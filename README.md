@@ -1,4 +1,4 @@
-# VMC-HELTY-FLOW, in Home Assistant
+# VMC HELTY FLOW PLUS REV.00 22-04-2023, per Home Assistant
 
 Seguire scrupolosamente i seguenti passaggi:
 
@@ -14,7 +14,7 @@ homeassistant:
 3 Verificare la presenza della cartella "packages" all'interno della cartella "config" del Server Home Assistant; se non presente creare l'intero  percorso ovvero: \\192.168.1.xxx\config\packages\vmc_helty_flow
 
  3.1 all'interno del percorso \config\packages\vmc_helty_flow copiare i seguenti Files:
-     - "vmc_helty_flow_cucina_rev_00.yaml"
+     - "vmc_helty_flow_cucina_<data>.yaml"
      - "Scheda Interfaccia VMC Cucina.txt"
      - "Automazione VMC Cucina.txt"
 
@@ -24,7 +24,7 @@ homeassistant:
 
 6 Riavviare Home Assistant
 
-7 Trovare e sostituire all'interno del file "configuration.yaml" l'indirizzo IP, da 192.168.1.160 con l'indirizzo Ip, vedi (Punto 1)  [Aprile in Home Assistant il Pannello "File editor", cliccare sull' icona "Cartellina", andare in "packages", andare in "vmc_helty_flow" e selezionare il file "vmc_helty_flow_cucina_rev_00.yaml", cliccare sull'icona "Lente" ovvero Cerca", inserire l'Indirizzo IP nel campo "Search for" e il nuovo Indirizzo IP, (Punto1) nel campo "Replace", cliccare su "All" e successivamente salvare il file cliccando sull'icona "Dischetto"; riavviare Home Assistant.
+7 Trovare e sostituire all'interno del file "configuration.yaml" l'indirizzo IP, da 192.168.1.160 con l'indirizzo Ip, vedi (Punto 1)  [Aprile in Home Assistant il Pannello "File editor", cliccare sull' icona "Cartellina", andare in "packages", andare in "vmc_helty_flow" e selezionare il file "vmc_helty_flow_cucina_<data>.yaml", cliccare sull'icona "Lente" ovvero Cerca", inserire l'Indirizzo IP nel campo "Search for" e il nuovo Indirizzo IP, (Punto1) nel campo "Replace", cliccare su "All" e successivamente salvare il file cliccando sull'icona "Dischetto"; riavviare Home Assistant.
 
 8 Cliccare su "Settaggi":
  8.1 Inserire il Volume della Stanza ove è installata la VMC
@@ -44,27 +44,25 @@ homeassistant:
 12 Cliccare su "Timer" per portare la VMC a "Velocià 0", impostando i minuti desiderati; per il funzionamento la Velocità deve essere diversa da "Velocità 0"
 
 13 Cliccare su "Info Lettura Dati nella VMC" per maggiori informazioni 
-
-
-# Se si hanno a disposizione più VMC, ripetere i punti sottostanti per ogni VMC:
-
+ 
+#   Se si hanno a disposizione più VMC, ripetere i punti sottostanti per ogni VMC:                      
 
 14 Copiare e Incollare i seguenti File nella cartella \config\packages\vmc_helty_flow:
-    - "vmc_helty_flow_cucina_rev_00.yaml" (Es. "vmc_helty_flow_<nome>_rev_00.yaml")
+    - "vmc_helty_flow_cucina_<data>.yaml" (Es. "vmc_helty_flow_<nome>_<data>.yaml")
     - "Scheda Interfaccia VMC Cucina.txt" (Es. "Scheda Interfaccia VMC Sala.txt")
     - "Automazione VMC Cucina.txt" (Es. "Automazione VMC Sala.txt")
 
 15 Rinominare i seguenti File:
-    - da "vmc_helty_flow_cucina_rev_00.yaml - Copia.yaml" a "vmc_helty_flow_<nome>_rev_00.yaml" (Es. "vmc_helty_flow_sala_rev_00.yaml")
+    - da "vmc_helty_flow_cucina_<data>.yaml - Copia.yaml" a "vmc_helty_flow_<nome>_<data>.yaml" (Es. "vmc_helty_flow_sala_<data>.yaml")
     - da "Scheda Interfaccia VMC Cucina - Copia" a "Scheda Interfaccia VMC <nome>.txt" (Es. "Scheda Interfaccia VMC Sala.txt")
     - da "Automazione VMC Cucina - Copia.txt" a "Automazione VMC <nome>.txt" (Es. "Automazione VMC Sala.txt")
 
 16 Aprire uno alla volta, con un Editor di File (Es. Word Office) i seguenti Files:
-    - "vmc_helty_flow_<nome>_rev_00.yaml"
+    - "vmc_helty_flow_<nome>_<data>.yaml"
     - "Scheda Interfaccia VMC <nome>.txt"
     - "Automazione VMC <nome>.txt"
   usare la funzione "trova e sostituisci"-> Trova: cucina e sostituisci con: <nome>
-  Salvare il File "vmc_helty_flow_<nome>_rev_00.yaml" e ripetere per i files rimanenti:
+  Salvare il File "vmc_helty_flow_<nome>_<data>.yaml" e ripetere per i files rimanenti:
     - "Scheda Interfaccia VMC <nome>.txt"
     - "Automazione VMC <nome>.txt"  
 
@@ -93,3 +91,4 @@ Per Installare l'API di OpenWeatherMap utile per estrerre l'Umidità Esterna, la
 8 Incollare la Chiave API, nel campo "Chiave API*", Modalità "Hourly", Lingua "It"
 
 9 Ricorda di non condividere la tua chiave API con altri e di non utilizzarla per scopi non consentiti dalle condizioni di utilizzo di OpenWeatherMap.
+
