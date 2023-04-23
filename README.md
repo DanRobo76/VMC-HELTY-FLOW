@@ -1,21 +1,34 @@
-# VMC HELTY FLOW PLUS REV.00 22-04-2023, per Home Assistant
+<pre style="font-size:10px; background-color: #d9ffcc;">
+VMC HELTY FLOW PLUS sviluppato per Home Assistant 
+Ing. Danilo Robotti
+E-mail: <a href="mailto:danilo.robotti@gmail.com">danilo.robotti@gmail.com</a>
+</pre>
 
-Seguire scrupolosamente i seguenti passaggi:
+<strong>Esonero di Responsabilità:</strong><br>
+In nessun caso Danilo Robotti sarà responsabile di danneggiamenti diretti, indiretti, o conseguenti, correlati a difetti di SoftWare. 
+Il Cliente ha l’onere e la responsabilità della scelta, dell’installazione, dell’uso e della gestione del SoftWare al fine del raggiungimento del risultato prefissatosi. 
+<br>
 
-1 Rendere gli indirizzi IP della/e VMC statici attraverso il Router <br>
-2 Verificare se nel File configuration.yaml, contenuto all'interno della cartella "config", è presente il seguente Codice all'inizio: <BR>
+<strong>Installazione:</strong><br>
+<strong>1</strong> Rendere gli indirizzi IP della/e VMC, statici attraverso il Router <br>
+<strong>2</strong> Verificare se nel File configuration.yaml, contenuto all'interno della cartella "config", è presente il seguente Codice all'inizio: <BR>
 
-  homeassistant: <br>
-  packages: !include_dir_named packages/<br>
+<pre style="font-size:10px; background-color: #d9ffcc;">
+  homeassistant:
+  packages: !include_dir_named packages/
+</pre>
+
 
   , diversamente inserirlo, salvare il File "configuration.yaml" e riavviare Home Assistant<BR>
 
-3 Verificare la presenza della cartella "packages" all'interno della cartella "config" del Server Home Assistant; se non presente creare l'intero  percorso ovvero: \\192.168.1.xxx\config\packages\vmc_helty_flow<BR>
- 3.1 all'interno del percorso \config\packages\vmc_helty_flow copiare i seguenti Files:<BR>
+<strong>3</strong> Verificare la presenza della cartella "packages" all'interno della cartella "config" del Server Home Assistant; se non presente creare l'intero  percorso ovvero: \\192.168.1.xxx\config\packages\vmc_helty_flow<BR>
+ <strong>3.1</strong> all'interno del percorso \config\packages\vmc_helty_flow copiare i seguenti Files:
   
-     - "vmc_helty_flow_cucina_data.yaml"<BR>
-     - "Scheda Interfaccia VMC Cucina.txt"<BR>
-     - "Automazione VMC Cucina.txt"<BR>
+  <pre style="font-size:10px; background-color: #d9ffcc;">
+     - vmc_helty_flow_cucina_data.yaml
+     - Scheda Interfaccia VMC Cucina.txt
+     - Automazione VMC Cucina.txt
+  </pre>
   
 4 in Home Assistant andare in  Impostazioni-> Automazioni e scene -> CREA AUTOMAZIONE -> Inizia con un'automazione vuota -> cliccare in alto a destra sui ... puntini -> modifica in yaml -> cancellare tutto il codice e incollare il contenuto del file "Automazione VMC Cucina.txt" ovvero "Automazione VMC "nome".txt" e salvare. <br>
 5 in Home Assistant andare in Panoramica -> cliccare in alto a destra sui ... puntini -> Modifica plancia -> AGGIUNGI SCHEDA -> Manuale -> Selezionare tutto il Codice , cancellare tutto il codice e incollare il contenuto del file "Scheda Interfaccia VMC Cucina.txt" ovvero "Scheda Interfaccia VMC "nome" e salvare. <br>
@@ -78,3 +91,4 @@ Per Installare l'API di OpenWeatherMap utile per estrarre l'Umidità Esterna, la
 9 Incollare la Chiave API, nel campo "Chiave API*", Modalità "Hourly", Lingua "It"<br>
 10 Ricorda di non condividere la tua chiave API con altri e di non utilizzarla per scopi non consentiti dalle condizioni di utilizzo di OpenWeatherMap.<br>
 
+# Se il progetto ti è piaciuto <a href="https://www.paypal.com/donate/?business=YU9379GL8VDW4&amount=1.2&no_recurring=1&item_name=Se+il+progetto+ti+%C3%A8+piaciuto%2C++offrimi+un+GinSeng%21+%0A%3B%29&currency_code=EUR">Clicca Qui</a> per offrirmi un GinSeng!
