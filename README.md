@@ -1,4 +1,4 @@
-## VMC HELTY FLOW PLUS sviluppato per Home Assistant 
+## VMC HELTY FLOW PLUS sviluppato per Home Assistant
 <pre style="font-size:10px; background-color: #d9ffcc;">
 VMC HELTY FLOW PLUS sviluppato per Home Assistant 
 Ing. Danilo Robotti
@@ -48,7 +48,7 @@ Il Cliente ha l’onere e la responsabilità della scelta, dell’installazione,
  <strong>11.2</strong> Attivare se si desidera l'opzione "VMC ON/OFF, in Funzione del Calendario" per attivare gli orari inseriti nel calendario<BR>
 <strong>13</strong> Cliccare su "Info Lettura Dati nella VMC" per maggiori informazioni 
  
-##   Se si hanno a disposizione più VMC, ripetere i punti sottostanti per ogni VMC:                      
+###   Se si hanno a disposizione più VMC, ripetere i punti sottostanti per ogni VMC:                      
 
 <strong>14</strong> Copiare e Incollare i seguenti File nella cartella \config\packages\vmc_helty_flow:
  <pre style="font-size:10px; background-color: #d9ffcc;">
@@ -76,7 +76,7 @@ Il Cliente ha l’onere e la responsabilità della scelta, dell’installazione,
   </pre> 
 <strong>17</strong> Ripetetere i punti dal <strong>4</strong> al <strong>13</strong>
 
-## OpenWeatherMap <br>
+### OpenWeatherMap <br>
 Per Installare l'API di OpenWeatherMap utile per estrarre l'Umidità Esterna, la quale verrà impiegata per determinare il Punto di Rugiada Esterno, segui questi passaggi:
 
 1 Vai al sito web di OpenWeatherMap all'indirizzo https://openweathermap.org/ e fai clic sul pulsante "Sign up" nell'angolo in alto a destra della pagina.<br>
@@ -90,4 +90,6 @@ Per Installare l'API di OpenWeatherMap utile per estrarre l'Umidità Esterna, la
 9 Incollare la Chiave API, nel campo "Chiave API*", Modalità "Hourly", Lingua "It"<br>
 10 Ricorda di non condividere la tua chiave API con altri e di non utilizzarla per scopi non consentiti dalle condizioni di utilizzo di OpenWeatherMap.<br>
 
-## Se il progetto ti è piaciuto <a href="https://www.paypal.com/donate/?business=YU9379GL8VDW4&amount=1.2&no_recurring=1&item_name=Se+il+progetto+ti+%C3%A8+piaciuto%2C++offrimi+un+GinSeng%21+%0A%3B%29&currency_code=EUR">Clicca Qui</a> per offrirmi un GinSeng!
+<img src="https://user-images.githubusercontent.com/102819027/233828895-5111cc49-3191-4dfb-8e5e-a69d810cd89f.png" alt="immagine" style="width:30%;">  
+  
+### Se il progetto ti è piaciuto <a href="https://www.paypal.com/donate/?business=YU9379GL8VDW4&amount=1.2&no_recurring=1&item_name=Se+il+progetto+ti+%C3%A8+piaciuto%2C++offrimi+un+GinSeng%21+%0A%3B%29&currency_code=EUR">Clicca Qui</a> per offrirmi un GinSeng!
