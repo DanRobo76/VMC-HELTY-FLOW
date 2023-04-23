@@ -91,6 +91,6 @@ Per Installare l'API di OpenWeatherMap utile per estrarre l'Umidità Esterna, la
 <strong>10</strong> Ricorda di non condividere la tua chiave API con altri e di non utilizzarla per scopi non consentiti dalle condizioni di utilizzo di OpenWeatherMap.<br>
 
 ## <span style="color:#663300">SchreenShot</span>  
-<img src="https://user-images.githubusercontent.com/102819027/233828895-5111cc49-3191-4dfb-8e5e-a69d810cd89f.png" alt="immagine" style="width:30%;"> <img src="https://user-images.githubusercontent.com/102819027/233829537-395737b7-4404-44da-b475-0d7b85d4390d.png" alt="immagine" style="width:30%;">  
+<img src="https://user-images.githubusercontent.com/102819027/233828895-5111cc49-3191-4dfb-8e5e-a69d810cd89f.png" alt="immagine" style="width:30%;"> <img src="https://user-images.githubusercontent.com/102819027/233829537-395737b7-4404-44da-b475-0d7b85d4390d.png" alt="immagine" style="width:30%;"> <img src="https://user-images.githubusercontent.com/102819027/233829599-a3e850e4-f692-4f26-b0e9-740fdfbe97c7.png" alt="immagine" style="width:30%;"> 
   
 #### Se il progetto ti è piaciuto <a href="https://www.paypal.com/donate/?business=YU9379GL8VDW4&amount=1.2&no_recurring=1&item_name=Se+il+progetto+ti+%C3%A8+piaciuto%2C++offrimi+un+GinSeng%21+%0A%3B%29&currency_code=EUR">Clicca Qui</a> per offrirmi un GinSeng!
