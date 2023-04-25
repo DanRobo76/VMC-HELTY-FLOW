@@ -17,7 +17,7 @@ Il Cliente ha l’onere e la responsabilità della scelta, dell’installazione,
 
 <pre style="font-size:10px; background-color: #d9ffcc;">
   homeassistant:
-  packages: !include_dir_named packages/
+    packages: !include_dir_named packages/
 </pre>
 
 
