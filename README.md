@@ -16,6 +16,16 @@ Il Cliente ha l’onere e la responsabilità della scelta, dell’installazione,
 
 <strong>Limiti del SoftWare:</strong><br>
  - In fase di Verifica, la Lettura dei Sensori: CO2 e VOC; lo scrivente non dispone del Modello Elite;<br>
+    Condividi questa stringa:<br>
+  <pre style="font-size:10px; background-color: #d9ffcc;">
+   - Sensori Ambientali:
+     VMGI,00214,00202,00817,00000,16384,00298,00222,00069,04354,00188,00000,00000,00000,00000,00000 <br>
+  </pre>
+![image](https://user-images.githubusercontent.com/102819027/235301291-e2686ed5-362a-4676-96a1-16fb3c2cda05.png) <br>
+<br>
+insieme allo ScreeShot dell'App. AirGuard: <br>
+<br>  , in modo che possa aggiornare il SoftWare!
+<br><br>
  - In fase di Verifica, la Lettura del Sensore: Temperatura Interna Valori Negativi; lo scrivente ad oggi non ha ancora individuato la lettura della temperatura negativa;<br>
    Condividi questa stringa:<br>
   <pre style="font-size:10px; background-color: #d9ffcc;">
