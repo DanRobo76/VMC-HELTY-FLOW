@@ -14,8 +14,8 @@ Il Cliente ha l’onere e la responsabilità della scelta, dell’installazione,
  - Add On FIle Edito di Home Assistant;
  - Integrazione OpenWeatherMap;
 
-<strong>Limiti del SoftWare:</strong><br>
- - In fase di Verifica, la Lettura dei Sensori: CO2 e VOC; lo scrivente non dispone del Modello Elite;<br>
+<strong>In fase di Verifica:</strong><br>
+ - la Lettura dei Sensori: CO2 e VOC; lo scrivente non dispone del Modello Elite;<br>
     Condividi questa stringa, se disponi del modello Elite:<br>
   <pre style="font-size:10px; background-color: #d9ffcc;">
    - Sensori Ambientali:
@@ -26,7 +26,7 @@ Il Cliente ha l’onere e la responsabilità della scelta, dell’installazione,
 ![image](https://user-images.githubusercontent.com/102819027/235301716-b4a5b6c8-fbbe-4552-a0d1-566aeedba01b.png)<br>
 <br>, in modo che possa aggiornare il SoftWare!
 <br><br>
- - In fase di Verifica, la Lettura del Sensore: Temperatura Interna Valori Negativi; lo scrivente ad oggi non ha ancora individuato la lettura della temperatura negativa;<br>
+ - la Lettura del Sensore: Temperatura Interna Valori Negativi; lo scrivente ad oggi non ha ancora individuato la lettura della temperatura negativa;<br>
    Condividi questa stringa:<br>
   <pre style="font-size:10px; background-color: #d9ffcc;">
    - Sensori Ambientali:
