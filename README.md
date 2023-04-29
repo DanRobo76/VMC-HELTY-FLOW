@@ -12,9 +12,7 @@ Il Cliente ha l’onere e la responsabilità della scelta, dell’installazione,
 
 <strong>Pre-Requisiti:</strong>
  - Installare l'Add On: FIle Edit, di Home Assistant;
- - Installare l'Integrazione OpenWeatherMap (vedi Sotto);
- - 
-<strong><a href="https://github.com/DanRobo76/VMC-HELTY-FLOW/blob/main/README.md#openweathermap-" text="OpenWeatherMap">OpenWeatherMap</a></strong> 
+ - Installare l'Integrazione <strong><a href="https://github.com/DanRobo76/VMC-HELTY-FLOW/blob/main/README.md#openweathermap-" text="OpenWeatherMap">OpenWeatherMap</a></strong>;
 
 <strong>Punti di Forza:</strong>
   - Invia Comandi alla VMC leggendone i valori Contenuti;
