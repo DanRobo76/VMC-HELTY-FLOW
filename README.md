@@ -86,7 +86,7 @@ Il Cliente ha l’onere e la responsabilità della scelta, dell’installazione,
     - Scheda Interfaccia VMC [nome].txt
     - Automazione VMC [nome].txt
   </pre> 
-  usare la funzione "trova e sostituisci"-> Trova: cucina e sostituisci con: [nome]
+  usare la funzione "trova e sostituisci"-> Trova: cucina e sostituisci con: [nome] <br>
   Salvare il File "vmc_helty_flow_nome_data.yaml" e ripetere per i files rimanenti:
   <pre style="font-size:10px; background-color: #d9ffcc;">
     - Scheda Interfaccia VMC [nome].txt
