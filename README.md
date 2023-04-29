@@ -25,14 +25,14 @@ Il Cliente ha l’onere e la responsabilità della scelta, dell’installazione,
   , diversamente inserirlo, salvare il File "configuration.yaml" e riavviare Home Assistant<BR>
 
 <strong>3</strong> Verificare la presenza della cartella "packages" all'interno della cartella "config" del Server Home Assistant; se non presente creare l'intero  percorso ovvero: \\192.168.1.xxx\config\packages\vmc_helty_flow<BR>
- <strong>3.1</strong> all'interno del percorso \config\packages\vmc_helty_flow copiare i seguenti Files:
+ <strong>3.1</strong> all'interno del percorso \config\packages\vmc_helty_flow copiare i seguenti Files:<BR>
   
   <pre style="font-size:10px; background-color: #d9ffcc;">
      - vmc_helty_flow_cucina_data.yaml
      - Scheda Interfaccia VMC Cucina.txt
      - Automazione VMC Cucina.txt
   </pre>
-  
+ ![image](https://user-images.githubusercontent.com/102819027/235298441-6978db49-c03f-4cdb-9688-c3f2a394fab2.png)
 <strong>4</strong> in Home Assistant andare in  Impostazioni-> Automazioni e scene -> CREA AUTOMAZIONE -> Inizia con un'automazione vuota -> cliccare in alto a destra sui ... puntini -> modifica in yaml -> cancellare tutto il codice e incollare il contenuto del file "Automazione VMC Cucina.txt" ovvero "Automazione VMC [nome].txt" e salvare. <br>
 <strong>5</strong> in Home Assistant andare in Panoramica -> cliccare in alto a destra sui ... puntini -> Modifica plancia -> AGGIUNGI SCHEDA -> Manuale -> Selezionare tutto il Codice , cancellare tutto il codice e incollare il contenuto del file "Scheda Interfaccia VMC Cucina.txt" ovvero "Scheda Interfaccia VMC [nome] e salvare. <br>
 <strong>6</strong> Riavviare Home Assistant <br>
