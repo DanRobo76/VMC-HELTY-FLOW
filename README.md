@@ -62,7 +62,7 @@ Il Cliente ha l’onere e la responsabilità della scelta, dell’installazione,
 <strong>13</strong> Cliccare su "Info Lettura Dati nella VMC" per maggiori informazioni
   ![image](https://user-images.githubusercontent.com/102819027/235298096-1648d8f2-5cfc-4ce4-a233-9cd67379ac3b.png)<BR>
   
- ###   Se si hanno a disposizione più VMC, ripetere i punti sottostanti per ogni VMC:                      
+###   Se si hanno a disposizione più VMC, ripetere i punti sottostanti per ogni VMC:                      
 
 <strong>14</strong> Copiare e Incollare i seguenti File nella cartella \config\packages\vmc_helty_flow:
  <pre style="font-size:10px; background-color: #d9ffcc;">
