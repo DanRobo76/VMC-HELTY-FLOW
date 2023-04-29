@@ -22,6 +22,7 @@ Il Cliente ha l’onere e la responsabilità della scelta, dell’installazione,
     Se la differenza del PdR Ext. - PdR Int. è minore di almeno qualche grado ("Set Lim. Δ Punto di Rugiada"), la VMC garantirà un adeguato trasporto dell'umidità dall'interno all'esterno dell'edificio.<br>
     Diversamente, se la differenza del PdR Ext. - PdR Int. è maggiore o uguale al "Set Lim. Δ Punto di Rugiada", la VMC si arresterà per evitare il trasporto dell'umidità dall'esterno all'interno dell'edificio, per poi riprendere in autonomia, l'ultima velocità impostata, non appena i Parametri Ambientali lo consentiranno.
   - Ripristina la Velocità precedente in caso di Black-Out<br>
+
 <strong><a href="https://github.com/DanRobo76/VMC-HELTY-FLOW/blob/main/SECURITY.md" text="Limiti del SoftWare Ver. 22-04-2023">Limiti del SoftWare Ver. 22-04-2023</a></strong> 
 <br><br>
 ![image](https://user-images.githubusercontent.com/102819027/235299358-88373b06-b62e-4867-88ab-287cad60bb6d.png)<br>
