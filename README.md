@@ -13,13 +13,14 @@ Il Cliente ha l’onere e la responsabilità della scelta, dell’installazione,
 <strong>Pre-Requisiti:</strong>
  - Installare l'Add On: FIle Edit, di Home Assistant;
  - Installare l'Integrazione OpenWeatherMap (vedi Sotto);
+ - 
+<strong><a href="https://github.com/DanRobo76/VMC-HELTY-FLOW/blob/main/README.md#openweathermap-" text="OpenWeatherMap">OpenWeatherMap</a></strong> 
 
 <strong>Punti di Forza:</strong>
   - Invia Comandi alla VMC leggendone i valori Contenuti;
   - Permette l'accensione e lo spegnimento in funzione delle 2 fasce orarie programmabili per ogni giorno della settimana;
   - Spegne la VMC in funzione dei Parametri Ambientali
   - Ripristina la Velocità precedente in caso di Black-Out
-
 <strong><a href="https://github.com/DanRobo76/VMC-HELTY-FLOW/blob/main/SECURITY.md" text="Limiti del SoftWare Ver. 22-04-2023">Limiti del SoftWare Ver. 22-04-2023</a></strong> 
 <br><br>
 ![image](https://user-images.githubusercontent.com/102819027/235299358-88373b06-b62e-4867-88ab-287cad60bb6d.png)<br>
