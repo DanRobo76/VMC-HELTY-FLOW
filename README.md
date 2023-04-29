@@ -14,7 +14,8 @@ Il Cliente ha l’onere e la responsabilità della scelta, dell’installazione,
  - Add On FIle Edito di Home Assistant;
  - Integrazione OpenWeatherMap;
 
-<strong>In fase di Verifica:</strong><br> https://github.com/DanRobo76/VMC-HELTY-FLOW/blob/main/SECURITY.md
+<strong>In fase di Verifica:</strong><br> <a href="https://github.com/DanRobo76/VMC-HELTY-FLOW/blob/main/SECURITY.md" text="Limiti">Policy</a>
+
 <br><br>
 ![image](https://user-images.githubusercontent.com/102819027/235299358-88373b06-b62e-4867-88ab-287cad60bb6d.png)<br>
 <strong>1</strong> Rendere gli indirizzi IP della/e VMC, statici attraverso il Router; la VMC risponde sulla porta 5001. <br>
