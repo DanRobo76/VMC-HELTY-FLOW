@@ -32,11 +32,12 @@ Il Cliente ha l’onere e la responsabilità della scelta, dell’installazione,
      - Scheda Interfaccia VMC Cucina.txt
      - Automazione VMC Cucina.txt
   </pre>
- ![image](https://user-images.githubusercontent.com/102819027/235298441-6978db49-c03f-4cdb-9688-c3f2a394fab2.png)<BR>
+ , presenti nella scheda "CODE" -> Download ZIP:<BR>
+ ![image](https://user-images.githubusercontent.com/102819027/235298629-1967e438-4096-4889-ac51-037483885dbe.png)<BR>
 <strong>4</strong> in Home Assistant andare in  Impostazioni-> Automazioni e scene -> CREA AUTOMAZIONE -> Inizia con un'automazione vuota -> cliccare in alto a destra sui ... puntini -> modifica in yaml -> cancellare tutto il codice e incollare il contenuto del file "Automazione VMC Cucina.txt" ovvero "Automazione VMC [nome].txt" e salvare. <br>
 <strong>5</strong> in Home Assistant andare in Panoramica -> cliccare in alto a destra sui ... puntini -> Modifica plancia -> AGGIUNGI SCHEDA -> Manuale -> Selezionare tutto il Codice , cancellare tutto il codice e incollare il contenuto del file "Scheda Interfaccia VMC Cucina.txt" ovvero "Scheda Interfaccia VMC [nome] e salvare. <br>
 <strong>6</strong> Riavviare Home Assistant <br>
-<strong>7</strong> Trovare e sostituire all'interno del file "configuration.yaml" l'indirizzo IP, da 192.168.1.160 con l'indirizzo Ip, vedi (Punto <strong>1</strong>)  [Aprile in Home Assistant il Pannello "File editor", cliccare sull' icona "Cartellina", andare in "packages", andare in "vmc_helty_flow" e selezionare il file "vmc_helty_flow_cucina_data.yaml", cliccare sull'icona "Lente" ovvero Cerca", inserire l'Indirizzo IP nel campo "Search for" e il nuovo Indirizzo IP, (Punto <strong>1</strong>) nel campo "Replace", cliccare su "All" e successivamente salvare il file cliccando sull'icona "Dischetto"; riavviare Home Assistant. <br>
+<strong>7</strong> trovare e sostituire all'interno del file "vmc_helty_flow_cucina_data.yaml" l'indirizzo IP, da 192.168.1.160 con l'indirizzo Ip, vedi (Punto <strong>1</strong>)  [Aprile in Home Assistant il Pannello "File editor", cliccare sull' icona "Cartellina", andare in "packages", andare in "vmc_helty_flow" e selezionare il file "vmc_helty_flow_cucina_data.yaml", cliccare sull'icona "Lente" ovvero Cerca", inserire l'Indirizzo IP nel campo "Search for" e il nuovo Indirizzo IP, (Punto <strong>1</strong>) nel campo "Replace", cliccare su "All" e successivamente salvare il file cliccando sull'icona "Dischetto"; riavviare Home Assistant. <br>
 <strong>8</strong> Nella Scheda Interfaccia, Cliccare su "Settaggi":<BR>
   ![image](https://user-images.githubusercontent.com/102819027/235297715-64bdf5b9-3210-4593-9d46-b8e602dd487a.png)<BR>
   <strong>8.1</strong> Inserire il Volume della Stanza ove è installata la VMC<BR>
