@@ -2,10 +2,10 @@
 
 ### Versione del Codice:
 
-| Versione             | Supportato         |
-| -------              | ------------------ |
-|      22-04-2023      | :white_check_mark: |
-| prima del 22-04-2023 | :x:                |
+|          VMC-HELTY-FLOW              | Supportato da Home Assistant         |
+| ------------------------------------ | ------------------------------------ |
+| :white_check_mark:   Ver. 22-04-2023 | :white_check_mark:   Ver. 2023.4.6   |
+
 
 ### Limiti del SoftWare:<br>
  - In fase di Verifica, la Lettura dei Sensori: CO2 e VOC; lo scrivente non dispone del Modello Elite;<br>
