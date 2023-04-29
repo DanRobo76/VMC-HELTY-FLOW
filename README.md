@@ -15,7 +15,7 @@ Il Cliente ha l’onere e la responsabilità della scelta, dell’installazione,
  - Installare l'Integrazione <strong><a href="https://github.com/DanRobo76/VMC-HELTY-FLOW/blob/main/README.md#openweathermap-" text="OpenWeatherMap">OpenWeatherMap</a></strong>;
 
 <strong>Punti di Forza:</strong>
-  - Invia Comandi alla VMC leggendone i valori Contenuti;
+  - Invia Comandi da remoto alla VMC, leggendone i valori Contenuti;
   - Permette l'accensione e lo spegnimento in funzione delle 2 fasce orarie programmabili per ogni giorno della settimana;
   - Spegne la VMC in funzione dei Parametri Ambientali;<br>
     Il SoftWare calcola il Punto di Rugiada Esterno (PdR Ext.) sottraendolo con il punto di Rugiada Interno (PdR Int.), confrontandolo con il Valore "Set Lim. Δ Punto di Rugiada", inserito dal Cliente.<br>
