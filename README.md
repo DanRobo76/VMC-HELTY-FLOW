@@ -5,12 +5,19 @@ Ing. Danilo Robotti
 E-mail: <a href="mailto:danilo.robotti@gmail.com">danilo.robotti@gmail.com</a>
 </pre>
 
-
 <strong>Esonero di Responsabilità:</strong><br>
 In nessun caso Danilo Robotti sarà responsabile di danneggiamenti diretti, indiretti, o conseguenti, correlati a difetti di SoftWare. 
 Il Cliente ha l’onere e la responsabilità della scelta, dell’installazione, dell’uso e della gestione del SoftWare al fine del raggiungimento del risultato prefissatosi. 
 <br>
 
+<strong>Pre-Requisiti:</strong>
+ - Add On FIle Edito di Home Assistant;
+ - Integrazione OpenWeatherMap;
+
+<strong>Limiti del SoftWare:</strong><br>
+ - In fase di Verifica, la Lettura dei Sensori: CO2 e VOC; lo scrivente non dispone del Modello Elite;<br>
+ - In fase di Verifica, la Lettura del Sensore: Temperatura Interna Valori Negativi; lo scrivente ad oggi non ha ancora individuato la lettura della temperatura negativa;<br>
+<br>
 <strong>Installazione:</strong><br>
 <strong>1</strong> Rendere gli indirizzi IP della/e VMC, statici attraverso il Router; la VMC risponde sulla porta 5001. <br>
 <strong>2</strong> Verificare se nel File configuration.yaml, contenuto all'interno della cartella "config", è presente il seguente Codice all'inizio: <BR>
@@ -24,9 +31,8 @@ Il Cliente ha l’onere e la responsabilità della scelta, dell’installazione,
 
   , diversamente inserirlo, salvare il File "configuration.yaml" e riavviare Home Assistant<BR>
 
-<strong>3</strong> Verificare la presenza della cartella "packages" all'interno della cartella "config" del Server Home Assistant; se non presente creare l'intero  percorso ovvero: \\192.168.1.xxx\config\packages\vmc_helty_flow<BR>
- <strong>3.1</strong> all'interno del percorso \config\packages\vmc_helty_flow copiare i seguenti Files:<BR>
-  
+<strong>3</strong> Verificare la presenza della cartella "packages" all'interno della cartella "config" del Server Home Assistant; se non è presente, creare l'intero  percorso ovvero: \\192.168.1.xxx\config\packages\vmc_helty_flow<BR>
+ <strong>3.1</strong> all'interno del percorso \config\packages\vmc_helty_flow copiare i seguenti Files:<BR> 
   <pre style="font-size:10px; background-color: #d9ffcc;">
      - vmc_helty_flow_cucina_data.yaml
      - Scheda Interfaccia VMC Cucina.txt
