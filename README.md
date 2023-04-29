@@ -17,7 +17,7 @@ Il Cliente ha l’onere e la responsabilità della scelta, dell’installazione,
 <strong>Punti di Forza:</strong>
   - Invia Comandi alla VMC leggendone i valori Contenuti;
   - Permette l'accensione e lo spegnimento in funzione delle 2 fasce orarie programmabili per ogni giorno della settimana;
-  - Spegne la VMC in funzione dei Parametri Ambientali<br>
+  - Spegne la VMC in funzione dei Parametri Ambientali;<br>
     Il SoftWare calcola il Punto di Rugiada Esterno (PdR Ext.) sottraendolo con il punto di Rugiada Interno (PdR Int.), confrontandolo con il Valore "Set Lim. Δ Punto di Rugiada", inserito dal Cliente.<br>
     Se la differenza del PdR Ext. - PdR Int. è minore di almeno qualche grado ("Set Lim. Δ Punto di Rugiada"), la VMC garantirà un adeguato trasporto dell'umidità dall'interno all'esterno dell'edificio.<br>
     Diversamente, se la differenza del PdR Ext. - PdR Int. è maggiore o uguale al "Set Lim. Δ Punto di Rugiada", la VMC si arresterà per evitare il trasporto dell'umidità dall'esterno all'interno dell'edificio, per poi riprendere in autonomia, l'ultima velocità impostata, non appena i Parametri Ambientali lo consentiranno.
