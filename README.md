@@ -28,34 +28,13 @@ Il Cliente ha l’onere e la responsabilità della scelta, dell’installazione,
   - Calcola l'Umidità Assoluta Esterna [g/m³];
   - Calcola l'Umidità Assoluta Interna [g/m³];
   - Mostra un'Allerta in funzione del:
-      <h6>Sensore Umidità [%]</h6>
-      <ul>
-          <li>U ≤ 0 - Non Calcolabile</li>
-          <li>0 &lt; U ≤ 35 - Possibile Secchezza, Disidratazione</li>
-          <li>35 &lt; U ≤ 65 - Normale</li>
-          <li>66 &lt; U ≤ 100 - Possibile Muffe, Batteri</li>
-      </ul>
+      <h6>Sensore Umidità</h6>
       <h6>Sensore CO₂ [ppm]</h6>
-      <ul>
-          <li>CO₂ ≤ 0 - Assente</li>
-          <li>0 &lt; CO₂ ≤ 350 - Bassa Concentrazione</li>
-          <li>350 &lt; CO₂ ≤ 600 - Moderata Concentrazione</li>
-          <li>600 &lt; CO₂ &lt; 1200 - Alta Concentrazione</li>
-          <li>CO₂ ≥ 1200 - Pessima Concentrazione</li>
-      </ul>
       <h6>Sensore VOC [ppb]</h6>
-      <ul>
-          <li>VOC ≤ 0 - Assente</li>
-          <li>0 &lt; VOC ≤ 300 - Bassa Concentrazione</li>
-          <li>350 &lt; VOC ≤ 600 - Moderata Concentrazione</li>
-          <li>VOC > 600 - Pessima Concentrazione</li>
-      </ul>
-      <h6>per Congelamento[%]</h6>
-      <h6>per Differenza tra Temperatura Interna ed Esterna[%]</h6>
-      <h6>per il Superamento del Set Lim. Δ Punto di Rugiada[%]</h6>
-
+      <h6>per Congelamento</h6>
+      <h6>per Differenza tra Temperatura Interna ed Esterna</h6>
+      <h6>per il Superamento del Set Lim. Δ Punto di Rugiada</h6>
 #
-
 ![image](https://user-images.githubusercontent.com/102819027/235299358-88373b06-b62e-4867-88ab-287cad60bb6d.png)<br>
 <strong>1</strong> Rendere gli indirizzi IP della/e VMC, statici attraverso il Router; la VMC risponde sulla porta 5001. <br>
 <strong>2</strong> Verificare se nel File configuration.yaml, contenuto all'interno della cartella "config", è presente il seguente Codice all'inizio: <BR>
