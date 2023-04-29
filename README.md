@@ -42,17 +42,20 @@ Il Cliente ha l’onere e la responsabilità della scelta, dell’installazione,
   <strong>8.1</strong> Inserire il Volume della Stanza ove è installata la VMC<BR>
   <strong>8.2</strong> Verificare con strumenti esterni se i Sensori di Temperatura Esterna, Temperatura Interna, Umidità Esterna, Umidità Interna, CO2 e VOC necessitano dell'Offset, diversamente portare uno o più sensori su 0<BR>
   <strong>8.3</strong> Impostare un "Set Lim. Δ Punto di Rugiada", solitamente a 5<BR>
-<strong>9</strong> Cliccare su "Monitoraggio" per l'andamento dei Valori dei Sensori; se si rileva un andamento non conforme verrà visualizzato una Scheda "Allerta <Tipologia>" <br>
+<strong>9</strong> Cliccare su "Monitoraggio" per l'andamento dei Valori dei Sensori; se si rileva un andamento non conforme verrà visualizzato una Scheda "Allerta -Tipologia-" <br>
     ![image](https://user-images.githubusercontent.com/102819027/235297848-b8339e66-ed99-4a9d-a412-87f19cb8c8a1.png)<BR>
 <strong>10</strong> Cliccare su "Calendario":<BR>
+  ![image](https://user-images.githubusercontent.com/102819027/235297925-a480941e-ab20-4ad9-a13e-cdc18c77c5b0.png)<BR>
  <strong>10.1</strong> Impostare se si desidera l'orario di Accensione e Spegnimento per ogni giorno della Settimana<BR>
- <strong>10.2</strong> RI-AVVIARE HOME ASSISTANT: Impostazioni -> Sistema -> Cliccare in alto a destra "RIAVVIA" per memorizzare i valori inseriti nel calendario<BR> 
+ <strong>10.2</strong> RI-AVVIARE HOME ASSISTANT: Impostazioni -> Sistema -> Cliccare in alto a destra "RIAVVIA" per memorizzare i valori inseriti nel calendario; solitamente l'operazione va fatta solo una volta, successivamente ad ogni variazione degli orari non è più necessario il riavvio;<BR> 
 <strong>11</strong> Cliccare su "Opzioni":<BR>
+  ![image](https://user-images.githubusercontent.com/102819027/235298039-d6784b15-6279-429a-94b9-00f5dd79f8e3.png)<BR>
  <strong>11.1</strong> Attivare se si desidera l'opzione "VMC ON/OFF, in Funzione del Lim. Δ P. di Rugiada" per verificare se i parametri ambientali sono ottimali, diversamente la VMC verrà portata a "Velocità 0"<BR>
  <strong>11.2</strong> Attivare se si desidera l'opzione "VMC ON/OFF, in Funzione del Calendario" per attivare gli orari inseriti nel calendario<BR>
-<strong>13</strong> Cliccare su "Info Lettura Dati nella VMC" per maggiori informazioni 
- 
-###   Se si hanno a disposizione più VMC, ripetere i punti sottostanti per ogni VMC:                      
+<strong>13</strong> Cliccare su "Info Lettura Dati nella VMC" per maggiori informazioni
+  ![image](https://user-images.githubusercontent.com/102819027/235298096-1648d8f2-5cfc-4ce4-a233-9cd67379ac3b.png)<BR>
+  
+ ###   Se si hanno a disposizione più VMC, ripetere i punti sottostanti per ogni VMC:                      
 
 <strong>14</strong> Copiare e Incollare i seguenti File nella cartella \config\packages\vmc_helty_flow:
  <pre style="font-size:10px; background-color: #d9ffcc;">
