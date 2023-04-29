@@ -6,7 +6,7 @@ E-mail: <a href="mailto:danilo.robotti@gmail.com">danilo.robotti@gmail.com</a>
 </pre>
 
 <strong>Esonero di Responsabilità:</strong><br>
-In nessun caso Danilo Robotti sarà responsabile di danneggiamenti diretti, indiretti, o conseguenti, correlati a difetti di SoftWare. 
+In nessun caso Danilo Robotti sarà responsabile di danneggiamenti diretti, indiretti, o conseguenti, correlati a difetti del presente SoftWare. 
 Il Cliente ha l’onere e la responsabilità della scelta, dell’installazione, dell’uso e della gestione del SoftWare al fine del raggiungimento del risultato prefissatosi. 
 <br>
 
