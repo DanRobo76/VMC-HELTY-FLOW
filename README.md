@@ -22,18 +22,18 @@ Il Cliente ha l’onere e la responsabilità della scelta, dell’installazione,
     Il SoftWare calcola il Punto di Rugiada Esterno (PdR Ext.) e il punto di Rugiada Interno (PdR Int.)<br>
     Se la differenza del PdR Ext. - PdR Int. è minore di almeno qualche grado ("Set Lim. Δ Punto di Rugiada", valore impostato dal Cliente), la VMC garantirà un adeguato trasporto dell'umidità dall'interno all'esterno dell'edificio.<br>
     Diversamente, se la differenza del PdR Ext. - PdR Int. è maggiore o uguale al "Set Lim. Δ Punto di Rugiada", la VMC si arresterà per evitare il trasporto dell'umidità dall'esterno all'interno dell'edificio, per poi riprendere in autonomia, l'ultima velocità impostata, non appena i Parametri Ambientali lo consentiranno.
-  - Ripristina la Velocità precedente in caso di Black-Out<br>
+  - Ripristina la Velocità precedente in caso di Black-Out;<br>
   - Calcola il Tempo di Ricambio d'Aria in funzione della Velocità;
   - Calcola la Portata d'Aria [M³/h] in funzione della Velocità;
   - Calcola l'Umidità Assoluta Esterna [g/m³];
   - Calcola l'Umidità Assoluta Interna [g/m³];
   - Mostra un'Allerta in funzione del:
-      <h6>Sensore Umidità</h6>
-      <h6>Sensore CO₂ [ppm]</h6>
-      <h6>Sensore VOC [ppb]</h6>
-      <h6>per Congelamento</h6>
-      <h6>per Differenza tra Temperatura Interna ed Esterna</h6>
-      <h6>per il Superamento del Set Lim. Δ Punto di Rugiada</h6>
+      <h6>Sensore Umidità;</h6>
+      <h6>Sensore CO₂ [ppm];</h6>
+      <h6>Sensore VOC [ppb];</h6>
+      <h6>per Congelamento;</h6>
+      <h6>per Differenza tra Temperatura Interna ed Esterna;</h6>
+      <h6>per il Superamento del Set Lim. Δ Punto di Rugiada.</h6>
 #
 ![image](https://user-images.githubusercontent.com/102819027/235299358-88373b06-b62e-4867-88ab-287cad60bb6d.png)<br>
 <strong>1</strong> Rendere gli indirizzi IP della/e VMC, statici attraverso il Router; la VMC risponde sulla porta 5001. <br>
