@@ -42,7 +42,8 @@ Il Cliente ha l’onere e la responsabilità della scelta, dell’installazione,
   <strong>8.1</strong> Inserire il Volume della Stanza ove è installata la VMC<BR>
   <strong>8.2</strong> Verificare con strumenti esterni se i Sensori di Temperatura Esterna, Temperatura Interna, Umidità Esterna, Umidità Interna, CO2 e VOC necessitano dell'Offset, diversamente portare uno o più sensori su 0<BR>
   <strong>8.3</strong> Impostare un "Set Lim. Δ Punto di Rugiada", solitamente a 5<BR>
-<strong>9</strong> Cliccare su "Monitoraggio" per l'andamento dei Valori dei Sensori; se si rileva un andamento non conforme verrà visualizzato tramite un "Allerta Monitoraggio" <br>
+<strong>9</strong> Cliccare su "Monitoraggio" per l'andamento dei Valori dei Sensori; se si rileva un andamento non conforme verrà visualizzato una Scheda "Allerta <Tipologia>" <br>
+    ![image](https://user-images.githubusercontent.com/102819027/235297848-b8339e66-ed99-4a9d-a412-87f19cb8c8a1.png)<BR>
 <strong>10</strong> Cliccare su "Calendario":<BR>
  <strong>10.1</strong> Impostare se si desidera l'orario di Accensione e Spegnimento per ogni giorno della Settimana<BR>
  <strong>10.2</strong> RI-AVVIARE HOME ASSISTANT: Impostazioni -> Sistema -> Cliccare in alto a destra "RIAVVIA" per memorizzare i valori inseriti nel calendario<BR> 
