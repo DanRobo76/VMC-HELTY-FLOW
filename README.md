@@ -12,7 +12,7 @@ Il Cliente ha l’onere e la responsabilità della scelta, dell’installazione,
 <br>
 
 <strong>Installazione:</strong><br>
-<strong>1</strong> Rendere gli indirizzi IP della/e VMC, statici attraverso il Router <br>
+<strong>1</strong> Rendere gli indirizzi IP della/e VMC, statici attraverso il Router; la VMC risponde sulla porta 5001 <br>
 <strong>2</strong> Verificare se nel File configuration.yaml, contenuto all'interno della cartella "config", è presente il seguente Codice all'inizio: <BR>
 
 <pre style="font-size:10px; background-color: #d9ffcc;">
