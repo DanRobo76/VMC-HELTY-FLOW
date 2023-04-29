@@ -1,6 +1,6 @@
 # Security Policy
 
-### Versione del Codice:
+### Versione del SoftWare:
 
 |          VMC-HELTY-FLOW              | Supportato da Home Assistant         |
 | ------------------------------------ | ------------------------------------ |
