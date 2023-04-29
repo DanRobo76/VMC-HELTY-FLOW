@@ -22,7 +22,34 @@ Il Cliente ha l’onere e la responsabilità della scelta, dell’installazione,
     Se la differenza del PdR Ext. - PdR Int. è minore di almeno qualche grado ("Set Lim. Δ Punto di Rugiada", valore impostato dal Cliente), la VMC garantirà un adeguato trasporto dell'umidità dall'interno all'esterno dell'edificio.<br>
     Diversamente, se la differenza del PdR Ext. - PdR Int. è maggiore o uguale al "Set Lim. Δ Punto di Rugiada", la VMC si arresterà per evitare il trasporto dell'umidità dall'esterno all'interno dell'edificio, per poi riprendere in autonomia, l'ultima velocità impostata, non appena i Parametri Ambientali lo consentiranno.
   - Ripristina la Velocità precedente in caso di Black-Out<br>
-
+  - Calcola il Tempo di Ricambio d'Aria in funzione della Velocità;
+  - Calcola la Portata d'Aria [M³/h] in funzione della Velocità;
+  - Calcola l'Umidità Assoluta Esterna [g/m³];
+  - Calcola l'Umidità Assoluta Interna [g/m³];
+  - Mostra un'Allerta in funzione:
+            <h5>Range Sensore Umidità [%]</h5>
+            <ul>
+                <li>U ≤ 0 - Non Calcolabile</li>
+                <li>0 &lt; U ≤ 35 - Possibile Secchezza, Disidratazione</li>
+                <li>35 &lt; U ≤ 65 - Normale</li>
+                <li>66 &lt; U ≤ 100 - Possibile Muffe, Batteri</li>
+            </ul>
+            <h5>Range Sensore CO₂ [ppm]</h5>
+            <ul>
+                <li>CO₂ ≤ 0 - Assente</li>
+                <li>0 &lt; CO₂ ≤ 350 - Bassa Concentrazione</li>
+                <li>350 &lt; CO₂ ≤ 600 - Moderata Concentrazione</li>
+                <li>600 &lt; CO₂ &lt; 1200 - Alta Concentrazione</li>
+                <li>CO₂ ≥ 1200 - Pessima Concentrazione</li>
+            </ul>
+            <h5>Range Sensore VOC [ppb]</h5>
+            <ul>
+                <li>VOC ≤ 0 - Assente</li>
+                <li>0 &lt; VOC ≤ 300 - Bassa Concentrazione</li>
+                <li>350 &lt; VOC ≤ 600 - Moderata Concentrazione</li>
+                <li>VOC > 600 - Pessima Concentrazione</li>
+            </ul>
+<br><br>
 <strong><a href="https://github.com/DanRobo76/VMC-HELTY-FLOW/blob/main/SECURITY.md" text="Limiti del SoftWare Ver. 22-04-2023">Limiti del SoftWare Ver. 22-04-2023</a></strong> 
 <br><br>
 ![image](https://user-images.githubusercontent.com/102819027/235299358-88373b06-b62e-4867-88ab-287cad60bb6d.png)<br>
