@@ -18,7 +18,7 @@ Il Cliente ha l’onere e la responsabilità della scelta, dell’installazione,
  - In fase di Verifica, la Lettura dei Sensori: CO2 e VOC; lo scrivente non dispone del Modello Elite;<br>
  - In fase di Verifica, la Lettura del Sensore: Temperatura Interna Valori Negativi; lo scrivente ad oggi non ha ancora individuato la lettura della temperatura negativa;<br>
 <br><br>
-<strong>Installazione:</strong><br>
+![image](https://user-images.githubusercontent.com/102819027/235299358-88373b06-b62e-4867-88ab-287cad60bb6d.png)<br>
 <strong>1</strong> Rendere gli indirizzi IP della/e VMC, statici attraverso il Router; la VMC risponde sulla porta 5001. <br>
 <strong>2</strong> Verificare se nel File configuration.yaml, contenuto all'interno della cartella "config", è presente il seguente Codice all'inizio: <BR>
 
