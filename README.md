@@ -32,7 +32,7 @@ Il Cliente ha l’onere e la responsabilità della scelta, dell’installazione,
      - Scheda Interfaccia VMC Cucina.txt
      - Automazione VMC Cucina.txt
   </pre>
- ![image](https://user-images.githubusercontent.com/102819027/235298441-6978db49-c03f-4cdb-9688-c3f2a394fab2.png)
+ ![image](https://user-images.githubusercontent.com/102819027/235298441-6978db49-c03f-4cdb-9688-c3f2a394fab2.png)<BR>
 <strong>4</strong> in Home Assistant andare in  Impostazioni-> Automazioni e scene -> CREA AUTOMAZIONE -> Inizia con un'automazione vuota -> cliccare in alto a destra sui ... puntini -> modifica in yaml -> cancellare tutto il codice e incollare il contenuto del file "Automazione VMC Cucina.txt" ovvero "Automazione VMC [nome].txt" e salvare. <br>
 <strong>5</strong> in Home Assistant andare in Panoramica -> cliccare in alto a destra sui ... puntini -> Modifica plancia -> AGGIUNGI SCHEDA -> Manuale -> Selezionare tutto il Codice , cancellare tutto il codice e incollare il contenuto del file "Scheda Interfaccia VMC Cucina.txt" ovvero "Scheda Interfaccia VMC [nome] e salvare. <br>
 <strong>6</strong> Riavviare Home Assistant <br>
