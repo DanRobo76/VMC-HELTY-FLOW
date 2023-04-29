@@ -11,13 +11,15 @@ Il Cliente ha l’onere e la responsabilità della scelta, dell’installazione,
 <br>
 
 <strong>Pre-Requisiti:</strong>
- - Installare l'Add On: FIle Edit, di Home Assistant;
+ - Installare l'Add On: FIle Edit, di Home Assistant (Impostazioni->Componenti aggiuntivi->Raccolta di Componenti Aggiuntivi->File editor);
  - Installare l'Integrazione <strong><a href="https://github.com/DanRobo76/VMC-HELTY-FLOW/blob/main/README.md#openweathermap-" text="OpenWeatherMap">OpenWeatherMap</a></strong>;
 
 <strong>Punti di Forza:</strong>
   - Invia Comandi alla VMC leggendone i valori Contenuti;
   - Permette l'accensione e lo spegnimento in funzione delle 2 fasce orarie programmabili per ogni giorno della settimana;
-  - Spegne la VMC in funzione dei Parametri Ambientali
+  - Spegne la VMC in funzione dei Parametri Ambientali<br>
+    Il SoftWare calcola il Punto di Rugiada Esterno (PdR Ext.) e il punto di Rugiada Interno (PdR Int.); se la differenza PdR Ext. - PdR Int. è minore di almeno 3-4°C (Valore impostabile dall'Utente) è sufficiente per 
+    garantire un adeguato trasporto dell'umidità dall'interno all'esterno dell'edificio.
   - Ripristina la Velocità precedente in caso di Black-Out
 <strong><a href="https://github.com/DanRobo76/VMC-HELTY-FLOW/blob/main/SECURITY.md" text="Limiti del SoftWare Ver. 22-04-2023">Limiti del SoftWare Ver. 22-04-2023</a></strong> 
 <br><br>
