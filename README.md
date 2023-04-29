@@ -26,15 +26,15 @@ Il Cliente ha l’onere e la responsabilità della scelta, dell’installazione,
   - Calcola la Portata d'Aria [M³/h] in funzione della Velocità;
   - Calcola l'Umidità Assoluta Esterna [g/m³];
   - Calcola l'Umidità Assoluta Interna [g/m³];
-  - Mostra un'Allerta in funzione:
-            <h5>Range Sensore Umidità [%]</h5>
+  - Mostra un'Allerta in funzione del:
+            <h5>Sensore Umidità [%]</h5>
             <ul>
                 <li>U ≤ 0 - Non Calcolabile</li>
                 <li>0 &lt; U ≤ 35 - Possibile Secchezza, Disidratazione</li>
                 <li>35 &lt; U ≤ 65 - Normale</li>
                 <li>66 &lt; U ≤ 100 - Possibile Muffe, Batteri</li>
             </ul>
-            <h5>Range Sensore CO₂ [ppm]</h5>
+            <h5>Sensore CO₂ [ppm]</h5>
             <ul>
                 <li>CO₂ ≤ 0 - Assente</li>
                 <li>0 &lt; CO₂ ≤ 350 - Bassa Concentrazione</li>
@@ -42,13 +42,16 @@ Il Cliente ha l’onere e la responsabilità della scelta, dell’installazione,
                 <li>600 &lt; CO₂ &lt; 1200 - Alta Concentrazione</li>
                 <li>CO₂ ≥ 1200 - Pessima Concentrazione</li>
             </ul>
-            <h5>Range Sensore VOC [ppb]</h5>
+            <h5>Sensore VOC [ppb]</h5>
             <ul>
                 <li>VOC ≤ 0 - Assente</li>
                 <li>0 &lt; VOC ≤ 300 - Bassa Concentrazione</li>
                 <li>350 &lt; VOC ≤ 600 - Moderata Concentrazione</li>
                 <li>VOC > 600 - Pessima Concentrazione</li>
             </ul>
+            <h5>per Congelamento[%]</h5>
+            <h5>per Differenza tra Temperatura Interna ed Esterna[%]</h5>
+            <h5>per il Superamento del Set Lim. Δ Punto di Rugiada[%]</h5>
 <br><br>
 <strong><a href="https://github.com/DanRobo76/VMC-HELTY-FLOW/blob/main/SECURITY.md" text="Limiti del SoftWare Ver. 22-04-2023">Limiti del SoftWare Ver. 22-04-2023</a></strong> 
 <br><br>
