@@ -32,3 +32,4 @@
 
 ### Rapporto Errori Ver. 22-04-2023
 Per la Versione del 22-04-2023, non si segnalano Errori<br>
+Aggiornata l'Automazione al 03-05-2023
