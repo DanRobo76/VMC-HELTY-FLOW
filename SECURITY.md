@@ -10,7 +10,9 @@
 
 
 ### Limiti del SoftWare:<br>
- <strong>In fase di Verifica:</strong><br>
+L'automazione compie una verifica <strong>ogni Secondo!</strong> Pertanto se lo ritieni, puoi variare l'indice temporale, ma tieni presente che le verifiche compiute dall'Automazione subiranno un tot di secondi di ritardo.<br>
+
+<strong>In fase di Verifica:</strong><br>
  - la Lettura dei Sensori: CO2 e VOC; lo scrivente non dispone del Modello Elite, il SoftWare mostra valori ancora da convalidare;<br>
     Condividi questa stringa, se disponi del modello Elite:<br>
   <pre style="font-size:10px; background-color: #d9ffcc;">
