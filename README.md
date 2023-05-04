@@ -87,24 +87,24 @@ Il Cliente ha l’onere e la responsabilità della scelta, dell’installazione,
 
 <strong>14</strong> Copiare e Incollare i seguenti File nella cartella \config\packages\vmc_helty_flow:
  <pre style="font-size:10px; background-color: #d9ffcc;">
-    - vmc_helty_flow_cucina_[data].yaml (Es. vmc_helty_flow_nome_[data].yaml)
+    - vmc_helty_flow_cucina_[data].yaml (Es. vmc_helty_flow_[nome]_[data].yaml)
     - Scheda Interfaccia VMC Cucina [data].txt (Es. Scheda Interfaccia VMC Sala [data].txt)
     - Automazione VMC Cucina [data].txt (Es. Automazione VMC Sala [data].txt)
   </pre> 
 <strong>15</strong> Rinominare i seguenti File:
   <pre style="font-size:10px; background-color: #d9ffcc;">
-    - da vmc_helty_flow_cucina_[data].yaml - Copia.yaml a vmc_helty_flow_nome_[data].yaml (Es. vmc_helty_flow_sala_[data].yaml)
+    - da vmc_helty_flow_cucina_[data].yaml - Copia.yaml a vmc_helty_flow_[nome]_[data].yaml (Es. vmc_helty_flow_sala_[data].yaml)
     - da Scheda Interfaccia VMC Cucina [data]- Copia a Scheda Interfaccia VMC [nome] [data].txt (Es. Scheda Interfaccia VMC Sala [data].txt)
     - da Automazione VMC Cucina [data] - Copia.txt a Automazione VMC [nome] [data].txt (Es. Automazione VMC Sala [data].txt)
   </pre> 
 <strong>16</strong> Aprire uno alla volta, con un Editor di File (Es. Word Office) i seguenti Files:
   <pre style="font-size:10px; background-color: #d9ffcc;">
-    - vmc_helty_flow_nome_data.yaml
+    - vmc_helty_flow_[nome]_data.yaml
     - Scheda Interfaccia VMC [nome] [data].txt
     - Automazione VMC [nome] [data].txt
   </pre> 
   usare la funzione "trova e sostituisci"-> Trova: cucina e sostituisci con: [nome] <br>
-  Salvare il File "vmc_helty_flow_nome_data.yaml" e ripetere per i files rimanenti:
+  Salvare il File "vmc_helty_flow_[nome]_data.yaml" e ripetere per i files rimanenti:
   <pre style="font-size:10px; background-color: #d9ffcc;">
     - Scheda Interfaccia VMC [nome] [data].txt
     - Automazione VMC [nome] [data].txt
