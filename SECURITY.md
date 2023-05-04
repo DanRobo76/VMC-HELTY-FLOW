@@ -2,10 +2,13 @@
 
 ### Versione del SoftWare:
 
-|          VMC-HELTY-FLOW              | Supportato da Home Assistant         |
-| ------------------------------------ | ------------------------------------ |
-| :white_check_mark:   Ver. 04-05-2023 | :white_check_mark:   Ver. 2023.5.0   |
-| :white_check_mark:   Ver. 22-04-2023 | :white_check_mark:   Ver. 2023.4.6   |
+|          VMC-HELTY-FLOW                  | Supportato da Home Assistant            |
+| ---------------------------------------- | ----------------------------------------|
+| :white_check_mark:                       | :white_check_mark:   Ver. 2023.5.0      |
+|  - Codice YAML Release 04-05-2023        |                                         |
+|  - Scheda Interfaccia Release 04-05-2023 |                                         |
+|  - Automazione Release 04-05-2023        |                                         |
+
 
 ### Limiti del SoftWare:<br>
  <strong>In fase di Verifica:</strong><br>
