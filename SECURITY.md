@@ -4,10 +4,9 @@
 
 |          VMC-HELTY-FLOW                  | Supportato da Home Assistant            |
 | ---------------------------------------- | ----------------------------------------|
-| :white_check_mark:                       | :white_check_mark:   Ver. 2023.5.0      |
-|  - VMC HELTY FLOW Release 04-05-2023     |                                         |
-|  - Scheda Interfaccia Release 04-05-2023 |                                         |
-|  - Automazione Release 04-05-2023        |                                         |
+|  :white_check_mark: VMC HELTY FLOW Release 04-05-2023     | :white_check_mark:   Ver. 2023.5.0 |
+|  :white_check_mark: Scheda Interfaccia Release 04-05-2023 | :white_check_mark:   Ver. 2023.5.0 |
+|  :white_check_mark: Automazione Release 04-05-2023        | :white_check_mark:   Ver. 2023.5.0 |
 
 
 ### Limiti del SoftWare:<br>
