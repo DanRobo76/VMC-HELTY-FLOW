@@ -55,14 +55,14 @@ Il Cliente ha l’onere e la responsabilità della scelta, dell’installazione,
 <strong>3</strong> Verificare la presenza della cartella "packages" all'interno della cartella "config" del Server Home Assistant; se non è presente, creare l'intero  percorso ovvero: \\192.168.1.xxx\config\packages\vmc_helty_flow<BR>
  <strong>3.1</strong> all'interno del percorso \config\packages\vmc_helty_flow copiare i seguenti Files:<BR> 
   <pre style="font-size:10px; background-color: #d9ffcc;">
-     - vmc_helty_flow_cucina_data.yaml
-     - Scheda Interfaccia VMC Cucina.txt
-     - Automazione VMC Cucina.txt
+     - vmc_helty_flow_cucina_[data].yaml
+     - Scheda Interfaccia VMC Cucina[data].txt
+     - Automazione VMC Cucina [data].txt
   </pre>
  , presenti nella scheda "CODE" -> Download ZIP:<BR>
  ![image](https://user-images.githubusercontent.com/102819027/235298629-1967e438-4096-4889-ac51-037483885dbe.png)<BR>
 <strong>4</strong> in Home Assistant andare in  Impostazioni-> Automazioni e scene -> CREA AUTOMAZIONE -> Inizia con un'automazione vuota -> cliccare in alto a destra sui ... puntini -> modifica in yaml -> cancellare tutto il codice e incollare il contenuto del file "Automazione VMC Cucina.txt" ovvero "Automazione VMC [nome].txt" e salvare. <br>
-<strong>5</strong> in Home Assistant andare in Panoramica -> cliccare in alto a destra sui ... puntini -> Modifica plancia -> AGGIUNGI SCHEDA -> Manuale -> Selezionare tutto il Codice , cancellare tutto il codice e incollare il contenuto del file "Scheda Interfaccia VMC Cucina.txt" ovvero "Scheda Interfaccia VMC [nome] e salvare. <br>
+<strong>5</strong> in Home Assistant andare in Panoramica -> cliccare in alto a destra sui ... puntini -> Modifica plancia -> AGGIUNGI SCHEDA -> Manuale -> Selezionare tutto il Codice , cancellare tutto il codice e incollare il contenuto del file "Scheda Interfaccia VMC Cucina_data.txt" ovvero "Scheda Interfaccia VMC [nome] [data] e salvare. <br>
 <strong>6</strong> Riavviare Home Assistant <br>
 <strong>7</strong> trovare e sostituire all'interno del file "vmc_helty_flow_cucina_data.yaml" l'indirizzo IP, da 192.168.1.160 con l'indirizzo Ip, vedi (Punto <strong>1</strong>)  [Aprile in Home Assistant il Pannello "File editor", cliccare sull' icona "Cartellina", andare in "packages", andare in "vmc_helty_flow" e selezionare il file "vmc_helty_flow_cucina_data.yaml", cliccare sull'icona "Lente" ovvero Cerca", inserire l'Indirizzo IP nel campo "Search for" e il nuovo Indirizzo IP, (Punto <strong>1</strong>) nel campo "Replace", cliccare su "All" e successivamente salvare il file cliccando sull'icona "Dischetto"; riavviare Home Assistant. <br>
 <strong>8</strong> Nella Scheda Interfaccia, Cliccare su "Settaggi":<BR>
@@ -70,7 +70,7 @@ Il Cliente ha l’onere e la responsabilità della scelta, dell’installazione,
   <strong>8.1</strong> Inserire il Volume della Stanza ove è installata la VMC<BR>
   <strong>8.2</strong> Verificare con strumenti esterni se i Sensori di Temperatura Esterna, Temperatura Interna, Umidità Esterna, Umidità Interna, CO2 e VOC necessitano dell'Offset, diversamente portare uno o più sensori su 0<BR>
   <strong>8.3</strong> Impostare un "Set Lim. Δ Punto di Rugiada", solitamente a 5<BR>
-<strong>9</strong> Cliccare su "Monitoraggio" per l'andamento dei Valori dei Sensori; se si rileva un andamento non conforme verrà visualizzato una Scheda "Allerta -Tipologia-" <br>
+<strong>9</strong> Cliccare su "Monitoraggio" per l'andamento dei Valori dei Sensori; se si rileva un andamento non conforme verrà visualizzato una Scheda "Allerta [Tipologia]" <br>
     ![image](https://user-images.githubusercontent.com/102819027/235297848-b8339e66-ed99-4a9d-a412-87f19cb8c8a1.png)<BR>
 <strong>10</strong> Cliccare su "Calendario":<BR>
   ![image](https://user-images.githubusercontent.com/102819027/235297925-a480941e-ab20-4ad9-a13e-cdc18c77c5b0.png)<BR>
@@ -87,27 +87,27 @@ Il Cliente ha l’onere e la responsabilità della scelta, dell’installazione,
 
 <strong>14</strong> Copiare e Incollare i seguenti File nella cartella \config\packages\vmc_helty_flow:
  <pre style="font-size:10px; background-color: #d9ffcc;">
-    - vmc_helty_flow_cucina_data.yaml (Es. vmc_helty_flow_nome_data.yaml)
-    - Scheda Interfaccia VMC Cucina.txt (Es. Scheda Interfaccia VMC Sala.txt)
-    - Automazione VMC Cucina.txt (Es. Automazione VMC Sala.txt)
+    - vmc_helty_flow_cucina_[data].yaml (Es. vmc_helty_flow_nome_[data].yaml)
+    - Scheda Interfaccia VMC Cucina [data].txt (Es. Scheda Interfaccia VMC Sala [data].txt)
+    - Automazione VMC Cucina [data].txt (Es. Automazione VMC Sala [data].txt)
   </pre> 
 <strong>15</strong> Rinominare i seguenti File:
   <pre style="font-size:10px; background-color: #d9ffcc;">
-    - da vmc_helty_flow_cucina_data.yaml - Copia.yaml a vmc_helty_flow_nome_data.yaml (Es. vmc_helty_flow_sala_data.yaml)
-    - da Scheda Interfaccia VMC Cucina - Copia a Scheda Interfaccia VMC [nome].txt (Es. Scheda Interfaccia VMC Sala.txt)
-    - da Automazione VMC Cucina - Copia.txt a Automazione VMC [nome].txt (Es. Automazione VMC Sala.txt)
+    - da vmc_helty_flow_cucina_[data].yaml - Copia.yaml a vmc_helty_flow_nome_[data].yaml (Es. vmc_helty_flow_sala_[data].yaml)
+    - da Scheda Interfaccia VMC Cucina [data]- Copia a Scheda Interfaccia VMC [nome] [data].txt (Es. Scheda Interfaccia VMC Sala [data].txt)
+    - da Automazione VMC Cucina [data] - Copia.txt a Automazione VMC [nome] [data].txt (Es. Automazione VMC Sala [data].txt)
   </pre> 
 <strong>16</strong> Aprire uno alla volta, con un Editor di File (Es. Word Office) i seguenti Files:
   <pre style="font-size:10px; background-color: #d9ffcc;">
     - vmc_helty_flow_nome_data.yaml
-    - Scheda Interfaccia VMC [nome].txt
-    - Automazione VMC [nome].txt
+    - Scheda Interfaccia VMC [nome] [data].txt
+    - Automazione VMC [nome] [data].txt
   </pre> 
   usare la funzione "trova e sostituisci"-> Trova: cucina e sostituisci con: [nome] <br>
   Salvare il File "vmc_helty_flow_nome_data.yaml" e ripetere per i files rimanenti:
   <pre style="font-size:10px; background-color: #d9ffcc;">
-    - Scheda Interfaccia VMC [nome].txt
-    - Automazione VMC [nome].txt
+    - Scheda Interfaccia VMC [nome] [data].txt
+    - Automazione VMC [nome] [data].txt
   </pre> 
 <strong>17</strong> Ripetetere i punti dal <strong>4</strong> al <strong>13</strong>
 
