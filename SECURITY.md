@@ -10,7 +10,7 @@
 
 
 ### Limiti del SoftWare:<br>
-L'automazione compie un "CICLO" di Verifica e di Lettura dei Sensori <strong>ogni 10 Secondi!</strong>. Se avvengono modifiche all'interno del "CICLO" ovvero tra l'Inizio e la Fine, i valori non veranno memorizzati, fino all'inizio del nuovo "CICLO"<br>
+L'automazione compie un "CICLO" di Verifica e di Lettura dei Sensori <strong>ogni 10 Secondi!</strong>.<br>Se avvengono modifiche all'interno del "CICLO" ovvero tra l'Inizio e la Fine, i valori non veranno memorizzati, fino all'inizio del nuovo "CICLO"<br>
 
 <strong>In fase di Verifica:</strong><br>
  - la Lettura dei Sensori: CO2 e VOC; lo scrivente non dispone del Modello Elite, il SoftWare mostra valori ancora da convalidare;<br>
