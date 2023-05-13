@@ -128,7 +128,7 @@ Per Installare l'API di OpenWeatherMap utile per estrarre l'Umidità Esterna, la
 <strong>9</strong> Incollare la Chiave API, nel campo "Chiave API*", Modalità "Hourly", Lingua "It"<br>
 <strong>10</strong> Ricorda di non condividere la tua chiave API con altri e di non utilizzarla per scopi non consentiti dalle condizioni di utilizzo di OpenWeatherMap.<br>
 
-## <span style="color:#663300">SchreenShot</span>  
+## <span style="color:#663300">SchreenShot, Variano in Funzione delle Versioni!</span>  
 <img src="https://user-images.githubusercontent.com/102819027/233828895-5111cc49-3191-4dfb-8e5e-a69d810cd89f.png" alt="immagine" style="width:30%;"> <img src="https://user-images.githubusercontent.com/102819027/233829537-395737b7-4404-44da-b475-0d7b85d4390d.png" alt="immagine" style="width:30%;"> <img src="https://user-images.githubusercontent.com/102819027/233829599-a3e850e4-f692-4f26-b0e9-740fdfbe97c7.png" alt="immagine" style="width:30%;"> 
 
 <img src="https://user-images.githubusercontent.com/102819027/233829674-94f02ff3-0a3b-4738-a709-c36a07b06b46.png" alt="immagine" style="width:30%;"> <img src="https://user-images.githubusercontent.com/102819027/233829732-6da71505-223e-4e1a-9875-0dac2574eb85.png" alt="immagine" style="width:30%;"> <img src="https://user-images.githubusercontent.com/102819027/233829786-8f671622-0a1b-4589-826d-29fb027ee3e3.png" alt="immagine" style="width:30%;">
