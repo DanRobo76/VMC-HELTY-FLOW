@@ -24,7 +24,7 @@ L'automazione compie un "CICLO" di Verifica e di Lettura dei Sensori <strong>ogn
 ![image](https://user-images.githubusercontent.com/102819027/235301716-b4a5b6c8-fbbe-4552-a0d1-566aeedba01b.png)<br>
 <br>, in modo che possa aggiornare il SoftWare!
 <br><br>
- - la Lettura del Sensore: Temperatura Interna [Valori Negativi]; lo scrivente ad oggi non ha ancora individuato la lettura della temperatura negativa;<br>
+ - la Lettura del Sensore: Temperatura Interna o Esterna minore di 0 °C; lo scrivente ad oggi non ha ancora riscontrato una temperatura minore di 0 °C;<br>
    Condividi questa stringa:<br>
   <pre style="font-size:10px; background-color: #d9ffcc;">
    - Sensori Ambientali:
@@ -33,7 +33,7 @@ L'automazione compie un "CICLO" di Verifica e di Lettura dei Sensori <strong>ogn
 ![image](https://user-images.githubusercontent.com/102819027/235301291-e2686ed5-362a-4676-96a1-16fb3c2cda05.png) <br>
 <br> insieme allo ScreeShot dell'App. Air Guard: <br>
 ![image](https://user-images.githubusercontent.com/102819027/235301928-6ac73fa0-fe02-48b4-80ff-6193cb9a8191.png)<br>
-<br>, se rilevi una Temperatura Interna Negativa, in modo che possa aggiornare il SoftWare!
+<br>, se rilevi una Temperatura Interna o Esterna minore di 0 °C (Negativa), in modo che possa aggiornare il SoftWare!
 
 ### Rapporto Errori
 Per la Versione corrente, non si segnalano Errori<br>
