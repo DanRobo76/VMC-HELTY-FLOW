@@ -4,13 +4,13 @@
 
 |          VMC-HELTY-FLOW                  | Supportato da Home Assistant            |
 | ---------------------------------------- | ----------------------------------------|
-|  :white_check_mark: VMC HELTY FLOW Release 08-05-2023     | :white_check_mark:   Ver. 2023.5.2 |
-|  :white_check_mark: Scheda Interfaccia Release 08-05-2023 | :white_check_mark:   Ver. 2023.5.2 |
-|  :white_check_mark: Automazione Release 08-05-2023        | :white_check_mark:   Ver. 2023.5.2 |
+|  :white_check_mark: VMC HELTY FLOW Release 13-05-2023     | :white_check_mark:   Ver. 2023.5.2 |
+|  :white_check_mark: Scheda Interfaccia Release 13-05-2023 | :white_check_mark:   Ver. 2023.5.2 |
+|  :white_check_mark: Automazione Release 13-05-2023        | :white_check_mark:   Ver. 2023.5.2 |
 
 
 ### Limiti del SoftWare:<br>
-L'automazione compie una verifica <strong>ogni Secondo!</strong> Pertanto se lo ritieni, puoi variare l'indice temporale, ma tieni presente che le verifiche compiute dall'Automazione subiranno un tot di secondi di ritardo.<br>
+L'automazione compie un "CICLO" di Verifica e di Lettura dei Sensori <strong>ogni 10 Secondi!</strong>. Se avvengono modifiche all'interno del "CICLO" ovvero tra l'Inizio e la Fine, i valori non veranno memorizzati, fino all'inizio del nuovo "CICLO"<br>
 
 <strong>In fase di Verifica:</strong><br>
  - la Lettura dei Sensori: CO2 e VOC; lo scrivente non dispone del Modello Elite, il SoftWare mostra valori ancora da convalidare;<br>
