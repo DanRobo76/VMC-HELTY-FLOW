@@ -1,9 +1,9 @@
 ## VMC HELTY FLOW PLUS sviluppato per Home Assistant <a href="https://www.home-assistant.io/" target="_blank"><img src="https://user-images.githubusercontent.com/102819027/233830183-9c55677d-b6a1-4153-8d3c-219394ec8720.png" alt="immagine" style="width:10%;"></a> <a href="https://www.heltyair.com/prodotti/vmc-a-parete/flow-plus/" target="_blank"><img src="https://user-images.githubusercontent.com/102819027/233830311-1a5e8923-b991-46b1-84b0-f72198d5055d.png" alt="immagine" style="width:7%;"></a>
 <pre style="font-size:10px; background-color: #d9ffcc;">
 VMC HELTY FLOW PLUS sviluppato per Home Assistant
-  - VMC HELTY FLOW Release 08-05-2023 
-  - Scheda Interfaccia Release 08-05-2023
-  - Automazione Release 86-05-2023
+  - VMC HELTY FLOW Release 13-05-2023 
+  - Scheda Interfaccia Release 13-05-2023
+  - Automazione Release 13-05-2023
 
 E-mail: <a href="mailto:danilo.robotti@gmail.com">danilo.robotti@gmail.com</a>
 </pre>
