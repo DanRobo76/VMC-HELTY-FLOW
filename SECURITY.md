@@ -4,26 +4,13 @@
 
 |          VMC-HELTY-FLOW                  | Supportato da Home Assistant            |
 | ---------------------------------------- | ----------------------------------------|
-|  :white_check_mark: VMC HELTY FLOW Release 13-05-2023     | :white_check_mark:   Ver. 2023.5.2 |
-|  :white_check_mark: Scheda Interfaccia Release 13-05-2023 | :white_check_mark:   Ver. 2023.5.2 |
-|  :white_check_mark: Automazione Release 13-05-2023        | :white_check_mark:   Ver. 2023.5.2 |
+|  :white_check_mark: VMC HELTY FLOW Release 20-05-2023     | :white_check_mark:   Ver. 2023.5.3 |
+|  :white_check_mark: Scheda Interfaccia Release 20-05-2023 | :white_check_mark:   Ver. 2023.5.3 |
+|  :white_check_mark: Automazione Release 20-05-2023        | :white_check_mark:   Ver. 2023.5.3 |
 
 
 ### Limiti del SoftWare:<br>
-L'automazione compie un "CICLO" di Verifica e di Lettura dei Sensori <strong>ogni 10 Secondi!</strong>.<br>Se avvengono modifiche all'interno del "CICLO" ovvero tra l'Inizio e la Fine, i valori non veranno memorizzati, fino all'inizio del nuovo "CICLO"<br>
-
 <strong>In fase di Verifica:</strong><br>
- - la Lettura dei Sensori: CO2 e VOC; lo scrivente non dispone del Modello Elite, il SoftWare mostra valori ancora da convalidare;<br>
-    Condividi questa stringa, se disponi del modello Elite:<br>
-  <pre style="font-size:10px; background-color: #d9ffcc;">
-   - Sensori Ambientali:
-     VMGI,00214,00202,00817,00000,16384,00298,00222,00069,04354,00188,00000,00000,00000,00000,00000 <br>
-  </pre>
-![image](https://user-images.githubusercontent.com/102819027/235301291-e2686ed5-362a-4676-96a1-16fb3c2cda05.png) <br>
-<br> insieme allo ScreeShot dell'App. Air Guard: <br>
-![image](https://user-images.githubusercontent.com/102819027/235301716-b4a5b6c8-fbbe-4552-a0d1-566aeedba01b.png)<br>
-<br>, in modo che possa aggiornare il SoftWare!
-<br><br>
  - la Lettura del Sensore: Temperatura Interna o Esterna minore di 0 °C; lo scrivente ad oggi non ha ancora riscontrato una temperatura minore di 0 °C;<br>
    Condividi questa stringa:<br>
   <pre style="font-size:10px; background-color: #d9ffcc;">
