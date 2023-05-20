@@ -64,12 +64,12 @@ Il Cliente ha l’onere e la responsabilità della scelta, dell’installazione,
   </pre>
  , presenti nella scheda "CODE" -> Download ZIP:<BR>
  ![image](https://user-images.githubusercontent.com/102819027/235298629-1967e438-4096-4889-ac51-037483885dbe.png)<BR>
-<strong>4</strong> in Home Assistant andare in  Impostazioni-> Automazioni e scene -> CREA AUTOMAZIONE -> Inizia con un'automazione vuota -> cliccare in alto a destra sui ... puntini -> modifica in yaml -> cancellare tutto il codice e incollare il contenuto del file "Automazione VMC Cucina [data].txt" ovvero "Automazione VMC [nome] [data].txt" e salvare. <br>
+<br><strong>4</strong> in Home Assistant andare in  Impostazioni-> Automazioni e scene -> CREA AUTOMAZIONE -> Inizia con un'automazione vuota -> cliccare in alto a destra sui ... puntini -> modifica in yaml -> cancellare tutto il codice e incollare il contenuto del file "Automazione VMC Cucina [data].txt" ovvero "Automazione VMC [nome] [data].txt" e salvare. <br>
 <strong>5</strong> in Home Assistant andare in Panoramica -> cliccare in alto a destra sui ... puntini -> Modifica plancia -> AGGIUNGI SCHEDA -> Manuale -> Selezionare tutto il Codice , cancellare tutto il codice e incollare il contenuto del file "Scheda Interfaccia VMC Cucina [data].txt" ovvero "Scheda Interfaccia VMC [nome] [data] e salvare. <br>
 <strong>6</strong> Riavviare Home Assistant <br>
 <strong>7</strong> trovare e sostituire all'interno del file "vmc_helty_flow_cucina_[data].yaml" l'indirizzo IP, da 192.168.1.160 con l'indirizzo Ip, vedi (Punto <strong>1</strong>)  [Aprile in Home Assistant il Pannello "File editor", cliccare sull' icona "Cartellina", andare in "packages", andare in "vmc_helty_flow" e selezionare il file "vmc_helty_flow_cucina_[data].yaml", cliccare sull'icona "Lente" ovvero Cerca", inserire l'Indirizzo IP nel campo "Search for" e il nuovo Indirizzo IP, (Punto <strong>1</strong>) nel campo "Replace", cliccare su "All" e successivamente salvare il file cliccando sull'icona "Dischetto"; riavviare Home Assistant. <br>
-<strong>8</strong> Nella Scheda Interfaccia, Cliccare su "Settaggi":<BR>
-  ![image](https://user-images.githubusercontent.com/102819027/235297715-64bdf5b9-3210-4593-9d46-b8e602dd487a.png)<BR>
+<strong>8</strong> Nella Scheda Interfaccia, Cliccare su "Settaggi":<br>
+  ![image](https://user-images.githubusercontent.com/102819027/235297715-64bdf5b9-3210-4593-9d46-b8e602dd487a.png)<br>
   <strong>8.1</strong> Inserire il Volume della Stanza ove è installata la VMC<BR>
   <strong>8.2</strong> Impostare un "Set Velocità 1", per la 1° Fascia del Calendario<BR>
   <strong>8.3</strong> Impostare un "Set Velocità 2", per la 2° Fascia del Calendario<BR>
@@ -80,15 +80,15 @@ Il Cliente ha l’onere e la responsabilità della scelta, dell’installazione,
   <strong>8.8</strong> Verificare con strumenti esterni se i Sensori di Temperatura Esterna, Temperatura Interna, Umidità Esterna e Umidità Interna, necessitano dell'Offset; diversamente portare uno o più sensori su 0<BR>
 <strong>9</strong> Cliccare su "Monitoraggio" per l'andamento dei Valori dei Sensori;  <br>
   Se si rileva un andamento non conforme, verrà visualizzato una Scheda "Allerta [Tipologia]", Es: <br>
-    ![Allerta Umidità](https://github.com/DanRobo76/VMC-HELTY-FLOW/assets/102819027/0b4e7ea6-a349-44a5-af0e-15ac542eb8e6)<BR> 
+    ![Allerta Umidità](https://github.com/DanRobo76/VMC-HELTY-FLOW/assets/102819027/0b4e7ea6-a349-44a5-af0e-15ac542eb8e6)<br>
 <strong>10</strong> Cliccare su "Calendario":<BR>
-  ![image](https://user-images.githubusercontent.com/102819027/235297925-a480941e-ab20-4ad9-a13e-cdc18c77c5b0.png)<BR>
- <strong>10.1</strong> Impostare se si desidera l'orario di Accensione e Spegnimento per ogni giorno della Settimana<BR>
- <strong>10.2</strong> RI-AVVIARE HOME ASSISTANT: Impostazioni -> Sistema -> Cliccare in alto a destra "RIAVVIA" per memorizzare i valori inseriti nel calendario; solitamente l'operazione va fatta solo una volta, successivamente ad ogni variazione degli orari non è più necessario il riavvio;<BR> 
-<strong>11</strong> Cliccare su "Opzioni" per poter comandare la VMC<BR>
-  ![image](https://user-images.githubusercontent.com/102819027/235298039-d6784b15-6279-429a-94b9-00f5dd79f8e3.png)<BR>
-<strong>13</strong> Cliccare su "Info Lettura Dati nella VMC" per maggiori informazioni
-  ![image](https://user-images.githubusercontent.com/102819027/235298096-1648d8f2-5cfc-4ce4-a233-9cd67379ac3b.png)<BR>
+  ![image](https://user-images.githubusercontent.com/102819027/235297925-a480941e-ab20-4ad9-a13e-cdc18c77c5b0.png)<br>
+<strong>10.1</strong> Impostare se si desidera l'orario di Accensione e Spegnimento per ogni giorno della Settimana<br>
+ <strong>10.2</strong> RI-AVVIARE HOME ASSISTANT: Impostazioni -> Sistema -> Cliccare in alto a destra "RIAVVIA" per memorizzare i valori inseriti nel calendario; solitamente l'operazione va fatta solo una volta, successivamente ad ogni variazione degli orari non è più necessario il riavvio;<br>
+<strong>11</strong> Cliccare su "Opzioni" per poter comandare la VMC
+<br>  ![image](https://user-images.githubusercontent.com/102819027/235298039-d6784b15-6279-429a-94b9-00f5dd79f8e3.png)<br>
+<br><strong>13</strong> Cliccare su "Info Lettura Dati nella VMC" per maggiori informazioni
+<br>  ![image](https://user-images.githubusercontent.com/102819027/235298096-1648d8f2-5cfc-4ce4-a233-9cd67379ac3b.png)<br>
   
 ###   Se si hanno a disposizione più VMC, ripetere i punti sottostanti per ogni VMC:                      
 
