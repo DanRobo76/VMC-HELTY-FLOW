@@ -8,13 +8,6 @@
 |  :white_check_mark: Scheda Interfaccia Release 20-05-2023 | :white_check_mark:   Ver. 2023.5.3 |
 |  :white_check_mark: Automazione Release 20-05-2023        | :white_check_mark:   Ver. 2023.5.3 |
 
-
-
-
-
-
-
-
 ### Limiti del SoftWare:<br>
 <strong>La Lettura dei Sensori avviene ogni:</strong>
 -  5 Secondi, per la Lettura della Velocità della VMC;<br> 
@@ -30,7 +23,7 @@
   - VMC_CUCINA_NOME;<br> 
   - VMC_CUCINA_LAN <br> 
 <br>
-<strong>In alcune condizioni, all'interno dell'Automazion, è presente un'attesa di 5 secondi, per bypassare le condizioni intrinseche contenute nel Firmware della VMC</strong><br> 
+<strong>In alcune condizioni, all'interno dell'Automazione, è presente un'attesa di 5 secondi, per bypassare le condizioni intrinseche contenute nel Firmware della VMC</strong><br> 
 
 ### In fase di Verifica la Lettura della Temperatura Interna o Esterna minore di 0 °C:<br>     
 
