@@ -33,10 +33,10 @@ Il Cliente ha l’onere e la responsabilità della scelta, dell’installazione,
   - Calcola l'Umidità Assoluta Esterna [g/m³];
   - Calcola l'Umidità Assoluta Interna [g/m³];
   - Mostra un'Allerta in funzione del:
-      <h6>Sensore Umidità;</h6>
-      <h6>per Congelamento;</h6>
-      <h6>per Differenza tra Temperatura Interna ed Esterna;</h6>
-      <h6>per il Superamento del Set Lim. Δ Punto di Rugiada.</h6>
+      - Sensore Umidità;<br>
+      - per Congelamento;<br>
+      - per Differenza tra Temperatura Interna ed Esterna;<br>
+      - per il Superamento del Set Lim. Δ Punto di Rugiada.<br>
 #
 ![image](https://user-images.githubusercontent.com/102819027/235299358-88373b06-b62e-4867-88ab-287cad60bb6d.png)<br>
 <strong>1</strong> Rendere gli indirizzi IP della/e VMC, statici attraverso il Router; la VMC risponde sulla porta 5001. <br>
