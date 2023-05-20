@@ -73,8 +73,8 @@ Il Cliente ha l’onere e la responsabilità della scelta, dell’installazione,
   <strong>8.6</strong> Attivare se si desidera l'opzione "VMC ON/OFF, in Funzione del Calendario" per attivare gli orari inseriti nel calendario<BR>
   <strong>8.7</strong> Attivare se si desidera l'opzione "Automazione VMC Cucina Release [data]" per attivare o disativare l'automazione dell'intero codice [Si consiglia di tenerla Attivata]<BR> 
   <strong>8.8</strong> Verificare con strumenti esterni se i Sensori di Temperatura Esterna, Temperatura Interna, Umidità Esterna e Umidità Interna, necessitano dell'Offset, diversamente portare uno o più sensori su 0<BR>
-<strong>9</strong> Cliccare su "Monitoraggio" per l'andamento dei Valori dei Sensori; se si rileva un andamento non conforme verrà visualizzato una Scheda "Allerta [Tipologia]" <br>
-    ![image](https://user-images.githubusercontent.com/102819027/235297848-b8339e66-ed99-4a9d-a412-87f19cb8c8a1.png)<BR>
+<strong>9</strong> Cliccare su "Monitoraggio" per l'andamento dei Valori dei Sensori; se si rileva un andamento non conforme verrà visualizzato una Scheda "Allerta [Tipologia]", Es: <br>
+    ![Allerta Umidità](https://github.com/DanRobo76/VMC-HELTY-FLOW/assets/102819027/0b4e7ea6-a349-44a5-af0e-15ac542eb8e6)<BR> 
 <strong>10</strong> Cliccare su "Calendario":<BR>
   ![image](https://user-images.githubusercontent.com/102819027/235297925-a480941e-ab20-4ad9-a13e-cdc18c77c5b0.png)<BR>
  <strong>10.1</strong> Impostare se si desidera l'orario di Accensione e Spegnimento per ogni giorno della Settimana<BR>
