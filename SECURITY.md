@@ -24,13 +24,14 @@ Se se vuole modificare la tempistica, modificare i seguenti sensori contenuti ne
 - VMC_CUCINA_NOME;<br> 
 - VMC_CUCINA_LAN <br> 
 <br>
-<strong>In fase di Verifica:</strong><br>     
- - la Lettura del Sensore: Temperatura Interna o Esterna minore di 0 °C<br>
- Lo scrivente ad oggi non ha ancora riscontrato una temperatura minore di 0 °C;<br>
+<strong>In fase di Verifica la Lettura della Temperatura Interna o Esterna minore di 0 °C:</strong><br>     
+
+Ad oggi non si è riscontrato una temperatura minore di 0 °C;<br>
+
+<img src="https://github.com/DanRobo76/VMC-HELTY-FLOW/assets/102819027/7e34f416-a47e-4749-b907-e6e1140a8321" alt="Immagine">
+<br>
  <br>
- ![Stringa Codice](https://github.com/DanRobo76/VMC-HELTY-FLOW/assets/102819027/586651b7-526e-4953-8c94-e08a5e0d1108)<br>
- <br>
- Condividi questa stringa:<br>
+ Condividi questa stringa, per Email:<br>
   <pre style="font-size:10px; background-color: #d9ffcc;">
    - Sensori Ambientali:
      VMGI,00214,00202,00817,00000,16384,00298,00222,00069,04354,00188,00000,00000,00000,00000,00000 <br>
