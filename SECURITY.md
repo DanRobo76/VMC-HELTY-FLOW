@@ -22,7 +22,7 @@
   - VMC_CUCINA_SENSORI;<br> 
   - VMC_CUCINA_NOME;<br> 
   - VMC_CUCINA_LAN <br> 
-<br>
+
 <strong>In alcune condizioni, all'interno dell'Automazione, è presente un'attesa di 5 secondi, per bypassare le condizioni intrinseche contenute nel Firmware della VMC</strong><br> 
 
 ### In fase di Verifica la Lettura della Temperatura Interna o Esterna minore di 0 °C:<br>     
