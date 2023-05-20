@@ -9,8 +9,14 @@
 |  :white_check_mark: Automazione Release 20-05-2023        | :white_check_mark:   Ver. 2023.5.3 |
 
 
+
+
+
+
+
+
 ### Limiti del SoftWare:<br>
-La Lettura dei Sensori avviene ogni:
+<strong>La Lettura dei Sensori avviene ogni:</strong>
 -  5 Secondi, per la Lettura della Velocità della VMC;<br> 
 - 60 Secondi (1 Minuto), per la Verifica On-Line della VMC;<br> 
 -  1200 Secondi (20 Minuti), per la Lettura dei Parametri Ambientali della VMC;<br> 
@@ -24,7 +30,7 @@ La Lettura dei Sensori avviene ogni:
   - VMC_CUCINA_NOME;<br> 
   - VMC_CUCINA_LAN <br> 
 <br>
-Tra un Comando e l'Altro durante la verifica delle condizioni, è presente un'attesa di 5 secondi, per bypassare le condizioni intrinseche contenute nel Firmware della VMC<br> 
+<strong>In alcune condizioni, all'interno dell'Automazion, è presente un'attesa di 5 secondi, per bypassare le condizioni intrinseche contenute nel Firmware della VMC</strong><br> 
 
 ### In fase di Verifica la Lettura della Temperatura Interna o Esterna minore di 0 °C:<br>     
 
