@@ -30,7 +30,8 @@ Se se vuole modificare la tempistica, modificare i seguenti sensori contenuti ne
 <img src="https://github.com/DanRobo76/VMC-HELTY-FLOW/assets/102819027/7e34f416-a47e-4749-b907-e6e1140a8321" alt="Immagine">
 <br>
  <br>
- Condividi questa stringa, per Email:<br>
+ Condividi questa stringa, per E-mail: <a href="mailto:danilo.robotti@gmail.com">danilo.robotti@gmail.com</a><br>
+ <br> 
   <pre style="font-size:10px; background-color: #d9ffcc;">
    - Sensori Ambientali:
      VMGI,00214,00202,00817,00000,16384,00298,00222,00069,04354,00188,00000,00000,00000,00000,00000 <br>
