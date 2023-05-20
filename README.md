@@ -116,7 +116,7 @@ Il Cliente ha l’onere e la responsabilità della scelta, dell’installazione,
     - Scheda Interfaccia VMC [nome] [data].txt
     - Automazione VMC [nome] [data].txt
   </pre> 
-<strong>17</strong> Ripetetere i punti dal <strong>4</strong> al <strong>10.2</strong>
+<strong>16</strong> Ripetetere i punti dal <strong>4</strong> al <strong>10.2</strong>
 
 ### OpenWeatherMap <br>
 Per Installare l'API di OpenWeatherMap utile per estrarre l'Umidità Esterna, la quale verrà impiegata per determinare il Punto di Rugiada Esterno, segui questi passaggi:
