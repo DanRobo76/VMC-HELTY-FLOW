@@ -7,8 +7,10 @@ cards:
     card:
       type: entities
       entities:
+        - entity: sensor.vmc_cucina_nome_status
         - entity: sensor.vmc_cucina_status_ip_interfaccia
           secondary_info: last-updated
+        - entity: sensor.vmc_cucina_ip
       state_color: true
       show_header_toggle: false
       title: Ventilazione Meccanica Controllata
