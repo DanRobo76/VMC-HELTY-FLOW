@@ -25,6 +25,7 @@ Se se vuole modificare la tempistica, modificare i seguenti sensori contenuti ne
 - VMC_CUCINA_LAN <br> 
 <br>
 <strong>In fase di Verifica la Lettura della Temperatura Interna o Esterna minore di 0 °C</strong><br>     
+<br>
 
 <img src="https://github.com/DanRobo76/VMC-HELTY-FLOW/assets/102819027/7e34f416-a47e-4749-b907-e6e1140a8321" alt="Immagine">
 <br>
