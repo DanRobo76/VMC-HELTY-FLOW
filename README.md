@@ -73,11 +73,11 @@ Il Cliente ha l’onere e la responsabilità della scelta, dell’installazione,
   <strong>8.1</strong> Inserire il Volume della Stanza ove è installata la VMC<BR>
   <strong>8.2</strong> Impostare un "Set Velocità 1", per la 1° Fascia del Calendario<BR>
   <strong>8.3</strong> Impostare un "Set Velocità 2", per la 2° Fascia del Calendario<BR>
-  <strong>8.4</strong> Impostare un "Set Lim. Δ Punto di Rugiada", solitamente a 5<BR>
+  <strong>8.4</strong> Impostare un "Set Lim. Δ Punto di Rugiada", solitamente a 5 [°C]<BR>
   <strong>8.5</strong> Attivare se si desidera l'opzione "VMC ON/OFF, in Funzione del Lim. Δ P. di Rugiada" per verificare se i parametri ambientali sono ottimali, diversamente la VMC verrà portata a "Velocità 0"<BR>
   <strong>8.6</strong> Attivare se si desidera l'opzione "VMC ON/OFF, in Funzione del Calendario" per attivare gli orari inseriti nel calendario<BR>
   <strong>8.7</strong> Attivare se si desidera l'opzione "Automazione VMC Cucina Release [data]" per attivare o disativare l'automazione dell'intero codice [Si consiglia di tenerla Attivata]<BR> 
-  <strong>8.8</strong> Verificare con strumenti esterni se i Sensori di Temperatura Esterna, Temperatura Interna, Umidità Esterna e Umidità Interna, necessitano dell'Offset, diversamente portare uno o più sensori su 0<BR>
+  <strong>8.8</strong> Verificare con strumenti esterni se i Sensori di Temperatura Esterna, Temperatura Interna, Umidità Esterna e Umidità Interna, necessitano dell'Offset; diversamente portare uno o più sensori su 0<BR>
 <strong>9</strong> Cliccare su "Monitoraggio" per l'andamento dei Valori dei Sensori;  <br>
   Se si rileva un andamento non conforme, verrà visualizzato una Scheda "Allerta [Tipologia]", Es: <br>
     ![Allerta Umidità](https://github.com/DanRobo76/VMC-HELTY-FLOW/assets/102819027/0b4e7ea6-a349-44a5-af0e-15ac542eb8e6)<BR> 
