@@ -133,9 +133,18 @@ sensor:
         value_template: >
           {% set stati = ['unknown', 'unavailable'] %}
           {% set vmc_nome = states('sensor.vmc_cucina_nome') %}
-          {{ 'Non disponibile' if vmc_nome in stati else
-          (vmc_nome.split(" ")[1]) }}
+          {% if vmc_nome.split(" ")|length >= 2 %}
+            {{ vmc_nome.split(" ")[1] }}
+          {% else %}
+            Non disponibile
+          {% endif %}
         icon_template: mdi:label-variant
+
+      vmc_cucina_ip:                                                           # [CONFIGURAZIONE 0 RICHIAMI] [INTERFACCIA PIU’ RICHIAMI] SENSORE PER VISUALIZZARE L'IP NELL'INTERFACCIA
+        friendly_name: "Internet Protocol Address"
+        value_template: >
+            192.168.1.168 su Porta 5001
+        icon_template: mdi:ip
 
       vmc_cucina_status_ventola_lettura_codice:                                # [CONFIGURAZIONE 0 RICHIAMI] SENSORE DI LETTURA DEI DATI "VELOCITA'" MEMORIZZATI NELLA VMC, PREVIA VERIFICA DI AVVENUTA LETTURA DEI DATI "VELOCITA'" MEMORIZZATI NELLA VMC
         friendly_name: "Codice Status Ventilazione"
@@ -578,7 +587,7 @@ sensor:
         value_template: >
           {% set stati = ['unknown', 'unavailable'] %}
           {% set codici = {'00000': '-', '00001': '10', '00002': '17', '00003': '26', 
-                           '00004': '37', '00005': '42', '00006': '-', '00007': '-'} %}
+                           '00004': '37', '00005': '42', '00006': '10', '00007': '-'} %}
           {{ 'Non disponibile' if states('sensor.vmc_cucina_status_ventola') in stati 
             else (codici.get(states('sensor.vmc_cucina_status_ventola').split(',')[1], 'Non disponibile')) }}
         icon_template: mdi:window-open-variant  
@@ -920,6 +929,7 @@ input_number:
 ################### Inizio Creazione Switch Booleani impiegati nell'Interfaccia Lovelace per mostrare o meno le Opzioni ####################################################################################
 input_boolean: 
   vmc_cucina_opzioni_vmc:                                                      # [CONFIGURAZIONE 0 RICHIAMI] [AUTOMAZIONE, PIU' RICHIAMI] [INTERFACCIA, PIU' RICHIAMI]    name: "Telecomando"
+    name: "Telecomando"
     initial: false
     icon: mdi:remote-tv
 
