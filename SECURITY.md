@@ -33,6 +33,7 @@
  Condividi questa stringa, per E-mail: <a href="mailto:danilo.robotti@gmail.com">danilo.robotti@gmail.com</a><br>
  <br> 
   <pre style="font-size:10px; background-color: #d9ffcc;">
+   Esempio:
    - Sensori Ambientali:
      VMGI,00214,00202,00817,00000,16384,00298,00222,00069,04354,00188,00000,00000,00000,00000,00000 <br>
   </pre>
