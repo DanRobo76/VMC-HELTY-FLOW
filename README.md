@@ -85,26 +85,26 @@ Il Cliente ha l’onere e la responsabilità della scelta, dell’installazione,
   ![image](https://user-images.githubusercontent.com/102819027/235297925-a480941e-ab20-4ad9-a13e-cdc18c77c5b0.png)<br>
 <strong>10.1</strong> Impostare se si desidera l'orario di Accensione e Spegnimento per ogni giorno della Settimana<br>
  <strong>10.2</strong> RI-AVVIARE HOME ASSISTANT: Impostazioni -> Sistema -> Cliccare in alto a destra "RIAVVIA" per memorizzare i valori inseriti nel calendario; solitamente l'operazione va fatta solo una volta, successivamente ad ogni variazione degli orari non è più necessario il riavvio;<br>
-<strong>11</strong> Cliccare su "Opzioni" per poter comandare la VMC
+<strong>11</strong> Cliccare su "Telecomando" per poter comandare la VMC
 <br>  ![image](https://user-images.githubusercontent.com/102819027/235298039-d6784b15-6279-429a-94b9-00f5dd79f8e3.png)<br>
-<br><strong>13</strong> Cliccare su "Info Lettura Dati nella VMC" per maggiori informazioni
+<br><strong>12</strong> Cliccare su "Info Lettura Dati nella VMC" per maggiori informazioni
 <br>  ![image](https://user-images.githubusercontent.com/102819027/235298096-1648d8f2-5cfc-4ce4-a233-9cd67379ac3b.png)<br>
   
 ###   Se si hanno a disposizione più VMC, ripetere i punti sottostanti per ogni VMC:                      
 
-<strong>14</strong> Copiare e Incollare i seguenti File nella cartella \config\packages\vmc_helty_flow:
+<strong>13</strong> Copiare e Incollare i seguenti File nella cartella \config\packages\vmc_helty_flow:
  <pre style="font-size:10px; background-color: #d9ffcc;">
     - vmc_helty_flow_cucina_[data].yaml (Es. vmc_helty_flow_[nome]_[data].yaml)
     - Scheda Interfaccia VMC Cucina [data].txt (Es. Scheda Interfaccia VMC Sala [data].txt)
     - Automazione VMC Cucina [data].txt (Es. Automazione VMC Sala [data].txt)
   </pre> 
-<strong>15</strong> Rinominare i seguenti File:
+<strong>14</strong> Rinominare i seguenti File:
   <pre style="font-size:10px; background-color: #d9ffcc;">
     - da vmc_helty_flow_cucina_[data].yaml - Copia.yaml a vmc_helty_flow_[nome]_[data].yaml (Es. vmc_helty_flow_sala_[data].yaml)
     - da Scheda Interfaccia VMC Cucina [data]- Copia a Scheda Interfaccia VMC [nome] [data].txt (Es. Scheda Interfaccia VMC Sala [data].txt)
     - da Automazione VMC Cucina [data] - Copia.txt a Automazione VMC [nome] [data].txt (Es. Automazione VMC Sala [data].txt)
   </pre> 
-<strong>16</strong> Aprire uno alla volta, con un Editor di File (Es. Word Office) i seguenti Files:
+<strong>15</strong> Aprire uno alla volta, con un Editor di File (Es. Word Office) i seguenti Files:
   <pre style="font-size:10px; background-color: #d9ffcc;">
     - vmc_helty_flow_[nome]_data.yaml
     - Scheda Interfaccia VMC [nome] [data].txt
@@ -116,7 +116,7 @@ Il Cliente ha l’onere e la responsabilità della scelta, dell’installazione,
     - Scheda Interfaccia VMC [nome] [data].txt
     - Automazione VMC [nome] [data].txt
   </pre> 
-<strong>17</strong> Ripetetere i punti dal <strong>4</strong> al <strong>13</strong>
+<strong>17</strong> Ripetetere i punti dal <strong>4</strong> al <strong>10.2</strong>
 
 ### OpenWeatherMap <br>
 Per Installare l'API di OpenWeatherMap utile per estrarre l'Umidità Esterna, la quale verrà impiegata per determinare il Punto di Rugiada Esterno, segui questi passaggi:
