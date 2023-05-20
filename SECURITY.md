@@ -10,7 +10,20 @@
 
 
 ### Limiti del SoftWare:<br>
-<strong>In fase di Verifica:</strong><br>
+ - la Lettura dei Sensori avviene ogni:
+     -  5 Secondi, per la Lettura della Velocità della VMC;
+     - 60 Secondi (1 Minuto), per la Verifica On-Line della VMC;
+     -  1200 Secondi (20 Minuti), per la Lettura dei Parametri Ambientali della VMC;
+     -  43200 Secondi (12 ore), per la Lettura del Nome della VMC;
+     -  43200 Secondi (12 ore), per la Lettura dei Dati LAN della VMC;<br> 
+Se se vuole modificare la tempistica, modificare i seguenti sensori contenuti nel File vmc_helty_flow_cucina_xx_xx_20xx.yaml :
+     - VMC_CUCINA_STATUS_IP;
+     - VMC_CUCINA_STATUS_VENTOLA;
+     - VMC_CUCINA_SENSORI;
+     - VMC_CUCINA_NOME;
+     - VMC_CUCINA_LAN 
+<br>
+<strong>In fase di Verifica:</strong><br>     
  - la Lettura del Sensore: Temperatura Interna o Esterna minore di 0 °C; lo scrivente ad oggi non ha ancora riscontrato una temperatura minore di 0 °C;<br>
    Condividi questa stringa:<br>
   <pre style="font-size:10px; background-color: #d9ffcc;">
