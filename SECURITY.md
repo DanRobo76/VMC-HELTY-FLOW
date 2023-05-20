@@ -15,17 +15,18 @@ La Lettura dei Sensori avviene ogni:
 - 60 Secondi (1 Minuto), per la Verifica On-Line della VMC;<br> 
 -  1200 Secondi (20 Minuti), per la Lettura dei Parametri Ambientali della VMC;<br> 
 -  43200 Secondi (12 ore), per la Lettura del Nome della VMC;<br> 
--  43200 Secondi (12 ore), per la Lettura dei Dati LAN della VMC;<br> 
+-  43200 Secondi (12 ore), per la Lettura dei Dati LAN della VMC;
 
-Se se vuole modificare la tempistica, modificare i seguenti sensori contenuti nel File vmc_helty_flow_cucina_xx_xx_20xx.yaml :<br> 
-- VMC_CUCINA_STATUS_IP;<br> 
-- VMC_CUCINA_STATUS_VENTOLA;<br> 
-- VMC_CUCINA_SENSORI;<br> 
-- VMC_CUCINA_NOME;<br> 
-- VMC_CUCINA_LAN <br> 
+ Se se vuole modificare le tempistiche, modificare i "Secondi" all'interno dei sensori, contenuti nel File vmc_helty_flow_cucina_xx_xx_20xx.yaml :<br> 
+  - VMC_CUCINA_STATUS_IP;<br> 
+  - VMC_CUCINA_STATUS_VENTOLA;<br> 
+  - VMC_CUCINA_SENSORI;<br> 
+  - VMC_CUCINA_NOME;<br> 
+  - VMC_CUCINA_LAN <br> 
 <br>
-<strong>In fase di Verifica la Lettura della Temperatura Interna o Esterna minore di 0 °C</strong><br>     
-<br>
+Tra un Comando e l'Altro durante la verifica delle condizioni, è presente un'attesa di 5 secondi, per bypassare le condizioni intrinseche contenute nel Firmware della VMC<br> 
+
+### In fase di Verifica la Lettura della Temperatura Interna o Esterna minore di 0 °C:<br>     
 
 <img src="https://github.com/DanRobo76/VMC-HELTY-FLOW/assets/102819027/7e34f416-a47e-4749-b907-e6e1140a8321" alt="Immagine">
 <br>
