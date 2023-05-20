@@ -24,9 +24,9 @@ Il Cliente ha l’onere e la responsabilità della scelta, dell’installazione,
   - Invia Comandi da remoto alla VMC, leggendone i valori Contenuti;
   - Permette l'accensione e lo spegnimento in funzione delle 2 fasce orarie programmabili per ogni giorno della settimana;
   - Spegne o Riavvia la VMC in funzione dei Parametri Ambientali;<br>
-    Il SoftWare calcola il Punto di Rugiada Esterno (PdR Ext.) e il punto di Rugiada Interno (PdR Int.)<br>
-    Se la differenza del PdR Ext. - PdR Int. è minore di almeno qualche grado ("Set Lim. Δ Punto di Rugiada", valore impostato dal Cliente), la VMC garantirà un adeguato trasporto dell'umidità dall'interno all'esterno dell'edificio.<br>
-    Diversamente, se la differenza del PdR Ext. - PdR Int. è maggiore o uguale al "Set Lim. Δ Punto di Rugiada", la VMC si arresterà per evitare il trasporto dell'umidità dall'esterno all'interno dell'edificio, per poi riprendere in autonomia, l'ultima velocità impostata, non appena i Parametri Ambientali lo consentiranno.
+    Il software calcola il Punto di Rugiada Esterno (PdR Ext.) e il Punto di Rugiada Interno (PdR Int.).<br>
+    Se la differenza tra il PdR Ext. e il PdR Int. è inferiore al "Set Lim. Δ Punto di Rugiada" (valore impostato dal Cliente), la VMC garantirà un adeguato trasporto dell'umidità dall'interno all'esterno dell'edificio.
+   <br>Al contrario, se la differenza tra il PdR Ext. e il PdR Int. sarà maggiore o uguale al "Set Lim. Δ Punto di Rugiada", la VMC si arresterà per evitare il trasporto dell'umidità dall'esterno all'interno dell'edificio.<br>Successivamente, riprenderà automaticamente l'ultima velocità impostata non appena i Parametri Ambientali lo permetteranno.
   - Ripristina la Velocità precedente in caso di Black-Out;<br>
   - Calcola il Tempo di Ricambio d'Aria in funzione della Velocità;
   - Calcola la Portata d'Aria [M³/h] in funzione della Velocità;
@@ -40,7 +40,7 @@ Il Cliente ha l’onere e la responsabilità della scelta, dell’installazione,
 #
 ![image](https://user-images.githubusercontent.com/102819027/235299358-88373b06-b62e-4867-88ab-287cad60bb6d.png)<br>
 <strong>1</strong> Rendere gli indirizzi IP della/e VMC, statici attraverso il Router; la VMC risponde sulla porta 5001. <br>
-<strong>2</strong> Verificare se nel File configuration.yaml, contenuto all'interno della cartella "config", è presente il seguente Codice all'inizio: <BR>
+<strong>2</strong> Verificare se nel File configuration.yaml, contenuto all'interno della cartella "config", è presente il seguente Codice all'inizio: <br>
 
 <pre style="font-size:10px; background-color: #d9ffcc;">
   homeassistant:
