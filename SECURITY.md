@@ -28,6 +28,7 @@ Se se vuole modificare la tempistica, modificare i seguenti sensori contenuti ne
  - la Lettura del Sensore: Temperatura Interna o Esterna minore di 0 °C<br>
  Lo scrivente ad oggi non ha ancora riscontrato una temperatura minore di 0 °C;<br>
  <br>
+ ![Stringa Codice](https://github.com/DanRobo76/VMC-HELTY-FLOW/assets/102819027/586651b7-526e-4953-8c94-e08a5e0d1108)<br>
  <br>
  Condividi questa stringa:<br>
   <pre style="font-size:10px; background-color: #d9ffcc;">
