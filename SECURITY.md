@@ -10,27 +10,30 @@
 
 
 ### Limiti del SoftWare:<br>
- - la Lettura dei Sensori avviene ogni:
-     -  5 Secondi, per la Lettura della Velocità della VMC;
-     - 60 Secondi (1 Minuto), per la Verifica On-Line della VMC;
-     -  1200 Secondi (20 Minuti), per la Lettura dei Parametri Ambientali della VMC;
-     -  43200 Secondi (12 ore), per la Lettura del Nome della VMC;
-     -  43200 Secondi (12 ore), per la Lettura dei Dati LAN della VMC;<br> 
-Se se vuole modificare la tempistica, modificare i seguenti sensori contenuti nel File vmc_helty_flow_cucina_xx_xx_20xx.yaml :
-     - VMC_CUCINA_STATUS_IP;
-     - VMC_CUCINA_STATUS_VENTOLA;
-     - VMC_CUCINA_SENSORI;
-     - VMC_CUCINA_NOME;
-     - VMC_CUCINA_LAN 
+La Lettura dei Sensori avviene ogni:
+-  5 Secondi, per la Lettura della Velocità della VMC;<br> 
+- 60 Secondi (1 Minuto), per la Verifica On-Line della VMC;<br> 
+-  1200 Secondi (20 Minuti), per la Lettura dei Parametri Ambientali della VMC;<br> 
+-  43200 Secondi (12 ore), per la Lettura del Nome della VMC;<br> 
+-  43200 Secondi (12 ore), per la Lettura dei Dati LAN della VMC;<br> 
+
+Se se vuole modificare la tempistica, modificare i seguenti sensori contenuti nel File vmc_helty_flow_cucina_xx_xx_20xx.yaml :<br> 
+- VMC_CUCINA_STATUS_IP;<br> 
+- VMC_CUCINA_STATUS_VENTOLA;<br> 
+- VMC_CUCINA_SENSORI;<br> 
+- VMC_CUCINA_NOME;<br> 
+- VMC_CUCINA_LAN <br> 
 <br>
 <strong>In fase di Verifica:</strong><br>     
- - la Lettura del Sensore: Temperatura Interna o Esterna minore di 0 °C; lo scrivente ad oggi non ha ancora riscontrato una temperatura minore di 0 °C;<br>
-   Condividi questa stringa:<br>
+ - la Lettura del Sensore: Temperatura Interna o Esterna minore di 0 °C<br>
+ Lo scrivente ad oggi non ha ancora riscontrato una temperatura minore di 0 °C;<br>
+ <br>
+ <br>
+ Condividi questa stringa:<br>
   <pre style="font-size:10px; background-color: #d9ffcc;">
    - Sensori Ambientali:
      VMGI,00214,00202,00817,00000,16384,00298,00222,00069,04354,00188,00000,00000,00000,00000,00000 <br>
   </pre>
-![Stringa](https://github.com/DanRobo76/VMC-HELTY-FLOW/assets/102819027/df0c7124-9b73-430f-a437-189a7a1b692d)<br>
 
 <br> insieme allo ScreeShot dell'App. Air Guard: <br>
 ![App AirGuard](https://github.com/DanRobo76/VMC-HELTY-FLOW/assets/102819027/f15527ff-2042-4835-b389-2974792da3fb)<br>
