@@ -30,9 +30,13 @@ Se se vuole modificare la tempistica, modificare i seguenti sensori contenuti ne
    - Sensori Ambientali:
      VMGI,00214,00202,00817,00000,16384,00298,00222,00069,04354,00188,00000,00000,00000,00000,00000 <br>
   </pre>
-![image](https://user-images.githubusercontent.com/102819027/235301291-e2686ed5-362a-4676-96a1-16fb3c2cda05.png) <br>
+![Stringa](https://github.com/DanRobo76/VMC-HELTY-FLOW/assets/102819027/df0c7124-9b73-430f-a437-189a7a1b692d)<br>
+
 <br> insieme allo ScreeShot dell'App. Air Guard: <br>
-![image](https://user-images.githubusercontent.com/102819027/235301928-6ac73fa0-fe02-48b4-80ff-6193cb9a8191.png)<br>
+![App AirGuard](https://github.com/DanRobo76/VMC-HELTY-FLOW/assets/102819027/f15527ff-2042-4835-b389-2974792da3fb)<br>
+
+
+
 <br>, se rilevi una Temperatura Interna o Esterna minore di 0 °C (Negativa), in modo che possa aggiornare il SoftWare!
 
 ### Rapporto Errori
