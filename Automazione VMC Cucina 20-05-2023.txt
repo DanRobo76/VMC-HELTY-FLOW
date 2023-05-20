@@ -166,7 +166,7 @@ trigger:
     for:
       hours: 0
       minutes: 0
-      seconds: 5
+      seconds: 2
   - platform: template
     value_template: >-
       {{ (states('sensor.vmc_cucina_punto_di_rugiada_verifica_confronto')!="Se
@@ -180,7 +180,7 @@ trigger:
     for:
       hours: 0
       minutes: 0
-      seconds: 5
+      seconds: 2
   - platform: template
     value_template: >-
       {{ (states('sensor.vmc_cucina_punto_di_rugiada_verifica_confronto')!="Se
@@ -194,7 +194,7 @@ trigger:
     for:
       hours: 0
       minutes: 0
-      seconds: 5
+      seconds: 2
   - platform: template
     value_template: >-
       {{ (states('sensor.vmc_cucina_punto_di_rugiada_verifica_confronto')!="Se
@@ -208,7 +208,7 @@ trigger:
     for:
       hours: 0
       minutes: 0
-      seconds: 5
+      seconds: 2
   - platform: template
     value_template: >-
       {{ (states('sensor.vmc_cucina_punto_di_rugiada_verifica_confronto')!="Se
@@ -222,7 +222,7 @@ trigger:
     for:
       hours: 0
       minutes: 0
-      seconds: 5
+      seconds: 2
   - platform: template
     value_template: >-
       {{ (states('sensor.vmc_cucina_punto_di_rugiada_verifica_confronto')!="Se
@@ -236,7 +236,7 @@ trigger:
     for:
       hours: 0
       minutes: 0
-      seconds: 5
+      seconds: 2
   - platform: template
     value_template: >-
       {{ (states('sensor.vmc_cucina_punto_di_rugiada_verifica_confronto')!="Se
@@ -250,7 +250,7 @@ trigger:
     for:
       hours: 0
       minutes: 0
-      seconds: 5
+      seconds: 2
   - platform: template
     value_template: >-
       {{ (states('sensor.vmc_cucina_status_ip_interfaccia') == "OFF-Line") and
@@ -299,7 +299,7 @@ trigger:
     for:
       hours: 0
       minutes: 0
-      seconds: 5
+      seconds: 2
   - platform: template
     value_template: >-
       {{ (states('sensor.vmc_cucina_status_ip_interfaccia') == "OFF-Line") and
@@ -348,7 +348,7 @@ trigger:
     for:
       hours: 0
       minutes: 0
-      seconds: 5
+      seconds: 2
   - platform: template
     value_template: >-
       {{ (states('sensor.vmc_cucina_status_ip_interfaccia') == "OFF-Line") and
@@ -397,7 +397,7 @@ trigger:
     for:
       hours: 0
       minutes: 0
-      seconds: 5
+      seconds: 2
   - platform: template
     value_template: >-
       {{ (states('sensor.vmc_cucina_status_ip_interfaccia') == "OFF-Line") and
@@ -446,7 +446,7 @@ trigger:
     for:
       hours: 0
       minutes: 0
-      seconds: 5
+      seconds: 2
   - platform: template
     value_template: >-
       {{ (states('sensor.vmc_cucina_status_ip_interfaccia') == "OFF-Line") and
@@ -495,7 +495,7 @@ trigger:
     for:
       hours: 0
       minutes: 0
-      seconds: 5
+      seconds: 2
   - platform: template
     value_template: >-
       {{ (states('sensor.vmc_cucina_status_ip_interfaccia') == "OFF-Line") and
@@ -544,7 +544,7 @@ trigger:
     for:
       hours: 0
       minutes: 0
-      seconds: 5
+      seconds: 2
   - platform: template
     value_template: >-
       {{ (states('sensor.vmc_cucina_status_ip_interfaccia') == "OFF-Line") and
@@ -594,7 +594,7 @@ trigger:
     for:
       hours: 0
       minutes: 0
-      seconds: 5
+      seconds: 2
   - platform: template
     value_template: >-
       {{ (states('sensor.vmc_cucina_status_ip_interfaccia') == "OFF-Line") and
@@ -643,7 +643,7 @@ trigger:
     for:
       hours: 0
       minutes: 0
-      seconds: 5
+      seconds: 2
   - platform: template
     value_template: >-
       {{
@@ -665,7 +665,7 @@ trigger:
     for:
       hours: 0
       minutes: 0
-      seconds: 5
+      seconds: 2
     alias: >-
       Disattivazione Calendario, quando era Attivato tra le Fascie del
       Calendario -> Velocità 0
@@ -692,7 +692,7 @@ trigger:
     for:
       hours: 0
       minutes: 0
-      seconds: 5
+      seconds: 2
     alias: >-
       Disattivazione: VMC ON/OFF, in Funzione del Lim. Δ P. di Rugiada,
       precedentemente Armato ed Attivato -> Velocità 0
@@ -713,7 +713,7 @@ trigger:
     for:
       hours: 0
       minutes: 0
-      seconds: 5
+      seconds: 2
   - platform: template
     value_template: >-
       {{ (((states('sensor.vmc_cucina_status_accensione_vmc_tramite_calendario')
@@ -731,7 +731,7 @@ trigger:
     for:
       hours: 0
       minutes: 0
-      seconds: 5
+      seconds: 2
   - platform: template
     value_template: >-
       {{
@@ -749,7 +749,7 @@ trigger:
     for:
       hours: 0
       minutes: 0
-      seconds: 5
+      seconds: 2
   - platform: template
     value_template: >-
       {{
@@ -768,7 +768,7 @@ trigger:
     for:
       hours: 0
       minutes: 0
-      seconds: 5
+      seconds: 2
   - platform: template
     value_template: >-
       {{ (((states('sensor.vmc_cucina_status_accensione_vmc_tramite_calendario')
@@ -785,7 +785,7 @@ trigger:
     for:
       hours: 0
       minutes: 0
-      seconds: 5
+      seconds: 2
   - platform: template
     value_template: >-
       {{ (((states('sensor.vmc_cucina_status_accensione_vmc_tramite_calendario')
@@ -803,7 +803,7 @@ trigger:
     for:
       hours: 0
       minutes: 0
-      seconds: 5
+      seconds: 2
   - platform: template
     value_template: >-
       {{
@@ -821,7 +821,7 @@ trigger:
     for:
       hours: 0
       minutes: 0
-      seconds: 5
+      seconds: 2
   - platform: template
     value_template: >-
       {{
@@ -840,7 +840,7 @@ trigger:
     for:
       hours: 0
       minutes: 0
-      seconds: 5
+      seconds: 2
   - platform: template
     value_template: >-
       {{ (((states('sensor.vmc_cucina_status_accensione_vmc_tramite_calendario')
@@ -857,7 +857,7 @@ trigger:
     for:
       hours: 0
       minutes: 0
-      seconds: 5
+      seconds: 2
   - platform: template
     value_template: >-
       {{ (((states('sensor.vmc_cucina_status_accensione_vmc_tramite_calendario')
@@ -875,7 +875,7 @@ trigger:
     for:
       hours: 0
       minutes: 0
-      seconds: 5
+      seconds: 2
   - platform: template
     value_template: >-
       {{
@@ -893,7 +893,7 @@ trigger:
     for:
       hours: 0
       minutes: 0
-      seconds: 5
+      seconds: 2
   - platform: template
     value_template: >-
       {{
@@ -912,7 +912,7 @@ trigger:
     for:
       hours: 0
       minutes: 0
-      seconds: 5
+      seconds: 2
   - platform: template
     value_template: >-
       {{ (((states('sensor.vmc_cucina_status_accensione_vmc_tramite_calendario')
@@ -929,7 +929,7 @@ trigger:
     for:
       hours: 0
       minutes: 0
-      seconds: 5
+      seconds: 2
   - platform: template
     value_template: >-
       {{ (((states('sensor.vmc_cucina_status_accensione_vmc_tramite_calendario')
@@ -947,7 +947,7 @@ trigger:
     for:
       hours: 0
       minutes: 0
-      seconds: 5
+      seconds: 2
   - platform: template
     value_template: >-
       {{
@@ -965,7 +965,7 @@ trigger:
     for:
       hours: 0
       minutes: 0
-      seconds: 5
+      seconds: 2
   - platform: template
     value_template: >-
       {{
@@ -984,7 +984,7 @@ trigger:
     for:
       hours: 0
       minutes: 0
-      seconds: 5
+      seconds: 2
   - platform: template
     value_template: >-
       {{ (((states('sensor.vmc_cucina_status_accensione_vmc_tramite_calendario')
@@ -1001,7 +1001,7 @@ trigger:
     for:
       hours: 0
       minutes: 0
-      seconds: 5
+      seconds: 2
   - platform: template
     value_template: >-
       {{ (((states('sensor.vmc_cucina_status_accensione_vmc_tramite_calendario')
@@ -1019,7 +1019,7 @@ trigger:
     for:
       hours: 0
       minutes: 0
-      seconds: 5
+      seconds: 2
   - platform: template
     value_template: >-
       {{
@@ -1037,7 +1037,7 @@ trigger:
     for:
       hours: 0
       minutes: 0
-      seconds: 5
+      seconds: 2
   - platform: template
     value_template: >-
       {{
@@ -1056,7 +1056,7 @@ trigger:
     for:
       hours: 0
       minutes: 0
-      seconds: 5
+      seconds: 2
   - platform: template
     value_template: >-
       {{ (((states('sensor.vmc_cucina_status_accensione_vmc_tramite_calendario')
@@ -1073,7 +1073,7 @@ trigger:
     for:
       hours: 0
       minutes: 0
-      seconds: 5
+      seconds: 2
   - platform: template
     value_template: >-
       {{ (((states('sensor.vmc_cucina_status_accensione_vmc_tramite_calendario')
@@ -1091,7 +1091,7 @@ trigger:
     for:
       hours: 0
       minutes: 0
-      seconds: 5
+      seconds: 2
   - platform: template
     value_template: >-
       {{
@@ -1109,7 +1109,7 @@ trigger:
     for:
       hours: 0
       minutes: 0
-      seconds: 5
+      seconds: 2
   - platform: template
     value_template: >-
       {{
@@ -1128,7 +1128,7 @@ trigger:
     for:
       hours: 0
       minutes: 0
-      seconds: 5
+      seconds: 2
   - platform: template
     value_template: >-
       {{ (((states('sensor.vmc_cucina_status_accensione_vmc_tramite_calendario')
@@ -1145,7 +1145,7 @@ trigger:
     for:
       hours: 0
       minutes: 0
-      seconds: 5
+      seconds: 2
   - platform: template
     value_template: >-
       {{ (((states('sensor.vmc_cucina_status_accensione_vmc_tramite_calendario')
@@ -1163,7 +1163,7 @@ trigger:
     for:
       hours: 0
       minutes: 0
-      seconds: 5
+      seconds: 2
   - platform: template
     value_template: >-
       {{
@@ -1181,7 +1181,7 @@ trigger:
     for:
       hours: 0
       minutes: 0
-      seconds: 5
+      seconds: 2
   - platform: template
     value_template: >-
       {{
@@ -1200,7 +1200,7 @@ trigger:
     for:
       hours: 0
       minutes: 0
-      seconds: 5
+      seconds: 2
 condition: []
 action:
   - choose:
