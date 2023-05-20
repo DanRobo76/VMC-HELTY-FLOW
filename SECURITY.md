@@ -24,9 +24,7 @@ Se se vuole modificare la tempistica, modificare i seguenti sensori contenuti ne
 - VMC_CUCINA_NOME;<br> 
 - VMC_CUCINA_LAN <br> 
 <br>
-<strong>In fase di Verifica la Lettura della Temperatura Interna o Esterna minore di 0 °C:</strong><br>     
-
-Ad oggi non si è riscontrato una temperatura minore di 0 °C;<br>
+<strong>In fase di Verifica la Lettura della Temperatura Interna o Esterna minore di 0 °C</strong><br>     
 
 <img src="https://github.com/DanRobo76/VMC-HELTY-FLOW/assets/102819027/7e34f416-a47e-4749-b907-e6e1140a8321" alt="Immagine">
 <br>
@@ -38,11 +36,9 @@ Ad oggi non si è riscontrato una temperatura minore di 0 °C;<br>
   </pre>
 
 <br> insieme allo ScreeShot dell'App. Air Guard: <br>
+
 ![App AirGuard](https://github.com/DanRobo76/VMC-HELTY-FLOW/assets/102819027/f15527ff-2042-4835-b389-2974792da3fb)<br>
-
-
-
-<br>, se rilevi una Temperatura Interna o Esterna minore di 0 °C (Negativa), in modo che possa aggiornare il SoftWare!
+<br>, se rilevi una Temperatura Interna o Esterna minore di 0 °C (Negativa).
 
 ### Rapporto Errori
 Per la Versione corrente, non si segnalano Errori<br>
