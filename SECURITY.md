@@ -16,12 +16,16 @@
 -  43200 Secondi (12 ore), per la Lettura del Nome della VMC;<br> 
 -  43200 Secondi (12 ore), per la Lettura dei Dati LAN della VMC;
 
- Se se vuole modificare le tempistiche, modificare i "Secondi" all'interno dei sensori, contenuti nel File vmc_helty_flow_cucina_xx_xx_20xx.yaml :<br> 
+Per Aggiornare tutti i sensori in real-time, entrare e uscire dal "Pannello Informazioni, Aggiorna Sensori"
+
+ Se se vuole modificare le tempistiche automaticamente, modificare i "Secondi" all'interno dei sensori, contenuti nel File vmc_helty_flow_cucina_xx_xx_20xx.yaml :<br> 
   - VMC_CUCINA_STATUS_IP;<br> 
   - VMC_CUCINA_STATUS_VENTOLA;<br> 
   - VMC_CUCINA_SENSORI;<br> 
   - VMC_CUCINA_NOME;<br> 
   - VMC_CUCINA_LAN <br> 
+
+e riavviare Home Assistan. [Non usare il Riavvio Rapido]
 
 <strong>In alcune condizioni, all'interno dell'Automazione, è presente un'attesa di 3 secondi [Aumentare se i riscontrano valori della Velocità disattesi (trova e sostituisci seconds: 3 con seconds: x)], per bypassare le condizioni intrinseche contenute nel Firmware della VMC</strong><br> 
 
