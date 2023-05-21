@@ -4,9 +4,9 @@
 
 |          VMC-HELTY-FLOW                  | Supportato da Home Assistant            |
 | ---------------------------------------- | ----------------------------------------|
-|  :white_check_mark: VMC HELTY FLOW Release 20-05-2023     | :white_check_mark:   Ver. 2023.5.3 |
-|  :white_check_mark: Scheda Interfaccia Release 20-05-2023 | :white_check_mark:   Ver. 2023.5.3 |
-|  :white_check_mark: Automazione Release 20-05-2023        | :white_check_mark:   Ver. 2023.5.3 |
+|  :white_check_mark: VMC HELTY FLOW Release 21-05-2023     | :white_check_mark:   Ver. 2023.5.3 |
+|  :white_check_mark: Scheda Interfaccia Release 21-05-2023 | :white_check_mark:   Ver. 2023.5.3 |
+|  :white_check_mark: Automazione Release 21-05-2023        | :white_check_mark:   Ver. 2023.5.3 |
 
 ### Limiti del SoftWare:<br>
 <strong>La Lettura dei Sensori avviene ogni:</strong>
