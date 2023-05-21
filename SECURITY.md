@@ -17,6 +17,7 @@
 -  43200 Secondi (12 ore), per la Lettura dei Dati LAN della VMC;
 
 Per Aggiornare tutti i sensori in real-time, entrare e uscire dal "Pannello Informazioni, Aggiorna Sensori"
+<br>  ![image](https://user-images.githubusercontent.com/102819027/235298096-1648d8f2-5cfc-4ce4-a233-9cd67379ac3b.png)<br>
 
  Se se vuole modificare le tempistiche automaticamente, modificare i "Secondi" all'interno dei sensori, contenuti nel File vmc_helty_flow_cucina_xx_xx_20xx.yaml :<br> 
   - VMC_CUCINA_STATUS_IP;<br> 
