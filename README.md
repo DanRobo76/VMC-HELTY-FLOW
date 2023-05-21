@@ -87,7 +87,7 @@ Il Cliente ha l’onere e la responsabilità della scelta, dell’installazione,
  <strong>10.2</strong> RI-AVVIARE HOME ASSISTANT: Impostazioni -> Sistema -> Cliccare in alto a destra "RIAVVIA" per memorizzare i valori inseriti nel calendario; solitamente l'operazione va fatta solo una volta, successivamente ad ogni variazione degli orari non è più necessario il riavvio;<br>
 <strong>11</strong> Cliccare su "Telecomando" per poter comandare la VMC
 <br>  ![image](https://user-images.githubusercontent.com/102819027/235298039-d6784b15-6279-429a-94b9-00f5dd79f8e3.png)<br>
-<br><strong>12</strong> Cliccare su "Informazioni" per maggiori dettagli.
+<br><strong>12</strong> Cliccare su "Informazioni, Aggiorna Sensori" per maggiori dettagli.
 <br>  ![image](https://user-images.githubusercontent.com/102819027/235298096-1648d8f2-5cfc-4ce4-a233-9cd67379ac3b.png)<br>
   
 ###   Se si hanno a disposizione più VMC, ripetere i punti sottostanti per ogni VMC:                      
