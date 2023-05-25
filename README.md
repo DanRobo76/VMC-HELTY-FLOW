@@ -77,7 +77,7 @@ Il Cliente ha l’onere e la responsabilità della scelta, dell’installazione,
   <strong>8.5</strong> Attivare se si desidera l'opzione "VMC ON/OFF, in Funzione del Lim. Δ P. di Rugiada" per verificare se i parametri ambientali sono ottimali, diversamente la VMC verrà portata a "Velocità 0"<BR>
   <strong>8.6</strong> Attivare se si desidera l'opzione "VMC ON/OFF, in Funzione del Calendario" per attivare gli orari inseriti nel calendario<BR>
   <strong>8.7</strong> Attivare se si desidera l'opzione "Automazione VMC Cucina Release [data]" per attivare o disativare l'automazione dell'intero codice [Si consiglia di tenerla Attivata]<BR> 
-  <strong>8.8</strong> Verificare con strumenti esterni se i Sensori di Temperatura Esterna, Temperatura Interna, Umidità Esterna e Umidità Interna, necessitano dell'Offset; diversamente portare uno o più sensori su 0<BR>
+  <strong>8.8</strong> Verificare con strumenti esterni se i Sensori di Temperatura Esterna, Temperatura Interna, Umidità Esterna e Umidità Interna, necessitano dell'Offset (entrare nel"Pannello Sensori", cliccare nel "Sotto Pannello Sensori - Offset"); diversamente portare uno o più sensori su 0<BR>
 <strong>9</strong> Cliccare su "Monitoraggio" per l'andamento dei Valori dei Sensori;  <br>
   Se si rileva un andamento non conforme, verrà visualizzato una Scheda "Allerta [Tipologia]", Es: <br>
     ![Allerta Umidità](https://github.com/DanRobo76/VMC-HELTY-FLOW/assets/102819027/0b4e7ea6-a349-44a5-af0e-15ac542eb8e6)<br>
@@ -87,7 +87,7 @@ Il Cliente ha l’onere e la responsabilità della scelta, dell’installazione,
  <strong>10.2</strong> RI-AVVIARE HOME ASSISTANT: Impostazioni -> Sistema -> Cliccare in alto a destra "RIAVVIA" per memorizzare i valori inseriti nel calendario; solitamente l'operazione va fatta solo una volta, successivamente ad ogni variazione degli orari non è più necessario il riavvio;<br>
 <strong>11</strong> Cliccare su "Telecomando" per poter comandare la VMC
 <br>  ![image](https://user-images.githubusercontent.com/102819027/235298039-d6784b15-6279-429a-94b9-00f5dd79f8e3.png)<br>
-<br><strong>12</strong> Cliccare su "Informazioni, Aggiorna Sensori" per maggiori dettagli.
+<br><strong>12</strong> Cliccare su "Informazioni, per maggiori dettagli.
 <br>  ![image](https://user-images.githubusercontent.com/102819027/235298096-1648d8f2-5cfc-4ce4-a233-9cd67379ac3b.png)<br>
   
 ###   Se si hanno a disposizione più VMC, ripetere i punti sottostanti per ogni VMC:                      
