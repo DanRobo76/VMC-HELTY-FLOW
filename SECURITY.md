@@ -29,7 +29,7 @@ Per Aggiornare tutti i sensori in real-time, entrare nel"Pannello Sensori", clic
 
 e riavviare Home Assistan. [Non usare il Riavvio Rapido]
 
-<strong>In alcune condizioni, all'interno dell'Automazione, è presente un'attesa di 4 secondi [Aumentare se i riscontrano valori della Velocità disattesi (trova e sostituisci seconds: 3 con seconds: x)], per bypassare le condizioni intrinseche contenute nel Firmware della VMC</strong><br> 
+<strong>In alcune condizioni, all'interno dell'Automazione, è presente un'attesa di 4 secondi [Aumentare se i riscontrano valori della Velocità disattesi (trova e sostituisci seconds: 4 con seconds: x)], per bypassare le condizioni intrinseche contenute nel Firmware della VMC</strong><br> 
 
 ### In fase di Verifica la Lettura della Temperatura Interna o Esterna minore di 0 °C:<br>     
 
