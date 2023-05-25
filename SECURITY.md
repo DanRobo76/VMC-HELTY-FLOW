@@ -4,9 +4,9 @@
 
 |          VMC-HELTY-FLOW                  | Supportato da Home Assistant            |
 | ---------------------------------------- | ----------------------------------------|
-|  :white_check_mark: VMC HELTY FLOW Release 21-05-2023     | :white_check_mark:   Ver. 2023.5.3 |
-|  :white_check_mark: Scheda Interfaccia Release 21-05-2023 | :white_check_mark:   Ver. 2023.5.3 |
-|  :white_check_mark: Automazione Release 21-05-2023        | :white_check_mark:   Ver. 2023.5.3 |
+|  :white_check_mark: VMC HELTY FLOW Release 25-05-2023     | :white_check_mark:   Ver. 2023.5.4 |
+|  :white_check_mark: Scheda Interfaccia Release 25-05-2023 | :white_check_mark:   Ver. 2023.5.4 |
+|  :white_check_mark: Automazione Release 25-05-2023        | :white_check_mark:   Ver. 2023.5.4 |
 
 ### Limiti del SoftWare:<br>
 <strong>La Lettura dei Sensori avviene ogni:</strong>
@@ -16,7 +16,7 @@
 -  43200 Secondi (12 ore), per la Lettura del Nome della VMC;<br> 
 -  43200 Secondi (12 ore), per la Lettura dei Dati LAN della VMC;
 
-Per Aggiornare tutti i sensori in real-time, entrare e uscire dal "Pannello Informazioni, Aggiorna Sensori"
+Per Aggiornare tutti i sensori in real-time, entrare nel"Pannello Sensori", cliccare nel "Sotto Pannello Sensori Offset" e cliccare su "Esegui" correlata alla voce "Aggiorna i Sensori Manualmente"
 <br>  ![image](https://user-images.githubusercontent.com/102819027/235298096-1648d8f2-5cfc-4ce4-a233-9cd67379ac3b.png)<br>
 
  Se se vuole modificare le tempistiche automaticamente, modificare i "Secondi" all'interno dei sensori, contenuti nel File vmc_helty_flow_cucina_xx_xx_20xx.yaml :<br> 
