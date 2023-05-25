@@ -9,7 +9,7 @@
 |  :white_check_mark: Automazione Release 25-05-2023        | :white_check_mark:   Ver. 2023.5.4 |
 
 ### Limiti del SoftWare:<br>
-<strong>La Lettura dei Sensori avviene ogni:</strong>
+<strong>La Lettura dei Sensori avviene Automaticamente ogni:</strong>
 -  5 Secondi, per la Lettura della Velocità della VMC;<br> 
 - 60 Secondi (1 Minuto), per la Verifica On-Line della VMC;<br> 
 -  1200 Secondi (20 Minuti), per la Lettura dei Parametri Ambientali della VMC;<br> 
