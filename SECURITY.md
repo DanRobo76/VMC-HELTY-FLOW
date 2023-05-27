@@ -1,6 +1,6 @@
 # Security Policy
 
-### Versione del SoftWare:
+### - Versione del SoftWare:
 
 |          VMC-HELTY-FLOW                  | Supportato da Home Assistant            |
 | ---------------------------------------- | ----------------------------------------|
@@ -8,7 +8,7 @@
 |  :white_check_mark: Scheda Interfaccia Release 25-05-2023 | :white_check_mark:   Ver. 2023.5.4 |
 |  :white_check_mark: Automazione Release 25-05-2023        | :white_check_mark:   Ver. 2023.5.4 |
 
-### Limiti del SoftWare:<br>
+### - Limiti del SoftWare:<br>
 <strong>La Lettura dei Sensori avviene Automaticamente ogni:</strong>
 -  5 Secondi, per la Lettura della Velocità della VMC;<br> 
 - 60 Secondi (1 Minuto), per la Verifica On-Line della VMC;<br> 
@@ -31,11 +31,7 @@ e riavviare Home Assistan. [Non usare il Riavvio Rapido]
 
 <strong>In alcune condizioni, all'interno dell'Automazione, è presente un'attesa di 4 secondi [Aumentare se i riscontrano valori della Velocità disattesi (trova e sostituisci seconds: 4 con seconds: x)], per bypassare le condizioni intrinseche contenute nel Firmware della VMC</strong><br> 
 
-### Curiosità: Impiego della VMC da remoto con l'uso di un Relè Smart:<br>
-Nella VMC Flow Plus, una volta impostata una velocità diversa da zero, è necessario attendere 30 secondi prima di interrompere l'alimentazione. Questa procedura consente attraverso l'utilizzo di un relè smart di spegnere o accendere la VMC da remoto.
-
-### In fase di Verifica la Lettura della Temperatura Interna o Esterna minore di 0 °C:<br>     
-
+### - In fase di Verifica la Lettura della Temperatura Interna o Esterna minore di 0 °C:<br>     
 <img src="https://github.com/DanRobo76/VMC-HELTY-FLOW/assets/102819027/7e34f416-a47e-4749-b907-e6e1140a8321" alt="Immagine">
 <br>
  <br>
@@ -52,5 +48,8 @@ Nella VMC Flow Plus, una volta impostata una velocità diversa da zero, è neces
 ![App AirGuard](https://github.com/DanRobo76/VMC-HELTY-FLOW/assets/102819027/f15527ff-2042-4835-b389-2974792da3fb)<br>
 <br>, se rilevi una Temperatura Interna o Esterna minore di 0 °C (Negativa).
 
-### Rapporto Errori
+### - Rapporto Errori
 Per la Versione corrente, non si segnalano Errori<br>
+
+### - Curiosità: Impiego della VMC da remoto con l'uso di un Relè Smart:<br>
+Nella VMC Flow Plus, una volta impostata una velocità diversa da zero, è necessario attendere 30 secondi prima di interrompere l'alimentazione. Questa procedura consente attraverso l'utilizzo di un relè smart di spegnere o accendere la VMC con la velocità impostata precedentemente, da remoto.
