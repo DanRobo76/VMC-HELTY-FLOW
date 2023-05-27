@@ -31,6 +31,9 @@ e riavviare Home Assistan. [Non usare il Riavvio Rapido]
 
 <strong>In alcune condizioni, all'interno dell'Automazione, è presente un'attesa di 4 secondi [Aumentare se i riscontrano valori della Velocità disattesi (trova e sostituisci seconds: 4 con seconds: x)], per bypassare le condizioni intrinseche contenute nel Firmware della VMC</strong><br> 
 
+### Curiosità: Impiego della VMC da remoto con l'uso di un Relè Smart:<br>
+Nella VMC Flow Plus, una volta impostata una velocità diversa da zero, è necessario attendere 30 secondi prima di interrompere l'alimentazione. Questa procedura consente attraverso l'utilizzo di un relè smart di spegnere o accendere la VMC da remoto.
+
 ### In fase di Verifica la Lettura della Temperatura Interna o Esterna minore di 0 °C:<br>     
 
 <img src="https://github.com/DanRobo76/VMC-HELTY-FLOW/assets/102819027/7e34f416-a47e-4749-b907-e6e1140a8321" alt="Immagine">
