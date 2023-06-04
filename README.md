@@ -119,6 +119,8 @@ Il Cliente ha l’onere e la responsabilità della scelta, dell’installazione,
   </pre> 
 <strong>16</strong> Ripetetere i punti dal <strong>4</strong> al <strong>10.2</strong>
 
+<strong>Attenzione, se la VMC non viene vista, assicurarsi che la stessa venga visualizzata all'interni dell'APP Air Guard; diversamente impiegando la stessa inserirla nell'infrastuttura di rete.</strong>
+    
 ### OpenWeatherMap <br>
 Per Installare l'API di OpenWeatherMap utile per estrarre l'Umidità Esterna, la quale verrà impiegata per determinare il Punto di Rugiada Esterno, segui questi passaggi:
 
