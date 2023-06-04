@@ -4,9 +4,9 @@
 
 |          VMC-HELTY-FLOW                  | Supportato da Home Assistant            |
 | ---------------------------------------- | ----------------------------------------|
-|  :white_check_mark: VMC HELTY FLOW Release 25-05-2023     | :white_check_mark:   Ver. 2023.5.4 |
-|  :white_check_mark: Scheda Interfaccia Release 25-05-2023 | :white_check_mark:   Ver. 2023.5.4 |
-|  :white_check_mark: Automazione Release 25-05-2023        | :white_check_mark:   Ver. 2023.5.4 |
+|  :white_check_mark: VMC HELTY FLOW Release 03-06-2023     | :white_check_mark:   Ver. 2023.5.4 |
+|  :white_check_mark: Scheda Interfaccia Release 03-06-2023 | :white_check_mark:   Ver. 2023.5.4 |
+|  :white_check_mark: Automazione Release 03-06-2023        | :white_check_mark:   Ver. 2023.5.4 |
 
 ### - Limiti del SoftWare:<br>
 <strong>La Lettura dei Sensori avviene Automaticamente ogni:</strong>
@@ -16,7 +16,7 @@
 -  43200 Secondi (12 ore), per la Lettura del Nome della VMC;<br> 
 -  43200 Secondi (12 ore), per la Lettura dei Dati LAN della VMC;
 
-Per Aggiornare tutti i sensori in real-time, entrare nel"Pannello Sensori", cliccare nel "Sotto Pannello Sensori Offset" e cliccare su "Esegui" correlata alla voce "Aggiorna i Sensori Manualmente"
+Per Aggiornare tutti i sensori in real-time, entrare nel"Pannello Sensori" e cliccare su "Esegui" correlata alla voce "Aggiorna i Sensori Manualmente"
 <br>  ![Sensori-Offset](https://github.com/DanRobo76/VMC-HELTY-FLOW/assets/102819027/c3d5f3a3-1374-48e7-baf3-f558f9672fea) <br>
 
 
