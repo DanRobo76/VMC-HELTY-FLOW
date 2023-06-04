@@ -1,0 +1,1134 @@
+type: vertical-stack
+cards:
+  - type: conditional
+    conditions:
+      - entity: sensor.vmc_cucina_status_ip_interfaccia
+        state_not: ON-Line
+    card:
+      type: entities
+      entities:
+        - entity: sensor.vmc_cucina_nome_status
+          secondary_info: last-updated
+        - entity: sensor.vmc_cucina_status_ip_interfaccia
+        - entity: sensor.vmc_cucina_ip
+          secondary_info: last-updated
+        - entity: script.vmc_cucina_upgrade_sensors
+      state_color: true
+      show_header_toggle: false
+      title: Ventilazione Meccanica Controllata
+  - type: conditional
+    conditions:
+      - entity: sensor.vmc_cucina_status_ip_interfaccia
+        state: ON-Line
+    card:
+      type: vertical-stack
+      cards:
+        - type: entities
+          entities:
+            - entity: sensor.vmc_cucina_nome_status
+              secondary_info: last-updated
+            - entity: >-
+                sensor.vmc_cucina_status_ventola_lettura_codice_interpretato_interfaccia
+              secondary_info: last-updated
+          state_color: true
+          show_header_toggle: true
+          title: Ventilazione Meccanica Controllata
+          footer:
+            type: buttons
+            entities:
+              - entity: input_boolean.vmc_cucina_opzioni_vmc
+              - entity: input_boolean.vmc_cucina_opzioni_offset_sensori
+              - entity: input_boolean.vmc_cucina_opzioni_monitoraggio_sensori
+              - entity: input_boolean.vmc_cucina_opzioni_calendario
+              - entity: input_boolean.vmc_cucina_opzioni_lettura_sensori
+        - type: conditional
+          conditions:
+            - entity: input_boolean.vmc_cucina_opzioni_vmc
+              state: 'on'
+          card:
+            square: false
+            type: grid
+            cards:
+              - square: false
+                type: grid
+                cards:
+                  - show_name: true
+                    show_icon: true
+                    type: button
+                    tap_action:
+                      action: call-service
+                      service: shell_command.vmc_cucina_sensori_off
+                      target: {}
+                    name: Sensori Off
+                    show_state: true
+                    icon: mdi:chip
+                    hold_action:
+                      action: none
+                  - show_name: true
+                    show_icon: true
+                    type: button
+                    tap_action:
+                      action: call-service
+                      service: shell_command.vmc_cucina_sensori_on
+                      target: {}
+                    name: Sensori On
+                    show_state: true
+                    icon: mdi:chip
+                    hold_action:
+                      action: none
+                  - show_name: true
+                    show_icon: true
+                    type: button
+                    tap_action:
+                      action: call-service
+                      service: shell_command.vmc_cucina_pannello_led_off
+                      target: {}
+                    name: Led Pannello Off
+                    show_state: true
+                    icon: mdi:led-off
+                    hold_action:
+                      action: none
+                  - show_name: true
+                    show_icon: true
+                    type: button
+                    tap_action:
+                      action: call-service
+                      service: shell_command.vmc_cucina_pannello_led_on
+                      target: {}
+                    name: Led Pannello On
+                    show_state: true
+                    icon: mdi:led-on
+                    hold_action:
+                      action: none
+                  - show_name: true
+                    show_icon: true
+                    type: button
+                    tap_action:
+                      action: call-service
+                      service: shell_command.vmc_cucina_velocita_0
+                      target: {}
+                    show_state: true
+                    name: Velocità 0
+                    icon: mdi:numeric-0-box
+                    hold_action:
+                      action: none
+                  - show_name: true
+                    show_icon: true
+                    type: button
+                    tap_action:
+                      action: call-service
+                      service: shell_command.vmc_cucina_velocita_1
+                      target: {}
+                    name: Velocità 1
+                    show_state: true
+                    icon: mdi:numeric-1-box
+                    hold_action:
+                      action: none
+                  - show_name: true
+                    show_icon: true
+                    type: button
+                    tap_action:
+                      action: call-service
+                      service: shell_command.vmc_cucina_velocita_2
+                      target: {}
+                    name: Velocità 2
+                    show_state: true
+                    icon: mdi:numeric-2-box
+                    hold_action:
+                      action: none
+                  - show_name: true
+                    show_icon: true
+                    type: button
+                    tap_action:
+                      action: call-service
+                      service: shell_command.vmc_cucina_velocita_3
+                      target: {}
+                    name: Velocità 3
+                    show_state: true
+                    icon: mdi:numeric-3-box
+                    hold_action:
+                      action: none
+                  - show_name: true
+                    show_icon: true
+                    type: button
+                    tap_action:
+                      action: call-service
+                      service: shell_command.vmc_cucina_velocita_4
+                      target: {}
+                    name: Velocità 4
+                    show_state: true
+                    icon: mdi:numeric-4-box
+                    hold_action:
+                      action: none
+                  - show_name: true
+                    show_icon: true
+                    type: button
+                    tap_action:
+                      action: call-service
+                      service: shell_command.vmc_cucina_notturna
+                      target: {}
+                    name: Notturna
+                    show_state: true
+                    icon: mdi:weather-night
+                    hold_action:
+                      action: none
+                  - show_name: true
+                    show_icon: true
+                    type: button
+                    tap_action:
+                      action: call-service
+                      service: shell_command.vmc_cucina_iperventilazione
+                      target: {}
+                    name: Iperventilazione
+                    show_state: true
+                    icon: mdi:wind-power
+                    hold_action:
+                      action: none
+                  - show_name: true
+                    show_icon: true
+                    type: button
+                    tap_action:
+                      action: call-service
+                      service: shell_command.vmc_cucina_freecooling
+                      target: {}
+                    name: Free Cool./Heat.
+                    show_state: true
+                    icon: mdi:theme-light-dark
+                    hold_action:
+                      action: none
+                columns: 4
+              - type: horizontal-stack
+                cards:
+                  - type: entities
+                    entities:
+                      - entity: >-
+                          sensor.vmc_cucina_status_sensori_lettura_codice_interpretato
+                        secondary_info: last-updated
+                      - entity: >-
+                          sensor.vmc_cucina_status_led_pannello_lettura_codice_interpretato
+                        secondary_info: last-updated
+                      - entity: sensor.vmc_cucina_status_calcolo_portata_ventola
+                        secondary_info: last-updated
+                      - entity: >-
+                          sensor.vmc_cucina_status_portata_ventola_lettura_codice_interpretato
+                        secondary_info: last-updated
+            columns: 1
+        - type: conditional
+          conditions:
+            - entity: input_boolean.vmc_cucina_opzioni_monitoraggio_sensori
+              state: 'on'
+          card:
+            type: vertical-stack
+            cards:
+              - type: entities
+                entities:
+                  - entity: sensor.vmc_cucina_temp_esterna_status
+                    secondary_info: last-updated
+                  - entity: sensor.vmc_cucina_temp_interna_status
+                    secondary_info: last-updated
+                  - entity: sensor.vmc_cucina_umidita_esterna_status
+                    secondary_info: last-updated
+                  - entity: sensor.vmc_cucina_umidita_interna_status
+                    secondary_info: last-updated
+                  - entity: script.vmc_cucina_upgrade_sensors
+                title: Sensori
+                footer:
+                  type: buttons
+                  entities:
+                    - entity: >-
+                        input_boolean.vmc_cucina_opzioni_interruttore_offset_sensori
+                    - entity: >-
+                        input_boolean.vmc_cucina_opzioni_interruttore_monitoraggio_sensori_extra
+                    - entity: input_boolean.vmc_cucina_opzioni_interruttore_calendario
+                state_color: true
+              - type: conditional
+                conditions:
+                  - entity: >-
+                      input_boolean.vmc_cucina_opzioni_interruttore_offset_sensori
+                    state: 'on'
+                card:
+                  type: vertical-stack
+                  cards:
+                    - type: entities
+                      entities:
+                        - entity: input_number.vmc_cucina_offset_temp_esterna
+                          secondary_info: last-updated
+                        - entity: input_number.vmc_cucina_offset_temp_interna
+                          secondary_info: last-updated
+                        - entity: input_number.vmc_cucina_offset_umidita_esterna
+                          secondary_info: last-updated
+                        - entity: input_number.vmc_cucina_offset_umidita_interna
+                          secondary_info: last-updated
+                      title: Sensori - Offset
+                      state_color: true
+              - type: conditional
+                conditions:
+                  - entity: >-
+                      input_boolean.vmc_cucina_opzioni_interruttore_monitoraggio_sensori_extra
+                    state: 'on'
+                card:
+                  type: vertical-stack
+                  cards:
+                    - type: entities
+                      entities:
+                        - entity: sensor.vmc_cucina_punto_di_rugiada_esterno
+                          secondary_info: last-updated
+                        - entity: sensor.vmc_cucina_punto_di_rugiada_interno
+                          secondary_info: last-updated
+                        - entity: sensor.vmc_cucina_umidita_assoluta_esterna
+                          secondary_info: last-updated
+                        - entity: sensor.vmc_cucina_umidita_assoluta_interna
+                          secondary_info: last-updated
+                      title: Sensori - Extra
+                      state_color: true
+              - type: conditional
+                conditions:
+                  - entity: input_boolean.vmc_cucina_opzioni_interruttore_calendario
+                    state: 'on'
+                card:
+                  type: vertical-stack
+                  cards:
+                    - type: entities
+                      entities:
+                        - entity: >-
+                            sensor.vmc_cucina_status_accensione_vmc_tramite_calendario_interfaccia
+                          secondary_info: last-updated
+                        - entity: >-
+                            sensor.vmc_cucina_status_spegnimento_vmc_tramite_calendario_interfaccia
+                          secondary_info: last-updated
+                        - entity: >-
+                            sensor.vmc_cucina_status_accensione_vmc_tramite_calendario_2_interfaccia
+                          secondary_info: last-updated
+                        - entity: >-
+                            sensor.vmc_cucina_status_spegnimento_vmc_tramite_calendario_2_interfaccia
+                          secondary_info: last-updated
+                      title: Programmazione Giornaliera
+                      state_color: true
+                    - type: entities
+                      entities:
+                        - entity: >-
+                            sensor.vmc_cucina_status_mese_corrente_freeheating_o_freecooling
+                          secondary_info: last-updated
+                      state_color: true
+                      title: Programmazione Mensile
+        - type: conditional
+          conditions:
+            - entity: input_boolean.vmc_cucina_opzioni_calendario
+              state: 'on'
+          card:
+            square: true
+            columns: 2
+            type: grid
+            cards:
+              - type: entities
+                entities:
+                  - entity: input_datetime.vmc_cucina_accensione_lunedi
+                  - entity: input_datetime.vmc_cucina_accensione_lunedi_2
+                  - entity: input_datetime.vmc_cucina_accensione_martedi
+                  - entity: input_datetime.vmc_cucina_accensione_martedi_2
+                  - entity: input_datetime.vmc_cucina_accensione_mercoledi
+                  - entity: input_datetime.vmc_cucina_accensione_mercoledi_2
+                  - entity: input_datetime.vmc_cucina_accensione_giovedi
+                  - entity: input_datetime.vmc_cucina_accensione_giovedi_2
+                  - entity: input_datetime.vmc_cucina_accensione_venerdi
+                  - entity: input_datetime.vmc_cucina_accensione_venerdi_2
+                  - entity: input_datetime.vmc_cucina_accensione_sabato
+                  - entity: input_datetime.vmc_cucina_accensione_sabato_2
+                  - entity: input_datetime.vmc_cucina_accensione_domenica
+                  - entity: input_datetime.vmc_cucina_accensione_domenica_2
+                title: Accensione
+                state_color: true
+              - type: entities
+                entities:
+                  - entity: input_datetime.vmc_cucina_spegnimento_lunedi
+                  - entity: input_datetime.vmc_cucina_spegnimento_lunedi_2
+                  - entity: input_datetime.vmc_cucina_spegnimento_martedi
+                  - entity: input_datetime.vmc_cucina_spegnimento_martedi_2
+                  - entity: input_datetime.vmc_cucina_spegnimento_mercoledi
+                  - entity: input_datetime.vmc_cucina_spegnimento_mercoledi_2
+                  - entity: input_datetime.vmc_cucina_spegnimento_giovedi
+                  - entity: input_datetime.vmc_cucina_spegnimento_giovedi_2
+                  - entity: input_datetime.vmc_cucina_spegnimento_venerdi
+                  - entity: input_datetime.vmc_cucina_spegnimento_venerdi_2
+                  - entity: input_datetime.vmc_cucina_spegnimento_sabato
+                  - entity: input_datetime.vmc_cucina_spegnimento_sabato_2
+                  - entity: input_datetime.vmc_cucina_spegnimento_domenica
+                  - entity: input_datetime.vmc_cucina_spegnimento_domenica_2
+                title: Spegnimento
+                state_color: true
+        - type: conditional
+          conditions:
+            - entity: input_boolean.vmc_cucina_opzioni_offset_sensori
+              state: 'on'
+          card:
+            type: vertical-stack
+            cards:
+              - type: entities
+                entities:
+                  - entity: input_number.vmc_cucina_volume_da_inserire
+                    secondary_info: last-updated
+                  - entity: automation.automazione_vmc_cucina
+                    secondary_info: last-triggered
+                state_color: true
+                title: Opzioni
+              - type: entities
+                entities:
+                  - entity: input_number.vmc_cucina_offset_verifica_impiego_vmc
+                    secondary_info: last-updated
+                  - entity: input_boolean.vmc_cucina_opzioni_accendi_spegni_vmc_vs_pdr
+                    secondary_info: last-updated
+                state_color: true
+                title: Opzioni - Punto di Rugiada
+              - type: entities
+                entities:
+                  - entity: input_select.vmc_cucina_speed_1_fascia_calendario
+                    secondary_info: last-updated
+                  - entity: input_select.vmc_cucina_speed_2_fascia_calendario
+                    secondary_info: last-updated
+                  - entity: >-
+                      input_boolean.vmc_cucina_opzioni_accendi_spegni_vmc_vs_calendario
+                    secondary_info: last-updated
+                state_color: true
+                title: Opzioni - Calendario
+              - type: entities
+                entities:
+                  - entity: input_select.vmc_cucina_mese_1_fascia_freeheating
+                    secondary_info: last-updated
+                  - entity: input_select.vmc_cucina_mese_2_fascia_freeheating
+                    secondary_info: last-updated
+                  - entity: input_select.vmc_cucina_mese_1_fascia_freecooling
+                    secondary_info: last-updated
+                  - entity: input_select.vmc_cucina_mese_2_fascia_freecooling
+                    secondary_info: last-updated
+                  - entity: >-
+                      input_boolean.vmc_cucina_opzioni_accendi_spegni_vmc_vs_freeheating
+                    secondary_info: last-updated
+                  - entity: >-
+                      input_boolean.vmc_cucina_opzioni_accendi_spegni_vmc_vs_freecooling
+                    secondary_info: last-updated
+                state_color: true
+                title: Opzioni - Free Heating / Free Cooling
+        - type: conditional
+          conditions:
+            - entity: input_boolean.vmc_cucina_opzioni_lettura_sensori
+              state: 'on'
+          card:
+            type: vertical-stack
+            cards:
+              - type: markdown
+                content: >-
+                  <pre style="font-size:6px; background-color: #d9ffcc;">
+
+                  <ha-icon icon="mdi:hvac"></ha-icon><strong> VMC HELTY FLOW
+                  PLUS</strong> by Ing. Danilo Robotti    
+                      - Codice YAML Release 03-06-2023 
+                      - Scheda Interfaccia Release 03-06-2023
+                      - Automazione Release 03-06-2023
+
+                  <ha-icon icon="mdi:email-fast"></ha-icon> <a
+                  href="mailto:danilo.robotti@gmail.com">Mail</a> <ha-icon
+                  icon="mdi:human-handsup"></ha-icon><a
+                  href="https://github.com/DanRobo76/VMC-HELTY-FLOW">Aggiornamenti</a><br>
+
+                  <ha-icon icon="mdi:human-greeting-variant"></ha-icon>
+                  <strong>Ringraziamenti</strong> <a
+                  href="https://www.paypal.com/donate/?business=YU9379GL8VDW4&amount=1.2&no_recurring=1&item_name=Se+il+progetto+ti+%C3%A8+piaciuto%2C++offrimi+un+GinSeng%21+%0A%3B%29&currency_code=EUR">Ginseng</a>
+                  <ha-icon icon="mdi:tag-faces"></ha-icon> 
+
+                  Grazie di cuore per ogni singolo Ginseng gustato! 
+
+                  Apprezzo immensamente il vostro sostegno e la 
+
+                  vostra generosità.
+
+
+                  <ha-icon icon="mdi:file-sign"></ha-icon> <strong>Esonero di
+                  Responsabilità:</strong> 
+
+                  In nessun caso lo sviluppatore sarà responsabile 
+
+                  di danneggiamenti diretti, indiretti o conseguenti
+
+                  , correlati a difetti del presente SoftWare. 
+
+                  Il Cliente ha l’onere e la responsabilità della 
+
+                  scelta, dell’installazione,  dell’uso e della 
+
+                  gestione del SoftWare al fine del raggiungimento 
+
+                  del  risultato prefissatosi.
+
+                  </pre>
+
+                  <br>
+
+
+                  ### **Info Lettura Dati nella VMC**
+
+                  <h4 style="font-size: smaller;">- Sensori Ventilazione</h4>
+
+                  <pre style="font-size: smaller;">
+
+                  {% set stati = ['unknown', 'unavailable'] %} {% if
+                  states('sensor.vmc_cucina_status_ventola') in stati %}Non
+                  disponibile{% else %}{{
+                  states('sensor.vmc_cucina_status_ventola') }} {% endif %}
+
+                  </pre>
+
+                  <h4 style="font-size: smaller;">- Sensori Ambientali</h4>
+
+                  <pre style="font-size: smaller;">
+
+                  {% set stati = ['unknown', 'unavailable'] %} {% if
+                  states('sensor.vmc_cucina_sensori') in stati %}Non
+                  disponibile{% else %}{{ states('sensor.vmc_cucina_sensori')
+                  }}{% endif %}
+
+                  </pre>
+
+                  <h4 style="font-size: smaller;">- Lan</h4>
+
+                  <pre style="font-size: smaller;">
+
+                  {% set stati = ['unknown', 'unavailable'] %} {% if
+                  states('sensor.vmc_cucina_lan') in stati %}Non disponibile{%
+                  else %}{{ states('sensor.vmc_cucina_lan') }}{% endif %}
+
+                  </pre>
+
+                  <h4 style="font-size: smaller;">- Nome</h4>
+
+                  <pre style="font-size: smaller;">
+
+                  {% set stati = ['unknown', 'unavailable'] %} {% if
+                  states('sensor.vmc_cucina_nome') in stati %}Non disponibile{%
+                  else %}{{ states('sensor.vmc_cucina_nome') }}
+
+                  {% endif %}
+
+                  </pre>
+
+                  <div style="background-color: #f0f0f0; padding: 10px;">
+
+                  <strong>Status Routine Sensori</strong><br>
+
+                  Se la funzione è disabilitata il sistema
+
+                  VMC mantiene lo stato di funzionamento impostato
+
+                  dall’utente. I valori rilevati dai sensori (Igrometrico) nella
+                  schermata INFO dell'App Mobile non saranno più
+
+                  disponibili e i relativi allarmi non segnalati. 
+
+                  </div>
+
+                  <br>
+
+
+                  <div style="background-color: #f0f0f0; padding: 10px;">
+
+                  <strong>Status Pannello Led</strong><br>
+
+                  Per attivare o disattivare i LED
+
+                  del pannello comandi della VMC. 
+
+                  </div>
+
+                  <br>
+
+
+                  <div style="background-color: #f0f0f0; padding: 10px;">
+
+                  <strong>Congelamento [°C]</strong><br>
+
+                  Blocca l’unità se la temperatura esterna rilevata è inferiore
+                  di -18 °C,
+
+                  indipendentemente dall'Offset settato.
+
+                  <br>
+
+                  Impostazione di default nel firmware della VMC.
+
+                  </div>
+
+                  <br>
+
+
+                  <div style="background-color: #f0f0f0; padding: 10px;">
+
+                  <strong>Differenziale tra temperatura interna ed esterna
+                  [°C]</strong><br>
+
+                  Se il differenziale è maggiore di 23°C Porta l’unità a
+                  Velocità 1
+
+                  indipendentemente dagli Offset settati.
+
+                  <br>
+
+                  Impostazione di default nel firmware della VMC.
+
+                  </div>
+
+                  <br>
+
+
+                  <div style="background-color: #f0f0f0; padding: 10px;">
+
+                  <strong>Punto di Rugiada [°C]</strong><br>
+
+                  Quando la temperatura di un oggetto è inferiore al punto di
+                  rugiada, il vapore acqueo presente nell'aria si condenserà
+                  sulla superficie dell'oggetto. 
+
+                  </div>
+
+                  <br>
+
+
+                  <div style="background-color: #f0f0f0; padding: 10px;">
+
+                  <strong>Verifica Impiego della VMC per il superamento del
+                  [Lim. Δ P. di Rugiada]</strong><br>
+
+                  Assicurarsi che il punto di rugiada dell'aria esterna meno il
+                  punto di rugiada dell'aria interna, sia minore di qualche
+                  grado  °C (impostare il [Set Lim. Δ P. di Rugiada]) prima di
+                  iniziare la ventilazione.
+
+                  In questo modo si ha la garanzia di trasportare l'umidità
+                  dall'interno verso l'esterno.
+
+                  <br>
+
+                  <br>
+
+                  Valutare pertanto se Attivare l'Opzione:
+
+                  <br>
+
+                  [VMC ON/OFF, per Superamento Lim. Δ P. di Rugiada]
+
+                  <br>
+
+                  <br>
+
+                  Le soglie di differenza di rugiada da considerare per la
+                  ventilazione possono variare in funzione delle condizioni
+                  ambientali. Ecco alcune soglie di differenza di rugiada da
+                  considerare in base alle diverse condizioni:
+
+
+                  In condizioni normali di temperatura e umidità, una differenza
+                  di rugiada di almeno 3-4°C è sufficiente per garantire un
+                  adeguato trasporto dell'umidità dall'interno all'esterno
+                  dell'edificio.
+
+
+                  In presenza di temperature esterne particolarmente elevate e
+                  di un elevato tasso di umidità, potrebbe essere necessario
+                  aumentare la differenza di rugiada a 5-6°C o anche di più per
+                  evitare la formazione di condensa.
+
+
+                  In presenza di temperature esterne particolarmente basse e di
+                  un basso tasso di umidità, la differenza di rugiada necessaria
+                  potrebbe essere inferiore, anche solo di 1-2°C.
+
+
+                  In ambienti particolarmente umidi, come ad esempio nei bagni o
+                  nelle cucine, potrebbe essere necessario adottare una soglia
+                  di differenza di rugiada più elevata per evitare la formazione
+                  di condensa sulle superfici.
+
+
+                  In ambienti in cui è presente un elevato tasso di inquinamento
+                  dell'aria, come ad esempio in prossimità di strade trafficate
+                  o di impianti industriali, potrebbe essere necessario adottare
+                  una soglia di differenza di rugiada più elevata per evitare
+                  l'ingresso di agenti inquinanti nell'edificio.
+
+
+                  Tuttavia, è importante considerare che queste soglie sono
+                  indicative e che la scelta della soglia più appropriata
+                  dipende da una serie di fattori, come ad esempio il tipo di
+                  edificio, le attività svolte al suo interno, il numero di
+                  persone presenti e le condizioni climatiche locali. In ogni
+                  caso, è consigliabile consultare un esperto del settore per
+                  determinare la soglia di differenza di rugiada più appropriata
+                  per le specifiche condizioni dell'edificio.
+
+
+                  <pre style="font-size: smaller;">
+
+                  P.di Rugiada Esterna - P. di Rugiada Interno < Set Lim. Δ P.
+                  di Rugiada -> <font color="rgb(128, 0, 128)">Si può impiegare
+                  [Nessuna Allerta]</font>
+
+                  P.di Rugiada Esterna - P. di Rugiada Interno ≥ Set Lim. Δ P.
+                  di Rugiada ->  <font color="rgb(100, 100, 100)">Se ne
+                  sconsiglia l'impiego [Allerta]</font>
+
+                  <font color='green'><br>Se l'Opzione [VMC ON/OFF, per
+                  Superamento Lim. Δ P. di Rugiada] è Attiva ed è stato superato
+                  il valore 
+
+                  del [Set Lim. Δ P. di Rugiada], allora la VMC si
+                  Arresterà.</font>
+
+                  </pre>
+
+
+                  Suggerimenti di impostazione del [Set Lim. Δ P. di Rugiada]:
+                    - Locale Bagno, Cucina: 7°C
+                    - Locale Camera: 5°C
+                  </div>
+
+
+                  <h4 style="font-size: smaller;">Range Sensore Umidità U [%],
+                  se:</h4>
+
+                  <pre style="font-size: smaller;">
+                           U ≤ 0     <font color="rgb(128, 0, 128)">Non Calcolabile [Nessuna Allerta]</font>
+                       0 < U ≤ 35    <font color="rgb(100, 100, 100)">Possibile Secchezza, Disidratazione [Allerta]</font>
+                      35 < U ≤ 65    <font color="rgb(128, 0, 128)">Normale [Nessuna Allerta]</font>
+                      66 < U ≤ 100   <font color="rgb(100, 100, 100)">Possibile Muffe, Batteri [Allerta]</font>
+                  </pre>
+
+                  <h4 style="font-size: smaller;">Umidità Assoluta U [g/m³],
+                  se:</h4>
+
+                  <pre style="font-size: smaller;">
+                              U ≤ 0  Non Calcolabile
+                  Temp. Interna ≤ 0  Non Calcolabile
+
+                  </pre>
+
+
+                  <div style="background-color: #f0f0f0; padding: 10px;">
+
+                  <strong>Calendario</strong><br>
+
+                  Permette di organizzare per ogni giorno della settimana
+                  l'orario di Accensione e l'orario di Spegnimento su due fasce
+                  di orario; le stesse possono essere contigue.<br> Selezionare
+                  la velocità dal menù "Settaggi" per ogni fascia di orario.<br>
+                  <strong>Riavviare Home Assistant per memorizzare i valori
+                  inseriti nel calendario</strong>
+
+                  </div>
+
+                  <pre style="font-size: smaller;">
+
+                  <strong>Regole:</strong>
+
+                  - l'opzione Calendario deve essere impostato su "ON"
+
+                  - l'oradio di Accensione  della 1° Fascia deve essere MINORE  
+                  dell'orario di Spegnimento della 1° Fascia
+
+                  - l'oradio di Accensione  della 1° Fascia deve essere MINORE  
+                  dell'orario di Accensione  della 2° Fascia
+
+                  - l'oradio di Spegnimento della 1° Fascia deve essere MINORE  
+                  dell'orario di Spegnimento della 2° Fascia
+
+                  - l'oradio di Accensiore  della 2° Fascia deve essere MINORE  
+                  dell'orario di Spegnimento della 2° Fascia
+
+                  - l'oradio di Accensiore  della 2° Fascia deve essere MAGGIORE
+                  dell'orario di Spegnimento della 1° Fascia
+
+                  - l'oradio di Accensione  della 1° Fascia deve essere DIVERSO 
+                  dell'orario di Spegnimento della 1° Fascia
+
+                  - l'oradio di Accensione  della 1° Fascia deve essere DIVERSO 
+                  dell'orario di Accensione  della 2° Fascia
+
+                  - l'oradio di Spegnimento della 1° Fascia deve essere DIVERSO 
+                  dell'orario di Spegnimento della 2° Fascia
+
+                  - l'oradio di Spegnimento della 1° Fascia deve essere DIVERSO 
+                  dell'orario di Accensione  della 2° Fascia
+
+                  - l'oradio di Accensione  della 1° Fascia deve essere DIVERSO 
+                  dell'orario di Spegnimento della 2° Fascia
+
+                  <br>
+
+                  - E' consigliato aver attivato l'opzione "VMC ON/OFF, per
+                  Superamento Lim. Δ P. di Rugiada", diversamente non verranno
+                  presi in considerazione i parametri ambientali
+
+                  </pre>
+
+                  <br>
+
+                  <strong>Es. Programmazione 1° e 2° Fascia contigue, dalle
+                  10:00 alle 10:30</strong><br>
+
+                  Dom. 1° Accensione: 10:00<br>
+
+                  Dom. 1° Spegnimento: 10:28<br>
+
+                  Dom. 2° Accensione: 10:29<br>
+
+                  Dom. 2° Spegnimento: 10:30<br>
+
+                  N.b. dalle 10:28 alle 10:29, la VMC si spegnerà per
+                  riattivarsi alle 10:29
+
+                  <br>
+
+                  <br>
+
+                  <strong>Es. Programmazione 1° e 2° Fascia non contigue, dalle
+                  00:00 alle 06:00 e dalle 20:00 alle 23:59</strong><br>
+
+                  Dom. 1° Accensione: 00:00<br>
+
+                  Dom. 1° Spegnimento: 06:00<br>
+
+                  Dom. 2° Accensione: 20:00<br>
+
+                  Dom. 2° Spegnimento: 23:59<br>
+
+                  <br>
+
+                  <div style="background-color: #f0f0f0; padding: 10px;">
+
+                  <strong>Free Heating / Free Cooling</strong><br>
+
+                  Permette di settare per la 1° e 2° Fascia (Set Inizio Mese -
+                  Set Fine Mese) i mesi soggetti a Riscaldamento (impiegando la
+                  velocità Free Heating) o a Raffreddamento (impiegando la
+                  velocità Free Cooling) se le condizioni ambientali sono
+                  favorevoli.<br> Selezionare i mesi dal menù "Opzioni - Free
+                  Heating / Free Cooling" per ogni fascia (Set Inizio Mese - Set
+                  Fine Mese).<br> 
+
+                  </div>
+
+                  <pre style="font-size: smaller;">
+
+                  <strong>Regole:</strong>
+
+                  - l'opzione VMC ON/OFF, in Funzione della Vel. Free Heating,
+                  deve essere impostato su "ON"
+
+                  - l'opzione VMC ON/OFF, in Funzione della Vel. Free Cooling,
+                  deve essere impostato su "ON"
+
+                  - i mesi di ogni fascia (Set Inizio Mese - Set Fine Mese)
+                  devono essere contigui
+
+                  - i mesi di ogni fascia (Set Inizio Mese - Set Fine Mese) non
+                  devono essere ripetuti
+
+                  </pre>
+
+                  <h4 style="font-size: smaller;">Riscaldamento /
+                  Raffrescamento, se:</h4>
+
+                  <pre style="font-size: smaller;">
+
+                  -<strong>Velocità Free Heating</strong>: Temperatura Esterna >
+                  Temperatura Interna <font color="rgb(128, 0,
+                  128)">Riscaldamento</font>
+
+                  -<strong>Velocità Free Heating</strong>: Temperatura Esterna <
+                  Temperatura Interna <font color="rgb(100, 100, 100)">[Allerta]
+                  Raffrescamento</font>
+
+                  -<strong>Velocità Free Cooling</strong>: Temperatura Esterna <
+                  Temperatura Interna <font color="rgb(128, 0,
+                  128)">Raffrescamento</font>
+
+                  -<strong>Velocità Free Cooling</strong>: Temperatura Esterna >
+                  Temperatura Interna <font color="rgb(100, 100, 100)">[Allerta]
+                  Riscaldamento</font>
+
+
+                  Se le condizioni ambientali non saranno ideali, mancato
+                  Riscaldamento o Raffrescamento, la VMC si arresterà, mostrando
+                  un avviso; la ripresa avviene non appena le condizioni
+                  risultano idonee per il Riscaldamento o Raffrescamento
+
+                  E' consigliato aver attivato l'opzione "VMC ON/OFF, per
+                  Superamento Lim. Δ P. di Rugiada", diversamente non verranno
+                  presi in considerazione i parametri ambientali
+
+                  </pre>
+
+                  <h4 style="font-size: smaller;">Es. Programmazione 1° e 2°
+                  Fascia (Set Inizio Mese - Set Fine Mese) contigue:</h4>
+
+                  <pre style="font-size: smaller;">
+
+                  Set Inizio Mese Free Heating - Set Fine Mese Free Heating:
+                  Novembre
+
+                  Set Inizio Mese Free Heating - Set Fine Mese Free Heating:
+                  Maggio
+
+                  Set Inizio Mese Free Cooling - Set Fine Mese Free Cooling:
+                  Luglio
+
+                  Set Inizio Mese Free Cooling - Set Fine Mese Free Cooling:
+                  Ottobre
+
+                  N.b. i Mesi Giugno e Settembre sono mesi non programmati,
+                  pertanto in caso di impiego della Velocità Free Heating o Free
+                  Cooling nelle condizioni non ideali, la VMC non si arresterà
+                  ma mostrerà un avviso di Raffrescamento o di Riscaldamento.
+
+                  </pre>
+  - type: conditional
+    conditions:
+      - entity: sensor.vmc_cucina_alert_monitoraggio_umidita
+        state: Allerta
+    card:
+      type: markdown
+      content: >-
+        {% if is_state('sensor.vmc_cucina_alert_monitoraggio_umidita',
+        'Allerta') %}
+          <span style="display: flex; align-items: center; font-size: 60px; background-color:#FF0000;">
+            <font color="rgb(100, 100, 100)"><font size="+3"><strong><ha-icon icon="mdi:alarm-light-outline"></ha-icon></strong></font>
+            <span style="padding-right: 10px;"></span>
+            <font size="+2"><strong>Allerta Umidità</strong></font>
+          </span>
+        {% else %}
+          <span style="display: flex; align-items: center; font-size: 60px; background-color: #00FF00;">
+            <font color="rgb(128, 0, 128)"><font size="+3"><strong><ha-icon icon="mdi:alarm-light-off-outline"></ha-icon></strong></font>
+            <span style="padding-right: 10px;"></span>
+            <font size="+1"><strong>Nessuna Allerta Umidità</strong></font>
+          </span>
+        {% endif %}
+
+
+        {{states('sensor.vmc_cucina_umidita_interna_status_verifica_soglia_valore')}}
+  - type: conditional
+    conditions:
+      - entity: sensor.vmc_cucina_alert_monitoraggio_pdr
+        state: Allerta
+    card:
+      type: markdown
+      content: >-
+        {% if states('sensor.vmc_cucina_punto_di_rugiada_verifica_confronto') ==
+        "Se ne sconsiglia l'impiego" and
+        states('input_boolean.vmc_cucina_opzioni_accendi_spegni_vmc_vs_pdr') ==
+        'on' %}
+          <span style="display: flex; align-items: center; font-size: 60px; background-color:#FF0000;">
+            <font color="rgb(100, 100, 100)"><font size="+3"><strong><ha-icon icon="mdi:alarm-light-outline"></ha-icon></strong></font>
+            <span style="padding-right: 10px;"></span>
+            <font size="+2"><strong>Allerta Δ P. di Rugiada</strong></font>
+          </span>
+          
+          
+          {{ states('sensor.vmc_cucina_punto_di_rugiada_verifica_confronto_valore')}}
+
+          <strong>Arresto della VMC</strong>
+
+          Ripresa Automatica della VMC sulla Velocità precedentemente impostata, non appena:
+           - la differenza del Punto di Rugiada Esterno {{states('sensor.vmc_cucina_punto_di_rugiada_esterno') | float(0) }} [°C] - Punto di Rugiada Interno {{states('sensor.vmc_cucina_punto_di_rugiada_interno') | float(0) }} [°C] sarà minore del Lim. Δ P. di Rugiada {{states('input_number.vmc_cucina_offset_verifica_impiego_vmc') | float(0) }} [°C];
+           - l'opzione [VMC ON/OFF, in Funzione del Lim. Δ P. di Rugiada] rimarrà impostata su Acceso;
+
+        Altrimenti, verrà annullata la Ripresa Automatica, confermando l'arresto
+        della VMC.
+
+
+        {% elif states('sensor.vmc_cucina_punto_di_rugiada_verifica_confronto')
+        == "Se ne sconsiglia l'impiego" and
+        states('input_boolean.vmc_cucina_opzioni_accendi_spegni_vmc_vs_pdr') ==
+        'off' %}
+          <span style="display: flex; align-items: center; font-size: 60px; background-color:#FF0000;">
+            <font color="rgb(100, 100, 100)"><font size="+3"><strong><ha-icon icon="mdi:alarm-light-outline"></ha-icon></strong></font>
+            <span style="padding-right: 10px;"></span>
+            <font size="+2"><strong>Allerta Δ P. di Rugiada</strong></font>
+          </span>
+
+          {{ states('sensor.vmc_cucina_punto_di_rugiada_verifica_confronto_valore')}}
+
+          <strong>{{ states('sensor.vmc_cucina_punto_di_rugiada_verifica_confronto')}}</strong>
+
+        {% else %}
+          <span style="display: flex; align-items: center; font-size: 60px; background-color: #00FF00;">
+            <font color="rgb(128, 0, 128)"><font size="+3"><strong><ha-icon icon="mdi:alarm-light-off-outline"></ha-icon></strong></font>
+            <span style="padding-right: 10px;"></span>
+            <font size="+1"><strong>Nessuna Allerta Δ P. di Rugiada</strong></font>
+          </span>
+
+          {{ states('sensor.vmc_cucina_punto_di_rugiada_verifica_confronto_valore')}}
+
+          <strong>{{ states('sensor.vmc_cucina_punto_di_rugiada_verifica_confronto')}}</strong>
+        {% endif %}
+  - type: conditional
+    conditions:
+      - entity: sensor.vmc_cucina_alert_monitoraggio_congelamento
+        state: Allerta
+    card:
+      type: markdown
+      content: >-
+        {% if is_state('sensor.vmc_cucina_alert_monitoraggio_congelamento',
+        'Allerta') %}
+          <span style="display: flex; align-items: center; font-size: 60px; background-color:#FF0000;">
+            <font color="rgb(100, 100, 100)"><font size="+3"><strong><ha-icon icon="mdi:alarm-light-outline"></ha-icon></strong></font>
+            <span style="padding-right: 10px;"></span>
+            <font size="+2"><strong>Allerta Congelamento</strong></font>
+          </span>
+        {% else %}
+          <span style="display: flex; align-items: center; font-size: 60px; background-color: #00FF00;">
+            <font color="rgb(128, 0, 128)"><font size="+3"><strong><ha-icon icon="mdi:alarm-light-off-outline"></ha-icon></strong></font>
+            <span style="padding-right: 10px;"></span>
+            <font size="+1"><strong>Nessuna Allerta Congelamento</strong></font>
+          </span>
+        {% endif %}
+
+
+        {{states('sensor.vmc_cucina_congelamento_verifica_soglia_valore')}}
+  - type: conditional
+    conditions:
+      - entity: sensor.vmc_cucina_alert_monitoraggio_delta
+        state: Allerta
+    card:
+      type: markdown
+      content: >-
+        {% if is_state('sensor.vmc_cucina_alert_monitoraggio_delta', 'Allerta')
+        %}
+          <span style="display: flex; align-items: center; font-size: 60px; background-color:#FF0000;">
+            <font color="rgb(100, 100, 100)"><font size="+3"><strong><ha-icon icon="mdi:alarm-light-outline"></ha-icon></strong></font>
+            <span style="padding-right: 10px;"></span>
+            <font size="+2"><strong>Allerta Allerta Diff. Temp. Int-Est > 23 °C</strong></font>
+          </span>
+        {% else %}
+          <span style="display: flex; align-items: center; font-size: 60px; background-color: #00FF00;">
+            <font color="rgb(128, 0, 128)"><font size="+3"><strong><ha-icon icon="mdi:alarm-light-off-outline"></ha-icon></strong></font>
+            <span style="padding-right: 10px;"></span>
+            <font size="+1"><strong>Nessuna Allerta Diff. Temp. Int-Est > 23 °C</strong></font>
+          </span>
+        {% endif %}
+
+
+        {{states('sensor.vmc_cucina_delta_temp_verifica_soglia_valore')}}
+  - type: conditional
+    conditions:
+      - entity: >-
+          sensor.vmc_cucina_alert_monitoraggio_free_heating_o_free_cooling_smart_allert_automazione
+        state: NOT OK
+    card:
+      type: markdown
+      content: >-
+        {% if
+        is_state('sensor.vmc_cucina_alert_monitoraggio_free_heating_o_free_cooling',
+        'Allerta Raffrescamento in atto') %}
+          <span style="display: flex; align-items: center; font-size: 60px; background-color:#FF0000;">
+            <font color="rgb(100, 100, 100)"><font size="+3"><strong><ha-icon icon="mdi:alarm-light-outline"></ha-icon></strong></font>
+            <span style="padding-right: 10px;"></span>
+            <font size="+2"><strong>Raffrescamento in atto</strong></font>
+
+            La Temperatura Esterna {{ states('sensor.vmc_cucina_temp_esterna_status')}} [°C] è minore della
+            Temperatura Interna {{ states('sensor.vmc_cucina_temp_interna_status')}} [°C]
+          </span>
+
+        {% elif
+        is_state('sensor.vmc_cucina_alert_monitoraggio_free_heating_o_free_cooling',
+        'Allerta Riscaldamento in atto') %}
+          <span style="display: flex; align-items: center; font-size: 60px; background-color:#FF0000;">
+            <font color="rgb(100, 100, 100)"><font size="+3"><strong><ha-icon icon="mdi:alarm-light-outline"></ha-icon></strong></font>
+            <span style="padding-right: 10px;"></span>
+            <font size="+2"><strong>Riscaldamento in atto</strong></font>
+
+            La Temperatura Esterna {{ states('sensor.vmc_cucina_temp_esterna_status')}} [°C] è maggiore della 
+            Temperatura Interna {{ states('sensor.vmc_cucina_temp_interna_status')}} [°C]
+          </span>
+
+        {% elif
+        is_state('sensor.vmc_cucina_alert_monitoraggio_free_heating_o_free_cooling',
+        'Raffrescamento in atto') %}
+          <span style="display: flex; align-items: center; font-size: 60px; background-color:#FF0000;">
+            <font color="rgb(100, 100, 100)"><font size="+3"><strong><ha-icon icon="mdi:alarm-light-outline"></ha-icon></strong></font>
+            <span style="padding-right: 10px;"></span>
+            <font size="+2"><strong>Raffrescamento in atto</strong></font>
+
+            La Temperatura Esterna {{ states('sensor.vmc_cucina_temp_esterna_status')}} [°C] è minore della 
+            Temperatura Interna {{ states('sensor.vmc_cucina_temp_interna_status')}} [°C]
+          </span>
+
+        {% elif
+        is_state('sensor.vmc_cucina_alert_monitoraggio_free_heating_o_free_cooling',
+        'Riscaldamento in atto') %}
+          <span style="display: flex; align-items: center; font-size: 60px; background-color:#FF0000;">
+            <font color="rgb(100, 100, 100)"><font size="+3"><strong><ha-icon icon="mdi:alarm-light-outline"></ha-icon></strong></font>
+            <span style="padding-right: 10px;"></span>
+            <font size="+2"><strong>Riscaldamento in atto</strong></font>
+
+            La Temperatura Esterna {{ states('sensor.vmc_cucina_temp_esterna_status')}} [°C] è maggiore della
+            Temperatura Interna {{ states('sensor.vmc_cucina_temp_interna_status')}} [°C]
+          </span>
+
+        {% else %}
+          <span style="display: flex; align-items: center; font-size: 60px; background-color: #00FF00;">
+            <font color="rgb(128, 0, 128)"><font size="+3"><strong><ha-icon icon="mdi:alarm-light-off-outline"></ha-icon></strong></font>
+            <span style="padding-right: 10px;"></span>
+            <font size="+1"><strong>Nessuna Allerta per l'impiego della Velocità Free Heating o Free Cooling</strong></font>
+          </span>
+        {% endif %}
+  - type: conditional
+    conditions:
+      - entity: >-
+          input_boolean.vmc_cucina_spia_velocita_freecooling_un_solo_avvio_per_programmazione_freecooling
+        state: 'on'
+    card:
+      type: markdown
+      content: >-
+        <span style="display: flex; align-items: center; font-size: 60px;
+        background-color:#FF0000;">
+            <font color="rgb(100, 100, 100)"><font size="+3"><strong><ha-icon icon="mdi:alarm-light-outline"></ha-icon></strong></font>
+            <span style="padding-right: 10px;"></span>
+            <font size="+2"><strong>Allerta Riscaldamento</strong></font></br></br>
+            La Temperatura Esterna {{ states('sensor.vmc_cucina_temp_esterna_status')}} [°C] attualmente 
+            è maggiore della Temperatura Interna {{ states('sensor.vmc_cucina_temp_interna_status')}} [°C]
+            
+            Ripresa Automatica della VMC sulla Velocità Free Cooling
+            (Raffrescamento), non appena:
+               - la Temperatura Esterna sarà minore della Temperatura 
+                 Interna;
+               - l'opzione [VMC ON/OFF, in Funzione della Vel. Free Cooling] 
+                 rimarrà impostata su Acceso;
+               - il mese corrente Programmato rimarrà impostato su 
+                 Free Cooling;
+            , diversamente verrà annullata la Ripresa Automatica, confermando 
+            l'arresto della VMC.
+        </span>
+  - type: conditional
+    conditions:
+      - entity: >-
+          input_boolean.vmc_cucina_spia_velocita_freecooling_un_solo_avvio_per_programmazione_freeheating
+        state: 'on'
+    card:
+      type: markdown
+      content: >-
+        <span style="display: flex; align-items: center; font-size: 60px;
+        background-color:#FF0000;">
+            <font color="rgb(100, 100, 100)"><font size="+3"><strong><ha-icon icon="mdi:alarm-light-outline"></ha-icon></strong></font>
+            <span style="padding-right: 10px;"></span>
+            <font size="+2"><strong>Allerta Raffrescamento</strong></font></br></br>
+            La Temperatura Esterna {{ states('sensor.vmc_cucina_temp_esterna_status')}} [°C] attualmente 
+            è maggiore della Temperatura Interna {{ states('sensor.vmc_cucina_temp_interna_status')}} [°C]
+
+            Ripresa Automatica della VMC sulla Velocità Free Heating 
+            (Riscaldamento), non appena:
+               - la Temperatura Esterna sarà maggiore della Temperatura 
+                 Interna;
+               - l'opzione [VMC ON/OFF, in Funzione della Vel. Free Heating]
+                 rimarrà impostata su Acceso;
+               - il mese corrente Programmato rimarra impostato su 
+                 Free Heating;
+            , diversamente verrà annullata la Ripresa Automatica, confermando 
+            l'arresto della VMC.
+        </span>
