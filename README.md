@@ -1,9 +1,9 @@
 ## VMC HELTY FLOW PLUS sviluppato per Home Assistant <a href="https://www.home-assistant.io/" target="_blank"><img src="https://user-images.githubusercontent.com/102819027/233830183-9c55677d-b6a1-4153-8d3c-219394ec8720.png" alt="immagine" style="width:10%;"></a> <a href="https://www.heltyair.com/prodotti/vmc-a-parete/flow-plus/" target="_blank"><img src="https://user-images.githubusercontent.com/102819027/233830311-1a5e8923-b991-46b1-84b0-f72198d5055d.png" alt="immagine" style="width:7%;"></a>
 <pre style="font-size:10px; background-color: #d9ffcc;">
 VMC HELTY FLOW PLUS sviluppato per Home Assistant
-  - VMC HELTY FLOW Release 25-05-2023 
-  - Scheda Interfaccia Release 25-05-2023
-  - Automazione Release 25-05-2023
+  - VMC HELTY FLOW Release 03-06-2023 
+  - Scheda Interfaccia Release 03-06-2023
+  - Automazione Release 03-06-2023
 
 E-mail: <a href="mailto:danilo.robotti@gmail.com">danilo.robotti@gmail.com</a>
 </pre>
@@ -32,6 +32,7 @@ Il Cliente ha l’onere e la responsabilità della scelta, dell’installazione,
     Se la differenza tra il PdR Ext. e il PdR Int. è inferiore al "Set Lim. Δ Punto di Rugiada" (valore impostato dal Cliente), la VMC garantirà un adeguato trasporto dell'umidità dall'interno all'esterno dell'edificio.
    <br>Al contrario, se la differenza tra il PdR Ext. e il PdR Int. sarà maggiore o uguale al "Set Lim. Δ Punto di Rugiada", la VMC si arresterà per evitare il trasporto dell'umidità dall'esterno all'interno dell'edificio.<br>Successivamente, riprenderà automaticamente l'ultima velocità impostata non appena i Parametri Ambientali lo permetteranno.
   - Ripristina la Velocità precedente in caso di Black-Out;<br>
+  - Permette l'accensione e lo spegnimento Automatico, in funzione delle 2 fasce mensili programmabili per la Velocità impostata su Free Heating / Free Cooling;<br>
   - Calcola il Tempo di Ricambio d'Aria in funzione della Velocità;
   - Calcola la Portata d'Aria [M³/h] in funzione della Velocità;
   - Calcola l'Umidità Assoluta Esterna [g/m³];
