@@ -37,11 +37,12 @@ Il Cliente ha l’onere e la responsabilità della scelta, dell’installazione,
   - Calcola la Portata d'Aria [M³/h] in funzione della Velocità;
   - Calcola l'Umidità Assoluta Esterna [g/m³];
   - Calcola l'Umidità Assoluta Interna [g/m³];
-  - Mostra un'Allerta in funzione del:
-      - Sensore Umidità;<br>
+  - Mostra un'Allerta in funzione:
+      - del Sensore Umidità;<br>
       - per Congelamento;<br>
       - per Differenza tra Temperatura Interna ed Esterna;<br>
       - per il Superamento del Set Lim. Δ Punto di Rugiada.<br>
+      - in caso di Riscaldamento o Raffrescamento non desiderato, correlato alla Velocità Free heating o Free Cooling<br>
 #
 ![image](https://user-images.githubusercontent.com/102819027/235299358-88373b06-b62e-4867-88ab-287cad60bb6d.png)<br>
 <strong>1</strong> Rendere gli indirizzi IP della/e VMC, statici attraverso il Router; la VMC risponde sulla porta 5001. <br>
