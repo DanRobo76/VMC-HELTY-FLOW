@@ -2,7 +2,7 @@
 <pre style="font-size:10px; background-color: #d9ffcc;">
 VMC HELTY FLOW PLUS sviluppato per Home Assistant
   - VMC HELTY FLOW Release 08-06-2023 
-  - Scheda Interfaccia Release 03-06-2023
+  - Scheda Interfaccia Release 08-06-2023
   - Automazione Release 03-06-2023
 
 E-mail: <a href="mailto:danilo.robotti@gmail.com">danilo.robotti@gmail.com</a>
