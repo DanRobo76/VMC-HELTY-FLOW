@@ -4,9 +4,9 @@
 
 |          VMC-HELTY-FLOW                  | Supportato da Home Assistant            |
 | ---------------------------------------- | ----------------------------------------|
-|  :white_check_mark: VMC HELTY FLOW Release 03-06-2023     | :white_check_mark:   Ver. 2023.5.4 |
-|  :white_check_mark: Scheda Interfaccia Release 03-06-2023 | :white_check_mark:   Ver. 2023.5.4 |
-|  :white_check_mark: Automazione Release 03-06-2023        | :white_check_mark:   Ver. 2023.5.4 |
+|  :white_check_mark: VMC HELTY FLOW Release 08-06-2023     | :white_check_mark:   Ver. 2023.6.0 |
+|  :white_check_mark: Scheda Interfaccia Release 08-06-2023 | :white_check_mark:   Ver. 2023.6.0 |
+|  :white_check_mark: Automazione Release 03-06-2023        | :white_check_mark:   Ver. 2023.6.0 |
 
 ### - Limiti del SoftWare:<br>
 <strong>La Lettura dei Sensori avviene Automaticamente ogni:</strong>
@@ -49,6 +49,7 @@ e riavviare Home Assistan. [Non usare il Riavvio Rapido]
 
 ### - Rapporto Errori
 Per la Versione corrente, non si segnalano Errori<br>
+Aggiornata la sintassi command_line per la versione HA 2023.6.0<br>
 
 ### - Curiosità: Impiego della VMC da remoto con l'uso di un Relè Smart:<br>
 Nella VMC Flow Plus, una volta impostata una velocità diversa da zero, è necessario attendere 30 secondi prima di interrompere l'alimentazione. Questa procedura consente attraverso l'utilizzo di un relè smart di spegnere o accendere la VMC con la velocità impostata precedentemente, da remoto.
