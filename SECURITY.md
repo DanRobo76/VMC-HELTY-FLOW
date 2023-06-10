@@ -49,6 +49,7 @@ e riavviare Home Assistan. [Non usare il Riavvio Rapido]
 
 ### - Rapporto Errori
 Per la Versione corrente, non si segnalano Errori<br>
+Aggiornata la visualizzazione degli Avvisi
 Aggiornata la sintassi command_line per la versione HA 2023.6.0<br>
 
 ### - Curiosità: Impiego della VMC da remoto con l'uso di un Relè Smart, senza l'impiego di Home Assistant:<br>
