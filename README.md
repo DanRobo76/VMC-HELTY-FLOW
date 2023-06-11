@@ -1,22 +1,21 @@
 ## VMC HELTY FLOW PLUS sviluppato per Home Assistant <a href="https://www.home-assistant.io/" target="_blank"><img src="https://user-images.githubusercontent.com/102819027/233830183-9c55677d-b6a1-4153-8d3c-219394ec8720.png" alt="immagine" style="width:10%;"></a> <a href="https://www.heltyair.com/prodotti/vmc-a-parete/flow-plus/" target="_blank"><img src="https://user-images.githubusercontent.com/102819027/233830311-1a5e8923-b991-46b1-84b0-f72198d5055d.png" alt="immagine" style="width:7%;"></a>
 <pre style="font-size:10px; background-color: #d9ffcc;">
 VMC HELTY FLOW PLUS sviluppato per Home Assistant
-  - VMC HELTY FLOW Release 08-06-2023 
-  - Scheda Interfaccia Release 10-06-2023
-  - Automazione Release 03-06-2023
+  - VMC HELTY FLOW Release 11-06-2023 
+  - Scheda Interfaccia Release 11-06-2023
+  - Automazione Release 11-06-2023
 
 E-mail: <a href="mailto:danilo.robotti@gmail.com">danilo.robotti@gmail.com</a>
 </pre>
-#
-<strong>Ringraziamenti</strong><br>
-Grazie di cuore per ogni singolo Ginseng gustato! 
-Apprezzo immensamente il vostro sostegno e la vostra generosità.
-#
 <strong>Esonero di Responsabilità:</strong><br>
 In nessun caso Danilo Robotti sarà responsabile di danneggiamenti diretti, indiretti, o conseguenti, correlati a difetti del presente SoftWare. 
 Il Cliente ha l’onere e la responsabilità della scelta, dell’installazione, dell’uso e della gestione del SoftWare al fine del raggiungimento del risultato prefissatosi. 
-#
-<strong><a href="https://github.com/DanRobo76/VMC-HELTY-FLOW/blob/main/SECURITY.md" text="Limiti del SoftWare">Limiti del SoftWare</a></strong> 
+
+<strong>Ringraziamenti</strong><br>
+Grazie di cuore per ogni singolo Ginseng gustato! 
+Apprezzo immensamente il vostro sostegno e la vostra generosità.
+
+<strong><a href="https://github.com/DanRobo76/VMC-HELTY-FLOW/blob/main/SECURITY.md" text="Limiti del SoftWare (Security)">Limiti del SoftWare (Security)</a></strong> 
 #
 <strong>Pre-Requisiti:</strong>
  - Installare <strong><a href="https://www.home-assistant.io/installation/">Home Assistant</a></strong>;
