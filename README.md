@@ -15,7 +15,7 @@ Il Cliente ha l’onere e la responsabilità della scelta, dell’installazione,
 Grazie di cuore per ogni singolo Ginseng gustato! 
 Apprezzo immensamente il vostro sostegno e la vostra generosità.
 
-<strong><a href="https://github.com/DanRobo76/VMC-HELTY-FLOW/blob/main/SECURITY.md" text="Limiti del SoftWare (Security)">Limiti del SoftWare (Security)</a></strong> 
+<strong><a href="https://github.com/DanRobo76/VMC-HELTY-FLOW/blob/main/SECURITY.md" text="Limiti del SoftWare (Security Policy)">Limiti del SoftWare (Security Policy)</a></strong> 
 #
 <strong>Pre-Requisiti:</strong>
  - Installare <strong><a href="https://www.home-assistant.io/installation/">Home Assistant</a></strong>;
