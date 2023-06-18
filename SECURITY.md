@@ -49,8 +49,8 @@ e riavviare Home Assistan. [Non usare il Riavvio Rapido]
 
 ### - Rapporto Errori
 Per la Versione corrente, non si segnalano Errori<br>
-Aggiornata la visualizzazione degli Avvisi<br>
-Aggiornata la sintassi command_line per la versione HA 2023.6.0<br>
+Aggiornata la visualizzazione degli Avvisi e Migliorata la Logica del Calcola del Superamento del Limite del Punto di Rugiada<br>
+Aggiornata la sintassi command_line per la versione HA 2023.6.0 e successive<br>
 
 ### - Curiosità: Impiego della VMC da remoto con l'uso di un Relè Smart, senza l'impiego di Home Assistant:<br>
 Nella VMC Flow Plus, una volta installato il relè e impostata una velocità diversa da zero, è necessario attendere 30 secondi prima di interrompere l'alimentazione. Questa procedura consente attraverso l'utilizzo di un relè smart di spegnere o accendere la VMC con la velocità impostata precedentemente, da remoto.
