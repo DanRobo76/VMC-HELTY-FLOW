@@ -4,9 +4,9 @@
 
 |          VMC-HELTY-FLOW                  | Supportato da Home Assistant            |
 | ---------------------------------------- | ----------------------------------------|
-|  :white_check_mark: VMC HELTY FLOW Release 17-06-2023     | :white_check_mark:   Ver. 2023.6.2 |
-|  :white_check_mark: Scheda Interfaccia Release 17-06-2023 | :white_check_mark:   Ver. 2023.6.2 |
-|  :white_check_mark: Automazione Release 17-06-2023        | :white_check_mark:   Ver. 2023.6.2 |
+|  :white_check_mark: VMC HELTY FLOW Release 23-06-2023     | :white_check_mark:   Ver. 2023.6.3 |
+|  :white_check_mark: Scheda Interfaccia Release 23-06-2023 | :white_check_mark:   Ver. 2023.6.3 |
+|  :white_check_mark: Automazione Release 23-06-2023        | :white_check_mark:   Ver. 2023.6.3 |
 
 ### - Limiti del SoftWare:<br>
 <strong>La Lettura dei Sensori avviene Automaticamente ogni:</strong>
@@ -49,6 +49,7 @@ e riavviare Home Assistan. [Non usare il Riavvio Rapido]
 
 ### - Rapporto Errori
 Per la Versione corrente, non si segnalano Errori<br>
+Aggiornata la visualizzazione degli Avvisi, inseriti profili
 Aggiornata la visualizzazione degli Avvisi e Migliorata la Logica del Calcola del Superamento del Limite del Punto di Rugiada<br>
 Aggiornata la sintassi command_line per la versione HA 2023.6.0 e successive<br>
 
