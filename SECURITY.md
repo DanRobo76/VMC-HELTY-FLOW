@@ -4,9 +4,9 @@
 
 |          VMC-HELTY-FLOW                  | Supportato da Home Assistant            |
 | ---------------------------------------- | ----------------------------------------|
-|  :white_check_mark: VMC HELTY FLOW Release 23-06-2023     | :white_check_mark:   Ver. 2023.6.3 |
-|  :white_check_mark: Scheda Interfaccia Release 23-06-2023 | :white_check_mark:   Ver. 2023.6.3 |
-|  :white_check_mark: Automazione Release 23-06-2023        | :white_check_mark:   Ver. 2023.6.3 |
+|  :white_check_mark: VMC HELTY FLOW Release 30-06-2023     | :white_check_mark:   Ver. 2023.6.3 |
+|  :white_check_mark: Scheda Interfaccia Release 30-06-2023 | :white_check_mark:   Ver. 2023.6.3 |
+|  :white_check_mark: Automazione Release 30-06-2023        | :white_check_mark:   Ver. 2023.6.3 |
 
 ### - Limiti del SoftWare:<br>
 <strong>La Lettura dei Sensori avviene Automaticamente ogni:</strong>
@@ -49,7 +49,7 @@ e riavviare Home Assistan. [Non usare il Riavvio Rapido]
 
 ### - Rapporto Errori
 Per la Versione corrente, non si segnalano Errori<br>
-Aggiornata la visualizzazione degli Avvisi, inseriti profili
+Aggiornata la visualizzazione degli Avvisi e Aggiunto Avvio automatico di Home Assistant se impiegato il Profilo di Inizializzazione
 <br>
 
 ### - Curiosità: Impiego della VMC da remoto con l'uso di un Relè Smart, senza l'impiego di Home Assistant:<br>
