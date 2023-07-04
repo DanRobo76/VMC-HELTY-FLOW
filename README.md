@@ -30,7 +30,7 @@ Apprezzo immensamente il vostro sostegno e la vostra generosità.
     Il software calcola il Punto di Rugiada Esterno (PdR Ext.) e il Punto di Rugiada Interno (PdR Int.).<br>
     Se la differenza tra il PdR Ext. e il PdR Int. è inferiore al "Set Lim. Δ Punto di Rugiada" (valore impostato dal Cliente), la VMC garantirà un adeguato trasporto dell'umidità dall'interno all'esterno dell'edificio.
    <br>Al contrario, se la differenza tra il PdR Ext. e il PdR Int. sarà maggiore o uguale al "Set Lim. Δ Punto di Rugiada", la VMC si arresterà per evitare il trasporto dell'umidità dall'esterno all'interno dell'edificio.<br>Successivamente, riprenderà automaticamente l'ultima velocità impostata non appena i Parametri Ambientali lo permetteranno.
-  - Ripristina la Velocità precedente in caso di Black-Out;<br>
+  - Ripristina la Velocità precedente in caso di Black-Out, se la VMC ha una linea dedicata e/o se installato un relè domotico;<br>
   - Permette l'accensione e lo spegnimento Automatico, in funzione delle 2 fasce mensili programmabili per la Velocità impostata su Free Heating / Free Cooling, riducendo i consumi energetici;<br>
   - Calcola il Tempo di Ricambio d'Aria in funzione della Velocità;
   - Calcola la Portata d'Aria [M³/h] in funzione della Velocità;
