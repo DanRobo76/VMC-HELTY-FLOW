@@ -31,7 +31,7 @@ Apprezzo immensamente il vostro sostegno e la vostra generosità.
 <strong>Punti di Forza:</strong>
   - Invia Comandi da remoto alla VMC, leggendone i valori Contenuti;
   - Permette l'accensione e lo spegnimento in funzione delle 2 fasce orarie programmabili per ogni giorno della settimana;
-  - Spegne o Riavvia la VMC in funzione dei Parametri Ambientali;<br>
+  - Automaticamente Spegne o Riavvia la VMC in funzione dei Parametri Ambientali;<br>
     Il software calcola il Punto di Rugiada Esterno (PdR Ext.) e il Punto di Rugiada Interno (PdR Int.).<br>
     Se la differenza tra il PdR Ext. e il PdR Int. è inferiore al "Set Lim. Δ Punto di Rugiada" (valore impostato dal Cliente), la VMC garantirà un adeguato trasporto dell'umidità dall'interno all'esterno dell'edificio.
    <br>Al contrario, se la differenza tra il PdR Ext. e il PdR Int. sarà maggiore o uguale al "Set Lim. Δ Punto di Rugiada", la VMC si arresterà per evitare il trasporto dell'umidità dall'esterno all'interno dell'edificio.<br>Successivamente, riprenderà automaticamente l'ultima velocità impostata non appena i Parametri Ambientali lo permetteranno.
