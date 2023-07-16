@@ -49,7 +49,7 @@ e riavviare Home Assistan. [Non usare il Riavvio Rapido]
 
 ### - Rapporto Errori
 Per la Versione corrente, non si segnalano Errori<br>
-Migliorata l'interfaccia con l'Immagine della VMC; cliccandoci sopra permette di mostrare o nascondere avventuali Avvisi
+Migliorata l'interfaccia con  l'aggiunta dell'immagine della VMC; cliccandoci sopra permette di mostrare o nascondere avventuali Avvisi
 <br>
 
 ### - Curiosità: Impiego della VMC da remoto con l'uso di un Relè Smart, senza l'impiego di Home Assistant:<br>
