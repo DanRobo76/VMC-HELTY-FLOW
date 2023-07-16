@@ -18,6 +18,8 @@ Apprezzo immensamente il vostro sostegno e la vostra generosità.
 
 <strong><a href="https://github.com/DanRobo76/VMC-HELTY-FLOW/blob/main/SECURITY.md" text="Limiti del SoftWare (Security Policy)">Limiti del SoftWare (Security Policy)</a></strong> 
 #
+![VMC Schermata Principale](https://github.com/DanRobo76/VMC-HELTY-FLOW/assets/102819027/23a4d50f-f4ab-40af-81d7-3370449ac190)
+
 <strong>Pre-Requisiti:</strong>
  - Installare <strong><a href="https://www.home-assistant.io/installation/">Home Assistant</a></strong>;
  - Installare l'Integrazione <strong><a href="https://github.com/DanRobo76/VMC-HELTY-FLOW/blob/main/README.md#openweathermap-" text="OpenWeatherMap">OpenWeatherMap</a></strong>;
