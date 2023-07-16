@@ -2156,7 +2156,7 @@ cards:
                   <!-- CANCELLA IL CODICE SOTTOSTANTE SE NON VUOI VISUALIZZARE
                   IL SUPPORTO E I RINGRAZIAMENTI :) -->
 
-                  &nbsp;&nbsp;&nbsp;&nbsp;<strong>Offrirmi un
+                  &nbsp;&nbsp;&nbsp;&nbsp;<strong>Offrimi un
                   <a>Ginseng</a></strong>&nbsp;&nbsp;&nbsp;&nbsp;[<img
                   src="https://user-images.githubusercontent.com/102819027/253791354-81ba7208-fbad-4fab-8ceb-cdcf901fdb61.png"
                   alt=""
