@@ -7,7 +7,7 @@
 |  :white_check_mark: VMC HELTY FLOW Release 04-07-2023     | :white_check_mark:   Ver. 2023.7.3 |
 |  :white_check_mark: Scheda Interfaccia Release 16-07-2023 | :white_check_mark:   Ver. 2023.7.3 |
 |  :white_check_mark: Automazione Release 04-07-2023        | :white_check_mark:   Ver. 2023.7.3 |
-1
+
 ### - Limiti del SoftWare:<br>
 <strong>La Lettura dei Sensori avviene Automaticamente ogni:</strong>
 -  5 Secondi, per la Lettura della Velocità della VMC;<br> 
