@@ -1,6 +1,0 @@
-  - platform: rest
-    name: VMC_CUCINA_REPOSITORY_GITHUB         # [CONFIGURAZIONE, 0 RICHIAMI] [INTERFACCIA, 0 RICHIAMI] [AUTOMAZIONE PIU' RICHIAMI] CREAZIONE DEL SENSORE LETTURA CAMBIAMENTI NEL REPOSITORY: DanRobo76/VMC-HELTY-FLOW
-    resource: https://api.github.com/repos/DanRobo76/VMC-HELTY-FLOW
-    method: GET
-    scan_interval: 10  # OGNI N° SECONDI RIPETE LA SCANSIONE
-    value_template: '{{ value_json.pushed_at }}'
