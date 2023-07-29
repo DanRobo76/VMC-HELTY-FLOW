@@ -143,4 +143,4 @@ oppure scansionare il seguente QR code:
 <br>
 
 <br><strong>Ringraziamenti</strong><br>
-Grazie di cuore, Apprezzo immensamente il vostro sostegno e la vostra generosità.
+Grazie di cuore, Apprezzo immensamente il vostro sostegno e la vostra generosità :)
