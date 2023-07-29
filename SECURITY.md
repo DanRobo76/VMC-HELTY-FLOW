@@ -1,12 +1,10 @@
 # Security Policy
 
-### - Versione del SoftWare:
+### - Versione del SoftWare: [Link Release](https://github.com/DanRobo76/VMC-HELTY-FLOW/releases)
 
-|          VMC-HELTY-FLOW                  | Supportato da Home Assistant            |
+|          VMC-HELTY-FLOW Release          | Supportato da Home Assistant            |
 | ---------------------------------------- | ----------------------------------------|
-|  :white_check_mark: VMC HELTY FLOW Release 04-07-2023     | :white_check_mark:   Ver. 2023.7.3 |
-|  :white_check_mark: Scheda Interfaccia Release 16-07-2023 | :white_check_mark:   Ver. 2023.7.3 |
-|  :white_check_mark: Automazione Release 04-07-2023        | :white_check_mark:   Ver. 2023.7.3 |
+|  :white_check_mark: v.1.0.0              | :white_check_mark:   Ver. 2023.7.3 |
 
 ### - Limiti del SoftWare:<br>
 <strong>La Lettura dei Sensori avviene Automaticamente ogni:</strong>
@@ -48,8 +46,7 @@ e riavviare Home Assistan. [Non usare il Riavvio Rapido]
 <br>, se rilevi una Temperatura Interna o Esterna minore di 0 °C (Negativa).
 
 ### - Rapporto Errori
-Per la Versione corrente, non si segnalano Errori<br>
-Migliorata l'interfaccia con  l'aggiunta dell'immagine della VMC; cliccandoci sopra permette di mostrare o nascondere eventuali Avvisi
+[Link Release](https://github.com/DanRobo76/VMC-HELTY-FLOW/releases)
 <br>
 
 ### - Curiosità: Impiego della VMC da remoto con l'uso di un Relè Smart, senza l'impiego di Home Assistant:<br>
