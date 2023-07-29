@@ -5,12 +5,8 @@
 E-mail: <a href="mailto:danilo.robotti@gmail.com">danilo.robotti@gmail.com</a>
 </pre>
 <strong>Esonero di Responsabilità:</strong><br>
-In nessun caso Danilo Robotti sarà responsabile di danneggiamenti diretti, indiretti, o conseguenti, correlati a difetti del presente SoftWare. 
+In nessun caso l'Ing. Danilo Robotti sarà responsabile di danneggiamenti diretti, indiretti, o conseguenti, correlati a difetti del presente SoftWare. 
 Il Cliente ha l’onere e la responsabilità della scelta, dell’installazione, dell’uso e della gestione del SoftWare al fine del raggiungimento del risultato prefissatosi. 
-
-<strong>Ringraziamenti</strong><br>
-Grazie di cuore per ogni singolo Ginseng gustato! 
-Apprezzo immensamente il vostro sostegno e la vostra generosità.
 
 <strong><a href="https://github.com/DanRobo76/VMC-HELTY-FLOW/blob/main/SECURITY.md" text="Limiti del SoftWare (Security Policy)">Limiti del SoftWare (Security Policy)</a></strong> 
 #
@@ -41,6 +37,7 @@ Apprezzo immensamente il vostro sostegno e la vostra generosità.
       - per Differenza tra Temperatura Interna ed Esterna;<br>
       - per il Superamento del Set Lim. Δ Punto di Rugiada.<br>
       - in caso di Riscaldamento o Raffrescamento non desiderato, correlato alla Velocità Free heating o Free Cooling<br>
+  - Informa in caso di un nuovo Aggiornamento.<br>
 #
 ![image](https://user-images.githubusercontent.com/102819027/235299358-88373b06-b62e-4867-88ab-287cad60bb6d.png)<br>
 <strong>1</strong> Rendere gli indirizzi IP della/e VMC, statici attraverso il Router; la VMC risponde sulla porta 5001. <br>
@@ -143,3 +140,6 @@ Per Installare l'API di OpenWeatherMap utile per estrarre l'Umidità Esterna, la
 <br>
 oppure scansionare il seguente QR code:
 <img src="https://github.com/DanRobo76/VMC-HELTY-FLOW/assets/102819027/81ba7208-fbad-4fab-8ceb-cdcf901fdb61.png" alt="immagine" style="width:20%;">
+
+<strong>Ringraziamenti</strong><br>
+Grazie di cuore, Apprezzo immensamente il vostro sostegno e la vostra generosità.
