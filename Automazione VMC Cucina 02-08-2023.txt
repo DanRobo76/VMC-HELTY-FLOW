@@ -1,0 +1,4107 @@
+alias: Automazione VMC Cucina
+description: >-
+  Automazione VMC Cucina Release v.1.1.0:
+
+  - Invia Comandi alla VMC leggendone i valori Contenuti;
+
+  - Permette l'accensione e lo spegnimento Automatico, in funzione delle 2 fasce
+  orarie programmabili per ogni giorno della settimana;
+   - Permette l'accensione e lo spegnimento Automatico, in funzione delle 2 fasce mensili programmabili per la Velocità impostata su Free Heating / Free Cooling;
+   - Permette l'accensione e lo spegnimento Automatico, in funzione dei Parametri Ambientali (Lettura del Punto di Rugiada), Temperatura Esterna ed Interna;
+   - Ripristina la Velocità precedente in caso di Black-Out, se la VMC ha una linea dedicata e/o se installato un relè domotico;
+   - Avvisa in caso di Aggiornamento del Package;
+   - Rinomina la VMC.
+trigger:
+  - platform: state
+    entity_id:
+      - input_boolean.vmc_cucina_opzioni_vmc
+    from: "off"
+    to: "on"
+    id: Opzioni Telecomando On
+    alias: Trigger Attivazione Finestra Telecomando
+  - platform: state
+    entity_id:
+      - input_boolean.vmc_cucina_opzioni_vmc
+    id: Opzioni Telecomando Off
+    from: "on"
+    to: "off"
+    alias: Trigger Disattivazione Finestra Telecomando
+  - platform: state
+    entity_id:
+      - input_boolean.vmc_cucina_opzioni_offset_sensori
+    from: "off"
+    to: "on"
+    id: " Opzioni On"
+    alias: Trigger Attivazione Finestra Opzioni
+  - platform: state
+    entity_id:
+      - input_boolean.vmc_cucina_opzioni_offset_sensori
+    id: Opzioni Off
+    from: "on"
+    to: "off"
+    alias: Trigger Disattivazione Finestra Opzioni
+  - platform: state
+    entity_id:
+      - input_boolean.vmc_cucina_opzioni_punto_di_rugiada
+    alias: Trigger Attivazione Sotto Finestra Opzioni - Finestra Lim. Δ P. di Rugiada
+    id: Opzioni Sub Lim. Δ P. di Rugiada On
+    from: "off"
+    to: "on"
+    enabled: true
+  - platform: state
+    entity_id:
+      - input_boolean.vmc_cucina_opzioni_punto_di_rugiada
+    alias: >-
+      Trigger Disattivazione Sotto Finestra Opzioni - Finestra Lim. Δ P. di
+      Rugiada
+    from: "on"
+    to: "off"
+    id: Opzioni Sub Lim. Δ P. di Rugiada Off
+    enabled: true
+  - platform: state
+    entity_id:
+      - input_boolean.vmc_cucina_opzioni_calendario_main
+    alias: Trigger Attivazione Sotto Finestra Opzioni - Finestra Calendario Main
+    id: Opzioni Sub Calendario Main On
+    from: "off"
+    to: "on"
+    enabled: true
+  - platform: state
+    entity_id:
+      - input_boolean.vmc_cucina_opzioni_calendario_main
+    alias: Trigger Disattivazione Sotto Finestra Opzioni - Finestra Calendario Main
+    from: "on"
+    to: "off"
+    id: Opzioni Sub Calendario Main Off
+    enabled: true
+  - platform: state
+    entity_id:
+      - input_boolean.vmc_cucina_opzioni_calendario
+    alias: Trigger Attivazione Sotto Finestra Opzioni - Finestra Calendario
+    id: Opzioni Sub Calendario On
+    from: "off"
+    to: "on"
+    enabled: true
+  - platform: state
+    entity_id:
+      - input_boolean.vmc_cucina_opzioni_calendario
+    alias: Trigger Disattivazione Sotto Finestra Opzioni - Finestra Calendario
+    from: "on"
+    to: "off"
+    id: Opzioni Sub Calendario Off
+    enabled: true
+  - platform: state
+    entity_id:
+      - input_boolean.vmc_cucina_opzioni_free_heating_o_free_cooling
+    alias: >-
+      Trigger Attivazione Sotto Finestra Opzioni - Finestra Calendario Free
+      Heating / Free Cooling
+    id: Opzioni Sub Calendario Free H/C On
+    from: "off"
+    to: "on"
+    enabled: true
+  - platform: state
+    entity_id:
+      - input_boolean.vmc_cucina_opzioni_free_heating_o_free_cooling
+    alias: >-
+      Trigger Disattivazione Sotto Finestra Opzioni - Finestra Calendario Free
+      Heating / Free Cooling
+    from: "on"
+    to: "off"
+    id: Opzioni Sub Calendario Free H/C Off
+    enabled: true
+  - platform: state
+    entity_id:
+      - input_boolean.vmc_cucina_opzioni_monitoraggio_sensori
+    to: "on"
+    id: Opzioni Monitoraggio On
+    alias: Trigger Attivazione Finestra Monitoraggio
+  - platform: state
+    entity_id:
+      - input_boolean.vmc_cucina_opzioni_monitoraggio_sensori
+    id: Opzioni Monitoraggio Off
+    from: "on"
+    to: "off"
+    alias: Trigger Disattivazione Finestra Monitoraggio
+  - platform: state
+    entity_id:
+      - input_boolean.vmc_cucina_opzioni_interruttore_offset_sensori
+    from: "off"
+    to: "on"
+    id: Opzioni Sub Offset On
+    alias: Trigger Attivazione Sotto Finestra Offset - Finestra Monitoraggio
+  - platform: state
+    entity_id:
+      - input_boolean.vmc_cucina_opzioni_interruttore_offset_sensori
+    from: "on"
+    to: "off"
+    id: Opzioni Sub Offset Off
+    alias: Trigger Disattivazione Sotto Finestra Offset - Finestra Monitoraggio
+  - platform: state
+    entity_id:
+      - input_boolean.vmc_cucina_opzioni_interruttore_monitoraggio_sensori_extra
+    from: "off"
+    to: "on"
+    id: Opzioni Sub Extra Sensori On
+    alias: Trigger Attivazione Sotto Finestra Sensori Extra - Finestra Monitoraggio
+  - platform: state
+    entity_id:
+      - input_boolean.vmc_cucina_opzioni_interruttore_monitoraggio_sensori_extra
+    from: "on"
+    to: "off"
+    id: Opzioni Sub Extra Sensori Off
+    alias: >-
+      Trigger Disattivazione Sotto Finestra Sensori Extra - Finestra
+      Monitoraggio
+  - platform: state
+    entity_id:
+      - input_boolean.vmc_cucina_opzioni_interruttore_calendario
+    from: "off"
+    to: "on"
+    id: Opzioni Sub Programmazione Giornaliera On
+    alias: Trigger Attivazione Programmazione Giornaliera
+  - platform: state
+    entity_id:
+      - input_boolean.vmc_cucina_opzioni_interruttore_calendario
+    from: "on"
+    to: "off"
+    id: Opzioni Sub Programmazione Giornaliera Off
+    alias: Trigger Disattivazione Programmazione Giornaliera
+  - platform: state
+    entity_id:
+      - input_boolean.vmc_cucina_opzioni_lettura_sensori
+    from: "off"
+    to: "on"
+    id: Opzioni Informazioni On
+    alias: Trigger Attivazione Finestra Informazioni
+  - platform: state
+    entity_id:
+      - input_boolean.vmc_cucina_opzioni_lettura_sensori
+    id: Opzioni Informazioni Off
+    from: "on"
+    to: "off"
+    for:
+      hours: 0
+      minutes: 0
+      seconds: 0
+    alias: Trigger Disattivazione Finestra Informazioni
+  - platform: template
+    value_template: >-
+      {{ (states('sensor.vmc_cucina_punto_di_rugiada_verifica_confronto')=="Se
+      ne sconsiglia l\'impiego") and
+      (states('input_boolean.vmc_cucina_opzioni_accendi_spegni_vmc_vs_pdr') ==
+      'on') and
+      (((states('sensor.vmc_cucina_status_ventola_lettura_codice_interpretato')
+      == "Velocità 1") )) }}
+    id: PdR Vel. 1-> Imposta Velocità 0
+    alias: Condizioni Sfavorevoli a Velocità 1 -> Imposta Velocità 0
+    for:
+      hours: 0
+      minutes: 0
+      seconds: 4
+  - platform: template
+    value_template: >-
+      {{ (states('sensor.vmc_cucina_punto_di_rugiada_verifica_confronto')=="Se
+      ne sconsiglia l\'impiego") and
+      (states('input_boolean.vmc_cucina_opzioni_accendi_spegni_vmc_vs_pdr') ==
+      'on') and
+      (((states('sensor.vmc_cucina_status_ventola_lettura_codice_interpretato')
+      == "Velocità 2") )) }}
+    id: PdR Vel. 2-> Imposta Velocità 0
+    alias: Condizioni Sfavorevoli a Velocità 2 -> Imposta Velocità 0
+    for:
+      hours: 0
+      minutes: 0
+      seconds: 4
+  - platform: template
+    value_template: >-
+      {{ (states('sensor.vmc_cucina_punto_di_rugiada_verifica_confronto')=="Se
+      ne sconsiglia l\'impiego") and
+      (states('input_boolean.vmc_cucina_opzioni_accendi_spegni_vmc_vs_pdr') ==
+      'on') and
+      (((states('sensor.vmc_cucina_status_ventola_lettura_codice_interpretato')
+      == "Velocità 3") )) }}
+    id: PdR Vel. 3-> Imposta Velocità 0
+    alias: Condizioni Sfavorevoli a Velocità 3 -> Imposta Velocità 0
+    for:
+      hours: 0
+      minutes: 0
+      seconds: 4
+  - platform: template
+    value_template: >-
+      {{ (states('sensor.vmc_cucina_punto_di_rugiada_verifica_confronto')=="Se
+      ne sconsiglia l\'impiego") and
+      (states('input_boolean.vmc_cucina_opzioni_accendi_spegni_vmc_vs_pdr') ==
+      'on') and
+      (((states('sensor.vmc_cucina_status_ventola_lettura_codice_interpretato')
+      == "Velocità 4") )) }}
+    id: PdR Vel. 4-> Imposta Velocità 0
+    alias: Condizioni Sfavorevoli a Velocità 4 -> Imposta Velocità 0
+    for:
+      hours: 0
+      minutes: 0
+      seconds: 4
+  - platform: template
+    value_template: >-
+      {{ (states('sensor.vmc_cucina_punto_di_rugiada_verifica_confronto')=="Se
+      ne sconsiglia l\'impiego") and
+      (states('input_boolean.vmc_cucina_opzioni_accendi_spegni_vmc_vs_pdr') ==
+      'on') and
+      (((states('sensor.vmc_cucina_status_ventola_lettura_codice_interpretato')
+      == "Notturna") )) }}
+    id: PdR Notturna -> Imposta Velocità 0
+    alias: Condizioni Sfavorevoli a Velocità Notturna -> Imposta Velocità 0
+    for:
+      hours: 0
+      minutes: 0
+      seconds: 4
+  - platform: template
+    value_template: >-
+      {{ (states('sensor.vmc_cucina_punto_di_rugiada_verifica_confronto')=="Se
+      ne sconsiglia l\'impiego") and
+      (states('input_boolean.vmc_cucina_opzioni_accendi_spegni_vmc_vs_pdr') ==
+      'on') and
+      (((states('sensor.vmc_cucina_status_ventola_lettura_codice_interpretato')
+      == "Free Cooling") )) }}
+    id: PdR Free-Cooling -> Imposta Velocità 0
+    alias: Condizioni Sfavorevoli a Velocità Free Cool./Heat.-> Imposta Velocità 0
+    for:
+      hours: 0
+      minutes: 0
+      seconds: 4
+  - platform: template
+    value_template: >-
+      {{ (states('sensor.vmc_cucina_punto_di_rugiada_verifica_confronto')=="Se
+      ne sconsiglia l\'impiego") and
+      (states('input_boolean.vmc_cucina_opzioni_accendi_spegni_vmc_vs_pdr') ==
+      'on') and
+      (((states('sensor.vmc_cucina_status_ventola_lettura_codice_interpretato')
+      == "Iperventilazione") )) }}
+    id: PdR Iperventilazione -> Imposta Velocità 0
+    alias: Condizioni Sfavorevoli a Velocità Iperventilazione -> Imposta Velocità 0
+    for:
+      hours: 0
+      minutes: 0
+      seconds: 4
+  - platform: template
+    value_template: >-
+      {{ (states('sensor.vmc_cucina_punto_di_rugiada_verifica_confronto')!="Se
+      ne sconsiglia l\'impiego") and
+      (states('input_boolean.vmc_cucina_opzioni_accendi_spegni_vmc_vs_pdr') ==
+      'on') and
+      (((states('input_boolean.vmc_cucina_spia_velocita_1_un_solo_avvio')==
+      'on')) ) }}
+    alias: Condizioni Favorevoli Ripristinate su Velocità 1
+    id: Rip. Vel. 1 No PdR
+    for:
+      hours: 0
+      minutes: 0
+      seconds: 4
+  - platform: template
+    value_template: >-
+      {{ (states('sensor.vmc_cucina_punto_di_rugiada_verifica_confronto')!="Se
+      ne sconsiglia l\'impiego") and
+      (states('input_boolean.vmc_cucina_opzioni_accendi_spegni_vmc_vs_pdr') ==
+      'on') and
+      (((states('input_boolean.vmc_cucina_spia_velocita_2_un_solo_avvio')==
+      'on')) ) }}
+    alias: Condizioni Favorevoli Ripristinate su Velocità 2
+    id: Rip. Vel. 2 No PdR
+    for:
+      hours: 0
+      minutes: 0
+      seconds: 4
+  - platform: template
+    value_template: >-
+      {{ (states('sensor.vmc_cucina_punto_di_rugiada_verifica_confronto')!="Se
+      ne sconsiglia l\'impiego") and
+      (states('input_boolean.vmc_cucina_opzioni_accendi_spegni_vmc_vs_pdr') ==
+      'on') and
+      (((states('input_boolean.vmc_cucina_spia_velocita_3_un_solo_avvio')==
+      'on')) ) }}
+    alias: Condizioni Favorevoli Ripristinate su Velocità 3
+    id: Rip. Vel. 3 No PdR
+    for:
+      hours: 0
+      minutes: 0
+      seconds: 4
+  - platform: template
+    value_template: >-
+      {{ (states('sensor.vmc_cucina_punto_di_rugiada_verifica_confronto')!="Se
+      ne sconsiglia l\'impiego") and
+      (states('input_boolean.vmc_cucina_opzioni_accendi_spegni_vmc_vs_pdr') ==
+      'on') and
+      (((states('input_boolean.vmc_cucina_spia_velocita_4_un_solo_avvio')==
+      'on')) ) }}
+    alias: Condizioni Favorevoli Ripristinate su Velocità 4
+    id: Rip. Vel. 4 No PdR
+    for:
+      hours: 0
+      minutes: 0
+      seconds: 4
+  - platform: template
+    value_template: >-
+      {{ (states('sensor.vmc_cucina_punto_di_rugiada_verifica_confronto')!="Se
+      ne sconsiglia l\'impiego") and
+      (states('input_boolean.vmc_cucina_opzioni_accendi_spegni_vmc_vs_pdr') ==
+      'on') and
+      (((states('input_boolean.vmc_cucina_spia_velocita_notturna_un_solo_avvio')==
+      'on')) ) }}
+    alias: Condizioni Favorevoli Ripristinate su Velocità Notturna
+    id: Rip. Notturno No PdR
+    for:
+      hours: 0
+      minutes: 0
+      seconds: 4
+  - platform: template
+    value_template: >-
+      {{ (states('sensor.vmc_cucina_punto_di_rugiada_verifica_confronto')!="Se
+      ne sconsiglia l\'impiego") and
+      (states('input_boolean.vmc_cucina_opzioni_accendi_spegni_vmc_vs_pdr') ==
+      'on') and
+      (((states('input_boolean.vmc_cucina_spia_velocita_freecooling_un_solo_avvio')==
+      'on')) ) }}
+    alias: Condizioni Favorevoli Ripristinate su Velocità Free Cool./Heat.
+    id: Rip. Free Cool./Heat. No PdR
+    for:
+      hours: 0
+      minutes: 0
+      seconds: 4
+  - platform: template
+    value_template: >-
+      {{ (states('sensor.vmc_cucina_punto_di_rugiada_verifica_confronto')!="Se
+      ne sconsiglia l\'impiego") and
+      (states('input_boolean.vmc_cucina_opzioni_accendi_spegni_vmc_vs_pdr') ==
+      'on') and
+      (((states('input_boolean.vmc_cucina_spia_velocita_iperventilazione_un_solo_avvio')==
+      'on')) ) }}
+    alias: Condizioni Favorevoli Ripristinate su Velocità Iperventilazione
+    id: Rip. Iperventilazione No PdR
+    for:
+      hours: 0
+      minutes: 0
+      seconds: 4
+  - platform: template
+    value_template: >-
+      {{ (states('sensor.vmc_cucina_status_ip_interfaccia') == "OFF-Line") and
+      (states('sensor.vmc_cucina_status_ventola_lettura_codice_interpretato') ==
+      "Velocità 0") and (
+      (states('input_boolean.vmc_cucina_spia_calendario_lunedi_1')=='off') and
+      (states('input_boolean.vmc_cucina_spia_calendario_lunedi_2')=='off') and
+      (states('input_boolean.vmc_cucina_spia_calendario_martedi_1')=='off') and
+      (states('input_boolean.vmc_cucina_spia_calendario_martedi_2')=='off') and
+      (states('input_boolean.vmc_cucina_spia_calendario_mercoledi_1')=='off')
+      and
+      (states('input_boolean.vmc_cucina_spia_calendario_mercoledi_2')=='off')
+      and (states('input_boolean.vmc_cucina_spia_calendario_giovedi_1')=='off')
+      and (states('input_boolean.vmc_cucina_spia_calendario_giovedi_2')=='off')
+      and (states('input_boolean.vmc_cucina_spia_calendario_venerdi_1')=='off')
+      and (states('input_boolean.vmc_cucina_spia_calendario_venerdi_2')=='off')
+      and (states('input_boolean.vmc_cucina_spia_calendario_sabato_1')=='off')
+      and (states('input_boolean.vmc_cucina_spia_calendario_sabato_2')=='off')
+      and (states('input_boolean.vmc_cucina_spia_calendario_domenica_1')=='off')
+      and (states('input_boolean.vmc_cucina_spia_calendario_domenica_2')=='off')
+      )}}
+    id: Black-Out a Velocità 0
+    alias: Black-Out Velocità 0 [ON]
+    for:
+      hours: 0
+      minutes: 0
+      seconds: 4
+  - platform: template
+    value_template: >-
+      {{ (states('sensor.vmc_cucina_status_ip_interfaccia') == "ON-Line") and
+      (states('input_boolean.vmc_cucina_spia_velocita_0')=="on") and (
+      (states('input_boolean.vmc_cucina_spia_calendario_lunedi_1')=='off') and
+      (states('input_boolean.vmc_cucina_spia_calendario_lunedi_2')=='off') and
+      (states('input_boolean.vmc_cucina_spia_calendario_martedi_1')=='off') and
+      (states('input_boolean.vmc_cucina_spia_calendario_martedi_2')=='off') and
+      (states('input_boolean.vmc_cucina_spia_calendario_mercoledi_1')=='off')
+      and
+      (states('input_boolean.vmc_cucina_spia_calendario_mercoledi_2')=='off')
+      and (states('input_boolean.vmc_cucina_spia_calendario_giovedi_1')=='off')
+      and (states('input_boolean.vmc_cucina_spia_calendario_giovedi_2')=='off')
+      and (states('input_boolean.vmc_cucina_spia_calendario_venerdi_1')=='off')
+      and (states('input_boolean.vmc_cucina_spia_calendario_venerdi_2')=='off')
+      and (states('input_boolean.vmc_cucina_spia_calendario_sabato_1')=='off')
+      and (states('input_boolean.vmc_cucina_spia_calendario_sabato_2')=='off')
+      and (states('input_boolean.vmc_cucina_spia_calendario_domenica_1')=='off')
+      and (states('input_boolean.vmc_cucina_spia_calendario_domenica_2')=='off')
+      )}}
+    alias: Black-Out Velocità 0 [OFF, Ripristino]
+    id: Black-Out Off Vel. 0
+    for:
+      hours: 0
+      minutes: 0
+      seconds: 4
+  - platform: template
+    value_template: >-
+      {{ (states('sensor.vmc_cucina_status_ip_interfaccia') == "OFF-Line") and
+      (states('sensor.vmc_cucina_status_ventola_lettura_codice_interpretato') ==
+      "Velocità 1") and (
+      (states('input_boolean.vmc_cucina_spia_calendario_lunedi_1')=='off') and
+      (states('input_boolean.vmc_cucina_spia_calendario_lunedi_2')=='off') and
+      (states('input_boolean.vmc_cucina_spia_calendario_martedi_1')=='off') and
+      (states('input_boolean.vmc_cucina_spia_calendario_martedi_2')=='off') and
+      (states('input_boolean.vmc_cucina_spia_calendario_mercoledi_1')=='off')
+      and
+      (states('input_boolean.vmc_cucina_spia_calendario_mercoledi_2')=='off')
+      and (states('input_boolean.vmc_cucina_spia_calendario_giovedi_1')=='off')
+      and (states('input_boolean.vmc_cucina_spia_calendario_giovedi_2')=='off')
+      and (states('input_boolean.vmc_cucina_spia_calendario_venerdi_1')=='off')
+      and (states('input_boolean.vmc_cucina_spia_calendario_venerdi_2')=='off')
+      and (states('input_boolean.vmc_cucina_spia_calendario_sabato_1')=='off')
+      and (states('input_boolean.vmc_cucina_spia_calendario_sabato_2')=='off')
+      and (states('input_boolean.vmc_cucina_spia_calendario_domenica_1')=='off')
+      and (states('input_boolean.vmc_cucina_spia_calendario_domenica_2')=='off')
+      )}}
+    id: Black-Out a Velocità 1
+    alias: Black-Out Velocità 1 [ON]
+    for:
+      hours: 0
+      minutes: 0
+      seconds: 4
+  - platform: template
+    value_template: >-
+      {{ (states('sensor.vmc_cucina_status_ip_interfaccia') == "ON-Line") and
+      (states('input_boolean.vmc_cucina_spia_velocita_1')=="on") and (
+      (states('input_boolean.vmc_cucina_spia_calendario_lunedi_1')=='off') and
+      (states('input_boolean.vmc_cucina_spia_calendario_lunedi_2')=='off') and
+      (states('input_boolean.vmc_cucina_spia_calendario_martedi_1')=='off') and
+      (states('input_boolean.vmc_cucina_spia_calendario_martedi_2')=='off') and
+      (states('input_boolean.vmc_cucina_spia_calendario_mercoledi_1')=='off')
+      and
+      (states('input_boolean.vmc_cucina_spia_calendario_mercoledi_2')=='off')
+      and (states('input_boolean.vmc_cucina_spia_calendario_giovedi_1')=='off')
+      and (states('input_boolean.vmc_cucina_spia_calendario_giovedi_2')=='off')
+      and (states('input_boolean.vmc_cucina_spia_calendario_venerdi_1')=='off')
+      and (states('input_boolean.vmc_cucina_spia_calendario_venerdi_2')=='off')
+      and (states('input_boolean.vmc_cucina_spia_calendario_sabato_1')=='off')
+      and (states('input_boolean.vmc_cucina_spia_calendario_sabato_2')=='off')
+      and (states('input_boolean.vmc_cucina_spia_calendario_domenica_1')=='off')
+      and (states('input_boolean.vmc_cucina_spia_calendario_domenica_2')=='off')
+      )}}
+    alias: Black-Out Velocità 1 [OFF, Ripristino]
+    id: Black-Out Off Vel. 1
+    for:
+      hours: 0
+      minutes: 0
+      seconds: 4
+  - platform: template
+    value_template: >-
+      {{ (states('sensor.vmc_cucina_status_ip_interfaccia') == "OFF-Line") and
+      (states('sensor.vmc_cucina_status_ventola_lettura_codice_interpretato') ==
+      "Velocità 2") and (
+      (states('input_boolean.vmc_cucina_spia_calendario_lunedi_1')=='off') and
+      (states('input_boolean.vmc_cucina_spia_calendario_lunedi_2')=='off') and
+      (states('input_boolean.vmc_cucina_spia_calendario_martedi_1')=='off') and
+      (states('input_boolean.vmc_cucina_spia_calendario_martedi_2')=='off') and
+      (states('input_boolean.vmc_cucina_spia_calendario_mercoledi_1')=='off')
+      and
+      (states('input_boolean.vmc_cucina_spia_calendario_mercoledi_2')=='off')
+      and (states('input_boolean.vmc_cucina_spia_calendario_giovedi_1')=='off')
+      and (states('input_boolean.vmc_cucina_spia_calendario_giovedi_2')=='off')
+      and (states('input_boolean.vmc_cucina_spia_calendario_venerdi_1')=='off')
+      and (states('input_boolean.vmc_cucina_spia_calendario_venerdi_2')=='off')
+      and (states('input_boolean.vmc_cucina_spia_calendario_sabato_1')=='off')
+      and (states('input_boolean.vmc_cucina_spia_calendario_sabato_2')=='off')
+      and (states('input_boolean.vmc_cucina_spia_calendario_domenica_1')=='off')
+      and (states('input_boolean.vmc_cucina_spia_calendario_domenica_2')=='off')
+      )}}
+    id: Black-Out a Velocità 2
+    alias: Black-Out Velocità 2 [ON]
+    for:
+      hours: 0
+      minutes: 0
+      seconds: 4
+  - platform: template
+    value_template: >-
+      {{ (states('sensor.vmc_cucina_status_ip_interfaccia') == "ON-Line") and
+      (states('input_boolean.vmc_cucina_spia_velocita_2')=="on") and (
+      (states('input_boolean.vmc_cucina_spia_calendario_lunedi_1')=='off') and
+      (states('input_boolean.vmc_cucina_spia_calendario_lunedi_2')=='off') and
+      (states('input_boolean.vmc_cucina_spia_calendario_martedi_1')=='off') and
+      (states('input_boolean.vmc_cucina_spia_calendario_martedi_2')=='off') and
+      (states('input_boolean.vmc_cucina_spia_calendario_mercoledi_1')=='off')
+      and
+      (states('input_boolean.vmc_cucina_spia_calendario_mercoledi_2')=='off')
+      and (states('input_boolean.vmc_cucina_spia_calendario_giovedi_1')=='off')
+      and (states('input_boolean.vmc_cucina_spia_calendario_giovedi_2')=='off')
+      and (states('input_boolean.vmc_cucina_spia_calendario_venerdi_1')=='off')
+      and (states('input_boolean.vmc_cucina_spia_calendario_venerdi_2')=='off')
+      and (states('input_boolean.vmc_cucina_spia_calendario_sabato_1')=='off')
+      and (states('input_boolean.vmc_cucina_spia_calendario_sabato_2')=='off')
+      and (states('input_boolean.vmc_cucina_spia_calendario_domenica_1')=='off')
+      and (states('input_boolean.vmc_cucina_spia_calendario_domenica_2')=='off')
+      )}}
+    alias: Black-Out Velocità 2 [OFF, Ripristino]
+    id: Black-Out Off Vel. 2
+    for:
+      hours: 0
+      minutes: 0
+      seconds: 4
+  - platform: template
+    value_template: >-
+      {{ (states('sensor.vmc_cucina_status_ip_interfaccia') == "OFF-Line") and
+      (states('sensor.vmc_cucina_status_ventola_lettura_codice_interpretato') ==
+      "Velocità 3") and (
+      (states('input_boolean.vmc_cucina_spia_calendario_lunedi_1')=='off') and
+      (states('input_boolean.vmc_cucina_spia_calendario_lunedi_2')=='off') and
+      (states('input_boolean.vmc_cucina_spia_calendario_martedi_1')=='off') and
+      (states('input_boolean.vmc_cucina_spia_calendario_martedi_2')=='off') and
+      (states('input_boolean.vmc_cucina_spia_calendario_mercoledi_1')=='off')
+      and
+      (states('input_boolean.vmc_cucina_spia_calendario_mercoledi_2')=='off')
+      and (states('input_boolean.vmc_cucina_spia_calendario_giovedi_1')=='off')
+      and (states('input_boolean.vmc_cucina_spia_calendario_giovedi_2')=='off')
+      and (states('input_boolean.vmc_cucina_spia_calendario_venerdi_1')=='off')
+      and (states('input_boolean.vmc_cucina_spia_calendario_venerdi_2')=='off')
+      and (states('input_boolean.vmc_cucina_spia_calendario_sabato_1')=='off')
+      and (states('input_boolean.vmc_cucina_spia_calendario_sabato_2')=='off')
+      and (states('input_boolean.vmc_cucina_spia_calendario_domenica_1')=='off')
+      and (states('input_boolean.vmc_cucina_spia_calendario_domenica_2')=='off')
+      )}}
+    id: Black-Out a Velocità 3
+    alias: Black-Out Velocità 3 [ON]
+    for:
+      hours: 0
+      minutes: 0
+      seconds: 4
+  - platform: template
+    value_template: >-
+      {{ (states('sensor.vmc_cucina_status_ip_interfaccia') == "ON-Line") and
+      (states('input_boolean.vmc_cucina_spia_velocita_3')=="on") and (
+      (states('input_boolean.vmc_cucina_spia_calendario_lunedi_1')=='off') and
+      (states('input_boolean.vmc_cucina_spia_calendario_lunedi_2')=='off') and
+      (states('input_boolean.vmc_cucina_spia_calendario_martedi_1')=='off') and
+      (states('input_boolean.vmc_cucina_spia_calendario_martedi_2')=='off') and
+      (states('input_boolean.vmc_cucina_spia_calendario_mercoledi_1')=='off')
+      and
+      (states('input_boolean.vmc_cucina_spia_calendario_mercoledi_2')=='off')
+      and (states('input_boolean.vmc_cucina_spia_calendario_giovedi_1')=='off')
+      and (states('input_boolean.vmc_cucina_spia_calendario_giovedi_2')=='off')
+      and (states('input_boolean.vmc_cucina_spia_calendario_venerdi_1')=='off')
+      and (states('input_boolean.vmc_cucina_spia_calendario_venerdi_2')=='off')
+      and (states('input_boolean.vmc_cucina_spia_calendario_sabato_1')=='off')
+      and (states('input_boolean.vmc_cucina_spia_calendario_sabato_2')=='off')
+      and (states('input_boolean.vmc_cucina_spia_calendario_domenica_1')=='off')
+      and (states('input_boolean.vmc_cucina_spia_calendario_domenica_2')=='off')
+      )}}
+    alias: Black-Out Velocità 3 [OFF, Ripristino]
+    id: Black-Out Off Vel. 3
+    for:
+      hours: 0
+      minutes: 0
+      seconds: 4
+  - platform: template
+    value_template: >-
+      {{ (states('sensor.vmc_cucina_status_ip_interfaccia') == "OFF-Line") and
+      (states('sensor.vmc_cucina_status_ventola_lettura_codice_interpretato') ==
+      "Velocità 4") and (
+      (states('input_boolean.vmc_cucina_spia_calendario_lunedi_1')=='off') and
+      (states('input_boolean.vmc_cucina_spia_calendario_lunedi_2')=='off') and
+      (states('input_boolean.vmc_cucina_spia_calendario_martedi_1')=='off') and
+      (states('input_boolean.vmc_cucina_spia_calendario_martedi_2')=='off') and
+      (states('input_boolean.vmc_cucina_spia_calendario_mercoledi_1')=='off')
+      and
+      (states('input_boolean.vmc_cucina_spia_calendario_mercoledi_2')=='off')
+      and (states('input_boolean.vmc_cucina_spia_calendario_giovedi_1')=='off')
+      and (states('input_boolean.vmc_cucina_spia_calendario_giovedi_2')=='off')
+      and (states('input_boolean.vmc_cucina_spia_calendario_venerdi_1')=='off')
+      and (states('input_boolean.vmc_cucina_spia_calendario_venerdi_2')=='off')
+      and (states('input_boolean.vmc_cucina_spia_calendario_sabato_1')=='off')
+      and (states('input_boolean.vmc_cucina_spia_calendario_sabato_2')=='off')
+      and (states('input_boolean.vmc_cucina_spia_calendario_domenica_1')=='off')
+      and (states('input_boolean.vmc_cucina_spia_calendario_domenica_2')=='off')
+      )}}
+    id: Black-Out a Velocità 4
+    alias: Black-Out Velocità 4 [ON]
+    for:
+      hours: 0
+      minutes: 0
+      seconds: 4
+  - platform: template
+    value_template: >-
+      {{ (states('sensor.vmc_cucina_status_ip_interfaccia') == "ON-Line") and
+      (states('input_boolean.vmc_cucina_spia_velocita_4')=="on") and (
+      (states('input_boolean.vmc_cucina_spia_calendario_lunedi_1')=='off') and
+      (states('input_boolean.vmc_cucina_spia_calendario_lunedi_2')=='off') and
+      (states('input_boolean.vmc_cucina_spia_calendario_martedi_1')=='off') and
+      (states('input_boolean.vmc_cucina_spia_calendario_martedi_2')=='off') and
+      (states('input_boolean.vmc_cucina_spia_calendario_mercoledi_1')=='off')
+      and
+      (states('input_boolean.vmc_cucina_spia_calendario_mercoledi_2')=='off')
+      and (states('input_boolean.vmc_cucina_spia_calendario_giovedi_1')=='off')
+      and (states('input_boolean.vmc_cucina_spia_calendario_giovedi_2')=='off')
+      and (states('input_boolean.vmc_cucina_spia_calendario_venerdi_1')=='off')
+      and (states('input_boolean.vmc_cucina_spia_calendario_venerdi_2')=='off')
+      and (states('input_boolean.vmc_cucina_spia_calendario_sabato_1')=='off')
+      and (states('input_boolean.vmc_cucina_spia_calendario_sabato_2')=='off')
+      and (states('input_boolean.vmc_cucina_spia_calendario_domenica_1')=='off')
+      and (states('input_boolean.vmc_cucina_spia_calendario_domenica_2')=='off')
+      )}}
+    alias: Black-Out Velocità 4 [OFF, Ripristino]
+    id: Black-Out Off Vel. 4
+    for:
+      hours: 0
+      minutes: 0
+      seconds: 4
+  - platform: template
+    value_template: >-
+      {{ (states('sensor.vmc_cucina_status_ip_interfaccia') == "OFF-Line") and
+      (states('sensor.vmc_cucina_status_ventola_lettura_codice_interpretato') ==
+      "Notturna") and (
+      (states('input_boolean.vmc_cucina_spia_calendario_lunedi_1')=='off') and
+      (states('input_boolean.vmc_cucina_spia_calendario_lunedi_2')=='off') and
+      (states('input_boolean.vmc_cucina_spia_calendario_martedi_1')=='off') and
+      (states('input_boolean.vmc_cucina_spia_calendario_martedi_2')=='off') and
+      (states('input_boolean.vmc_cucina_spia_calendario_mercoledi_1')=='off')
+      and
+      (states('input_boolean.vmc_cucina_spia_calendario_mercoledi_2')=='off')
+      and (states('input_boolean.vmc_cucina_spia_calendario_giovedi_1')=='off')
+      and (states('input_boolean.vmc_cucina_spia_calendario_giovedi_2')=='off')
+      and (states('input_boolean.vmc_cucina_spia_calendario_venerdi_1')=='off')
+      and (states('input_boolean.vmc_cucina_spia_calendario_venerdi_2')=='off')
+      and (states('input_boolean.vmc_cucina_spia_calendario_sabato_1')=='off')
+      and (states('input_boolean.vmc_cucina_spia_calendario_sabato_2')=='off')
+      and (states('input_boolean.vmc_cucina_spia_calendario_domenica_1')=='off')
+      and (states('input_boolean.vmc_cucina_spia_calendario_domenica_2')=='off')
+      )}}
+    id: Black-Out Notturna
+    alias: Black-Out Velocità Notturna [ON]
+    for:
+      hours: 0
+      minutes: 0
+      seconds: 4
+  - platform: template
+    value_template: >-
+      {{ (states('sensor.vmc_cucina_status_ip_interfaccia') == "ON-Line") and
+      (states('input_boolean.vmc_cucina_spia_velocita_notturna')=="on") and (
+      (states('input_boolean.vmc_cucina_spia_calendario_lunedi_1')=='off') and
+      (states('input_boolean.vmc_cucina_spia_calendario_lunedi_2')=='off') and
+      (states('input_boolean.vmc_cucina_spia_calendario_martedi_1')=='off') and
+      (states('input_boolean.vmc_cucina_spia_calendario_martedi_2')=='off') and
+      (states('input_boolean.vmc_cucina_spia_calendario_mercoledi_1')=='off')
+      and
+      (states('input_boolean.vmc_cucina_spia_calendario_mercoledi_2')=='off')
+      and (states('input_boolean.vmc_cucina_spia_calendario_giovedi_1')=='off')
+      and (states('input_boolean.vmc_cucina_spia_calendario_giovedi_2')=='off')
+      and (states('input_boolean.vmc_cucina_spia_calendario_venerdi_1')=='off')
+      and (states('input_boolean.vmc_cucina_spia_calendario_venerdi_2')=='off')
+      and (states('input_boolean.vmc_cucina_spia_calendario_sabato_1')=='off')
+      and (states('input_boolean.vmc_cucina_spia_calendario_sabato_2')=='off')
+      and (states('input_boolean.vmc_cucina_spia_calendario_domenica_1')=='off')
+      and (states('input_boolean.vmc_cucina_spia_calendario_domenica_2')=='off')
+      )}}
+    alias: Black-Out Velocità Notturna [OFF, Ripristino]
+    id: Black-Out Off Notturna
+    for:
+      hours: 0
+      minutes: 0
+      seconds: 4
+  - platform: template
+    value_template: >-
+      {{ (states('sensor.vmc_cucina_status_ip_interfaccia') == "OFF-Line") and
+      (states('sensor.vmc_cucina_status_ventola_lettura_codice_interpretato') ==
+      "Iperventilazione") and (
+      (states('input_boolean.vmc_cucina_spia_calendario_lunedi_1')=='off') and
+      (states('input_boolean.vmc_cucina_spia_calendario_lunedi_2')=='off') and
+      (states('input_boolean.vmc_cucina_spia_calendario_martedi_1')=='off') and
+      (states('input_boolean.vmc_cucina_spia_calendario_martedi_2')=='off') and
+      (states('input_boolean.vmc_cucina_spia_calendario_mercoledi_1')=='off')
+      and
+      (states('input_boolean.vmc_cucina_spia_calendario_mercoledi_2')=='off')
+      and (states('input_boolean.vmc_cucina_spia_calendario_giovedi_1')=='off')
+      and (states('input_boolean.vmc_cucina_spia_calendario_giovedi_2')=='off')
+      and (states('input_boolean.vmc_cucina_spia_calendario_venerdi_1')=='off')
+      and (states('input_boolean.vmc_cucina_spia_calendario_venerdi_2')=='off')
+      and (states('input_boolean.vmc_cucina_spia_calendario_sabato_1')=='off')
+      and (states('input_boolean.vmc_cucina_spia_calendario_sabato_2')=='off')
+      and (states('input_boolean.vmc_cucina_spia_calendario_domenica_1')=='off')
+      and (states('input_boolean.vmc_cucina_spia_calendario_domenica_2')=='off')
+      )}}
+    id: Black-Out Iperventilazione
+    alias: Black-Out Velocità Iperventilazione [ON]
+    for:
+      hours: 0
+      minutes: 0
+      seconds: 4
+  - platform: template
+    value_template: >-
+      {{ (states('sensor.vmc_cucina_status_ip_interfaccia') == "ON-Line") and
+      (states('input_boolean.vmc_cucina_spia_velocita_iperventilazione')=="on")
+      and ( (states('input_boolean.vmc_cucina_spia_calendario_lunedi_1')=='off')
+      and (states('input_boolean.vmc_cucina_spia_calendario_lunedi_2')=='off')
+      and (states('input_boolean.vmc_cucina_spia_calendario_martedi_1')=='off')
+      and (states('input_boolean.vmc_cucina_spia_calendario_martedi_2')=='off')
+      and
+      (states('input_boolean.vmc_cucina_spia_calendario_mercoledi_1')=='off')
+      and
+      (states('input_boolean.vmc_cucina_spia_calendario_mercoledi_2')=='off')
+      and (states('input_boolean.vmc_cucina_spia_calendario_giovedi_1')=='off')
+      and (states('input_boolean.vmc_cucina_spia_calendario_giovedi_2')=='off')
+      and (states('input_boolean.vmc_cucina_spia_calendario_venerdi_1')=='off')
+      and (states('input_boolean.vmc_cucina_spia_calendario_venerdi_2')=='off')
+      and (states('input_boolean.vmc_cucina_spia_calendario_sabato_1')=='off')
+      and (states('input_boolean.vmc_cucina_spia_calendario_sabato_2')=='off')
+      and (states('input_boolean.vmc_cucina_spia_calendario_domenica_1')=='off')
+      and (states('input_boolean.vmc_cucina_spia_calendario_domenica_2')=='off')
+      )}}
+    alias: Black-Out Velocità Iperventilazione [OFF, Ripristino]
+    id: Black-Out Off Iperventilazione
+    for:
+      hours: 0
+      minutes: 0
+      seconds: 4
+  - platform: template
+    value_template: >-
+      {{ (states('sensor.vmc_cucina_status_ip_interfaccia') == "OFF-Line") and
+      (states('sensor.vmc_cucina_status_ventola_lettura_codice_interpretato') ==
+      "Free Cooling") and (
+      (states('input_boolean.vmc_cucina_spia_calendario_lunedi_1')=='off') and
+      (states('input_boolean.vmc_cucina_spia_calendario_lunedi_2')=='off') and
+      (states('input_boolean.vmc_cucina_spia_calendario_martedi_1')=='off') and
+      (states('input_boolean.vmc_cucina_spia_calendario_martedi_2')=='off') and
+      (states('input_boolean.vmc_cucina_spia_calendario_mercoledi_1')=='off')
+      and
+      (states('input_boolean.vmc_cucina_spia_calendario_mercoledi_2')=='off')
+      and (states('input_boolean.vmc_cucina_spia_calendario_giovedi_1')=='off')
+      and (states('input_boolean.vmc_cucina_spia_calendario_giovedi_2')=='off')
+      and (states('input_boolean.vmc_cucina_spia_calendario_venerdi_1')=='off')
+      and (states('input_boolean.vmc_cucina_spia_calendario_venerdi_2')=='off')
+      and (states('input_boolean.vmc_cucina_spia_calendario_sabato_1')=='off')
+      and (states('input_boolean.vmc_cucina_spia_calendario_sabato_2')=='off')
+      and (states('input_boolean.vmc_cucina_spia_calendario_domenica_1')=='off')
+      and (states('input_boolean.vmc_cucina_spia_calendario_domenica_2')=='off')
+      )}}
+    id: Black-Out Free Cool./Heat.
+    alias: Black-Out Velocità Free Cool./Heat. [ON]
+    for:
+      hours: 0
+      minutes: 0
+      seconds: 4
+  - platform: template
+    value_template: >-
+      {{ (states('sensor.vmc_cucina_status_ip_interfaccia') == "ON-Line") and
+      (states('input_boolean.vmc_cucina_spia_velocita_freecooling')=="on") and (
+      (states('input_boolean.vmc_cucina_spia_calendario_lunedi_1')=='off') and
+      (states('input_boolean.vmc_cucina_spia_calendario_lunedi_2')=='off') and
+      (states('input_boolean.vmc_cucina_spia_calendario_martedi_1')=='off') and
+      (states('input_boolean.vmc_cucina_spia_calendario_martedi_2')=='off') and
+      (states('input_boolean.vmc_cucina_spia_calendario_mercoledi_1')=='off')
+      and
+      (states('input_boolean.vmc_cucina_spia_calendario_mercoledi_2')=='off')
+      and (states('input_boolean.vmc_cucina_spia_calendario_giovedi_1')=='off')
+      and (states('input_boolean.vmc_cucina_spia_calendario_giovedi_2')=='off')
+      and (states('input_boolean.vmc_cucina_spia_calendario_venerdi_1')=='off')
+      and (states('input_boolean.vmc_cucina_spia_calendario_venerdi_2')=='off')
+      and (states('input_boolean.vmc_cucina_spia_calendario_sabato_1')=='off')
+      and (states('input_boolean.vmc_cucina_spia_calendario_sabato_2')=='off')
+      and (states('input_boolean.vmc_cucina_spia_calendario_domenica_1')=='off')
+      and (states('input_boolean.vmc_cucina_spia_calendario_domenica_2')=='off')
+      )}}
+    alias: Black-Out Velocità Free Cool./Heat. [OFF, Ripristino]
+    id: Black-Out Off Free Cool./Heat.
+    for:
+      hours: 0
+      minutes: 0
+      seconds: 4
+  - platform: template
+    value_template: >-
+      {{ (((states('sensor.vmc_cucina_status_accensione_vmc_tramite_calendario')
+      == "Lunedi") and
+      (states('sensor.vmc_cucina_status_spegnimento_vmc_tramite_calendario')==
+      "Lunedi") and (now().strftime('%H:%M') >=
+      strptime(states('input_datetime.vmc_cucina_accensione_lunedi'),
+      '%H:%M:%S').strftime('%H:%M') and now().strftime('%H:%M') <
+      strptime(states('input_datetime.vmc_cucina_spegnimento_lunedi'),
+      '%H:%M:%S').strftime('%H:%M')))==true) and
+      (states('sensor.vmc_cucina_status_ip_interfaccia')=="ON-Line") }}
+    alias: All'Interno della 1° Fascia Lunedì
+    id: 1° Lunedì On
+    for:
+      hours: 0
+      minutes: 0
+      seconds: 4
+  - platform: template
+    value_template: >-
+      {{
+      (((states('sensor.vmc_cucina_status_accensione_vmc_tramite_calendario') 
+      == "Lunedi") and
+      (states('sensor.vmc_cucina_status_spegnimento_vmc_tramite_calendario') ==
+      "Lunedi") and (now().strftime('%H:%M') >=
+      strptime(states('input_datetime.vmc_cucina_accensione_lunedi'),
+      '%H:%M:%S').strftime('%H:%M') and now().strftime('%H:%M') <
+      strptime(states('input_datetime.vmc_cucina_spegnimento_lunedi'),
+      '%H:%M:%S').strftime('%H:%M')))==false) and
+      (states('sensor.vmc_cucina_status_ip_interfaccia')=="ON-Line") and
+      (states('input_boolean.vmc_cucina_spia_calendario_lunedi_1')=='on') }}
+    alias: All'Esterno della 1° Fascia Lunedì
+    id: 1° Lunedì Off
+    for:
+      hours: 0
+      minutes: 0
+      seconds: 4
+  - platform: template
+    value_template: >-
+      {{
+      (((states('sensor.vmc_cucina_status_accensione_vmc_tramite_calendario_2')
+      == "Lunedi") and
+      (states('sensor.vmc_cucina_status_spegnimento_vmc_tramite_calendario_2')==
+      "Lunedi") and (now().strftime('%H:%M') >=
+      strptime(states('input_datetime.vmc_cucina_accensione_lunedi_2'),
+      '%H:%M:%S').strftime('%H:%M') and now().strftime('%H:%M') <
+      strptime(states('input_datetime.vmc_cucina_spegnimento_lunedi_2'),
+      '%H:%M:%S').strftime('%H:%M')))==true) and
+      (states('sensor.vmc_cucina_status_ip_interfaccia')=="ON-Line")}} 
+    id: 2° Lunedì On
+    alias: All'Interno della 2° Fascia Lunedì
+    for:
+      hours: 0
+      minutes: 0
+      seconds: 4
+  - platform: template
+    value_template: >-
+      {{
+      (((states('sensor.vmc_cucina_status_accensione_vmc_tramite_calendario_2')
+      == "Lunedi") and
+      (states('sensor.vmc_cucina_status_spegnimento_vmc_tramite_calendario_2')
+      == "Lunedi") and (now().strftime('%H:%M') >=
+      strptime(states('input_datetime.vmc_cucina_accensione_lunedi_2'),
+      '%H:%M:%S').strftime('%H:%M') and now().strftime('%H:%M') <
+      strptime(states('input_datetime.vmc_cucina_spegnimento_lunedi_2'),
+      '%H:%M:%S').strftime('%H:%M')))==false) and
+      (states('sensor.vmc_cucina_status_ip_interfaccia')=="ON-Line") and
+      (states('input_boolean.vmc_cucina_spia_calendario_lunedi_2')=='on')}} 
+    id: 2° Lunedì Off
+    alias: All'Esterno della 2° Fascia Lunedì
+    for:
+      hours: 0
+      minutes: 0
+      seconds: 4
+  - platform: template
+    value_template: >-
+      {{ (((states('sensor.vmc_cucina_status_accensione_vmc_tramite_calendario')
+      == "Martedi") and
+      (states('sensor.vmc_cucina_status_spegnimento_vmc_tramite_calendario')==
+      "Martedi") and (now().strftime('%H:%M') >=
+      strptime(states('input_datetime.vmc_cucina_accensione_martedi'),
+      '%H:%M:%S').strftime('%H:%M') and now().strftime('%H:%M') <
+      strptime(states('input_datetime.vmc_cucina_spegnimento_martedi'),
+      '%H:%M:%S').strftime('%H:%M')))==true) and
+      (states('sensor.vmc_cucina_status_ip_interfaccia')=="ON-Line") }}
+    alias: All'Interno della 1° Fascia Martedì
+    id: 1° Martedì On
+    for:
+      hours: 0
+      minutes: 0
+      seconds: 4
+  - platform: template
+    value_template: >-
+      {{
+      (((states('sensor.vmc_cucina_status_accensione_vmc_tramite_calendario') 
+      == "Martedi") and
+      (states('sensor.vmc_cucina_status_spegnimento_vmc_tramite_calendario') ==
+      "Martedi") and (now().strftime('%H:%M') >=
+      strptime(states('input_datetime.vmc_cucina_accensione_martedi'),
+      '%H:%M:%S').strftime('%H:%M') and now().strftime('%H:%M') <
+      strptime(states('input_datetime.vmc_cucina_spegnimento_martedi'),
+      '%H:%M:%S').strftime('%H:%M')))==false) and
+      (states('sensor.vmc_cucina_status_ip_interfaccia')=="ON-Line") and
+      (states('input_boolean.vmc_cucina_spia_calendario_martedi_1')=='on') }}
+    alias: All'Esterno della 1° Fascia Martedì
+    id: 1° Martedì Off
+    for:
+      hours: 0
+      minutes: 0
+      seconds: 4
+  - platform: template
+    value_template: >-
+      {{
+      (((states('sensor.vmc_cucina_status_accensione_vmc_tramite_calendario_2')
+      == "Martedi") and
+      (states('sensor.vmc_cucina_status_spegnimento_vmc_tramite_calendario_2')==
+      "Martedi") and (now().strftime('%H:%M') >=
+      strptime(states('input_datetime.vmc_cucina_accensione_martedi_2'),
+      '%H:%M:%S').strftime('%H:%M') and now().strftime('%H:%M') <
+      strptime(states('input_datetime.vmc_cucina_spegnimento_martedi_2'),
+      '%H:%M:%S').strftime('%H:%M')))==true) and
+      (states('sensor.vmc_cucina_status_ip_interfaccia')=="ON-Line")}} 
+    id: 2° Martedì On
+    alias: All'Interno della 2° Fascia Martedì
+    for:
+      hours: 0
+      minutes: 0
+      seconds: 4
+  - platform: template
+    value_template: >-
+      {{
+      (((states('sensor.vmc_cucina_status_accensione_vmc_tramite_calendario_2')
+      == "Martedi") and
+      (states('sensor.vmc_cucina_status_spegnimento_vmc_tramite_calendario_2')
+      == "Martedi") and (now().strftime('%H:%M') >=
+      strptime(states('input_datetime.vmc_cucina_accensione_martedi_2'),
+      '%H:%M:%S').strftime('%H:%M') and now().strftime('%H:%M') <
+      strptime(states('input_datetime.vmc_cucina_spegnimento_martedi_2'),
+      '%H:%M:%S').strftime('%H:%M')))==false) and
+      (states('sensor.vmc_cucina_status_ip_interfaccia')=="ON-Line") and
+      (states('input_boolean.vmc_cucina_spia_calendario_martedi_2')=='on')}}
+    id: 2° Martedì Off
+    alias: All'Esterno della 2° Fascia Martedì
+    for:
+      hours: 0
+      minutes: 0
+      seconds: 4
+  - platform: template
+    value_template: >-
+      {{ (((states('sensor.vmc_cucina_status_accensione_vmc_tramite_calendario')
+      == "Mercoledi") and
+      (states('sensor.vmc_cucina_status_spegnimento_vmc_tramite_calendario')==
+      "Mercoledi") and (now().strftime('%H:%M') >=
+      strptime(states('input_datetime.vmc_cucina_accensione_mercoledi'),
+      '%H:%M:%S').strftime('%H:%M') and now().strftime('%H:%M') <
+      strptime(states('input_datetime.vmc_cucina_spegnimento_mercoledi'),
+      '%H:%M:%S').strftime('%H:%M')))==true) and
+      (states('sensor.vmc_cucina_status_ip_interfaccia')=="ON-Line") }}
+    alias: All'Interno della 1° Fascia Mercoledì
+    id: 1° Mercoledì On
+    for:
+      hours: 0
+      minutes: 0
+      seconds: 4
+  - platform: template
+    value_template: >-
+      {{
+      (((states('sensor.vmc_cucina_status_accensione_vmc_tramite_calendario') 
+      == "Mercoledi") and
+      (states('sensor.vmc_cucina_status_spegnimento_vmc_tramite_calendario') ==
+      "Mercoledi") and (now().strftime('%H:%M') >=
+      strptime(states('input_datetime.vmc_cucina_accensione_mercoledi'),
+      '%H:%M:%S').strftime('%H:%M') and now().strftime('%H:%M') <
+      strptime(states('input_datetime.vmc_cucina_spegnimento_mercoledi'),
+      '%H:%M:%S').strftime('%H:%M')))==false) and
+      (states('sensor.vmc_cucina_status_ip_interfaccia')=="ON-Line") and
+      (states('input_boolean.vmc_cucina_spia_calendario_mercoledi_1')=='on') }}
+    alias: All'Esterno della 1° Fascia Mercoledì
+    id: 1° Mercoledì Off
+    for:
+      hours: 0
+      minutes: 0
+      seconds: 4
+  - platform: template
+    value_template: >-
+      {{
+      (((states('sensor.vmc_cucina_status_accensione_vmc_tramite_calendario_2')
+      == "Mercoledi") and
+      (states('sensor.vmc_cucina_status_spegnimento_vmc_tramite_calendario_2')==
+      "Mercoledi") and (now().strftime('%H:%M') >=
+      strptime(states('input_datetime.vmc_cucina_accensione_mercoledi_2'),
+      '%H:%M:%S').strftime('%H:%M') and now().strftime('%H:%M') <
+      strptime(states('input_datetime.vmc_cucina_spegnimento_mercoledi_2'),
+      '%H:%M:%S').strftime('%H:%M')))==true) and
+      (states('sensor.vmc_cucina_status_ip_interfaccia')=="ON-Line")}} 
+    id: 2° Mercoledì On
+    alias: All'Interno della 2° Fascia Mercoledì
+    for:
+      hours: 0
+      minutes: 0
+      seconds: 4
+  - platform: template
+    value_template: >-
+      {{
+      (((states('sensor.vmc_cucina_status_accensione_vmc_tramite_calendario_2')
+      == "Mercoledi") and
+      (states('sensor.vmc_cucina_status_spegnimento_vmc_tramite_calendario_2')
+      == "Mercoledi") and (now().strftime('%H:%M') >=
+      strptime(states('input_datetime.vmc_cucina_accensione_mercoledi_2'),
+      '%H:%M:%S').strftime('%H:%M') and now().strftime('%H:%M') <
+      strptime(states('input_datetime.vmc_cucina_spegnimento_mercoledi_2'),
+      '%H:%M:%S').strftime('%H:%M')))==false) and
+      (states('sensor.vmc_cucina_status_ip_interfaccia')=="ON-Line") and
+      (states('input_boolean.vmc_cucina_spia_calendario_mercoledi_2')=='on')}}
+    id: 2° Mercoledì Off
+    alias: All'Esterno della 2° Fascia Mercoledì
+    for:
+      hours: 0
+      minutes: 0
+      seconds: 4
+  - platform: template
+    value_template: >-
+      {{ (((states('sensor.vmc_cucina_status_accensione_vmc_tramite_calendario')
+      == "Giovedi") and
+      (states('sensor.vmc_cucina_status_spegnimento_vmc_tramite_calendario')==
+      "Giovedi") and (now().strftime('%H:%M') >=
+      strptime(states('input_datetime.vmc_cucina_accensione_giovedi'),
+      '%H:%M:%S').strftime('%H:%M') and now().strftime('%H:%M') <
+      strptime(states('input_datetime.vmc_cucina_spegnimento_giovedi'),
+      '%H:%M:%S').strftime('%H:%M')))==true) and
+      (states('sensor.vmc_cucina_status_ip_interfaccia')=="ON-Line") }}
+    alias: All'Interno della 1° Fascia Giovedì
+    id: 1° Giovedì On
+    for:
+      hours: 0
+      minutes: 0
+      seconds: 4
+  - platform: template
+    value_template: >-
+      {{
+      (((states('sensor.vmc_cucina_status_accensione_vmc_tramite_calendario') 
+      == "Giovedi") and
+      (states('sensor.vmc_cucina_status_spegnimento_vmc_tramite_calendario') ==
+      "Giovedi") and (now().strftime('%H:%M') >=
+      strptime(states('input_datetime.vmc_cucina_accensione_giovedi'),
+      '%H:%M:%S').strftime('%H:%M') and now().strftime('%H:%M') <
+      strptime(states('input_datetime.vmc_cucina_spegnimento_giovedi'),
+      '%H:%M:%S').strftime('%H:%M')))==false) and
+      (states('sensor.vmc_cucina_status_ip_interfaccia')=="ON-Line") and
+      (states('input_boolean.vmc_cucina_spia_calendario_giovedi_1')=='on') }}
+    alias: All'Esterno della 1° Fascia Giovedì
+    id: 1° Giovedì Off
+    for:
+      hours: 0
+      minutes: 0
+      seconds: 4
+  - platform: template
+    value_template: >-
+      {{
+      (((states('sensor.vmc_cucina_status_accensione_vmc_tramite_calendario_2')
+      == "Giovedi") and
+      (states('sensor.vmc_cucina_status_spegnimento_vmc_tramite_calendario_2')==
+      "Giovedi") and (now().strftime('%H:%M') >=
+      strptime(states('input_datetime.vmc_cucina_accensione_giovedi_2'),
+      '%H:%M:%S').strftime('%H:%M') and now().strftime('%H:%M') <
+      strptime(states('input_datetime.vmc_cucina_spegnimento_giovedi_2'),
+      '%H:%M:%S').strftime('%H:%M')))==true) and
+      (states('sensor.vmc_cucina_status_ip_interfaccia')=="ON-Line")}} 
+    id: 2° Giovedì On
+    alias: All'Interno della 2° Fascia Giovedì
+    for:
+      hours: 0
+      minutes: 0
+      seconds: 4
+  - platform: template
+    value_template: >-
+      {{
+      (((states('sensor.vmc_cucina_status_accensione_vmc_tramite_calendario_2')
+      == "Giovedi") and
+      (states('sensor.vmc_cucina_status_spegnimento_vmc_tramite_calendario_2')
+      == "Giovedi") and (now().strftime('%H:%M') >=
+      strptime(states('input_datetime.vmc_cucina_accensione_giovedi_2'),
+      '%H:%M:%S').strftime('%H:%M') and now().strftime('%H:%M') <
+      strptime(states('input_datetime.vmc_cucina_spegnimento_giovedi_2'),
+      '%H:%M:%S').strftime('%H:%M')))==false) and
+      (states('sensor.vmc_cucina_status_ip_interfaccia')=="ON-Line") and
+      (states('input_boolean.vmc_cucina_spia_calendario_giovedi_2')=='on')}}
+    id: 2° Giovedì Off
+    alias: All'Esterno della 2° Fascia Giovedì
+    for:
+      hours: 0
+      minutes: 0
+      seconds: 4
+  - platform: template
+    value_template: >
+      {{ (((states('sensor.vmc_cucina_status_accensione_vmc_tramite_calendario')
+      == "Venerdi") and
+      (states('sensor.vmc_cucina_status_spegnimento_vmc_tramite_calendario')==
+      "Venerdi") and (now().strftime('%H:%M') >=
+      strptime(states('input_datetime.vmc_cucina_accensione_venerdi'),
+      '%H:%M:%S').strftime('%H:%M') and now().strftime('%H:%M') <
+      strptime(states('input_datetime.vmc_cucina_spegnimento_venerdi'),
+      '%H:%M:%S').strftime('%H:%M')))==true) and
+      (states('sensor.vmc_cucina_status_ip_interfaccia')=="ON-Line") }}
+    alias: All'Interno della 1° Fascia Venerdì
+    id: 1° Venerdì On
+    for:
+      hours: 0
+      minutes: 0
+      seconds: 4
+  - platform: template
+    value_template: >-
+      {{
+      (((states('sensor.vmc_cucina_status_accensione_vmc_tramite_calendario') 
+      == "Venerdi") and
+      (states('sensor.vmc_cucina_status_spegnimento_vmc_tramite_calendario') ==
+      "Venerdi") and (now().strftime('%H:%M') >=
+      strptime(states('input_datetime.vmc_cucina_accensione_venerdi'),
+      '%H:%M:%S').strftime('%H:%M') and now().strftime('%H:%M') <
+      strptime(states('input_datetime.vmc_cucina_spegnimento_venerdi'),
+      '%H:%M:%S').strftime('%H:%M')))==false) and
+      (states('sensor.vmc_cucina_status_ip_interfaccia')=="ON-Line") and
+      (states('input_boolean.vmc_cucina_spia_calendario_venerdi_1')=='on') }}
+    alias: All'Esterno della 1° Fascia Venerdì
+    id: 1° Venerdì Off
+    for:
+      hours: 0
+      minutes: 0
+      seconds: 4
+  - platform: template
+    value_template: >-
+      {{
+      (((states('sensor.vmc_cucina_status_accensione_vmc_tramite_calendario_2')
+      == "Venerdi") and
+      (states('sensor.vmc_cucina_status_spegnimento_vmc_tramite_calendario_2')==
+      "Venerdi") and (now().strftime('%H:%M') >=
+      strptime(states('input_datetime.vmc_cucina_accensione_venerdi_2'),
+      '%H:%M:%S').strftime('%H:%M') and now().strftime('%H:%M') <
+      strptime(states('input_datetime.vmc_cucina_spegnimento_venerdi_2'),
+      '%H:%M:%S').strftime('%H:%M')))==true) and
+      (states('sensor.vmc_cucina_status_ip_interfaccia')=="ON-Line")}} 
+    id: 2° Venerdì On
+    alias: All'Interno della 2° Fascia Venerdì
+    for:
+      hours: 0
+      minutes: 0
+      seconds: 4
+  - platform: template
+    value_template: >-
+      {{
+      (((states('sensor.vmc_cucina_status_accensione_vmc_tramite_calendario_2')
+      == "Venerdi") and
+      (states('sensor.vmc_cucina_status_spegnimento_vmc_tramite_calendario_2')
+      == "Venerdi") and (now().strftime('%H:%M') >=
+      strptime(states('input_datetime.vmc_cucina_accensione_venerdi_2'),
+      '%H:%M:%S').strftime('%H:%M') and now().strftime('%H:%M') <
+      strptime(states('input_datetime.vmc_cucina_spegnimento_venerdi_2'),
+      '%H:%M:%S').strftime('%H:%M')))==false) and
+      (states('sensor.vmc_cucina_status_ip_interfaccia')=="ON-Line") and
+      (states('input_boolean.vmc_cucina_spia_calendario_venerdi_2')=='on')}}
+    id: 2° Venerdì Off
+    alias: All'Esterno della 2° Fascia Venerdì
+    for:
+      hours: 0
+      minutes: 0
+      seconds: 4
+  - platform: template
+    value_template: >-
+      {{ (((states('sensor.vmc_cucina_status_accensione_vmc_tramite_calendario')
+      == "Sabato") and
+      (states('sensor.vmc_cucina_status_spegnimento_vmc_tramite_calendario')==
+      "Sabato") and (now().strftime('%H:%M') >=
+      strptime(states('input_datetime.vmc_cucina_accensione_sabato'),
+      '%H:%M:%S').strftime('%H:%M') and now().strftime('%H:%M') <
+      strptime(states('input_datetime.vmc_cucina_spegnimento_sabato'),
+      '%H:%M:%S').strftime('%H:%M')))==true) and
+      (states('sensor.vmc_cucina_status_ip_interfaccia')=="ON-Line") }}
+    alias: All'Interno della 1° Fascia Sabato
+    id: 1° Sabato On
+    for:
+      hours: 0
+      minutes: 0
+      seconds: 4
+  - platform: template
+    value_template: >-
+      {{
+      (((states('sensor.vmc_cucina_status_accensione_vmc_tramite_calendario') 
+      == "Sabato") and
+      (states('sensor.vmc_cucina_status_spegnimento_vmc_tramite_calendario') ==
+      "Sabato") and (now().strftime('%H:%M') >=
+      strptime(states('input_datetime.vmc_cucina_accensione_sabato'),
+      '%H:%M:%S').strftime('%H:%M') and now().strftime('%H:%M') <
+      strptime(states('input_datetime.vmc_cucina_spegnimento_sabato'),
+      '%H:%M:%S').strftime('%H:%M')))==false) and
+      (states('sensor.vmc_cucina_status_ip_interfaccia')=="ON-Line") and
+      (states('input_boolean.vmc_cucina_spia_calendario_sabato_1')=='on') }}
+    alias: All'Esterno della 1° Fascia Sabato
+    id: 1° Sabato Off
+    for:
+      hours: 0
+      minutes: 0
+      seconds: 4
+  - platform: template
+    value_template: >-
+      {{
+      (((states('sensor.vmc_cucina_status_accensione_vmc_tramite_calendario_2')
+      == "Sabato") and
+      (states('sensor.vmc_cucina_status_spegnimento_vmc_tramite_calendario_2')==
+      "Sabato") and (now().strftime('%H:%M') >=
+      strptime(states('input_datetime.vmc_cucina_accensione_sabato_2'),
+      '%H:%M:%S').strftime('%H:%M') and now().strftime('%H:%M') <
+      strptime(states('input_datetime.vmc_cucina_spegnimento_sabato_2'),
+      '%H:%M:%S').strftime('%H:%M')))==true) and
+      (states('sensor.vmc_cucina_status_ip_interfaccia')=="ON-Line")}} 
+    id: 2° Sabato On
+    alias: All'Interno della 2° Fascia Sabato
+    for:
+      hours: 0
+      minutes: 0
+      seconds: 4
+  - platform: template
+    value_template: >-
+      {{
+      (((states('sensor.vmc_cucina_status_accensione_vmc_tramite_calendario_2')
+      == "Sabato") and
+      (states('sensor.vmc_cucina_status_spegnimento_vmc_tramite_calendario_2')
+      == "Sabato") and (now().strftime('%H:%M') >=
+      strptime(states('input_datetime.vmc_cucina_accensione_sabato_2'),
+      '%H:%M:%S').strftime('%H:%M') and now().strftime('%H:%M') <
+      strptime(states('input_datetime.vmc_cucina_spegnimento_sabato_2'),
+      '%H:%M:%S').strftime('%H:%M')))==false) and
+      (states('sensor.vmc_cucina_status_ip_interfaccia')=="ON-Line") and
+      (states('input_boolean.vmc_cucina_spia_calendario_sabato_2')=='on')}}
+    id: 2° Sabato Off
+    alias: All'Esterno della 2° Fascia Sabato
+    for:
+      hours: 0
+      minutes: 0
+      seconds: 4
+  - platform: template
+    value_template: >-
+      {{ (((states('sensor.vmc_cucina_status_accensione_vmc_tramite_calendario')
+      == "Domenica") and
+      (states('sensor.vmc_cucina_status_spegnimento_vmc_tramite_calendario')==
+      "Domenica") and (now().strftime('%H:%M') >=
+      strptime(states('input_datetime.vmc_cucina_accensione_domenica'),
+      '%H:%M:%S').strftime('%H:%M') and now().strftime('%H:%M') <
+      strptime(states('input_datetime.vmc_cucina_spegnimento_domenica'),
+      '%H:%M:%S').strftime('%H:%M')))==true) and
+      (states('sensor.vmc_cucina_status_ip_interfaccia')=="ON-Line") }}
+    alias: All'Interno della 1° Fascia Domenica
+    id: 1° Domenica On
+    for:
+      hours: 0
+      minutes: 0
+      seconds: 4
+  - platform: template
+    value_template: >
+      {{
+      (((states('sensor.vmc_cucina_status_accensione_vmc_tramite_calendario') 
+      == "Domenica") and
+      (states('sensor.vmc_cucina_status_spegnimento_vmc_tramite_calendario') ==
+      "Domenica") and (now().strftime('%H:%M') >=
+      strptime(states('input_datetime.vmc_cucina_accensione_domenica'),
+      '%H:%M:%S').strftime('%H:%M') and now().strftime('%H:%M') <
+      strptime(states('input_datetime.vmc_cucina_spegnimento_domenica'),
+      '%H:%M:%S').strftime('%H:%M')))==false) and
+      (states('sensor.vmc_cucina_status_ip_interfaccia')=="ON-Line") and
+      (states('input_boolean.vmc_cucina_spia_calendario_domenica_1')=='on') }}
+    alias: All'Esterno della 1° Fascia Domenica
+    id: 1° Domenica Off
+    for:
+      hours: 0
+      minutes: 0
+      seconds: 4
+  - platform: template
+    value_template: >
+      {{
+      (((states('sensor.vmc_cucina_status_accensione_vmc_tramite_calendario_2')
+      == "Domenica") and
+      (states('sensor.vmc_cucina_status_spegnimento_vmc_tramite_calendario_2')==
+      "Domenica") and (now().strftime('%H:%M') >=
+      strptime(states('input_datetime.vmc_cucina_accensione_domenica_2'),
+      '%H:%M:%S').strftime('%H:%M') and now().strftime('%H:%M') <
+      strptime(states('input_datetime.vmc_cucina_spegnimento_domenica_2'),
+      '%H:%M:%S').strftime('%H:%M')))==true) and
+      (states('sensor.vmc_cucina_status_ip_interfaccia')=="ON-Line")}} 
+    id: 2° Domenica On
+    alias: All'Interno della 2° Fascia Domenica
+    for:
+      hours: 0
+      minutes: 0
+      seconds: 4
+  - platform: template
+    value_template: >-
+      {{
+      (((states('sensor.vmc_cucina_status_accensione_vmc_tramite_calendario_2')
+      == "Domenica") and
+      (states('sensor.vmc_cucina_status_spegnimento_vmc_tramite_calendario_2')
+      == "Domenica") and (now().strftime('%H:%M') >=
+      strptime(states('input_datetime.vmc_cucina_accensione_domenica_2'),
+      '%H:%M:%S').strftime('%H:%M') and now().strftime('%H:%M') <
+      strptime(states('input_datetime.vmc_cucina_spegnimento_domenica_2'),
+      '%H:%M:%S').strftime('%H:%M')))==false) and
+      (states('sensor.vmc_cucina_status_ip_interfaccia')=="ON-Line") and
+      (states('input_boolean.vmc_cucina_spia_calendario_domenica_2')=='on')}}
+    id: 2° Domenica Off
+    alias: All'Esterno della 2° Fascia Domenica
+    for:
+      hours: 0
+      minutes: 0
+      seconds: 4
+  - platform: template
+    value_template: >-
+      {{
+      (states('sensor.vmc_cucina_alert_monitoraggio_free_heating_o_free_cooling')
+      == 'Allerta Free Heating Programmato (Raffrescamento in atto)') }}
+    id: TeVsTi Free-Heating -> Imposta Velocità 0
+    alias: >-
+      Condizioni Sfavorevoli Temp. Ext Vs Temp. Int. a Velocità Free Heating ->
+      Imposta Velocità 0
+    for:
+      hours: 0
+      minutes: 0
+      seconds: 4
+  - platform: template
+    value_template: >-
+      {{
+      (states('sensor.vmc_cucina_alert_monitoraggio_free_heating_o_free_cooling')
+      == 'Allerta Free Cooling Programmato (Riscaldamento in atto)') }}
+    id: TeVsTi Free-Cooling -> Imposta Velocità 0
+    alias: >-
+      Condizioni Sfavorevoli Temp. Ext Vs Temp. Int. a Velocità Free Cooling ->
+      Imposta Velocità 0
+    for:
+      hours: 0
+      minutes: 0
+      seconds: 4
+  - platform: template
+    value_template: >-
+      {{ (states('sensor.vmc_cucina_temp_esterna_status') | float(0) >=
+      states('sensor.vmc_cucina_temp_interna_status') | float(0)) and
+      (states('input_boolean.vmc_cucina_spia_velocita_freecooling_un_solo_avvio_per_programmazione_freeheating')
+      == 'on') }}
+    alias: >-
+      Condizioni Favorevoli Temp. Ext Vs Temp. Int. Ripristinate su Velocità
+      Free Heating
+    id: "Rip. Free Heating No TeVsTi "
+    for:
+      hours: 0
+      minutes: 0
+      seconds: 4
+  - platform: template
+    value_template: >-
+      {{ (states('sensor.vmc_cucina_temp_esterna_status') | float(0) <=
+      states('sensor.vmc_cucina_temp_interna_status') | float(0)) and
+      (states('input_boolean.vmc_cucina_spia_velocita_freecooling_un_solo_avvio_per_programmazione_freecooling')
+      == 'on') }}
+    alias: >-
+      Condizioni Favorevoli Temp. Ext Vs Temp. Int. Ripristinate su Velocità
+      Free Cooling
+    id: "Rip. Free Cooling No TeVsTi "
+    for:
+      hours: 0
+      minutes: 0
+      seconds: 4
+  - platform: template
+    value_template: >-
+      {{
+      (states('input_boolean.vmc_cucina_opzioni_accendi_spegni_vmc_vs_calendario')=='off')
+      and ( (states('input_boolean.vmc_cucina_spia_calendario_lunedi_1')=='on')
+      or (states('input_boolean.vmc_cucina_spia_calendario_lunedi_2')=='on') or
+      (states('input_boolean.vmc_cucina_spia_calendario_martedi_1')=='on') or
+      (states('input_boolean.vmc_cucina_spia_calendario_martedi_2')=='on') or
+      (states('input_boolean.vmc_cucina_spia_calendario_mercoledi_1')=='on') or
+      (states('input_boolean.vmc_cucina_spia_calendario_mercoledi_2')=='on') or
+      (states('input_boolean.vmc_cucina_spia_calendario_giovedi_1')=='on') or
+      (states('input_boolean.vmc_cucina_spia_calendario_giovedi_2')=='on') or
+      (states('input_boolean.vmc_cucina_spia_calendario_venerdi_1')=='on') or
+      (states('input_boolean.vmc_cucina_spia_calendario_venerdi_2')=='on') or
+      (states('input_boolean.vmc_cucina_spia_calendario_sabato_1')=='on') or
+      (states('input_boolean.vmc_cucina_spia_calendario_sabato_2')=='on') or
+      (states('input_boolean.vmc_cucina_spia_calendario_domenica_1')=='on') or
+      (states('input_boolean.vmc_cucina_spia_calendario_domenica_2')=='on') )}}
+    for:
+      hours: 0
+      minutes: 0
+      seconds: 4
+    alias: >-
+      Disattivazione Calendario, quando era Attivato tra le Fascie del
+      Calendario -> Velocità 0
+    id: Calendario Off tra Fascie
+  - platform: template
+    value_template: >-
+      {{
+      (states('input_boolean.vmc_cucina_opzioni_accendi_spegni_vmc_vs_pdr')=='off')
+      and ( (states('input_boolean.vmc_cucina_spia_velocita_0_un_solo_avvio')==
+      'on') or
+      (states('input_boolean.vmc_cucina_spia_velocita_1_un_solo_avvio')=='on')
+      or
+      (states('input_boolean.vmc_cucina_spia_velocita_2_un_solo_avvio')=='on')
+      or
+      (states('input_boolean.vmc_cucina_spia_velocita_3_un_solo_avvio')=='on')
+      or
+      (states('input_boolean.vmc_cucina_spia_velocita_4_un_solo_avvio')=='on')
+      or
+      (states('input_boolean.vmc_cucina_spia_velocita_notturna_un_solo_avvio')=='on')
+      or
+      (states('input_boolean.vmc_cucina_spia_velocita_freecooling_un_solo_avvio')=='on')
+      or
+      (states('input_boolean.vmc_cucina_spia_velocita_iperventilazione_un_solo_avvio')=='on'))}}
+    for:
+      hours: 0
+      minutes: 0
+      seconds: 4
+    alias: >-
+      Disattivazione: VMC ON/OFF, in Funzione del Lim. Δ P. di Rugiada,
+      precedentemente Armato ed Attivato -> Velocità 0
+    id: " Disattivazione Lim. Δ P. di Rugiada, precedentemente Armato ed Attivato"
+  - platform: template
+    value_template: >-
+      {{ (
+      (states('input_boolean.vmc_cucina_opzioni_accendi_spegni_vmc_vs_freeheating')=="off")
+      or
+      (states('sensor.vmc_cucina_status_mese_corrente_freeheating_o_freecooling')!="Free
+      Heating") ) and
+      (states('input_boolean.vmc_cucina_spia_velocita_freecooling_un_solo_avvio_per_programmazione_freeheating')
+      == 'on') }}
+    alias: >-
+      Disattivazione VMC ON/OFF, in Funzione della Vel. Free Heating
+      precedentemente Armato
+    id: " Disattivazione VMC ON/OFF, in Funzione della Vel. Free Heating precedentemente Armato"
+    for:
+      hours: 0
+      minutes: 0
+      seconds: 4
+  - platform: template
+    value_template: >-
+      {{ (
+      (states('input_boolean.vmc_cucina_opzioni_accendi_spegni_vmc_vs_freecooling')=="off")
+      or
+      (states('sensor.vmc_cucina_status_mese_corrente_freeheating_o_freecooling')!="Free
+      Cooling") )  and
+      (states('input_boolean.vmc_cucina_spia_velocita_freecooling_un_solo_avvio_per_programmazione_freecooling')
+      == 'on') }}
+    alias: >-
+      Disattivazione VMC ON/OFF, in Funzione della Vel. Free Cooling
+      precedentemente Armato
+    id: " Disattivazione VMC ON/OFF, in Funzione della Vel. Free Cooling precedentemente Armato"
+    for:
+      hours: 0
+      minutes: 0
+      seconds: 4
+  - platform: template
+    value_template: "{{ states('sensor.vmc_cucina_alert_monitoraggio_totale')=='Allerta'}}"
+    alias: Spia Avvisi On
+    id: Spia Avvisi On
+  - platform: template
+    value_template: >-
+      {{ states('sensor.vmc_cucina_alert_monitoraggio_totale')=='Nessuna
+      Allerta' or states('sensor.vmc_cucina_alert_monitoraggio_totale')=='Non
+      disponibile'}}
+    alias: Spia Avvisi Off
+    id: Spia Avvisi Off
+  - platform: template
+    value_template: >-
+      {{ states('sensor.vmc_cucina_versione_repository') !=
+      states('sensor.vmc_cucina_versione_corrente') and
+      states('input_boolean.vmc_cucina_popup_versione_corrente_vs_repository')=="off"
+      and states('sensor.vmc_cucina_versione_repository') != "Errore
+      Connessione"}}
+    alias: Verifica Aggiornamenti Repository VMC-HELTY-FLOW - ON
+    id: Repository Update ON
+    for:
+      hours: 0
+      minutes: 0
+      seconds: 5
+  - platform: template
+    value_template: >-
+      {{ states('sensor.vmc_cucina_versione_repository') ==
+      states('sensor.vmc_cucina_versione_corrente') and
+      states('sensor.vmc_cucina_versione_repository') != "Errore Connessione"}}
+    alias: Verifica Aggiornamenti Repository VMC-HELTY-FLOW - OFF
+    id: Repository Update OFF
+  - platform: state
+    entity_id:
+      - input_text.vmc_cucina_nome_da_inserire
+    id: Cambio Nome VMC
+    alias: Rinomina VMC
+condition: []
+action:
+  - choose:
+      - conditions:
+          - condition: trigger
+            id: " Opzioni On"
+        sequence:
+          - service: input_boolean.turn_on
+            data: {}
+            target:
+              entity_id: input_boolean.vmc_cucina_opzioni_offset_sensori
+          - service: input_boolean.turn_off
+            data: {}
+            target:
+              entity_id:
+                - input_boolean.vmc_cucina_opzioni_vmc
+                - input_boolean.vmc_cucina_opzioni_monitoraggio_sensori
+                - input_boolean.vmc_cucina_opzioni_lettura_sensori
+                - input_boolean.vmc_cucina_opzioni_interruttore_calendario
+                - input_boolean.vmc_cucina_opzioni_free_heating_o_free_cooling
+                - input_boolean.vmc_cucina_opzioni_punto_di_rugiada
+                - input_boolean.vmc_cucina_opzioni_interruttore_offset_sensori
+                - >-
+                  input_boolean.vmc_cucina_opzioni_interruttore_monitoraggio_sensori_extra
+                - input_boolean.vmc_cucina_opzioni_calendario
+                - input_boolean.vmc_cucina_opzioni_calendario_main
+      - conditions:
+          - condition: trigger
+            id: Opzioni Off
+        sequence:
+          - service: input_boolean.turn_off
+            data: {}
+            target:
+              entity_id: input_boolean.vmc_cucina_opzioni_offset_sensori
+      - conditions:
+          - condition: trigger
+            id: Opzioni Telecomando On
+        sequence:
+          - service: input_boolean.turn_on
+            data: {}
+            target:
+              entity_id: input_boolean.vmc_cucina_opzioni_vmc
+          - service: input_boolean.turn_off
+            data: {}
+            target:
+              entity_id:
+                - input_boolean.vmc_cucina_opzioni_offset_sensori
+                - input_boolean.vmc_cucina_opzioni_monitoraggio_sensori
+                - input_boolean.vmc_cucina_opzioni_lettura_sensori
+                - input_boolean.vmc_cucina_opzioni_interruttore_calendario
+                - input_boolean.vmc_cucina_opzioni_calendario
+                - input_boolean.vmc_cucina_opzioni_calendario_main
+                - input_boolean.vmc_cucina_opzioni_free_heating_o_free_cooling
+                - input_boolean.vmc_cucina_opzioni_punto_di_rugiada
+                - >-
+                  input_boolean.vmc_cucina_opzioni_interruttore_monitoraggio_sensori_extra
+                - input_boolean.vmc_cucina_opzioni_interruttore_offset_sensori
+      - conditions:
+          - condition: trigger
+            id: Opzioni Telecomando Off
+        sequence:
+          - service: input_boolean.turn_off
+            data: {}
+            target:
+              entity_id: input_boolean.vmc_cucina_opzioni_vmc
+      - conditions:
+          - condition: trigger
+            id: Opzioni Monitoraggio On
+        sequence:
+          - service: input_boolean.turn_on
+            data: {}
+            target:
+              entity_id: input_boolean.vmc_cucina_opzioni_monitoraggio_sensori
+          - service: input_boolean.turn_off
+            data: {}
+            target:
+              entity_id:
+                - input_boolean.vmc_cucina_opzioni_offset_sensori
+                - input_boolean.vmc_cucina_opzioni_vmc
+                - input_boolean.vmc_cucina_opzioni_lettura_sensori
+                - input_boolean.vmc_cucina_opzioni_interruttore_calendario
+                - input_boolean.vmc_cucina_opzioni_calendario
+                - input_boolean.vmc_cucina_opzioni_calendario_main
+                - input_boolean.vmc_cucina_opzioni_free_heating_o_free_cooling
+                - input_boolean.vmc_cucina_opzioni_punto_di_rugiada
+                - >-
+                  input_boolean.vmc_cucina_opzioni_interruttore_monitoraggio_sensori_extra
+                - input_boolean.vmc_cucina_opzioni_interruttore_offset_sensori
+      - conditions:
+          - condition: trigger
+            id: Opzioni Monitoraggio Off
+        sequence:
+          - service: input_boolean.turn_off
+            data: {}
+            target:
+              entity_id: input_boolean.vmc_cucina_opzioni_monitoraggio_sensori
+      - conditions:
+          - condition: trigger
+            id: Opzioni Informazioni On
+        sequence:
+          - service: input_boolean.turn_on
+            data: {}
+            target:
+              entity_id: input_boolean.vmc_cucina_opzioni_lettura_sensori
+          - service: input_boolean.turn_off
+            data: {}
+            target:
+              entity_id:
+                - input_boolean.vmc_cucina_opzioni_offset_sensori
+                - input_boolean.vmc_cucina_opzioni_vmc
+                - input_boolean.vmc_cucina_opzioni_monitoraggio_sensori
+                - input_boolean.vmc_cucina_opzioni_interruttore_calendario
+                - input_boolean.vmc_cucina_opzioni_calendario
+                - input_boolean.vmc_cucina_opzioni_calendario_main
+                - input_boolean.vmc_cucina_opzioni_free_heating_o_free_cooling
+                - input_boolean.vmc_cucina_opzioni_punto_di_rugiada
+                - >-
+                  input_boolean.vmc_cucina_opzioni_interruttore_monitoraggio_sensori_extra
+                - input_boolean.vmc_cucina_opzioni_interruttore_offset_sensori
+      - conditions:
+          - condition: trigger
+            id: Opzioni Informazioni Off
+        sequence:
+          - service: input_boolean.turn_off
+            data: {}
+            target:
+              entity_id: input_boolean.vmc_cucina_opzioni_lettura_sensori
+      - conditions:
+          - condition: trigger
+            id: Opzioni Sub Calendario On
+        sequence:
+          - service: input_boolean.turn_on
+            data: {}
+            target:
+              entity_id: input_boolean.vmc_cucina_opzioni_calendario
+          - service: input_boolean.turn_off
+            data: {}
+            target:
+              entity_id:
+                - input_boolean.vmc_cucina_opzioni_free_heating_o_free_cooling
+                - input_boolean.vmc_cucina_opzioni_punto_di_rugiada
+      - conditions:
+          - condition: trigger
+            id: Opzioni Sub Calendario Off
+        sequence:
+          - service: input_boolean.turn_off
+            data: {}
+            target:
+              entity_id: input_boolean.vmc_cucina_opzioni_calendario
+      - conditions:
+          - condition: trigger
+            id: PdR Vel. 1-> Imposta Velocità 0
+        sequence:
+          - if: []
+            then:
+              - service: input_boolean.turn_on
+                data: {}
+                target:
+                  entity_id: input_boolean.vmc_cucina_spia_velocita_1_un_solo_avvio
+              - service: input_boolean.turn_off
+                data: {}
+                target:
+                  entity_id:
+                    - input_boolean.vmc_cucina_spia_velocita_0_un_solo_avvio
+                    - input_boolean.vmc_cucina_spia_velocita_2_un_solo_avvio
+                    - input_boolean.vmc_cucina_spia_velocita_3_un_solo_avvio
+                    - input_boolean.vmc_cucina_spia_velocita_4_un_solo_avvio
+                    - >-
+                      input_boolean.vmc_cucina_spia_velocita_freecooling_un_solo_avvio
+                    - >-
+                      input_boolean.vmc_cucina_spia_velocita_iperventilazione_un_solo_avvio
+                    - >-
+                      input_boolean.vmc_cucina_spia_velocita_notturna_un_solo_avvio
+              - service: shell_command.vmc_cucina_velocita_0
+                data: {}
+            alias: >-
+              Condizioni Sfavorevoli su Velocità 1 -> Velocità 0, memorizzando
+              la Velocità 1
+      - conditions:
+          - condition: trigger
+            id: PdR Vel. 2-> Imposta Velocità 0
+        sequence:
+          - if: []
+            then:
+              - service: input_boolean.turn_on
+                data: {}
+                target:
+                  entity_id: input_boolean.vmc_cucina_spia_velocita_2_un_solo_avvio
+              - service: input_boolean.turn_off
+                data: {}
+                target:
+                  entity_id:
+                    - input_boolean.vmc_cucina_spia_velocita_0_un_solo_avvio
+                    - input_boolean.vmc_cucina_spia_velocita_1_un_solo_avvio
+                    - input_boolean.vmc_cucina_spia_velocita_3_un_solo_avvio
+                    - input_boolean.vmc_cucina_spia_velocita_4_un_solo_avvio
+                    - >-
+                      input_boolean.vmc_cucina_spia_velocita_freecooling_un_solo_avvio
+                    - >-
+                      input_boolean.vmc_cucina_spia_velocita_iperventilazione_un_solo_avvio
+                    - >-
+                      input_boolean.vmc_cucina_spia_velocita_notturna_un_solo_avvio
+              - service: shell_command.vmc_cucina_velocita_0
+                data: {}
+            alias: >-
+              Condizioni Sfavorevoli su Velocità 2 -> Velocità 0, memorizzando
+              la Velocità 2
+      - conditions:
+          - condition: trigger
+            id: PdR Vel. 3-> Imposta Velocità 0
+        sequence:
+          - if: []
+            then:
+              - service: input_boolean.turn_on
+                data: {}
+                target:
+                  entity_id: input_boolean.vmc_cucina_spia_velocita_3_un_solo_avvio
+              - service: input_boolean.turn_off
+                data: {}
+                target:
+                  entity_id:
+                    - input_boolean.vmc_cucina_spia_velocita_0_un_solo_avvio
+                    - input_boolean.vmc_cucina_spia_velocita_1_un_solo_avvio
+                    - input_boolean.vmc_cucina_spia_velocita_2_un_solo_avvio
+                    - input_boolean.vmc_cucina_spia_velocita_4_un_solo_avvio
+                    - >-
+                      input_boolean.vmc_cucina_spia_velocita_freecooling_un_solo_avvio
+                    - >-
+                      input_boolean.vmc_cucina_spia_velocita_iperventilazione_un_solo_avvio
+                    - >-
+                      input_boolean.vmc_cucina_spia_velocita_notturna_un_solo_avvio
+              - service: shell_command.vmc_cucina_velocita_0
+                data: {}
+            alias: >-
+              Condizioni Sfavorevoli su Velocità 3 -> Velocità 0, memorizzando
+              la Velocità 3
+      - conditions:
+          - condition: trigger
+            id: PdR Vel. 4-> Imposta Velocità 0
+        sequence:
+          - if: []
+            then:
+              - service: input_boolean.turn_on
+                data: {}
+                target:
+                  entity_id: input_boolean.vmc_cucina_spia_velocita_4_un_solo_avvio
+              - service: input_boolean.turn_off
+                data: {}
+                target:
+                  entity_id:
+                    - input_boolean.vmc_cucina_spia_velocita_0_un_solo_avvio
+                    - input_boolean.vmc_cucina_spia_velocita_1_un_solo_avvio
+                    - input_boolean.vmc_cucina_spia_velocita_2_un_solo_avvio
+                    - input_boolean.vmc_cucina_spia_velocita_3_un_solo_avvio
+                    - >-
+                      input_boolean.vmc_cucina_spia_velocita_freecooling_un_solo_avvio
+                    - >-
+                      input_boolean.vmc_cucina_spia_velocita_iperventilazione_un_solo_avvio
+                    - >-
+                      input_boolean.vmc_cucina_spia_velocita_notturna_un_solo_avvio
+              - service: shell_command.vmc_cucina_velocita_0
+                data: {}
+            alias: >-
+              Condizioni Sfavorevoli su Velocità 4 -> Velocità 0, memorizzando
+              la Velocità 4
+      - conditions:
+          - condition: trigger
+            id: PdR Free-Cooling -> Imposta Velocità 0
+        sequence:
+          - if: []
+            then:
+              - service: input_boolean.turn_on
+                data: {}
+                target:
+                  entity_id: >-
+                    input_boolean.vmc_cucina_spia_velocita_freecooling_un_solo_avvio
+              - service: input_boolean.turn_off
+                data: {}
+                target:
+                  entity_id:
+                    - input_boolean.vmc_cucina_spia_velocita_0_un_solo_avvio
+                    - input_boolean.vmc_cucina_spia_velocita_1_un_solo_avvio
+                    - input_boolean.vmc_cucina_spia_velocita_2_un_solo_avvio
+                    - input_boolean.vmc_cucina_spia_velocita_3_un_solo_avvio
+                    - input_boolean.vmc_cucina_spia_velocita_4_un_solo_avvio
+                    - >-
+                      input_boolean.vmc_cucina_spia_velocita_iperventilazione_un_solo_avvio
+                    - >-
+                      input_boolean.vmc_cucina_spia_velocita_notturna_un_solo_avvio
+              - service: shell_command.vmc_cucina_velocita_0
+                data: {}
+            alias: >-
+              Condizioni Sfavorevoli su Velocità Free Cool./Heat. -> Velocità 0,
+              memorizzando la Velocità Free Cool./Heat.
+      - conditions:
+          - condition: trigger
+            id: PdR Notturna -> Imposta Velocità 0
+        sequence:
+          - if: []
+            then:
+              - service: input_boolean.turn_on
+                data: {}
+                target:
+                  entity_id: >-
+                    input_boolean.vmc_cucina_spia_velocita_notturna_un_solo_avvio
+              - service: input_boolean.turn_off
+                data: {}
+                target:
+                  entity_id:
+                    - input_boolean.vmc_cucina_spia_velocita_0_un_solo_avvio
+                    - input_boolean.vmc_cucina_spia_velocita_1_un_solo_avvio
+                    - input_boolean.vmc_cucina_spia_velocita_2_un_solo_avvio
+                    - input_boolean.vmc_cucina_spia_velocita_3_un_solo_avvio
+                    - input_boolean.vmc_cucina_spia_velocita_4_un_solo_avvio
+                    - >-
+                      input_boolean.vmc_cucina_spia_velocita_iperventilazione_un_solo_avvio
+                    - >-
+                      input_boolean.vmc_cucina_spia_velocita_freecooling_un_solo_avvio
+              - service: shell_command.vmc_cucina_velocita_0
+                data: {}
+            alias: >-
+              Condizioni Sfavorevoli su Velocità Notturna -> Velocità 0,
+              memorizzando la Velocità Notturna
+      - conditions:
+          - condition: trigger
+            id: PdR Iperventilazione -> Imposta Velocità 0
+        sequence:
+          - if: []
+            then:
+              - service: input_boolean.turn_on
+                data: {}
+                target:
+                  entity_id: >-
+                    input_boolean.vmc_cucina_spia_velocita_iperventilazione_un_solo_avvio
+              - service: input_boolean.turn_off
+                data: {}
+                target:
+                  entity_id:
+                    - input_boolean.vmc_cucina_spia_velocita_0_un_solo_avvio
+                    - input_boolean.vmc_cucina_spia_velocita_1_un_solo_avvio
+                    - input_boolean.vmc_cucina_spia_velocita_2_un_solo_avvio
+                    - input_boolean.vmc_cucina_spia_velocita_3_un_solo_avvio
+                    - input_boolean.vmc_cucina_spia_velocita_4_un_solo_avvio
+                    - >-
+                      input_boolean.vmc_cucina_spia_velocita_notturna_un_solo_avvio
+                    - >-
+                      input_boolean.vmc_cucina_spia_velocita_freecooling_un_solo_avvio
+              - service: shell_command.vmc_cucina_velocita_0
+                data: {}
+            alias: >-
+              Condizioni Sfavorevoli su Velocità Iperventilazione -> Velocità 0,
+              memorizzando la Velocità Iperventilazione
+      - conditions:
+          - condition: trigger
+            id: Rip. Vel. 1 No PdR
+        sequence:
+          - service: shell_command.vmc_cucina_velocita_1
+            data: {}
+          - service: input_boolean.turn_off
+            data: {}
+            target:
+              entity_id: input_boolean.vmc_cucina_spia_velocita_1_un_solo_avvio
+      - conditions:
+          - condition: trigger
+            id: Rip. Vel. 2 No PdR
+        sequence:
+          - service: shell_command.vmc_cucina_velocita_2
+            data: {}
+          - service: input_boolean.turn_off
+            data: {}
+            target:
+              entity_id: input_boolean.vmc_cucina_spia_velocita_2_un_solo_avvio
+      - conditions:
+          - condition: trigger
+            id: Rip. Vel. 3 No PdR
+        sequence:
+          - service: shell_command.vmc_cucina_velocita_3
+            data: {}
+          - service: input_boolean.turn_off
+            data: {}
+            target:
+              entity_id: input_boolean.vmc_cucina_spia_velocita_3_un_solo_avvio
+      - conditions:
+          - condition: trigger
+            id: Rip. Vel. 4 No PdR
+        sequence:
+          - service: shell_command.vmc_cucina_velocita_4
+            data: {}
+          - service: input_boolean.turn_off
+            data: {}
+            target:
+              entity_id: input_boolean.vmc_cucina_spia_velocita_4_un_solo_avvio
+      - conditions:
+          - condition: trigger
+            id: Rip. Notturno No PdR
+        sequence:
+          - service: shell_command.vmc_cucina_notturna
+            data: {}
+          - service: input_boolean.turn_off
+            data: {}
+            target:
+              entity_id: input_boolean.vmc_cucina_spia_velocita_notturna_un_solo_avvio
+      - conditions:
+          - condition: trigger
+            id: Rip. Free Cool./Heat. No PdR
+        sequence:
+          - service: shell_command.vmc_cucina_freecooling
+            data: {}
+          - service: input_boolean.turn_off
+            data: {}
+            target:
+              entity_id: input_boolean.vmc_cucina_spia_velocita_freecooling_un_solo_avvio
+      - conditions:
+          - condition: trigger
+            id: Rip. Iperventilazione No PdR
+        sequence:
+          - service: shell_command.vmc_cucina_iperventilazione
+            data: {}
+          - service: input_boolean.turn_off
+            data: {}
+            target:
+              entity_id: >-
+                input_boolean.vmc_cucina_spia_velocita_iperventilazione_un_solo_avvio
+      - conditions:
+          - condition: trigger
+            id: Black-Out a Velocità 0
+        sequence:
+          - service: input_boolean.turn_on
+            data: {}
+            target:
+              entity_id:
+                - input_boolean.vmc_cucina_spia_velocita_0
+          - service: input_boolean.turn_off
+            data: {}
+            target:
+              entity_id:
+                - input_boolean.vmc_cucina_spia_velocita_1
+                - input_boolean.vmc_cucina_spia_velocita_2
+                - input_boolean.vmc_cucina_spia_velocita_3
+                - input_boolean.vmc_cucina_spia_velocita_4
+                - input_boolean.vmc_cucina_spia_velocita_notturna
+                - input_boolean.vmc_cucina_spia_velocita_iperventilazione
+                - input_boolean.vmc_cucina_spia_velocita_freecooling
+      - conditions:
+          - condition: trigger
+            id: Black-Out Off Vel. 0
+        sequence:
+          - service: shell_command.vmc_cucina_velocita_0
+            data: {}
+          - service: input_boolean.turn_off
+            data: {}
+            target:
+              entity_id:
+                - input_boolean.vmc_cucina_spia_velocita_0
+                - input_boolean.vmc_cucina_spia_velocita_1
+                - input_boolean.vmc_cucina_spia_velocita_2
+                - input_boolean.vmc_cucina_spia_velocita_3
+                - input_boolean.vmc_cucina_spia_velocita_4
+                - input_boolean.vmc_cucina_spia_velocita_notturna
+                - input_boolean.vmc_cucina_spia_velocita_freecooling
+                - input_boolean.vmc_cucina_spia_velocita_iperventilazione
+            enabled: true
+      - conditions:
+          - condition: trigger
+            id: Black-Out a Velocità 1
+        sequence:
+          - service: input_boolean.turn_on
+            data: {}
+            target:
+              entity_id:
+                - input_boolean.vmc_cucina_spia_velocita_1
+          - service: input_boolean.turn_off
+            data: {}
+            target:
+              entity_id:
+                - input_boolean.vmc_cucina_spia_velocita_0
+                - input_boolean.vmc_cucina_spia_velocita_2
+                - input_boolean.vmc_cucina_spia_velocita_3
+                - input_boolean.vmc_cucina_spia_velocita_4
+                - input_boolean.vmc_cucina_spia_velocita_notturna
+                - input_boolean.vmc_cucina_spia_velocita_iperventilazione
+                - input_boolean.vmc_cucina_spia_velocita_freecooling
+      - conditions:
+          - condition: trigger
+            id: Black-Out Off Vel. 1
+        sequence:
+          - service: shell_command.vmc_cucina_velocita_1
+            data: {}
+          - service: input_boolean.turn_off
+            data: {}
+            target:
+              entity_id:
+                - input_boolean.vmc_cucina_spia_velocita_0
+                - input_boolean.vmc_cucina_spia_velocita_1
+                - input_boolean.vmc_cucina_spia_velocita_2
+                - input_boolean.vmc_cucina_spia_velocita_3
+                - input_boolean.vmc_cucina_spia_velocita_4
+                - input_boolean.vmc_cucina_spia_velocita_notturna
+                - input_boolean.vmc_cucina_spia_velocita_freecooling
+                - input_boolean.vmc_cucina_spia_velocita_iperventilazione
+            enabled: true
+      - conditions:
+          - condition: trigger
+            id: Black-Out a Velocità 2
+        sequence:
+          - service: input_boolean.turn_on
+            data: {}
+            target:
+              entity_id:
+                - input_boolean.vmc_cucina_spia_velocita_2
+          - service: input_boolean.turn_off
+            data: {}
+            target:
+              entity_id:
+                - input_boolean.vmc_cucina_spia_velocita_0
+                - input_boolean.vmc_cucina_spia_velocita_1
+                - input_boolean.vmc_cucina_spia_velocita_3
+                - input_boolean.vmc_cucina_spia_velocita_4
+                - input_boolean.vmc_cucina_spia_velocita_notturna
+                - input_boolean.vmc_cucina_spia_velocita_iperventilazione
+                - input_boolean.vmc_cucina_spia_velocita_freecooling
+      - conditions:
+          - condition: trigger
+            id: Black-Out Off Vel. 2
+        sequence:
+          - service: shell_command.vmc_cucina_velocita_2
+            data: {}
+          - service: input_boolean.turn_off
+            data: {}
+            target:
+              entity_id:
+                - input_boolean.vmc_cucina_spia_velocita_0
+                - input_boolean.vmc_cucina_spia_velocita_1
+                - input_boolean.vmc_cucina_spia_velocita_2
+                - input_boolean.vmc_cucina_spia_velocita_3
+                - input_boolean.vmc_cucina_spia_velocita_4
+                - input_boolean.vmc_cucina_spia_velocita_notturna
+                - input_boolean.vmc_cucina_spia_velocita_iperventilazione
+                - input_boolean.vmc_cucina_spia_velocita_freecooling
+            enabled: true
+      - conditions:
+          - condition: trigger
+            id: Black-Out a Velocità 3
+        sequence:
+          - service: input_boolean.turn_on
+            data: {}
+            target:
+              entity_id:
+                - input_boolean.vmc_cucina_spia_velocita_3
+          - service: input_boolean.turn_off
+            data: {}
+            target:
+              entity_id:
+                - input_boolean.vmc_cucina_spia_velocita_0
+                - input_boolean.vmc_cucina_spia_velocita_1
+                - input_boolean.vmc_cucina_spia_velocita_2
+                - input_boolean.vmc_cucina_spia_velocita_4
+                - input_boolean.vmc_cucina_spia_velocita_notturna
+                - input_boolean.vmc_cucina_spia_velocita_iperventilazione
+                - input_boolean.vmc_cucina_spia_velocita_freecooling
+      - conditions:
+          - condition: trigger
+            id: Black-Out Off Vel. 3
+        sequence:
+          - service: shell_command.vmc_cucina_velocita_3
+            data: {}
+          - service: input_boolean.turn_off
+            data: {}
+            target:
+              entity_id:
+                - input_boolean.vmc_cucina_spia_velocita_0
+                - input_boolean.vmc_cucina_spia_velocita_1
+                - input_boolean.vmc_cucina_spia_velocita_2
+                - input_boolean.vmc_cucina_spia_velocita_3
+                - input_boolean.vmc_cucina_spia_velocita_4
+                - input_boolean.vmc_cucina_spia_velocita_notturna
+                - input_boolean.vmc_cucina_spia_velocita_freecooling
+                - input_boolean.vmc_cucina_spia_velocita_iperventilazione
+            enabled: true
+      - conditions:
+          - condition: trigger
+            id: Black-Out a Velocità 4
+        sequence:
+          - service: input_boolean.turn_on
+            data: {}
+            target:
+              entity_id:
+                - input_boolean.vmc_cucina_spia_velocita_4
+          - service: input_boolean.turn_off
+            data: {}
+            target:
+              entity_id:
+                - input_boolean.vmc_cucina_spia_velocita_0
+                - input_boolean.vmc_cucina_spia_velocita_1
+                - input_boolean.vmc_cucina_spia_velocita_2
+                - input_boolean.vmc_cucina_spia_velocita_3
+                - input_boolean.vmc_cucina_spia_velocita_notturna
+                - input_boolean.vmc_cucina_spia_velocita_iperventilazione
+                - input_boolean.vmc_cucina_spia_velocita_freecooling
+      - conditions:
+          - condition: trigger
+            id: Black-Out Off Vel. 4
+        sequence:
+          - service: shell_command.vmc_cucina_velocita_4
+            data: {}
+          - service: input_boolean.turn_off
+            data: {}
+            target:
+              entity_id:
+                - input_boolean.vmc_cucina_spia_velocita_0
+                - input_boolean.vmc_cucina_spia_velocita_1
+                - input_boolean.vmc_cucina_spia_velocita_2
+                - input_boolean.vmc_cucina_spia_velocita_3
+                - input_boolean.vmc_cucina_spia_velocita_4
+                - input_boolean.vmc_cucina_spia_velocita_notturna
+                - input_boolean.vmc_cucina_spia_velocita_freecooling
+                - input_boolean.vmc_cucina_spia_velocita_iperventilazione
+            enabled: true
+      - conditions:
+          - condition: trigger
+            id: Black-Out Notturna
+        sequence:
+          - service: input_boolean.turn_on
+            data: {}
+            target:
+              entity_id:
+                - input_boolean.vmc_cucina_spia_velocita_notturna
+          - service: input_boolean.turn_off
+            data: {}
+            target:
+              entity_id:
+                - input_boolean.vmc_cucina_spia_velocita_0
+                - input_boolean.vmc_cucina_spia_velocita_1
+                - input_boolean.vmc_cucina_spia_velocita_2
+                - input_boolean.vmc_cucina_spia_velocita_3
+                - input_boolean.vmc_cucina_spia_velocita_4
+                - input_boolean.vmc_cucina_spia_velocita_iperventilazione
+                - input_boolean.vmc_cucina_spia_velocita_freecooling
+      - conditions:
+          - condition: trigger
+            id: Black-Out Off Notturna
+        sequence:
+          - service: shell_command.vmc_cucina_notturna
+            data: {}
+          - service: input_boolean.turn_off
+            data: {}
+            target:
+              entity_id:
+                - input_boolean.vmc_cucina_spia_velocita_0
+                - input_boolean.vmc_cucina_spia_velocita_1
+                - input_boolean.vmc_cucina_spia_velocita_2
+                - input_boolean.vmc_cucina_spia_velocita_3
+                - input_boolean.vmc_cucina_spia_velocita_4
+                - input_boolean.vmc_cucina_spia_velocita_notturna
+                - input_boolean.vmc_cucina_spia_velocita_freecooling
+                - input_boolean.vmc_cucina_spia_velocita_iperventilazione
+            enabled: true
+      - conditions:
+          - condition: trigger
+            id: Black-Out Iperventilazione
+        sequence:
+          - service: input_boolean.turn_on
+            data: {}
+            target:
+              entity_id:
+                - input_boolean.vmc_cucina_spia_velocita_iperventilazione
+          - service: input_boolean.turn_off
+            data: {}
+            target:
+              entity_id:
+                - input_boolean.vmc_cucina_spia_velocita_0
+                - input_boolean.vmc_cucina_spia_velocita_1
+                - input_boolean.vmc_cucina_spia_velocita_2
+                - input_boolean.vmc_cucina_spia_velocita_3
+                - input_boolean.vmc_cucina_spia_velocita_4
+                - input_boolean.vmc_cucina_spia_velocita_notturna
+                - input_boolean.vmc_cucina_spia_velocita_freecooling
+      - conditions:
+          - condition: trigger
+            id: Black-Out Off Iperventilazione
+        sequence:
+          - service: shell_command.vmc_cucina_iperventilazione
+            data: {}
+          - service: input_boolean.turn_off
+            data: {}
+            target:
+              entity_id:
+                - input_boolean.vmc_cucina_spia_velocita_0
+                - input_boolean.vmc_cucina_spia_velocita_1
+                - input_boolean.vmc_cucina_spia_velocita_2
+                - input_boolean.vmc_cucina_spia_velocita_3
+                - input_boolean.vmc_cucina_spia_velocita_4
+                - input_boolean.vmc_cucina_spia_velocita_notturna
+                - input_boolean.vmc_cucina_spia_velocita_freecooling
+                - input_boolean.vmc_cucina_spia_velocita_iperventilazione
+            enabled: true
+      - conditions:
+          - condition: trigger
+            id: Black-Out Free Cool./Heat.
+        sequence:
+          - service: input_boolean.turn_on
+            data: {}
+            target:
+              entity_id:
+                - input_boolean.vmc_cucina_spia_velocita_freecooling
+          - service: input_boolean.turn_off
+            data: {}
+            target:
+              entity_id:
+                - input_boolean.vmc_cucina_spia_velocita_1
+                - input_boolean.vmc_cucina_spia_velocita_2
+                - input_boolean.vmc_cucina_spia_velocita_3
+                - input_boolean.vmc_cucina_spia_velocita_4
+                - input_boolean.vmc_cucina_spia_velocita_notturna
+                - input_boolean.vmc_cucina_spia_velocita_iperventilazione
+      - conditions:
+          - condition: trigger
+            id: Black-Out Off Free Cool./Heat.
+        sequence:
+          - service: shell_command.vmc_cucina_freecooling
+            data: {}
+          - service: input_boolean.turn_off
+            data: {}
+            target:
+              entity_id:
+                - input_boolean.vmc_cucina_spia_velocita_0
+                - input_boolean.vmc_cucina_spia_velocita_1
+                - input_boolean.vmc_cucina_spia_velocita_2
+                - input_boolean.vmc_cucina_spia_velocita_3
+                - input_boolean.vmc_cucina_spia_velocita_4
+                - input_boolean.vmc_cucina_spia_velocita_notturna
+                - input_boolean.vmc_cucina_spia_velocita_freecooling
+                - input_boolean.vmc_cucina_spia_velocita_iperventilazione
+            enabled: true
+      - conditions:
+          - condition: trigger
+            id: 1° Lunedì On
+          - condition: state
+            entity_id: input_boolean.vmc_cucina_opzioni_accendi_spegni_vmc_vs_calendario
+            state: "on"
+        sequence:
+          - choose:
+              - conditions:
+                  - condition: state
+                    entity_id: input_select.vmc_cucina_speed_1_fascia_calendario
+                    state: Velocità 0
+                sequence:
+                  - service: shell_command.vmc_cucina_velocita_0
+                    data: {}
+              - conditions:
+                  - condition: state
+                    entity_id: input_select.vmc_cucina_speed_1_fascia_calendario
+                    state: Velocità 1
+                sequence:
+                  - service: shell_command.vmc_cucina_velocita_1
+                    data: {}
+              - conditions:
+                  - condition: state
+                    entity_id: input_select.vmc_cucina_speed_1_fascia_calendario
+                    state: Velocità 3
+                sequence:
+                  - service: shell_command.vmc_cucina_velocita_3
+                    data: {}
+              - conditions:
+                  - condition: state
+                    entity_id: input_select.vmc_cucina_speed_1_fascia_calendario
+                    state: Velocità 4
+                sequence:
+                  - service: shell_command.vmc_cucina_velocita_4
+                    data: {}
+              - conditions:
+                  - condition: state
+                    entity_id: input_select.vmc_cucina_speed_1_fascia_calendario
+                    state: Notturna
+                sequence:
+                  - service: shell_command.vmc_cucina_notturna
+                    data: {}
+              - conditions:
+                  - condition: state
+                    entity_id: input_select.vmc_cucina_speed_1_fascia_calendario
+                    state: Iperventilazione
+                sequence:
+                  - service: shell_command.vmc_cucina_iperventilazione
+                    data: {}
+              - conditions:
+                  - condition: state
+                    entity_id: input_select.vmc_cucina_speed_1_fascia_calendario
+                    state: Free Cool./Heat.
+                sequence:
+                  - service: shell_command.vmc_cucina_freecooling
+                    data: {}
+            alias: >-
+              Scelta della Velocità Impostata di Default nella 1° Fascia
+              Calendario
+          - service: input_boolean.turn_on
+            data: {}
+            target:
+              entity_id: input_boolean.vmc_cucina_spia_calendario_lunedi_1
+          - service: input_boolean.turn_off
+            data: {}
+            target:
+              entity_id:
+                - >-
+                  input_boolean.vmc_cucina_spia_velocita_freecooling_un_solo_avvio_per_programmazione_freecooling
+                - >-
+                  input_boolean.vmc_cucina_spia_velocita_freecooling_un_solo_avvio_per_programmazione_freeheating
+      - conditions:
+          - condition: trigger
+            id: 1° Lunedì Off
+          - condition: state
+            entity_id: input_boolean.vmc_cucina_opzioni_accendi_spegni_vmc_vs_calendario
+            state: "on"
+        sequence:
+          - service: shell_command.vmc_cucina_velocita_0
+            data: {}
+            alias: Velocità 0
+          - service: input_boolean.turn_off
+            data: {}
+            target:
+              entity_id:
+                - input_boolean.vmc_cucina_spia_velocita_0_un_solo_avvio
+                - input_boolean.vmc_cucina_spia_velocita_1_un_solo_avvio
+                - input_boolean.vmc_cucina_spia_velocita_2_un_solo_avvio
+                - input_boolean.vmc_cucina_spia_velocita_3_un_solo_avvio
+                - input_boolean.vmc_cucina_spia_velocita_4_un_solo_avvio
+                - input_boolean.vmc_cucina_spia_velocita_notturna_un_solo_avvio
+                - >-
+                  input_boolean.vmc_cucina_spia_velocita_freecooling_un_solo_avvio
+                - >-
+                  input_boolean.vmc_cucina_spia_velocita_iperventilazione_un_solo_avvio
+                - input_boolean.vmc_cucina_spia_velocita_0
+                - input_boolean.vmc_cucina_spia_velocita_1
+                - input_boolean.vmc_cucina_spia_velocita_2
+                - input_boolean.vmc_cucina_spia_velocita_3
+                - input_boolean.vmc_cucina_spia_velocita_4
+                - input_boolean.vmc_cucina_spia_velocita_freecooling
+                - input_boolean.vmc_cucina_spia_velocita_iperventilazione
+                - input_boolean.vmc_cucina_spia_velocita_notturna
+                - >-
+                  input_boolean.vmc_cucina_spia_velocita_freecooling_un_solo_avvio_per_programmazione_freecooling
+                - >-
+                  input_boolean.vmc_cucina_spia_velocita_freecooling_un_solo_avvio_per_programmazione_freeheating
+          - service: input_boolean.turn_off
+            data: {}
+            target:
+              entity_id: input_boolean.vmc_cucina_spia_calendario_lunedi_1
+      - conditions:
+          - condition: trigger
+            id: 2° Lunedì On
+          - condition: state
+            entity_id: input_boolean.vmc_cucina_opzioni_accendi_spegni_vmc_vs_calendario
+            state: "on"
+        sequence:
+          - choose:
+              - conditions:
+                  - condition: state
+                    entity_id: input_select.vmc_cucina_speed_2_fascia_calendario
+                    state: Velocità 0
+                sequence:
+                  - service: shell_command.vmc_cucina_velocita_0
+                    data: {}
+              - conditions:
+                  - condition: state
+                    entity_id: input_select.vmc_cucina_speed_2_fascia_calendario
+                    state: Velocità 1
+                sequence:
+                  - service: shell_command.vmc_cucina_velocita_1
+                    data: {}
+              - conditions:
+                  - condition: state
+                    entity_id: input_select.vmc_cucina_speed_2_fascia_calendario
+                    state: Velocità 3
+                sequence:
+                  - service: shell_command.vmc_cucina_velocita_3
+                    data: {}
+              - conditions:
+                  - condition: state
+                    entity_id: input_select.vmc_cucina_speed_2_fascia_calendario
+                    state: Velocità 4
+                sequence:
+                  - service: shell_command.vmc_cucina_velocita_4
+                    data: {}
+              - conditions:
+                  - condition: state
+                    entity_id: input_select.vmc_cucina_speed_2_fascia_calendario
+                    state: Notturna
+                sequence:
+                  - service: shell_command.vmc_cucina_notturna
+                    data: {}
+              - conditions:
+                  - condition: state
+                    entity_id: input_select.vmc_cucina_speed_2_fascia_calendario
+                    state: Iperventilazione
+                sequence:
+                  - service: shell_command.vmc_cucina_iperventilazione
+                    data: {}
+              - conditions:
+                  - condition: state
+                    entity_id: input_select.vmc_cucina_speed_2_fascia_calendario
+                    state: Free Cool./Heat.
+                sequence:
+                  - service: shell_command.vmc_cucina_freecooling
+                    data: {}
+            alias: >-
+              Scelta della Velocità Impostata di Default nella 2° Fascia
+              Calendario
+          - service: input_boolean.turn_on
+            data: {}
+            target:
+              entity_id: input_boolean.vmc_cucina_spia_calendario_lunedi_2
+          - service: input_boolean.turn_off
+            data: {}
+            target:
+              entity_id:
+                - >-
+                  input_boolean.vmc_cucina_spia_velocita_freecooling_un_solo_avvio_per_programmazione_freecooling
+                - >-
+                  input_boolean.vmc_cucina_spia_velocita_freecooling_un_solo_avvio_per_programmazione_freeheating
+      - conditions:
+          - condition: trigger
+            id: 2° Lunedì Off
+          - condition: state
+            entity_id: input_boolean.vmc_cucina_opzioni_accendi_spegni_vmc_vs_calendario
+            state: "on"
+        sequence:
+          - service: shell_command.vmc_cucina_velocita_0
+            data: {}
+            alias: Velocità 0
+          - service: input_boolean.turn_off
+            data: {}
+            target:
+              entity_id:
+                - input_boolean.vmc_cucina_spia_velocita_0_un_solo_avvio
+                - input_boolean.vmc_cucina_spia_velocita_1_un_solo_avvio
+                - input_boolean.vmc_cucina_spia_velocita_2_un_solo_avvio
+                - input_boolean.vmc_cucina_spia_velocita_3_un_solo_avvio
+                - input_boolean.vmc_cucina_spia_velocita_4_un_solo_avvio
+                - input_boolean.vmc_cucina_spia_velocita_notturna_un_solo_avvio
+                - >-
+                  input_boolean.vmc_cucina_spia_velocita_freecooling_un_solo_avvio
+                - >-
+                  input_boolean.vmc_cucina_spia_velocita_iperventilazione_un_solo_avvio
+                - input_boolean.vmc_cucina_spia_velocita_0
+                - input_boolean.vmc_cucina_spia_velocita_1
+                - input_boolean.vmc_cucina_spia_velocita_2
+                - input_boolean.vmc_cucina_spia_velocita_3
+                - input_boolean.vmc_cucina_spia_velocita_4
+                - input_boolean.vmc_cucina_spia_velocita_freecooling
+                - input_boolean.vmc_cucina_spia_velocita_iperventilazione
+                - input_boolean.vmc_cucina_spia_velocita_notturna
+                - >-
+                  input_boolean.vmc_cucina_spia_velocita_freecooling_un_solo_avvio_per_programmazione_freecooling
+                - >-
+                  input_boolean.vmc_cucina_spia_velocita_freecooling_un_solo_avvio_per_programmazione_freeheating
+          - service: input_boolean.turn_off
+            data: {}
+            target:
+              entity_id: input_boolean.vmc_cucina_spia_calendario_lunedi_2
+      - conditions:
+          - condition: trigger
+            id: 1° Martedì On
+          - condition: state
+            entity_id: input_boolean.vmc_cucina_opzioni_accendi_spegni_vmc_vs_calendario
+            state: "on"
+        sequence:
+          - choose:
+              - conditions:
+                  - condition: state
+                    entity_id: input_select.vmc_cucina_speed_1_fascia_calendario
+                    state: Velocità 0
+                sequence:
+                  - service: shell_command.vmc_cucina_velocita_0
+                    data: {}
+              - conditions:
+                  - condition: state
+                    entity_id: input_select.vmc_cucina_speed_1_fascia_calendario
+                    state: Velocità 1
+                sequence:
+                  - service: shell_command.vmc_cucina_velocita_1
+                    data: {}
+              - conditions:
+                  - condition: state
+                    entity_id: input_select.vmc_cucina_speed_1_fascia_calendario
+                    state: Velocità 3
+                sequence:
+                  - service: shell_command.vmc_cucina_velocita_3
+                    data: {}
+              - conditions:
+                  - condition: state
+                    entity_id: input_select.vmc_cucina_speed_1_fascia_calendario
+                    state: Velocità 4
+                sequence:
+                  - service: shell_command.vmc_cucina_velocita_4
+                    data: {}
+              - conditions:
+                  - condition: state
+                    entity_id: input_select.vmc_cucina_speed_1_fascia_calendario
+                    state: Notturna
+                sequence:
+                  - service: shell_command.vmc_cucina_notturna
+                    data: {}
+              - conditions:
+                  - condition: state
+                    entity_id: input_select.vmc_cucina_speed_1_fascia_calendario
+                    state: Iperventilazione
+                sequence:
+                  - service: shell_command.vmc_cucina_iperventilazione
+                    data: {}
+              - conditions:
+                  - condition: state
+                    entity_id: input_select.vmc_cucina_speed_1_fascia_calendario
+                    state: Free Cool./Heat.
+                sequence:
+                  - service: shell_command.vmc_cucina_freecooling
+                    data: {}
+            alias: >-
+              Scelta della Velocità Impostata di Default nella 1° Fascia
+              Calendario
+          - service: input_boolean.turn_on
+            data: {}
+            target:
+              entity_id: input_boolean.vmc_cucina_spia_calendario_martedi_1
+          - service: input_boolean.turn_off
+            data: {}
+            target:
+              entity_id:
+                - >-
+                  input_boolean.vmc_cucina_spia_velocita_freecooling_un_solo_avvio_per_programmazione_freecooling
+                - >-
+                  input_boolean.vmc_cucina_spia_velocita_freecooling_un_solo_avvio_per_programmazione_freeheating
+      - conditions:
+          - condition: trigger
+            id: 1° Martedì Off
+          - condition: state
+            entity_id: input_boolean.vmc_cucina_opzioni_accendi_spegni_vmc_vs_calendario
+            state: "on"
+        sequence:
+          - service: shell_command.vmc_cucina_velocita_0
+            data: {}
+            alias: Velocità 0
+          - service: input_boolean.turn_off
+            data: {}
+            target:
+              entity_id:
+                - input_boolean.vmc_cucina_spia_velocita_0_un_solo_avvio
+                - input_boolean.vmc_cucina_spia_velocita_1_un_solo_avvio
+                - input_boolean.vmc_cucina_spia_velocita_2_un_solo_avvio
+                - input_boolean.vmc_cucina_spia_velocita_3_un_solo_avvio
+                - input_boolean.vmc_cucina_spia_velocita_4_un_solo_avvio
+                - input_boolean.vmc_cucina_spia_velocita_notturna_un_solo_avvio
+                - >-
+                  input_boolean.vmc_cucina_spia_velocita_freecooling_un_solo_avvio
+                - >-
+                  input_boolean.vmc_cucina_spia_velocita_iperventilazione_un_solo_avvio
+                - input_boolean.vmc_cucina_spia_velocita_0
+                - input_boolean.vmc_cucina_spia_velocita_1
+                - input_boolean.vmc_cucina_spia_velocita_2
+                - input_boolean.vmc_cucina_spia_velocita_3
+                - input_boolean.vmc_cucina_spia_velocita_4
+                - input_boolean.vmc_cucina_spia_velocita_freecooling
+                - input_boolean.vmc_cucina_spia_velocita_iperventilazione
+                - input_boolean.vmc_cucina_spia_velocita_notturna
+                - >-
+                  input_boolean.vmc_cucina_spia_velocita_freecooling_un_solo_avvio_per_programmazione_freecooling
+                - >-
+                  input_boolean.vmc_cucina_spia_velocita_freecooling_un_solo_avvio_per_programmazione_freeheating
+          - service: input_boolean.turn_off
+            data: {}
+            target:
+              entity_id: input_boolean.vmc_cucina_spia_calendario_martedi_1
+      - conditions:
+          - condition: trigger
+            id: 2° Martedì On
+          - condition: state
+            entity_id: input_boolean.vmc_cucina_opzioni_accendi_spegni_vmc_vs_calendario
+            state: "on"
+        sequence:
+          - choose:
+              - conditions:
+                  - condition: state
+                    entity_id: input_select.vmc_cucina_speed_2_fascia_calendario
+                    state: Velocità 0
+                sequence:
+                  - service: shell_command.vmc_cucina_velocita_0
+                    data: {}
+              - conditions:
+                  - condition: state
+                    entity_id: input_select.vmc_cucina_speed_2_fascia_calendario
+                    state: Velocità 1
+                sequence:
+                  - service: shell_command.vmc_cucina_velocita_1
+                    data: {}
+              - conditions:
+                  - condition: state
+                    entity_id: input_select.vmc_cucina_speed_2_fascia_calendario
+                    state: Velocità 3
+                sequence:
+                  - service: shell_command.vmc_cucina_velocita_3
+                    data: {}
+              - conditions:
+                  - condition: state
+                    entity_id: input_select.vmc_cucina_speed_2_fascia_calendario
+                    state: Velocità 4
+                sequence:
+                  - service: shell_command.vmc_cucina_velocita_4
+                    data: {}
+              - conditions:
+                  - condition: state
+                    entity_id: input_select.vmc_cucina_speed_2_fascia_calendario
+                    state: Notturna
+                sequence:
+                  - service: shell_command.vmc_cucina_notturna
+                    data: {}
+              - conditions:
+                  - condition: state
+                    entity_id: input_select.vmc_cucina_speed_2_fascia_calendario
+                    state: Iperventilazione
+                sequence:
+                  - service: shell_command.vmc_cucina_iperventilazione
+                    data: {}
+              - conditions:
+                  - condition: state
+                    entity_id: input_select.vmc_cucina_speed_2_fascia_calendario
+                    state: Free Cool./Heat.
+                sequence:
+                  - service: shell_command.vmc_cucina_freecooling
+                    data: {}
+            alias: >-
+              Scelta della Velocità Impostata di Default nella 2° Fascia
+              Calendario
+          - service: input_boolean.turn_on
+            data: {}
+            target:
+              entity_id: input_boolean.vmc_cucina_spia_calendario_martedi_2
+          - service: input_boolean.turn_off
+            data: {}
+            target:
+              entity_id:
+                - >-
+                  input_boolean.vmc_cucina_spia_velocita_freecooling_un_solo_avvio_per_programmazione_freecooling
+                - >-
+                  input_boolean.vmc_cucina_spia_velocita_freecooling_un_solo_avvio_per_programmazione_freeheating
+      - conditions:
+          - condition: trigger
+            id: 2° Martedì Off
+          - condition: state
+            entity_id: input_boolean.vmc_cucina_opzioni_accendi_spegni_vmc_vs_calendario
+            state: "on"
+        sequence:
+          - service: shell_command.vmc_cucina_velocita_0
+            data: {}
+            alias: Velocità 0
+          - service: input_boolean.turn_off
+            data: {}
+            target:
+              entity_id:
+                - input_boolean.vmc_cucina_spia_velocita_0_un_solo_avvio
+                - input_boolean.vmc_cucina_spia_velocita_1_un_solo_avvio
+                - input_boolean.vmc_cucina_spia_velocita_2_un_solo_avvio
+                - input_boolean.vmc_cucina_spia_velocita_3_un_solo_avvio
+                - input_boolean.vmc_cucina_spia_velocita_4_un_solo_avvio
+                - input_boolean.vmc_cucina_spia_velocita_notturna_un_solo_avvio
+                - >-
+                  input_boolean.vmc_cucina_spia_velocita_freecooling_un_solo_avvio
+                - >-
+                  input_boolean.vmc_cucina_spia_velocita_iperventilazione_un_solo_avvio
+                - input_boolean.vmc_cucina_spia_velocita_0
+                - input_boolean.vmc_cucina_spia_velocita_1
+                - input_boolean.vmc_cucina_spia_velocita_2
+                - input_boolean.vmc_cucina_spia_velocita_3
+                - input_boolean.vmc_cucina_spia_velocita_4
+                - input_boolean.vmc_cucina_spia_velocita_freecooling
+                - input_boolean.vmc_cucina_spia_velocita_iperventilazione
+                - input_boolean.vmc_cucina_spia_velocita_notturna
+                - >-
+                  input_boolean.vmc_cucina_spia_velocita_freecooling_un_solo_avvio_per_programmazione_freecooling
+                - >-
+                  input_boolean.vmc_cucina_spia_velocita_freecooling_un_solo_avvio_per_programmazione_freeheating
+          - service: input_boolean.turn_off
+            data: {}
+            target:
+              entity_id: input_boolean.vmc_cucina_spia_calendario_martedi_2
+      - conditions:
+          - condition: trigger
+            id: 1° Mercoledì On
+          - condition: state
+            entity_id: input_boolean.vmc_cucina_opzioni_accendi_spegni_vmc_vs_calendario
+            state: "on"
+        sequence:
+          - choose:
+              - conditions:
+                  - condition: state
+                    entity_id: input_select.vmc_cucina_speed_1_fascia_calendario
+                    state: Velocità 0
+                sequence:
+                  - service: shell_command.vmc_cucina_velocita_0
+                    data: {}
+              - conditions:
+                  - condition: state
+                    entity_id: input_select.vmc_cucina_speed_1_fascia_calendario
+                    state: Velocità 1
+                sequence:
+                  - service: shell_command.vmc_cucina_velocita_1
+                    data: {}
+              - conditions:
+                  - condition: state
+                    entity_id: input_select.vmc_cucina_speed_1_fascia_calendario
+                    state: Velocità 3
+                sequence:
+                  - service: shell_command.vmc_cucina_velocita_3
+                    data: {}
+              - conditions:
+                  - condition: state
+                    entity_id: input_select.vmc_cucina_speed_1_fascia_calendario
+                    state: Velocità 4
+                sequence:
+                  - service: shell_command.vmc_cucina_velocita_4
+                    data: {}
+              - conditions:
+                  - condition: state
+                    entity_id: input_select.vmc_cucina_speed_1_fascia_calendario
+                    state: Notturna
+                sequence:
+                  - service: shell_command.vmc_cucina_notturna
+                    data: {}
+              - conditions:
+                  - condition: state
+                    entity_id: input_select.vmc_cucina_speed_1_fascia_calendario
+                    state: Iperventilazione
+                sequence:
+                  - service: shell_command.vmc_cucina_iperventilazione
+                    data: {}
+              - conditions:
+                  - condition: state
+                    entity_id: input_select.vmc_cucina_speed_1_fascia_calendario
+                    state: Free Cool./Heat.
+                sequence:
+                  - service: shell_command.vmc_cucina_freecooling
+                    data: {}
+            alias: >-
+              Scelta della Velocità Impostata di Default nella 1° Fascia
+              Calendario
+          - service: input_boolean.turn_on
+            data: {}
+            target:
+              entity_id: input_boolean.vmc_cucina_spia_calendario_mercoledi_1
+          - service: input_boolean.turn_off
+            data: {}
+            target:
+              entity_id:
+                - >-
+                  input_boolean.vmc_cucina_spia_velocita_freecooling_un_solo_avvio_per_programmazione_freecooling
+                - >-
+                  input_boolean.vmc_cucina_spia_velocita_freecooling_un_solo_avvio_per_programmazione_freeheating
+      - conditions:
+          - condition: trigger
+            id: 1° Mercoledì Off
+          - condition: state
+            entity_id: input_boolean.vmc_cucina_opzioni_accendi_spegni_vmc_vs_calendario
+            state: "on"
+        sequence:
+          - service: shell_command.vmc_cucina_velocita_0
+            data: {}
+            alias: Velocità 0
+          - service: input_boolean.turn_off
+            data: {}
+            target:
+              entity_id:
+                - input_boolean.vmc_cucina_spia_velocita_0_un_solo_avvio
+                - input_boolean.vmc_cucina_spia_velocita_1_un_solo_avvio
+                - input_boolean.vmc_cucina_spia_velocita_2_un_solo_avvio
+                - input_boolean.vmc_cucina_spia_velocita_3_un_solo_avvio
+                - input_boolean.vmc_cucina_spia_velocita_4_un_solo_avvio
+                - input_boolean.vmc_cucina_spia_velocita_notturna_un_solo_avvio
+                - >-
+                  input_boolean.vmc_cucina_spia_velocita_freecooling_un_solo_avvio
+                - >-
+                  input_boolean.vmc_cucina_spia_velocita_iperventilazione_un_solo_avvio
+                - input_boolean.vmc_cucina_spia_velocita_0
+                - input_boolean.vmc_cucina_spia_velocita_1
+                - input_boolean.vmc_cucina_spia_velocita_2
+                - input_boolean.vmc_cucina_spia_velocita_3
+                - input_boolean.vmc_cucina_spia_velocita_4
+                - input_boolean.vmc_cucina_spia_velocita_freecooling
+                - input_boolean.vmc_cucina_spia_velocita_iperventilazione
+                - input_boolean.vmc_cucina_spia_velocita_notturna
+                - >-
+                  input_boolean.vmc_cucina_spia_velocita_freecooling_un_solo_avvio_per_programmazione_freecooling
+                - >-
+                  input_boolean.vmc_cucina_spia_velocita_freecooling_un_solo_avvio_per_programmazione_freeheating
+          - service: input_boolean.turn_off
+            data: {}
+            target:
+              entity_id: input_boolean.vmc_cucina_spia_calendario_mercoledi_1
+      - conditions:
+          - condition: trigger
+            id: 2° Mercoledì On
+          - condition: state
+            entity_id: input_boolean.vmc_cucina_opzioni_accendi_spegni_vmc_vs_calendario
+            state: "on"
+        sequence:
+          - choose:
+              - conditions:
+                  - condition: state
+                    entity_id: input_select.vmc_cucina_speed_2_fascia_calendario
+                    state: Velocità 0
+                sequence:
+                  - service: shell_command.vmc_cucina_velocita_0
+                    data: {}
+              - conditions:
+                  - condition: state
+                    entity_id: input_select.vmc_cucina_speed_2_fascia_calendario
+                    state: Velocità 1
+                sequence:
+                  - service: shell_command.vmc_cucina_velocita_1
+                    data: {}
+              - conditions:
+                  - condition: state
+                    entity_id: input_select.vmc_cucina_speed_2_fascia_calendario
+                    state: Velocità 3
+                sequence:
+                  - service: shell_command.vmc_cucina_velocita_3
+                    data: {}
+              - conditions:
+                  - condition: state
+                    entity_id: input_select.vmc_cucina_speed_2_fascia_calendario
+                    state: Velocità 4
+                sequence:
+                  - service: shell_command.vmc_cucina_velocita_4
+                    data: {}
+              - conditions:
+                  - condition: state
+                    entity_id: input_select.vmc_cucina_speed_2_fascia_calendario
+                    state: Notturna
+                sequence:
+                  - service: shell_command.vmc_cucina_notturna
+                    data: {}
+              - conditions:
+                  - condition: state
+                    entity_id: input_select.vmc_cucina_speed_2_fascia_calendario
+                    state: Iperventilazione
+                sequence:
+                  - service: shell_command.vmc_cucina_iperventilazione
+                    data: {}
+              - conditions:
+                  - condition: state
+                    entity_id: input_select.vmc_cucina_speed_2_fascia_calendario
+                    state: Free Cool./Heat.
+                sequence:
+                  - service: shell_command.vmc_cucina_freecooling
+                    data: {}
+            alias: >-
+              Scelta della Velocità Impostata di Default nella 2° Fascia
+              Calendario
+          - service: input_boolean.turn_on
+            data: {}
+            target:
+              entity_id: input_boolean.vmc_cucina_spia_calendario_mercoledi_2
+          - service: input_boolean.turn_off
+            data: {}
+            target:
+              entity_id:
+                - >-
+                  input_boolean.vmc_cucina_spia_velocita_freecooling_un_solo_avvio_per_programmazione_freecooling
+                - >-
+                  input_boolean.vmc_cucina_spia_velocita_freecooling_un_solo_avvio_per_programmazione_freeheating
+      - conditions:
+          - condition: trigger
+            id: 2° Mercoledì Off
+          - condition: state
+            entity_id: input_boolean.vmc_cucina_opzioni_accendi_spegni_vmc_vs_calendario
+            state: "on"
+        sequence:
+          - service: shell_command.vmc_cucina_velocita_0
+            data: {}
+            alias: Velocità 0
+          - service: input_boolean.turn_off
+            data: {}
+            target:
+              entity_id:
+                - input_boolean.vmc_cucina_spia_velocita_0_un_solo_avvio
+                - input_boolean.vmc_cucina_spia_velocita_1_un_solo_avvio
+                - input_boolean.vmc_cucina_spia_velocita_2_un_solo_avvio
+                - input_boolean.vmc_cucina_spia_velocita_3_un_solo_avvio
+                - input_boolean.vmc_cucina_spia_velocita_4_un_solo_avvio
+                - input_boolean.vmc_cucina_spia_velocita_notturna_un_solo_avvio
+                - >-
+                  input_boolean.vmc_cucina_spia_velocita_freecooling_un_solo_avvio
+                - >-
+                  input_boolean.vmc_cucina_spia_velocita_iperventilazione_un_solo_avvio
+                - input_boolean.vmc_cucina_spia_velocita_0
+                - input_boolean.vmc_cucina_spia_velocita_1
+                - input_boolean.vmc_cucina_spia_velocita_2
+                - input_boolean.vmc_cucina_spia_velocita_3
+                - input_boolean.vmc_cucina_spia_velocita_4
+                - input_boolean.vmc_cucina_spia_velocita_freecooling
+                - input_boolean.vmc_cucina_spia_velocita_iperventilazione
+                - input_boolean.vmc_cucina_spia_velocita_notturna
+                - >-
+                  input_boolean.vmc_cucina_spia_velocita_freecooling_un_solo_avvio_per_programmazione_freecooling
+                - >-
+                  input_boolean.vmc_cucina_spia_velocita_freecooling_un_solo_avvio_per_programmazione_freeheating
+          - service: input_boolean.turn_off
+            data: {}
+            target:
+              entity_id: input_boolean.vmc_cucina_spia_calendario_mercoledi_2
+      - conditions:
+          - condition: trigger
+            id: 1° Giovedì On
+          - condition: state
+            entity_id: input_boolean.vmc_cucina_opzioni_accendi_spegni_vmc_vs_calendario
+            state: "on"
+        sequence:
+          - choose:
+              - conditions:
+                  - condition: state
+                    entity_id: input_select.vmc_cucina_speed_1_fascia_calendario
+                    state: Velocità 0
+                sequence:
+                  - service: shell_command.vmc_cucina_velocita_0
+                    data: {}
+              - conditions:
+                  - condition: state
+                    entity_id: input_select.vmc_cucina_speed_1_fascia_calendario
+                    state: Velocità 1
+                sequence:
+                  - service: shell_command.vmc_cucina_velocita_1
+                    data: {}
+              - conditions:
+                  - condition: state
+                    entity_id: input_select.vmc_cucina_speed_1_fascia_calendario
+                    state: Velocità 3
+                sequence:
+                  - service: shell_command.vmc_cucina_velocita_3
+                    data: {}
+              - conditions:
+                  - condition: state
+                    entity_id: input_select.vmc_cucina_speed_1_fascia_calendario
+                    state: Velocità 4
+                sequence:
+                  - service: shell_command.vmc_cucina_velocita_4
+                    data: {}
+              - conditions:
+                  - condition: state
+                    entity_id: input_select.vmc_cucina_speed_1_fascia_calendario
+                    state: Notturna
+                sequence:
+                  - service: shell_command.vmc_cucina_notturna
+                    data: {}
+              - conditions:
+                  - condition: state
+                    entity_id: input_select.vmc_cucina_speed_1_fascia_calendario
+                    state: Iperventilazione
+                sequence:
+                  - service: shell_command.vmc_cucina_iperventilazione
+                    data: {}
+              - conditions:
+                  - condition: state
+                    entity_id: input_select.vmc_cucina_speed_1_fascia_calendario
+                    state: Free Cool./Heat.
+                sequence:
+                  - service: shell_command.vmc_cucina_freecooling
+                    data: {}
+            alias: >-
+              Scelta della Velocità Impostata di Default nella 1° Fascia
+              Calendario
+          - service: input_boolean.turn_on
+            data: {}
+            target:
+              entity_id: input_boolean.vmc_cucina_spia_calendario_giovedi_1
+          - service: input_boolean.turn_off
+            data: {}
+            target:
+              entity_id:
+                - >-
+                  input_boolean.vmc_cucina_spia_velocita_freecooling_un_solo_avvio_per_programmazione_freecooling
+                - >-
+                  input_boolean.vmc_cucina_spia_velocita_freecooling_un_solo_avvio_per_programmazione_freeheating
+      - conditions:
+          - condition: trigger
+            id: 1° Giovedì Off
+          - condition: state
+            entity_id: input_boolean.vmc_cucina_opzioni_accendi_spegni_vmc_vs_calendario
+            state: "on"
+        sequence:
+          - service: shell_command.vmc_cucina_velocita_0
+            data: {}
+            alias: Velocità 0
+          - service: input_boolean.turn_off
+            data: {}
+            target:
+              entity_id:
+                - input_boolean.vmc_cucina_spia_velocita_0_un_solo_avvio
+                - input_boolean.vmc_cucina_spia_velocita_1_un_solo_avvio
+                - input_boolean.vmc_cucina_spia_velocita_2_un_solo_avvio
+                - input_boolean.vmc_cucina_spia_velocita_3_un_solo_avvio
+                - input_boolean.vmc_cucina_spia_velocita_4_un_solo_avvio
+                - input_boolean.vmc_cucina_spia_velocita_notturna_un_solo_avvio
+                - >-
+                  input_boolean.vmc_cucina_spia_velocita_freecooling_un_solo_avvio
+                - >-
+                  input_boolean.vmc_cucina_spia_velocita_iperventilazione_un_solo_avvio
+                - input_boolean.vmc_cucina_spia_velocita_0
+                - input_boolean.vmc_cucina_spia_velocita_1
+                - input_boolean.vmc_cucina_spia_velocita_2
+                - input_boolean.vmc_cucina_spia_velocita_3
+                - input_boolean.vmc_cucina_spia_velocita_4
+                - input_boolean.vmc_cucina_spia_velocita_freecooling
+                - input_boolean.vmc_cucina_spia_velocita_iperventilazione
+                - input_boolean.vmc_cucina_spia_velocita_notturna
+                - >-
+                  input_boolean.vmc_cucina_spia_velocita_freecooling_un_solo_avvio_per_programmazione_freecooling
+                - >-
+                  input_boolean.vmc_cucina_spia_velocita_freecooling_un_solo_avvio_per_programmazione_freeheating
+          - service: input_boolean.turn_off
+            data: {}
+            target:
+              entity_id: input_boolean.vmc_cucina_spia_calendario_giovedi_1
+      - conditions:
+          - condition: trigger
+            id: 2° Giovedì On
+          - condition: state
+            entity_id: input_boolean.vmc_cucina_opzioni_accendi_spegni_vmc_vs_calendario
+            state: "on"
+        sequence:
+          - choose:
+              - conditions:
+                  - condition: state
+                    entity_id: input_select.vmc_cucina_speed_2_fascia_calendario
+                    state: Velocità 0
+                sequence:
+                  - service: shell_command.vmc_cucina_velocita_0
+                    data: {}
+              - conditions:
+                  - condition: state
+                    entity_id: input_select.vmc_cucina_speed_2_fascia_calendario
+                    state: Velocità 1
+                sequence:
+                  - service: shell_command.vmc_cucina_velocita_1
+                    data: {}
+              - conditions:
+                  - condition: state
+                    entity_id: input_select.vmc_cucina_speed_2_fascia_calendario
+                    state: Velocità 3
+                sequence:
+                  - service: shell_command.vmc_cucina_velocita_3
+                    data: {}
+              - conditions:
+                  - condition: state
+                    entity_id: input_select.vmc_cucina_speed_2_fascia_calendario
+                    state: Velocità 4
+                sequence:
+                  - service: shell_command.vmc_cucina_velocita_4
+                    data: {}
+              - conditions:
+                  - condition: state
+                    entity_id: input_select.vmc_cucina_speed_2_fascia_calendario
+                    state: Notturna
+                sequence:
+                  - service: shell_command.vmc_cucina_notturna
+                    data: {}
+              - conditions:
+                  - condition: state
+                    entity_id: input_select.vmc_cucina_speed_2_fascia_calendario
+                    state: Iperventilazione
+                sequence:
+                  - service: shell_command.vmc_cucina_iperventilazione
+                    data: {}
+              - conditions:
+                  - condition: state
+                    entity_id: input_select.vmc_cucina_speed_2_fascia_calendario
+                    state: Free Cool./Heat.
+                sequence:
+                  - service: shell_command.vmc_cucina_freecooling
+                    data: {}
+            alias: >-
+              Scelta della Velocità Impostata di Default nella 2° Fascia
+              Calendario
+          - service: input_boolean.turn_on
+            data: {}
+            target:
+              entity_id: input_boolean.vmc_cucina_spia_calendario_giovedi_2
+          - service: input_boolean.turn_off
+            data: {}
+            target:
+              entity_id:
+                - >-
+                  input_boolean.vmc_cucina_spia_velocita_freecooling_un_solo_avvio_per_programmazione_freecooling
+                - >-
+                  input_boolean.vmc_cucina_spia_velocita_freecooling_un_solo_avvio_per_programmazione_freeheating
+      - conditions:
+          - condition: trigger
+            id: 2° Giovedì Off
+          - condition: state
+            entity_id: input_boolean.vmc_cucina_opzioni_accendi_spegni_vmc_vs_calendario
+            state: "on"
+        sequence:
+          - service: shell_command.vmc_cucina_velocita_0
+            data: {}
+            alias: Velocità 0
+          - service: input_boolean.turn_off
+            data: {}
+            target:
+              entity_id:
+                - input_boolean.vmc_cucina_spia_velocita_0_un_solo_avvio
+                - input_boolean.vmc_cucina_spia_velocita_1_un_solo_avvio
+                - input_boolean.vmc_cucina_spia_velocita_2_un_solo_avvio
+                - input_boolean.vmc_cucina_spia_velocita_3_un_solo_avvio
+                - input_boolean.vmc_cucina_spia_velocita_4_un_solo_avvio
+                - input_boolean.vmc_cucina_spia_velocita_notturna_un_solo_avvio
+                - >-
+                  input_boolean.vmc_cucina_spia_velocita_freecooling_un_solo_avvio
+                - >-
+                  input_boolean.vmc_cucina_spia_velocita_iperventilazione_un_solo_avvio
+                - input_boolean.vmc_cucina_spia_velocita_0
+                - input_boolean.vmc_cucina_spia_velocita_1
+                - input_boolean.vmc_cucina_spia_velocita_2
+                - input_boolean.vmc_cucina_spia_velocita_3
+                - input_boolean.vmc_cucina_spia_velocita_4
+                - input_boolean.vmc_cucina_spia_velocita_freecooling
+                - input_boolean.vmc_cucina_spia_velocita_iperventilazione
+                - input_boolean.vmc_cucina_spia_velocita_notturna
+                - >-
+                  input_boolean.vmc_cucina_spia_velocita_freecooling_un_solo_avvio_per_programmazione_freecooling
+                - >-
+                  input_boolean.vmc_cucina_spia_velocita_freecooling_un_solo_avvio_per_programmazione_freeheating
+          - service: input_boolean.turn_off
+            data: {}
+            target:
+              entity_id: input_boolean.vmc_cucina_spia_calendario_giovedi_2
+      - conditions:
+          - condition: trigger
+            id: 1° Venerdì On
+          - condition: state
+            entity_id: input_boolean.vmc_cucina_opzioni_accendi_spegni_vmc_vs_calendario
+            state: "on"
+        sequence:
+          - choose:
+              - conditions:
+                  - condition: state
+                    entity_id: input_select.vmc_cucina_speed_1_fascia_calendario
+                    state: Velocità 0
+                sequence:
+                  - service: shell_command.vmc_cucina_velocita_0
+                    data: {}
+              - conditions:
+                  - condition: state
+                    entity_id: input_select.vmc_cucina_speed_1_fascia_calendario
+                    state: Velocità 1
+                sequence:
+                  - service: shell_command.vmc_cucina_velocita_1
+                    data: {}
+              - conditions:
+                  - condition: state
+                    entity_id: input_select.vmc_cucina_speed_1_fascia_calendario
+                    state: Velocità 3
+                sequence:
+                  - service: shell_command.vmc_cucina_velocita_3
+                    data: {}
+              - conditions:
+                  - condition: state
+                    entity_id: input_select.vmc_cucina_speed_1_fascia_calendario
+                    state: Velocità 4
+                sequence:
+                  - service: shell_command.vmc_cucina_velocita_4
+                    data: {}
+              - conditions:
+                  - condition: state
+                    entity_id: input_select.vmc_cucina_speed_1_fascia_calendario
+                    state: Notturna
+                sequence:
+                  - service: shell_command.vmc_cucina_notturna
+                    data: {}
+              - conditions:
+                  - condition: state
+                    entity_id: input_select.vmc_cucina_speed_1_fascia_calendario
+                    state: Iperventilazione
+                sequence:
+                  - service: shell_command.vmc_cucina_iperventilazione
+                    data: {}
+              - conditions:
+                  - condition: state
+                    entity_id: input_select.vmc_cucina_speed_1_fascia_calendario
+                    state: Free Cool./Heat.
+                sequence:
+                  - service: shell_command.vmc_cucina_freecooling
+                    data: {}
+            alias: >-
+              Scelta della Velocità Impostata di Default nella 1° Fascia
+              Calendario
+          - service: input_boolean.turn_on
+            data: {}
+            target:
+              entity_id: input_boolean.vmc_cucina_spia_calendario_venerdi_1
+          - service: input_boolean.turn_off
+            data: {}
+            target:
+              entity_id:
+                - >-
+                  input_boolean.vmc_cucina_spia_velocita_freecooling_un_solo_avvio_per_programmazione_freecooling
+                - >-
+                  input_boolean.vmc_cucina_spia_velocita_freecooling_un_solo_avvio_per_programmazione_freeheating
+      - conditions:
+          - condition: trigger
+            id: 1° Venerdì Off
+          - condition: state
+            entity_id: input_boolean.vmc_cucina_opzioni_accendi_spegni_vmc_vs_calendario
+            state: "on"
+        sequence:
+          - service: shell_command.vmc_cucina_velocita_0
+            data: {}
+            alias: Velocità 0
+          - service: input_boolean.turn_off
+            data: {}
+            target:
+              entity_id:
+                - input_boolean.vmc_cucina_spia_velocita_0_un_solo_avvio
+                - input_boolean.vmc_cucina_spia_velocita_1_un_solo_avvio
+                - input_boolean.vmc_cucina_spia_velocita_2_un_solo_avvio
+                - input_boolean.vmc_cucina_spia_velocita_3_un_solo_avvio
+                - input_boolean.vmc_cucina_spia_velocita_4_un_solo_avvio
+                - input_boolean.vmc_cucina_spia_velocita_notturna_un_solo_avvio
+                - >-
+                  input_boolean.vmc_cucina_spia_velocita_freecooling_un_solo_avvio
+                - >-
+                  input_boolean.vmc_cucina_spia_velocita_iperventilazione_un_solo_avvio
+                - input_boolean.vmc_cucina_spia_velocita_0
+                - input_boolean.vmc_cucina_spia_velocita_1
+                - input_boolean.vmc_cucina_spia_velocita_2
+                - input_boolean.vmc_cucina_spia_velocita_3
+                - input_boolean.vmc_cucina_spia_velocita_4
+                - input_boolean.vmc_cucina_spia_velocita_freecooling
+                - input_boolean.vmc_cucina_spia_velocita_iperventilazione
+                - input_boolean.vmc_cucina_spia_velocita_notturna
+                - >-
+                  input_boolean.vmc_cucina_spia_velocita_freecooling_un_solo_avvio_per_programmazione_freecooling
+                - >-
+                  input_boolean.vmc_cucina_spia_velocita_freecooling_un_solo_avvio_per_programmazione_freeheating
+          - service: input_boolean.turn_off
+            data: {}
+            target:
+              entity_id: input_boolean.vmc_cucina_spia_calendario_venerdi_1
+      - conditions:
+          - condition: trigger
+            id: 2° Venerdì On
+          - condition: state
+            entity_id: input_boolean.vmc_cucina_opzioni_accendi_spegni_vmc_vs_calendario
+            state: "on"
+        sequence:
+          - choose:
+              - conditions:
+                  - condition: state
+                    entity_id: input_select.vmc_cucina_speed_2_fascia_calendario
+                    state: Velocità 0
+                sequence:
+                  - service: shell_command.vmc_cucina_velocita_0
+                    data: {}
+              - conditions:
+                  - condition: state
+                    entity_id: input_select.vmc_cucina_speed_2_fascia_calendario
+                    state: Velocità 1
+                sequence:
+                  - service: shell_command.vmc_cucina_velocita_1
+                    data: {}
+              - conditions:
+                  - condition: state
+                    entity_id: input_select.vmc_cucina_speed_2_fascia_calendario
+                    state: Velocità 3
+                sequence:
+                  - service: shell_command.vmc_cucina_velocita_3
+                    data: {}
+              - conditions:
+                  - condition: state
+                    entity_id: input_select.vmc_cucina_speed_2_fascia_calendario
+                    state: Velocità 4
+                sequence:
+                  - service: shell_command.vmc_cucina_velocita_4
+                    data: {}
+              - conditions:
+                  - condition: state
+                    entity_id: input_select.vmc_cucina_speed_2_fascia_calendario
+                    state: Notturna
+                sequence:
+                  - service: shell_command.vmc_cucina_notturna
+                    data: {}
+              - conditions:
+                  - condition: state
+                    entity_id: input_select.vmc_cucina_speed_2_fascia_calendario
+                    state: Iperventilazione
+                sequence:
+                  - service: shell_command.vmc_cucina_iperventilazione
+                    data: {}
+              - conditions:
+                  - condition: state
+                    entity_id: input_select.vmc_cucina_speed_2_fascia_calendario
+                    state: Free Cool./Heat.
+                sequence:
+                  - service: shell_command.vmc_cucina_freecooling
+                    data: {}
+            alias: >-
+              Scelta della Velocità Impostata di Default nella 2° Fascia
+              Calendario
+          - service: input_boolean.turn_on
+            data: {}
+            target:
+              entity_id: input_boolean.vmc_cucina_spia_calendario_venerdi_2
+          - service: input_boolean.turn_off
+            data: {}
+            target:
+              entity_id:
+                - >-
+                  input_boolean.vmc_cucina_spia_velocita_freecooling_un_solo_avvio_per_programmazione_freecooling
+                - >-
+                  input_boolean.vmc_cucina_spia_velocita_freecooling_un_solo_avvio_per_programmazione_freeheating
+      - conditions:
+          - condition: trigger
+            id: 2° Venerdì Off
+          - condition: state
+            entity_id: input_boolean.vmc_cucina_opzioni_accendi_spegni_vmc_vs_calendario
+            state: "on"
+        sequence:
+          - service: shell_command.vmc_cucina_velocita_0
+            data: {}
+            alias: Velocità 0
+          - service: input_boolean.turn_off
+            data: {}
+            target:
+              entity_id:
+                - input_boolean.vmc_cucina_spia_velocita_0_un_solo_avvio
+                - input_boolean.vmc_cucina_spia_velocita_1_un_solo_avvio
+                - input_boolean.vmc_cucina_spia_velocita_2_un_solo_avvio
+                - input_boolean.vmc_cucina_spia_velocita_3_un_solo_avvio
+                - input_boolean.vmc_cucina_spia_velocita_4_un_solo_avvio
+                - input_boolean.vmc_cucina_spia_velocita_notturna_un_solo_avvio
+                - >-
+                  input_boolean.vmc_cucina_spia_velocita_freecooling_un_solo_avvio
+                - >-
+                  input_boolean.vmc_cucina_spia_velocita_iperventilazione_un_solo_avvio
+                - input_boolean.vmc_cucina_spia_velocita_0
+                - input_boolean.vmc_cucina_spia_velocita_1
+                - input_boolean.vmc_cucina_spia_velocita_2
+                - input_boolean.vmc_cucina_spia_velocita_3
+                - input_boolean.vmc_cucina_spia_velocita_4
+                - input_boolean.vmc_cucina_spia_velocita_freecooling
+                - input_boolean.vmc_cucina_spia_velocita_iperventilazione
+                - input_boolean.vmc_cucina_spia_velocita_notturna
+                - >-
+                  input_boolean.vmc_cucina_spia_velocita_freecooling_un_solo_avvio_per_programmazione_freecooling
+                - >-
+                  input_boolean.vmc_cucina_spia_velocita_freecooling_un_solo_avvio_per_programmazione_freeheating
+          - service: input_boolean.turn_off
+            data: {}
+            target:
+              entity_id: input_boolean.vmc_cucina_spia_calendario_venerdi_2
+      - conditions:
+          - condition: trigger
+            id: 1° Sabato On
+          - condition: state
+            entity_id: input_boolean.vmc_cucina_opzioni_accendi_spegni_vmc_vs_calendario
+            state: "on"
+        sequence:
+          - choose:
+              - conditions:
+                  - condition: state
+                    entity_id: input_select.vmc_cucina_speed_1_fascia_calendario
+                    state: Velocità 0
+                sequence:
+                  - service: shell_command.vmc_cucina_velocita_0
+                    data: {}
+              - conditions:
+                  - condition: state
+                    entity_id: input_select.vmc_cucina_speed_1_fascia_calendario
+                    state: Velocità 1
+                sequence:
+                  - service: shell_command.vmc_cucina_velocita_1
+                    data: {}
+              - conditions:
+                  - condition: state
+                    entity_id: input_select.vmc_cucina_speed_1_fascia_calendario
+                    state: Velocità 3
+                sequence:
+                  - service: shell_command.vmc_cucina_velocita_3
+                    data: {}
+              - conditions:
+                  - condition: state
+                    entity_id: input_select.vmc_cucina_speed_1_fascia_calendario
+                    state: Velocità 4
+                sequence:
+                  - service: shell_command.vmc_cucina_velocita_4
+                    data: {}
+              - conditions:
+                  - condition: state
+                    entity_id: input_select.vmc_cucina_speed_1_fascia_calendario
+                    state: Notturna
+                sequence:
+                  - service: shell_command.vmc_cucina_notturna
+                    data: {}
+              - conditions:
+                  - condition: state
+                    entity_id: input_select.vmc_cucina_speed_1_fascia_calendario
+                    state: Iperventilazione
+                sequence:
+                  - service: shell_command.vmc_cucina_iperventilazione
+                    data: {}
+              - conditions:
+                  - condition: state
+                    entity_id: input_select.vmc_cucina_speed_1_fascia_calendario
+                    state: Free Cool./Heat.
+                sequence:
+                  - service: shell_command.vmc_cucina_freecooling
+                    data: {}
+            alias: >-
+              Scelta della Velocità Impostata di Default nella 1° Fascia
+              Calendario
+          - service: input_boolean.turn_on
+            data: {}
+            target:
+              entity_id: input_boolean.vmc_cucina_spia_calendario_sabato_1
+          - service: input_boolean.turn_off
+            data: {}
+            target:
+              entity_id:
+                - >-
+                  input_boolean.vmc_cucina_spia_velocita_freecooling_un_solo_avvio_per_programmazione_freecooling
+                - >-
+                  input_boolean.vmc_cucina_spia_velocita_freecooling_un_solo_avvio_per_programmazione_freeheating
+      - conditions:
+          - condition: trigger
+            id: 1° Sabato Off
+          - condition: state
+            entity_id: input_boolean.vmc_cucina_opzioni_accendi_spegni_vmc_vs_calendario
+            state: "on"
+        sequence:
+          - service: shell_command.vmc_cucina_velocita_0
+            data: {}
+            alias: Velocità 0
+          - service: input_boolean.turn_off
+            data: {}
+            target:
+              entity_id:
+                - input_boolean.vmc_cucina_spia_velocita_0_un_solo_avvio
+                - input_boolean.vmc_cucina_spia_velocita_1_un_solo_avvio
+                - input_boolean.vmc_cucina_spia_velocita_2_un_solo_avvio
+                - input_boolean.vmc_cucina_spia_velocita_3_un_solo_avvio
+                - input_boolean.vmc_cucina_spia_velocita_4_un_solo_avvio
+                - input_boolean.vmc_cucina_spia_velocita_notturna_un_solo_avvio
+                - >-
+                  input_boolean.vmc_cucina_spia_velocita_freecooling_un_solo_avvio
+                - >-
+                  input_boolean.vmc_cucina_spia_velocita_iperventilazione_un_solo_avvio
+                - input_boolean.vmc_cucina_spia_velocita_0
+                - input_boolean.vmc_cucina_spia_velocita_1
+                - input_boolean.vmc_cucina_spia_velocita_2
+                - input_boolean.vmc_cucina_spia_velocita_3
+                - input_boolean.vmc_cucina_spia_velocita_4
+                - input_boolean.vmc_cucina_spia_velocita_freecooling
+                - input_boolean.vmc_cucina_spia_velocita_iperventilazione
+                - input_boolean.vmc_cucina_spia_velocita_notturna
+                - >-
+                  input_boolean.vmc_cucina_spia_velocita_freecooling_un_solo_avvio_per_programmazione_freecooling
+                - >-
+                  input_boolean.vmc_cucina_spia_velocita_freecooling_un_solo_avvio_per_programmazione_freeheating
+          - service: input_boolean.turn_off
+            data: {}
+            target:
+              entity_id: input_boolean.vmc_cucina_spia_calendario_sabato_1
+      - conditions:
+          - condition: trigger
+            id: 2° Sabato On
+          - condition: state
+            entity_id: input_boolean.vmc_cucina_opzioni_accendi_spegni_vmc_vs_calendario
+            state: "on"
+        sequence:
+          - choose:
+              - conditions:
+                  - condition: state
+                    entity_id: input_select.vmc_cucina_speed_2_fascia_calendario
+                    state: Velocità 0
+                sequence:
+                  - service: shell_command.vmc_cucina_velocita_0
+                    data: {}
+              - conditions:
+                  - condition: state
+                    entity_id: input_select.vmc_cucina_speed_2_fascia_calendario
+                    state: Velocità 1
+                sequence:
+                  - service: shell_command.vmc_cucina_velocita_1
+                    data: {}
+              - conditions:
+                  - condition: state
+                    entity_id: input_select.vmc_cucina_speed_2_fascia_calendario
+                    state: Velocità 3
+                sequence:
+                  - service: shell_command.vmc_cucina_velocita_3
+                    data: {}
+              - conditions:
+                  - condition: state
+                    entity_id: input_select.vmc_cucina_speed_2_fascia_calendario
+                    state: Velocità 4
+                sequence:
+                  - service: shell_command.vmc_cucina_velocita_4
+                    data: {}
+              - conditions:
+                  - condition: state
+                    entity_id: input_select.vmc_cucina_speed_2_fascia_calendario
+                    state: Notturna
+                sequence:
+                  - service: shell_command.vmc_cucina_notturna
+                    data: {}
+              - conditions:
+                  - condition: state
+                    entity_id: input_select.vmc_cucina_speed_2_fascia_calendario
+                    state: Iperventilazione
+                sequence:
+                  - service: shell_command.vmc_cucina_iperventilazione
+                    data: {}
+              - conditions:
+                  - condition: state
+                    entity_id: input_select.vmc_cucina_speed_2_fascia_calendario
+                    state: Free Cool./Heat.
+                sequence:
+                  - service: shell_command.vmc_cucina_freecooling
+                    data: {}
+            alias: >-
+              Scelta della Velocità Impostata di Default nella 2° Fascia
+              Calendario
+          - service: input_boolean.turn_on
+            data: {}
+            target:
+              entity_id: input_boolean.vmc_cucina_spia_calendario_sabato_2
+          - service: input_boolean.turn_off
+            data: {}
+            target:
+              entity_id:
+                - >-
+                  input_boolean.vmc_cucina_spia_velocita_freecooling_un_solo_avvio_per_programmazione_freecooling
+                - >-
+                  input_boolean.vmc_cucina_spia_velocita_freecooling_un_solo_avvio_per_programmazione_freeheating
+      - conditions:
+          - condition: trigger
+            id: 2° Sabato Off
+          - condition: state
+            entity_id: input_boolean.vmc_cucina_opzioni_accendi_spegni_vmc_vs_calendario
+            state: "on"
+        sequence:
+          - service: shell_command.vmc_cucina_velocita_0
+            data: {}
+            alias: Velocità 0
+          - service: input_boolean.turn_off
+            data: {}
+            target:
+              entity_id:
+                - input_boolean.vmc_cucina_spia_velocita_0_un_solo_avvio
+                - input_boolean.vmc_cucina_spia_velocita_1_un_solo_avvio
+                - input_boolean.vmc_cucina_spia_velocita_2_un_solo_avvio
+                - input_boolean.vmc_cucina_spia_velocita_3_un_solo_avvio
+                - input_boolean.vmc_cucina_spia_velocita_4_un_solo_avvio
+                - input_boolean.vmc_cucina_spia_velocita_notturna_un_solo_avvio
+                - >-
+                  input_boolean.vmc_cucina_spia_velocita_freecooling_un_solo_avvio
+                - >-
+                  input_boolean.vmc_cucina_spia_velocita_iperventilazione_un_solo_avvio
+                - input_boolean.vmc_cucina_spia_velocita_0
+                - input_boolean.vmc_cucina_spia_velocita_1
+                - input_boolean.vmc_cucina_spia_velocita_2
+                - input_boolean.vmc_cucina_spia_velocita_3
+                - input_boolean.vmc_cucina_spia_velocita_4
+                - input_boolean.vmc_cucina_spia_velocita_freecooling
+                - input_boolean.vmc_cucina_spia_velocita_iperventilazione
+                - input_boolean.vmc_cucina_spia_velocita_notturna
+                - >-
+                  input_boolean.vmc_cucina_spia_velocita_freecooling_un_solo_avvio_per_programmazione_freecooling
+                - >-
+                  input_boolean.vmc_cucina_spia_velocita_freecooling_un_solo_avvio_per_programmazione_freeheating
+          - service: input_boolean.turn_off
+            data: {}
+            target:
+              entity_id: input_boolean.vmc_cucina_spia_calendario_sabato_2
+      - conditions:
+          - condition: trigger
+            id: 1° Domenica On
+          - condition: state
+            entity_id: input_boolean.vmc_cucina_opzioni_accendi_spegni_vmc_vs_calendario
+            state: "on"
+        sequence:
+          - choose:
+              - conditions:
+                  - condition: state
+                    entity_id: input_select.vmc_cucina_speed_1_fascia_calendario
+                    state: Velocità 0
+                sequence:
+                  - service: shell_command.vmc_cucina_velocita_0
+                    data: {}
+              - conditions:
+                  - condition: state
+                    entity_id: input_select.vmc_cucina_speed_1_fascia_calendario
+                    state: Velocità 1
+                sequence:
+                  - service: shell_command.vmc_cucina_velocita_1
+                    data: {}
+              - conditions:
+                  - condition: state
+                    entity_id: input_select.vmc_cucina_speed_1_fascia_calendario
+                    state: Velocità 3
+                sequence:
+                  - service: shell_command.vmc_cucina_velocita_3
+                    data: {}
+              - conditions:
+                  - condition: state
+                    entity_id: input_select.vmc_cucina_speed_1_fascia_calendario
+                    state: Velocità 4
+                sequence:
+                  - service: shell_command.vmc_cucina_velocita_4
+                    data: {}
+              - conditions:
+                  - condition: state
+                    entity_id: input_select.vmc_cucina_speed_1_fascia_calendario
+                    state: Notturna
+                sequence:
+                  - service: shell_command.vmc_cucina_notturna
+                    data: {}
+              - conditions:
+                  - condition: state
+                    entity_id: input_select.vmc_cucina_speed_1_fascia_calendario
+                    state: Iperventilazione
+                sequence:
+                  - service: shell_command.vmc_cucina_iperventilazione
+                    data: {}
+              - conditions:
+                  - condition: state
+                    entity_id: input_select.vmc_cucina_speed_1_fascia_calendario
+                    state: Free Cool./Heat.
+                sequence:
+                  - service: shell_command.vmc_cucina_freecooling
+                    data: {}
+            alias: >-
+              Scelta della Velocità Impostata di Default nella 1° Fascia
+              Calendario
+          - service: input_boolean.turn_on
+            data: {}
+            target:
+              entity_id: input_boolean.vmc_cucina_spia_calendario_domenica_1
+          - service: input_boolean.turn_off
+            data: {}
+            target:
+              entity_id:
+                - >-
+                  input_boolean.vmc_cucina_spia_velocita_freecooling_un_solo_avvio_per_programmazione_freecooling
+                - >-
+                  input_boolean.vmc_cucina_spia_velocita_freecooling_un_solo_avvio_per_programmazione_freeheating
+      - conditions:
+          - condition: trigger
+            id: 1° Domenica Off
+          - condition: state
+            entity_id: input_boolean.vmc_cucina_opzioni_accendi_spegni_vmc_vs_calendario
+            state: "on"
+        sequence:
+          - service: shell_command.vmc_cucina_velocita_0
+            data: {}
+            alias: Velocità 0
+          - service: input_boolean.turn_off
+            data: {}
+            target:
+              entity_id:
+                - input_boolean.vmc_cucina_spia_velocita_0_un_solo_avvio
+                - input_boolean.vmc_cucina_spia_velocita_1_un_solo_avvio
+                - input_boolean.vmc_cucina_spia_velocita_2_un_solo_avvio
+                - input_boolean.vmc_cucina_spia_velocita_3_un_solo_avvio
+                - input_boolean.vmc_cucina_spia_velocita_4_un_solo_avvio
+                - input_boolean.vmc_cucina_spia_velocita_notturna_un_solo_avvio
+                - >-
+                  input_boolean.vmc_cucina_spia_velocita_freecooling_un_solo_avvio
+                - >-
+                  input_boolean.vmc_cucina_spia_velocita_iperventilazione_un_solo_avvio
+                - input_boolean.vmc_cucina_spia_velocita_0
+                - input_boolean.vmc_cucina_spia_velocita_1
+                - input_boolean.vmc_cucina_spia_velocita_2
+                - input_boolean.vmc_cucina_spia_velocita_3
+                - input_boolean.vmc_cucina_spia_velocita_4
+                - input_boolean.vmc_cucina_spia_velocita_freecooling
+                - input_boolean.vmc_cucina_spia_velocita_iperventilazione
+                - input_boolean.vmc_cucina_spia_velocita_notturna
+                - >-
+                  input_boolean.vmc_cucina_spia_velocita_freecooling_un_solo_avvio_per_programmazione_freecooling
+                - >-
+                  input_boolean.vmc_cucina_spia_velocita_freecooling_un_solo_avvio_per_programmazione_freeheating
+          - service: input_boolean.turn_off
+            data: {}
+            target:
+              entity_id: input_boolean.vmc_cucina_spia_calendario_domenica_1
+      - conditions:
+          - condition: trigger
+            id: 2° Domenica On
+          - condition: state
+            entity_id: input_boolean.vmc_cucina_opzioni_accendi_spegni_vmc_vs_calendario
+            state: "on"
+        sequence:
+          - choose:
+              - conditions:
+                  - condition: state
+                    entity_id: input_select.vmc_cucina_speed_2_fascia_calendario
+                    state: Velocità 0
+                sequence:
+                  - service: shell_command.vmc_cucina_velocita_0
+                    data: {}
+              - conditions:
+                  - condition: state
+                    entity_id: input_select.vmc_cucina_speed_2_fascia_calendario
+                    state: Velocità 1
+                sequence:
+                  - service: shell_command.vmc_cucina_velocita_1
+                    data: {}
+              - conditions:
+                  - condition: state
+                    entity_id: input_select.vmc_cucina_speed_2_fascia_calendario
+                    state: Velocità 3
+                sequence:
+                  - service: shell_command.vmc_cucina_velocita_3
+                    data: {}
+              - conditions:
+                  - condition: state
+                    entity_id: input_select.vmc_cucina_speed_2_fascia_calendario
+                    state: Velocità 4
+                sequence:
+                  - service: shell_command.vmc_cucina_velocita_4
+                    data: {}
+              - conditions:
+                  - condition: state
+                    entity_id: input_select.vmc_cucina_speed_2_fascia_calendario
+                    state: Notturna
+                sequence:
+                  - service: shell_command.vmc_cucina_notturna
+                    data: {}
+              - conditions:
+                  - condition: state
+                    entity_id: input_select.vmc_cucina_speed_2_fascia_calendario
+                    state: Iperventilazione
+                sequence:
+                  - service: shell_command.vmc_cucina_iperventilazione
+                    data: {}
+              - conditions:
+                  - condition: state
+                    entity_id: input_select.vmc_cucina_speed_2_fascia_calendario
+                    state: Free Cool./Heat.
+                sequence:
+                  - service: shell_command.vmc_cucina_freecooling
+                    data: {}
+            alias: >-
+              Scelta della Velocità Impostata di Default nella 2° Fascia
+              Calendario
+          - service: input_boolean.turn_on
+            data: {}
+            target:
+              entity_id: input_boolean.vmc_cucina_spia_calendario_domenica_2
+          - service: input_boolean.turn_off
+            data: {}
+            target:
+              entity_id:
+                - >-
+                  input_boolean.vmc_cucina_spia_velocita_freecooling_un_solo_avvio_per_programmazione_freecooling
+                - >-
+                  input_boolean.vmc_cucina_spia_velocita_freecooling_un_solo_avvio_per_programmazione_freeheating
+      - conditions:
+          - condition: trigger
+            id: 2° Domenica Off
+          - condition: state
+            entity_id: input_boolean.vmc_cucina_opzioni_accendi_spegni_vmc_vs_calendario
+            state: "on"
+        sequence:
+          - service: shell_command.vmc_cucina_velocita_0
+            data: {}
+            alias: Velocità 0
+          - service: input_boolean.turn_off
+            data: {}
+            target:
+              entity_id:
+                - input_boolean.vmc_cucina_spia_velocita_0_un_solo_avvio
+                - input_boolean.vmc_cucina_spia_velocita_1_un_solo_avvio
+                - input_boolean.vmc_cucina_spia_velocita_2_un_solo_avvio
+                - input_boolean.vmc_cucina_spia_velocita_3_un_solo_avvio
+                - input_boolean.vmc_cucina_spia_velocita_4_un_solo_avvio
+                - input_boolean.vmc_cucina_spia_velocita_notturna_un_solo_avvio
+                - >-
+                  input_boolean.vmc_cucina_spia_velocita_freecooling_un_solo_avvio
+                - >-
+                  input_boolean.vmc_cucina_spia_velocita_iperventilazione_un_solo_avvio
+                - input_boolean.vmc_cucina_spia_velocita_0
+                - input_boolean.vmc_cucina_spia_velocita_1
+                - input_boolean.vmc_cucina_spia_velocita_2
+                - input_boolean.vmc_cucina_spia_velocita_3
+                - input_boolean.vmc_cucina_spia_velocita_4
+                - input_boolean.vmc_cucina_spia_velocita_freecooling
+                - input_boolean.vmc_cucina_spia_velocita_iperventilazione
+                - input_boolean.vmc_cucina_spia_velocita_notturna
+                - >-
+                  input_boolean.vmc_cucina_spia_velocita_freecooling_un_solo_avvio_per_programmazione_freecooling
+                - >-
+                  input_boolean.vmc_cucina_spia_velocita_freecooling_un_solo_avvio_per_programmazione_freeheating
+          - service: input_boolean.turn_off
+            data: {}
+            target:
+              entity_id: input_boolean.vmc_cucina_spia_calendario_domenica_2
+      - conditions:
+          - condition: trigger
+            id: Calendario Off tra Fascie
+        sequence:
+          - service: shell_command.vmc_cucina_velocita_0
+            data: {}
+          - service: input_boolean.turn_off
+            data: {}
+            target:
+              entity_id:
+                - input_boolean.vmc_cucina_spia_calendario_lunedi_1
+                - input_boolean.vmc_cucina_spia_calendario_lunedi_2
+                - input_boolean.vmc_cucina_spia_calendario_martedi_1
+                - input_boolean.vmc_cucina_spia_calendario_martedi_2
+                - input_boolean.vmc_cucina_spia_calendario_mercoledi_1
+                - input_boolean.vmc_cucina_spia_calendario_mercoledi_2
+                - input_boolean.vmc_cucina_spia_calendario_giovedi_1
+                - input_boolean.vmc_cucina_spia_calendario_giovedi_2
+                - input_boolean.vmc_cucina_spia_calendario_venerdi_1
+                - input_boolean.vmc_cucina_spia_calendario_venerdi_2
+                - input_boolean.vmc_cucina_spia_calendario_sabato_1
+                - input_boolean.vmc_cucina_spia_calendario_sabato_2
+                - input_boolean.vmc_cucina_spia_calendario_domenica_1
+                - input_boolean.vmc_cucina_spia_calendario_domenica_2
+      - conditions:
+          - condition: trigger
+            id: " Disattivazione Lim. Δ P. di Rugiada, precedentemente Armato ed Attivato"
+        sequence:
+          - service: shell_command.vmc_cucina_velocita_0
+            data: {}
+          - service: input_boolean.turn_off
+            data: {}
+            target:
+              entity_id:
+                - input_boolean.vmc_cucina_spia_velocita_0_un_solo_avvio
+                - input_boolean.vmc_cucina_spia_velocita_1_un_solo_avvio
+                - input_boolean.vmc_cucina_spia_velocita_3_un_solo_avvio
+                - input_boolean.vmc_cucina_spia_velocita_4_un_solo_avvio
+                - input_boolean.vmc_cucina_spia_velocita_notturna_un_solo_avvio
+                - >-
+                  input_boolean.vmc_cucina_spia_velocita_freecooling_un_solo_avvio
+                - input_boolean.vmc_cucina_spia_velocita_2_un_solo_avvio
+                - >-
+                  input_boolean.vmc_cucina_spia_velocita_iperventilazione_un_solo_avvio
+      - conditions:
+          - condition: trigger
+            id: Opzioni Sub Offset On
+        sequence:
+          - service: input_boolean.turn_on
+            data: {}
+            target:
+              entity_id: input_boolean.vmc_cucina_opzioni_interruttore_offset_sensori
+          - service: input_boolean.turn_off
+            data: {}
+            target:
+              entity_id:
+                - >-
+                  input_boolean.vmc_cucina_opzioni_interruttore_monitoraggio_sensori_extra
+      - conditions:
+          - condition: trigger
+            id: Opzioni Sub Offset Off
+        sequence:
+          - service: input_boolean.turn_off
+            data: {}
+            target:
+              entity_id: input_boolean.vmc_cucina_opzioni_interruttore_offset_sensori
+      - conditions:
+          - condition: trigger
+            id: Opzioni Sub Extra Sensori On
+        sequence:
+          - service: input_boolean.turn_on
+            data: {}
+            target:
+              entity_id: >-
+                input_boolean.vmc_cucina_opzioni_interruttore_monitoraggio_sensori_extra
+          - service: input_boolean.turn_off
+            data: {}
+            target:
+              entity_id:
+                - input_boolean.vmc_cucina_opzioni_interruttore_offset_sensori
+      - conditions:
+          - condition: trigger
+            id: Opzioni Sub Extra Sensori Off
+        sequence:
+          - service: input_boolean.turn_off
+            data: {}
+            target:
+              entity_id: >-
+                input_boolean.vmc_cucina_opzioni_interruttore_monitoraggio_sensori_extra
+      - conditions:
+          - condition: trigger
+            id: Opzioni Sub Programmazione Giornaliera On
+        sequence:
+          - service: input_boolean.turn_on
+            data: {}
+            target:
+              entity_id: input_boolean.vmc_cucina_opzioni_interruttore_calendario
+          - service: input_boolean.turn_off
+            data: {}
+            target:
+              entity_id:
+                - input_boolean.vmc_cucina_opzioni_lettura_sensori
+                - input_boolean.vmc_cucina_opzioni_offset_sensori
+                - input_boolean.vmc_cucina_opzioni_monitoraggio_sensori
+                - input_boolean.vmc_cucina_opzioni_vmc
+      - conditions:
+          - condition: trigger
+            id: Opzioni Sub Programmazione Giornaliera Off
+        sequence:
+          - service: input_boolean.turn_off
+            data: {}
+            target:
+              entity_id: input_boolean.vmc_cucina_opzioni_interruttore_calendario
+      - conditions:
+          - condition: trigger
+            id: TeVsTi Free-Cooling -> Imposta Velocità 0
+        sequence:
+          - service: input_boolean.turn_on
+            data: {}
+            target:
+              entity_id: >-
+                input_boolean.vmc_cucina_spia_velocita_freecooling_un_solo_avvio_per_programmazione_freecooling
+          - service: shell_command.vmc_cucina_velocita_0
+            data: {}
+      - conditions:
+          - condition: trigger
+            id: "Rip. Free Cooling No TeVsTi "
+        sequence:
+          - service: shell_command.vmc_cucina_freecooling
+            data: {}
+          - service: input_boolean.turn_off
+            data: {}
+            target:
+              entity_id: >-
+                input_boolean.vmc_cucina_spia_velocita_freecooling_un_solo_avvio_per_programmazione_freecooling
+      - conditions:
+          - condition: trigger
+            id: " Disattivazione VMC ON/OFF, in Funzione della Vel. Free Cooling precedentemente Armato"
+        sequence:
+          - service: input_boolean.turn_off
+            data: {}
+            target:
+              entity_id: >-
+                input_boolean.vmc_cucina_spia_velocita_freecooling_un_solo_avvio_per_programmazione_freecooling
+      - conditions:
+          - condition: trigger
+            id: TeVsTi Free-Heating -> Imposta Velocità 0
+        sequence:
+          - service: shell_command.vmc_cucina_velocita_0
+            data: {}
+          - service: input_boolean.turn_on
+            data: {}
+            target:
+              entity_id: >-
+                input_boolean.vmc_cucina_spia_velocita_freecooling_un_solo_avvio_per_programmazione_freeheating
+      - conditions:
+          - condition: trigger
+            id: "Rip. Free Heating No TeVsTi "
+        sequence:
+          - service: shell_command.vmc_cucina_freecooling
+            data: {}
+          - service: input_boolean.turn_off
+            data: {}
+            target:
+              entity_id: >-
+                input_boolean.vmc_cucina_spia_velocita_freecooling_un_solo_avvio_per_programmazione_freeheating
+      - conditions:
+          - condition: trigger
+            id: " Disattivazione VMC ON/OFF, in Funzione della Vel. Free Heating precedentemente Armato"
+        sequence:
+          - service: input_boolean.turn_off
+            data: {}
+            target:
+              entity_id: >-
+                input_boolean.vmc_cucina_spia_velocita_freecooling_un_solo_avvio_per_programmazione_freeheating
+      - conditions:
+          - condition: trigger
+            id: Opzioni Sub Calendario Main On
+        sequence:
+          - service: input_boolean.turn_on
+            data: {}
+            target:
+              entity_id: input_boolean.vmc_cucina_opzioni_calendario_main
+          - service: input_boolean.turn_off
+            data: {}
+            target:
+              entity_id:
+                - input_boolean.vmc_cucina_opzioni_free_heating_o_free_cooling
+                - input_boolean.vmc_cucina_opzioni_punto_di_rugiada
+                - input_boolean.vmc_cucina_opzioni_calendario
+      - conditions:
+          - condition: trigger
+            id: Opzioni Sub Calendario Main Off
+        sequence:
+          - service: input_boolean.turn_off
+            data: {}
+            target:
+              entity_id: input_boolean.vmc_cucina_opzioni_calendario_main
+      - conditions:
+          - condition: trigger
+            id: Opzioni Sub Calendario Free H/C On
+        sequence:
+          - service: input_boolean.turn_on
+            data: {}
+            target:
+              entity_id: input_boolean.vmc_cucina_opzioni_free_heating_o_free_cooling
+          - service: input_boolean.turn_off
+            data: {}
+            target:
+              entity_id:
+                - input_boolean.vmc_cucina_opzioni_calendario_main
+                - input_boolean.vmc_cucina_opzioni_punto_di_rugiada
+                - input_boolean.vmc_cucina_opzioni_calendario
+      - conditions:
+          - condition: trigger
+            id: Opzioni Sub Calendario Free H/C Off
+        sequence:
+          - service: input_boolean.turn_off
+            data: {}
+            target:
+              entity_id: input_boolean.vmc_cucina_opzioni_free_heating_o_free_cooling
+      - conditions:
+          - condition: trigger
+            id: Opzioni Sub Lim. Δ P. di Rugiada On
+        sequence:
+          - service: input_boolean.turn_on
+            data: {}
+            target:
+              entity_id: input_boolean.vmc_cucina_opzioni_punto_di_rugiada
+          - service: input_boolean.turn_off
+            data: {}
+            target:
+              entity_id:
+                - input_boolean.vmc_cucina_opzioni_calendario_main
+                - input_boolean.vmc_cucina_opzioni_free_heating_o_free_cooling
+                - input_boolean.vmc_cucina_opzioni_calendario
+      - conditions:
+          - condition: trigger
+            id: Opzioni Sub Lim. Δ P. di Rugiada Off
+        sequence:
+          - service: input_boolean.turn_off
+            data: {}
+            target:
+              entity_id: input_boolean.vmc_cucina_opzioni_punto_di_rugiada
+      - conditions:
+          - condition: trigger
+            id: Spia Avvisi On
+        sequence:
+          - service: input_boolean.turn_on
+            data: {}
+            target:
+              entity_id: input_boolean.vmc_cucina_opzioni_accendi_spegni_avvisi_spia
+      - conditions:
+          - condition: trigger
+            id: Spia Avvisi Off
+        sequence:
+          - service: input_boolean.turn_off
+            data: {}
+            target:
+              entity_id: input_boolean.vmc_cucina_opzioni_accendi_spegni_avvisi_spia
+      - conditions:
+          - condition: trigger
+            id:
+              - Repository Update ON
+            enabled: true
+        sequence:
+          - service: input_boolean.turn_on
+            data: {}
+            target:
+              entity_id: input_boolean.vmc_cucina_popup_versione_corrente_vs_repository
+          - service: notify.persistent_notification
+            data:
+              message: >-
+                Una nuova revisione è stata rilasciata
+                [Link](https://github.com/DanRobo76/VMC-HELTY-FLOW)
+              title: AGGIORNAMENTO SUL REPOSITORY VMC HELTY FLOW
+      - conditions:
+          - condition: trigger
+            id:
+              - Repository Update OFF
+        sequence:
+          - service: input_boolean.turn_off
+            data: {}
+            target:
+              entity_id: input_boolean.vmc_cucina_popup_versione_corrente_vs_repository
+      - conditions:
+          - condition: trigger
+            id:
+              - Cambio Nome VMC
+        sequence:
+          - service: shell_command.vmc_cucina_cambia_nome
+            data: {}
+            alias: Chiama il Servizio per Cambiare nome alla VMC
+          - delay:
+              hours: 0
+              minutes: 0
+              seconds: 4
+              milliseconds: 0
+          - service: homeassistant.update_entity
+            data: {}
+            target:
+              entity_id:
+                - sensor.vmc_cucina_nome
+          - service: input_text.set_value
+            data:
+              value: ""
+            target:
+              entity_id: input_text.vmc_cucina_nome_da_inserire
+mode: restart
