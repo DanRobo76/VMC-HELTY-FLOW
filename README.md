@@ -37,7 +37,8 @@ Il Cliente ha l’onere e la responsabilità della scelta, dell’installazione,
       - per Differenza tra Temperatura Interna ed Esterna;<br>
       - per il Superamento del Set Lim. Δ Punto di Rugiada.<br>
       - in caso di Riscaldamento o Raffrescamento non desiderato, correlato alla Velocità Free heating o Free Cooling<br>
-  - Informa in caso di un nuovo Aggiornamento.<br>
+  - Informa in caso di un nuovo Aggiornamento;<br>
+  - Permette di Rinominare la VMC.<br>
 #
 ![image](https://user-images.githubusercontent.com/102819027/235299358-88373b06-b62e-4867-88ab-287cad60bb6d.png)<br>
 <strong>1</strong> Rendere gli indirizzi IP della/e VMC, statici attraverso il Router; la VMC risponde sulla porta 5001. <br>
@@ -58,13 +59,14 @@ Il Cliente ha l’onere e la responsabilità della scelta, dell’installazione,
      - vmc_helty_flow_cucina_[data].yaml
      - Scheda Interfaccia VMC Cucina[data].txt
      - Automazione VMC Cucina [data].txt
+     - vmc_cucina_script_cambio_nome.sh
   </pre>
  , presenti nella scheda "CODE" -> Download ZIP:<BR>
  ![image](https://user-images.githubusercontent.com/102819027/235298629-1967e438-4096-4889-ac51-037483885dbe.png)<BR>
 <br><strong>4</strong> in Home Assistant andare in  Impostazioni-> Automazioni e scene -> CREA AUTOMAZIONE -> Inizia con un'automazione vuota -> cliccare in alto a destra sui ... puntini -> modifica in yaml -> cancellare tutto il codice e incollare il contenuto del file "Automazione VMC Cucina [data].txt" ovvero "Automazione VMC [nome] [data].txt" e salvare. <br>
 <strong>5</strong> in Home Assistant andare in Panoramica -> cliccare in alto a destra sui ... puntini -> Modifica plancia -> AGGIUNGI SCHEDA -> Manuale -> Selezionare tutto il Codice , cancellare tutto il codice e incollare il contenuto del file "Scheda Interfaccia VMC Cucina [data].txt" ovvero "Scheda Interfaccia VMC [nome] [data] e salvare. <br>
 <strong>6</strong> Riavviare Home Assistant [Non usare il Riavvio Rapido] <br>
-<strong>7</strong> trovare e sostituire all'interno del file "vmc_helty_flow_cucina_[data].yaml" l'indirizzo IP, da 192.168.1.160 con l'indirizzo Ip, vedi (Punto <strong>1</strong>)  [Aprile in Home Assistant il Pannello "File editor", cliccare sull' icona "Cartellina", andare in "packages", andare in "vmc_helty_flow" e selezionare il file "vmc_helty_flow_cucina_[data].yaml", cliccare sull'icona "Lente" ovvero Cerca", inserire l'Indirizzo IP nel campo "Search for" e il nuovo Indirizzo IP, (Punto <strong>1</strong>) nel campo "Replace", cliccare su "All" e successivamente salvare il file cliccando sull'icona "Dischetto"; riavviare Home Assistant. [Non usare il Riavvio Rapido]<br>
+<strong>7</strong> trovare e sostituire all'interno del file "vmc_helty_flow_cucina_[data].yaml" e all'interno del file "vmc_cucina_script_cambio_nome.sh" l'indirizzo IP, da 192.168.1.160 con l'indirizzo Ip, vedi (Punto <strong>1</strong>)  [Aprile in Home Assistant il Pannello "File editor", cliccare sull' icona "Cartellina", andare in "packages", andare in "vmc_helty_flow" e selezionare il file "vmc_helty_flow_cucina_[data].yaml", cliccare sull'icona "Lente" ovvero Cerca", inserire l'Indirizzo IP nel campo "Search for" e il nuovo Indirizzo IP, (Punto <strong>1</strong>) nel campo "Replace", cliccare su "All" e successivamente salvare il file cliccando sull'icona "Dischetto"; ripetere lo stesso processo per il file "vmc_cucina_script_cambio_nome.sh" e riavviare Home Assistant. [Non usare il Riavvio Rapido]<br>
 <strong>8</strong> Nella Scheda Interfaccia, Cliccare su "Settaggi":<br>
   ![image](https://user-images.githubusercontent.com/102819027/235297715-64bdf5b9-3210-4593-9d46-b8e602dd487a.png)<br>
   <strong>8.1</strong> Inserire il Volume della Stanza ove è installata la VMC<BR>
@@ -91,15 +93,17 @@ Il Cliente ha l’onere e la responsabilità della scelta, dell’installazione,
 
 <strong>13</strong> Copiare e Incollare i seguenti File nella cartella \config\packages\vmc_helty_flow:
  <pre style="font-size:10px; background-color: #d9ffcc;">
-    - vmc_helty_flow_cucina_[data].yaml (Es. vmc_helty_flow_[nome]_[data].yaml)
-    - Scheda Interfaccia VMC Cucina [data].txt (Es. Scheda Interfaccia VMC Sala [data].txt)
-    - Automazione VMC Cucina [data].txt (Es. Automazione VMC Sala [data].txt)
+    - vmc_helty_flow_cucina_[data].yaml
+    - Scheda Interfaccia VMC Cucina [data].txt
+    - Automazione VMC Cucina [data].txt
+    - vmc_cucina_script_cambio_nome.sh
   </pre> 
 <strong>14</strong> Rinominare i seguenti File:
   <pre style="font-size:10px; background-color: #d9ffcc;">
     - da vmc_helty_flow_cucina_[data].yaml - Copia.yaml a vmc_helty_flow_[nome]_[data].yaml (Es. vmc_helty_flow_sala_[data].yaml)
     - da Scheda Interfaccia VMC Cucina [data]- Copia a Scheda Interfaccia VMC [nome] [data].txt (Es. Scheda Interfaccia VMC Sala [data].txt)
     - da Automazione VMC Cucina [data] - Copia.txt a Automazione VMC [nome] [data].txt (Es. Automazione VMC Sala [data].txt)
+    - da vmc_cucina_script_cambio_nome - Copia.sh a vmc_[nome]_script_cambio_nome.sh (Es. vmc_sala_script_cambio_nome.sh)
   </pre> 
 <strong>15</strong> Aprire uno alla volta, con un Editor di File (Es. Word Office) i seguenti Files:
   <pre style="font-size:10px; background-color: #d9ffcc;">
