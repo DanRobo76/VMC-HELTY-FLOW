@@ -8,10 +8,10 @@
 
 ### - Limiti del SoftWare:<br>
 <strong>La Lettura dei Sensori avviene Automaticamente ogni:</strong>
--  5 Secondi, per la Lettura della Velocità della VMC;<br> 
-- 60 Secondi (1 Minuto), per la Verifica On-Line della VMC;<br> 
+-  10 Secondi, per la Lettura della Velocità della VMC;<br> 
+-  60 Secondi (1 Minuto), per la Verifica On-Line della VMC;<br> 
 -  1200 Secondi (20 Minuti), per la Lettura dei Parametri Ambientali della VMC;<br> 
--  43200 Secondi (12 ore), per la Lettura del Nome della VMC;<br> 
+-  86400 Secondi (24 ore), per la Lettura del Nome della VMC;<br> 
 -  43200 Secondi (12 ore), per la Lettura dei Dati LAN della VMC;
 
 Per Aggiornare tutti i sensori in real-time, entrare nel"Pannello Sensori" e cliccare su "Esegui" correlata alla voce "Aggiorna i Sensori Manualmente"
