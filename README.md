@@ -148,5 +148,3 @@ Per Installare l'API di OpenWeatherMap utile per estrarre l'Umidità Esterna, la
 oppure scansionare il seguente QR code:
 <img src="https://github.com/DanRobo76/VMC-HELTY-FLOW/assets/102819027/81ba7208-fbad-4fab-8ceb-cdcf901fdb61.png" alt="immagine" style="width:20%;">
 <br>
-
-<br><strong>Ringraziamenti</strong><br>
