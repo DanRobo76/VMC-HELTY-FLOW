@@ -4,50 +4,59 @@
 
 |          VMC-HELTY-FLOW Release          | Supportato da Home Assistant            |
 | ---------------------------------------- | ----------------------------------------|
-|  :white_check_mark: v.1.1.0              | :white_check_mark:   Ver. 2023.8.4 |
-
+|  :white_check_mark: v.2.0.0              | :white_check_mark:   Ver. 2023.11.2     |
+#
 ### - Limiti del SoftWare:<br>
-<strong>La Lettura dei Sensori avviene Automaticamente ogni:</strong>
--  10 Secondi, per la Lettura della Velocità della VMC;<br> 
--  60 Secondi (1 Minuto), per la Verifica On-Line della VMC;<br> 
--  1200 Secondi (20 Minuti), per la Lettura dei Parametri Ambientali della VMC;<br> 
--  86400 Secondi (24 ore), per la Lettura del Nome della VMC;<br> 
--  43200 Secondi (12 ore), per la Lettura dei Dati LAN della VMC;
+<strong>La Lettura dei Sensori avviene ogni:</strong>
+<pre style="font-size:10px; background-color: #d9ffcc;">
+  -  60 Secondi (1 Minuto), per la Verifica On-Line della VMC;
+  -  5 Secondi, per la Lettura della Velocità della VMC;
+  -  1200 Secondi (20 Minuti), per la Lettura dei Parametri Ambientali della VMC;
+  -  43200 Secondi (12 ore), per la Lettura del Nome della VMC;
+  -  43200 Secondi (12 ore), per la Lettura dei Dati LAN della VMC;
+  -  86400 Secondi (24 ore), per la verifica della Versione del Software; 
+</pre>
 
-Per Aggiornare tutti i sensori in real-time, entrare nel"Pannello Sensori" e cliccare su "Esegui" correlata alla voce "Aggiorna i Sensori Manualmente"
-<br>  ![Sensori - Manuale](https://github.com/DanRobo76/VMC-HELTY-FLOW/assets/102819027/5dbecdb3-2e99-49d6-b91c-758ae3a07490) <br>
+Per Aggiornare tutti i sensori in real-time, senza attendere le tempistiche sopra esposte, entrare nel <strong>Pannello Sensori</strong> e cliccare su <strong>Esegui</strong>:
 
-Se si vuole modificare le tempistiche automaticamente, modificare i "Secondi" all'interno dei sensori, contenuti nel File vmc_helty_flow_[NOME]_xx_xx_20xx.yaml :<br> 
-  - VMC_[NOME]_STATUS_IP;<br> 
-  - VMC_[NOME]_STATUS_VENTOLA;<br> 
-  - VMC_[NOME]_SENSORI;<br> 
-  - VMC_[NOME]_NOME;<br> 
-  - VMC_[NOME]_LAN <br> 
+<img src="https://github-production-user-asset-6210df.s3.amazonaws.com/102819027/282233328-e868765e-e023-42cc-b371-64c0e99f36ad.png" alt="immagine" style="width:30%;">
+Se si vuole modificare le tempistiche, modificare i <strong>Secondi</strong> all'interno dei sensori, contenuti nel File <strong>vmc_[NOME].yaml</strong>:<br> 
+<pre style="font-size:10px; background-color: #d9ffcc;">
+  - VMC_[NOME]_STATUS_IP
+  - VMC_[NOME]_STATUS_VENTOLA
+  - VMC_[NOME]_SENSORI
+  - VMC_[NOME]_NOME
+  - VMC_[NOME]_LAN
+  - vmc_[NOME]_versione_repository
+</pre>
 
-e riavviare Home Assistan. [Non usare il Riavvio Rapido]
+<img src="https://github-production-user-asset-6210df.s3.amazonaws.com/102819027/282233228-95b0fa20-8308-49eb-a75d-d4f7183c9d7d.png" alt="immagine" style="width:60%;"><br>
 
-<strong>In alcune condizioni, all'interno dell'Automazione, è presente un'attesa di 4 secondi [Aumentare se si riscontrano valori della Velocità disattesi (trova e sostituisci seconds: 4 con seconds: x)], per bypassare le condizioni intrinseche contenute nel Firmware della VMC</strong><br> 
+e riavviare Home Assistan.
 
+In alcune condizioni, all'interno dell'Automazione, è presente un'attesa di 4 secondi <strong>[Aumentare se si riscontrano valori della Velocità disattesi (trova e sostituisci seconds: 4 con seconds: x)]</strong>, per bypassare le condizioni intrinseche contenute nel Firmware della VMC<br> 
+#
 ### - In fase di Verifica la Lettura della Temperatura Interna o Esterna minore di 0 °C:<br>     
-<img src="https://github.com/DanRobo76/VMC-HELTY-FLOW/assets/102819027/7e34f416-a47e-4749-b907-e6e1140a8321" alt="Immagine">
+
+<img src="https://github-production-user-asset-6210df.s3.amazonaws.com/102819027/282232595-cb4de785-90b8-426d-8e89-31c2244fac8d.png" alt="immagine" style="width:30%;"><br>
+Condividi la stringa evidenziata dalla Freccia, per E-mail a: <a href="mailto:danilo.robotti@gmail.com">danilo.robotti@gmail.com</a>
+<br><br>
+Esempio Stringa dei Sensori Ambientali da Condividere:
 <br>
- <br>
- Condividi questa stringa, per E-mail: <a href="mailto:danilo.robotti@gmail.com">danilo.robotti@gmail.com</a><br>
- <br> 
-  <pre style="font-size:10px; background-color: #d9ffcc;">
-   Esempio:
-   - Sensori Ambientali:
-     VMGI,00214,00202,00817,00000,16384,00298,00222,00069,04354,00188,00000,00000,00000,00000,00000 <br>
-  </pre>
+<pre style="font-size:10px; background-color: #d9ffcc;">
+VMGI,00209,00196,00708,00000,16384,02307,00224,00069,04354,00168,00000,00000,00000,00000,00000 <br>
+</pre>
+insieme allo ScreeShot dell'App. Air Guard: <br>
 
-<br> insieme allo ScreeShot dell'App. Air Guard: <br>
+<img src="https://github-production-user-asset-6210df.s3.amazonaws.com/102819027/282240134-aaba012f-7122-4a83-b1d6-470427a67854.png" alt="immagine" style="width:15%;"><br>
 
-![App AirGuard](https://github.com/DanRobo76/VMC-HELTY-FLOW/assets/102819027/f15527ff-2042-4835-b389-2974792da3fb)<br>
-<br>, se rilevi una Temperatura Interna o Esterna minore di 0 °C (Negativa).
-
+, se rilevi una Temperatura Interna o Esterna minore di 0 °C (Negativa).
+#
 ### - Rapporto Errori
 [Link Release](https://github.com/DanRobo76/VMC-HELTY-FLOW/releases)
 <br>
-
+#
 ### - Curiosità: Impiego della VMC da remoto con l'uso di un Relè Smart, senza l'impiego di Home Assistant:<br>
-Nella VMC Flow Plus, una volta installato il relè e impostata una velocità diversa da zero, è necessario attendere 30 secondi prima di interrompere l'alimentazione. Questa procedura consente attraverso l'utilizzo di un relè smart di spegnere o accendere la VMC con la velocità impostata precedentemente, da remoto.
+<strong>1</strong> Nella VMC Flow Plus, una volta installato il relè e impostata una velocità diversa da zero, attendere 30 secondi prima di interrompere l'alimentazione;<br>
+<strong>2</strong> Successivamente ripristinare l'alimentazione e portare la VMC alla Velocità 0;<br>
+<strong>3</strong> Questa procedura consente attraverso l'utilizzo di un relè smart di spegnere o accendere la VMC con la velocità impostata precedentemente <strong>Punto 1</strong>, da remoto.<br>
