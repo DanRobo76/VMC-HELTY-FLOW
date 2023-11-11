@@ -17,7 +17,7 @@
 Per Aggiornare tutti i sensori in real-time, entrare nel"Pannello Sensori" e cliccare su "Esegui" correlata alla voce "Aggiorna i Sensori Manualmente"
 <br>  ![Sensori - Manuale](https://github.com/DanRobo76/VMC-HELTY-FLOW/assets/102819027/5dbecdb3-2e99-49d6-b91c-758ae3a07490) <br>
 
-Se se vuole modificare le tempistiche automaticamente, modificare i "Secondi" all'interno dei sensori, contenuti nel File vmc_helty_flow_[NOME]_xx_xx_20xx.yaml :<br> 
+Se si vuole modificare le tempistiche automaticamente, modificare i "Secondi" all'interno dei sensori, contenuti nel File vmc_helty_flow_[NOME]_xx_xx_20xx.yaml :<br> 
   - VMC_[NOME]_STATUS_IP;<br> 
   - VMC_[NOME]_STATUS_VENTOLA;<br> 
   - VMC_[NOME]_SENSORI;<br> 
@@ -26,7 +26,7 @@ Se se vuole modificare le tempistiche automaticamente, modificare i "Secondi" al
 
 e riavviare Home Assistan. [Non usare il Riavvio Rapido]
 
-<strong>In alcune condizioni, all'interno dell'Automazione, è presente un'attesa di 4 secondi [Aumentare se i riscontrano valori della Velocità disattesi (trova e sostituisci seconds: 4 con seconds: x)], per bypassare le condizioni intrinseche contenute nel Firmware della VMC</strong><br> 
+<strong>In alcune condizioni, all'interno dell'Automazione, è presente un'attesa di 4 secondi [Aumentare se si riscontrano valori della Velocità disattesi (trova e sostituisci seconds: 4 con seconds: x)], per bypassare le condizioni intrinseche contenute nel Firmware della VMC</strong><br> 
 
 ### - In fase di Verifica la Lettura della Temperatura Interna o Esterna minore di 0 °C:<br>     
 <img src="https://github.com/DanRobo76/VMC-HELTY-FLOW/assets/102819027/7e34f416-a47e-4749-b907-e6e1140a8321" alt="Immagine">
