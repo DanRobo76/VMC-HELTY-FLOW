@@ -3982,13 +3982,13 @@ action:
           - condition: trigger
             id: "Rip. Free Cooling No TeVsTi "
         sequence:
-          - service: shell_command.vmc_master_freecooling
-            data: {}
           - service: input_boolean.turn_off
             data: {}
             target:
               entity_id: >-
                 input_boolean.vmc_master_spia_velocita_freecooling_un_solo_avvio_per_programmazione_freecooling
+          - service: shell_command.vmc_master_freecooling
+            data: {}
       - conditions:
           - condition: trigger
             id: " Disattivazione VMC ON/OFF, in Funzione della Vel. Free Cooling precedentemente Armato"
@@ -4002,24 +4002,24 @@ action:
           - condition: trigger
             id: TeVsTi Free-Heating -> Imposta Velocità 0
         sequence:
-          - service: shell_command.vmc_master_velocita_0
-            data: {}
           - service: input_boolean.turn_on
             data: {}
             target:
               entity_id: >-
                 input_boolean.vmc_master_spia_velocita_freecooling_un_solo_avvio_per_programmazione_freeheating
+          - service: shell_command.vmc_master_velocita_0
+            data: {}
       - conditions:
           - condition: trigger
             id: "Rip. Free Heating No TeVsTi "
         sequence:
-          - service: shell_command.vmc_master_freecooling
-            data: {}
           - service: input_boolean.turn_off
             data: {}
             target:
               entity_id: >-
                 input_boolean.vmc_master_spia_velocita_freecooling_un_solo_avvio_per_programmazione_freeheating
+          - service: shell_command.vmc_master_freecooling
+            data: {}
       - conditions:
           - condition: trigger
             id: " Disattivazione VMC ON/OFF, in Funzione della Vel. Free Heating precedentemente Armato"
