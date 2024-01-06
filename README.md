@@ -125,7 +125,7 @@ Per Installare l'API di OpenWeatherMap utile per estrarre l'Umidità Esterna, la
 <strong>10</strong> Ricorda di non condividere la tua chiave API con altri e di non utilizzarla per scopi non consentiti dalle condizioni di utilizzo di OpenWeatherMap.<br>
 
 ## <span style="color:#663300">SchreenShot</span>
-<img src="https://github-production-user-asset-6210df.s3.amazonaws.com/102819027/282230900-d2e47275-16fd-49e9-81c2-8956ac07bcd4.png" alt="immagine" style="width:100%;"><br><br> 
+![Grafiche per GitHub](https://github.com/DanRobo76/VMC-HELTY-FLOW/assets/102819027/bee1e748-2f46-4b8b-b977-3e7ce7607683)<br><br> 
 
 #
 
