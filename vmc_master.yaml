@@ -1261,7 +1261,7 @@ sensor:
             {% set offset = states('sensor.vmc_master_alert_monitoraggio_offset_tutti_min') %}
             {% set freeheating_freecooling = states('sensor.vmc_master_alert_monitoraggio_free_heating_o_free_cooling_disabilitato') %}
             {% set black_out = states('sensor.vmc_master_alert_monitoraggio_black_out') %}
-            {% if ( (black_out == 'Rilevato') or (umidità == 'Allerta' ) or (umidità_non_calcolabile == '[Non Calcolabile]') or (umidità_esterna_non_calcolabile == '[Non Calcolabile]') or (co2 =='Allerta') or (voc =='Allerta') or (PdRvc =='Allerta') or (congelamento == 'Allerta') or (delta == 'Allerta')  or (freeheating_freecooling == 'NOT OK') or (offset == 'NOT OK')) %}
+            {% if ( (black_out == 'Rilevato') or (umidità == 'Allerta' ) or (umidità_non_calcolabile == '[Non Calcolabile]') or (umidità_esterna_non_calcolabile == '[Non Calcolabile]') or (co2 =='Allerta') or (voc =='Allerta') or (PdRvc =='Allerta') or (congelamento == 'Allerta') or (delta == 'Allerta')  or (freeheating_freecooling == 'OK') or (offset == 'NOT OK')) %}
               Allerta
             {% else %}
               Nessuna Allerta
