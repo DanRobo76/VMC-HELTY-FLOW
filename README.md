@@ -62,7 +62,7 @@ Il Cliente ha l’onere e la responsabilità della scelta, dell’installazione,
     packages: !include_dir_named packages/
 </pre>
 <img src="https://github-production-user-asset-6210df.s3.amazonaws.com/102819027/282229181-536ce9c7-e1ba-4baa-9967-c8a91ebc4920.png" alt="immagine" style="width:40%;">
-, diversamente inserirlo, salvare il File <strong>configuration.yaml</strong> e riavviare Home Assistant;<BR>
+, diversamente inserirlo, salvare il File <strong>configuration.yaml</strong> e riavviare Home Assistant (Strumenti per sviluppatori->Riavvia->Opzioni avanzate->Riavvio del sistema);<BR>
 <br>
 <strong>3</strong> Verificare la presenza della cartella <strong>packages</strong> all'interno della cartella <strong>config</strong> del Server Home Assistant; se non è presente, creare l'intero  percorso ovvero <strong>\\192.168.1.xxx\config\packages\vmc_helty_flow\master</strong>;<BR>
 <br>
@@ -90,9 +90,9 @@ Il Cliente ha l’onere e la responsabilità della scelta, dell’installazione,
 <br>
 <strong>5</strong> in Home Assistant andare in  <strong>Impostazioni-> Automazioni e scene -> CREA AUTOMAZIONE -> Inizia con un'automazione vuota</strong> -> cliccare in alto a destra sui <strong>... puntini</strong> -> <strong>modifica in yaml</strong> -> cancellare tutto il codice e incollare il contenuto del file <strong>vmc_master_automazione.txt</strong>  e salvare;<br>
 <br>
-<strong>6</strong> in Home Assistant andare in <strong>Panoramica</strong> -> cliccare in alto a destra sui <strong>... puntini</strong> -> <strong>Modifica plancia</strong> -> <strong>AGGIUNGI SCHEDA</strong> -> <strong>Manuale</strong> -> Selezionare tutto il Codice , cancellare tutto il codice e incollare il contenuto del file <strong>vmc_master_scheda_manuale_interfaccia.txt</strong> e salvare; ripetere per il file <strong>vmc_clona_scheda_manuale_interfaccia</strong> se si dispone di più unità VMC;<br>
+<strong>6</strong> in Home Assistant andare in <strong>Panoramica</strong> -> cliccare in alto a destra sui <strong>... puntini</strong> -> <strong>Modifica plancia</strong> -> <strong>AGGIUNGI SCHEDA</strong> -> <strong>Manuale</strong> -> Selezionare tutto il Codice , cancellare tutto il codice e incollare il contenuto del file <strong>vmc_master_scheda_manuale_interfaccia.txt</strong> e salvare; ripetere per il file <strong>vmc_clona_scheda_manuale_interfaccia</strong> se si dispone di più unità VMC.<br>Riavviare Home Assistant (Strumenti per sviluppatori->Riavvia->Riavvia Home Assistant);<br>
 <br>
-<strong>7</strong> Nella Scheda Interfaccia, a primo avvio, inserire l'Indirizzo IP, vedere <strong>Punto 1</strong>;<br>
+<strong>7</strong> Nella Scheda Interfaccia, inserire l'Indirizzo IP, vedere <strong>Punto 1</strong>;<br>
 <br>
 <strong>8</strong> Per maggior informazioni andare sul Pannello Informazioni.<BR>
 <img src="https://github-production-user-asset-6210df.s3.amazonaws.com/102819027/282228208-01c799a0-b92a-406f-939f-9c06006360a7.png" alt="immagine" style="width:30%;"><br>
