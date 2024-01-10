@@ -35,7 +35,7 @@ Il Cliente ha l’onere e la responsabilità della scelta, dell’installazione,
 <sub>-  Calcola la Portata d'Aria [M³/h] in funzione della Velocità;</sub><br>
 <sub>-  Calcola l'Umidità Assoluta Esterna [g/m³];</sub><br>
 <sub>-  Calcola l'Umidità Assoluta Interna [g/m³];</sub><br>
-<sub>-  Mostra un'Avviso in funzione: del Sensore Umidità; per Congelamento; per Differenza tra Temperatura Interna ed Esterna; per il Superamento del Set Lim. Δ Punto di Rugiada. in caso di Riscaldamento o Raffrescamento non desiderato, correlato alla Velocità Free heating o Free Cooling</sub><br>
+<sub>-  Mostra un'Avviso in funzione: dei sensori CO₂ e VOC, del Sensore Umidità; per Congelamento; per Differenza tra Temperatura Interna ed Esterna; per il Superamento del Set Lim. Δ Punto di Rugiada. in caso di Riscaldamento o Raffrescamento non desiderato, correlato alla Velocità Free heating o Free Cooling</sub><br>
 <sub>-  Informa in caso di un nuovo Aggiornamento;</sub><br>
 <sub>-  Permette l'utilizzo dei seguenti Servizi, da impiegare in qualsiasi Automazione:</sub><br>                                                                    
 <img src="https://github-production-user-asset-6210df.s3.amazonaws.com/102819027/263529824-d63e3903-1a11-444c-9c1b-4ad4ebf1b365.png" alt="immagine" style="width:120%;">
