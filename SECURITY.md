@@ -4,7 +4,7 @@
 
 |          VMC-HELTY-FLOW Release          | Supportato da Home Assistant            |
 | ---------------------------------------- | ----------------------------------------|
-|  :white_check_mark: v.3.0.0              | :white_check_mark:   Ver. 2024.1.2      |
+|  :white_check_mark: v.4.0.0              | :white_check_mark:   Ver. 2024.4.4      |
 #
 ### - Limiti del SoftWare:<br>
 <strong>La Lettura dei Sensori avviene ogni:</strong>
@@ -34,7 +34,6 @@ Se si vuole modificare le tempistiche, modificare i <strong>Secondi</strong> all
 
 e riavviare Home Assistan.
 
-In alcune condizioni, all'interno dell'Automazione, è presente un'attesa di 4 secondi <strong>[Aumentare se si riscontrano valori della Velocità disattesi (trova e sostituisci seconds: 4 con seconds: x)]</strong>, per bypassare le condizioni intrinseche contenute nel Firmware della VMC<br> 
 #
 ### - In fase di Verifica la Lettura della Temperatura Interna o Esterna minore di 0 °C:<br>     
 
