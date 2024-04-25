@@ -23,6 +23,7 @@ Il Cliente ha l’onere e la responsabilità della scelta, dell’installazione,
 <strong>Punti di Forza:</strong><br>
 <sub>-  Permette l'accensione e lo spegnimento Automatico, in funzione degli inquinanti (CO₂ e VOC) [Sensori presenti solo nella VMC HELTY FLOW ELITE];</sub><br>
 <sub>-  Se disponi di più VMC, questo software ti offre la possibilità di clonarle direttamente dall'interfaccia utente. Assicurati di seguire attentamente le istruzioni al <strong>Punto 3</strong> per eseguire correttamente questa operazione;</sub><br>
+<sub>-  Permette lo spegnimento Automatico, in funzione della Temperatura Esterna se ≤ -18 [°C] e successiva ripresa, anche in funzione degli Offset settati;</sub><br>
 <sub>-  Permette di Cambiare l'IP della VMC, dall'interfaccia utente;</sub><br>
 <sub>-  Permette di Rinominare la VMC, dall'interfaccia utente;</sub><br>
 <sub>-  Permette di Pilotare la VMC da remoto e in Locale;</sub><br>
