@@ -23,7 +23,8 @@ Il Cliente ha l’onere e la responsabilità della scelta, dell’installazione,
 <strong>Punti di Forza:</strong><br>
 <sub>-  Permette l'accensione e lo spegnimento Automatico, in funzione degli inquinanti (CO₂ e VOC) [Sensori presenti solo nella VMC HELTY FLOW ELITE];</sub><br>
 <sub>-  Se disponi di più VMC, questo software ti offre la possibilità di clonarle direttamente dall'interfaccia utente. Assicurati di seguire attentamente le istruzioni al <strong>Punto 3</strong> per eseguire correttamente questa operazione;</sub><br>
-<sub>-  Permette lo spegnimento Automatico, in funzione della Temperatura Esterna se ≤ -18 [°C] e successiva ripresa, anche in funzione degli Offset settati;</sub><br>
+<sub>-  Permette lo spegnimento Automatico, in funzione della Temperatura Esterna se ≤ -18 [°C] e successiva ripresa, anche in funzione degli Offset settati
+        <br>N.b. Per impostazione del firmware, la priorità è assegnata al sensore di temperatura esterna della VMC anziché al valore rilevato dal sensore di Temperatura Esterna di OpenWeatherMap;</sub><br>
 <sub>-  Permette di Cambiare l'IP della VMC, dall'interfaccia utente;</sub><br>
 <sub>-  Permette di Rinominare la VMC, dall'interfaccia utente;</sub><br>
 <sub>-  Permette di Pilotare la VMC da remoto e in Locale;</sub><br>
@@ -112,10 +113,15 @@ Il software calcola il Punto di Rugiada Esterno (PdR Ext.) e il Punto di Rugiada
 <br>
 <strong>Attenzione, se la VMC non viene vista, assicurarsi che la stessa venga visualizzata all'interni dell'APP Air Guard; diversamente impiegando la stessa inserirla nell'infrastuttura di rete.</strong>
 
+#
+###   Logiche di Funzionamento 
+
+<img src="https://github.com/DanRobo76/VMC-HELTY-FLOW/assets/102819027/c7cf55c7-f80e-44e8-84e9-01868574dba1.png" alt="immagine" style="width:100%;">
+
 #  
 
 ### OpenWeatherMap
-Per Installare l'API di OpenWeatherMap utile per estrarre l'Umidità Esterna, la quale verrà impiegata per determinare il Punto di Rugiada Esterno, segui questi passaggi:<br>
+Per Installare l'API di OpenWeatherMap utile per estrarre i valori della Temperatura Esterna e dell'Umidità Esterna, impiegati per determinare il Punto di Rugiada Esterno, segui questi passaggi:<br>
 <strong>1</strong> Vai al sito web di OpenWeatherMap all'indirizzo https://openweathermap.org/ e fai clic sul pulsante "Sign up" nell'angolo in alto a destra della pagina.<br>
 <strong>2</strong> Inserisci i tuoi dati personali per creare un account gratuito. Puoi utilizzare il tuo indirizzo e-mail o il tuo account Facebook o Google per accedere.<br>
 <strong>3</strong> Dopo aver creato un account, fai clic sul tuo nome utente nell'angolo in alto a destra della pagina e seleziona "API keys" dal menu a discesa.<br>
