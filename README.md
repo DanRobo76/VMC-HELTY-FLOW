@@ -17,7 +17,7 @@ Il Cliente ha l’onere e la responsabilità della scelta, dell’installazione,
 <sub>- Installare <strong><a href="https://www.home-assistant.io/installation/">Home Assistant</a></strong>;</sub><br>
 <sub>- Installare l'Integrazione <strong><a href="https://github.com/DanRobo76/VMC-HELTY-FLOW/blob/main/README.md#openweathermap-" text="OpenWeatherMap">OpenWeatherMap</a>; [per l'impiego della Temperatura Esterna e l'Umidità Esterna]</strong></sub><br>
 <sub>- Installare l'Add On [Facoltativo, ma Consigliato] <strong>File Edit</strong>, di Home Assistant;</sub><sub>   [Impostazioni->Componenti aggiuntivi->Raccolta di Componenti Aggiuntivi->File editor].</sub><br>
-<sub>- Assicurarsi che la VMC venga visualizzata all'interni dell'APP <strong><a href="https://play.google.com/store/apps/details?id=com.helty.heltyair&hl=it&gl=US&pli=1">Air Guard</a></strong>; diversamente impiegando la stessa inserirla nell'infrastuttura di rete, prima di procedere.</sub><br>
+<sub>- Assicurarsi che la VMC venga visualizzata all'interni dell'APP <strong><a href="https://play.google.com/store/apps/details?id=com.helty.heltyair&hl=it&gl=US&pli=1">Air Guard</a></strong>; diversamente, impiegando la stessa, inserirla nell'infrastuttura di rete, prima di procedere.</sub><br>
 
 #
 
