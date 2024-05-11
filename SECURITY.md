@@ -4,7 +4,7 @@
 
 |          VMC-HELTY-FLOW Release          | Supportato da Home Assistant            |
 | ---------------------------------------- | ----------------------------------------|
-|  :white_check_mark: v.4.1.0              | :white_check_mark:   Ver. 2024.4.4      |
+|  :white_check_mark: v.4.2.0              | :white_check_mark:   Ver. 2024.5.3      |
 #
 ### - Limiti del SoftWare:<br>
 <strong>La Lettura dei Sensori avviene ogni:</strong>
@@ -32,7 +32,7 @@ Se si vuole modificare le tempistiche, modificare i <strong>Secondi</strong> all
 
 <img src="https://github-production-user-asset-6210df.s3.amazonaws.com/102819027/282233228-95b0fa20-8308-49eb-a75d-d4f7183c9d7d.png" alt="immagine" style="width:60%;"><br>
 
-e riavviare Home Assistan.
+e riavviare Home Assistant.
 
 #
 ### - In fase di Verifica la Lettura della Temperatura Interna o Esterna minore di 0 °C:<br>     
