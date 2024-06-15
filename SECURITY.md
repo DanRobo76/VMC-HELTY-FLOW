@@ -4,12 +4,12 @@
 
 |          VMC-HELTY-FLOW Release          | Supportato da Home Assistant            |
 | ---------------------------------------- | ----------------------------------------|
-|  :white_check_mark: v.4.2.0              | :white_check_mark:   Ver. 2024.5.3      |
+|  :white_check_mark: v.4.3.0              | :white_check_mark:   Ver. 2024.6.2      |
 #
 ### - Limiti del SoftWare:<br>
 <strong>La Lettura dei Sensori avviene ogni:</strong>
 <pre style="font-size:10px; background-color: #d9ffcc;">
-  -  60 Secondi (1 Minuto), per la Verifica On-Line della VMC;
+  -  2 Secondi, per la Verifica On-Line della VMC;
   -  5 Secondi, per la Lettura della Velocità della VMC;
   -  1200 Secondi (20 Minuti), per la Lettura dei Parametri Ambientali della VMC;
   -  43200 Secondi (12 ore), per la Lettura del Nome della VMC;
