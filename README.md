@@ -15,33 +15,41 @@ Il Cliente ha l’onere e la responsabilità della scelta, dell’installazione,
 <img src="https://github-production-user-asset-6210df.s3.amazonaws.com/102819027/282244833-479bc367-e39e-4443-9969-92620c3c96bf.png" alt="immagine" style="width:70%;">
 <strong>Pre-Requisiti:</strong><br> 
 <sub>- Installare <strong><a href="https://www.home-assistant.io/installation/">Home Assistant</a></strong>;</sub><br>
-<sub>- Installare l'Integrazione <strong><a href="https://github.com/DanRobo76/VMC-HELTY-FLOW/blob/main/README.md#openweathermap-" text="OpenWeatherMap">OpenWeatherMap</a>; [per l'impiego della Temperatura Esterna e l'Umidità Esterna]</strong></sub><br>
+<sub>- Verificare la presenza di almeno un'entità Meteo installata in Home Assistant, diversamente installarne almeno una. Es. <strong><a href="https://www.home-assistant.io/integrations/met/">Meteorologisk institutt (Met.no)</a></strong>;</strong></sub><br>
 <sub>- Installare l'Add On [Facoltativo, ma Consigliato] <strong>File Edit</strong>, di Home Assistant;</sub><sub>   [Impostazioni->Componenti aggiuntivi->Raccolta di Componenti Aggiuntivi->File editor].</sub><br>
 <sub>- Assicurarsi che la VMC venga visualizzata all'interni dell'APP <strong><a href="https://play.google.com/store/apps/details?id=com.helty.heltyair&hl=it&gl=US&pli=1">Air Guard</a></strong>; diversamente, impiegando la stessa, inserirla nell'infrastuttura di rete, prima di procedere.</sub><br>
 
 #
 
 <strong>Punti di Forza:</strong><br>
-<sub>-  Permette l'accensione e lo spegnimento Automatico, in funzione degli inquinanti (CO₂ e VOC) [Sensori presenti solo nella VMC HELTY FLOW ELITE];</sub><br>
-<sub>-  Se disponi di più VMC, questo software ti offre la possibilità di clonarle direttamente dall'interfaccia utente. Assicurati di seguire attentamente le istruzioni al <strong>Punto 3</strong> per eseguire correttamente questa operazione;</sub><br>
-<sub>-  Permette lo spegnimento Automatico, in funzione della Temperatura Esterna se ≤ -18 [°C] e successiva ripresa, anche in funzione degli Offset settati
-        <br>N.b. Per impostazione del firmware, la priorità è assegnata al sensore di temperatura esterna della VMC anziché al valore rilevato dal sensore di Temperatura Esterna di OpenWeatherMap;</sub><br>
+<sub>-  Permette di selezionare un'entità Meteo tra quelle installate in Home Assistant per poter impiegare la Temperatura Esterna e l'Umidità Esterna;</sub><br>
+<sub>-  Permette l'accensione e lo spegnimento Automatico, in funzione degli inquinanti (CO₂ e/o VOC) [Sensori presenti solo nella VMC HELTY FLOW ELITE];</sub><br>
+<sub>-  Se si dispone di più VMC, questo software offre la possibilità di clonarle direttamente dall'interfaccia utente. Assicurarsi di seguire attentamente le istruzioni al <strong>Punto 3</strong> per attuare correttamente questa operazione;</sub><br>
+<sub>-  Permette lo spegnimento Automatico, in funzione della Temperatura Esterna se ≤ -18 [°C] e successiva ripresa, anche in funzione degli Offset settati</sub><br>
+        &nbsp;&nbsp;<sub><sub>N.b. Per impostazione del firmware, la priorità è assegnata al sensore di temperatura esterna della VMC anziché al valore rilevato dal sensore di Temperatura Esterna dell'entità Meteo selezionata;</sub></sub><br>
 <sub>-  Permette di Cambiare l'IP della VMC, dall'interfaccia utente;</sub><br>
 <sub>-  Permette di Rinominare la VMC, dall'interfaccia utente;</sub><br>
 <sub>-  Permette di Pilotare la VMC da remoto e in Locale;</sub><br>
 <sub>-  Permette l'accensione e lo spegnimento della VMC, in funzione delle 2 fasce orarie programmabili per ogni giorno della settimana;</sub><br>
 <sub>-  Permette l'accensione e lo spegnimento della VMC, in funzione delle 2 fasce mensili programmabili, per la Velocità impostata su Free Heating / Free Cooling, evitando il raffrescamento o il riscaldamento indesiderato;</sub><br>
 <sub>-  Permette l'accensione e lo spegnimento della VMC, in in funzione dei Parametri Ambientali;</sub><br>
-<sub>-  Permettere di selezionare la "Condizione Climatica Esterna" da introdurre nel tuo ambiente tramite il "Set Lim. Δ Punto di Rugiada":
-<br>![Tabella](https://github.com/DanRobo76/VMC-HELTY-FLOW/assets/102819027/3e207f90-9a6e-42a2-b35d-f0fa51cfba95)
-Il software calcola il Punto di Rugiada Esterno (PdR Ext.) e il Punto di Rugiada Interno (PdR Int.). Se la differenza tra il PdR Ext. e il PdR Int. è inferiore al "Set Lim. Δ Punto di Rugiada" (valore impostato dall'utente), la VMC garantirà un adeguato trasporto dell'umidità dall'interno all'esterno dell'edificio. Al contrario, se la differenza tra il PdR Ext. e il PdR Int. sarà maggiore o uguale al "Set Lim. Δ Punto di Rugiada", la VMC si arresterà per evitare il trasporto dell'umidità dall'esterno all'interno dell'edificio; la ripresa automatica sull'ultima velocità impostata è garantita non appena la differenza tra il PdR Ext. e il PdR Int. è inferiore al "Set Lim. Δ Punto di Rugiada".</sub><br>
 <sub>-  Ripristina la Velocità in caso di Black-Out, se la VMC ha una linea dedicata al Quadro Elettrico e/o se installato un relè domotico sulla VMC;</sub><br>
 <sub>-  Calcola il Tempo di Ricambio d'Aria in funzione della Velocità;</sub><br>
 <sub>-  Calcola la Portata d'Aria [M³/h] in funzione della Velocità;</sub><br>
 <sub>-  Calcola l'Umidità Assoluta Esterna [g/m³];</sub><br>
 <sub>-  Calcola l'Umidità Assoluta Interna [g/m³];</sub><br>
-<sub>-  Mostra un'Avviso in funzione: dei sensori CO₂ e VOC, del Sensore Umidità; per Congelamento; per Differenza tra Temperatura Interna ed Esterna; per il Superamento del Set Lim. Δ Punto di Rugiada. in caso di Riscaldamento o Raffrescamento non desiderato, correlato alla Velocità Free heating o Free Cooling</sub><br>
+<sub>- Mostra un avviso in funzione:</sub><br>
+&nbsp;&nbsp;<sub><sub>- dei sensori CO₂ e/o VOC;</sub></sub><br>
+&nbsp;&nbsp;<sub><sub>- del sensore umidità;</sub></sub><br>
+&nbsp;&nbsp;<sub><sub>- per congelamento;</sub></sub><br>
+&nbsp;&nbsp;<sub><sub>- per differenza tra temperatura interna ed esterna;</sub></sub><br>
+&nbsp;&nbsp;<sub><sub>- per il superamento del set limit. Δ punto di rugiada;</sub></sub><br>
+&nbsp;&nbsp;<sub><sub>- in caso di riscaldamento o raffrescamento non desiderato, correlato alla velocità Free Heating o Free Cooling.</sub></sub><br>
 <sub>-  Informa in caso di un nuovo Aggiornamento;</sub><br>
+<sub>-  Permettere di selezionare la "Condizione Climatica Esterna" da introdurre nel tuo ambiente tramite il "Set Lim. Δ Punto di Rugiada":</sub><br>
+<br>![Tabella](https://github.com/DanRobo76/VMC-HELTY-FLOW/assets/102819027/3e207f90-9a6e-42a2-b35d-f0fa51cfba95)
+<sub><sub>Il software calcola il Punto di Rugiada Esterno (PdR Ext.) e il Punto di Rugiada Interno (PdR Int.). Se la differenza tra il PdR Ext. e il PdR Int. è inferiore al "Set Lim. Δ Punto di Rugiada" (valore impostato dall'utente), la VMC garantirà un adeguato trasporto dell'umidità dall'interno all'esterno dell'edificio. Al contrario, se la differenza tra il PdR Ext. e il PdR Int. sarà maggiore o uguale al "Set Lim. Δ Punto di Rugiada", la VMC si arresterà per evitare il trasporto dell'umidità dall'esterno all'interno dell'edificio; la ripresa automatica sull'ultima velocità impostata è garantita non appena la differenza tra il PdR Ext. e il PdR Int. è inferiore al "Set Lim. Δ Punto di Rugiada".</sub></sub><br>
+<br>
 <sub>-  Permette l'utilizzo dei seguenti Servizi, da impiegare in qualsiasi Automazione:</sub><br>                                                                    
 <img src="https://github-production-user-asset-6210df.s3.amazonaws.com/102819027/263529824-d63e3903-1a11-444c-9c1b-4ad4ebf1b365.png" alt="immagine" style="width:120%;">
 
@@ -119,21 +127,7 @@ Il software calcola il Punto di Rugiada Esterno (PdR Ext.) e il Punto di Rugiada
 
 <img src="https://github.com/DanRobo76/VMC-HELTY-FLOW/assets/102819027/c7cf55c7-f80e-44e8-84e9-01868574dba1.png" alt="immagine" style="width:100%;">
 
-#  
-
-### OpenWeatherMap
-Per Installare l'API di OpenWeatherMap utile per estrarre i valori della Temperatura Esterna e dell'Umidità Esterna, impiegati per determinare il Punto di Rugiada Esterno, segui questi passaggi:<br>
-<strong>1</strong> Vai al sito web di OpenWeatherMap all'indirizzo https://openweathermap.org/ e fai clic sul pulsante "Sign up" nell'angolo in alto a destra della pagina.<br>
-<strong>2</strong> Inserisci i tuoi dati personali per creare un account gratuito. Puoi utilizzare il tuo indirizzo e-mail o il tuo account Facebook o Google per accedere.<br>
-<strong>3</strong> Dopo aver creato un account, fai clic sul tuo nome utente nell'angolo in alto a destra della pagina e seleziona "API keys" dal menu a discesa.<br>
-<strong>4</strong> Sulla pagina "API keys", fai clic sul pulsante "Generate" per creare una nuova chiave API.<br>
-<strong>5</strong> Inserisci un nome per la tua chiave API e seleziona i servizi e le funzionalità che desideri utilizzare con la tua chiave API.<br>
-<strong>6</strong> Fai clic sul pulsante "Generate" per creare la tua chiave API. La tua chiave API verrà visualizzata nella pagina "API keys".<br>
-<strong>7</strong> Copia la tua chiave API e utilizzala successivamente, come parametro di configurazione nel componente OpenWeatherMap in Home Assistant<br>
-<strong>8</strong> In Home Assistant cliccare su Impostazioni -> Dispositivi e Servizi -> Aggiungi Integrazione -> inserire OpenWeatherMap<br>
-<strong>9</strong> Incollare la Chiave API, nel campo "Chiave API*", Modalità "Hourly", Lingua "It"<br>
-<strong>10</strong> Ricorda di non condividere la tua chiave API con altri e di non utilizzarla per scopi non consentiti dalle condizioni di utilizzo di OpenWeatherMap.<br>
-
+#
 ## <span style="color:#663300">SchreenShot</span>
 ![Grafiche per GitHub](https://github.com/DanRobo76/VMC-HELTY-FLOW/assets/102819027/bee1e748-2f46-4b8b-b977-3e7ce7607683)<br><br> 
 
