@@ -26,6 +26,7 @@ Il Cliente ha l’onere e la responsabilità della scelta, dell’installazione,
 #
 
 <strong>Punti di Forza:</strong><br>
+<sub>- Elenca tutte le VMC installate e relativi parametri correlati [Cliccare su Informazioni -> Punto 17];</sub><br>
 <sub>- Permette di selezionare un'entità Meteo tra quelle installate in Home Assistant per poter impiegare la Temperatura Esterna e l'Umidità Esterna;</sub><br>
 <sub>- Permette l'accensione e lo spegnimento Automatico, in funzione degli inquinanti (CO₂ e/o VOC) [Sensori presenti solo nella VMC HELTY FLOW ELITE];</sub><br>
 <sub>- Se si dispone di più VMC, questo software offre la possibilità di clonarle direttamente dall'interfaccia utente. Assicurarsi di seguire attentamente le istruzioni al <strong>Punto 3</strong> per attuare correttamente questa operazione;</sub><br>
@@ -38,7 +39,7 @@ Il Cliente ha l’onere e la responsabilità della scelta, dell’installazione,
 <sub>- Permette l'accensione e lo spegnimento della VMC, in funzione delle 2 fasce mensili programmabili, per la Velocità impostata su Free Heating / Free Cooling, evitando il raffrescamento o il</sub><br>
 <sub>&nbsp;&nbsp;&nbsp;&nbsp;riscaldamento indesiderato;</sub><br>
 <sub>- Permette l'accensione e lo spegnimento della VMC, in funzione dei Parametri Ambientali;</sub><br>
-<sub>- Ripristina la Velocità in caso di Black-Out, se la VMC ha una linea dedicata al Quadro Elettrico e/o se installato un relè domotico sulla VMC;</sub><br>
+<sub>- Ripristina la Velocità in caso di Black-Out, se la VMC ha una linea dedicata al Quadro Elettrico e/o se installato un relè domotico sulla VMC [Opzione Esclusa nell'intervallo del Calendario];</sub><br>
 <sub>- Calcola il Tempo di Ricambio d'Aria in funzione della Velocità;</sub><br>
 <sub>- Calcola la Portata d'Aria [M³/h] in funzione della Velocità;</sub><br>
 <sub>- Calcola l'Umidità Assoluta Esterna [g/m³];</sub><br>
@@ -66,7 +67,7 @@ Il Cliente ha l’onere e la responsabilità della scelta, dell’installazione,
 <br>
 <sub><strong>Nota: se su Home Assistant è presente una versione precedente del presente Software:</strong></sub><br>    
 <br>
-<sub><strong>a) </strong>Cancellare tutto il contenuto all'interno della cartella <strong>\\192.168.1.xxx\config\packages\vmc_helty_flow\</strong></sub><br>    
+<sub><strong>a) </strong>Cancellare tutto il contenuto all'interno della cartella <strong>\\192.168.1.xxx\config\packages\vmc_helty_flow\</strong> oppure seguire il punto <strong>4.2</strong> per poi inserire l'indirizzo IP e la cartella dove è installato il Software della VMC da cancellare, punto <strong>8.1</strong>; successivamente, cliccare su "VMC Master - Cancella VMC" </sub><br>    
 <sub><strong>b) </strong>Andare in <strong>Panoramica</strong> -> cliccare in alto a destra sui <strong>... puntini</strong> -> <strong>Modifica plancia</strong> -> cliccare sui <strong>... puntini</strong> della/e Scheda/e VMC e infine cliccare su <strong>Elimina</strong>;</sub><br>    
 <sub><strong>c) </strong>Andare in  <strong>Impostazioni</strong> -> cliccare su <strong>Automazioni e scenari</strong> -> cliccare sui <strong>... puntini</strong> della/e Scheda/e VMC e infine cliccare su <strong>Elimina</strong>;</sub><br>    
 <sub><strong>d) </strong>Riavviare Home Assistant.</sub><br>
@@ -118,7 +119,7 @@ Il Cliente ha l’onere e la responsabilità della scelta, dell’installazione,
 <img src="https://github-production-user-asset-6210df.s3.amazonaws.com/102819027/282228208-01c799a0-b92a-406f-939f-9c06006360a7.png" alt="immagine" style="width:30%;"><br>
 
 #
-### Se si hanno a disposizione più VMC 
+<strong>8.1 Se si hanno a disposizione più VMC </strong>
 
 <img src="https://github-production-user-asset-6210df.s3.amazonaws.com/102819027/282228725-dad8e9a6-d3e7-4e48-bce3-1efe778c77fd.png" alt="immagine" style="width:60%;">
 <strong>9</strong> Inserire l'indirizzo <strong>IP</strong> e il <strong>Nome della VMC</strong>; quest'ultimo darà nome alla cartella e alle variabili contenute nei files richiamati al <strong>Punto 4.2</strong>
