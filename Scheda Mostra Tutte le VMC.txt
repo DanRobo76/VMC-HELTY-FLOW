@@ -1,0 +1,103 @@
+<pre style="font-size:6px; background-color: #d9ffcc; overflow-x:auto;">
+  <table border="1" style="width:100%; border-collapse: collapse;">
+    <thead>
+      <tr style="background-color: #f2f2f2;">
+        <th style="padding: 10px; border: 1px solid black;">&nbsp;&nbsp;NOME VMC&nbsp;&nbsp;</th>
+        <th style="padding: 10px; border: 1px solid black;">&nbsp;&nbsp;VELOCITA'&nbsp;&nbsp;</th>
+        <th style="padding: 10px; border: 1px solid black;">&nbsp;&nbsp;Status Sensori VMC&nbsp;&nbsp;</th>
+        <th style="padding: 10px; border: 1px solid black;">&nbsp;&nbsp;Status Pannello LED&nbsp;&nbsp;</th>
+        {%- set temp_esterna_sensor = states.sensor | selectattr('entity_id', 'search', '_temp_esterna_status_vmc') | first -%}
+        <th style="padding: 10px; border: 1px solid black;">&nbsp;&nbsp;{{ temp_esterna_sensor.attributes.friendly_name }}&nbsp;&nbsp;</th>
+        {%- set umidita_esterna_sensor = states.sensor | selectattr('entity_id', 'search', '_umidita_esterna_status') | first -%}
+        <th style="padding: 10px; border: 1px solid black;">&nbsp;&nbsp;{{ umidita_esterna_sensor.attributes.friendly_name }}&nbsp;&nbsp;</th>
+        {%- set temp_interna_sensor = states.sensor | selectattr('entity_id', 'search', '_temp_interna_status') | first -%}
+        <th style="padding: 10px; border: 1px solid black;">&nbsp;&nbsp;{{ temp_interna_sensor.attributes.friendly_name }}&nbsp;&nbsp;</th>
+        {%- set umidita_interna_sensor = states.sensor | selectattr('entity_id', 'search', '_umidita_interna_status') | first -%}
+        <th style="padding: 10px; border: 1px solid black;">&nbsp;&nbsp;{{ umidita_interna_sensor.attributes.friendly_name }}&nbsp;&nbsp;</th>
+        {%- set co2_sensor = states.sensor | selectattr('entity_id', 'search', '_co2_status') | first -%}
+        <th style="padding: 10px; border: 1px solid black;">&nbsp;&nbsp;{{ co2_sensor.attributes.friendly_name }}&nbsp;&nbsp;</th>
+        {%- set voc_sensor = states.sensor | selectattr('entity_id', 'search', '_voc_status') | first -%}
+        <th style="padding: 10px; border: 1px solid black;">&nbsp;&nbsp;{{ voc_sensor.attributes.friendly_name }}&nbsp;&nbsp;</th>
+        {%- set punto_di_rugiada_sensor = states.sensor | selectattr('entity_id', 'search', '_punto_di_rugiada_valore') | first -%}
+        <th style="padding: 10px; border: 1px solid black;">&nbsp;&nbsp;{{ punto_di_rugiada_sensor.attributes.friendly_name }}&nbsp;&nbsp;</th>
+        {%- set umidita_assoluta_esterna_sensor = states.sensor | selectattr('entity_id', 'search', '_umidita_assoluta_esterna') | first -%}
+        <th style="padding: 10px; border: 1px solid black;">&nbsp;&nbsp;{{ umidita_assoluta_esterna_sensor.attributes.friendly_name }}&nbsp;&nbsp;</th>
+        {%- set umidita_assoluta_interna_sensor = states.sensor | selectattr('entity_id', 'search', '_umidita_assoluta_interna') | first -%}
+        <th style="padding: 10px; border: 1px solid black;">&nbsp;&nbsp;{{ umidita_assoluta_interna_sensor.attributes.friendly_name }}&nbsp;&nbsp;</th>
+        {%- set co2_status_verifica_soglia_sensor = states.sensor | selectattr('entity_id', 'search', '_co2_status_verifica_soglia') | first -%}
+        <th style="padding: 10px; border: 1px solid black;">&nbsp;&nbsp;{{ co2_status_verifica_soglia_sensor.attributes.friendly_name }}&nbsp;&nbsp;</th>
+        {%- set voc_status_verifica_soglia_sensor = states.sensor | selectattr('entity_id', 'search', '_voc_status_verifica_soglia') | first -%}
+        <th style="padding: 10px; border: 1px solid black;">&nbsp;&nbsp;{{ voc_status_verifica_soglia_sensor.attributes.friendly_name }}&nbsp;&nbsp;</th>
+        {%- set alert_monitoraggio_pdr_sensor = states.sensor | selectattr('entity_id', 'search', '_alert_monitoraggio_pdr') | first -%}
+        <th style="padding: 10px; border: 1px solid black;">&nbsp;&nbsp;{{ alert_monitoraggio_pdr_sensor.attributes.friendly_name }}&nbsp;&nbsp;</th>
+        {%- set umidita_interna_status_verifica_soglia_sensor = states.sensor | selectattr('entity_id', 'search', '_umidita_interna_status_verifica_soglia') | first -%}
+        <th style="padding: 10px; border: 1px solid black;">&nbsp;&nbsp;{{ umidita_interna_status_verifica_soglia_sensor.attributes.friendly_name }}&nbsp;&nbsp;</th>
+        {%- set alert_monitoraggio_free_heating_o_free_cooling_sensor = states.sensor | selectattr('entity_id', 'search', '_alert_monitoraggio_free_heating_o_free_cooling_allert_interfaccia_avvisi') | first -%}
+        <th style="padding: 10px; border: 1px solid black;">&nbsp;&nbsp;{{ alert_monitoraggio_free_heating_o_free_cooling_sensor.attributes.friendly_name }}&nbsp;&nbsp;</th>
+        {%- set delta_temp_verifica_soglia_sensor = states.sensor | selectattr('entity_id', 'search', '_delta_temp_verifica_soglia') | first -%}
+        <th style="padding: 10px; border: 1px solid black;">&nbsp;&nbsp;{{ delta_temp_verifica_soglia_sensor.attributes.friendly_name }}&nbsp;&nbsp;</th>
+        {%- set congelamento_verifica_soglia_sensor = states.sensor | selectattr('entity_id', 'search', '_congelamento_verifica_soglia') | first -%}
+        <th style="padding: 10px; border: 1px solid black;">&nbsp;&nbsp;{{ congelamento_verifica_soglia_sensor.attributes.friendly_name }}&nbsp;&nbsp;</th>
+        {%- set alert_monitoraggio_black_out_sensor = states.sensor | selectattr('entity_id', 'search', '_alert_monitoraggio_black_out') | first -%}
+        <th style="padding: 10px; border: 1px solid black;">&nbsp;&nbsp;{{ alert_monitoraggio_black_out_sensor.attributes.friendly_name }}&nbsp;&nbsp;</th>
+        {%- set status_calcolo_portata_ventola_sensor = states.sensor | selectattr('entity_id', 'search', '_status_calcolo_portata_ventola') | first -%}
+        <th style="padding: 10px; border: 1px solid black;">&nbsp;&nbsp;{{ status_calcolo_portata_ventola_sensor.attributes.friendly_name }}&nbsp;&nbsp;</th>
+        {%- set status_portata_ventola_lettura_codice_interpretato_sensor = states.sensor | selectattr('entity_id', 'search', '_status_portata_ventola_lettura_codice_interpretato') | first -%}
+        <th style="padding: 10px; border: 1px solid black;">&nbsp;&nbsp;{{ status_portata_ventola_lettura_codice_interpretato_sensor.attributes.friendly_name }}&nbsp;&nbsp;</th>
+      </tr>
+    </thead>
+    <tbody>
+      {%- for state in states.sensor if state.entity_id.endswith('_status_ventola_lettura_codice_interpretato_interfaccia') -%}
+        {%- set parts = state.entity_id.split('_') -%}
+        {%- set location = parts[1].upper() -%}
+        {%- set status_sensor = states.sensor['vmc_' ~ location ~ '_nome_status'] -%}
+        {%- set sensor_status = states.sensor['vmc_' ~ location ~ '_status_sensori_lettura_codice_interpretato'] -%}
+        {%- set led_status = states.sensor['vmc_' ~ location ~ '_status_led_pannello_lettura_codice_interpretato'] -%}
+        {%- set temp_esterna_status = states.sensor['vmc_' ~ location ~ '_temp_esterna_status_vmc'] -%}
+        {%- set umidita_esterna_status = states.sensor['vmc_' ~ location ~ '_umidita_esterna_status'] -%}
+        {%- set temp_interna_status = states.sensor['vmc_' ~ location ~ '_temp_interna_status'] -%}
+        {%- set umidita_interna_status = states.sensor['vmc_' ~ location ~ '_umidita_interna_status'] -%}
+        {%- set co2_status = states.sensor['vmc_' ~ location ~ '_co2_status'] -%}
+        {%- set voc_status = states.sensor['vmc_' ~ location ~ '_voc_status'] -%}
+        {%- set punto_di_rugiada_status = states.sensor['vmc_' ~ location ~ '_punto_di_rugiada_valore'] -%}
+        {%- set umidita_assoluta_esterna_status = states.sensor['vmc_' ~ location ~ '_umidita_assoluta_esterna'] -%}
+        {%- set umidita_assoluta_interna_status = states.sensor['vmc_' ~ location ~ '_umidita_assoluta_interna'] -%}
+        {%- set co2_status_verifica_soglia = states.sensor['vmc_' ~ location ~ '_co2_status_verifica_soglia'] -%}
+        {%- set voc_status_verifica_soglia = states.sensor['vmc_' ~ location ~ '_voc_status_verifica_soglia'] -%}
+        {%- set alert_monitoraggio_pdr = states.sensor['vmc_' ~ location ~ '_alert_monitoraggio_pdr'] -%}
+        {%- set umidita_interna_status_verifica_soglia = states.sensor['vmc_' ~ location ~ '_umidita_interna_status_verifica_soglia'] -%}
+        {%- set alert_monitoraggio_free_heating_o_free_cooling = states.sensor['vmc_' ~ location ~ '_alert_monitoraggio_free_heating_o_free_cooling_allert_interfaccia_avvisi'] -%}
+        {%- set delta_temp_verifica_soglia = states.sensor['vmc_' ~ location ~ '_delta_temp_verifica_soglia'] -%}
+        {%- set congelamento_verifica_soglia = states.sensor['vmc_' ~ location ~ '_congelamento_verifica_soglia'] -%}
+        {%- set alert_monitoraggio_black_out = states.sensor['vmc_' ~ location ~ '_alert_monitoraggio_black_out'] -%}
+        {%- set status_calcolo_portata_ventola = states.sensor['vmc_' ~ location ~ '_status_calcolo_portata_ventola'] -%}
+        {%- set status_portata_ventola_lettura_codice_interpretato = states.sensor['vmc_' ~ location ~ '_status_portata_ventola_lettura_codice_interpretato'] -%}
+        <tr>
+          <td style="padding: 10px; border: 1px solid black;">&nbsp;&nbsp;{{ status_sensor.state }}&nbsp;&nbsp;</td>
+          <td style="padding: 10px; border: 1px solid black;">&nbsp;&nbsp;{{ state.state }}&nbsp;&nbsp;</td>
+          <td style="padding: 10px; border: 1px solid black;">&nbsp;&nbsp;{{ sensor_status.state }}&nbsp;&nbsp;</td>
+          <td style="padding: 10px; border: 1px solid black;">&nbsp;&nbsp;{{ led_status.state }}&nbsp;&nbsp;</td>
+          <td style="padding: 10px; border: 1px solid black;">&nbsp;&nbsp;{{ temp_esterna_status.state }}&nbsp;&nbsp;</td>
+          <td style="padding: 10px; border: 1px solid black;">&nbsp;&nbsp;{{ umidita_esterna_status.state }}&nbsp;&nbsp;</td>
+          <td style="padding: 10px; border: 1px solid black;">&nbsp;&nbsp;{{ temp_interna_status.state }}&nbsp;&nbsp;</td>
+          <td style="padding: 10px; border: 1px solid black;">&nbsp;&nbsp;{{ umidita_interna_status.state }}&nbsp;&nbsp;</td>
+          <td style="padding: 10px; border: 1px solid black;">&nbsp;&nbsp;{{ co2_status.state }}&nbsp;&nbsp;</td>
+          <td style="padding: 10px; border: 1px solid black;">&nbsp;&nbsp;{{ voc_status.state }}&nbsp;&nbsp;</td>
+          <td style="padding: 10px; border: 1px solid black;">&nbsp;&nbsp;{{ punto_di_rugiada_status.state }}&nbsp;&nbsp;</td>
+          <td style="padding: 10px; border: 1px solid black;">&nbsp;&nbsp;{{ umidita_assoluta_esterna_status.state }}&nbsp;&nbsp;</td>
+          <td style="padding: 10px; border: 1px solid black;">&nbsp;&nbsp;{{ umidita_assoluta_interna_status.state }}&nbsp;&nbsp;</td>
+          <td style="padding: 10px; border: 1px solid black;">&nbsp;&nbsp;{{ co2_status_verifica_soglia.state }}&nbsp;&nbsp;</td>
+          <td style="padding: 10px; border: 1px solid black;">&nbsp;&nbsp;{{ voc_status_verifica_soglia.state }}&nbsp;&nbsp;</td>
+          <td style="padding: 10px; border: 1px solid black;">&nbsp;&nbsp;{{ alert_monitoraggio_pdr.state }}&nbsp;&nbsp;</td>
+          <td style="padding: 10px; border: 1px solid black;">&nbsp;&nbsp;{{ umidita_interna_status_verifica_soglia.state }}&nbsp;&nbsp;</td>
+          <td style="padding: 10px; border: 1px solid black;">&nbsp;&nbsp;{{ alert_monitoraggio_free_heating_o_free_cooling.state }}&nbsp;&nbsp;</td>
+          <td style="padding: 10px; border: 1px solid black;">&nbsp;&nbsp;{{ delta_temp_verifica_soglia.state }}&nbsp;&nbsp;</td>
+          <td style="padding: 10px; border: 1px solid black;">&nbsp;&nbsp;{{ congelamento_verifica_soglia.state }}&nbsp;&nbsp;</td>
+          <td style="padding: 10px; border: 1px solid black;">&nbsp;&nbsp;{{ alert_monitoraggio_black_out.state }}&nbsp;&nbsp;</td>
+          <td style="padding: 10px; border: 1px solid black;">&nbsp;&nbsp;{{ status_calcolo_portata_ventola.state }}&nbsp;&nbsp;</td>
+          <td style="padding: 10px; border: 1px solid black;">&nbsp;&nbsp;{{ status_portata_ventola_lettura_codice_interpretato.state }}&nbsp;&nbsp;</td>
+        </tr>
+      {%- endfor %}
+    </tbody>
+  </table>
+</pre>
