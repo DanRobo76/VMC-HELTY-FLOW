@@ -1,0 +1,88 @@
+<details>
+  <summary><b>Elenco VMC Installate</b></summary>
+  <pre style="font-size:10px; background-color: #d9ffcc; overflow-x:auto;">
+    <table border="1" style="width:100%; border-collapse: collapse;">
+      <thead>
+        <tr style="background-color: #f2f2f2;">
+          <th style="padding: 10px; border: 1px solid black;">&nbsp;&nbsp;NOME VMC&nbsp;&nbsp;</th>
+          <th style="padding: 10px; border: 1px solid black;">&nbsp;&nbsp;VELOCITÀ&nbsp;&nbsp;</th>
+          <th style="padding: 10px; border: 1px solid black;">&nbsp;&nbsp;Status Sensori VMC&nbsp;&nbsp;</th>
+          <th style="padding: 10px; border: 1px solid black;">&nbsp;&nbsp;Status Pannello LED&nbsp;&nbsp;</th>
+          <th style="padding: 10px; border: 1px solid black;">&nbsp;&nbsp;Temperatura Esterna&nbsp;&nbsp;</th>
+          <th style="padding: 10px; border: 1px solid black;">&nbsp;&nbsp;Umidità Esterna&nbsp;&nbsp;</th>
+          <th style="padding: 10px; border: 1px solid black;">&nbsp;&nbsp;Temperatura Interna&nbsp;&nbsp;</th>
+          <th style="padding: 10px; border: 1px solid black;">&nbsp;&nbsp;Umidità Interna&nbsp;&nbsp;</th>
+          <th style="padding: 10px; border: 1px solid black;">&nbsp;&nbsp;CO2&nbsp;&nbsp;</th>
+          <th style="padding: 10px; border: 1px solid black;">&nbsp;&nbsp;VOC&nbsp;&nbsp;</th>
+          <th style="padding: 10px; border: 1px solid black;">&nbsp;&nbsp;Punto di Rugiada&nbsp;&nbsp;</th>
+          <th style="padding: 10px; border: 1px solid black;">&nbsp;&nbsp;Umidità Assoluta Esterna&nbsp;&nbsp;</th>
+          <th style="padding: 10px; border: 1px solid black;">&nbsp;&nbsp;Umidità Assoluta Interna&nbsp;&nbsp;</th>
+          <th style="padding: 10px; border: 1px solid black;">&nbsp;&nbsp;CO2 Verifica Soglia&nbsp;&nbsp;</th>
+          <th style="padding: 10px; border: 1px solid black;">&nbsp;&nbsp;VOC Verifica Soglia&nbsp;&nbsp;</th>
+          <th style="padding: 10px; border: 1px solid black;">&nbsp;&nbsp;Alert Monitoraggio PDR&nbsp;&nbsp;</th>
+          <th style="padding: 10px; border: 1px solid black;">&nbsp;&nbsp;Umidità Interna Verifica Soglia&nbsp;&nbsp;</th>
+          <th style="padding: 10px; border: 1px solid black;">&nbsp;&nbsp;Alert Monitoraggio Free Heating o Free Cooling&nbsp;&nbsp;</th>
+          <th style="padding: 10px; border: 1px solid black;">&nbsp;&nbsp;Delta Temperatura Verifica Soglia&nbsp;&nbsp;</th>
+          <th style="padding: 10px; border: 1px solid black;">&nbsp;&nbsp;Congelamento Verifica Soglia&nbsp;&nbsp;</th>
+          <th style="padding: 10px; border: 1px solid black;">&nbsp;&nbsp;Alert Monitoraggio Black Out&nbsp;&nbsp;</th>
+          <th style="padding: 10px; border: 1px solid black;">&nbsp;&nbsp;Status Calcolo Portata Ventola&nbsp;&nbsp;</th>
+          <th style="padding: 10px; border: 1px solid black;">&nbsp;&nbsp;Status Portata Ventola Lettura Codice Interpretato&nbsp;&nbsp;</th>
+        </tr>
+      </thead>
+      <tbody>
+        {%- for state in states.sensor if state.entity_id.endswith('_status_ventola_lettura_codice_interpretato_interfaccia') -%}
+          {%- set parts = state.entity_id.split('_') -%}
+          {%- set location = parts[1].upper() -%} <!-- Correzione: da lower() a upper() -->
+          {%- set status_sensor = states('sensor.vmc_' ~ location ~ '_nome_status') | default('N/A') -%}
+          {%- set sensor_status = states('sensor.vmc_' ~ location ~ '_status_sensori_lettura_codice_interpretato') | default('N/A') -%}
+          {%- set led_status = states('sensor.vmc_' ~ location ~ '_status_led_pannello_lettura_codice_interpretato') | default('N/A') -%}
+          {%- set temp_esterna_status = states('sensor.vmc_' ~ location ~ '_temp_esterna_status') | default('N/A') -%}
+          {%- set umidita_esterna_status = states('sensor.vmc_' ~ location ~ '_umidita_esterna_status') | default('N/A') -%}
+          {%- set temp_interna_status = states('sensor.vmc_' ~ location ~ '_temp_interna_status') | default('N/A') -%}
+          {%- set umidita_interna_status = states('sensor.vmc_' ~ location ~ '_umidita_interna_status') | default('N/A') -%}
+          {%- set co2_status = states('sensor.vmc_' ~ location ~ '_co2_status') | default('N/A') -%}
+          {%- set voc_status = states('sensor.vmc_' ~ location ~ '_voc_status') | default('N/A') -%}
+          {%- set punto_di_rugiada_status = states('sensor.vmc_' ~ location ~ '_punto_di_rugiada_valore') | default('N/A') -%}
+          {%- set umidita_assoluta_esterna_status = states('sensor.vmc_' ~ location ~ '_umidita_assoluta_esterna') | default('N/A') -%}
+          {%- set umidita_assoluta_interna_status = states('sensor.vmc_' ~ location ~ '_umidita_assoluta_interna') | default('N/A') -%}
+          {%- set co2_status_verifica_soglia = states('sensor.vmc_' ~ location ~ '_co2_status_verifica_soglia') | default('N/A') -%}
+          {%- set voc_status_verifica_soglia = states('sensor.vmc_' ~ location ~ '_voc_status_verifica_soglia') | default('N/A') -%}
+          {%- set alert_monitoraggio_pdr = states('sensor.vmc_' ~ location ~ '_alert_monitoraggio_pdr') | default('N/A') -%}
+          {%- set umidita_interna_status_verifica_soglia = states('sensor.vmc_' ~ location ~ '_umidita_interna_status_verifica_soglia') | default('N/A') -%}
+          {%- set alert_monitoraggio_free_heating_o_free_cooling = states('sensor.vmc_' ~ location ~ '_alert_monitoraggio_free_heating_o_free_cooling_allert_interfaccia_avvisi') | default('N/A') -%}
+          {%- set delta_temp_verifica_soglia = states('sensor.vmc_' ~ location ~ '_delta_temp_verifica_soglia') | default('N/A') -%}
+          {%- set congelamento_verifica_soglia = states('sensor.vmc_' ~ location ~ '_congelamento_verifica_soglia') | default('N/A') -%}
+          {%- set alert_monitoraggio_black_out = states('sensor.vmc_' ~ location ~ '_alert_monitoraggio_black_out') | default('N/A') -%}
+          {%- set status_calcolo_portata_ventola = states('sensor.vmc_' ~ location ~ '_status_calcolo_portata_ventola') | default('N/A') -%}
+          {%- set status_portata_ventola_lettura_codice_interpretato = states('sensor.vmc_' ~ location ~ '_status_portata_ventola_lettura_codice_interpretato') | default('N/A') -%}
+          <tr>
+            <td style="padding: 10px; border: 1px solid black;">&nbsp;&nbsp;{{ status_sensor }}&nbsp;&nbsp;</td>
+            <td style="padding: 10px; border: 1px solid black;">&nbsp;&nbsp;{{ state.state }}&nbsp;&nbsp;</td>
+            <td style="padding: 10px; border: 1px solid black;">&nbsp;&nbsp;{{ sensor_status }}&nbsp;&nbsp;</td>
+            <td style="padding: 10px; border: 1px solid black;">&nbsp;&nbsp;{{ led_status }}&nbsp;&nbsp;</td>
+            <td style="padding: 10px; border: 1px solid black;">&nbsp;&nbsp;{{ temp_esterna_status }}&nbsp;&nbsp;</td>
+            <td style="padding: 10px; border: 1px solid black;">&nbsp;&nbsp;{{ umidita_esterna_status }}&nbsp;&nbsp;</td>
+            <td style="padding: 10px; border: 1px solid black;">&nbsp;&nbsp;{{ temp_interna_status }}&nbsp;&nbsp;</td>
+            <td style="padding: 10px; border: 1px solid black;">&nbsp;&nbsp;{{ umidita_interna_status }}&nbsp;&nbsp;</td>
+            <td style="padding: 10px; border: 1px solid black;">&nbsp;&nbsp;{{ co2_status }}&nbsp;&nbsp;</td>
+            <td style="padding: 10px; border: 1px solid black;">&nbsp;&nbsp;{{ voc_status }}&nbsp;&nbsp;</td>
+            <td style="padding: 10px; border: 1px solid black;">&nbsp;&nbsp;{{ punto_di_rugiada_status }}&nbsp;&nbsp;</td>
+            <td style="padding: 10px; border: 1px solid black;">&nbsp;&nbsp;{{ umidita_assoluta_esterna_status }}&nbsp;&nbsp;</td>
+            <td style="padding: 10px; border: 1px solid black;">&nbsp;&nbsp;{{ umidita_assoluta_interna_status }}&nbsp;&nbsp;</td>
+            <td style="padding: 10px; border: 1px solid black;">&nbsp;&nbsp;{{ co2_status_verifica_soglia }}&nbsp;&nbsp;</td>
+            <td style="padding: 10px; border: 1px solid black;">&nbsp;&nbsp;{{ voc_status_verifica_soglia }}&nbsp;&nbsp;</td>
+            <td style="padding: 10px; border: 1px solid black;">&nbsp;&nbsp;{{ alert_monitoraggio_pdr }}&nbsp;&nbsp;</td>
+            <td style="padding: 10px; border: 1px solid black;">&nbsp;&nbsp;{{ umidita_interna_status_verifica_soglia }}&nbsp;&nbsp;</td>
+            <td style="padding: 10px; border: 1px solid black;">&nbsp;&nbsp;{{ alert_monitoraggio_free_heating_o_free_cooling }}&nbsp;&nbsp;</td>
+            <td style="padding: 10px; border: 1px solid black;">&nbsp;&nbsp;{{ delta_temp_verifica_soglia }}&nbsp;&nbsp;</td>
+            <td style="padding: 10px; border: 1px solid black;">&nbsp;&nbsp;{{ congelamento_verifica_soglia }}&nbsp;&nbsp;</td>
+            <td style="padding: 10px; border: 1px solid black;">&nbsp;&nbsp;{{ alert_monitoraggio_black_out }}&nbsp;&nbsp;</td>
+            <td style="padding: 10px; border: 1px solid black;">&nbsp;&nbsp;{{ status_calcolo_portata_ventola }}&nbsp;&nbsp;</td>
+            <td style="padding: 10px; border: 1px solid black;">&nbsp;&nbsp;{{ status_portata_ventola_lettura_codice_interpretato }}&nbsp;&nbsp;</td>
+          </tr>
+        {%- endfor %}
+      </tbody>
+    </table>
+  </pre>
+</details>
+<br>
