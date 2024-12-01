@@ -19,7 +19,6 @@ Il Cliente ha l’onere e la responsabilità della scelta, dell’installazione,
 
 <strong>Pre-Requisiti:</strong><br> 
 <sub>- Installare <strong><a href="https://www.home-assistant.io/installation/">Home Assistant</a></strong>;</sub><br>
-<sub>- Verificare la presenza di almeno un'entità Meteo installata in Home Assistant, diversamente installarne almeno una. Es. <strong><a href="https://www.home-assistant.io/integrations/met/">Meteorologisk institutt (Met.no)</a></strong>;</sub><br>
 <sub>- Installare l'Add On [Facoltativo, ma Consigliato] <strong>File Editor</strong>, di Home Assistant; [Impostazioni -> Componenti aggiuntivi -> Raccolta di Componenti Aggiuntivi -> File editor].</sub><br>
 <sub>- Assicurarsi che la VMC venga visualizzata all'interno dell'APP <strong><a href="https://play.google.com/store/apps/details?id=com.helty.heltyair&hl=it&gl=US&pli=1">Air Guard</a></strong>; diversamente, utilizzando la stessa, inserirla nell'infrastruttura di rete prima di procedere.</sub><br>
 
@@ -27,7 +26,8 @@ Il Cliente ha l’onere e la responsabilità della scelta, dell’installazione,
 
 <strong>Punti di Forza:</strong><br>
 <sub>- Elenca tutte le VMC installate e relativi parametri correlati [Cliccare su Informazioni -> Punto 17];</sub><br>
-<sub>- Permette di selezionare un'entità Meteo tra quelle installate in Home Assistant per poter impiegare la Temperatura Esterna e l'Umidità Esterna;</sub><br>
+<sub>- Permette di selezionare le entità di Temperatura e Umidità disponibili nel sistema di Home Assistant (H.A.), includendo anche le entità provenienti da fonti Meteo, per ottenere una maggiore precisione e affidabilità rispetto ai sensori di Temperatura e Umidità 
+       integrati nella VMC;</sub><br>
 <sub>- Permette l'accensione e lo spegnimento Automatico, in funzione degli inquinanti (CO₂ e/o VOC) [Sensori presenti solo nella VMC HELTY FLOW ELITE];</sub><br>
 <sub>- Se si dispone di più VMC, questo software offre la possibilità di clonarle direttamente dall'interfaccia utente. Assicurarsi di seguire attentamente le istruzioni al <strong>Punto 3</strong> per attuare correttamente questa operazione;</sub><br>
 <sub>- Permette lo spegnimento Automatico, in funzione della Temperatura Esterna se ≤ -18 [°C] e successiva ripresa, anche in funzione degli Offset settati</sub><br>
@@ -135,7 +135,7 @@ Il Cliente ha l’onere e la responsabilità della scelta, dell’installazione,
 <img src="https://github.com/DanRobo76/VMC-HELTY-FLOW/assets/102819027/c7cf55c7-f80e-44e8-84e9-01868574dba1.png" alt="immagine" style="width:100%;">
 
 #
-## <span style="color:#663300">SchreenShot</span>
+## <span style="color:#663300">SchreenShot</span> - Possono variare in funzione dell'Ultima Versione Rilasciata
 ![Grafiche per GitHub](https://github.com/DanRobo76/VMC-HELTY-FLOW/assets/102819027/bee1e748-2f46-4b8b-b977-3e7ce7607683)<br><br> 
 
 #
