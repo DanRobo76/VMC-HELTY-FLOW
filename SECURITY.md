@@ -10,7 +10,7 @@
 <strong>La Lettura dei Sensori avviene ogni:</strong>
 <pre style="font-size:10px; background-color: #d9ffcc;">
   -  04 Secondi, per la Lettura della Velocità della VMC;
-  -  57 Secondi, per la Verifica On-Line della VMC;
+  -  20 Secondi, per la Verifica On-Line della VMC;
   -  1227 Secondi [20 MINUTI + 27 secondi di margine], per la Lettura dei Parametri Ambientali della VMC;
   -  43227 Secondi [12 ORE + 27 secondi di margine], per la Lettura del Nome della VMC;
   -  57641 Secondi [16 ORE + 41 secondi di margine], per la Lettura dei Dati LAN della VMC;
