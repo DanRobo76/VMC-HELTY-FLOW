@@ -26,9 +26,9 @@ Il Cliente ha l’onere e la responsabilità della scelta, dell’installazione,
 
 <strong>Punti di Forza:</strong><br>
 <sub>- Elenca tutte le VMC installate e relativi parametri correlati [Cliccare su Informazioni -> Punto 17];</sub><br>
-<sub>- Permette di selezionare le entità di Temperatura, Umidità, CO₂ e Mobile, disponibili nel sistema di Home Assistant (H.A.), includendo anche le entità provenienti da fonti Meteo, per ottenere una maggiore precisione e affidabilità rispetto ai sensori di Temperatura e Umidità 
+<sub>- Permette di selezionare le entità di: Temperatura (Interna ed Esterna), Umidità (Interna ed Esterna), Anidride Caronica CO₂ (Interna) e Dispositivo Mobile, disponibili nel sistema di Home Assistant (H.A.), includendo anche le entità provenienti da fonti Meteo, per ottenere una maggiore precisione e affidabilità rispetto ai sensori di Temperatura e Umidità 
        integrati nella VMC;</sub><br>
-<sub>- Permette di inviare le notifiche sul Mobile in caso di: Errori correlate alle entità selezionate, Arresto e Avvio della VMC;</sub><br>
+<sub>- Avvisa l'utente tramite notifica sul Dispositivo Mobile, in caso di Avvio, Arresto, Errori o cambio filtro della VMC;</sub><br>
 <sub>- Permette l'accensione e lo spegnimento Automatico, in funzione degli inquinanti (CO₂ e/o VOC) [Sensori presenti solo nella VMC HELTY FLOW ELITE];</sub><br>
 <sub>- Se si dispone di più VMC, questo software offre la possibilità di clonarle direttamente dall'interfaccia utente. Assicurarsi di seguire attentamente le istruzioni al <strong>Punto 3</strong> per attuare correttamente questa operazione;</sub><br>
 <sub>- Permette lo spegnimento Automatico, in funzione della Temperatura Esterna se ≤ -18 [°C] e successiva ripresa, anche in funzione degli Offset settati</sub><br>
