@@ -32,7 +32,7 @@ Il Cliente ha l’onere e la responsabilità della scelta, dell’installazione,
 <sub>- Permette l'accensione e lo spegnimento Automatico, in funzione degli inquinanti (CO₂ e/o VOC) [Sensori presenti solo nella VMC HELTY FLOW ELITE];</sub><br>
 <sub>- Se si dispone di più VMC, questo software offre la possibilità di clonarle direttamente dall'interfaccia utente. Assicurarsi di seguire attentamente le istruzioni al <strong>Punto 3</strong> per attuare correttamente questa operazione;</sub><br>
 <sub>- Permette lo spegnimento Automatico, in funzione della Temperatura Esterna se ≤ -18 [°C] e successiva ripresa, anche in funzione degli Offset settati</sub><br>
-<sub>&nbsp;&nbsp;N.b. Per impostazione del firmware, la priorità è assegnata al sensore di temperatura esterna della VMC anziché al valore rilevato dal sensore di Temperatura Esterna dell'entità Meteo selezionata;</sub><br>
+<sub>&nbsp;&nbsp;N.b. Per impostazione del firmware, la priorità è assegnata al sensore di temperatura esterna della VMC anziché al valore rilevato dal sensore di Temperatura Esterna dell'entità selezionata;</sub><br>
 <sub>- Permette di Cambiare l'IP della VMC, dall'interfaccia utente;</sub><br>
 <sub>- Permette di Rinominare la VMC, dall'interfaccia utente;</sub><br>
 <sub>- Permette di Pilotare la VMC da remoto e in Locale;</sub><br>
