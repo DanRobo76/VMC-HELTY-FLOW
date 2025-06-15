@@ -27,37 +27,36 @@ Il Cliente ha l’onere e la responsabilità della scelta, dell’installazione,
 <strong>Punti di Forza:</strong><br>
 ## Funzionalità principali
 
-<sub>• Elenca tutte le VMC installate e relativi parametri correlati [Cliccare su Informazioni → Punto 18].</sub>  
-<sub>• Permette di selezionare le entità di: Temperatura (Interna ed Esterna), Umidità (Interna ed Esterna), Anidride Carbonica CO₂ (Interna) e Dispositivo Mobile, disponibili nel sistema Home Assistant (H.A.), includendo anche le entità provenienti da fonti Meteo, per ottenere maggiore precisione e affidabilità rispetto ai sensori integrati della VMC.</sub>  
-<sub>• Avvisa l'utente tramite notifica sul Dispositivo Mobile in caso di Avvio, Arresto, Errori o cambio filtro della VMC.</sub>  
-<sub>• Permette l'accensione e lo spegnimento automatico in funzione degli inquinanti (CO₂ e/o VOC) [sensori presenti solo nella VMC HELTY FLOW ELITE].</sub>  
-<sub>• Permette l'accensione e lo spegnimento automatico in funzione dell'Umidità Interna Settata [opzione esclusa nell'intervallo del calendario].</sub>  
-<sub>• Se si dispone di più VMC, il software offre la possibilità di clonarle direttamente dall'interfaccia utente (vedi istruzioni al Punto 3).</sub>  
-<sub>• Permette lo spegnimento automatico in funzione della Temperatura Esterna ≤ -18°C e successiva ripresa in funzione degli offset impostati.</sub>  
-<sub>&nbsp;&nbsp;&nbsp;> **Nota:** per impostazione firmware, la priorità è assegnata al sensore interno della VMC rispetto al valore rilevato dal sensore esterno dell'entità selezionata.</sub>  
-<sub>• Permette di cambiare l'IP della VMC dall'interfaccia utente.</sub>  
-<sub>• Permette di rinominare la VMC dall'interfaccia utente.</sub>  
-<sub>• Permette il controllo remoto e locale della VMC.</sub>  
-<sub>• Permette l'accensione e spegnimento in funzione di 2 fasce orarie programmabili per ogni giorno della settimana.</sub>  
-<sub>• Permette l'accensione e spegnimento in funzione di 2 fasce mensili programmabili (Free Heating / Free Cooling), evitando raffrescamento o riscaldamento indesiderato.</sub>  
-<sub>• Permette l'accensione e spegnimento in funzione dei parametri ambientali.</sub>  
-<sub>• Ripristina la velocità in caso di Black-Out (se la VMC ha linea dedicata al quadro elettrico e/o è installato un relè domotico) [opzione esclusa nell'intervallo del calendario].</sub>  
-<sub>• Calcola il tempo di ricambio d'aria in funzione della velocità.</sub>  
-<sub>• Calcola la portata d'aria (m³/h) in funzione della velocità.</sub>  
-<sub>• Calcola l'umidità assoluta esterna (g/m³).</sub>  
-<sub>• Calcola l'umidità assoluta interna (g/m³).</sub>  
-<sub>• Mostra avvisi in funzione di:</sub>  
-<sub>&nbsp;&nbsp;&nbsp;• sensori CO₂ e/o VOC;</sub>  
-<sub>&nbsp;&nbsp;&nbsp;• sensore umidità;</sub>  
-<sub>&nbsp;&nbsp;&nbsp;• congelamento;</sub>  
-<sub>&nbsp;&nbsp;&nbsp;• differenza tra temperatura interna ed esterna;</sub>  
-<sub>&nbsp;&nbsp;&nbsp;• superamento del set limit Δ punto di rugiada;</sub>  
-<sub>&nbsp;&nbsp;&nbsp;• riscaldamento o raffrescamento indesiderato (Free Heating / Free Cooling).</sub>  
-<sub>• Informa in caso di nuovo aggiornamento disponibile.</sub>  
-<sub>• Permette di selezionare la "Condizione Climatica Esterna" da introdurre tramite il "Set Lim. Δ Punto di Rugiada".</sub>
-
+<sub>• 🔵 **NOVITÀ!** Visualizza in tempo reale: il numero totale di ricambi d'aria effettuati nella giornata, il volume totale di aria scambiata (m³) e il tempo rimanente prima del prossimo ricambio completo [Cliccare su Telecomando].</sub><br>
+<sub>• Elenca tutte le VMC installate e relativi parametri correlati [Cliccare su Informazioni → Punto 18].</sub><br>
+<sub>• Permette di selezionare le entità di: Temperatura (Interna ed Esterna), Umidità (Interna ed Esterna), Anidride Carbonica CO₂ (Interna) e Dispositivo Mobile, disponibili nel sistema Home Assistant (H.A.), includendo anche le entità provenienti da fonti Meteo, per ottenere maggiore precisione e affidabilità rispetto ai sensori integrati della VMC.</sub><br>
+<sub>• Avvisa l'utente tramite notifica sul Dispositivo Mobile in caso di Avvio, Arresto, Errori o cambio filtro della VMC.</sub><br>
+<sub>• Permette l'accensione e lo spegnimento automatico in funzione degli inquinanti (CO₂ e/o VOC) [sensori presenti solo nella VMC HELTY FLOW ELITE].</sub><br>
+<sub>• 🔵 **NOVITÀ!** Permette l'accensione e lo spegnimento automatico in funzione dell'Umidità Interna Settata [opzione esclusa nell'intervallo del calendario].</sub><br>
+<sub>• Se si dispone di più VMC, il software offre la possibilità di clonarle direttamente dall'interfaccia utente (vedi istruzioni al Punto 3).</sub><br>
+<sub>• Permette lo spegnimento automatico in funzione della Temperatura Esterna ≤ -18°C e successiva ripresa in funzione degli offset impostati.</sub><br>
+<sub>&nbsp;&nbsp;&nbsp;> **Nota:** per impostazione firmware, la priorità è assegnata al sensore interno della VMC rispetto al valore rilevato dal sensore esterno dell'entità selezionata.</sub><br>
+<sub>• Permette di cambiare l'IP della VMC dall'interfaccia utente.</sub><br>
+<sub>• Permette di rinominare la VMC dall'interfaccia utente.</sub><br>
+<sub>• Permette il controllo remoto e locale della VMC.</sub><br>
+<sub>• Permette l'accensione e spegnimento in funzione di 2 fasce orarie programmabili per ogni giorno della settimana.</sub><br>
+<sub>• Permette l'accensione e spegnimento in funzione di 2 fasce mensili programmabili (Free Heating / Free Cooling), evitando raffrescamento o riscaldamento indesiderato.</sub><br>
+<sub>• Permette l'accensione e spegnimento in funzione dei parametri ambientali.</sub><br>
+<sub>• Ripristina la velocità in caso di Black-Out (se la VMC ha linea dedicata al quadro elettrico e/o è installato un relè domotico) [opzione esclusa nell'intervallo del calendario].</sub><br>
+<sub>• Calcola il tempo di ricambio d'aria in funzione della velocità.</sub><br>
+<sub>• Calcola la portata d'aria (m³/h) in funzione della velocità.</sub><br>
+<sub>• Calcola l'umidità assoluta esterna (g/m³).</sub><br>
+<sub>• Calcola l'umidità assoluta interna (g/m³).</sub><br>
+<sub>• Mostra avvisi in funzione di:</sub><br>
+<sub>&nbsp;&nbsp;&nbsp;• sensori CO₂ e/o VOC;</sub><br>
+<sub>&nbsp;&nbsp;&nbsp;• sensore umidità;</sub><br>
+<sub>&nbsp;&nbsp;&nbsp;• congelamento;</sub><br>
+<sub>&nbsp;&nbsp;&nbsp;• differenza tra temperatura interna ed esterna;</sub><br>
+<sub>&nbsp;&nbsp;&nbsp;• superamento del set limit Δ punto di rugiada;</sub><br>
+<sub>&nbsp;&nbsp;&nbsp;• riscaldamento o raffrescamento indesiderato (Free Heating / Free Cooling).</sub><br>
+<sub>• Informa in caso di nuovo aggiornamento disponibile.</sub><br>
+<sub>• Permette di selezionare la "Condizione Climatica Esterna" da introdurre tramite il "Set Lim. Δ Punto di Rugiada".</sub><br>
 <br>
-
 ![Tabella](https://github.com/DanRobo76/VMC-HELTY-FLOW/assets/102819027/3e207f90-9a6e-42a2-b35d-f0fa51cfba95)
 <sub><sub>Il software calcola il Punto di Rugiada Esterno (PdR Ext.) e il Punto di Rugiada Interno (PdR Int.). Se la differenza tra il PdR Ext. e il PdR Int. è inferiore al "Set Lim. Δ Punto di Rugiada" (valore impostato dall'utente), la VMC garantirà un adeguato trasporto dell'umidità dall'interno all'esterno dell'edificio. Al contrario, se la differenza tra il PdR Ext. e il PdR Int. sarà maggiore o uguale al "Set Lim. Δ Punto di Rugiada", la VMC si arresterà per evitare il trasporto dell'umidità dall'esterno all'interno dell'edificio; la ripresa automatica sull'ultima velocità impostata è garantita non appena la differenza tra il PdR Ext. e il PdR Int. è inferiore al "Set Lim. Δ Punto di Rugiada".</sub></sub><br>
 <br>
