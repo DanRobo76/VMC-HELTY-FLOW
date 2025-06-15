@@ -1,0 +1,144 @@
+###########################################################################################################################################################################################################################
+#                                                                                                                                                                                                                         #
+#                                                          CLONA o CANCELLA VMC HELTY FLOW PLUS RELEASE [V2.0.0]                                                                                                          #
+#                                                                                                                                                                                                                         #
+# SVILUPPATO DA ING. DANILO ROBOTTI, ALLE PRIME ARMI CON HOME ASSISTANT :)                                                                                                                                                #
+#                                                                                                                                                                                                                         #
+# LICENZA D'USO – USO PERSONALE NON COMMERCIALE                                                                                                                                                                           #
+#                                                                                                                                                                                                                         #
+# COPYRIGHT © ING. DANILO ROBOTTI                                                                                                                                                                                         #
+#                                                                                                                                                                                                                         #
+# TUTTI I DIRITTI RISERVATI.                                                                                                                                                                                              #
+#                                                                                                                                                                                                                         #
+# QUESTA LICENZA SI APPLICA A TUTTE LE VERSIONI DEL PRESENTE SOFTWARE CHE INCLUDE I SEGUENTI FILES:                                                                                                                       #
+#   - VMC_CLONA.YAML                                                                                                                                                                                                      #
+#   - VMC_CLONA_SCHEDA_MANUALE_INTERFACCIA.TXT                                                                                                                                                                            #
+#   - VMC_MASTER.YAML                                                                                                                                                                                                     #
+#   - VMC_MASTER_AUTOMAZIONE.TXT                                                                                                                                                                                          #
+#   - VMC_MASTER_SCHEDA_MANUALE_INTERFACCIA.TXT                                                                                                                                                                           #
+#   - VMC_MASTER_SCRIPT_CAMBIO_IP.SH                                                                                                                                                                                      #
+#   - VMC_MASTER_SCRIPT_CAMBIO_NOME.SH                                                                                                                                                                                    #
+#   - VMC_SCRIPT_CLONA.SH                                                                                                                                                                                                 #
+# A PARTIRE DALLA PRIMA VERSIONE PUBBLICATA E SUCCESSIVE                                                                                                                                                                  #
+#                                                                                                                                                                                                                         #
+# È CONCESSO:                                                                                                                                                                                                             #
+#  - L'UTILIZZO DEL SOFTWARE ESCLUSIVAMENTE PER FINI PERSONALI E NON COMMERCIALI                                                                                                                                          #
+#  - LA DISTRIBUZIONE LIBERA, PURCHÉ VENGA MANTENUTO IL PRESENTE TESTO DI LICENZA E SIA RISPETTATO IL DIVIETO D'USO COMMERCIALE                                                                                           #
+#                                                                                                                                                                                                                         #
+# QUALSIASI USO NON AUTORIZZATO AD USO COMMERCIALE COSTITUISCE VIOLAZIONE DEL DIRITTO D'AUTORE E POTRÀ ESSERE PERSEGUITO LEGALMENTE                                                                                       #
+#                                                                                                                                                                                                                         #
+# PER RICHIESTE DI LICENZA COMMERCIALE O USI PARTICOLARI, CONTATTARE L’AUTORE: danilo.robotti@gmail.com                                                                                                                   #
+#                                                                                                                                                                                                                         #
+# VERSIONE LICENZA: 1.0                                                                                                                                                                                                   #
+# DATA: 30 APRILE 2025                                                                                                                                                                                                    #
+#                                                                                                                                                                                                                         #
+# Esonero di Responsabilità                                                                                                                                                                                               #
+# In nessun caso lo sviluppatore sarà responsabile di danneggiamenti diretti, indiretti o conseguenti, correlati a difetti del presente software                                                                          #
+# L’usufruitore ha l’onere e la responsabilità della scelta, dell’installazione, dell’uso e della gestione del software al fine del raggiungimento del risultato prefissatosi                                             #
+#                                                                                                                                                                                                                         #
+###########################################################################################################################################################################################################################
+sensor:
+- platform: template
+  sensors:
+    vmc_master_slave_verifica_nome_inserito:                                    # [CONFIGURAZIONE PIU' RICHIAMI] [AUTOMAZIONE 0 RICHIAMI] [INTERFACCIA PIU' RICHIAMI]
+      friendly_name: "Verifica Nome"
+      value_template: >
+        {% set nome_inserito = states.input_text.vmc_master_slave_nome_insert.state %}
+        {% set directory_proibite = ['config', 'share', 'addons', 'backup', 'media', 'ssl', 'www', 'deps', 'blueprints', 'lovelace', 'tts', '.storage', '.cloud'] %}
+        {% if nome_inserito | regex_match('^[a-z]{1,10}$') and
+              nome_inserito | replace(' ', '') == nome_inserito and
+              nome_inserito | lower not in ['master', 'clona'] and
+              nome_inserito not in directory_proibite %}
+          ok
+        {% else %}
+          not ok
+        {% endif %}
+      icon_template: mdi:check-circle
+
+    vmc_master_slave_verifica_ip_inserito:                                      # [CONFIGURAZIONE PIU' RICHIAMI] [AUTOMAZIONE 0 RICHIAMI] [INTERFACCIA PIU' RICHIAMI]
+      friendly_name: "Verifica IP"
+      value_template: >
+        {% if states.input_text.vmc_master_slave_ip_insert.state is match("^(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$") %}
+          {{ states.input_text.vmc_master_slave_ip_insert.state }}
+        {% else %}
+          not ok
+        {% endif %}
+      icon_template: mdi:ip 
+
+input_text:
+  vmc_master_slave_nome_insert:                                                 # [CONFIGURAZIONE PIU' RICHIAMI] [AUTOMAZIONE 0 RICHIAMI] [INTERFACCIA PIU' RICHIAMI]
+    name: Nome VMC
+    initial: ""
+    min: 0
+    max: 10
+
+  vmc_master_slave_ip_insert:                                                   # [CONFIGURAZIONE PIU' RICHIAMI] [AUTOMAZIONE 0 RICHIAMI] [INTERFACCIA PIU' RICHIAMI]
+    name: IP VMC su Porta 5001
+    initial: ""
+
+input_boolean: 
+  vmc_master_slave_check_avvio_clonazione:                                      # [CONFIGURAZIONE 0 RICHIAMI] [AUTOMAZIONE 0 RICHIAMI] [INTERFACCIA, PIU' RICHIAMI]
+    name: Mostra/Nascondi - Clona o Cancella VMC
+    initial: false
+    icon: mdi:cog
+    
+  vmc_master_slave_check_avvio_script_vmc_master_slave_duplica_vmc:             # [CONFIGURAZIONE PIU' RICHIAMI] [AUTOMAZIONE 0 RICHIAMI] [INTERFACCIA, PIU' RICHIAMI]
+    name: Check Avvio Scipt Clonazione VMC
+    initial: false
+    icon: mdi:check-circle
+
+shell_command:                                                                  # [CONFIGURAZIONE PIU' RICHIAMI] [AUTOMAZIONE 0 RICHIAMI] [INTERFACCIA 0 RICHIAMI]
+  vmc_master_slave_rimuovi_caratteri_di_ritorno: find /config/packages/vmc_helty_flow/master -type f -name "*.sh" -exec sed -i 's/\r$//' {} \; # TROVA E RIMUOVE CARATTERI DI RITORNO IN TUTTI I FILES *.sh CONTENUTI NELLA CARTELLA
+  vmc_master_slave_clona:                        bash /config/packages/vmc_helty_flow/master/vmc_script_clona.sh {{ states('input_text.vmc_master_slave_nome_insert') }} {{ states('input_text.vmc_master_slave_ip_insert') }}
+  vmc_master_slave_cancella_cartella:            bash -c 'rm -rf /config/packages/vmc_helty_flow/{{ states("input_text.vmc_master_slave_nome_insert") }}'
+
+script:
+  vmc_master_slave_duplica_vmc:                                                 # [CONFIGURAZIONE 0 RICHIAMI] [AUTOMAZIONE 0 RICHIAMI] [INTERFACCIA, PIU' RICHIAMI]
+    alias: VMC Master - Avvio Clona VMC
+    sequence:
+      - condition: and
+        conditions:
+          - condition: template
+            value_template: "{{ is_state('sensor.vmc_master_slave_verifica_nome_inserito', 'ok') }}"
+          - condition: template
+            value_template: "{{ not is_state('sensor.vmc_master_slave_verifica_ip_inserito', 'not ok') }}"
+      - service: shell_command.vmc_master_slave_rimuovi_caratteri_di_ritorno
+      - service: shell_command.vmc_master_slave_clona
+      - service: input_boolean.turn_on
+        entity_id: input_boolean.vmc_master_slave_check_avvio_script_vmc_master_slave_duplica_vmc
+    icon: mdi:cursor-pointer
+
+  vmc_master_slave_restart_ha:                                                  # [CONFIGURAZIONE 0 RICHIAMI] [AUTOMAZIONE 0 RICHIAMI] [INTERFACCIA, PIU' RICHIAMI]
+    alias: VMC Master - Riavvio H.A.
+    sequence:
+      - service: input_text.set_value
+        target:
+          entity_id:
+            - input_text.vmc_master_slave_nome_insert
+            - input_text.vmc_master_slave_ip_insert
+        data:
+          value: ''
+      - service: input_boolean.turn_off
+        entity_id: input_boolean.vmc_master_slave_check_avvio_script_vmc_master_slave_duplica_vmc
+      - service: homeassistant.restart
+    icon: mdi:cursor-pointer
+    
+  vmc_master_slave_cancella_cartella:                                           # [CONFIGURAZIONE 0 RICHIAMI] [AUTOMAZIONE 0 RICHIAMI] [INTERFACCIA, PIU' RICHIAMI]
+    alias: VMC Master - Cancella VMC
+    sequence:
+      - service: shell_command.vmc_master_slave_cancella_cartella
+      - service: input_text.set_value
+        target:
+          entity_id:
+            - input_text.vmc_master_slave_nome_insert
+            - input_text.vmc_master_slave_ip_insert
+        data:
+          value: ''
+      - service: input_boolean.turn_off
+        entity_id: input_boolean.vmc_master_slave_check_avvio_script_vmc_master_slave_duplica_vmc
+      - service: persistent_notification.create
+        data:
+          title: "Attenzione"
+          message: "Ricordati di cancellare manualmente l'automazione e la scheda correlata nell'interfaccia."
+          notification_id: "vmc_master_slave_cancella_cartella"
+    icon: mdi:delete
