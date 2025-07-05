@@ -21,6 +21,8 @@ Il Cliente ha l’onere e la responsabilità della scelta, dell’installazione,
 <sub>- Installare <strong><a href="https://www.home-assistant.io/installation/">Home Assistant</a></strong>;</sub><br>
 <sub>- Installare l'Add On [Facoltativo, ma Consigliato] <strong>File Editor</strong>, di Home Assistant; [Impostazioni -> Componenti aggiuntivi -> Raccolta di Componenti Aggiuntivi -> File editor].</sub><br>
 <sub>- Assicurarsi che la VMC venga visualizzata all'interno dell'APP <strong><a href="https://play.google.com/store/apps/details?id=com.helty.heltyair&hl=it&gl=US&pli=1">Air Guard</a></strong>; diversamente, utilizzando la stessa, inserirla nell'infrastruttura di rete prima di procedere.</sub><br>
+#
+<sub>⚠️ **ATTENZIONE!** Se la VMC utilizza un’app diversa da <strong><a href="https://play.google.com/store/apps/details?id=com.helty.heltyair&hl=it&gl=US&pli=1">Air Guard</a></strong>, il codice riportato di seguito non sarà compatibile 🧰.</sub><br>
 
 #
 
