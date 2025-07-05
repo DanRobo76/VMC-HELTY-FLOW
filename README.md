@@ -140,7 +140,7 @@ Il Cliente ha l’onere e la responsabilità della scelta, dell’installazione,
 #
 ### Logiche di Funzionamento 
 
-<img src="https://github.com/DanRobo76/VMC-HELTY-FLOW/blob/main/Logiche%20di%20Funzionamento%20Ver.%202.0.0.png" alt="immagine" style="width:100%;">
+<img src="https://github.com/DanRobo76/VMC-HELTY-FLOW/blob/main/Logiche%20di%20Funzionamento.png" alt="immagine" style="width:100%;">
 
 #
 ## <span style="color:#663300">SchreenShot</span> - Possono variare in funzione dell'Ultima Versione Rilasciata
