@@ -138,7 +138,7 @@ Il Cliente ha l’onere e la responsabilità della scelta, dell’installazione,
 <strong>Attenzione, se la VMC non viene vista, assicurarsi che la stessa venga visualizzata all'interno dell'APP Air Guard; diversamente, utilizzando la stessa, inserirla nell'infrastruttura di rete.</strong>
 
 #
-### Logiche di Funzionamento 
+### 
 
 <img src="https://github.com/DanRobo76/VMC-HELTY-FLOW/blob/main/Logiche%20di%20Funzionamento.png" alt="immagine" style="width:100%;">
 
