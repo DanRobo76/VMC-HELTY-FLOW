@@ -27,15 +27,18 @@ Il Cliente ha l’onere e la responsabilità della scelta, dell’installazione,
 <strong>Punti di Forza:</strong><br>
 ## Funzionalità principali
 
-<sub>• 🔵 **NOVITÀ!** Visualizza in tempo reale: il numero totale di ricambi d'aria effettuati nella giornata, il volume totale di aria scambiata (m³) e il tempo rimanente prima del prossimo ricambio completo [Cliccare su Telecomando].</sub><br>
-<sub>• Elenca tutte le VMC installate e relativi parametri correlati [Cliccare su Informazioni → Punto 18].</sub><br>
+<sub>• 🔵 **NOVITÀ!** Aggiunto indicatore che converte il punto di rugiada (TPdR) in una classificazione qualitativa del comfort igrometrico all’interno dell’ambiente.</sub><br>
+<sub>• Visualizza in tempo reale: il numero totale di ricambi d'aria effettuati nella giornata, il volume totale di aria scambiata (m³) e il tempo rimanente prima del prossimo ricambio completo [Cliccare su Telecomando].</sub><br>
+<sub>• Elenca tutte le VMC installate e relativi parametri correlati [Cliccare su Informazioni → Punto 19].</sub><br>
 <sub>• Permette di selezionare le entità di: Temperatura (Interna ed Esterna), Umidità (Interna ed Esterna), Anidride Carbonica CO₂ (Interna) e Dispositivo Mobile, disponibili nel sistema Home Assistant (H.A.), includendo anche le entità provenienti da fonti Meteo, per ottenere maggiore precisione e affidabilità rispetto ai sensori integrati della VMC.</sub><br>
 <sub>• Avvisa l'utente tramite notifica sul Dispositivo Mobile in caso di Avvio, Arresto, Errori o cambio filtro della VMC.</sub><br>
 <sub>• Permette l'accensione e lo spegnimento automatico in funzione degli inquinanti (CO₂ e/o VOC) [sensori presenti solo nella VMC HELTY FLOW ELITE].</sub><br>
-<sub>• 🔵 **NOVITÀ!** Permette l'accensione e lo spegnimento automatico in funzione dell'Umidità Interna Settata [opzione esclusa nell'intervallo del calendario].</sub><br>
+<sub>• Permette l'accensione e lo spegnimento automatico in funzione dell'Umidità Interna Settata [opzione esclusa nell'intervallo del calendario].</sub><br>
 <sub>• Se si dispone di più VMC, il software offre la possibilità di clonarle direttamente dall'interfaccia utente (vedi istruzioni al Punto 3).</sub><br>
 <sub>• Permette lo spegnimento automatico in funzione della Temperatura Esterna ≤ -18°C e successiva ripresa in funzione degli offset impostati.</sub><br>
 <sub>&nbsp;&nbsp;&nbsp;> **Nota:** per impostazione firmware, la priorità è assegnata al sensore interno della VMC rispetto al valore rilevato dal sensore esterno dell'entità selezionata.</sub><br>
+<sub>• 🔵 **NOVITÀ!** Permette l'avvio Automatico a Velocità 1, in funzione della Differenza della Temperatura Interna - Temperatura Esterna se > 23 [°C] e successiva ripresa.</sub><br>
+<sub>&nbsp;&nbsp;&nbsp;> **Nota:** per impostazione firmware, la priorità è assegnata ai sensori interni della VMC rispetto ai valori rilevati dal sensore esterno dell'entità selezionata.</sub><br>
 <sub>• Permette di cambiare l'IP della VMC dall'interfaccia utente.</sub><br>
 <sub>• Permette di rinominare la VMC dall'interfaccia utente.</sub><br>
 <sub>• Permette il controllo remoto e locale della VMC.</sub><br>
