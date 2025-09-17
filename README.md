@@ -33,7 +33,7 @@ Il Cliente ha l’onere e la responsabilità della scelta, dell’installazione,
 <sub>• Aggiunto indicatore Andamento Rischio Muffa.
 <sub>• Aggiunto indicatore che converte il punto di rugiada (TPdR) in una classificazione qualitativa del comfort igrometrico all’interno dell’ambiente.</sub><br>
 <sub>• Visualizza in tempo reale: il numero totale di ricambi d'aria effettuati nella giornata, il volume totale di aria scambiata (m³) e il tempo rimanente prima del prossimo ricambio completo [Cliccare su Telecomando].</sub><br>
-<sub>• Elenca tutte le VMC installate e relativi parametri correlati [Cliccare su Informazioni → Punto 21].</sub><br>
+<sub>• Elenca tutte le VMC installate e relativi parametri correlati [Cliccare su Informazioni → Punto 22].</sub><br>
 <sub>• Permette di selezionare le entità di: Temperatura (Interna ed Esterna), Umidità (Interna ed Esterna), Anidride Carbonica CO₂ (Interna) e Dispositivo Mobile, disponibili nel sistema Home Assistant (H.A.), includendo anche le entità provenienti da fonti Meteo, per ottenere maggiore precisione e affidabilità rispetto ai sensori integrati della VMC.</sub><br>
 <sub>• Avvisa l'utente tramite notifica sul Dispositivo Mobile in caso di Avvio, Arresto, Errori o cambio filtro della VMC.</sub><br>
 <sub>• Permette l'accensione e lo spegnimento automatico in funzione degli inquinanti (CO₂ e/o VOC) [sensori presenti solo nella VMC HELTY FLOW ELITE].</sub><br>
