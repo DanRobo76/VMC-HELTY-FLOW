@@ -22,14 +22,15 @@ Il Cliente ha l’onere e la responsabilità della scelta, dell’installazione,
 <sub>- Installare l'Add On [Facoltativo, ma Consigliato] <strong>File Editor</strong>, di Home Assistant; [Impostazioni -> Componenti aggiuntivi -> Raccolta di Componenti Aggiuntivi -> File editor].</sub><br>
 <sub>- Assicurarsi che la VMC venga visualizzata all'interno dell'APP <strong><a href="https://play.google.com/store/apps/details?id=com.helty.heltyair&hl=it&gl=US&pli=1">Air Guard</a></strong>; diversamente, utilizzando la stessa, inserirla nell'infrastruttura di rete prima di procedere.</sub><br>
 #
-<sub>⚠️ **ATTENZIONE!** Se la VMC utilizza un’app diversa da <strong><a href="https://play.google.com/store/apps/details?id=com.helty.heltyair&hl=it&gl=US&pli=1">Air Guard</a></strong>, il codice riportato di seguito non sarà compatibile 🧰.</sub><br>
+<sub>⚠️ **ATTENZIONE!** Se la VMC utilizza un’app diversa da <strong><a href="https://play.google.com/store/apps/details?id=com.helty.heltyair&hl=it&gl=US&pli=1">Air Guard</a></strong>, il codice riportato di seguito molto probabilmente non sarà compatibile 🧰.</sub><br>
 
 #
 
 <strong>Punti di Forza:</strong><br>
 ## Funzionalità principali
 
-<sub>• 🔵 **NOVITÀ!** Aggiunto indicatore Andamento Rischio Muffa.</sub><br>
+<sub>• 🔵 **NOVITÀ!** Permette di selezionare le entità Media Player, per ascoltare lo stato degli Avvisi e la Velocità.</sub><br>
+<sub>• Aggiunto indicatore Andamento Rischio Muffa.
 <sub>• Aggiunto indicatore che converte il punto di rugiada (TPdR) in una classificazione qualitativa del comfort igrometrico all’interno dell’ambiente.</sub><br>
 <sub>• Visualizza in tempo reale: il numero totale di ricambi d'aria effettuati nella giornata, il volume totale di aria scambiata (m³) e il tempo rimanente prima del prossimo ricambio completo [Cliccare su Telecomando].</sub><br>
 <sub>• Elenca tutte le VMC installate e relativi parametri correlati [Cliccare su Informazioni → Punto 21].</sub><br>
