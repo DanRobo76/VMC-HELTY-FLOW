@@ -68,7 +68,7 @@ Il Cliente ha l’onere e la responsabilità della scelta, dell’installazione,
 ![Tabella](https://github.com/DanRobo76/VMC-HELTY-FLOW/assets/102819027/3e207f90-9a6e-42a2-b35d-f0fa51cfba95)
 <sub><sub>Il software calcola il Punto di Rugiada Esterno (PdR Ext.) e il Punto di Rugiada Interno (PdR Int.). Se la differenza tra il PdR Ext. e il PdR Int. è inferiore al "Set Lim. Δ Punto di Rugiada" (valore impostato dall'utente), la VMC garantirà un adeguato trasporto dell'umidità dall'interno all'esterno dell'edificio. Al contrario, se la differenza tra il PdR Ext. e il PdR Int. sarà maggiore o uguale al "Set Lim. Δ Punto di Rugiada", la VMC si arresterà per evitare il trasporto dell'umidità dall'esterno all'interno dell'edificio; la ripresa automatica sull'ultima velocità impostata è garantita non appena la differenza tra il PdR Ext. e il PdR Int. è inferiore al "Set Lim. Δ Punto di Rugiada".</sub></sub><br>
 <br>
-<sub>- Permette l'utilizzo dei seguenti Servizi, da impiegare in qualsiasi Automazione:</sub><br>                                                                    
+<sub>- Permette l'utilizzo dei seguenti Servizi, da impiegare in qualsiasi Automazione, Script, etc:</sub><br>                                                                    
 <img src="https://github-production-user-asset-6210df.s3.amazonaws.com/102819027/263529824-d63e3903-1a11-444c-9c1b-4ad4ebf1b365.png" alt="immagine" style="width:120%;">
 
 #
