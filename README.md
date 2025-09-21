@@ -29,7 +29,8 @@ Il Cliente ha l’onere e la responsabilità della scelta, dell’installazione,
 <strong>Punti di Forza:</strong><br>
 ## Funzionalità principali
 
-<sub>• 🔵 **NOVITÀ!** Permette di selezionare le entità Media Player, per ascoltare lo stato degli Avvisi e la Velocità.</sub><br>
+<sub>• 🔵 **NOVITÀ!** Permette di selezionare quali Avvisi ascoltare tramite il Media Player selezionato.</sub><br>
+<sub>• Permette di selezionare le entità Media Player, per ascoltare lo stato degli Avvisi e la Velocità.</sub><br>
 <sub>• Aggiunto indicatore Andamento Rischio Muffa.
 <sub>• Aggiunto indicatore che converte il punto di rugiada (TPdR) in una classificazione qualitativa del comfort igrometrico all’interno dell’ambiente.</sub><br>
 <sub>• Visualizza in tempo reale: il numero totale di ricambi d'aria effettuati nella giornata, il volume totale di aria scambiata (m³) e il tempo rimanente prima del prossimo ricambio completo [Cliccare su Telecomando].</sub><br>
