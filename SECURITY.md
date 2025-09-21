@@ -4,7 +4,7 @@
 
 |          VMC-HELTY-FLOW Release          | Supportato da Home Assistant (Core)     |
 | ---------------------------------------- | ----------------------------------------|
-|  :white_check_mark: v.8.0.0              | :white_check_mark:   Ver. 2025.9.4      |
+|  :white_check_mark: v.8.0.1              | :white_check_mark:   Ver. 2025.9.4      |
 #
 ### - Limiti del SoftWare:<br>
 <strong>La Lettura dei Sensori avviene ogni:</strong>
