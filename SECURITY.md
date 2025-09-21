@@ -51,6 +51,59 @@ e riavviare Home Assistant.
 
 #
 
+### - ENTITA' REGISTRATE NEL DB DI HOME ASSISTANT
+<pre style="font-size:10px; background-color: #d9ffcc;">
+- sensor.vmc_master_spia_pannello_alert_monitoraggio_totale
+- sensor.vmc_master_status_ventola_lettura_codice_interpretato_interfaccia
+- sensor.vmc_master_temp_esterna_status
+- sensor.vmc_master_temp_interna_status
+- sensor.vmc_master_umidita_esterna_status
+- sensor.vmc_master_umidita_interna_status
+- sensor.vmc_master_co2_status
+- sensor.vmc_master_voc_status
+- sensor.vmc_master_punto_di_rugiada_esterno
+- sensor.vmc_master_punto_di_rugiada_interno
+- sensor.vmc_master_punto_di_rugiada_valore
+- sensor.vmc_master_umidita_assoluta_esterna
+- sensor.vmc_master_umidita_assoluta_interna
+- sensor.vmc_master_calcolo_confort_interno
+- sensor.vmc_master_trend_muffa
+- sensor.vmc_master_temp_esterna_status_senza_offset
+- sensor.vmc_master_temp_interna_status_senza_offset
+- sensor.vmc_master_umidita_interna_status_senza_offset
+- sensor.vmc_master_co2_status_senza_offset
+- sensor.vmc_master_voc_status_senza_offset
+- sensor.vmc_master_congelamento_verifica_soglia
+- sensor.vmc_master_delta_temp_verifica_soglia
+- sensor.vmc_master_co2_status_verifica_soglia
+- sensor.vmc_master_voc_status_verifica_soglia
+- sensor.vmc_master_alert_monitoraggio_pdr
+- sensor.vmc_master_alert_monitoraggio_free_heating_o_free_cooling_allert_interfaccia_avvisi
+- sensor.vmc_master_umidita_interna_status_verifica_soglia
+- sensor.vmc_master_alert_monitoraggio_black_out
+- sensor.vmc_master_trend_muffa_level
+
+Aggiungere o Togliere le Entità nel File vmc_nome.yaml nel campo
+#################################################################################################################################
+# Esclusione entità da Recorder, History e Logbook per ridurre il carico sul database escludendo entità aggiornate di frequente #
+#################################################################################################################################
+recorder:
+  include:
+    entities:
+      - sensor.vmc_master_spia_pannello_alert_monitoraggio_totale
+      - sensor.vmc_master_status_ventola_lettura_codice_interpretato_interfaccia
+      - ...
+      
+  exclude:
+    entities:
+      - automation.vmc_master_aggiorna_aria_scambiata_e_gestisci_countdown_rev_00
+      - automation.automazione_vmc_master
+      - automation.vmc_master_audio_allerte_stato
+      - automation.vmc_master_riepilogo_audio_allavvio
+      - ...
+</pre>
+#
+
 ### - In fase di Verifica la Lettura della Temperatura Interna o Esterna minore di 0 °C:<br>     
 
 <img src="https://github-production-user-asset-6210df.s3.amazonaws.com/102819027/282232595-cb4de785-90b8-426d-8e89-31c2244fac8d.png" alt="immagine" style="width:30%;"><br>
