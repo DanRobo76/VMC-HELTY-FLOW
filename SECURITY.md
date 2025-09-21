@@ -4,7 +4,7 @@
 
 |          VMC-HELTY-FLOW Release          | Supportato da Home Assistant (Core)     |
 | ---------------------------------------- | ----------------------------------------|
-|  :white_check_mark: v.8.0.0              | :white_check_mark:   Ver. 2025.9.3      |
+|  :white_check_mark: v.8.0.0              | :white_check_mark:   Ver. 2025.9.4      |
 #
 ### - Limiti del SoftWare:<br>
 <strong>La Lettura dei Sensori avviene ogni:</strong>
@@ -35,6 +35,22 @@ Se si vuole modificare le tempistiche, modificare i <strong>Secondi</strong> all
 e riavviare Home Assistant.
 
 #
+
+### - PRIORITA' DI ATTIVAZIONE DEGLI ALLARMI
+<pre style="font-size:10px; background-color: #d9ffcc;">
+  - Congelamento ≤ -18 [°C] Temp. Ext. 0 Secondi per l'Attivazione
+  - VMC Sensori Int. Δ Temp. > 23 [°C] 4 Secondi per l'Attivazione
+  - INQUINANTI 8 Secondi per l'Attivazione
+  - Sup. Lim. Δ PdR INQUINANTI 12 Secondi per l'Attivazione
+  - Sup. Lim. Δ PdR 16 Secondi per l'Attivazione
+  - FREE COOL./HEAT. INQUINANTI 20 Secondi per l'Attivazione
+  - FREE COOL./HEAT. 24 Secondi per l'Attivazione
+  - UMIDITA' 28 Secondi per l'Attivazione
+  - BLACK-OUT 32 Secondi per l'Attivazione
+</pre>
+
+#
+
 ### - In fase di Verifica la Lettura della Temperatura Interna o Esterna minore di 0 °C:<br>     
 
 <img src="https://github-production-user-asset-6210df.s3.amazonaws.com/102819027/282232595-cb4de785-90b8-426d-8e89-31c2244fac8d.png" alt="immagine" style="width:30%;"><br>
