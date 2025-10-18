@@ -57,6 +57,13 @@ Aggiungere o Togliere le Entità da escludere, nel File vmc_nome.yaml nel campo:
   
 #################################################################################################################################
 # Esclusione entità da Recorder, History e Logbook per ridurre il carico sul database escludendo entità aggiornate di frequente #
+#                                                                                                                               #
+#      METTERE DAVANTI AL SENSORE IL SIMBOLO #                                                                                  #
+#                                                                                                                               #
+#      ES. #      - sensor.vmc_master_status_ventola_lettura_codice_interpretato_interfaccia                                    #
+#                                                                                                                               #
+#      SIGNIFICA CHE VERRA' REGISTRATO NEL DB DI HOME ASSISTANT                                                                 #
+#                                                                                                                               #
 #################################################################################################################################
 recorder:
   exclude:
@@ -65,6 +72,27 @@ recorder:
       - automation.automazione_vmc_master
       - automation.vmc_master_audio_allerte_stato
       - automation.vmc_master_riepilogo_audio_allavvio
+      - sensor.vmc_master_temperatura_esterna_selezionata
+      - sensor.vmc_master_temperatura_interna_selezionata
+      - sensor.vmc_master_umidita_esterna_selezionata
+      - sensor.vmc_master_umidita_interna_selezionata
+      - sensor.vmc_master_co2_interna_selezionata
+      - sensor.vmc_master_status_ip
+      - sensor.vmc_master_status_ventola
+      - sensor.vmc_master_sensori
+      - sensor.vmc_master_nome
+      - sensor.vmc_master_lan
+      - sensor.vmc_master_versione_repository
+      - sensor.vmc_master_versione_corrente
+      - sensor.vmc_master_verifica_ip_inserito
+      - sensor.vmc_master_ip
+      - sensor.vmc_master_status_ip_interfaccia
+      - sensor.vmc_master_nome_status
+      - sensor.vmc_master_status_ventola_lettura_codice
+      - sensor.vmc_master_status_ventola_lettura_codice_interpretato
+#      - sensor.vmc_master_status_ventola_lettura_codice_interpretato_interfaccia
+      - sensor.vmc_master_status_sensori_lettura_codice_interpretato
+      - sensor.vmc_master_status_led_pannello_lettura_codice_interpretato
       - ...
 </pre>
 #
