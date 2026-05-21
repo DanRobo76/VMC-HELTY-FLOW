@@ -97,7 +97,7 @@ recorder:
 </pre>
 #
 
-### - In fase di Verifica la Lettura della Temperatura Interna o Esterna minore di 0 °C:<br>     
+### - In fase di Verifica la Lettura della Temperatura Interna o Esterna minore di 0 °C (Sensori della VMC):<br>     
 
 <img src="https://github-production-user-asset-6210df.s3.amazonaws.com/102819027/282232595-cb4de785-90b8-426d-8e89-31c2244fac8d.png" alt="immagine" style="width:30%;"><br>
 Condividi la stringa evidenziata dalla Freccia, per E-mail a: <a href="mailto:danilo.robotti@gmail.com">danilo.robotti@gmail.com</a>
