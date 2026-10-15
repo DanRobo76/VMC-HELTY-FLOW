@@ -185,6 +185,7 @@ sensor:
   - platform: statistics
     name: vmc_master_temp_interna_4w
     entity_id: sensor.vmc_master_temp_interna_numeric
+    unique_id: vmc_master_temp_interna_4w
     state_characteristic: mean
     max_age:
       days: 28
@@ -192,6 +193,7 @@ sensor:
   - platform: statistics
     name: vmc_master_hum_interna_4w
     entity_id: sensor.vmc_master_hum_interna_numeric
+    unique_id: vmc_master_hum_interna_4w
     state_characteristic: mean
     max_age:
       days: 28
@@ -199,6 +201,7 @@ sensor:
   - platform: statistics
     name: vmc_master_temp_interna_8w
     entity_id: sensor.vmc_master_temp_interna_numeric
+    unique_id: vmc_master_temp_interna_8w
     state_characteristic: mean
     max_age:
       days: 56
@@ -206,6 +209,7 @@ sensor:
   - platform: statistics
     name: vmc_master_hum_interna_8w
     entity_id: sensor.vmc_master_hum_interna_numeric
+    unique_id: vmc_master_hum_interna_8w
     state_characteristic: mean
     max_age:
       days: 56
@@ -213,6 +217,7 @@ sensor:
   - platform: statistics
     name: vmc_master_temp_interna_12w
     entity_id: sensor.vmc_master_temp_interna_numeric
+    unique_id: vmc_master_temp_interna_12w
     state_characteristic: mean
     max_age:
       days: 84
@@ -220,6 +225,7 @@ sensor:
   - platform: statistics
     name: vmc_master_hum_interna_12w
     entity_id: sensor.vmc_master_hum_interna_numeric
+    unique_id: vmc_master_hum_interna_12w
     state_characteristic: mean
     max_age:
       days: 84
@@ -328,7 +334,7 @@ template:
       - default_entity_id: sensor.vmc_master_versione_corrente                  # [CONFIGURAZIONE PIù RICHIAMI] [INTERFACCIA, PIU' RICHIAMI] [AUTOMAZIONE, PIU’ RICHIAMI] SENSORE PER VISUALIZZARE LA VERSIONE CORRENTE INSTALLATA IN HOME ASSISTANT DA CONFRONTARE NEL REPOSITORY DI GITHUB: https://github.com/DanRobo76/VMC-HELTY-FLOW IN Releases TRAMITE AUTOMAZIONE
         name: "Package Ver."
         unique_id: vmc_master_versione_corrente
-        state: "v.8.3.3"
+        state: "v.8.4.0"
         icon: mdi:check-decagram-outline
 
   - sensor:
@@ -1229,7 +1235,7 @@ template:
               {% set t_val = t_str | float(default=none) %}
       
               {# Se la conversione non riesce o i valori non sono positivi, non sono calcolabili #}
-              {% if h_val is none or t_val is none or h_val <= 0 or t_val <= 0 %}
+              {% if h_val is none or t_val is none or h_val <= 0 %}
                 [Non Calcolabile]
               {% else %}
                 {# Calcolo dell'umidità assoluta:
@@ -1265,8 +1271,8 @@ template:
               {% set h_val = h_str | float(default=none) %}
               {% set t_val = t_str | float(default=none) %}
       
-              {# Se non numerico o ≤0, non si può calcolare #}
-              {% if h_val is none or t_val is none or h_val <= 0 or t_val <= 0 %}
+              {# Se non numerico o umidità ≤0, non si può calcolare #}
+              {% if h_val is none or t_val is none or h_val <= 0 %}
                 [Non Calcolabile]
               {% else %}
                 {# Calcolo dell'umidità assoluta: 
@@ -2702,7 +2708,7 @@ template:
             {% set input2 = states('sensor.vmc_master_status_freecooling') %}
             {% set interruttore_freecooling = states('input_boolean.vmc_master_opzioni_accendi_spegni_vmc_vs_freecooling') %}
             {% set interruttore_freeheating = states('input_boolean.vmc_master_opzioni_accendi_spegni_vmc_vs_freeheating') %}   
-            {% if input1_freecooling in stati or input2_freecooling in stati %}
+            {% if input1 in stati or input2 in stati %}
               Non disponibile
             {% else %}     
               {% if input1 == "OK" and interruttore_freeheating == 'on' %}
@@ -5646,7 +5652,7 @@ script:
     icon: mdi:cursor-pointer
 
   vmc_master_bottone_panico:
-    alias: VMC Master - Panic Botton (Riavvio Package)
+    alias: VMC Master - Panic Button
     sequence:
       - service: script.vmc_master_azzera_booleans
         data: {}
@@ -8479,7 +8485,7 @@ script:
                                 value_template: >-
                                   {{
                                   states('sensor.vmc_master_alert_monitoraggio_free_heating_o_free_cooling_allert_interfaccia_avvisi')
-                                  != "Nessuna Allerta Free Heating Programmato" or
+                                  != "Nessuna Allerta Free Heating Programmato" and
                                   states('sensor.vmc_master_alert_monitoraggio_free_heating_o_free_cooling_allert_interfaccia_avvisi')
                                   != "Nessuna Allerta Free Heating Programmato,
                                   Presenza di Inquinanti" }}
@@ -9287,7 +9293,7 @@ script:
                                 value_template: >-
                                   {{
                                   states('sensor.vmc_master_alert_monitoraggio_free_heating_o_free_cooling_allert_interfaccia_avvisi')
-                                  != "Nessuna Allerta Free Cooling Programmato" or
+                                  != "Nessuna Allerta Free Cooling Programmato" and
                                   states('sensor.vmc_master_alert_monitoraggio_free_heating_o_free_cooling_allert_interfaccia_avvisi')
                                   != "Nessuna Allerta Free Cooling Programmato,
                                   Presenza di Inquinanti" }}
@@ -9299,10 +9305,10 @@ script:
                                           {{
                                           states('sensor.vmc_master_punto_di_rugiada_verifica_confronto')=="Se
                                           ne sconsiglia l\'impiego" and
-                                          (states('sensor.vmc_master_alert_monitoraggio_co2')
+                                          ((states('sensor.vmc_master_alert_monitoraggio_co2')
                                           == 'Allerta' or
                                           states('sensor.vmc_master_alert_monitoraggio_voc')
-                                          == 'Allerta')}}
+                                          == 'Allerta') and states('input_boolean.vmc_master_opzioni_accendi_spegni_vmc_vs_co2_e_voc')=='on')}}
                                     sequence:
                                       - service: input_boolean.turn_on
                                         metadata: {}
@@ -9325,10 +9331,10 @@ script:
                                           {{
                                           states('sensor.vmc_master_punto_di_rugiada_verifica_confronto')=="Se
                                           ne sconsiglia l\'impiego" and
-                                          (states('sensor.vmc_master_alert_monitoraggio_co2')
+                                          ((states('sensor.vmc_master_alert_monitoraggio_co2')
                                           == 'Nessuna Allerta' and
                                           states('sensor.vmc_master_alert_monitoraggio_voc')
-                                          == 'Nessuna Allerta')}}
+                                          == 'Nessuna Allerta') or states('input_boolean.vmc_master_opzioni_accendi_spegni_vmc_vs_co2_e_voc')=='off')}}
                                     sequence:
                                       - service: input_boolean.turn_on
                                         metadata: {}
@@ -9348,10 +9354,10 @@ script:
                                           {{
                                           states('sensor.vmc_master_punto_di_rugiada_verifica_confronto')!="Se
                                           ne sconsiglia l\'impiego" and
-                                          (states('sensor.vmc_master_alert_monitoraggio_co2')
+                                          ((states('sensor.vmc_master_alert_monitoraggio_co2')
                                           == 'Allerta' or
                                           states('sensor.vmc_master_alert_monitoraggio_voc')
-                                          == 'Allerta')}}
+                                          == 'Allerta') and states('input_boolean.vmc_master_opzioni_accendi_spegni_vmc_vs_co2_e_voc')=='on')}}
                                     sequence:
                                       - service: input_boolean.turn_on
                                         metadata: {}
@@ -9372,10 +9378,10 @@ script:
                                           {{
                                           states('sensor.vmc_master_punto_di_rugiada_verifica_confronto')!="Se
                                           ne sconsiglia l\'impiego" and
-                                          (states('sensor.vmc_master_alert_monitoraggio_co2')
+                                          ((states('sensor.vmc_master_alert_monitoraggio_co2')
                                           == 'Nessuna Allerta' and
                                           states('sensor.vmc_master_alert_monitoraggio_voc')
-                                          == 'Nessuna Allerta')}}
+                                          == 'Nessuna Allerta') or states('input_boolean.vmc_master_opzioni_accendi_spegni_vmc_vs_co2_e_voc')=='off')}}
                                     sequence:
                                       - service: input_boolean.turn_on
                                         metadata: {}
@@ -12899,7 +12905,7 @@ script:
                                 value_template: >-
                                   {{
                                   states('sensor.vmc_master_alert_monitoraggio_free_heating_o_free_cooling_allert_interfaccia_avvisi')
-                                  != "Nessuna Allerta Free Heating Programmato" or
+                                  != "Nessuna Allerta Free Heating Programmato" and
                                   states('sensor.vmc_master_alert_monitoraggio_free_heating_o_free_cooling_allert_interfaccia_avvisi')
                                   != "Nessuna Allerta Free Heating Programmato,
                                   Presenza di Inquinanti" }}
@@ -13707,7 +13713,7 @@ script:
                                 value_template: >-
                                   {{
                                   states('sensor.vmc_master_alert_monitoraggio_free_heating_o_free_cooling_allert_interfaccia_avvisi')
-                                  != "Nessuna Allerta Free Cooling Programmato" or
+                                  != "Nessuna Allerta Free Cooling Programmato" and
                                   states('sensor.vmc_master_alert_monitoraggio_free_heating_o_free_cooling_allert_interfaccia_avvisi')
                                   != "Nessuna Allerta Free Cooling Programmato,
                                   Presenza di Inquinanti" }}
@@ -13719,10 +13725,10 @@ script:
                                           {{
                                           states('sensor.vmc_master_punto_di_rugiada_verifica_confronto')=="Se
                                           ne sconsiglia l\'impiego" and
-                                          (states('sensor.vmc_master_alert_monitoraggio_co2')
+                                          ((states('sensor.vmc_master_alert_monitoraggio_co2')
                                           == 'Allerta' or
                                           states('sensor.vmc_master_alert_monitoraggio_voc')
-                                          == 'Allerta')}}
+                                          == 'Allerta') and states('input_boolean.vmc_master_opzioni_accendi_spegni_vmc_vs_co2_e_voc')=='on')}}
                                     sequence:
                                       - service: input_boolean.turn_on
                                         metadata: {}
@@ -13745,10 +13751,10 @@ script:
                                           {{
                                           states('sensor.vmc_master_punto_di_rugiada_verifica_confronto')=="Se
                                           ne sconsiglia l\'impiego" and
-                                          (states('sensor.vmc_master_alert_monitoraggio_co2')
+                                          ((states('sensor.vmc_master_alert_monitoraggio_co2')
                                           == 'Nessuna Allerta' and
                                           states('sensor.vmc_master_alert_monitoraggio_voc')
-                                          == 'Nessuna Allerta')}}
+                                          == 'Nessuna Allerta') or states('input_boolean.vmc_master_opzioni_accendi_spegni_vmc_vs_co2_e_voc')=='off')}}
                                     sequence:
                                       - service: input_boolean.turn_on
                                         metadata: {}
@@ -13768,10 +13774,10 @@ script:
                                           {{
                                           states('sensor.vmc_master_punto_di_rugiada_verifica_confronto')!="Se
                                           ne sconsiglia l\'impiego" and
-                                          (states('sensor.vmc_master_alert_monitoraggio_co2')
+                                          ((states('sensor.vmc_master_alert_monitoraggio_co2')
                                           == 'Allerta' or
                                           states('sensor.vmc_master_alert_monitoraggio_voc')
-                                          == 'Allerta')}}
+                                          == 'Allerta') and states('input_boolean.vmc_master_opzioni_accendi_spegni_vmc_vs_co2_e_voc')=='on')}}
                                     sequence:
                                       - service: input_boolean.turn_on
                                         metadata: {}
@@ -13792,10 +13798,10 @@ script:
                                           {{
                                           states('sensor.vmc_master_punto_di_rugiada_verifica_confronto')!="Se
                                           ne sconsiglia l\'impiego" and
-                                          (states('sensor.vmc_master_alert_monitoraggio_co2')
+                                          ((states('sensor.vmc_master_alert_monitoraggio_co2')
                                           == 'Nessuna Allerta' and
                                           states('sensor.vmc_master_alert_monitoraggio_voc')
-                                          == 'Nessuna Allerta')}}
+                                          == 'Nessuna Allerta') or states('input_boolean.vmc_master_opzioni_accendi_spegni_vmc_vs_co2_e_voc')=='off')}}
                                     sequence:
                                       - service: input_boolean.turn_on
                                         metadata: {}

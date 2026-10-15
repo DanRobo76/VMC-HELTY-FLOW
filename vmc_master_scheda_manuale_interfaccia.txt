@@ -7897,7 +7897,6 @@ cards:
 
                   <pre style="font-size: smaller;">
                               U ≤ 0  Non Calcolabile
-                  Temp. Interna ≤ 0  Non Calcolabile
 
                   </pre>
 
@@ -7916,7 +7915,7 @@ cards:
 
                   <pre style="font-size: smaller;">
                          CO₂ ≤ 0     <font color="rgb(128, 0, 128)">Assente [Nessuna Allerta]</font>
-                     0 < CO₂ ≤ 350   <font color="rgb(128, 0, 128)">Bassa Contentrazione [Nessuna Allerta]</font>
+                     0 < CO₂ ≤ 350   <font color="rgb(128, 0, 128)">Bassa Concentrazione [Nessuna Allerta]</font>
                    350 < CO₂ ≤ 600   <font color="rgb(100, 100, 100)">Moderata Concentrazione [Allerta Pop-Up]</font>
                    600 < CO₂ < 1200  <font color="rgb(100, 100, 100)">Alta Concentrazione [Allerta Pop-Up]</font>
                          CO₂ ≥ 1200  <font color="rgb(100, 100, 100)">Pessima Concentrazione [Allerta Pop-Up]</font>
@@ -7937,7 +7936,7 @@ cards:
 
                   <pre style="font-size: smaller;">
                         VOC ≤ 0     <font color="rgb(128, 0, 128)">Assente [Nessuna Allerta]</font>
-                    0 < VOC ≤ 300   <font color="rgb(128, 0, 128)">Bassa Contentrazione [Nessuna Allerta]</font>
+                    0 < VOC ≤ 300   <font color="rgb(128, 0, 128)">Bassa Concentrazione [Nessuna Allerta]</font>
                   300 < VOC ≤ 600   <font color="rgb(100, 100, 100)">Moderata
                   Concentrazione [Allerta Pop-Up]</font>
                         VOC > 600   <font color="rgb(100, 100, 100)">Pessima Concentrazione [Allerta Pop-Up]</font>
@@ -7971,34 +7970,34 @@ cards:
                   - l'Impostazione [VMC ON/OFF, in Funzione del Calendario] deve
                   essere impostato su "ON"
 
-                  - l'oradio di Accensione  della 1° Fascia deve essere MINORE  
+                  - l'orario di Accensione  della 1° Fascia deve essere MINORE  
                   dell'orario di Spegnimento della 1° Fascia
 
-                  - l'oradio di Accensione  della 1° Fascia deve essere MINORE  
+                  - l'orario di Accensione  della 1° Fascia deve essere MINORE  
                   dell'orario di Accensione  della 2° Fascia
 
-                  - l'oradio di Spegnimento della 1° Fascia deve essere MINORE  
+                  - l'orario di Spegnimento della 1° Fascia deve essere MINORE  
                   dell'orario di Spegnimento della 2° Fascia
 
-                  - l'oradio di Accensiore  della 2° Fascia deve essere MINORE  
+                  - l'orario di Accensione  della 2° Fascia deve essere MINORE  
                   dell'orario di Spegnimento della 2° Fascia
 
-                  - l'oradio di Accensiore  della 2° Fascia deve essere MAGGIORE
+                  - l'orario di Accensione  della 2° Fascia deve essere MAGGIORE
                   dell'orario di Spegnimento della 1° Fascia
 
-                  - l'oradio di Accensione  della 1° Fascia deve essere DIVERSO 
+                  - l'orario di Accensione  della 1° Fascia deve essere DIVERSO 
                   dell'orario di Spegnimento della 1° Fascia
 
-                  - l'oradio di Accensione  della 1° Fascia deve essere DIVERSO 
+                  - l'orario di Accensione  della 1° Fascia deve essere DIVERSO 
                   dell'orario di Accensione  della 2° Fascia
 
-                  - l'oradio di Spegnimento della 1° Fascia deve essere DIVERSO 
+                  - l'orario di Spegnimento della 1° Fascia deve essere DIVERSO 
                   dell'orario di Spegnimento della 2° Fascia
 
-                  - l'oradio di Spegnimento della 1° Fascia deve essere DIVERSO 
+                  - l'orario di Spegnimento della 1° Fascia deve essere DIVERSO 
                   dell'orario di Accensione  della 2° Fascia
 
-                  - l'oradio di Accensione  della 1° Fascia deve essere DIVERSO 
+                  - l'orario di Accensione  della 1° Fascia deve essere DIVERSO 
                   dell'orario di Spegnimento della 2° Fascia
 
                   <br>
@@ -8057,7 +8056,7 @@ cards:
                   Set Fine Mese), i mesi soggetti a Riscaldamento (impiegando la
                   velocità Free Heating) o a Raffrescamento (impiegando la
                   velocità Free Cooling) se le condizioni ambientali sono
-                  favorevoli.<br> Selezionare i mesi dal menù "Opzion -> Opzioni
+                  favorevoli.<br> Selezionare i mesi dal menù "Opzioni -> Opzioni
                   - Free Heating / Free Cooling" per ogni fascia (Set Inizio
                   Mese - Set Fine Mese).<br> 
 
@@ -8120,7 +8119,7 @@ cards:
                   In caso di presenza di Inquinanti e di allerte Raffrescamento
                   / Riscaldamento, la velocità verrà impostata su 1, purchè la
                   programmazione mensile sia diversa da <font color="rgb(100,
-                  100, 100)"><strong>Disabiliata</strong></font>  
+                  100, 100)"><strong>Disabilitata</strong></font>  
 
                   </pre>
 
@@ -8171,7 +8170,7 @@ cards:
                   programmazione sono visibili.
 
                   Diversamente se viene visualizzato <font color="rgb(100, 100,
-                  100)"><strong>Disabiliata</strong></font> è necessario
+                  100)"><strong>Disabilitata</strong></font> è necessario
                   rivedere e correggere i valori di programmazione.
 
                   </pre>
@@ -8200,7 +8199,7 @@ cards:
                   <strong>2° VMC Master - Profilo Umidità Interna</strong>
 
                   Attiva [VMC ON/OFF, in Funzione dell'Umidità Interna], imposta
-                  il Valore a 65 % con Velocità Iperventilazione
+                  il Valore a 75 % con Velocità Iperventilazione
 
                   <br>
 
@@ -8211,13 +8210,13 @@ cards:
 
                   <br>
 
-                  <strong>4° VMC Master - VMC Master - Profilo
+                  <strong>4° VMC Master - Profilo
                   Calendario</strong>
 
                   Attiva [VMC ON/OFF, in Funzione del Calendario], imposta la
-                  velocità della VMC su [Velocità 1] per entrambe le Fascie, e
-                  Programma la 1° e 2° Fascia dalle 00:00 alle 06:00 e dalle
-                  20:00 alle 23:59
+                  velocità della VMC su [Velocità 1] per entrambe le Fasce, e
+                  Programma la 1° e 2° Fascia dalle 00:30 alle 06:00 e dalle
+                  20:00 alle 23:30
 
                   <br>
 
@@ -8234,7 +8233,7 @@ cards:
 
                   Imposta:
                    - On, l'Invio delle Notifica Audio
-                   - il Volume a metà della potenza;
+                   - il Volume al 30% della potenza;
                    - la notifica Audio tra le 08:00 e le 21:00
                   <strong>Nota VMC Master - Pulisci cronologia Audio</strong>
 
@@ -8243,15 +8242,13 @@ cards:
 
                   <br>
 
-                  <strong>VMC Master - Panic Botton (Riavvio Package)</strong>
+                  <strong>VMC Master - Panic Button</strong>
 
                   Da impiegare se il comportamento della VMC non risponde
                   correttamente alle automazioni e/o comandi.
 
-                  Disattiva i 6 Profili sopra Esposti, Attiva lo Status Pannello
-                  Led, Disattiva lo Status Routine Sensori, Arresta la VMC,
-                  Inizializza tutte le Varibili Booleane su [False] e Riavvia il
-                  Package.
+                  Disattiva i 6 Profili sopra Esposti, Arresta la VMC e
+                  Inizializza tutte le Variabili Booleane su [False].
 
                   <br>
 
@@ -8262,7 +8259,7 @@ cards:
 
                   Attiva i 6 Profili sopra Esposti, Attiva lo Status Pannello
                   Led, Disattiva lo Status Routine Sensori, Arresta la VMC,
-                  Inizializza tutte le Varibili Booleane su [False] e Riavvia
+                  Inizializza tutte le Variabili Booleane su [False] e Riavvia
                   Home Assistant.
 
                   <br>
