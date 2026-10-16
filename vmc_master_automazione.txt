@@ -624,6 +624,50 @@ triggers:
       seconds: 16
     trigger: template
   - alias: >-
+      Condizioni Sfavorevoli a Velocità 0 (VMC ferma) -> Spia PdR Velocità 0 se Spia
+      Congelamento Off e Spia Delta Temp Off e se Spia Inquinanti OFF
+    value_template: |
+      {{
+      states('sensor.vmc_master_punto_di_rugiada_verifica_confronto') == "Se ne sconsiglia l'impiego"
+      and states('input_boolean.vmc_master_opzioni_accendi_spegni_vmc_vs_pdr') == 'on'
+      and states('sensor.vmc_master_status_ventola_lettura_codice_interpretato') == 'Velocità 0'
+      and states('input_boolean.vmc_master_spia_co2_o_voc') == 'off'
+      and states('input_boolean.vmc_master_spia_co2_o_voc_partenza_ritorno_velocita_0') == 'off'
+      and states('input_boolean.vmc_master_spia_velocita_1_co2_o_voc_pdr') == 'off'
+      and states('input_boolean.vmc_master_spia_velocita_freecooling_un_solo_avvio_per_programmazione_freecooling') == 'off'
+      and states('input_boolean.vmc_master_spia_velocita_freecooling_un_solo_avvio_per_programmazione_freeheating') == 'off'
+      and states('input_boolean.vmc_master_congelamento_verifica_soglia_valore_spia') == 'off'
+      and states('input_boolean.vmc_master_delta_temp_verifica_soglia_valore_spia') == 'off'
+      and states('sensor.vmc_master_status_ip_interfaccia') == 'ON-Line'
+      and states('sensor.vmc_master_status_ventola_lettura_codice_interpretato_interfaccia') != 'Non disponibile'
+      and (
+          states('input_boolean.vmc_master_spia_velocita_0') == 'off'
+          and states('input_boolean.vmc_master_spia_velocita_1') == 'off'
+          and states('input_boolean.vmc_master_spia_velocita_2') == 'off'
+          and states('input_boolean.vmc_master_spia_velocita_3') == 'off'
+          and states('input_boolean.vmc_master_spia_velocita_4') == 'off'
+          and states('input_boolean.vmc_master_spia_velocita_notturna') == 'off'
+          and states('input_boolean.vmc_master_spia_velocita_freecooling') == 'off'
+          and states('input_boolean.vmc_master_spia_velocita_iperventilazione') == 'off'
+      )
+      and (
+          states('input_boolean.vmc_master_spia_velocita_0_un_solo_avvio') == 'off'
+          and states('input_boolean.vmc_master_spia_velocita_1_un_solo_avvio') == 'off'
+          and states('input_boolean.vmc_master_spia_velocita_2_un_solo_avvio') == 'off'
+          and states('input_boolean.vmc_master_spia_velocita_3_un_solo_avvio') == 'off'
+          and states('input_boolean.vmc_master_spia_velocita_4_un_solo_avvio') == 'off'
+          and states('input_boolean.vmc_master_spia_velocita_notturna_un_solo_avvio') == 'off'
+          and states('input_boolean.vmc_master_spia_velocita_freecooling_un_solo_avvio') == 'off'
+          and states('input_boolean.vmc_master_spia_velocita_iperventilazione_un_solo_avvio') == 'off'
+      )
+      }}
+    id: PdR Vel. 0 -> Spia PdR Velocità 0
+    for:
+      hours: 0
+      minutes: 0
+      seconds: 16
+    trigger: template
+  - alias: >-
       Condizioni Sfavorevoli a Velocità 1 se Spia Congelamento Off e Spia Delta
       Temp Off e se Spia Inquinanti ON
     value_template: |
@@ -858,6 +902,37 @@ triggers:
       )
       }}
     id: Rip. Vel. 0 No PdR
+    for:
+      hours: 0
+      minutes: 0
+      seconds: 16
+    trigger: template
+  - alias: >-
+      Condizioni Favorevoli Ripristinate su Velocità 0 (VMC ferma) -> Spia PdR Velocità
+      0 OFF se Spia Congelamento Off e Spia Delta Temp Off e se Spia Inquinanti OFF
+    value_template: |
+      {{
+      states('sensor.vmc_master_punto_di_rugiada_verifica_confronto') != "Se ne sconsiglia l'impiego"
+      and states('input_boolean.vmc_master_opzioni_accendi_spegni_vmc_vs_pdr') == 'on'
+      and states('input_boolean.vmc_master_spia_velocita_0_un_solo_avvio') == 'on'
+      and states('input_boolean.vmc_master_spia_velocita_1_co2_o_voc_pdr') == 'off'
+      and states('input_boolean.vmc_master_spia_co2_o_voc') == 'off'
+      and states('input_boolean.vmc_master_congelamento_verifica_soglia_valore_spia') == 'off'
+      and states('input_boolean.vmc_master_delta_temp_verifica_soglia_valore_spia') == 'off'
+      and states('sensor.vmc_master_status_ip_interfaccia') == 'ON-Line'
+      and states('sensor.vmc_master_status_ventola_lettura_codice_interpretato_interfaccia') != 'Non disponibile'
+      and (
+          states('input_boolean.vmc_master_spia_velocita_0') == 'off'
+          and states('input_boolean.vmc_master_spia_velocita_1') == 'off'
+          and states('input_boolean.vmc_master_spia_velocita_2') == 'off'
+          and states('input_boolean.vmc_master_spia_velocita_3') == 'off'
+          and states('input_boolean.vmc_master_spia_velocita_4') == 'off'
+          and states('input_boolean.vmc_master_spia_velocita_notturna') == 'off'
+          and states('input_boolean.vmc_master_spia_velocita_freecooling') == 'off'
+          and states('input_boolean.vmc_master_spia_velocita_iperventilazione') == 'off'
+      )
+      }}
+    id: Rip. Vel. 0 No PdR -> Spia PdR Velocità 0 OFF
     for:
       hours: 0
       minutes: 0
@@ -3672,6 +3747,36 @@ triggers:
       hours: 0
       minutes: 0
       seconds: 8
+    trigger: template
+  - alias: >-
+      Inquinanti CO2 e/o VOC Rilevati con Spia PdR Velocità 0 (VMC ferma) -> Spia PdR
+      Velocità 0 OFF se Spia Congelamento Off e Spia Delta Temp Off
+    value_template: |
+      {{
+      (states('sensor.vmc_master_alert_monitoraggio_co2') == 'Allerta'
+       or states('sensor.vmc_master_alert_monitoraggio_voc') == 'Allerta')
+      and states('input_boolean.vmc_master_opzioni_accendi_spegni_vmc_vs_co2_e_voc') == 'on'
+      and states('input_boolean.vmc_master_spia_velocita_0_un_solo_avvio') == 'on'
+      and states('input_boolean.vmc_master_congelamento_verifica_soglia_valore_spia') == 'off'
+      and states('input_boolean.vmc_master_delta_temp_verifica_soglia_valore_spia') == 'off'
+      and states('sensor.vmc_master_status_ip_interfaccia') == 'ON-Line'
+      and states('sensor.vmc_master_status_ventola_lettura_codice_interpretato_interfaccia') != 'Non disponibile'
+      and (
+          states('input_boolean.vmc_master_spia_velocita_0') == 'off'
+          and states('input_boolean.vmc_master_spia_velocita_1') == 'off'
+          and states('input_boolean.vmc_master_spia_velocita_2') == 'off'
+          and states('input_boolean.vmc_master_spia_velocita_3') == 'off'
+          and states('input_boolean.vmc_master_spia_velocita_4') == 'off'
+          and states('input_boolean.vmc_master_spia_velocita_notturna') == 'off'
+          and states('input_boolean.vmc_master_spia_velocita_freecooling') == 'off'
+          and states('input_boolean.vmc_master_spia_velocita_iperventilazione') == 'off'
+      )
+      }}
+    id: Inquinanti con Spia PdR Velocità 0 -> Spia PdR Velocità 0 OFF
+    for:
+      hours: 0
+      minutes: 0
+      seconds: 4
     trigger: template
   - alias: Disattivazione Automatica VMC per Inquinanti CO2 e/o VOC Rilevati
     value_template: |
@@ -8473,6 +8578,57 @@ actions:
         alias: >-
           Condizioni Sfavorevoli a Velocità Iperventilazione se Spia
           Congelamento Off e Spia Delta Temp Off e se se Spia Inquinanti ON
+      - conditions:
+          - condition: trigger
+            id: PdR Vel. 0 -> Spia PdR Velocità 0
+        sequence:
+          - action: input_boolean.turn_on
+            metadata: {}
+            data: {}
+            target:
+              entity_id: input_boolean.vmc_master_spia_velocita_0_un_solo_avvio
+        alias: >-
+          Condizioni Sfavorevoli a Velocità 0 (VMC ferma): Spia PdR Velocità 0 ON, la VMC
+          resta ferma (l'Umidità non la avvia)
+      - conditions:
+          - condition: trigger
+            id: Rip. Vel. 0 No PdR -> Spia PdR Velocità 0 OFF
+        sequence:
+          - repeat:
+              sequence:
+                - data: {}
+                  action: shell_command.vmc_master_velocita_0
+                - delay:
+                    hours: 0
+                    minutes: 0
+                    seconds: 4
+                    milliseconds: 0
+              until:
+                - condition: template
+                  value_template: >-
+                    {{
+                    states('sensor.vmc_master_status_ventola_lettura_codice_interpretato')=='Velocità
+                    0'}}
+          - action: input_boolean.turn_off
+            metadata: {}
+            data: {}
+            target:
+              entity_id: input_boolean.vmc_master_spia_velocita_0_un_solo_avvio
+        alias: >-
+          Condizioni Favorevoli Ripristinate su Velocità 0 (VMC ferma): Spia PdR Velocità 0
+          OFF
+      - conditions:
+          - condition: trigger
+            id: Inquinanti con Spia PdR Velocità 0 -> Spia PdR Velocità 0 OFF
+        sequence:
+          - action: input_boolean.turn_off
+            metadata: {}
+            data: {}
+            target:
+              entity_id: input_boolean.vmc_master_spia_velocita_0_un_solo_avvio
+        alias: >-
+          Inquinanti con Spia PdR Velocità 0: Spia PdR Velocità 0 OFF (gli Inquinanti avviano
+          la VMC a Velocità 1)
       - conditions:
           - condition: trigger
             id: Rip. Vel. 0 No PdR

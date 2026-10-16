@@ -3176,8 +3176,8 @@ cards:
         states('sensor.vmc_master_punto_di_rugiada_verifica_confronto_valore')}}
 
 
-        {% if spia_velocita_0=="on"%}RIPRESA AUTOMATICA DELLA VMC SULLA
-        <strong>VELOCITA' 0</strong>{% elif spia_velocita_1=="on" %}RIPRESA
+        {% if spia_velocita_0=="on"%}MANTENIMENTO AUTOMATICO DELLA VMC SU
+        <strong>VELOCITA' 0</strong> FINO AL TERMINE DELL'ALLERTA{% elif spia_velocita_1=="on" %}RIPRESA
         AUTOMATICA DELLA VMC SULLA <strong>VELOCITA' 1</strong>{% elif
         spia_velocita_2=="on" %}RIPRESA AUTOMATICA DELLA VMC SULLA
         <strong>VELOCITA' 2</strong>{% elif spia_velocita_3=="on" %}RIPRESA
@@ -3239,8 +3239,8 @@ cards:
         states('sensor.vmc_master_punto_di_rugiada_verifica_confronto_valore')}}
 
 
-        {% if spia_velocita_0=="on"%}RIPRESA AUTOMATICA DELLA VMC SULLA
-        <strong>VELOCITA' 0</strong>{% elif spia_velocita_1=="on" %}RIPRESA
+        {% if spia_velocita_0=="on"%}MANTENIMENTO AUTOMATICO DELLA VMC SU
+        <strong>VELOCITA' 0</strong> FINO AL TERMINE DELL'ALLERTA{% elif spia_velocita_1=="on" %}RIPRESA
         AUTOMATICA DELLA VMC SULLA <strong>VELOCITA' 1</strong>{% elif
         spia_velocita_2=="on" %}RIPRESA AUTOMATICA DELLA VMC SULLA
         <strong>VELOCITA' 2</strong>{% elif spia_velocita_3=="on" %}RIPRESA
@@ -3283,7 +3283,7 @@ cards:
         states('sensor.vmc_master_punto_di_rugiada_verifica_confronto_valore')}}
 
 
-        {% if spia_velocita_0=="on"%}RIPRESA AUTOMATICA DELLA VMC SULLA
+        {% if spia_velocita_0=="on"%}FINE DEL MANTENIMENTO DELLA VMC SU
         <strong>VELOCITA' 0</strong>, ATTENDERE..
 
         {% elif spia_velocita_1=="on" %}RIPRESA AUTOMATICA DELLA VMC SULLA
