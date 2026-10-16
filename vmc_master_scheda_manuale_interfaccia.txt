@@ -4336,7 +4336,7 @@ cards:
 
         <strong>DIVERSAMENTE SI CONFERMA L'ARRESTO DELLA VMC:</strong>
 
-          - NON APPENA L'ANIDRIDE CARBONICA, CO₂ ≤ DI 350 ppm e/o I COMPOSTI ORGANICI VOLATICI, VOC ≤ DI 300 ppb
+          - NON APPENA L'ANIDRIDE CARBONICA, CO₂ ≤ DI 800 ppm e/o I COMPOSTI ORGANICI VOLATICI, VOC ≤ DI 300 ppb
             o
           - FINCHE' L'OPZIONE [VMC ON/OFF, in Funzione del Lim. CO₂ e/o VOC] RIMARRÀ IMPOSTATA SU ACCESO
         <strong> DIVERSAMENTE VERRÀ ANNULLATA LA RIPRESA AUTOMATICA, CONFERMANDO
@@ -7915,10 +7915,10 @@ cards:
 
                   <pre style="font-size: smaller;">
                          CO₂ ≤ 0     <font color="rgb(128, 0, 128)">Assente [Nessuna Allerta]</font>
-                     0 < CO₂ ≤ 350   <font color="rgb(128, 0, 128)">Bassa Concentrazione [Nessuna Allerta]</font>
-                   350 < CO₂ ≤ 600   <font color="rgb(100, 100, 100)">Moderata Concentrazione [Allerta Pop-Up]</font>
-                   600 < CO₂ < 1200  <font color="rgb(100, 100, 100)">Alta Concentrazione [Allerta Pop-Up]</font>
-                         CO₂ ≥ 1200  <font color="rgb(100, 100, 100)">Pessima Concentrazione [Allerta Pop-Up]</font>
+                     0 < CO₂ ≤ 800   <font color="rgb(128, 0, 128)">Bassa Concentrazione [Nessuna Allerta]</font>
+                   800 < CO₂ ≤ 1000  <font color="rgb(100, 100, 100)">Moderata Concentrazione [Allerta Pop-Up]</font>
+                  1000 < CO₂ < 1400  <font color="rgb(100, 100, 100)">Alta Concentrazione [Allerta Pop-Up]</font>
+                         CO₂ ≥ 1400  <font color="rgb(100, 100, 100)">Pessima Concentrazione [Allerta Pop-Up]</font>
                   </pre>
 
                   <br>

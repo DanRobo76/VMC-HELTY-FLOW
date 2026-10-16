@@ -1007,11 +1007,11 @@ template:
                 [Non Disponibile]
               {% elif co2 <= 0 %}
                 -
-              {% elif co2 > 0 and co2 <= 350 %}
+              {% elif co2 > 0 and co2 <= 800 %}
                 Bassa Concentrazione
-              {% elif co2 > 350 and co2 <= 600 %}
+              {% elif co2 > 800 and co2 <= 1000 %}
                 Moderata Concentrazione
-              {% elif co2 > 600 and co2 < 1200 %}
+              {% elif co2 > 1000 and co2 < 1400 %}
                 Alta Concentrazione
               {% else %}
                 Pessima Concentrazione
