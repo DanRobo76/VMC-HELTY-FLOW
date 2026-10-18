@@ -8190,13 +8190,13 @@ cards:
 
                   <pre style="font-size: smaller;">
 
-                  <strong>1° VMC Master - Profilo Elementi Chimici</strong>
+                  <strong>1° VMC Master - Profilo Elementi Chimici (compreso nel Profilo Inizializzazione)</strong>
 
                   Attiva [VMC ON/OFF, in Funzione del Lim. CO₂ e/o VOC]
 
                   <br>
 
-                  <strong>2° VMC Master - Profilo Umidità Interna</strong>
+                  <strong>2° VMC Master - Profilo Umidità Interna di Avvio</strong>
 
                   Attiva [VMC ON/OFF, in Funzione dell'Umidità Interna], imposta
                   il Valore a 75 % con Velocità Iperventilazione
@@ -8252,8 +8252,8 @@ cards:
 
                   <br>
 
-                  <strong>VMC Master - Profilo Inizializzazione (Riavvio di
-                  H.A.)</strong>
+                  <strong>VMC Master - Profilo Inizializzazione (Attendere -
+                  Riavvio H.A.)</strong>
 
                   Da impiegare solo la prima volta appena installato il Package.
 
@@ -8305,7 +8305,7 @@ cards:
                   is_state('input_boolean.vmc_master_opzioni_scelta_sensori',
                   'on') or
                   is_state('input_boolean.vmc_master_opzioni_elementi_chimici',
-                  'on') or is_state('input_boolean.vmc_master_finestra_audio',
+                  'on') or is_state('input_boolean.vmc_master_opzione_finestra_audio',
                   'on') %}
 
 
@@ -8355,8 +8355,8 @@ cards:
                   %}{% if
                   is_state('input_boolean.vmc_master_opzioni_elementi_chimici',
                   'on') %}vmc_master_opzioni_elementi_chimici: On <br>{% endif
-                  %}{% if is_state('input_boolean.vmc_master_finestra_audio',
-                  'on') %}vmc_master_finestra_audio: On <br>{% endif %}</pre>
+                  %}{% if is_state('input_boolean.vmc_master_opzione_finestra_audio',
+                  'on') %}vmc_master_opzione_finestra_audio: On <br>{% endif %}</pre>
 
                   {% endif %}
 
@@ -8458,7 +8458,7 @@ cards:
 
                   {% if
                   is_state('sensor.vmc_master_congelamento_verifica_soglia',
-                  'on') or
+                  'Si') or
                   is_state('input_boolean.vmc_master_spia_velocita_0_congelamento',
                   'on') or
                   is_state('input_boolean.vmc_master_spia_velocita_1_congelamento',
@@ -8481,7 +8481,7 @@ cards:
                   #d9ffcc"><details
                   open><summary><b>CONGELAMENTO</b></summary>{% if
                   is_state('sensor.vmc_master_congelamento_verifica_soglia',
-                  'on') %}vmc_master_congelamento_verifica_soglia: On <br>{%
+                  'Si') %}vmc_master_congelamento_verifica_soglia: On <br>{%
                   endif %}{% if
                   is_state('input_boolean.vmc_master_spia_velocita_0_congelamento',
                   'on') %}vmc_master_spia_velocita_0_congelamento: On <br>{%
@@ -8857,13 +8857,13 @@ cards:
 
 
                   {% if is_state('sensor.vmc_master_delta_temp_verifica_soglia',
-                  'on')
+                  'Si')
                      or is_state('input_boolean.vmc_master_spia_velocita_0_delta_temp_verifica_soglia_valore', 'on') or is_state('input_boolean.vmc_master_spia_velocita_1_delta_temp_verifica_soglia_valore', 'on') or is_state('input_boolean.vmc_master_spia_velocita_2_delta_temp_verifica_soglia_valore', 'on')  or is_state('input_boolean.vmc_master_spia_velocita_3_delta_temp_verifica_soglia_valore', 'on')  or is_state('input_boolean.vmc_master_spia_velocita_4_delta_temp_verifica_soglia_valore', 'on')  or is_state('input_boolean.vmc_master_spia_velocita_iperventilazione_delta_temp_verifica_soglia_valore', 'on')  or is_state('input_boolean.vmc_master_spia_velocita_notturna_delta_temp_verifica_soglia_valore', 'on')  or is_state('input_boolean.vmc_master_spia_velocita_freecooling_delta_temp_verifica_soglia_valore', 'on') %}
 
                   <pre style="font-size: 1px; background-color:
                   #d9ffcc"><details open><summary><b>DIFF. TEMP. (INTEST) > 23
                   [°C]?</b></summary>{% if
-                  is_state('sensor.vmc_master_delta_temp_verifica_soglia', 'on')
+                  is_state('sensor.vmc_master_delta_temp_verifica_soglia', 'Si')
                   %}vmc_master_delta_temp_verifica_soglia: On <br>{% endif %}{%
                   if
                   is_state('input_boolean.vmc_master_spia_velocita_0_delta_temp_verifica_soglia_valore',

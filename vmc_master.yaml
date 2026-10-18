@@ -98,7 +98,7 @@
 #                                               00003 = VELOCITA' 3     , ATTRAVERSO L'AUTOMAZIONE, LANCIA IL SERVIZIO: vmc_master_velocita_3                                                                             #
 #                                               00004 = VELOCITA' 4     , ATTRAVERSO L'AUTOMAZIONE, LANCIA IL SERVIZIO: vmc_master_velocita_4                                                                             #
 #                                               00005 = IPERVENTILAZIONE, ATTRAVERSO L'AUTOMAZIONE, LANCIA IL SERVIZIO: vmc_master_iperventilazione                                                                       #
-#                                               00006 = NOTTE           , ATTRAVERSO L'AUTOMAZIONE, LANCIA IL SERVIZIO: vmc_master_notte                                                                                  #
+#                                               00006 = NOTTE           , ATTRAVERSO L'AUTOMAZIONE, LANCIA IL SERVIZIO: vmc_master_notturna                                                                               #
 #                                               00007 = FREECOOLING     , ATTRAVERSO L'AUTOMAZIONE, LANCIA IL SERVIZIO: vmc_master_freecooling                                                                            #
 #                                                                                                                                                                                                                         #
 ###########################################################################################################################################################################################################################
@@ -380,9 +380,9 @@ template:
           {% if vmc_nome in invalid %}
             Non disponibile
           {% else %}
-            {% set parts = vmc_nome.split(" ") %}
+            {% set parts = vmc_nome.split(" ", 1) %}
             {% if parts | length >= 2 %}
-              {{ parts[1] }}
+              {{ parts[1] | trim }}
             {% else %}
               Non disponibile
             {% endif %}
@@ -570,7 +570,7 @@ template:
             {% if temp_float == none %}
               [Non Calcolabile]
             {% else %}
-              {{ temp_float + float(states('input_number.vmc_master_offset_temp_esterna')) | round(1)}}
+              {{ (temp_float + float(states('input_number.vmc_master_offset_temp_esterna'))) | round(1) }}
             {% endif %}
           {% endif %}
         icon: mdi:home-thermometer-outline
@@ -619,7 +619,7 @@ template:
             {% if temp_float == none %}
               [Non Calcolabile]
             {% else %}
-              {{ temp_float + float(states('input_number.vmc_master_offset_temp_interna')) | round(1)}}
+              {{ (temp_float + float(states('input_number.vmc_master_offset_temp_interna'))) | round(1) }}
             {% endif %}
           {% endif %}
         icon: mdi:home-thermometer
@@ -664,12 +664,12 @@ template:
             Non disponibile
           {% else %}
             {% set humidity = states('sensor.vmc_master_umidita_esterna_selezionata') %}
-            {% if humidity | float == none %}
+            {% if humidity | float(default=none) is none %}
               [Non Calcolabile]
             {% else %}
               {% set umidita_relativa_esterna = humidity | float + float(states('input_number.vmc_master_offset_umidita_esterna')) %}
               {% if umidita_relativa_esterna > 0 and umidita_relativa_esterna <= 100 %}
-                {{ umidita_relativa_esterna }}
+                {{ umidita_relativa_esterna | round(1) }}
               {% elif umidita_relativa_esterna <= 0 %}
                 [Non Calcolabile]
               {% else %}
@@ -783,7 +783,7 @@ template:
         icon: mdi:molecule-co2
 
   - sensor:
-      - default_entity_id: sensor.vmc_master_voc_status                         # [CONFIGURAZIONE, PIU’ RICHIAMI] [INTERFACCIA, PIU’ RICHIAMI] [AUTOMAZIONE 0 RICHIAMI]  SENSORE DI LETTURA COMPOSTI ORGANICI VOLATICI INTERNI MEMORIZZATI NELLA VMC + OFFSET MANUALE TRASFORMATI DA PPB [DEFAULT VMC] IN PPM, PREVIA VERIFICA DI AVVENUTA LETTURA DEI DATI "SENSORI" MEMORIZZATI NELLA VMC
+      - default_entity_id: sensor.vmc_master_voc_status                         # [CONFIGURAZIONE, PIU’ RICHIAMI] [INTERFACCIA, PIU’ RICHIAMI] [AUTOMAZIONE 0 RICHIAMI]  SENSORE DI LETTURA COMPOSTI ORGANICI VOLATICI INTERNI MEMORIZZATI NELLA VMC + OFFSET MANUALE ESPRESSI IN PPB [DEFAULT VMC], PREVIA VERIFICA DI AVVENUTA LETTURA DEI DATI "SENSORI" MEMORIZZATI NELLA VMC
         name: "VOC Int. [ppb]"
         unique_id: vmc_master_voc_status
         state: >
@@ -807,7 +807,7 @@ template:
         icon: mdi:weather-dust
 
   - sensor:
-      - default_entity_id: sensor.vmc_master_voc_status_senza_offset            # [CONFIGURAZIONE, 0 RICHIAMI] [INTERFACCIA, 1 RICHIAMO] [AUTOMAZIONE 0 RICHIAMI]  SENSORE DI LETTURA COMPOSTI ORGANICI VOLATICI INTERNI MEMORIZZATI NELLA VMC SENZA OFFSET MANUALE TRASFORMATI DA PPB [DEFAULT VMC] IN PPM, PREVIA VERIFICA DI AVVENUTA LETTURA DEI DATI "SENSORI" MEMORIZZATI NELLA VMC
+      - default_entity_id: sensor.vmc_master_voc_status_senza_offset            # [CONFIGURAZIONE, 0 RICHIAMI] [INTERFACCIA, 1 RICHIAMO] [AUTOMAZIONE 0 RICHIAMI]  SENSORE DI LETTURA COMPOSTI ORGANICI VOLATICI INTERNI MEMORIZZATI NELLA VMC SENZA OFFSET MANUALE ESPRESSI IN PPB [DEFAULT VMC], PREVIA VERIFICA DI AVVENUTA LETTURA DEI DATI "SENSORI" MEMORIZZATI NELLA VMC
         name: "Composti Organici Volatici, VOC Int. [ppb]"
         unique_id: vmc_master_voc_status_senza_offset
         state: >
@@ -1173,7 +1173,7 @@ template:
             
             {% if PdRi == '[Non Calcolabile]' or PdRe == '[Non Calcolabile]' %}
               [Non Calcolabile]
-            {% elif PdRi == 'Non disponibile' or PdRe == 'Non disponibile' %}
+            {% elif PdRi in ['Non disponibile', '[Non Disponibile]'] or PdRe in ['Non disponibile', '[Non Disponibile]'] %}
               Non disponibile
             {% else %}
               Si può impiegare
@@ -1793,8 +1793,6 @@ template:
             {# Gestione stati non disponibili o non calcolabili per tipologia e velocita #}
             {% if tipologia == 'Non disponibile' or velocita == 'Non disponibile' %}
               Non disponibile
-            {% elif tipologia == '[Non Calcolabile]' or velocita == '[Non Calcolabile]' %}
-              [Non Calcolabile]
             {% else %}
               {# Se tipologia e velocita sono 'normali' #}
               {# Controllo anche le temperature. Se sono "Non disponibile" o "[Non Calcolabile]" non possiamo calcolare #}
@@ -1853,8 +1851,6 @@ template:
             {# Controllo disponibilità e calcolabilità di tipologia e velocità #}
             {% if tipologia in ['Non disponibile'] or velocita in ['Non disponibile'] %}
               Non disponibile
-            {% elif tipologia in ['[Non Calcolabile]'] or velocita in ['[Non Calcolabile]'] %}
-              [Non Calcolabile]
             {% else %}
               {# Controllo disponibilità e calcolabilità delle temperature #}
               {% if temp_interna_str in ['Non disponibile','[Non Calcolabile]'] or temp_esterna_str in ['Non disponibile','[Non Calcolabile]'] %}
@@ -2089,7 +2085,7 @@ template:
             Non disponibile
           {% else %}
             {% if (
-              states('vmc_master_status_ip_interfaccia')=='OFF-Line' or
+              states('sensor.vmc_master_status_ip_interfaccia')=='OFF-Line' or
               is_state('input_boolean.vmc_master_spia_velocita_0', 'on') or
               is_state('input_boolean.vmc_master_spia_velocita_1', 'on') or
               is_state('input_boolean.vmc_master_spia_velocita_2', 'on') or
@@ -2525,35 +2521,10 @@ template:
             {% set input1_freeheating = states('sensor.vmc_master_mese_1_fascia_freeheating') %}
             {% set input2_freeheating = states('sensor.vmc_master_mese_2_fascia_freeheating') %}
             {% set check = states('sensor.vmc_master_status_check_freeheating_freecooling') %}
-            {% set mese_corrente = now().strftime('%B') %}
+            {% set mese_corrente = ['Gennaio', 'Febbraio', 'Marzo', 'Aprile', 'Maggio', 'Giugno', 'Luglio', 'Agosto', 'Settembre', 'Ottobre', 'Novembre', 'Dicembre'][now().month - 1] %}
             {% if input1_freeheating in stati or input2_freeheating in stati or check in stati %}
               Non disponibile
             {% else %}      
-              {% if mese_corrente == 'January' %}
-                {% set mese_corrente = 'Gennaio' %}
-              {% elif mese_corrente == 'February' %}
-                {% set mese_corrente = 'Febbraio' %}
-              {% elif mese_corrente == 'March' %}
-                {% set mese_corrente = 'Marzo' %}
-              {% elif mese_corrente == 'April' %}
-                {% set mese_corrente = 'Aprile' %}
-              {% elif mese_corrente == 'May' %}
-                {% set mese_corrente = 'Maggio' %}
-              {% elif mese_corrente == 'June' %}
-                {% set mese_corrente = 'Giugno' %}
-              {% elif mese_corrente == 'July' %}
-                {% set mese_corrente = 'Luglio' %}
-              {% elif mese_corrente == 'August' %}
-                {% set mese_corrente = 'Agosto' %}
-              {% elif mese_corrente == 'September' %}
-                {% set mese_corrente = 'Settembre' %}
-              {% elif mese_corrente == 'October' %}
-                {% set mese_corrente = 'Ottobre' %}
-              {% elif mese_corrente == 'November' %}
-                {% set mese_corrente = 'Novembre' %}
-              {% elif mese_corrente == 'December' %}
-                {% set mese_corrente = 'Dicembre' %}
-              {% endif %}
               {% if input1_freeheating=='Gennaio'%}
                 {% set months_freeheating = ['Gennaio', 'Febbraio', 'Marzo', 'Aprile', 'Maggio', 'Giugno', 'Luglio', 'Agosto', 'Settembre', 'Ottobre', 'Novembre', 'Dicembre'] %}
                 {% set interval_1_freeheating = months_freeheating[months_freeheating.index(input1_freeheating):months_freeheating.index(input2_freeheating)+1] %}
@@ -2616,35 +2587,10 @@ template:
             {% set input1_freecooling = states('sensor.vmc_master_mese_1_fascia_freecooling') %}
             {% set input2_freecooling = states('sensor.vmc_master_mese_2_fascia_freecooling') %}
             {% set check = states('sensor.vmc_master_status_check_freeheating_freecooling') %}
-            {% set mese_corrente = now().strftime('%B') %}
+            {% set mese_corrente = ['Gennaio', 'Febbraio', 'Marzo', 'Aprile', 'Maggio', 'Giugno', 'Luglio', 'Agosto', 'Settembre', 'Ottobre', 'Novembre', 'Dicembre'][now().month - 1] %}
             {% if input1_freecooling in stati or input2_freecooling in stati or check in stati %}
               Non disponibile
             {% else %}      
-              {% if mese_corrente == 'January' %}
-                {% set mese_corrente = 'Gennaio' %}
-              {% elif mese_corrente == 'February' %}
-                {% set mese_corrente = 'Febbraio' %}
-              {% elif mese_corrente == 'March' %}
-                {% set mese_corrente = 'Marzo' %}
-              {% elif mese_corrente == 'April' %}
-                {% set mese_corrente = 'Aprile' %}
-              {% elif mese_corrente == 'May' %}
-                {% set mese_corrente = 'Maggio' %}
-              {% elif mese_corrente == 'June' %}
-                {% set mese_corrente = 'Giugno' %}
-              {% elif mese_corrente == 'July' %}
-                {% set mese_corrente = 'Luglio' %}
-              {% elif mese_corrente == 'August' %}
-                {% set mese_corrente = 'Agosto' %}
-              {% elif mese_corrente == 'September' %}
-                {% set mese_corrente = 'Settembre' %}
-              {% elif mese_corrente == 'October' %}
-                {% set mese_corrente = 'Ottobre' %}
-              {% elif mese_corrente == 'November' %}
-                {% set mese_corrente = 'Novembre' %}
-              {% elif mese_corrente == 'December' %}
-                {% set mese_corrente = 'Dicembre' %}
-              {% endif %}
               {% if input1_freecooling=='Gennaio'%}
                 {% set months_freecooling = ['Gennaio', 'Febbraio', 'Marzo', 'Aprile', 'Maggio', 'Giugno', 'Luglio', 'Agosto', 'Settembre', 'Ottobre', 'Novembre', 'Dicembre'] %}
                 {% set interval_1_freecooling = months_freecooling[months_freecooling.index(input1_freecooling):months_freecooling.index(input2_freecooling)+1] %}
@@ -2965,7 +2911,6 @@ input_select:
 input_number:
   vmc_master_aria_scambiata_v1:
     name: Aria Scambiata a Velocità 1
-    initial: 0
     min: 0
     max: 10000000000000
     step: 0.01
@@ -2973,7 +2918,6 @@ input_number:
 
   vmc_master_aria_scambiata_v2:
     name: Aria Scambiata a Velocità 2
-    initial: 0
     min: 0
     max: 10000000000000
     step: 0.01
@@ -2981,7 +2925,6 @@ input_number:
 
   vmc_master_aria_scambiata_v3:
     name: Aria Scambiata a Velocità 3
-    initial: 0
     min: 0
     max: 10000000000000
     step: 0.01
@@ -2989,7 +2932,6 @@ input_number:
 
   vmc_master_aria_scambiata_v4:
     name: Aria Scambiata a Velocità 4
-    initial: 0
     min: 0
     max: 10000000000000
     step: 0.01
@@ -2997,7 +2939,6 @@ input_number:
 
   vmc_master_aria_scambiata_iperventilazione:
     name: Aria Scambiata a Vel. Iperventilazione
-    initial: 0
     min: 0
     max: 10000000000000
     step: 0.01
@@ -3005,7 +2946,6 @@ input_number:
 
   vmc_master_aria_scambiata_notte:
     name: Aria Scambiata a Vel. Notturna
-    initial: 0
     min: 0
     max: 10000000000000
     step: 0.01
@@ -3013,7 +2953,6 @@ input_number:
 
   vmc_master_aria_scambiata_freecooling:
     name: Aria Scambiata a Vel. Free Heating/Cooling
-    initial: 0
     min: 0
     max: 10000000000000
     step: 0.01
@@ -3021,7 +2960,6 @@ input_number:
 
   vmc_master_aria_scambiata_ricomincio:
     name: Aria Scambiata Ricomincio
-    initial: 0
     min: 0
     max: 10000000000000000000000  # o un valore sufficientemente grande per il volume
     step: 0.0001
@@ -3066,7 +3004,7 @@ input_number:
     unit_of_measurement: "ppm"
     icon: mdi:counter
     
-  vmc_master_offset_voc:                                                       # [CONFIGURAZIONE, PIù RICHIAMI] [INTERFACCIA PIU’ RICHIAMI] SENSORE DI MEMORIZZAZIONE DELL'OFFSET PER I COMPOSTI ORGANICI VOLATICI ESPRESSO IN PPM [DI DEFAULT NELLA VMC SONO ESPRESSI IN PPB] CHE VERRANNO SOMMATI NEL SENSORE vmc_master_voc_status
+  vmc_master_offset_voc:                                                       # [CONFIGURAZIONE, PIù RICHIAMI] [INTERFACCIA PIU’ RICHIAMI] SENSORE DI MEMORIZZAZIONE DELL'OFFSET PER I COMPOSTI ORGANICI VOLATICI ESPRESSO IN PPB [COME NELLA VMC] CHE VERRANNO SOMMATI NEL SENSORE vmc_master_voc_status
     name: "Offset VOC Int."
     min: -1000
     max: 1000
@@ -3579,6 +3517,7 @@ input_boolean:
 
   vmc_master_avvio_home_assistant_in_corso_per_audio:                         # [CONFIGURAZIONE 0 RICHIAMI] [AUTOMAZIONE, PIU’ RICHIAMI] SENSORE TRACCIAMENTO AUDIO ALL'AVVIO DI HOME ASSISTANT PER LA LETTURA DEI VARI SENSORI
     name: "Spia Audio all'Avvio di Home Assistant"
+    initial: false
     icon: mdi:memory
 
 ################### Fine Creazione Switch Booleano impiegato nell'Automazione, per l'Audio all'Avvio di Home Assistant ############################
@@ -3830,7 +3769,7 @@ script:
                         value_template: >
                           {% set last_temperatura_esterna_entity = states('input_text.vmc_master_last_temp_external_entity') %}
                           {% set valid_options = state_attr('input_select.vmc_master_selected_temp_external_entity', 'options') | reject('equalto', 'Aggiorna Elenco Entità Temperatura Esterna') | list %}
-                          {{ (last_temperatura_esterna_entity not in valid_options or last_temperatura_esterna_entity in ["sconosciuto", "unknown", "", none, "unavailable", "Non disponibile"]) and states('vmc_master_status_ip_interfaccia')=='ON-Line' and states('input_boolean.vmc_master_notifica_status_vmc')=='on'}}
+                          {{ (last_temperatura_esterna_entity not in valid_options or last_temperatura_esterna_entity in ["sconosciuto", "unknown", "", none, "unavailable", "Non disponibile"]) and states('sensor.vmc_master_status_ip_interfaccia')=='ON-Line' and states('input_boolean.vmc_master_notifica_status_vmc')=='on'}}
                     sequence:
                       - service: input_select.select_option
                         target:
@@ -3934,7 +3873,7 @@ script:
                         value_template: >
                           {% set last_temperatura_interna_entity = states('input_text.vmc_master_last_temp_internal_entity') %}
                           {% set valid_options = state_attr('input_select.vmc_master_selected_temp_internal_entity', 'options') | reject('equalto', 'Aggiorna Elenco Entità Temperatura Interna') | list %}
-                          {{ (last_temperatura_interna_entity not in valid_options or last_temperatura_interna_entity in ["sconosciuto", "unknown", "", none, "unavailable", "Non disponibile"]) and states('vmc_master_status_ip_interfaccia')=='ON-Line' and states('input_boolean.vmc_master_notifica_status_vmc')=='on'}}
+                          {{ (last_temperatura_interna_entity not in valid_options or last_temperatura_interna_entity in ["sconosciuto", "unknown", "", none, "unavailable", "Non disponibile"]) and states('sensor.vmc_master_status_ip_interfaccia')=='ON-Line' and states('input_boolean.vmc_master_notifica_status_vmc')=='on'}}
                     sequence:
                       - service: input_select.select_option
                         target:
@@ -4040,7 +3979,7 @@ script:
                         value_template: >
                           {% set last_umidita_esterna_entity = states('input_text.vmc_master_last_humidity_external_entity') %}
                           {% set valid_options = state_attr('input_select.vmc_master_selected_humidity_external_entity', 'options') | reject('equalto', 'Aggiorna Elenco Entità Umidità Esterna') | list %}
-                          {{ (last_umidita_esterna_entity not in valid_options or last_umidita_esterna_entity in ["sconosciuto", "unknown", "", none, "unavailable", "Non disponibile"]) and states('vmc_master_status_ip_interfaccia')=='ON-Line' and states('input_boolean.vmc_master_notifica_status_vmc')=='on'}}
+                          {{ (last_umidita_esterna_entity not in valid_options or last_umidita_esterna_entity in ["sconosciuto", "unknown", "", none, "unavailable", "Non disponibile"]) and states('sensor.vmc_master_status_ip_interfaccia')=='ON-Line' and states('input_boolean.vmc_master_notifica_status_vmc')=='on'}}
                     sequence:
                       - service: input_select.select_option
                         target:
@@ -4144,7 +4083,7 @@ script:
                         value_template: >
                           {% set last_umidita_interna_entity = states('input_text.vmc_master_last_humidity_internal_entity') %}
                           {% set valid_options = state_attr('input_select.vmc_master_selected_humidity_internal_entity', 'options') | reject('equalto', 'Aggiorna Elenco Entità Umidità Interna') | list %}
-                          {{ (last_umidita_interna_entity not in valid_options or last_umidita_interna_entity in ["sconosciuto", "unknown", "", none, "unavailable", "Non disponibile"]) and states('vmc_master_status_ip_interfaccia')=='ON-Line' and states('input_boolean.vmc_master_notifica_status_vmc')=='on'}}
+                          {{ (last_umidita_interna_entity not in valid_options or last_umidita_interna_entity in ["sconosciuto", "unknown", "", none, "unavailable", "Non disponibile"]) and states('sensor.vmc_master_status_ip_interfaccia')=='ON-Line' and states('input_boolean.vmc_master_notifica_status_vmc')=='on'}}
                     sequence:
                       - service: input_select.select_option
                         target:
@@ -4241,7 +4180,7 @@ script:
                         value_template: >
                           {% set last_co2_interna_entity = states('input_text.vmc_master_last_co2_internal_entity') %}
                           {% set valid_options = state_attr('input_select.vmc_master_selected_co2_internal_entity', 'options') | reject('equalto', 'Aggiorna Elenco Entità CO₂ Interna') | list %}
-                          {{ (last_co2_interna_entity not in valid_options or last_co2_interna_entity in ["sconosciuto", "unknown", "", none, "unavailable", "Non disponibile"]) and states('vmc_master_status_ip_interfaccia')=='ON-Line' and states('input_boolean.vmc_master_notifica_status_vmc')=='on'}}
+                          {{ (last_co2_interna_entity not in valid_options or last_co2_interna_entity in ["sconosciuto", "unknown", "", none, "unavailable", "Non disponibile"]) and states('sensor.vmc_master_status_ip_interfaccia')=='ON-Line' and states('input_boolean.vmc_master_notifica_status_vmc')=='on'}}
                     sequence:
                       - service: input_select.select_option
                         target:
@@ -4333,7 +4272,7 @@ script:
                         value_template: >
                           {% set last_notification_device = states('input_text.vmc_master_last_notification_device') %}
                           {% set valid_options = state_attr('input_select.vmc_master_selected_notification_device', 'options') | reject('equalto', 'Aggiorna Elenco Dispositivi per Invio Notifica') | list %}
-                          {{ (last_notification_device not in valid_options or last_notification_device in ["sconosciuto", "unknown", "", none, "unavailable", "Non disponibile"]) and states('vmc_master_status_ip_interfaccia')=='ON-Line' and states('input_boolean.vmc_master_notifica_status_vmc')=='on'}}
+                          {{ (last_notification_device not in valid_options or last_notification_device in ["sconosciuto", "unknown", "", none, "unavailable", "Non disponibile"]) and states('sensor.vmc_master_status_ip_interfaccia')=='ON-Line' and states('input_boolean.vmc_master_notifica_status_vmc')=='on'}}
                     sequence:
                       - service: input_select.select_option
                         target:
@@ -4423,7 +4362,7 @@ script:
                           {% set last_mp = states('input_text.vmc_master_last_media_player_entity') %}
                           {% set valid_options = state_attr('input_select.vmc_master_selected_media_player_entity', 'options') 
                             | reject('equalto', 'Aggiorna Elenco Media Player') | list %}
-                          {{ (last_mp not in valid_options or last_mp in ["sconosciuto", "unknown", "", none, "unavailable", "Non disponibile"]) and states('vmc_master_status_ip_interfaccia')=='ON-Line' and states('input_boolean.vmc_master_notifica_status_vmc')=='on'}}
+                          {{ (last_mp not in valid_options or last_mp in ["sconosciuto", "unknown", "", none, "unavailable", "Non disponibile"]) and states('sensor.vmc_master_status_ip_interfaccia')=='ON-Line' and states('input_boolean.vmc_master_notifica_status_vmc')=='on'}}
                     sequence:
                       - service: input_select.select_option
                         target:
@@ -15355,7 +15294,7 @@ automation:
     conditions:
       - condition: template
         value_template: >
-          {{ states('sensor.vmc_master_status_ventola_lettura_codice_interpretato_interfaccia') != 'Velocità 0' }}
+          {{ trigger.platform == 'time' or states('sensor.vmc_master_status_ventola_lettura_codice_interpretato_interfaccia') != 'Velocità 0' }}
     actions:
       - variables:
           velocita_corrente: >-
@@ -15437,7 +15376,7 @@ automation:
                   - conditions:
                       - condition: template
                         value_template: >
-                          {{ tempo_mancante in ['0 secondi', '1 secondo'] and
+                          {{ tempo_mancante in ['0 secondi', '1 secondi'] and
                           ricomincio_val > 0 }}
                     sequence:
                       - data:
