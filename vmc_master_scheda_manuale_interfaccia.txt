@@ -3004,6 +3004,76 @@ cards:
         Msg. 18
 
 
+        <!-------18.1-----[PdR ON] , [Interruttore PdR OFF] , [Velocità = 0] ,  [
+        Spia Pdr OFF] , [Spia CO2 e VOC OFF], [Interruttore Inquinanti OFF]
+        -------------------------------------------------------- -->
+
+        {% elif states('sensor.vmc_master_punto_di_rugiada_verifica_confronto')
+        == "Se ne sconsiglia l\'impiego" and
+        states('input_boolean.vmc_master_opzioni_accendi_spegni_vmc_vs_pdr') ==
+        'off' and is_state('sensor.vmc_master_status_ip_interfaccia','ON-Line')
+        and
+        (states('sensor.vmc_master_status_ventola_lettura_codice_interpretato')
+        == "Velocità 0") and
+        (states('input_boolean.vmc_master_spia_velocita_1_un_solo_avvio') =='on'
+        or states('input_boolean.vmc_master_spia_velocita_2_un_solo_avvio')
+        =='on' or
+        states('input_boolean.vmc_master_spia_velocita_3_un_solo_avvio') =='on'
+        or states('input_boolean.vmc_master_spia_velocita_4_un_solo_avvio')
+        =='on' or
+        states('input_boolean.vmc_master_spia_velocita_notturna_un_solo_avvio')
+        =='on' or
+        states('input_boolean.vmc_master_spia_velocita_freecooling_un_solo_avvio')
+        =='on' or 
+        states('input_boolean.vmc_master_spia_velocita_iperventilazione_un_solo_avvio')
+        =='on') and
+        (is_state('sensor.vmc_master_alert_monitoraggio_co2','Nessuna Allerta')
+        and is_state('sensor.vmc_master_alert_monitoraggio_voc','Nessuna
+        Allerta')) and 
+        states('input_boolean.vmc_master_opzioni_accendi_spegni_vmc_vs_co2_e_voc')=="off"
+        %}
+          <font color="rgb(100, 100, 100)"><font size="+1"><strong><ha-icon icon="mdi:alarm-light-outline"></ha-icon></strong></font><span style="padding-right: 10px;"></span><font size="+1"><strong> ALLERTA SUPERAMENTO DEL LIM. Δ PUNTO DI RUGIADA </strong></font>
+
+        {{
+        states('sensor.vmc_master_punto_di_rugiada_verifica_confronto_valore')}}
+
+
+        {% if spia_velocita_0=="on"%}RIPRESA AUTOMATICA DELLA VMC SULLA
+        <strong>VELOCITA' 0</strong>{% elif spia_velocita_1=="on" %}RIPRESA
+        AUTOMATICA DELLA VMC SULLA <strong>VELOCITA' 1</strong>{% elif
+        spia_velocita_2=="on" %}RIPRESA AUTOMATICA DELLA VMC SULLA
+        <strong>VELOCITA' 2</strong>{% elif spia_velocita_3=="on" %}RIPRESA
+        AUTOMATICA DELLA VMC SULLA <strong>VELOCITA' 3</strong>{% elif
+        spia_velocita_4=="on" %}RIPRESA AUTOMATICA DELLA VMC SULLA
+        <strong>VELOCITA' 4</strong>{% elif spia_notturna=="on" %}RIPRESA
+        AUTOMATICA DELLA VMC SULLA <strong>VELOCITA' NOTTURNA</strong>{% elif
+        spia_freecooling=="on" and freeheating_cooling=="Free Heating" %}RIPRESA
+        AUTOMATICA DELLA VMC SULLA <strong>VELOCITA' FREE HEATING</strong>{%
+        elif spia_freecooling=="on" and freeheating_cooling=="Free Cooling"
+        %}RIPRESA AUTOMATICA DELLA VMC SULLA <strong>VELOCITA’ FREE
+        COOLING</strong>{% elif spia_freecooling=="on" and
+        freeheating_cooling=="Disabilitata" %}RIPRESA AUTOMATICA DELLA VMC SULLA
+        <strong>VELOCITA' FREE COOL./HEAT.</strong>{% elif
+        spia_iperventilazione=="on" %}RIPRESA AUTOMATICA DELLA VMC SULLA
+        <strong>VELOCITA' IPERVENTILAZIONE</strong>{%elif
+        spia_velocita_1_co2_o_voc_pdr=="on"%}RIPRESA AUTOMATICA DELLA VMC SULLA
+        <strong>VELOCITA' 0</strong>{% else %}{% endif %}
+
+
+        <strong>SI CONSIGLIA DI NON AVVIARE LA VMC</strong>
+
+
+        <strong>SI CONSIGLIA DI IMPOSTARE SU ACCESO L'OPZIONE [VMC ON/OFF, in
+        Funzione del Lim. Δ P. di Rugiada]</strong>
+
+
+        <strong>SI CONSIGLIA DI IMPOSTARE SU ACCESO L'OPZIONE [VMC ON/OFF, in
+        Funzione del Lim. CO₂ e/o VOC]</strong>
+
+
+        Msg. 18.1
+
+
         <!-------19-----[PdR ON] , [Interruttore PdR OFF] , [Velocità = 0] ,  [
         Spia Pdr OFF] , [Spia CO2 o VOC ON], [Interruttore Inquinanti ON]
         -------------------------------------------------------- -->
@@ -3710,8 +3780,8 @@ cards:
           - LA TEMPERATURA ESTERNA SARÀ MAGGIORE DELLA TEMPERATURA INTERNA
             e
           - L'OPZIONE [VMC ON/OFF, IN FUNZIONE DELLA VEL. FREE HEATING] RIMARRÀ IMPOSTATA SU ACCESO
-        <strong> DIVERSAMENTE VERRÀ ANNULLATA LA RIPRESA AUTOMATICA, CONFERMANDO
-        L'ARRESTO DELLA VMC. </strong>
+        <strong> ALTRIMENTI, LA RIPRESA AUTOMATICA VERRÀ ANNULLATA IMPOSTANDO LA
+        VELOCITÀ DELLA VMC A 1.</strong>
             e 
           - IL MESE CORRENTE PROGRAMMATO RIMARRA IMPOSTATO SU FREE HEATING
 
@@ -4167,8 +4237,8 @@ cards:
           - LA TEMPERATURA ESTERNA SARÀ MINORE DELLA TEMPERATURA INTERNA
             e
           - L'OPZIONE [VMC ON/OFF, IN FUNZIONE DELLA VEL. FREE COOLING] RIMARRÀ IMPOSTATA SU ACCESO
-        <strong> DIVERSAMENTE VERRÀ ANNULLATA LA RIPRESA AUTOMATICA, CONFERMANDO
-        L'ARRESTO DELLA VMC. </strong>
+        <strong> ALTRIMENTI LA RIPRESA AUTOMATICA VERRÀ ANNULLATA IMPOSTANDO LA
+        VELOCITÀ DELLA VMC A 1.</strong>
             e 
           - IL MESE CORRENTE PROGRAMMATO RIMARRÀ IMPOSTATO SU FREE COOLING
 
@@ -4688,6 +4758,9 @@ cards:
         [°C]
 
 
+        {% if spia_free_heating == "on" %}RIPRISTINO SULLA VELOCITA' FREE HEATING, ATTENDERE..{% endif %}
+
+
         Msg. 11.1 Free Heating
 
 
@@ -4710,6 +4783,9 @@ cards:
         [°C]
 
 
+        {% if spia_free_heating == "on" %}RIPRISTINO SULLA VELOCITA' FREE HEATING, ATTENDERE..{% endif %}
+
+
         Msg. 12 Free Heating
 
 
@@ -4730,6 +4806,9 @@ cards:
         states('sensor.vmc_master_temp_esterna_status')}} [°C] È UGUALE ALLA
         TEMPERATURA INTERNA {{ states('sensor.vmc_master_temp_interna_status')}}
         [°C]
+
+
+        {% if spia_free_heating == "on" %}RIPRISTINO SULLA VELOCITA' FREE HEATING, ATTENDERE..{% endif %}
 
 
         Msg. 12.1 Free Heating
@@ -4958,6 +5037,9 @@ cards:
         [°C]
 
 
+        {% if spia_free_cooling == "on" %}RIPRISTINO SULLA VELOCITA' FREE COOLING, ATTENDERE..{% endif %}
+
+
         Msg. 11.1 Free Cooling
 
 
@@ -4980,6 +5062,9 @@ cards:
         [°C]
 
 
+        {% if spia_free_cooling == "on" %}RIPRISTINO SULLA VELOCITA' FREE COOLING, ATTENDERE..{% endif %}
+
+
         Msg. 12 Free Cooling
 
 
@@ -5000,6 +5085,9 @@ cards:
         states('sensor.vmc_master_temp_esterna_status')}} [°C] È UGUALE ALLA
         TEMPERATURA INTERNA {{ states('sensor.vmc_master_temp_interna_status')}}
         [°C]
+
+
+        {% if spia_free_cooling == "on" %}RIPRISTINO SULLA VELOCITA' FREE COOLING, ATTENDERE..{% endif %}
 
 
         Msg. 12.1 Free Cooling
@@ -8914,7 +9002,7 @@ cards:
                     - VMC Sensori Int. Δ Temp. > 23 [°C]: 4 Secondi;<br>
                     - Inquinanti (CO₂ e VOC): 8 Secondi;<br>
                     - Sup. Lim. Δ PdR con Inquinanti: 12 Secondi;<br>
-                    - Sup. Lim. Δ PdR: 16 Secondi;<br>
+                    - Sup. Lim. Δ PdR: 16 Secondi. Se l'allerta inizia con la VMC a Velocità 0, l'Umidità non la avvia fino al termine dell'allerta; se durante l'allerta si cambia Velocità, la VMC viene riportata a Velocità 0 e la nuova Velocità viene memorizzata e ripristinata al termine dell'allerta, anche al posto della ripresa in Free Cool./Heat.;<br>
                     - Free Cool./Heat. con Inquinanti: 20 Secondi;<br>
                     - Free Cool./Heat.: 24 Secondi;<br>
                     - Umidità: 28 Secondi (la logica Umidità memorizza subito la Velocità in uso); se durante l'allerta si cambia Velocità, la nuova Velocità viene memorizzata dopo 4 Secondi e mantenuta a fine Umidità;<br>
