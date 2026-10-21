@@ -81,7 +81,7 @@ sed -i 's/MASTER/'"$slave_nome"'/g' "${subfolder}vmc_${slave_nome}.yaml"
 # Sostituisci l'indirizzo IP utilizzando l'espressione regolare (case-sensitive)
 sed -i 's/[0-9]\+\.[0-9]\+\.[0-9]\+\.[0-9]\+/'"$slave_ip"'/g' "${subfolder}vmc_${slave_nome}_automazione.txt"
 sed -i 's/[0-9]\+\.[0-9]\+\.[0-9]\+\.[0-9]\+/'"$slave_ip"'/g' "${subfolder}vmc_${slave_nome}_scheda_manuale_interfaccia.txt"
-sed -i 's/[0-9]\+\.[0-9]\+\.[0.9]\+\.[0-9]\+/'"$slave_ip"'/g' "${subfolder}vmc_${slave_nome}_script_cambio_ip.sh"
+sed -i 's/[0-9]\+\.[0-9]\+\.[0-9]\+\.[0-9]\+/'"$slave_ip"'/g' "${subfolder}vmc_${slave_nome}_script_cambio_ip.sh"
 sed -i 's/nc [0-9]\+\.[0-9]\+\.[0-9]\+\.[0-9]\+ 5001/nc '"$slave_ip"' 5001/' "${subfolder}vmc_${slave_nome}_script_cambio_nome.sh"
 sed -i 's/[0-9]\+\.[0-9]\+\.[0-9]\+\.[0-9]\+/'"$slave_ip"'/g' "${subfolder}vmc_${slave_nome}.yaml"
 
