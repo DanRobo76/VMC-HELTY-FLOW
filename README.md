@@ -419,8 +419,8 @@ homeassistant:
 - <sub>Select Media Player entities to hear the alert status and the speed.</sub>
 - <sub>Mould risk trend indicator.</sub>
 - <sub>Indicator that converts the dew point (TPdR) into a qualitative classification of indoor hygrometric comfort.</sub>
-- <sub>Shows in real time: the total number of air changes of the day, the total volume of exchanged air (m³) and the time left before the next complete air change [click on Remote control].</sub>
-- <sub>Lists all installed units and their related parameters [click on Information → Point 22].</sub>
+- <sub>Shows in real time: the total number of air changes of the day, the total volume of exchanged air (m³) and the time left before the next complete air change [click on Telecomando (Remote control)].</sub>
+- <sub>Lists all installed units and their related parameters [click on Informazioni (Information) → Point 22].</sub>
 - <sub>Select the entities for: Temperature (indoor and outdoor), Humidity (indoor and outdoor), Carbon Dioxide CO₂ (indoor) and Mobile Device available in Home Assistant, including weather sources, for better accuracy and reliability than the unit's built-in sensors.</sub>
 - <sub>Notifies the user on the Mobile Device when the unit starts, stops, has errors or needs a filter change.</sub>
 - <sub>Automatic start and stop based on pollutants (CO₂ and/or VOC) [the unit's sensors are available only on the HELTY FLOW ELITE; for CO₂ a Home Assistant entity can also be selected].</sub>
@@ -604,7 +604,7 @@ homeassistant:
 ---
 
 ### 8. Information Panel
-<sub>For more information, open the card's <strong>Information Panel</strong>.</sub>
+<sub>For more information, open the card's <strong>Informazioni</strong> panel (Information Panel).</sub>
 
 <img src="https://github-production-user-asset-6210df.s3.amazonaws.com/102819027/282228208-01c799a0-b92a-406f-939f-9c06006360a7.png" alt="image" style="width:30%;">
 
@@ -642,7 +642,7 @@ homeassistant:
 - <sub>calendar (2 time slots for each day) and Free Heating / Free Cooling months;</sub>
 - <sub>ON/OFF switches for every function: pollutants, dew point, Free Cooling, Free Heating, humidity, calendar.</sub>
 
-<sub>This allows you to change devices and settings without manually editing the YAML. For details, open the card's **Information Panel**.</sub>
+<sub>This allows you to change devices and settings without manually editing the YAML. For details, open the card's **Informazioni** panel (Information Panel).</sub>
 </details>
 
 <details>
@@ -682,7 +682,7 @@ homeassistant:
   <a href="https://www.paypal.com/ncp/payment/8LT4JJW7MHW6U">
     <img src="https://raw.githubusercontent.com/DanRobo76/VMC-HELTY-FLOW/main/VMC-HELTY-FLOW-qrcode.png"
          alt="PayPal QR code to support VMC MASTER"
-         width="220">
+         width="200">
   </a>
   <br><br>
   Thank you for your support!
