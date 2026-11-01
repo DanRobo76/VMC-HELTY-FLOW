@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="immagini/README/banner.png" alt="VMC MASTER v.8.5.0 per Helty Flow Plus / Elite" width="100%">
+  <img src="immagini/Collage%20VMC%20Master.png" alt="VMC MASTER" width="100%">
 </p>
 
 ---
