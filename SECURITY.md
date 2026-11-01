@@ -4,33 +4,71 @@
 
 |          VMC-HELTY-FLOW Release          | Supportato da Home Assistant (Core)     |
 | ---------------------------------------- | ----------------------------------------|
-|  :white_check_mark: v.8.4.0              | :white_check_mark:   Ver. 2026.10.2     |
+|  :white_check_mark: v.8.5.0              | :white_check_mark:   Ver. 2026.10.2     |
 #
 ### - Limiti del SoftWare:<br>
 <strong>La Lettura dei Sensori avviene ogni:</strong>
 <pre style="font-size:10px; background-color: #d9ffcc;">
-  -  03 Secondi, per la Lettura della Velocità della VMC;
-  -  05 Secondi, per la Verifica On-Line della VMC;
-  -  1227 Secondi [20 MINUTI + 27 secondi di margine], per la Lettura dei Parametri Ambientali della VMC;
-  -  43227 Secondi [12 ORE + 27 secondi di margine], per la Lettura del Nome della VMC;
-  -  57641 Secondi [16 ORE + 41 secondi di margine], per la Lettura dei Dati LAN della VMC;
-  -  86400 Secondi (24 ore), per la verifica della Versione del Software; 
+  -  05 Secondi, per la Lettura della Velocità della VMC (comando VMGH? sulla porta 5001);
+  -  10 Secondi, per la Verifica On-Line della VMC (ping ICMP, non usa la porta 5001);
+  -  1227 Secondi [20 MINUTI + 27 secondi di margine], per la Lettura dei Parametri Ambientali della VMC (comando VMGI?);
+  -  43227 Secondi [12 ORE + 27 secondi di margine], per la Lettura del Nome della VMC (comando VMNM?);
+  -  57641 Secondi [16 ORE + 41 secondi di margine], per la Lettura dei Dati LAN della VMC (comando VMSL?);
+  -  86400 Secondi (24 ore), per la verifica della Versione del Software (GitHub, ultima Release pubblicata);
 </pre>
 
-Per Aggiornare tutti i sensori in real-time, senza attendere le tempistiche sopra esposte, entrare nel <strong>Pannello Sensori</strong> e cliccare su <strong>Esegui</strong>:
+Per Aggiornare tutti i sensori in real-time, senza attendere le tempistiche sopra esposte, aprire il pannello <strong>Sensori - Selezionati</strong> e cliccare su <strong>Esegui</strong> nella riga <strong>VMC Master - Agg. Sensori</strong>, confermando con <strong>OK</strong> nel popup «Vuoi Procedere?»:
 
-<img src="https://github-production-user-asset-6210df.s3.amazonaws.com/102819027/282233328-e868765e-e023-42cc-b371-64c0e99f36ad.png" alt="immagine" style="width:30%;">
-Se si vuole modificare le tempistiche, modificare i <strong>Secondi</strong> all'interno dei sensori, contenuti nel File <strong>vmc_[NOME].yaml</strong>:<br> 
+<img src="immagini/README/sicurezza_agg_sensori.png" alt="VMC Master - Agg. Sensori" width="40%">
+
+Se si vogliono modificare le tempistiche, modificare i <strong>Secondi</strong> all'interno dei sensori contenuti nel File <strong>vmc_[NOME].yaml</strong>:<br>
 <pre style="font-size:10px; background-color: #d9ffcc;">
-  - VMC_[NOME]_STATUS_IP
-  - VMC_[NOME]_STATUS_VENTOLA
-  - VMC_[NOME]_SENSORI
-  - VMC_[NOME]_NOME
-  - VMC_[NOME]_LAN
+  - vmc_[NOME]_status_ip
+  - vmc_[NOME]_status_ventola
+  - vmc_[NOME]_sensori
+  - vmc_[NOME]_nome
+  - vmc_[NOME]_lan
   - vmc_[NOME]_versione_repository
 </pre>
 
-<img src="https://github-production-user-asset-6210df.s3.amazonaws.com/102819027/282233228-95b0fa20-8308-49eb-a75d-d4f7183c9d7d.png" alt="immagine" style="width:60%;"><br>
+Esempio (File <strong>vmc_master.yaml</strong>):
+
+```yaml
+command_line:
+  - sensor:
+      name: vmc_master_status_ip
+      scan_interval:
+        seconds: 10                            # Verifica On-Line
+
+sensor:
+  - platform: tcp
+    name: vmc_master_status_ventola
+    payload: "VMGH?"
+    scan_interval:
+      seconds: 5                               # Lettura della Velocità
+
+  - platform: tcp
+    name: vmc_master_sensori
+    payload: "VMGI?"
+    scan_interval:
+      seconds: 1227                            # [20 MINUTI + 27 secondi di margine]
+
+  - platform: tcp
+    name: vmc_master_nome
+    payload: "VMNM?"
+    scan_interval:
+      seconds: 43227                           # [12 ORE + 27 secondi di margine]
+
+  - platform: tcp
+    name: vmc_master_lan
+    payload: "VMSL?"
+    scan_interval:
+      seconds: 57641                           # [16 ORE + 41 secondi di margine]
+
+  - platform: rest
+    name: vmc_master_versione_repository
+    scan_interval: 86400                       # 24 ore
+```
 
 e riavviare Home Assistant.
 
@@ -47,14 +85,17 @@ e riavviare Home Assistant.
   - FREE COOL./HEAT. 24 Secondi per l'Attivazione
   - UMIDITA' 28 Secondi per l'Attivazione
   - BLACK-OUT 32 Secondi per l'Attivazione
+  - CALENDARIO 3 Secondi per l'Attivazione (fasce orarie)
 </pre>
+
+Il comportamento della VMC per ogni allarme è riassunto nella tabella <strong>Logiche di Funzionamento</strong> del [README](README.md) e nella voce 18 del Pannello Informazioni.
 
 #
 
 ### - ENTITA' ESCLUSE NEL DB DI HOME ASSISTANT
+Nel File <strong>vmc_[NOME].yaml</strong> sono escluse dal Recorder 318 entità aggiornate di frequente (altre 31 sono già registrate, perché precedute dal simbolo #). Aggiungere o Togliere le Entità da escludere nel campo:
+
 <pre style="font-size:10px; background-color: #d9ffcc;">
-Aggiungere o Togliere le Entità da escludere, nel File vmc_nome.yaml nel campo:
-  
 #################################################################################################################################
 # Esclusione entità da Recorder, History e Logbook per ridurre il carico sul database escludendo entità aggiornate di frequente #
 #                                                                                                                               #
@@ -68,10 +109,10 @@ Aggiungere o Togliere le Entità da escludere, nel File vmc_nome.yaml nel campo:
 recorder:
   exclude:
     entities:
-      - automation.vmc_master_aggiorna_aria_scambiata_e_gestisci_countdown_rev_00
+      - automation.vmc_master_aggiorna_aria_scambiata_e_gestisci_countdown
       - automation.automazione_vmc_master
-      - automation.vmc_master_audio_allerte_stato
-      - automation.vmc_master_riepilogo_audio_allavvio
+      - automation.vmc_master_riepilogo_audio_avvio
+      - automation.vmc_master_audio_allerte_e_stato
       - sensor.vmc_master_temperatura_esterna_selezionata
       - sensor.vmc_master_temperatura_interna_selezionata
       - sensor.vmc_master_umidita_esterna_selezionata
@@ -97,19 +138,22 @@ recorder:
 </pre>
 #
 
-### - In fase di Verifica la Lettura della Temperatura Interna o Esterna minore di 0 °C (Sensori della VMC):<br>     
+### - In fase di Verifica la Lettura della Temperatura Interna o Esterna minore di 0 °C (Sensori della VMC):<br>
 
-<img src="https://github-production-user-asset-6210df.s3.amazonaws.com/102819027/282232595-cb4de785-90b8-426d-8e89-31c2244fac8d.png" alt="immagine" style="width:30%;"><br>
-Condividi la stringa evidenziata dalla Freccia, per E-mail a: <a href="mailto:danilo.robotti@gmail.com">danilo.robotti@gmail.com</a>
+Aprire il <strong>Pannello Informazioni</strong>, espandere la voce <strong>1 Info Lettura Dati nella VMC</strong> e copiare la stringa <strong>Sensori Ambientali</strong> (evidenziata in rosso; la riga scorre in orizzontale):
+
+<img src="immagini/README/sicurezza_sensori_ambientali.png" alt="Pannello Informazioni - Sensori Ambientali" width="40%"><br>
+
+Condividi la stringa per E-mail a: <a href="mailto:danilo.robotti@gmail.com">danilo.robotti@gmail.com</a>
 <br><br>
 Esempio Stringa dei Sensori Ambientali da Condividere:
 <br>
 <pre style="font-size:10px; background-color: #d9ffcc;">
-VMGI,00209,00196,00708,00000,16384,02307,00224,00069,04354,00168,00000,00000,00000,00000,00000 <br>
+VMGI,00209,00196,00708,00000,16384,02307,00224,00069,04354,00168,00000,00000,00000,00000,00000
 </pre>
-insieme allo ScreeShot dell'App. Air Guard: <br>
+insieme allo ScreenShot dell'App Air Guard: <br>
 
-<img src="https://github-production-user-asset-6210df.s3.amazonaws.com/102819027/282240134-aaba012f-7122-4a83-b1d6-470427a67854.png" alt="immagine" style="width:15%;"><br>
+<img src="https://github-production-user-asset-6210df.s3.amazonaws.com/102819027/282240134-aaba012f-7122-4a83-b1d6-470427a67854.png" alt="App Air Guard" style="width:15%;"><br>
 
 , se rilevi una Temperatura Interna o Esterna minore di 0 °C (Negativa).
 #

@@ -1,6 +1,45 @@
+###########################################################################################################################################################################################################################
+#                                                                                                                                                                                                                         #
+#                                                          AUTOMAZIONE VMC HELTY FLOW PLUS RELEASE [VER. 8.5.0]                                                                                                           #
+#                                                                                                                                                                                                                         #
+# SVILUPPATO DA ING. DANILO ROBOTTI, ALLE PRIME ARMI CON HOME ASSISTANT :)                                                                                                                                                #
+#                                                                                                                                                                                                                         #
+# COPYRIGHT © 2023-2026 ING. DANILO ROBOTTI                                                                                                                                                                               #
+#                                                                                                                                                                                                                         #
+# LICENZA: POLYFORM NONCOMMERCIAL LICENSE 1.0.0                                                                                                                                                                           #
+# TESTO UFFICIALE DELLA LICENZA (IN INGLESE, L'UNICO CHE FA FEDE): https://polyformproject.org/licenses/noncommercial/1.0.0                                                                                               #
+# Required Notice: Copyright © 2023-2026 Ing. Danilo Robotti (https://github.com/DanRobo76/VMC-HELTY-FLOW)                                                                                                                #
+#                                                                                                                                                                                                                         #
+# LA LICENZA SI APPLICA, A PARTIRE DALLA RELEASE 8.4.1, AI SEGUENTI FILES DEL PRESENTE SOFTWARE:                                                                                                                          #
+#   - VMC_MASTER.YAML                                                                                                                                                                                                     #
+#   - VMC_MASTER_AUTOMAZIONE.TXT                                                                                                                                                                                          #
+#   - VMC_MASTER_SCHEDA_MANUALE_INTERFACCIA.TXT                                                                                                                                                                           #
+#   - VMC_MASTER_SCRIPT_CAMBIO_IP.SH                                                                                                                                                                                      #
+#   - VMC_MASTER_SCRIPT_CAMBIO_NOME.SH                                                                                                                                                                                    #
+#   - VMC_SCRIPT_CLONA.SH                                                                                                                                                                                                 #
+#                                                                                                                                                                                                                         #
+# IN SINTESI:                                                                                                                                                                                                             #
+#  - È CONSENTITO USARE, COPIARE, MODIFICARE E DISTRIBUIRE IL SOFTWARE ESCLUSIVAMENTE PER SCOPI NON COMMERCIALI: USO PERSONALE, STUDIO, RICERCA, SPERIMENTAZIONE, HOBBY, ENTI SENZA SCOPO DI LUCRO, ISTITUTI DI           #
+#    ISTRUZIONE ED ENTI PUBBLICI;                                                                                                                                                                                         #
+#  - CHI DISTRIBUISCE IL SOFTWARE, ANCHE MODIFICATO, DEVE CONSEGNARE INSIEME AD ESSO IL TESTO DELLA LICENZA (O IL SUO INDIRIZZO) E LA RIGA "Required Notice" SOPRA RIPORTATA;                                             #
+#  - QUALSIASI USO COMMERCIALE NON È CONSENTITO SENZA UNA LICENZA SEPARATA RILASCIATA DALL'AUTORE;                                                                                                                        #
+#  - IN CASO DI VIOLAZIONE LA LICENZA DECADE, SALVO REGOLARIZZAZIONE ENTRO 32 GIORNI DALLA SEGNALAZIONE SCRITTA.                                                                                                          #
+#                                                                                                                                                                                                                         #
+# PER LICENZE COMMERCIALI O USI PARTICOLARI CONTATTARE L'AUTORE: danilo.robotti@gmail.com                                                                                                                                 #
+#                                                                                                                                                                                                                         #
+# DATA: 1 NOVEMBRE 2026                                                                                                                                                                                                   #
+#                                                                                                                                                                                                                         #
+# Impiego dell'Intelligenza Artificiale                                                                                                                                                                                   #
+# Nello sviluppo del presente software l'autore si è avvalso anche di strumenti di intelligenza artificiale.                                                                                                              #
+#                                                                                                                                                                                                                         #
+# Esonero di Responsabilità                                                                                                                                                                                               #
+# Il software è fornito «così com'è», senza garanzie di alcun tipo. In nessun caso lo sviluppatore sarà responsabile di danneggiamenti diretti, indiretti o conseguenti, correlati a difetti del presente software.       #
+# L'usufruitore ha l'onere e la responsabilità della scelta, dell'installazione, dell'uso e della gestione del software al fine del raggiungimento del risultato prefissatosi.                                            #
+#                                                                                                                                                                                                                         #
+###########################################################################################################################################################################################################################
 alias: Automazione VMC Master
 description: >-
-  Automazione VMC Master Release v.8.4.0:
+  Automazione VMC Master Release v.8.5.0:
 
   - Invia Comandi alla VMC leggendone i valori Contenuti;
 
@@ -1142,7 +1181,7 @@ triggers:
             states('sensor.vmc_master_punto_di_rugiada_verifica_confronto') != "Se ne sconsiglia l'impiego"
           )
           and (states('input_boolean.vmc_master_opzioni_accendi_spegni_vmc_vs_pdr') == 'on')
-          and (states('input_boolean.vmc_master_spia_velocita_Notturna_un_solo_avvio') == 'on')
+          and (states('input_boolean.vmc_master_spia_velocita_notturna_un_solo_avvio') == 'on')
           and (states('input_boolean.vmc_master_spia_velocita_1_co2_o_voc_pdr') == 'off')
           and (states('input_boolean.vmc_master_spia_co2_o_voc') == 'off')
         )
@@ -1189,7 +1228,7 @@ triggers:
             states('sensor.vmc_master_punto_di_rugiada_verifica_confronto') != "Se ne sconsiglia l'impiego"
           )
           and (states('input_boolean.vmc_master_opzioni_accendi_spegni_vmc_vs_pdr') == 'on')
-          and (states('input_boolean.vmc_master_spia_velocita_Iperventilazione_un_solo_avvio') == 'on')
+          and (states('input_boolean.vmc_master_spia_velocita_iperventilazione_un_solo_avvio') == 'on')
           and (states('input_boolean.vmc_master_spia_velocita_1_co2_o_voc_pdr') == 'off')
           and (states('input_boolean.vmc_master_spia_co2_o_voc') == 'off')
         )
@@ -3676,9 +3715,13 @@ triggers:
     trigger: template
   - alias: Verifica Aggiornamenti Repository VMC-HELTY-FLOW - ON
     value_template: |
+      {%- set _i = states('sensor.vmc_master_versione_corrente') | trim | regex_replace('^[^0-9]*', '') -%}
+      {%- set _r = states('sensor.vmc_master_versione_repository') | trim | regex_replace('^[^0-9]*', '') -%}
+      {%- set _nuova = _i is match('^[0-9]+([.][0-9]+)*$') and _r is match('^[0-9]+([.][0-9]+)*$') and (_r.split('.') | map('int') | list) > (_i.split('.') | map('int') | list) -%}
+      {%- set _valida = _i is match('^[0-9]+([.][0-9]+)*$') and _r is match('^[0-9]+([.][0-9]+)*$') -%}
       {{
       (
-        states('sensor.vmc_master_versione_repository') != states('sensor.vmc_master_versione_corrente')
+        _nuova
         and states('input_boolean.vmc_master_popup_versione_corrente_vs_repository') == 'off'
         and states('sensor.vmc_master_versione_repository') != 'Errore Connessione'
         and states('sensor.vmc_master_status_ip_interfaccia') == 'ON-Line'
@@ -3701,9 +3744,13 @@ triggers:
     trigger: template
   - alias: Verifica Aggiornamenti Repository VMC-HELTY-FLOW - OFF
     value_template: |
+      {%- set _i = states('sensor.vmc_master_versione_corrente') | trim | regex_replace('^[^0-9]*', '') -%}
+      {%- set _r = states('sensor.vmc_master_versione_repository') | trim | regex_replace('^[^0-9]*', '') -%}
+      {%- set _nuova = _i is match('^[0-9]+([.][0-9]+)*$') and _r is match('^[0-9]+([.][0-9]+)*$') and (_r.split('.') | map('int') | list) > (_i.split('.') | map('int') | list) -%}
+      {%- set _valida = _i is match('^[0-9]+([.][0-9]+)*$') and _r is match('^[0-9]+([.][0-9]+)*$') -%}
       {{
       (
-        states('sensor.vmc_master_versione_repository') == states('sensor.vmc_master_versione_corrente')
+        _valida and not _nuova
         and states('sensor.vmc_master_versione_repository') != 'Errore Connessione'
         and states('sensor.vmc_master_status_ip_interfaccia') == 'ON-Line'
         and states('sensor.vmc_master_status_ventola_lettura_codice_interpretato_interfaccia') != 'Non disponibile'
@@ -4885,6 +4932,32 @@ triggers:
     from: 'on'
     to: 'off'
     id: Opzioni Sub Elementi Audio Off
+    enabled: true
+    trigger: state
+# >>> INIZIO SEZIONE CLONA VMC (SOLO MASTER, RIMOSSA DA VMC_SCRIPT_CLONA.SH) <<<
+  - alias: Trigger Attivazione Sotto Finestra Opzioni - Finestra Clona
+    entity_id:
+      - input_boolean.vmc_master_opzione_finestra_clona
+    id: Opzioni Sub Elementi Clona On
+    from: 'off'
+    to: 'on'
+    enabled: true
+    trigger: state
+  - alias: Trigger Disattivazione Sotto Finestra Opzioni - Finestra Clona
+    entity_id:
+      - input_boolean.vmc_master_opzione_finestra_clona
+    from: 'on'
+    to: 'off'
+    id: Opzioni Sub Elementi Clona Off
+    enabled: true
+    trigger: state
+# >>> FINE SEZIONE CLONA VMC (SOLO MASTER, RIMOSSA DA VMC_SCRIPT_CLONA.SH) <<<
+  - alias: Trigger Apertura Riquadro di Conferma Pulizia Cronologia Entità
+    entity_id:
+      - input_boolean.vmc_master_conferma_pulizia_cronologia
+    id: Opzioni Sub Conferma Pulizia On
+    from: 'off'
+    to: 'on'
     enabled: true
     trigger: state
   - alias: >-
@@ -6875,6 +6948,8 @@ actions:
                 - input_boolean.vmc_master_opzioni_scelta_sensori
                 - input_boolean.vmc_master_opzioni_elementi_chimici
                 - input_boolean.vmc_master_opzione_finestra_audio
+                - input_boolean.vmc_master_conferma_pulizia_cronologia
+                - input_boolean.vmc_master_opzione_finestra_clona
             action: input_boolean.turn_off
         alias: Trigger Attivazione Finestra Telecomando
       - conditions:
@@ -6913,6 +6988,8 @@ actions:
                 - input_boolean.vmc_master_opzioni_scelta_sensori
                 - input_boolean.vmc_master_opzioni_elementi_chimici
                 - input_boolean.vmc_master_opzione_finestra_audio
+                - input_boolean.vmc_master_conferma_pulizia_cronologia
+                - input_boolean.vmc_master_opzione_finestra_clona
             enabled: true
             action: input_boolean.turn_off
         alias: Trigger Attivazione Finestra Monitoraggio
@@ -7010,6 +7087,8 @@ actions:
                 - input_boolean.vmc_master_opzioni_scelta_sensori
                 - input_boolean.vmc_master_opzioni_elementi_chimici
                 - input_boolean.vmc_master_opzione_finestra_audio
+                - input_boolean.vmc_master_conferma_pulizia_cronologia
+                - input_boolean.vmc_master_opzione_finestra_clona
             action: input_boolean.turn_off
         alias: Trigger Attivazione Programmazione Giornaliera
       - conditions:
@@ -7048,6 +7127,8 @@ actions:
                 - input_boolean.vmc_master_opzioni_scelta_sensori
                 - input_boolean.vmc_master_opzioni_elementi_chimici
                 - input_boolean.vmc_master_opzione_finestra_audio
+                - input_boolean.vmc_master_conferma_pulizia_cronologia
+                - input_boolean.vmc_master_opzione_finestra_clona
             enabled: true
             action: input_boolean.turn_off
         alias: Trigger Attivazione Finestra Opzioni
@@ -7067,6 +7148,8 @@ actions:
                 - input_boolean.vmc_master_opzioni_scelta_sensori
                 - input_boolean.vmc_master_opzioni_elementi_chimici
                 - input_boolean.vmc_master_opzione_finestra_audio
+                - input_boolean.vmc_master_conferma_pulizia_cronologia
+                - input_boolean.vmc_master_opzione_finestra_clona
             enabled: true
             action: input_boolean.turn_off
         alias: Trigger Disattivazione Finestra Opzioni
@@ -7088,6 +7171,8 @@ actions:
                 - input_boolean.vmc_master_opzioni_scelta_sensori
                 - input_boolean.vmc_master_opzioni_elementi_chimici
                 - input_boolean.vmc_master_opzione_finestra_audio
+                - input_boolean.vmc_master_conferma_pulizia_cronologia
+                - input_boolean.vmc_master_opzione_finestra_clona
             action: input_boolean.turn_off
         alias: >-
           Trigger Attivazione Sotto Finestra Opzioni - Finestra Lim. Δ P. di
@@ -7120,6 +7205,8 @@ actions:
                 - input_boolean.vmc_master_opzioni_scelta_sensori
                 - input_boolean.vmc_master_opzioni_elementi_chimici
                 - input_boolean.vmc_master_opzione_finestra_audio
+                - input_boolean.vmc_master_conferma_pulizia_cronologia
+                - input_boolean.vmc_master_opzione_finestra_clona
             action: input_boolean.turn_off
         alias: Trigger Attivazione Sotto Finestra Opzioni - Finestra Calendario Main
       - conditions:
@@ -7149,6 +7236,8 @@ actions:
                 - input_boolean.vmc_master_opzioni_scelta_sensori
                 - input_boolean.vmc_master_opzioni_elementi_chimici
                 - input_boolean.vmc_master_opzione_finestra_audio
+                - input_boolean.vmc_master_conferma_pulizia_cronologia
+                - input_boolean.vmc_master_opzione_finestra_clona
             action: input_boolean.turn_off
         alias: Trigger Attivazione Sotto Finestra Opzioni - Finestra Calendario
       - conditions:
@@ -7177,6 +7266,8 @@ actions:
                 - input_boolean.vmc_master_opzioni_scelta_sensori
                 - input_boolean.vmc_master_opzioni_elementi_chimici
                 - input_boolean.vmc_master_opzione_finestra_audio
+                - input_boolean.vmc_master_conferma_pulizia_cronologia
+                - input_boolean.vmc_master_opzione_finestra_clona
             action: input_boolean.turn_off
         alias: >-
           Trigger Attivazione Sotto Finestra Opzioni - Finestra Calendario Free
@@ -7260,6 +7351,8 @@ actions:
                 - input_boolean.vmc_master_opzioni_scelta_sensori
                 - input_boolean.vmc_master_opzioni_elementi_chimici
                 - input_boolean.vmc_master_opzione_finestra_audio
+                - input_boolean.vmc_master_conferma_pulizia_cronologia
+                - input_boolean.vmc_master_opzione_finestra_clona
             action: input_boolean.turn_off
         alias: Trigger Attivazione Finestra Informazioni
       - conditions:
@@ -22660,6 +22753,8 @@ actions:
                 - input_boolean.vmc_master_opzioni_punto_di_rugiada
                 - input_boolean.vmc_master_opzioni_elementi_chimici
                 - input_boolean.vmc_master_opzione_finestra_audio
+                - input_boolean.vmc_master_conferma_pulizia_cronologia
+                - input_boolean.vmc_master_opzione_finestra_clona
             action: input_boolean.turn_off
         alias: >-
           Trigger Attivazione Sotto Finestra Opzioni - Finestra Sensori
@@ -22695,6 +22790,8 @@ actions:
                 - input_boolean.vmc_master_opzioni_punto_di_rugiada
                 - input_boolean.vmc_master_opzioni_scelta_sensori
                 - input_boolean.vmc_master_opzione_finestra_audio
+                - input_boolean.vmc_master_conferma_pulizia_cronologia
+                - input_boolean.vmc_master_opzione_finestra_clona
             action: input_boolean.turn_off
         alias: Trigger Attivazione Sotto Finestra Opzioni - Finestra Elementi Chimici
       - conditions:
@@ -22728,6 +22825,8 @@ actions:
                 - input_boolean.vmc_master_opzioni_punto_di_rugiada
                 - input_boolean.vmc_master_opzioni_scelta_sensori
                 - input_boolean.vmc_master_opzioni_elementi_chimici
+                - input_boolean.vmc_master_opzione_finestra_clona
+                - input_boolean.vmc_master_conferma_pulizia_cronologia
             action: input_boolean.turn_off
         alias: Trigger Attivazione Sotto Finestra Opzioni - Finestra Audio
       - conditions:
@@ -22740,6 +22839,58 @@ actions:
             target:
               entity_id: input_boolean.vmc_master_opzione_finestra_audio
         alias: Trigger Disattivazione Sotto Finestra Opzioni - Finestra Audio
+# >>> INIZIO SEZIONE CLONA VMC (SOLO MASTER, RIMOSSA DA VMC_SCRIPT_CLONA.SH) <<<
+      - conditions:
+          - condition: trigger
+            id:
+              - Opzioni Sub Elementi Clona On
+        sequence:
+          - data: {}
+            action: input_boolean.turn_on
+            target:
+              entity_id: input_boolean.vmc_master_opzione_finestra_clona
+          - data: {}
+            target:
+              entity_id:
+                - input_boolean.vmc_master_opzioni_calendario_main
+                - input_boolean.vmc_master_opzioni_free_heating_o_free_cooling
+                - input_boolean.vmc_master_opzioni_calendario
+                - input_boolean.vmc_master_opzioni_punto_di_rugiada
+                - input_boolean.vmc_master_opzioni_scelta_sensori
+                - input_boolean.vmc_master_opzioni_elementi_chimici
+                - input_boolean.vmc_master_opzione_finestra_audio
+                - input_boolean.vmc_master_conferma_pulizia_cronologia
+            action: input_boolean.turn_off
+        alias: Trigger Attivazione Sotto Finestra Opzioni - Finestra Clona
+      - conditions:
+          - condition: trigger
+            id:
+              - Opzioni Sub Elementi Clona Off
+        sequence:
+          - data: {}
+            action: input_boolean.turn_off
+            target:
+              entity_id: input_boolean.vmc_master_opzione_finestra_clona
+        alias: Trigger Disattivazione Sotto Finestra Opzioni - Finestra Clona
+# >>> FINE SEZIONE CLONA VMC (SOLO MASTER, RIMOSSA DA VMC_SCRIPT_CLONA.SH) <<<
+      - conditions:
+          - condition: trigger
+            id:
+              - Opzioni Sub Conferma Pulizia On
+        sequence:
+          - data: {}
+            target:
+              entity_id:
+                - input_boolean.vmc_master_opzioni_calendario_main
+                - input_boolean.vmc_master_opzioni_free_heating_o_free_cooling
+                - input_boolean.vmc_master_opzioni_calendario
+                - input_boolean.vmc_master_opzioni_punto_di_rugiada
+                - input_boolean.vmc_master_opzioni_scelta_sensori
+                - input_boolean.vmc_master_opzioni_elementi_chimici
+                - input_boolean.vmc_master_opzione_finestra_audio
+                - input_boolean.vmc_master_opzione_finestra_clona
+            action: input_boolean.turn_off
+        alias: Trigger Apertura Riquadro di Conferma Pulizia Cronologia Entità
       - conditions:
           - condition: trigger
             id:
