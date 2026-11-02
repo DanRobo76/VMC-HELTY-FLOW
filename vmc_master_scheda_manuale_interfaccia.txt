@@ -116,7 +116,7 @@ cards:
       header:
         type: picture
         image: >-
-          https://raw.githubusercontent.com/DanRobo76/VMC-HELTY-FLOW/main/immagini/Intestazione/ferma_off_line.png
+          https://raw.githubusercontent.com/DanRobo76/VMC-HELTY-FLOW/main/immagini/Intestazione/ferma_off_line.webp
         tap_action:
           action: none
         hold_action:
@@ -7557,7 +7557,7 @@ cards:
               - entity: input_boolean.vmc_master_opzioni_lettura_sensori
             header:
               type: picture
-              image: https://raw.githubusercontent.com/DanRobo76/VMC-HELTY-FLOW/main/immagini/Intestazione/ferma_off_line.png
+              image: https://raw.githubusercontent.com/DanRobo76/VMC-HELTY-FLOW/main/immagini/Intestazione/ferma_off_line.webp
               tap_action:
                 action: call-service
                 service: input_boolean.toggle
@@ -7599,7 +7599,7 @@ cards:
               - entity: input_boolean.vmc_master_opzioni_lettura_sensori
             header:
               type: picture
-              image: https://raw.githubusercontent.com/DanRobo76/VMC-HELTY-FLOW/main/immagini/Intestazione/ferma_normale.png
+              image: https://raw.githubusercontent.com/DanRobo76/VMC-HELTY-FLOW/main/immagini/Intestazione/ferma_normale.webp
               tap_action:
                 action: call-service
                 service: input_boolean.toggle
@@ -7641,7 +7641,7 @@ cards:
               - entity: input_boolean.vmc_master_opzioni_lettura_sensori
             header:
               type: picture
-              image: https://raw.githubusercontent.com/DanRobo76/VMC-HELTY-FLOW/main/immagini/Intestazione/ferma_allerta.png
+              image: https://raw.githubusercontent.com/DanRobo76/VMC-HELTY-FLOW/main/immagini/Intestazione/ferma_allerta.webp
               tap_action:
                 action: call-service
                 service: input_boolean.toggle
@@ -7685,7 +7685,7 @@ cards:
               - entity: input_boolean.vmc_master_opzioni_lettura_sensori
             header:
               type: picture
-              image: https://raw.githubusercontent.com/DanRobo76/VMC-HELTY-FLOW/main/immagini/Intestazione/normale_velocita_1_notturna.gif
+              image: https://raw.githubusercontent.com/DanRobo76/VMC-HELTY-FLOW/main/immagini/Intestazione/normale_velocita_1_notturna.webp
               tap_action:
                 action: call-service
                 service: input_boolean.toggle
@@ -7728,7 +7728,7 @@ cards:
               - entity: input_boolean.vmc_master_opzioni_lettura_sensori
             header:
               type: picture
-              image: https://raw.githubusercontent.com/DanRobo76/VMC-HELTY-FLOW/main/immagini/Intestazione/normale_velocita_2.gif
+              image: https://raw.githubusercontent.com/DanRobo76/VMC-HELTY-FLOW/main/immagini/Intestazione/normale_velocita_2.webp
               tap_action:
                 action: call-service
                 service: input_boolean.toggle
@@ -7774,7 +7774,7 @@ cards:
               - entity: input_boolean.vmc_master_opzioni_lettura_sensori
             header:
               type: picture
-              image: https://raw.githubusercontent.com/DanRobo76/VMC-HELTY-FLOW/main/immagini/Intestazione/normale_velocita_3_free.gif
+              image: https://raw.githubusercontent.com/DanRobo76/VMC-HELTY-FLOW/main/immagini/Intestazione/normale_velocita_3_free.webp
               tap_action:
                 action: call-service
                 service: input_boolean.toggle
@@ -7817,7 +7817,7 @@ cards:
               - entity: input_boolean.vmc_master_opzioni_lettura_sensori
             header:
               type: picture
-              image: https://raw.githubusercontent.com/DanRobo76/VMC-HELTY-FLOW/main/immagini/Intestazione/normale_velocita_4.gif
+              image: https://raw.githubusercontent.com/DanRobo76/VMC-HELTY-FLOW/main/immagini/Intestazione/normale_velocita_4.webp
               tap_action:
                 action: call-service
                 service: input_boolean.toggle
@@ -7860,7 +7860,7 @@ cards:
               - entity: input_boolean.vmc_master_opzioni_lettura_sensori
             header:
               type: picture
-              image: https://raw.githubusercontent.com/DanRobo76/VMC-HELTY-FLOW/main/immagini/Intestazione/normale_iperventilazione.gif
+              image: https://raw.githubusercontent.com/DanRobo76/VMC-HELTY-FLOW/main/immagini/Intestazione/normale_iperventilazione.webp
               tap_action:
                 action: call-service
                 service: input_boolean.toggle
@@ -7904,7 +7904,7 @@ cards:
               - entity: input_boolean.vmc_master_opzioni_lettura_sensori
             header:
               type: picture
-              image: https://raw.githubusercontent.com/DanRobo76/VMC-HELTY-FLOW/main/immagini/Intestazione/umidita_velocita_1_notturna.gif
+              image: https://raw.githubusercontent.com/DanRobo76/VMC-HELTY-FLOW/main/immagini/Intestazione/umidita_velocita_1_notturna.webp
               tap_action:
                 action: call-service
                 service: input_boolean.toggle
@@ -7947,7 +7947,7 @@ cards:
               - entity: input_boolean.vmc_master_opzioni_lettura_sensori
             header:
               type: picture
-              image: https://raw.githubusercontent.com/DanRobo76/VMC-HELTY-FLOW/main/immagini/Intestazione/umidita_velocita_2.gif
+              image: https://raw.githubusercontent.com/DanRobo76/VMC-HELTY-FLOW/main/immagini/Intestazione/umidita_velocita_2.webp
               tap_action:
                 action: call-service
                 service: input_boolean.toggle
@@ -7993,7 +7993,7 @@ cards:
               - entity: input_boolean.vmc_master_opzioni_lettura_sensori
             header:
               type: picture
-              image: https://raw.githubusercontent.com/DanRobo76/VMC-HELTY-FLOW/main/immagini/Intestazione/umidita_velocita_3_free.gif
+              image: https://raw.githubusercontent.com/DanRobo76/VMC-HELTY-FLOW/main/immagini/Intestazione/umidita_velocita_3_free.webp
               tap_action:
                 action: call-service
                 service: input_boolean.toggle
@@ -8036,7 +8036,7 @@ cards:
               - entity: input_boolean.vmc_master_opzioni_lettura_sensori
             header:
               type: picture
-              image: https://raw.githubusercontent.com/DanRobo76/VMC-HELTY-FLOW/main/immagini/Intestazione/umidita_velocita_4.gif
+              image: https://raw.githubusercontent.com/DanRobo76/VMC-HELTY-FLOW/main/immagini/Intestazione/umidita_velocita_4.webp
               tap_action:
                 action: call-service
                 service: input_boolean.toggle
@@ -8079,7 +8079,7 @@ cards:
               - entity: input_boolean.vmc_master_opzioni_lettura_sensori
             header:
               type: picture
-              image: https://raw.githubusercontent.com/DanRobo76/VMC-HELTY-FLOW/main/immagini/Intestazione/umidita_iperventilazione.gif
+              image: https://raw.githubusercontent.com/DanRobo76/VMC-HELTY-FLOW/main/immagini/Intestazione/umidita_iperventilazione.webp
               tap_action:
                 action: call-service
                 service: input_boolean.toggle
@@ -8123,7 +8123,7 @@ cards:
               - entity: input_boolean.vmc_master_opzioni_lettura_sensori
             header:
               type: picture
-              image: https://raw.githubusercontent.com/DanRobo76/VMC-HELTY-FLOW/main/immagini/Intestazione/inquinanti_velocita_1_notturna.gif
+              image: https://raw.githubusercontent.com/DanRobo76/VMC-HELTY-FLOW/main/immagini/Intestazione/inquinanti_velocita_1_notturna.webp
               tap_action:
                 action: call-service
                 service: input_boolean.toggle
@@ -8166,7 +8166,7 @@ cards:
               - entity: input_boolean.vmc_master_opzioni_lettura_sensori
             header:
               type: picture
-              image: https://raw.githubusercontent.com/DanRobo76/VMC-HELTY-FLOW/main/immagini/Intestazione/inquinanti_velocita_2.gif
+              image: https://raw.githubusercontent.com/DanRobo76/VMC-HELTY-FLOW/main/immagini/Intestazione/inquinanti_velocita_2.webp
               tap_action:
                 action: call-service
                 service: input_boolean.toggle
@@ -8212,7 +8212,7 @@ cards:
               - entity: input_boolean.vmc_master_opzioni_lettura_sensori
             header:
               type: picture
-              image: https://raw.githubusercontent.com/DanRobo76/VMC-HELTY-FLOW/main/immagini/Intestazione/inquinanti_velocita_3_free.gif
+              image: https://raw.githubusercontent.com/DanRobo76/VMC-HELTY-FLOW/main/immagini/Intestazione/inquinanti_velocita_3_free.webp
               tap_action:
                 action: call-service
                 service: input_boolean.toggle
@@ -8255,7 +8255,7 @@ cards:
               - entity: input_boolean.vmc_master_opzioni_lettura_sensori
             header:
               type: picture
-              image: https://raw.githubusercontent.com/DanRobo76/VMC-HELTY-FLOW/main/immagini/Intestazione/inquinanti_velocita_4.gif
+              image: https://raw.githubusercontent.com/DanRobo76/VMC-HELTY-FLOW/main/immagini/Intestazione/inquinanti_velocita_4.webp
               tap_action:
                 action: call-service
                 service: input_boolean.toggle
@@ -8298,7 +8298,7 @@ cards:
               - entity: input_boolean.vmc_master_opzioni_lettura_sensori
             header:
               type: picture
-              image: https://raw.githubusercontent.com/DanRobo76/VMC-HELTY-FLOW/main/immagini/Intestazione/inquinanti_iperventilazione.gif
+              image: https://raw.githubusercontent.com/DanRobo76/VMC-HELTY-FLOW/main/immagini/Intestazione/inquinanti_iperventilazione.webp
               tap_action:
                 action: call-service
                 service: input_boolean.toggle
@@ -8342,7 +8342,7 @@ cards:
               - entity: input_boolean.vmc_master_opzioni_lettura_sensori
             header:
               type: picture
-              image: https://raw.githubusercontent.com/DanRobo76/VMC-HELTY-FLOW/main/immagini/Intestazione/allerta_velocita_1_notturna.gif
+              image: https://raw.githubusercontent.com/DanRobo76/VMC-HELTY-FLOW/main/immagini/Intestazione/allerta_velocita_1_notturna.webp
               tap_action:
                 action: call-service
                 service: input_boolean.toggle
@@ -8385,7 +8385,7 @@ cards:
               - entity: input_boolean.vmc_master_opzioni_lettura_sensori
             header:
               type: picture
-              image: https://raw.githubusercontent.com/DanRobo76/VMC-HELTY-FLOW/main/immagini/Intestazione/allerta_velocita_2.gif
+              image: https://raw.githubusercontent.com/DanRobo76/VMC-HELTY-FLOW/main/immagini/Intestazione/allerta_velocita_2.webp
               tap_action:
                 action: call-service
                 service: input_boolean.toggle
@@ -8431,7 +8431,7 @@ cards:
               - entity: input_boolean.vmc_master_opzioni_lettura_sensori
             header:
               type: picture
-              image: https://raw.githubusercontent.com/DanRobo76/VMC-HELTY-FLOW/main/immagini/Intestazione/allerta_velocita_3_free.gif
+              image: https://raw.githubusercontent.com/DanRobo76/VMC-HELTY-FLOW/main/immagini/Intestazione/allerta_velocita_3_free.webp
               tap_action:
                 action: call-service
                 service: input_boolean.toggle
@@ -8474,7 +8474,7 @@ cards:
               - entity: input_boolean.vmc_master_opzioni_lettura_sensori
             header:
               type: picture
-              image: https://raw.githubusercontent.com/DanRobo76/VMC-HELTY-FLOW/main/immagini/Intestazione/allerta_velocita_4.gif
+              image: https://raw.githubusercontent.com/DanRobo76/VMC-HELTY-FLOW/main/immagini/Intestazione/allerta_velocita_4.webp
               tap_action:
                 action: call-service
                 service: input_boolean.toggle
@@ -8517,7 +8517,7 @@ cards:
               - entity: input_boolean.vmc_master_opzioni_lettura_sensori
             header:
               type: picture
-              image: https://raw.githubusercontent.com/DanRobo76/VMC-HELTY-FLOW/main/immagini/Intestazione/allerta_iperventilazione.gif
+              image: https://raw.githubusercontent.com/DanRobo76/VMC-HELTY-FLOW/main/immagini/Intestazione/allerta_iperventilazione.webp
               tap_action:
                 action: call-service
                 service: input_boolean.toggle
@@ -10333,7 +10333,7 @@ cards:
             cards:
               - type: markdown
                 content: >-
-                  <table align="center"><tr><td width="96"><img src="https://raw.githubusercontent.com/DanRobo76/VMC-HELTY-FLOW/main/immagini/Intestazione/icona_vmc.png" width="96" alt="VMC"></td><td>
+                  <table align="center"><tr><td width="96"><img src="https://raw.githubusercontent.com/DanRobo76/VMC-HELTY-FLOW/main/immagini/Intestazione/icona_vmc.webp" width="96" alt="VMC"></td><td>
                   <b>VMC HELTY FLOW Plus/Elite</b><br>
                   Release installata: <b>{{ states('sensor.vmc_master_versione_corrente') }}</b><br>
                   {% set _i = states('sensor.vmc_master_versione_corrente') | trim | regex_replace('^[^0-9]*', '') %}{% set _r = states('sensor.vmc_master_versione_repository') | trim | regex_replace('^[^0-9]*', '') %}{% if _i is match('^[0-9]+([.][0-9]+)*$') and _r is match('^[0-9]+([.][0-9]+)*$') and (_r.split('.') | map('int') | list) > (_i.split('.') | map('int') | list) %}<ha-icon icon="mdi:arrow-up-bold-circle-outline"></ha-icon> <b>Aggiornamento disponibile: {{ states('sensor.vmc_master_versione_repository') }}</b>{% else %}<ha-icon icon="mdi:check-circle-outline"></ha-icon> Nessun aggiornamento{% endif %}<br>
