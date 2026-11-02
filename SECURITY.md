@@ -88,7 +88,7 @@ e riavviare Home Assistant.
   - CALENDARIO 3 Secondi per l'Attivazione (fasce orarie)
 </pre>
 
-Il comportamento della VMC per ogni allarme è riassunto nella tabella <strong>Logiche di Funzionamento</strong> del [README](README.md) e nella voce 18 del Pannello Informazioni.
+Il comportamento della VMC per ogni allarme è riassunto nella tabella <strong>Logiche di Funzionamento</strong> del [README](README.md) e nella voce 17 del Pannello Informazioni.
 
 #
 
