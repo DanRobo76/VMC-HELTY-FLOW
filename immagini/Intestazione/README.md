@@ -1,6 +1,8 @@
 # Immagini dell'intestazione animata
 
-Immagini mostrate in cima alla scheda **VMC HELTY FLOW** (voce 23 del pannello informazioni).
+Immagini mostrate in cima alla scheda **VMC HELTY FLOW** (voce 22 del pannello informazioni).
+
+Formato: **WebP** (animato per le velocità, fermo per Velocità 0, OFF-Line e icona), 1520 × 540 pixel.
 
 ## Significato del nome
 
@@ -22,18 +24,18 @@ Il nome di ogni file è formato da **situazione** + **velocità della VMC**.
 | `velocita_4` | 37 m³/h | |
 | `iperventilazione` | 42 m³/h | il più veloce |
 
-Velocità con la stessa portata usano la stessa GIF.
+Velocità con la stessa portata usano la stessa animazione.
 
 ## Immagini ferme (Velocità 0 e OFF-Line)
 
 | File | Quando |
 |---|---|
-| `ferma_off_line.png` | VMC OFF-Line o non disponibile (LED grigio) |
-| `ferma_normale.png` | Velocità 0 senza allerte (LED bianco) |
-| `ferma_allerta.png` | Velocità 0 per un'allerta che blocca la VMC (LED giallo) |
+| `ferma_off_line.webp` | VMC OFF-Line o non disponibile (LED grigio) |
+| `ferma_normale.webp` | Velocità 0 senza allerte (LED bianco) |
+| `ferma_allerta.webp` | Velocità 0 per un'allerta che blocca la VMC (LED giallo) |
 
 ## Altre immagini
 
 | File | Uso |
 |---|---|
-| `icona_vmc.png` | piccola immagine della VMC nel riquadro in cima al pannello informazioni |
+| `icona_vmc.webp` | piccola immagine della VMC nel riquadro in cima al pannello informazioni |
