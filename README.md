@@ -162,7 +162,9 @@
 <sub><strong>Dalla release 8.4.1 o precedenti:</strong></sub><br>
 <sub><strong>a)</strong> nella cartella `\\192.168.1.xxx\config\packages\vmc_helty_flow\master\` sostituire i file con quelli nuovi del punto <strong>4</strong>; i file `vmc_clona.yaml` e `vmc_clona_scheda_manuale_interfaccia.txt` non servono più: al primo avvio l'automazione «VMC Master - Clona Rimuovi File Obsoleti» li cancella da sola e chiede, con una notifica, di riavviare Home Assistant;</sub><br>
 <sub><strong>b)</strong> sostituire l'automazione (punto <strong>5</strong>) e la scheda (punto <strong>6</strong>) con le nuove; cancellare dall'interfaccia la vecchia scheda «Clona VMC», ora sostituita dalla Finestra Clona del pannello Impostazioni;</sub><br>
-<sub><strong>c)</strong> riavviare Home Assistant.</sub><br>
+<sub><strong>c)</strong> riavviare Home Assistant;</sub><br>
+<sub><strong>d)</strong> il nuovo `vmc_master.yaml` contiene l'IP predefinito 192.168.1.160: se la VMC ha un IP diverso, scriverlo di nuovo nel campo <strong>«Cambia IP VMC (Riavvio di H.A.)»</strong> (punto <strong>8</strong>); l'IP viene aggiornato anche nello script del cambio nome e Home Assistant si riavvia da solo.</sub><br>
+<sub>Le vecchie entità «vmc_master_slave_…» della scheda «Clona VMC» restano come «non più fornite»: si possono eliminare da <strong>Impostazioni → Dispositivi e servizi → Entità</strong>.</sub><br>
 <sub>Le VMC clonate restano alla release con cui sono state create: per aggiornarle, cancellarle dalla Finestra Clona, riavviare, clonarle di nuovo con lo stesso nome e IP, riavviare e incollare di nuovo automazione e scheda (punto <strong>11</strong>).</sub>
 
 ---
@@ -257,6 +259,8 @@
 ### 9. Eseguire il Profilo Inizializzazione
 <sub>Nello stesso pannello premere <strong>Esegui</strong> su <strong>«VMC Master - Profilo Inizializzazione»</strong> e confermare con <strong>OK</strong> nel popup «Vuoi Procedere?». Da eseguire solo la prima volta: attiva i profili predefiniti, azzera gli offset dei sensori e le variabili, arresta la VMC e, al termine del processo, riavvia Home Assistant.</sub>
 
+<sub>Al riavvio compaiono le notifiche «Aggiornare Manualmente l'Entità …»: aprire la finestra <strong>«Opzioni - Sensori da Selezionare»</strong> del pannello Impostazioni e scegliere per ogni grandezza un'entità, ad esempio i sensori della VMC (…<em>_senza_offset</em>) oppure sensori o servizi meteo di Home Assistant (l'umidità esterna richiede un sensore o un servizio meteo di Home Assistant: la VMC non la misura). Finché un'entità non è scelta, la grandezza risulta «Non disponibile».</sub>
+
 ---
 
 ### 10. Pannello Informazioni
@@ -272,6 +276,7 @@
 - <sub>premere <strong>«Clona VMC ‹nome›»</strong> e confermare: viene creata la cartella `\\192.168.1.xxx\config\packages\vmc_helty_flow\‹nome›` con i file della nuova VMC;</sub>
 - <sub>copiare il contenuto dei due file .txt indicati nel riquadro «VMC Clonata» in una nuova automazione e in una nuova scheda (come ai punti <strong>5</strong> e <strong>6</strong>);</sub>
 - <sub>per un'altra VMC premere <strong>«Ripeti Clona/Elimina VMC»</strong>; terminate le clonazioni premere <strong>«Riavvia Home Assistant»</strong>.</sub>
+- <sub>dopo il riavvio, nella scheda di ogni nuova VMC eseguire <strong>«VMC ‹nome› - Profilo Inizializzazione»</strong> (come al punto <strong>9</strong>) e scegliere le entità dei sensori: finché non lo si esegue gli offset della nuova VMC restano al valore minimo e i valori mostrati non sono corretti.</sub>
 
 <sub>Per cancellare una VMC scrivere il suo nome nella Finestra Clona, premere <strong>«Cancella VMC ‹nome›»</strong> e confermare con <strong>«Sì, cancella ‹nome›»</strong>; poi cancellare a mano la sua automazione e la sua scheda e riavviare. Dettagli nel Pannello Informazioni, voce 24.</sub>
 
@@ -514,7 +519,9 @@
 <sub><strong>From release 8.4.1 or earlier:</strong></sub><br>
 <sub><strong>a)</strong> in the folder `\\192.168.1.xxx\config\packages\vmc_helty_flow\master\` replace the files with the new ones of step <strong>4</strong>; the files `vmc_clona.yaml` and `vmc_clona_scheda_manuale_interfaccia.txt` are no longer needed: at the first start the automation «VMC Master - Clona Rimuovi File Obsoleti» deletes them by itself and asks, with a notification, to restart Home Assistant;</sub><br>
 <sub><strong>b)</strong> replace the automation (step <strong>5</strong>) and the card (step <strong>6</strong>) with the new ones; delete the old «Clona VMC» card from the interface, now replaced by the Clone window of the Settings panel;</sub><br>
-<sub><strong>c)</strong> restart Home Assistant.</sub><br>
+<sub><strong>c)</strong> restart Home Assistant;</sub><br>
+<sub><strong>d)</strong> the new `vmc_master.yaml` contains the default IP 192.168.1.160: if the unit has a different IP, type it again in the <strong>«Cambia IP VMC (Riavvio di H.A.)»</strong> field (step <strong>8</strong>); the IP is also updated in the name-change script and Home Assistant restarts by itself.</sub><br>
+<sub>The old «vmc_master_slave_…» entities of the «Clona VMC» card remain as «no longer provided»: they can be deleted from <strong>Settings → Devices & services → Entities</strong>.</sub><br>
 <sub>Cloned units stay at the release they were created with: to update them, delete them from the Clone window, restart, clone them again with the same name and IP, restart and paste automation and card again (step <strong>11</strong>).</sub>
 
 ---
@@ -609,6 +616,8 @@
 ### 9. Run the Initialisation Profile
 <sub>In the same panel press <strong>Esegui</strong> (Run) on <strong>«VMC Master - Profilo Inizializzazione»</strong> and confirm with <strong>OK</strong> in the «Vuoi Procedere?» popup. Run it only the first time: it enables the default profiles, resets the sensor offsets and the variables, stops the unit and, when the process ends, restarts Home Assistant.</sub>
 
+<sub>After the restart the notifications «Aggiornare Manualmente l'Entità …» (update the entity manually) appear: open the <strong>«Opzioni - Sensori da Selezionare»</strong> window of the Settings panel and choose an entity for each quantity, for example the unit's sensors (…<em>_senza_offset</em>) or Home Assistant sensors or weather services (outdoor humidity needs a Home Assistant sensor or weather service: the unit does not measure it). Until an entity is chosen, that quantity shows «Non disponibile» (not available).</sub>
+
 ---
 
 ### 10. Information Panel
@@ -624,6 +633,7 @@
 - <sub>press <strong>«Clona VMC ‹name›»</strong> and confirm: the folder `\\192.168.1.xxx\config\packages\vmc_helty_flow\‹name›` is created with the files of the new unit;</sub>
 - <sub>copy the content of the two .txt files shown in the «VMC Clonata» box into a new automation and a new card (as in steps <strong>5</strong> and <strong>6</strong>);</sub>
 - <sub>for another unit press <strong>«Ripeti Clona/Elimina VMC»</strong> (repeat); when done press <strong>«Riavvia Home Assistant»</strong> (restart).</sub>
+- <sub>after the restart, on the card of each new unit run <strong>«VMC ‹name› - Profilo Inizializzazione»</strong> (as in step <strong>9</strong>) and choose the sensor entities: until you do, the offsets of the new unit stay at their minimum and the values shown are not correct.</sub>
 
 <sub>To delete a unit type its name in the Clone window, press <strong>«Cancella VMC ‹name›»</strong> and confirm with <strong>«Sì, cancella ‹name›»</strong> (yes, delete); then delete its automation and card by hand and restart. Details in the Information Panel, item 24.</sub>
 

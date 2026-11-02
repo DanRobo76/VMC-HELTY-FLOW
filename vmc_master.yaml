@@ -493,7 +493,7 @@ template:
         icon: mdi:code-array
 
   - sensor:
-      - default_entity_id: sensor.vmc_master_status_ventola_lettura_codice_interpretato # [CONFIGURAZIONE, 5 RICHIAMI] [INTERFACCIA, 53 RICHIAMI] [AUTOMAZIONE, 283 RICHIAMI] SENSORE DI INTERPRETAZIONE DELLA LETTURA DEI DATI "VELOCITA'" MEMORIZZATI NELLA VMC CONVERITA IN "STRINGA", PREVIA VERIFICA DI AVVENUTA LETTURA DEI DATI "VELOCITA'"" MEMORIZZATI NELLA VMC
+      - default_entity_id: sensor.vmc_master_status_ventola_lettura_codice_interpretato # [CONFIGURAZIONE, 5 RICHIAMI] [INTERFACCIA, 53 RICHIAMI] [AUTOMAZIONE, 563 RICHIAMI] SENSORE DI INTERPRETAZIONE DELLA LETTURA DEI DATI "VELOCITA'" MEMORIZZATI NELLA VMC CONVERITA IN "STRINGA", PREVIA VERIFICA DI AVVENUTA LETTURA DEI DATI "VELOCITA'"" MEMORIZZATI NELLA VMC
         name: "Status Ventilazione"
         unique_id: vmc_master_status_ventola_lettura_codice_interpretato
         state: >
@@ -3670,39 +3670,39 @@ input_boolean:
     name: "Invio Notifica Audio"
     icon: mdi:light-switch-off
 
-  vmc_master_notifica_allerta_congelamento:                                     # [CONFIGURAZIONE, 7 RICHIAMI] [INTERFACCIA, 4 RICHIAMI] [AUTOMAZIONE, 0 RICHIAMI] [SCRIPT, PIU’ RICHIAMI] SENSORE PER ACCENDERE O SPEGNERE LA NOTIFICA AUDIO SULL'ALLERTA
+  vmc_master_notifica_allerta_congelamento:                                     # [CONFIGURAZIONE, 7 RICHIAMI] [INTERFACCIA, 4 RICHIAMI] [AUTOMAZIONE, 0 RICHIAMI] SENSORE PER ACCENDERE O SPEGNERE LA NOTIFICA AUDIO SULL'ALLERTA
     name: "Notifica ON/OFF Allerta Congelamento"
     icon: mdi:light-switch-off
 
-  vmc_master_notifica_allerta_differenza_temp_int_est:                          # [CONFIGURAZIONE, 7 RICHIAMI] [INTERFACCIA, 4 RICHIAMI] [AUTOMAZIONE, 0 RICHIAMI] [SCRIPT, PIU’ RICHIAMI] SENSORE PER ACCENDERE O SPEGNERE LA NOTIFICA AUDIO SULL'ALLERTA
+  vmc_master_notifica_allerta_differenza_temp_int_est:                          # [CONFIGURAZIONE, 7 RICHIAMI] [INTERFACCIA, 4 RICHIAMI] [AUTOMAZIONE, 0 RICHIAMI] SENSORE PER ACCENDERE O SPEGNERE LA NOTIFICA AUDIO SULL'ALLERTA
     name: "Notifica ON/OFF Allerta Diff. Temp. Int-Est > 23 [°C]"
     icon: mdi:light-switch-off
 
-  vmc_master_notifica_allerta_inquinanti:                                       # [CONFIGURAZIONE, 11 RICHIAMI] [INTERFACCIA, 4 RICHIAMI] [AUTOMAZIONE, 0 RICHIAMI] [SCRIPT, PIU’ RICHIAMI] SENSORE PER ACCENDERE O SPEGNERE LA NOTIFICA AUDIO SULL'ALLERTA
+  vmc_master_notifica_allerta_inquinanti:                                       # [CONFIGURAZIONE, 11 RICHIAMI] [INTERFACCIA, 4 RICHIAMI] [AUTOMAZIONE, 0 RICHIAMI] SENSORE PER ACCENDERE O SPEGNERE LA NOTIFICA AUDIO SULL'ALLERTA
     name: "Notifica ON/OFF Allerta Inquinanti"
     icon: mdi:light-switch-off
 
-  vmc_master_notifica_allerta_pdr:                                              # [CONFIGURAZIONE, 7 RICHIAMI] [INTERFACCIA, 4 RICHIAMI] [AUTOMAZIONE, 0 RICHIAMI] [SCRIPT, PIU’ RICHIAMI] SENSORE PER ACCENDERE O SPEGNERE LA NOTIFICA AUDIO SULL'ALLERTA
+  vmc_master_notifica_allerta_pdr:                                              # [CONFIGURAZIONE, 7 RICHIAMI] [INTERFACCIA, 4 RICHIAMI] [AUTOMAZIONE, 0 RICHIAMI] SENSORE PER ACCENDERE O SPEGNERE LA NOTIFICA AUDIO SULL'ALLERTA
     name: "Notifica ON/OFF Allerta Lim. Δ P. di Rugiada"
     icon: mdi:light-switch-off
 
-  vmc_master_notifica_allerta_freecooling_heating:                              # [CONFIGURAZIONE, 5 RICHIAMI] [INTERFACCIA, 4 RICHIAMI] [AUTOMAZIONE, 0 RICHIAMI] [SCRIPT, PIU’ RICHIAMI] SENSORE PER ACCENDERE O SPEGNERE LA NOTIFICA AUDIO SULL'ALLERTA
+  vmc_master_notifica_allerta_freecooling_heating:                              # [CONFIGURAZIONE, 5 RICHIAMI] [INTERFACCIA, 4 RICHIAMI] [AUTOMAZIONE, 0 RICHIAMI] SENSORE PER ACCENDERE O SPEGNERE LA NOTIFICA AUDIO SULL'ALLERTA
     name: "Notifica ON/OFF Allerta Free Cool./Heat."
     icon: mdi:light-switch-off
 
-  vmc_master_notifica_allerta_umidita:                                          # [CONFIGURAZIONE, 7 RICHIAMI] [INTERFACCIA, 4 RICHIAMI] [AUTOMAZIONE, 0 RICHIAMI] [SCRIPT, PIU’ RICHIAMI] SENSORE PER ACCENDERE O SPEGNERE LA NOTIFICA AUDIO SULL'ALLERTA
+  vmc_master_notifica_allerta_umidita:                                          # [CONFIGURAZIONE, 7 RICHIAMI] [INTERFACCIA, 4 RICHIAMI] [AUTOMAZIONE, 0 RICHIAMI] SENSORE PER ACCENDERE O SPEGNERE LA NOTIFICA AUDIO SULL'ALLERTA
     name: "Notifica ON/OFF Allerta Umidità"
     icon: mdi:light-switch-off
 
-  vmc_master_notifica_allerta_black_out:                                        # [CONFIGURAZIONE, 7 RICHIAMI] [INTERFACCIA, 4 RICHIAMI] [AUTOMAZIONE, 0 RICHIAMI] [SCRIPT, PIU’ RICHIAMI] SENSORE PER ACCENDERE O SPEGNERE LA NOTIFICA AUDIO SULL'ALLERTA
+  vmc_master_notifica_allerta_black_out:                                        # [CONFIGURAZIONE, 7 RICHIAMI] [INTERFACCIA, 4 RICHIAMI] [AUTOMAZIONE, 0 RICHIAMI] SENSORE PER ACCENDERE O SPEGNERE LA NOTIFICA AUDIO SULL'ALLERTA
     name: "Notifica ON/OFF Allerta Black-Out"
     icon: mdi:light-switch-off
 
-  vmc_master_notifica_allerta_status_velocita:                                  # [CONFIGURAZIONE, 5 RICHIAMI] [INTERFACCIA, 4 RICHIAMI] [AUTOMAZIONE, 0 RICHIAMI] [SCRIPT, PIU’ RICHIAMI] SENSORE PER ACCENDERE O SPEGNERE LA NOTIFICA AUDIO SULL'ALLERTA
+  vmc_master_notifica_allerta_status_velocita:                                  # [CONFIGURAZIONE, 5 RICHIAMI] [INTERFACCIA, 4 RICHIAMI] [AUTOMAZIONE, 0 RICHIAMI] SENSORE PER ACCENDERE O SPEGNERE LA NOTIFICA AUDIO SULL'ALLERTA
     name: "Notifica ON/OFF Status Velocità"
     icon: mdi:light-switch-off
 
-  vmc_master_notifica_allerta_riepilogo:                                        # [CONFIGURAZIONE, 4 RICHIAMI] [INTERFACCIA, 4 RICHIAMI] [AUTOMAZIONE, 0 RICHIAMI] [SCRIPT, PIU’ RICHIAMI] SENSORE PER ACCENDERE O SPEGNERE LA NOTIFICA AUDIO SULL'ALLERTA
+  vmc_master_notifica_allerta_riepilogo:                                        # [CONFIGURAZIONE, 4 RICHIAMI] [INTERFACCIA, 4 RICHIAMI] [AUTOMAZIONE, 0 RICHIAMI] SENSORE PER ACCENDERE O SPEGNERE LA NOTIFICA AUDIO SULL'ALLERTA
     name: "Notifica ON/OFF Riepilogo Allerte"
     icon: mdi:light-switch-off
 ################### Fine Creazione Switch Booleano impiegato nella riproduzione Audio, al Media Player Selezionato ##############################
@@ -3928,7 +3928,7 @@ script:
     icon: mdi:cursor-pointer
 
   vmc_master_clona_nuova_clonazione:                                            # [CONFIGURAZIONE, 0 RICHIAMI] [INTERFACCIA, 1 RICHIAMO] [AUTOMAZIONE, 0 RICHIAMI] CLONA VMC: PREPARA UNA NUOVA CLONAZIONE
-    alias: VMC Master - Clona un'altra VMC
+    alias: VMC Master - Ripeti Clona/Elimina VMC
     sequence:
       - action: input_text.set_value
         target:
@@ -3945,7 +3945,7 @@ script:
     icon: mdi:cursor-pointer
 
   vmc_master_clona_riavvio_ha:                                                  # [CONFIGURAZIONE, 0 RICHIAMI] [INTERFACCIA, 1 RICHIAMO] [AUTOMAZIONE, 0 RICHIAMI] CLONA VMC: RIAVVIO FACOLTATIVO DI HOME ASSISTANT
-    alias: VMC Master - Riavvio H.A.
+    alias: VMC Master - Riavvia Home Assistant
     sequence:
       - action: input_text.set_value
         target:
@@ -5013,7 +5013,7 @@ script:
           milliseconds: 0
     mode: restart
     icon: mdi:cursor-pointer
-    description: Pulisce la cronologia di tutte le Entità installate dal Package
+    description: Pulisce la cache dei messaggi audio (file TTS) generati per il Media Player
 
   vmc_master_pulisci_cronologia_entita:                                         # [CONFIGURAZIONE, 1 RICHIAMO] [INTERFACCIA, 2 RICHIAMI] [AUTOMAZIONE, 0 RICHIAMI]
     alias: "VMC Master - Pulisci cronologia Entità"

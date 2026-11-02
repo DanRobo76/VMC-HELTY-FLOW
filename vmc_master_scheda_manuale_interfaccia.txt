@@ -12030,6 +12030,11 @@ cards:
                     - Umidità: 28 Secondi (la logica Umidità memorizza subito la Velocità in uso); se durante l'allerta si cambia Velocità, la nuova Velocità viene memorizzata dopo 4 Secondi e mantenuta a fine Umidità;<br>
                     - Black-Out: 32 Secondi per il Rilevamento e per il Ripristino.<br>
                     <br>
+                    <b>CAMBIO MANUALE DELLA VELOCITÀ:</b> ogni comando dell'automazione viene ripetuto ogni 4-5 Secondi finché la VMC non
+                    lo esegue; se nel frattempo si sceglie un'altra Velocità (Telecomando, scheda o App), la ripetizione si interrompe e la scelta
+                    viene rispettata e gestita dalle regole sopra (es. memorizzata dal Lim. Δ PdR o dall'Umidità). Fanno eccezione Congelamento e
+                    Δ Temp., che impongono comunque la loro Velocità.<br>
+                    <br>
                     <b>CALENDARIO:</b> 3 Secondi per l'Ingresso e per l'Uscita dalla Fascia oraria; all'Ingresso il comando alla VMC parte dopo ulteriori 5 Secondi (attesa dello script della Fascia).<br>
                     All'interno della Fascia, a VMC avviata, hanno effetto Congelamento, Δ Temp., Inquinanti, Lim. Δ Punto di Rugiada e Free Cooling / Free Heating; Umidità e Black-Out non hanno effetto. All'uscita dalla Fascia la VMC si arresta.<br>
                     <br>
@@ -12376,7 +12381,7 @@ cards:
                   per ogni VMC e una riga per ogni grandezza, così su ogni riga si confrontano a colpo d'occhio tutte le VMC.
                   </td></tr></table>
                   {%- set ns = namespace(vmc=[]) -%}
-                  {%- for state in states.sensor if state.entity_id.endswith('_status_ventola_lettura_codice_interpretato_interfaccia') -%}
+                  {%- for state in states.sensor if state.entity_id.endswith('_status_ventola_lettura_codice_interpretato_interfaccia') and not state.attributes.get('restored', false) -%}
                   {%- set ns.vmc = ns.vmc + [state.entity_id.split('_')[1]] -%}
                   {%- endfor -%}
                   <table width="100%">
@@ -12481,6 +12486,10 @@ cards:
                   <br>6. Terminate le clonazioni, riavviare Home Assistant con il pulsante «Riavvia Home Assistant» (popup «Vuoi Procedere?»)
                   oppure dal menu
                   Impostazioni → Sistema: solo dopo il riavvio le VMC clonate sono attive, con tutte le loro entità.
+                  <br>7. Dopo il riavvio, nella scheda di ogni VMC clonata eseguire «VMC &lt;nome&gt; - Profilo Inizializzazione»
+                  (pannello Impostazioni, popup «Vuoi Procedere?»): azzera gli offset dei sensori, attiva i profili predefiniti e
+                  riavvia Home Assistant; poi scegliere le entità dei sensori. Finché non lo si esegue gli offset della nuova VMC
+                  restano al valore minimo e i valori mostrati non sono corretti.
                   <br><br>
                   <b>Controlli sui dati inseriti.</b> Se un dato non è corretto compaiono le regole da rispettare, oppure
                   l'avviso «già in uso», e il pulsante «Clona VMC &lt;nome&gt;» non compare.
@@ -12523,6 +12532,9 @@ cards:
                   cancella da sola i vecchi file vmc_clona.yaml e vmc_clona_scheda_manuale_interfaccia.txt e lo segnala con una
                   notifica: a quel punto riavviare Home Assistant e cancellare dall'interfaccia la vecchia scheda «Clona VMC»,
                   ora sostituita dalla Finestra Clona. La vecchia scheda non può essere cancellata in automatico.
+                  Il nuovo vmc_master.yaml contiene l'IP predefinito 192.168.1.160: se la VMC ha un IP diverso, scriverlo di nuovo
+                  nel campo «Cambia IP VMC (Riavvio di H.A.)». Le vecchie entità «vmc_master_slave_…» della scheda «Clona VMC»
+                  restano come «non più fornite» e si possono eliminare da Impostazioni → Dispositivi e servizi → Entità.
                   <br><br>
                   <b>Valori impostabili.</b> «Nome VMC» da 1 a 10 caratteri; «IP VMC su Porta 5001» nel formato
                   xxx.xxx.xxx.xxx.
