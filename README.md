@@ -70,7 +70,7 @@
 - <sub>Calcolo di ricambi d'aria, portata, umidità assoluta e comfort igrometrico</sub>
 - <sub>Cambio dell'indirizzo IP e del nome della VMC dall'interfaccia</sub>
 - <sub>Conferma prima di ogni script («Vuoi Procedere?»); conferma «Sì / No» per la pulizia della cronologia e per la cancellazione di una VMC</sub>
-- <sub>Pannello Informazioni con 24 voci illustrate che spiegano ogni funzione</sub>
+- <sub>Pannello Informazioni con 23 voci illustrate che spiegano ogni funzione</sub>
 - <sub>Avviso quando è disponibile un nuovo aggiornamento</sub>
 </details>
 
@@ -82,8 +82,8 @@
 - <sub>Indicatore Andamento Rischio Muffa.</sub>
 - <sub>Indicatore che converte il punto di rugiada (TPdR) in una classificazione qualitativa del comfort igrometrico all'interno dell'ambiente.</sub>
 - <sub>Visualizza in tempo reale: il numero totale di ricambi d'aria effettuati nella giornata, il volume totale di aria scambiata (m³) e il tempo rimanente prima del prossimo ricambio completo [Cliccare su Telecomando].</sub>
-- <sub>Elenca tutte le VMC installate in una tabella, una colonna per VMC [Pannello Informazioni → voce 22].</sub>
-- <sub>Intestazione animata: flusso d'aria proporzionale alla portata e colore del LED in funzione dello stato; scritte «Alert», «Alert Δ Temp.» e «Alert Free» sotto i tasti di velocità quando un'allerta bloccherebbe o ridurrebbe la VMC [Pannello Informazioni → voce 23].</sub>
+- <sub>Elenca tutte le VMC installate in una tabella, una colonna per VMC [Pannello Informazioni → voce 21].</sub>
+- <sub>Intestazione animata: flusso d'aria proporzionale alla portata e colore del LED in funzione dello stato; scritte «Alert», «Alert Δ Temp.» e «Alert Free» sotto i tasti di velocità quando un'allerta bloccherebbe o ridurrebbe la VMC [Pannello Informazioni → voce 22].</sub>
 - <sub>Permette di selezionare le entità di: Temperatura (Interna ed Esterna), Umidità (Interna ed Esterna), Anidride Carbonica CO₂ (Interna) e Dispositivo Mobile, disponibili in Home Assistant, includendo anche le entità provenienti da fonti Meteo, per ottenere maggiore precisione e affidabilità rispetto ai sensori integrati della VMC.</sub>
 - <sub>Avvisa l'utente tramite notifica sul Dispositivo Mobile in caso di Avvio, Arresto, Errori o cambio filtro della VMC.</sub>
 - <sub>Permette l'accensione e lo spegnimento automatico in funzione degli inquinanti (CO₂ e/o VOC) [sensori della VMC presenti solo nella VMC HELTY FLOW ELITE; per la CO₂ si può selezionare anche un'entità di Home Assistant].</sub>
@@ -264,7 +264,7 @@
 ---
 
 ### 10. Pannello Informazioni
-<sub>Per maggiori informazioni aprire il <strong>Pannello Informazioni</strong> della scheda: 24 voci illustrate spiegano ogni funzione, i valori impostabili e le logiche.</sub>
+<sub>Per maggiori informazioni aprire il <strong>Pannello Informazioni</strong> della scheda: 23 voci illustrate spiegano ogni funzione, i valori impostabili e le logiche.</sub>
 
 <img src="immagini/README/passo_pannello_informazioni.png" alt="Pannello Informazioni" width="45%">
 
@@ -278,7 +278,7 @@
 - <sub>per un'altra VMC premere <strong>«Ripeti Clona/Elimina VMC»</strong>; terminate le clonazioni premere <strong>«Riavvia Home Assistant»</strong>.</sub>
 - <sub>dopo il riavvio, nella scheda di ogni nuova VMC eseguire <strong>«VMC ‹nome› - Profilo Inizializzazione»</strong> (come al punto <strong>9</strong>) e scegliere le entità dei sensori: finché non lo si esegue gli offset della nuova VMC restano al valore minimo e i valori mostrati non sono corretti.</sub>
 
-<sub>Per cancellare una VMC scrivere il suo nome nella Finestra Clona, premere <strong>«Cancella VMC ‹nome›»</strong> e confermare con <strong>«Sì, cancella ‹nome›»</strong>; poi cancellare a mano la sua automazione e la sua scheda e riavviare. Dettagli nel Pannello Informazioni, voce 24.</sub>
+<sub>Per cancellare una VMC scrivere il suo nome nella Finestra Clona, premere <strong>«Cancella VMC ‹nome›»</strong> e confermare con <strong>«Sì, cancella ‹nome›»</strong>; poi cancellare a mano la sua automazione e la sua scheda e riavviare. Dettagli nel Pannello Informazioni, voce 23.</sub>
 
 <img src="immagini/README/passo_clona_vmc.png" alt="Finestra Clona e conferma di cancellazione" width="80%">
 
@@ -312,7 +312,7 @@
 <details>
 <summary><strong>Logiche di funzionamento</strong></summary>
 
-<sub>La tabella riassume priorità, comportamento della VMC e tempi di intervento di ogni allerta. Il dettaglio completo è nel Pannello Informazioni, voce 18.</sub>
+<sub>La tabella riassume priorità, comportamento della VMC e tempi di intervento di ogni allerta. Il dettaglio completo è nel Pannello Informazioni, voce 17.</sub>
 
 <img src="immagini/README/logiche_it.png" alt="Logiche di funzionamento" width="100%">
 </details>
@@ -427,7 +427,7 @@
 - <sub>Calculation of air changes, airflow, absolute humidity and hygrometric comfort</sub>
 - <sub>Change of the unit's IP address and name from the interface</sub>
 - <sub>Confirmation before every script («Vuoi Procedere?» – Do you want to proceed?); «Yes / No» confirmation for history purge and unit deletion</sub>
-- <sub>Information Panel with 24 illustrated items explaining every function</sub>
+- <sub>Information Panel with 23 illustrated items explaining every function</sub>
 - <sub>Notice when a new update is available</sub>
 </details>
 
@@ -439,8 +439,8 @@
 - <sub>Mould risk trend indicator.</sub>
 - <sub>Indicator that converts the dew point into a qualitative classification of indoor hygrometric comfort.</sub>
 - <sub>Shows in real time: the total number of air changes made during the day, the total volume of exchanged air (m³) and the time left before the next complete air change [Click on Remote control].</sub>
-- <sub>Lists all installed units in one table, one column per unit [Information Panel → item 22].</sub>
-- <sub>Animated header: airflow proportional to the flow rate and LED colour according to the state; «Alert», «Alert Δ Temp.» and «Alert Free» labels under the speed buttons when an alert would block or reduce the unit [Information Panel → item 23].</sub>
+- <sub>Lists all installed units in one table, one column per unit [Information Panel → item 21].</sub>
+- <sub>Animated header: airflow proportional to the flow rate and LED colour according to the state; «Alert», «Alert Δ Temp.» and «Alert Free» labels under the speed buttons when an alert would block or reduce the unit [Information Panel → item 22].</sub>
 - <sub>Select the Home Assistant entities for: Temperature (Indoor and Outdoor), Humidity (Indoor and Outdoor), Carbon Dioxide CO₂ (Indoor) and Mobile Device, including entities from weather sources, for greater precision and reliability than the unit's built-in sensors.</sub>
 - <sub>Notifies the user on the Mobile Device when the unit starts, stops, reports errors or needs a filter change.</sub>
 - <sub>Automatic start and stop based on pollutants (CO₂ and/or VOC) [unit sensors only on the HELTY FLOW ELITE; for CO₂ a Home Assistant entity can also be selected].</sub>
@@ -621,7 +621,7 @@
 ---
 
 ### 10. Information Panel
-<sub>For more details open the card's <strong>Information Panel</strong>: 24 illustrated items explain every function, the settable values and the logic.</sub>
+<sub>For more details open the card's <strong>Information Panel</strong>: 23 illustrated items explain every function, the settable values and the logic.</sub>
 
 <img src="immagini/README/passo_pannello_informazioni.png" alt="Information Panel" width="45%">
 
@@ -635,7 +635,7 @@
 - <sub>for another unit press <strong>«Ripeti Clona/Elimina VMC»</strong> (repeat); when done press <strong>«Riavvia Home Assistant»</strong> (restart).</sub>
 - <sub>after the restart, on the card of each new unit run <strong>«VMC ‹name› - Profilo Inizializzazione»</strong> (as in step <strong>9</strong>) and choose the sensor entities: until you do, the offsets of the new unit stay at their minimum and the values shown are not correct.</sub>
 
-<sub>To delete a unit type its name in the Clone window, press <strong>«Cancella VMC ‹name›»</strong> and confirm with <strong>«Sì, cancella ‹name›»</strong> (yes, delete); then delete its automation and card by hand and restart. Details in the Information Panel, item 24.</sub>
+<sub>To delete a unit type its name in the Clone window, press <strong>«Cancella VMC ‹name›»</strong> and confirm with <strong>«Sì, cancella ‹name›»</strong> (yes, delete); then delete its automation and card by hand and restart. Details in the Information Panel, item 23.</sub>
 
 <img src="immagini/README/passo_clona_vmc.png" alt="Clone window and deletion confirmation" width="80%">
 
@@ -669,7 +669,7 @@
 <details>
 <summary><strong>Operating Logic</strong></summary>
 
-<sub>The table summarises priority, unit behaviour and reaction time of each alert. Full details are in the Information Panel, item 18.</sub>
+<sub>The table summarises priority, unit behaviour and reaction time of each alert. Full details are in the Information Panel, item 17.</sub>
 
 <img src="immagini/README/logiche_en.png" alt="Operating logic" width="100%">
 </details>

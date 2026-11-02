@@ -4733,23 +4733,18 @@ cards:
         temp_interna > temp_esterna | float(0) and spia_free_heating=="on" and
         ((co2 !="Allerta") and (voc !="Allerta")) and avviso_da_mostrare=="OK")
         %}
-         <font color="rgb(100, 100, 100)"><font size="+1"><strong><ha-icon icon="mdi:alarm-light-outline"></ha-icon></strong></font><span style="padding-right: 10px;"></span><font size="+1"><strong> ALLERTA FREE HEATING PROGRAMMATO (RAFFRESCAMENTO ARRESTATO)</strong></font></br>
+         <font color="rgb(100, 100, 100)"><font size="+1"><strong><ha-icon icon="mdi:alarm-light-outline"></ha-icon></strong></font><span style="padding-right: 10px;"></span><font size="+1"><strong> ALLERTA FREE HEATING PROGRAMMATO (VELOCITÀ SCELTA DALL'UTENTE)</strong></font></br>
         LA TEMPERATURA ESTERNA {{
         states('sensor.vmc_master_temp_esterna_status')}} [°C] È MINORE DELLA
         TEMPERATURA INTERNA {{ states('sensor.vmc_master_temp_interna_status')}}
         [°C]
 
 
-        <strong>RIPRESA AUTOMATICA DELLA VMC SULLA VELOCITÀ FREE HEATING
-        (RISCALDAMENTO), NON APPENA:</strong>
+        <strong>È STATA SCELTA LA {{ velocita | upper }}: LA RIPRESA AUTOMATICA
+        DELLA VMC SULLA VELOCITÀ FREE HEATING (RISCALDAMENTO) VIENE ANNULLATA.</strong>
 
-          - LA TEMPERATURA ESTERNA SARÀ MAGGIORE DELLA TEMPERATURA INTERNA
-            e
-          - L'OPZIONE [VMC ON/OFF, IN FUNZIONE DELLA VEL. FREE HEATING] RIMARRÀ IMPOSTATA SU ACCESO
-        <strong> DIVERSAMENTE VERRÀ ANNULLATA LA RIPRESA AUTOMATICA, CONFERMANDO
-        L'ARRESTO DELLA VMC. </strong>
-            e 
-          - IL MESE CORRENTE PROGRAMMATO RIMARRA IMPOSTATO SU FREE HEATING
+          - LA VMC RESTA SULLA VELOCITÀ SCELTA, CON LO SCAMBIATORE DI CALORE ATTIVO (NESSUN RAFFRESCAMENTO)
+          - ANCHE QUANDO LA TEMPERATURA ESTERNA SARÀ MAGGIORE DELLA TEMPERATURA INTERNA, LA VMC NON PASSERÀ DA SOLA ALLA VELOCITÀ FREE HEATING: PER RIATTIVARLA PREMERE IL TASTO FREE HEATING
 
         Msg. 7, Free Heating Allarmato
 
@@ -5190,23 +5185,18 @@ cards:
         temp_esterna > temp_interna | float(0) and spia_free_cooling=="on" and
         ((co2 !="Allerta") and (voc !="Allerta")) and avviso_da_mostrare=="OK")
         %}
-         <font color="rgb(100, 100, 100)"><font size="+1"><strong><ha-icon icon="mdi:alarm-light-outline"></ha-icon></strong></font><span style="padding-right: 10px;"></span><font size="+1"><strong> ALLERTA FREE COOLING PROGRAMMATO (RISCALDAMENTO ARRESTATO)</strong></font></br>
+         <font color="rgb(100, 100, 100)"><font size="+1"><strong><ha-icon icon="mdi:alarm-light-outline"></ha-icon></strong></font><span style="padding-right: 10px;"></span><font size="+1"><strong> ALLERTA FREE COOLING PROGRAMMATO (VELOCITÀ SCELTA DALL'UTENTE)</strong></font></br>
         LA TEMPERATURA ESTERNA, {{
         states('sensor.vmc_master_temp_esterna_status')}} [°C] ATTUALMENTE È
         MAGGIORE DELLA TEMPERATURA INTERNA, {{
         states('sensor.vmc_master_temp_interna_status')}} [°C]
 
 
-        <strong>RIPRESA AUTOMATICA DELLA VMC SULLA VELOCITÀ FREE COOLING
-        (RAFFRESCAMENTO), NON APPENA:</strong>
+        <strong>È STATA SCELTA LA {{ velocita | upper }}: LA RIPRESA AUTOMATICA
+        DELLA VMC SULLA VELOCITÀ FREE COOLING (RAFFRESCAMENTO) VIENE ANNULLATA.</strong>
 
-          - LA TEMPERATURA ESTERNA SARÀ MINORE DELLA TEMPERATURA INTERNA
-            e
-          - L'OPZIONE [VMC ON/OFF, IN FUNZIONE DELLA VEL. FREE COOLING] RIMARRÀ IMPOSTATA SU ACCESO
-        <strong> DIVERSAMENTE VERRÀ ANNULLATA LA RIPRESA AUTOMATICA, CONFERMANDO
-        L'ARRESTO DELLA VMC. </strong>
-            e 
-          - IL MESE CORRENTE PROGRAMMATO RIMARRÀ IMPOSTATO SU FREE COOLING
+          - LA VMC RESTA SULLA VELOCITÀ SCELTA, CON LO SCAMBIATORE DI CALORE ATTIVO (NESSUN RISCALDAMENTO DALL'ARIA ESTERNA)
+          - ANCHE QUANDO LA TEMPERATURA ESTERNA SARÀ MINORE DELLA TEMPERATURA INTERNA, LA VMC NON PASSERÀ DA SOLA ALLA VELOCITÀ FREE COOLING: PER RIATTIVARLA PREMERE IL TASTO FREE COOLING
 
         Msg. 7, Free Cooling Allarmato
 
@@ -6619,7 +6609,7 @@ cards:
                 "Non Avviare in Velocità Free Cooling Programmato (Allerta Riscaldamento, Presenza di Inquinanti)"
               ]
               ))%}
-          MANTENIMENTO AUTOMATICO DELLA VMC SU <strong>Velocita 1</strong> IMPOSTATA PER {% if messaggio == "Allerta Free Heating Programmato (Raffrescamento Arrestato)" %} ALLERTA FREE HEATING PROGRAMMATO (RAFFRESCAMENTO ARRESTATO) {% elif messaggio == "Allerta Free Heating Programmato (Raffrescamento in atto)" %} ALLERTA FREE HEATING PROGRAMMATO (RAFFRESCAMENTO IN ATTO)  {% elif messaggio == "Allerta Free Heating Programmato (Raffrescamento in atto, Presenza di Inquinanti)" %} ALLERTA FREE HEATING PROGRAMMATO (RAFFRESCAMENTO IN ATTO, PRESENZA DI INQUINANTI)  {% elif messaggio == "Allerta Free Heating Programmato (Raffrescamento Arrestato, Presenza di Inquinanti)" %} ALLERTA FREE HEATING PROGRAMMATO (RAFFRESCAMENTO ARRESTATO, PRESENZA DI INQUINANTI)  {% elif messaggio == "Allerta Free Cooling Programmato (Riscaldamento in atto)" %} ALLERTA FREE COOLING PROGRAMMATO (RISCALDAMENTO IN ATTO) {% elif messaggio == "Allerta Free Cooling Programmato (Riscaldamento Arrestato)" %} ALLERTA FREE COOLING PROGRAMMATO (RISCALDAMENTO ARRESTATO)  {% elif messaggio == "Allerta Free Cooling Programmato (Riscaldamento Arrestato, Presenza di Inquinanti)" %} ALLERTA FREE COOLING PROGRAMMATO (RISCALDAMENTO ARRESTATO, PRESENZA DI INQUINANTI)  {% elif messaggio == "Allerta Free Cooling Programmato (Riscaldamento in atto, Presenza di Inquinanti)" %} ALLERTA FREE COOLING PROGRAMMATO (RISCALDAMENTO IN ATTO, PRESENZA DI INQUINANTI)  {% elif messaggio == "Allerta Raffrescamento in atto" %} ALLERTA RAFFRESCAMENTO IN ATTO{% elif messaggio == "Allerta Riscaldamento in atto" %} ALLERTA RISCALDAMENTO IN ATTO  {% elif messaggio == "Allerta Riscaldamento in atto, Presenza di Inquinanti" %} ALLERTA RISCALDAMENTO IN ATTO, PRESENZA DI INQUINANTI  {% elif messaggio == "Allerta Raffrescamento in atto, Presenza di Inquinanti" %} ALLERTA RAFFRESCAMENTO IN ATTO, PRESENZA DI INQUINANTI  {% elif messaggio == "Non Avviare in Velocità Free Heating Programmato (Allerta Raffrescamento)" %} ALLERTA NON AVVIARE IN VELOCITÀ FREE HEATING PROGRAMMATO (ALLERTA RAFFRESCAMENTO)  {% elif messaggio == "Non Avviare in Velocità Free Heating Programmato (Allerta Raffrescamento, Presenza di Inquinanti)" %} ALLERTA NON AVVIARE IN VELOCITÀ FREE HEATING PROGRAMMATO (ALLERTA RAFFRESCAMENTO, PRESENZA DI INQUINANTI) {% elif messaggio == "Non Avviare in Velocità Free Cooling Programmato (Allerta Riscaldamento)" %} ALLERTA NON AVVIARE IN VELOCITÀ FREE COOLING PROGRAMMATO (ALLERTA RISCALDAMENTO)  {% elif messaggio == "Non Avviare in Velocità Free Cooling Programmato (Allerta Riscaldamento, Presenza di Inquinanti)" %} NON AVVIARE IN VELOCITÀ FREE COOLING PROGRAMMATO (ALLERTA RISCALDAMENTO, PRESENZA DI INQUINANTI)  {% elif messaggio == "Se Avviata in Velocità Free Cool./Heat. (Allerta Raffrescamento)" %} ALLERTA SE AVVIATA IN VELOCITÀ FREE COOL./HEAT. (ALLERTA RAFFRESCAMENTO) {% elif messaggio == "Se Avviata in Velocità Free Cool./Heat. (Allerta Riscaldamento)" %} ALLERTA SE AVVIATA IN VELOCITÀ FREE COOL./HEAT. (ALLERTA RISCALDAMENTO)  {% elif messaggio == "Se Avviata in Velocità Free Cool./Heat. (Allerta Raffrescamento, Presenza di Inquinanti)" %} ALLERTA SE AVVIATA IN VELOCITÀ FREE COOL./HEAT. (ALLERTA RAFFRESCAMENTO, PRESENZA DI INQUINANTI)  { elif messaggio == "Se Avviata in Velocità Free Cool./Heat. (Allerta Riscaldamento, Presenza di Inquinanti)" %} ALLERTA SE AVVIATA IN VELOCITÀ FREE COOL./HEAT. (ALLERTA RISCALDAMENTO, PRESENZA DI INQUINANTI){% endif %}, FINCHE’:
+          MANTENIMENTO AUTOMATICO DELLA VMC SU <strong>Velocita 1</strong> IMPOSTATA PER {% if messaggio == "Allerta Free Heating Programmato (Raffrescamento Arrestato)" %} ALLERTA FREE HEATING PROGRAMMATO (RAFFRESCAMENTO ARRESTATO) {% elif messaggio == "Allerta Free Heating Programmato (Raffrescamento in atto)" %} ALLERTA FREE HEATING PROGRAMMATO (RAFFRESCAMENTO IN ATTO)  {% elif messaggio == "Allerta Free Heating Programmato (Raffrescamento in atto, Presenza di Inquinanti)" %} ALLERTA FREE HEATING PROGRAMMATO (RAFFRESCAMENTO IN ATTO, PRESENZA DI INQUINANTI)  {% elif messaggio == "Allerta Free Heating Programmato (Raffrescamento Arrestato, Presenza di Inquinanti)" %} ALLERTA FREE HEATING PROGRAMMATO (RAFFRESCAMENTO ARRESTATO, PRESENZA DI INQUINANTI)  {% elif messaggio == "Allerta Free Cooling Programmato (Riscaldamento in atto)" %} ALLERTA FREE COOLING PROGRAMMATO (RISCALDAMENTO IN ATTO) {% elif messaggio == "Allerta Free Cooling Programmato (Riscaldamento Arrestato)" %} ALLERTA FREE COOLING PROGRAMMATO (RISCALDAMENTO ARRESTATO)  {% elif messaggio == "Allerta Free Cooling Programmato (Riscaldamento Arrestato, Presenza di Inquinanti)" %} ALLERTA FREE COOLING PROGRAMMATO (RISCALDAMENTO ARRESTATO, PRESENZA DI INQUINANTI)  {% elif messaggio == "Allerta Free Cooling Programmato (Riscaldamento in atto, Presenza di Inquinanti)" %} ALLERTA FREE COOLING PROGRAMMATO (RISCALDAMENTO IN ATTO, PRESENZA DI INQUINANTI)  {% elif messaggio == "Allerta Raffrescamento in atto" %} ALLERTA RAFFRESCAMENTO IN ATTO{% elif messaggio == "Allerta Riscaldamento in atto" %} ALLERTA RISCALDAMENTO IN ATTO  {% elif messaggio == "Allerta Riscaldamento in atto, Presenza di Inquinanti" %} ALLERTA RISCALDAMENTO IN ATTO, PRESENZA DI INQUINANTI  {% elif messaggio == "Allerta Raffrescamento in atto, Presenza di Inquinanti" %} ALLERTA RAFFRESCAMENTO IN ATTO, PRESENZA DI INQUINANTI  {% elif messaggio == "Non Avviare in Velocità Free Heating Programmato (Allerta Raffrescamento)" %} ALLERTA NON AVVIARE IN VELOCITÀ FREE HEATING PROGRAMMATO (ALLERTA RAFFRESCAMENTO)  {% elif messaggio == "Non Avviare in Velocità Free Heating Programmato (Allerta Raffrescamento, Presenza di Inquinanti)" %} ALLERTA NON AVVIARE IN VELOCITÀ FREE HEATING PROGRAMMATO (ALLERTA RAFFRESCAMENTO, PRESENZA DI INQUINANTI) {% elif messaggio == "Non Avviare in Velocità Free Cooling Programmato (Allerta Riscaldamento)" %} ALLERTA NON AVVIARE IN VELOCITÀ FREE COOLING PROGRAMMATO (ALLERTA RISCALDAMENTO)  {% elif messaggio == "Non Avviare in Velocità Free Cooling Programmato (Allerta Riscaldamento, Presenza di Inquinanti)" %} ALLERTA NON AVVIARE IN VELOCITÀ FREE COOLING PROGRAMMATO (ALLERTA RISCALDAMENTO, PRESENZA DI INQUINANTI)  {% elif messaggio == "Se Avviata in Velocità Free Cool./Heat. (Allerta Raffrescamento)" %} ALLERTA SE AVVIATA IN VELOCITÀ FREE COOL./HEAT. (ALLERTA RAFFRESCAMENTO) {% elif messaggio == "Se Avviata in Velocità Free Cool./Heat. (Allerta Riscaldamento)" %} ALLERTA SE AVVIATA IN VELOCITÀ FREE COOL./HEAT. (ALLERTA RISCALDAMENTO)  {% elif messaggio == "Se Avviata in Velocità Free Cool./Heat. (Allerta Raffrescamento, Presenza di Inquinanti)" %} ALLERTA SE AVVIATA IN VELOCITÀ FREE COOL./HEAT. (ALLERTA RAFFRESCAMENTO, PRESENZA DI INQUINANTI)  {% elif messaggio == "Se Avviata in Velocità Free Cool./Heat. (Allerta Riscaldamento, Presenza di Inquinanti)" %} ALLERTA SE AVVIATA IN VELOCITÀ FREE COOL./HEAT. (ALLERTA RISCALDAMENTO, PRESENZA DI INQUINANTI){% endif %}, FINCHE’:
               {% else %}
           MANTENIMENTO AUTOMATICO DELLA VMC SU <strong>{{ states('sensor.vmc_master_status_ventola_lettura_codice_interpretato_interfaccia') }}</strong>, FINCHE’:
               {% endif %}
@@ -6964,7 +6954,7 @@ cards:
         Riscaldamento)" %} ALLERTA NON AVVIARE IN VELOCITÀ FREE COOLING
         PROGRAMMATO (ALLERTA RISCALDAMENTO)  {% elif messaggio == "Non Avviare
         in Velocità Free Cooling Programmato (Allerta Riscaldamento, Presenza di
-        Inquinanti)" %} NON AVVIARE IN VELOCITÀ FREE COOLING PROGRAMMATO
+        Inquinanti)" %} ALLERTA NON AVVIARE IN VELOCITÀ FREE COOLING PROGRAMMATO
         (ALLERTA RISCALDAMENTO, PRESENZA DI INQUINANTI)  {% elif messaggio ==
         "Se Avviata in Velocità Free Cool./Heat. (Allerta Raffrescamento)" %}
         ALLERTA SE AVVIATA IN VELOCITÀ FREE COOL./HEAT. (ALLERTA RAFFRESCAMENTO)
@@ -6973,7 +6963,7 @@ cards:
         (ALLERTA RISCALDAMENTO)  {% elif messaggio == "Se Avviata in Velocità
         Free Cool./Heat. (Allerta Raffrescamento, Presenza di Inquinanti)" %}
         ALLERTA SE AVVIATA IN VELOCITÀ FREE COOL./HEAT. (ALLERTA RAFFRESCAMENTO,
-        PRESENZA DI INQUINANTI)  { elif messaggio == "Se Avviata in Velocità
+        PRESENZA DI INQUINANTI)  {% elif messaggio == "Se Avviata in Velocità
         Free Cool./Heat. (Allerta Riscaldamento, Presenza di Inquinanti)" %}
         ALLERTA SE AVVIATA IN VELOCITÀ FREE COOL./HEAT. (ALLERTA RISCALDAMENTO,
         PRESENZA DI INQUINANTI){% endif %}
@@ -8553,7 +8543,7 @@ cards:
             square: false
             type: grid
             cards:
-              - square: false
+              - square: true
                 type: grid
                 cards:
                 - show_name: true
@@ -8616,453 +8606,403 @@ cards:
                   icon: mdi:numeric-0-box
                   hold_action:
                     action: none
-                - type: vertical-stack
-                  cards:
-                  - type: conditional
-                    conditions:
-                    - condition: state
-                      entity: sensor.vmc_master_alert_avvio_interfaccia
-                      state_not:
-                      - Alert
-                    card:
-                      show_name: true
-                      show_icon: true
-                      type: button
-                      tap_action:
-                        action: call-service
-                        service: shell_command.vmc_master_velocita_1
-                        target: {}
-                      name: Velocità 1
-                      show_state: true
-                      icon: mdi:numeric-1-box
-                      hold_action:
-                        action: none
-                  - type: conditional
-                    conditions:
-                    - condition: state
-                      entity: sensor.vmc_master_alert_avvio_interfaccia
-                      state:
-                      - Alert
-                    card:
-                      show_name: true
-                      show_icon: true
-                      type: button
-                      tap_action:
-                        action: call-service
-                        service: shell_command.vmc_master_velocita_1
-                        target: {}
-                      name: Velocità 1
-                      show_state: true
-                      icon: mdi:numeric-1-box
-                      hold_action:
-                        action: none
-                      entity: sensor.vmc_master_alert_avvio_interfaccia
-                - type: vertical-stack
-                  cards:
-                  - type: conditional
-                    conditions:
-                    - condition: state
-                      entity: sensor.vmc_master_alert_avvio_interfaccia
-                      state_not:
-                      - Alert
-                      - Alert Δ Temp.
-                    card:
-                      show_name: true
-                      show_icon: true
-                      type: button
-                      tap_action:
-                        action: call-service
-                        service: shell_command.vmc_master_velocita_2
-                        target: {}
-                      name: Velocità 2
-                      show_state: true
-                      icon: mdi:numeric-2-box
-                      hold_action:
-                        action: none
-                  - type: conditional
-                    conditions:
-                    - condition: state
-                      entity: sensor.vmc_master_alert_avvio_interfaccia
-                      state:
-                      - Alert
-                      - Alert Δ Temp.
-                    card:
-                      show_name: true
-                      show_icon: true
-                      type: button
-                      tap_action:
-                        action: call-service
-                        service: shell_command.vmc_master_velocita_2
-                        target: {}
-                      name: Velocità 2
-                      show_state: true
-                      icon: mdi:numeric-2-box
-                      hold_action:
-                        action: none
-                      entity: sensor.vmc_master_alert_avvio_interfaccia
-                - type: vertical-stack
-                  cards:
-                  - type: conditional
-                    conditions:
-                    - condition: state
-                      entity: sensor.vmc_master_alert_avvio_interfaccia
-                      state_not:
-                      - Alert
-                      - Alert Δ Temp.
-                    card:
-                      show_name: true
-                      show_icon: true
-                      type: button
-                      tap_action:
-                        action: call-service
-                        service: shell_command.vmc_master_velocita_3
-                        target: {}
-                      name: Velocità 3
-                      show_state: true
-                      icon: mdi:numeric-3-box
-                      hold_action:
-                        action: none
-                  - type: conditional
-                    conditions:
-                    - condition: state
-                      entity: sensor.vmc_master_alert_avvio_interfaccia
-                      state:
-                      - Alert
-                      - Alert Δ Temp.
-                    card:
-                      show_name: true
-                      show_icon: true
-                      type: button
-                      tap_action:
-                        action: call-service
-                        service: shell_command.vmc_master_velocita_3
-                        target: {}
-                      name: Velocità 3
-                      show_state: true
-                      icon: mdi:numeric-3-box
-                      hold_action:
-                        action: none
-                      entity: sensor.vmc_master_alert_avvio_interfaccia
-                - type: vertical-stack
-                  cards:
-                  - type: conditional
-                    conditions:
-                    - condition: state
-                      entity: sensor.vmc_master_alert_avvio_interfaccia
-                      state_not:
-                      - Alert
-                      - Alert Δ Temp.
-                    card:
-                      show_name: true
-                      show_icon: true
-                      type: button
-                      tap_action:
-                        action: call-service
-                        service: shell_command.vmc_master_velocita_4
-                        target: {}
-                      name: Velocità 4
-                      show_state: true
-                      icon: mdi:numeric-4-box
-                      hold_action:
-                        action: none
-                  - type: conditional
-                    conditions:
-                    - condition: state
-                      entity: sensor.vmc_master_alert_avvio_interfaccia
-                      state:
-                      - Alert
-                      - Alert Δ Temp.
-                    card:
-                      show_name: true
-                      show_icon: true
-                      type: button
-                      tap_action:
-                        action: call-service
-                        service: shell_command.vmc_master_velocita_4
-                        target: {}
-                      name: Velocità 4
-                      show_state: true
-                      icon: mdi:numeric-4-box
-                      hold_action:
-                        action: none
-                      entity: sensor.vmc_master_alert_avvio_interfaccia
-                - type: vertical-stack
-                  cards:
-                  - type: conditional
-                    conditions:
-                    - condition: state
-                      entity: sensor.vmc_master_alert_avvio_interfaccia
-                      state_not:
-                      - Alert
-                    card:
-                      show_name: true
-                      show_icon: true
-                      type: button
-                      tap_action:
-                        action: call-service
-                        service: shell_command.vmc_master_notturna
-                        target: {}
-                      name: Notturna
-                      show_state: true
-                      icon: mdi:weather-night
-                      hold_action:
-                        action: none
-                  - type: conditional
-                    conditions:
-                    - condition: state
-                      entity: sensor.vmc_master_alert_avvio_interfaccia
-                      state:
-                      - Alert
-                    card:
-                      show_name: true
-                      show_icon: true
-                      type: button
-                      tap_action:
-                        action: call-service
-                        service: shell_command.vmc_master_notturna
-                        target: {}
-                      name: Notturna
-                      show_state: true
-                      icon: mdi:weather-night
-                      hold_action:
-                        action: none
-                      entity: sensor.vmc_master_alert_avvio_interfaccia
-                - type: vertical-stack
-                  cards:
-                  - type: conditional
-                    conditions:
-                    - condition: state
-                      entity: sensor.vmc_master_alert_avvio_interfaccia
-                      state_not:
-                      - Alert
-                      - Alert Δ Temp.
-                    card:
-                      show_name: true
-                      show_icon: true
-                      type: button
-                      tap_action:
-                        action: call-service
-                        service: shell_command.vmc_master_iperventilazione
-                        target: {}
-                      name: Iperventilazione
-                      show_state: true
-                      icon: mdi:wind-power
-                      hold_action:
-                        action: none
-                  - type: conditional
-                    conditions:
-                    - condition: state
-                      entity: sensor.vmc_master_alert_avvio_interfaccia
-                      state:
-                      - Alert
-                      - Alert Δ Temp.
-                    card:
-                      show_name: true
-                      show_icon: true
-                      type: button
-                      tap_action:
-                        action: call-service
-                        service: shell_command.vmc_master_iperventilazione
-                        target: {}
-                      name: Iperventilazione
-                      show_state: true
-                      icon: mdi:wind-power
-                      hold_action:
-                        action: none
-                      entity: sensor.vmc_master_alert_avvio_interfaccia
-                - type: vertical-stack
-                  cards:
-                  - type: conditional
-                    conditions:
-                    - condition: and
-                      conditions:
-                      - condition: state
-                        entity: sensor.vmc_master_status_mese_corrente_freeheating_o_freecooling
-                        state: Free Heating
-                      - condition: or
-                        conditions:
-                        - condition: state
-                          entity: sensor.vmc_master_alert_monitoraggio_free_heating_o_free_cooling_allert_interfaccia_avvisi
-                          state: Nessuna Allerta Free Heating Programmato
-                        - condition: state
-                          entity: sensor.vmc_master_alert_monitoraggio_free_heating_o_free_cooling_allert_interfaccia_avvisi
-                          state: Nessuna Allerta Free Heating Programmato, Presenza di Inquinanti
-                    - condition: state
-                      entity: sensor.vmc_master_alert_avvio_interfaccia
-                      state_not:
-                      - Alert
-                      - Alert Δ Temp.
-                    card:
-                      show_name: true
-                      show_icon: true
-                      type: button
-                      tap_action:
-                        action: call-service
-                        service: shell_command.vmc_master_freecooling
-                      icon: mdi:weather-sunny
-                      name: Free Heating
-                      show_state: true
-                      hold_action:
-                        action: none
-                  - type: conditional
+                - show_name: true
+                  show_icon: true
+                  type: button
+                  tap_action:
+                    action: call-service
+                    service: shell_command.vmc_master_velocita_1
+                    target: {}
+                  name: Velocità 1
+                  show_state: true
+                  icon: mdi:numeric-1-box
+                  hold_action:
+                    action: none
+                  visibility:
+                  - condition: state
+                    entity: sensor.vmc_master_alert_avvio_interfaccia
+                    state_not:
+                    - Alert
+                - show_name: true
+                  show_icon: true
+                  type: button
+                  tap_action:
+                    action: call-service
+                    service: shell_command.vmc_master_velocita_1
+                    target: {}
+                  name: Velocità 1
+                  show_state: true
+                  icon: mdi:numeric-1-box
+                  hold_action:
+                    action: none
+                  entity: sensor.vmc_master_alert_avvio_interfaccia
+                  visibility:
+                  - condition: state
+                    entity: sensor.vmc_master_alert_avvio_interfaccia
+                    state:
+                    - Alert
+                - show_name: true
+                  show_icon: true
+                  type: button
+                  tap_action:
+                    action: call-service
+                    service: shell_command.vmc_master_velocita_2
+                    target: {}
+                  name: Velocità 2
+                  show_state: true
+                  icon: mdi:numeric-2-box
+                  hold_action:
+                    action: none
+                  visibility:
+                  - condition: state
+                    entity: sensor.vmc_master_alert_avvio_interfaccia
+                    state_not:
+                    - Alert
+                    - Alert Δ Temp.
+                - show_name: true
+                  show_icon: true
+                  type: button
+                  tap_action:
+                    action: call-service
+                    service: shell_command.vmc_master_velocita_2
+                    target: {}
+                  name: Velocità 2
+                  show_state: true
+                  icon: mdi:numeric-2-box
+                  hold_action:
+                    action: none
+                  entity: sensor.vmc_master_alert_avvio_interfaccia
+                  visibility:
+                  - condition: state
+                    entity: sensor.vmc_master_alert_avvio_interfaccia
+                    state:
+                    - Alert
+                    - Alert Δ Temp.
+                - show_name: true
+                  show_icon: true
+                  type: button
+                  tap_action:
+                    action: call-service
+                    service: shell_command.vmc_master_velocita_3
+                    target: {}
+                  name: Velocità 3
+                  show_state: true
+                  icon: mdi:numeric-3-box
+                  hold_action:
+                    action: none
+                  visibility:
+                  - condition: state
+                    entity: sensor.vmc_master_alert_avvio_interfaccia
+                    state_not:
+                    - Alert
+                    - Alert Δ Temp.
+                - show_name: true
+                  show_icon: true
+                  type: button
+                  tap_action:
+                    action: call-service
+                    service: shell_command.vmc_master_velocita_3
+                    target: {}
+                  name: Velocità 3
+                  show_state: true
+                  icon: mdi:numeric-3-box
+                  hold_action:
+                    action: none
+                  entity: sensor.vmc_master_alert_avvio_interfaccia
+                  visibility:
+                  - condition: state
+                    entity: sensor.vmc_master_alert_avvio_interfaccia
+                    state:
+                    - Alert
+                    - Alert Δ Temp.
+                - show_name: true
+                  show_icon: true
+                  type: button
+                  tap_action:
+                    action: call-service
+                    service: shell_command.vmc_master_velocita_4
+                    target: {}
+                  name: Velocità 4
+                  show_state: true
+                  icon: mdi:numeric-4-box
+                  hold_action:
+                    action: none
+                  visibility:
+                  - condition: state
+                    entity: sensor.vmc_master_alert_avvio_interfaccia
+                    state_not:
+                    - Alert
+                    - Alert Δ Temp.
+                - show_name: true
+                  show_icon: true
+                  type: button
+                  tap_action:
+                    action: call-service
+                    service: shell_command.vmc_master_velocita_4
+                    target: {}
+                  name: Velocità 4
+                  show_state: true
+                  icon: mdi:numeric-4-box
+                  hold_action:
+                    action: none
+                  entity: sensor.vmc_master_alert_avvio_interfaccia
+                  visibility:
+                  - condition: state
+                    entity: sensor.vmc_master_alert_avvio_interfaccia
+                    state:
+                    - Alert
+                    - Alert Δ Temp.
+                - show_name: true
+                  show_icon: true
+                  type: button
+                  tap_action:
+                    action: call-service
+                    service: shell_command.vmc_master_notturna
+                    target: {}
+                  name: Notturna
+                  show_state: true
+                  icon: mdi:weather-night
+                  hold_action:
+                    action: none
+                  visibility:
+                  - condition: state
+                    entity: sensor.vmc_master_alert_avvio_interfaccia
+                    state_not:
+                    - Alert
+                - show_name: true
+                  show_icon: true
+                  type: button
+                  tap_action:
+                    action: call-service
+                    service: shell_command.vmc_master_notturna
+                    target: {}
+                  name: Notturna
+                  show_state: true
+                  icon: mdi:weather-night
+                  hold_action:
+                    action: none
+                  entity: sensor.vmc_master_alert_avvio_interfaccia
+                  visibility:
+                  - condition: state
+                    entity: sensor.vmc_master_alert_avvio_interfaccia
+                    state:
+                    - Alert
+                - show_name: true
+                  show_icon: true
+                  type: button
+                  tap_action:
+                    action: call-service
+                    service: shell_command.vmc_master_iperventilazione
+                    target: {}
+                  name: Iperventil.
+                  show_state: true
+                  icon: mdi:wind-power
+                  hold_action:
+                    action: none
+                  visibility:
+                  - condition: state
+                    entity: sensor.vmc_master_alert_avvio_interfaccia
+                    state_not:
+                    - Alert
+                    - Alert Δ Temp.
+                - show_name: true
+                  show_icon: true
+                  type: button
+                  tap_action:
+                    action: call-service
+                    service: shell_command.vmc_master_iperventilazione
+                    target: {}
+                  name: Iperventil.
+                  show_state: true
+                  icon: mdi:wind-power
+                  hold_action:
+                    action: none
+                  entity: sensor.vmc_master_alert_avvio_interfaccia
+                  visibility:
+                  - condition: state
+                    entity: sensor.vmc_master_alert_avvio_interfaccia
+                    state:
+                    - Alert
+                    - Alert Δ Temp.
+                - show_name: true
+                  show_icon: true
+                  type: button
+                  tap_action:
+                    action: call-service
+                    service: shell_command.vmc_master_freecooling
+                  icon: mdi:weather-sunny
+                  name: Free Heating
+                  show_state: true
+                  hold_action:
+                    action: none
+                  visibility:
+                  - condition: and
                     conditions:
                     - condition: state
                       entity: sensor.vmc_master_status_mese_corrente_freeheating_o_freecooling
                       state: Free Heating
-                    - condition: state
-                      entity: sensor.vmc_master_alert_avvio_interfaccia
-                      state:
-                      - Alert
-                      - Alert Δ Temp.
-                      - Alert Free
-                    card:
-                      show_name: true
-                      show_icon: true
-                      type: button
-                      tap_action:
-                        action: call-service
-                        service: shell_command.vmc_master_freecooling
-                      icon: mdi:weather-sunny-alert
-                      name: Free Heating
-                      show_state: true
-                      hold_action:
-                        action: none
-                      entity: sensor.vmc_master_alert_avvio_interfaccia
-                  - type: conditional
-                    conditions:
-                    - condition: and
+                    - condition: or
                       conditions:
                       - condition: state
-                        entity: sensor.vmc_master_status_mese_corrente_freeheating_o_freecooling
-                        state: Free Cooling
-                      - condition: or
-                        conditions:
-                        - condition: state
-                          entity: sensor.vmc_master_alert_monitoraggio_free_heating_o_free_cooling_allert_interfaccia_avvisi
-                          state: Nessuna Allerta Free Cooling Programmato
-                        - condition: state
-                          entity: sensor.vmc_master_alert_monitoraggio_free_heating_o_free_cooling_allert_interfaccia_avvisi
-                          state: Nessuna Allerta Free Cooling Programmato, Presenza di Inquinanti
-                    - condition: state
-                      entity: sensor.vmc_master_alert_avvio_interfaccia
-                      state_not:
-                      - Alert
-                      - Alert Δ Temp.
-                    card:
-                      type: button
-                      tap_action:
-                        action: call-service
-                        service: shell_command.vmc_master_freecooling
-                      icon: mdi:snowflake
-                      name: Free Cooling
-                      show_name: true
-                      show_icon: true
-                      show_state: true
-                      hold_action:
-                        action: none
-                  - type: conditional
+                        entity: sensor.vmc_master_alert_monitoraggio_free_heating_o_free_cooling_allert_interfaccia_avvisi
+                        state: Nessuna Allerta Free Heating Programmato
+                      - condition: state
+                        entity: sensor.vmc_master_alert_monitoraggio_free_heating_o_free_cooling_allert_interfaccia_avvisi
+                        state: Nessuna Allerta Free Heating Programmato, Presenza di Inquinanti
+                  - condition: state
+                    entity: sensor.vmc_master_alert_avvio_interfaccia
+                    state_not:
+                    - Alert
+                    - Alert Δ Temp.
+                - show_name: true
+                  show_icon: true
+                  type: button
+                  tap_action:
+                    action: call-service
+                    service: shell_command.vmc_master_freecooling
+                  icon: mdi:weather-sunny-alert
+                  name: Free Heating
+                  show_state: true
+                  hold_action:
+                    action: none
+                  entity: sensor.vmc_master_alert_avvio_interfaccia
+                  visibility:
+                  - condition: state
+                    entity: sensor.vmc_master_status_mese_corrente_freeheating_o_freecooling
+                    state: Free Heating
+                  - condition: state
+                    entity: sensor.vmc_master_alert_avvio_interfaccia
+                    state:
+                    - Alert
+                    - Alert Δ Temp.
+                    - Alert Free
+                - type: button
+                  tap_action:
+                    action: call-service
+                    service: shell_command.vmc_master_freecooling
+                  icon: mdi:snowflake
+                  name: Free Cooling
+                  show_name: true
+                  show_icon: true
+                  show_state: true
+                  hold_action:
+                    action: none
+                  visibility:
+                  - condition: and
                     conditions:
                     - condition: state
                       entity: sensor.vmc_master_status_mese_corrente_freeheating_o_freecooling
                       state: Free Cooling
-                    - condition: state
-                      entity: sensor.vmc_master_alert_avvio_interfaccia
-                      state:
-                      - Alert
-                      - Alert Δ Temp.
-                      - Alert Free
-                    card:
-                      show_name: true
-                      show_icon: true
-                      type: button
-                      tap_action:
-                        action: call-service
-                        service: shell_command.vmc_master_freecooling
-                      icon: mdi:snowflake-alert
-                      name: Free Cooling
-                      show_state: true
-                      hold_action:
-                        action: none
-                      entity: sensor.vmc_master_alert_avvio_interfaccia
-                  - type: conditional
-                    conditions:
                     - condition: or
                       conditions:
                       - condition: state
-                        entity: sensor.vmc_master_status_mese_corrente_freeheating_o_freecooling
-                        state: Disabilitata
+                        entity: sensor.vmc_master_alert_monitoraggio_free_heating_o_free_cooling_allert_interfaccia_avvisi
+                        state: Nessuna Allerta Free Cooling Programmato
                       - condition: state
-                        entity: sensor.vmc_master_status_mese_corrente_freeheating_o_freecooling
-                        state: Non disponibile
-                      - condition: state
-                        entity: sensor.vmc_master_temp_esterna_status
-                        state: unavailable
-                      - condition: state
-                        entity: sensor.vmc_master_temp_interna_status
-                        state: unavailable
-                      - condition: state
-                        entity: sensor.vmc_master_temp_interna_status
-                        state: Non disponibile
-                      - condition: state
-                        entity: sensor.vmc_master_temp_esterna_status
-                        state: Non disponibile
-                    - condition: state
-                      entity: sensor.vmc_master_alert_avvio_interfaccia
-                      state_not:
-                      - Alert
-                      - Alert Δ Temp.
-                    card:
-                      type: button
-                      tap_action:
-                        action: call-service
-                        service: shell_command.vmc_master_freecooling
-                      icon: mdi:sun-snowflake-variant
-                      name: Free Cool./Heat.
-                      show_name: true
-                      show_icon: true
-                      show_state: true
-                      hold_action:
-                        action: none
-                  - type: conditional
+                        entity: sensor.vmc_master_alert_monitoraggio_free_heating_o_free_cooling_allert_interfaccia_avvisi
+                        state: Nessuna Allerta Free Cooling Programmato, Presenza di Inquinanti
+                  - condition: state
+                    entity: sensor.vmc_master_alert_avvio_interfaccia
+                    state_not:
+                    - Alert
+                    - Alert Δ Temp.
+                - show_name: true
+                  show_icon: true
+                  type: button
+                  tap_action:
+                    action: call-service
+                    service: shell_command.vmc_master_freecooling
+                  icon: mdi:snowflake-alert
+                  name: Free Cooling
+                  show_state: true
+                  hold_action:
+                    action: none
+                  entity: sensor.vmc_master_alert_avvio_interfaccia
+                  visibility:
+                  - condition: state
+                    entity: sensor.vmc_master_status_mese_corrente_freeheating_o_freecooling
+                    state: Free Cooling
+                  - condition: state
+                    entity: sensor.vmc_master_alert_avvio_interfaccia
+                    state:
+                    - Alert
+                    - Alert Δ Temp.
+                    - Alert Free
+                - type: button
+                  tap_action:
+                    action: call-service
+                    service: shell_command.vmc_master_freecooling
+                  icon: mdi:sun-snowflake-variant
+                  name: Free Cool./Heat.
+                  show_name: true
+                  show_icon: true
+                  show_state: true
+                  hold_action:
+                    action: none
+                  visibility:
+                  - condition: or
                     conditions:
-                    - condition: or
-                      conditions:
-                      - condition: state
-                        entity: sensor.vmc_master_status_mese_corrente_freeheating_o_freecooling
-                        state: Disabilitata
-                      - condition: state
-                        entity: sensor.vmc_master_status_mese_corrente_freeheating_o_freecooling
-                        state: Non disponibile
-                      - condition: state
-                        entity: sensor.vmc_master_temp_esterna_status
-                        state: unavailable
-                      - condition: state
-                        entity: sensor.vmc_master_temp_interna_status
-                        state: unavailable
-                      - condition: state
-                        entity: sensor.vmc_master_temp_interna_status
-                        state: Non disponibile
-                      - condition: state
-                        entity: sensor.vmc_master_temp_esterna_status
-                        state: Non disponibile
                     - condition: state
-                      entity: sensor.vmc_master_alert_avvio_interfaccia
-                      state:
-                      - Alert
-                      - Alert Δ Temp.
-                    card:
-                      type: button
-                      tap_action:
-                        action: call-service
-                        service: shell_command.vmc_master_freecooling
-                      icon: mdi:sun-snowflake-variant
-                      name: Free Cool./Heat.
-                      show_name: true
-                      show_icon: true
-                      show_state: true
-                      hold_action:
-                        action: none
-                      entity: sensor.vmc_master_alert_avvio_interfaccia
+                      entity: sensor.vmc_master_status_mese_corrente_freeheating_o_freecooling
+                      state: Disabilitata
+                    - condition: state
+                      entity: sensor.vmc_master_status_mese_corrente_freeheating_o_freecooling
+                      state: Non disponibile
+                    - condition: state
+                      entity: sensor.vmc_master_temp_esterna_status
+                      state: unavailable
+                    - condition: state
+                      entity: sensor.vmc_master_temp_interna_status
+                      state: unavailable
+                    - condition: state
+                      entity: sensor.vmc_master_temp_interna_status
+                      state: Non disponibile
+                    - condition: state
+                      entity: sensor.vmc_master_temp_esterna_status
+                      state: Non disponibile
+                  - condition: state
+                    entity: sensor.vmc_master_alert_avvio_interfaccia
+                    state_not:
+                    - Alert
+                    - Alert Δ Temp.
+                - type: button
+                  tap_action:
+                    action: call-service
+                    service: shell_command.vmc_master_freecooling
+                  icon: mdi:sun-snowflake-variant
+                  name: Free Cool./Heat.
+                  show_name: true
+                  show_icon: true
+                  show_state: true
+                  hold_action:
+                    action: none
+                  entity: sensor.vmc_master_alert_avvio_interfaccia
+                  visibility:
+                  - condition: or
+                    conditions:
+                    - condition: state
+                      entity: sensor.vmc_master_status_mese_corrente_freeheating_o_freecooling
+                      state: Disabilitata
+                    - condition: state
+                      entity: sensor.vmc_master_status_mese_corrente_freeheating_o_freecooling
+                      state: Non disponibile
+                    - condition: state
+                      entity: sensor.vmc_master_temp_esterna_status
+                      state: unavailable
+                    - condition: state
+                      entity: sensor.vmc_master_temp_interna_status
+                      state: unavailable
+                    - condition: state
+                      entity: sensor.vmc_master_temp_interna_status
+                      state: Non disponibile
+                    - condition: state
+                      entity: sensor.vmc_master_temp_esterna_status
+                      state: Non disponibile
+                  - condition: state
+                    entity: sensor.vmc_master_alert_avvio_interfaccia
+                    state:
+                    - Alert
+                    - Alert Δ Temp.
                 columns: 4
               - type: horizontal-stack
                 cards:
@@ -10589,9 +10529,13 @@ cards:
                   <a href="https://raw.githubusercontent.com/DanRobo76/VMC-HELTY-FLOW/main/immagini/Informazioni/06_punto_di_rugiada.png" target="_blank"><img src="https://raw.githubusercontent.com/DanRobo76/VMC-HELTY-FLOW/main/immagini/Informazioni/06_punto_di_rugiada.png" alt="Punto di Rugiada in funzione dell'umidità relativa" width="100%"></a>
 
                   <table><tr><td align="justify">
-                  <b>Calcolo.</b> Formula di Magnus, con la temperatura T [°C] e l'umidità relativa UR [%]
+                  <b>Calcolo.</b> Formula di Magnus-Tetens (sotto), con la temperatura T [°C] e l'umidità relativa UR [%]
                   dell'ambiente Interno ed Esterno. Il valore risulta [Non Calcolabile] se UR ≤ 0 % oppure
                   UR > 100 %. Più l'aria è umida, più il punto di rugiada si avvicina alla temperatura dell'aria.
+                  </td></tr></table>
+                  <a href="https://raw.githubusercontent.com/DanRobo76/VMC-HELTY-FLOW/main/immagini/Informazioni/formula_punto_di_rugiada.png" target="_blank"><img src="https://raw.githubusercontent.com/DanRobo76/VMC-HELTY-FLOW/main/immagini/Informazioni/formula_punto_di_rugiada.png" alt="Formula del Punto di Rugiada" width="60%"></a>
+                  <table><tr><td align="justify">
+                  E<sub>s</sub> = pressione di vapore saturo [hPa]; E = pressione di vapore [hPa]; T<sub>d</sub> = Punto di Rugiada [°C].
                   </td></tr></table>
 
                   </details>
@@ -10600,23 +10544,26 @@ cards:
 
                   <details>
 
-                  <summary><b>7 Verifica Superamento dell'Umidità
-                  Interna</b></summary>
+                  <summary><b>7 Umidità Interna: Fasce, Avvio e Arresto</b></summary>
 
                   <table><tr><td align="justify">
-                  <b>Che cos'è.</b> L'avvio e l'arresto automatico della VMC in base all'umidità relativa
-                  interna, con l'interruttore [VMC ON/OFF, in Funzione dell'Umidità Interna] su ON e senza
-                  altre allerte in corso.
-                  <br><br>
-                  <b>Avvio.</b> L'umidità è maggiore o uguale al valore limite impostato [Avvio VMC per Umidità ≥],
-                  oppure compresa tra l'1 % e il 35 % (aria secca: si fa entrare aria dall'esterno). Sotto l'1 %
-                  il valore è [Non Calcolabile] e la VMC non si avvia.
-                  <br><br>
-                  <b>Arresto.</b> L'umidità torna compresa tra il 35 % e il valore limite impostato.
+                  <b>Che cos'è.</b> L'umidità relativa interna U viene classificata in fasce. Le fasce generano gli
+                  avvisi Pop-Up e, con l'interruttore [VMC ON/OFF, in Funzione dell'Umidità Interna] su ON e senza
+                  altre allerte in corso, comandano l'avvio e l'arresto automatico della VMC.
                   </td></tr></table>
-
+                  <table width="100%">
+                  <tr><th style="padding: 4px 8px; border: 1px solid #c3c2b7;">Umidità interna U</th><th style="padding: 4px 8px; border: 1px solid #c3c2b7;">Fascia</th><th style="padding: 4px 8px; border: 1px solid #c3c2b7;">Avviso</th><th style="padding: 4px 8px; border: 1px solid #c3c2b7;">VMC (interruttore ON)</th></tr>
+                  <tr><td style="padding: 4px 8px; border: 1px solid #c3c2b7;">U &lt; 1 %</td><td style="padding: 4px 8px; border: 1px solid #c3c2b7;">[Non Calcolabile]</td><td style="padding: 4px 8px; border: 1px solid #c3c2b7;">nessuno</td><td style="padding: 4px 8px; border: 1px solid #c3c2b7;">non si avvia</td></tr>
+                  <tr><td style="padding: 4px 8px; border: 1px solid #c3c2b7;">1 % ≤ U ≤ 35 %</td><td style="padding: 4px 8px; border: 1px solid #c3c2b7;">Possibile Secchezza, Disidratazione</td><td style="padding: 4px 8px; border: 1px solid #c3c2b7;">Pop-Up</td><td style="padding: 4px 8px; border: 1px solid #c3c2b7;">si avvia (aria secca: si fa entrare aria dall'esterno)</td></tr>
+                  <tr><td style="padding: 4px 8px; border: 1px solid #c3c2b7;">35 % &lt; U &lt; Limite</td><td style="padding: 4px 8px; border: 1px solid #c3c2b7;">Normale</td><td style="padding: 4px 8px; border: 1px solid #c3c2b7;">nessuno</td><td style="padding: 4px 8px; border: 1px solid #c3c2b7;">si arresta</td></tr>
+                  <tr><td style="padding: 4px 8px; border: 1px solid #c3c2b7;">Limite ≤ U ≤ 100 %</td><td style="padding: 4px 8px; border: 1px solid #c3c2b7;">Possibile Muffe, Batteri</td><td style="padding: 4px 8px; border: 1px solid #c3c2b7;">Pop-Up</td><td style="padding: 4px 8px; border: 1px solid #c3c2b7;">si avvia</td></tr>
+                  <tr><td style="padding: 4px 8px; border: 1px solid #c3c2b7;">U &gt; 100 %</td><td style="padding: 4px 8px; border: 1px solid #c3c2b7;">[Non Calcolabile]</td><td style="padding: 4px 8px; border: 1px solid #c3c2b7;">nessuno</td><td style="padding: 4px 8px; border: 1px solid #c3c2b7;">—</td></tr>
+                  </table>
+                  <table><tr><td align="justify">
+                  Limite = [Avvio VMC per Umidità ≥], ora impostato a {{ (states('input_number.vmc_master_umidita_avvio') | float(0)) | round(1) | string | replace('.', ',') }} %. All'avvio la VMC va alla
+                  [Set Velocità Umidità di Avvio]; all'arresto torna alla velocità memorizzata.
+                  </td></tr></table>
                   <a href="https://raw.githubusercontent.com/DanRobo76/VMC-HELTY-FLOW/main/immagini/Informazioni/07_umidita_avvio_arresto.png" target="_blank"><img src="https://raw.githubusercontent.com/DanRobo76/VMC-HELTY-FLOW/main/immagini/Informazioni/07_umidita_avvio_arresto.png" alt="Avvio e arresto in funzione dell'umidità" width="100%"></a>
-
                   <table><tr><td align="justify">
                   <b>Note.</b>
                   <br><br>
@@ -10643,13 +10590,13 @@ cards:
                   • Se si entra prima nel Calendario, oppure è già in corso un'altra allerta, e poi sale
                   l'umidità, l'allerta Umidità non scatta e l'interruttore si spegne normalmente.
                   </td></tr></table>
-
                   <table><tr><td align="justify">
                   <b>Valori impostabili.</b>
-                  <br>• [Avvio VMC per Umidità ≥]: da 65 a 100 % (passo 0,1 %).
-                  <br>• [Set Velocità Umidità di Avvio]: Velocità 0, 1, 2, 3, 4, Notturna, Iperventilazione,
-                  Free Cool./Heat.
-                  <br>Le soglie dell'1 % e del 35 % sono fisse.
+                  <br>• [Avvio VMC per Umidità ≥] (Limite): da 65 a 100 % (passo 0,1 %); da questo valore parte la fascia
+                  Possibile Muffe, Batteri.
+                  <br>• [Set Velocità Umidità di Avvio]: Velocità 0, 1, 2, 3, 4, Notturna, Iperventilazione, Free Cool./Heat.
+                  <br>• [Offset Umidità Int.]: da −100 a +100 % (passo 0,1 %), si somma al valore letto.
+                  <br>Fisse: le soglie dell'1 % e del 35 %; sotto l'1 % e sopra il 100 % il valore è [Non Calcolabile].
                   </td></tr></table>
                   </details>
 
@@ -10787,25 +10734,12 @@ cards:
                   attivare la VMC.
 
 
-                  <pre style="font-size: smaller;">
-
-                  P.di Rugiada Esterna - P. di Rugiada Interno < Set Lim. Δ P.
-                  di Rugiada -> <font color="rgb(128, 0, 128)">Si può impiegare
-                  [Nessuna Allerta]</font>
-
-                  P.di Rugiada Esterna - P. di Rugiada Interno ≥ Set Lim. Δ P.
-                  di Rugiada ->  <font color="rgb(100, 100, 100)">Se ne
-                  sconsiglia l'impiego [Allerta]</font>
-
-                  <font color='green'><br>Se l'Impostazione [VMC ON/OFF, in
-                  Funzione del Lim. Δ P. di Rugiada] è Attiva ed è stato superato
-                  il valore 
-
-                  del [Set Lim. Δ P. di Rugiada], allora la VMC si Arresterà,
-                  per poi riattivarsi successivamente non appena le condizioni
-                  lo permetterano.</font>
-
-                  </pre>
+                  <a href="https://raw.githubusercontent.com/DanRobo76/VMC-HELTY-FLOW/main/immagini/Informazioni/formula_delta_pdr.png" target="_blank"><img src="https://raw.githubusercontent.com/DanRobo76/VMC-HELTY-FLOW/main/immagini/Informazioni/formula_delta_pdr.png" alt="Confronto del Δ Punto di Rugiada con il Set" width="90%"></a>
+                  <table><tr><td align="justify">
+                  Si può impiegare = [Nessuna Allerta]; Se ne sconsiglia l'impiego = [Allerta]. Se l'impostazione
+                  [VMC ON/OFF, in Funzione del Lim. Δ P. di Rugiada] è attiva e il Δ raggiunge o supera il
+                  [Set Lim. Δ P. di Rugiada], la VMC si arresta e riparte non appena le condizioni lo permettono.
+                  </td></tr></table>
 
 
                   Suggerimenti di impostazione del [Set Lim. Δ P. di Rugiada]:
@@ -10818,40 +10752,7 @@ cards:
 
                   <details>
 
-                  <summary><b>9 Range Sensore Umidità U [%]</b></summary>
-
-                  <table><tr><td align="justify">
-                  <b>Che cosa indica.</b> Le fasce dell'umidità relativa interna usate per gli avvisi
-                  Pop-Up. Il valore limite è l'[Umidità Interna di Avvio] impostata: sopra di essa si
-                  segnalano possibili muffe e batteri, sotto il 35 % possibile secchezza.
-                  </td></tr></table>
-
-                  <a href="https://raw.githubusercontent.com/DanRobo76/VMC-HELTY-FLOW/main/immagini/Informazioni/09_fasce_umidita.png" target="_blank"><img src="https://raw.githubusercontent.com/DanRobo76/VMC-HELTY-FLOW/main/immagini/Informazioni/09_fasce_umidita.png" alt="Fasce dell'umidità relativa" width="100%"></a>
-
-
-                  <pre style="font-size: smaller;">
-                           U < 1     <font color="rgb(128, 0, 128)">Non Calcolabile [Nessuna Allerta]</font>
-                       1 ≤ U ≤ 35    <font color="rgb(100, 100, 100)">Possibile Secchezza, Disidratazione [Allerta Pop-Up]</font>
-                      35 < U < {{states('input_number.vmc_master_umidita_avvio') | float}}  <font color="rgb(128, 0, 128)">Normale [Nessuna Allerta]</font>
-                    {{states('input_number.vmc_master_umidita_avvio') | float}} ≤ U ≤ 100   <font color="rgb(100, 100, 100)">Possibile Muffe, Batteri [Allerta Pop-Up]</font>
-                         U > 100     <font color="rgb(128, 0, 128)">Non Calcolabile [Nessuna Allerta]</font>
-                  </pre>
-
-                  <br>
-
-                  <table><tr><td align="justify">
-                  <b>Valori impostabili.</b>
-                  <br>• Valore limite [Avvio VMC per Umidità ≥]: da 65 a 100 % (passo 0,1 %); la fascia
-                  Possibili Muffe, Batteri parte da questo valore.
-                  <br>• [Offset Umidità Int.]: da −100 a +100 % (passo 0,1 %), si somma al valore letto.
-                  <br>Fissi: Possibile Secchezza da 1 % a 35 %; sotto l'1 % e sopra il 100 % [Non Calcolabile].
-                  </td></tr></table>
-                  </details>
-
-
-                  <details>
-
-                  <summary><b>10 Umidità Assoluta U [g/m³]</b></summary>
+                  <summary><b>9 Umidità Assoluta U [g/m³]</b></summary>
 
                   <table><tr><td align="justify">
                   <b>Che cos'è.</b> La quantità di vapore acqueo contenuta in un metro cubo d'aria, in
@@ -10860,20 +10761,17 @@ cards:
                   </td></tr></table>
 
 
-                  <pre style="font-size: smaller;">
-                    UR ≤ 0 % o non numerica   Non Calcolabile
-                    Sensori VMC assenti       Non disponibile
-                    UR > 0 %                  Valore calcolato
-
-                    UA = UR·6,112·2,1674·e^(17,67·T/(T+243,5))
-                         / (T+273,15)
-
-                    UR = Umidità Relativa [%]
-                    T  = Temperatura [°C]
-                    UA = Umidità Assoluta [g/m³]
-                    Per l'ambiente Interno ed Esterno.
-                    Solo informativo: non genera allerte.
-                  </pre>
+                  <a href="https://raw.githubusercontent.com/DanRobo76/VMC-HELTY-FLOW/main/immagini/Informazioni/formula_umidita_assoluta.png" target="_blank"><img src="https://raw.githubusercontent.com/DanRobo76/VMC-HELTY-FLOW/main/immagini/Informazioni/formula_umidita_assoluta.png" alt="Formula dell'Umidità Assoluta" width="75%"></a>
+                  <table><tr><td align="justify">
+                  UR = Umidità Relativa [%]; T = Temperatura [°C]; UA = Umidità Assoluta [g/m³]. Si calcola per
+                  l'ambiente Interno e per quello Esterno. Solo informativo: non genera allerte.
+                  </td></tr></table>
+                  <table width="100%">
+                  <tr><th style="padding: 4px 8px; border: 1px solid #c3c2b7;">Condizione</th><th style="padding: 4px 8px; border: 1px solid #c3c2b7;">Valore mostrato</th></tr>
+                  <tr><td style="padding: 4px 8px; border: 1px solid #c3c2b7;">UR ≤ 0 % o non numerica</td><td style="padding: 4px 8px; border: 1px solid #c3c2b7;">[Non Calcolabile]</td></tr>
+                  <tr><td style="padding: 4px 8px; border: 1px solid #c3c2b7;">Sensori della VMC assenti</td><td style="padding: 4px 8px; border: 1px solid #c3c2b7;">Non disponibile</td></tr>
+                  <tr><td style="padding: 4px 8px; border: 1px solid #c3c2b7;">UR &gt; 0 %</td><td style="padding: 4px 8px; border: 1px solid #c3c2b7;">Valore calcolato</td></tr>
+                  </table>
 
                   <br>
 
@@ -10882,7 +10780,7 @@ cards:
 
                   <details>
 
-                  <summary><b>11 Range Sensore CO₂ [ppm]</b></summary>
+                  <summary><b>10 Range Sensore CO₂ [ppm]</b></summary>
 
                   <table><tr><td align="justify">
                   <b>Che cosa indica.</b> La concentrazione di anidride carbonica nell'aria interna, in
@@ -10893,15 +10791,15 @@ cards:
                   <a href="https://raw.githubusercontent.com/DanRobo76/VMC-HELTY-FLOW/main/immagini/Informazioni/11_co2.png" target="_blank"><img src="https://raw.githubusercontent.com/DanRobo76/VMC-HELTY-FLOW/main/immagini/Informazioni/11_co2.png" alt="Fasce di concentrazione CO2" width="100%"></a>
 
 
-                  <pre style="font-size: smaller;">
-                         CO₂ ≤ 0     <font color="rgb(128, 0, 128)">Assente «-» [Nessuna Allerta]</font>
-                     0 < CO₂ ≤ 800   <font color="rgb(128, 0, 128)">Bassa Concentrazione [Nessuna Allerta]</font>
-                   800 < CO₂ ≤ 1000  <font color="rgb(100, 100, 100)">Moderata Concentrazione [Allerta Pop-Up]</font>
-                  1000 < CO₂ < 1400  <font color="rgb(100, 100, 100)">Alta Concentrazione [Allerta Pop-Up]</font>
-                         CO₂ ≥ 1400  <font color="rgb(100, 100, 100)">Pessima Concentrazione [Allerta Pop-Up]</font>
-
-                    «-» = sensore non presente o valore non valido
-                  </pre>
+                  <table width="100%">
+                  <tr><th style="padding: 4px 8px; border: 1px solid #c3c2b7;">CO₂ [ppm]</th><th style="padding: 4px 8px; border: 1px solid #c3c2b7;">Fascia</th><th style="padding: 4px 8px; border: 1px solid #c3c2b7;">Avviso</th></tr>
+                  <tr><td style="padding: 4px 8px; border: 1px solid #c3c2b7;">CO₂ ≤ 0</td><td style="padding: 4px 8px; border: 1px solid #c3c2b7;">Assente «-»</td><td style="padding: 4px 8px; border: 1px solid #c3c2b7;">nessuno</td></tr>
+                  <tr><td style="padding: 4px 8px; border: 1px solid #c3c2b7;">0 &lt; CO₂ ≤ 800</td><td style="padding: 4px 8px; border: 1px solid #c3c2b7;">Bassa Concentrazione</td><td style="padding: 4px 8px; border: 1px solid #c3c2b7;">nessuno</td></tr>
+                  <tr><td style="padding: 4px 8px; border: 1px solid #c3c2b7;">800 &lt; CO₂ ≤ 1000</td><td style="padding: 4px 8px; border: 1px solid #c3c2b7;">Moderata Concentrazione</td><td style="padding: 4px 8px; border: 1px solid #c3c2b7;">Pop-Up</td></tr>
+                  <tr><td style="padding: 4px 8px; border: 1px solid #c3c2b7;">1000 &lt; CO₂ &lt; 1400</td><td style="padding: 4px 8px; border: 1px solid #c3c2b7;">Alta Concentrazione</td><td style="padding: 4px 8px; border: 1px solid #c3c2b7;">Pop-Up</td></tr>
+                  <tr><td style="padding: 4px 8px; border: 1px solid #c3c2b7;">CO₂ ≥ 1400</td><td style="padding: 4px 8px; border: 1px solid #c3c2b7;">Pessima Concentrazione</td><td style="padding: 4px 8px; border: 1px solid #c3c2b7;">Pop-Up</td></tr>
+                  </table>
+                  <table><tr><td>«-» = sensore non presente o valore non valido.</td></tr></table>
 
                   <br>
 
@@ -10929,7 +10827,7 @@ cards:
 
                   <details>
 
-                  <summary><b>12 Range Sensore VOC [ppb]</b></summary>
+                  <summary><b>11 Range Sensore VOC [ppb]</b></summary>
 
                   <table><tr><td align="justify">
                   <b>Che cosa indica.</b> La concentrazione di composti organici volatili (vernici,
@@ -10940,20 +10838,19 @@ cards:
                   <a href="https://raw.githubusercontent.com/DanRobo76/VMC-HELTY-FLOW/main/immagini/Informazioni/12_voc.png" target="_blank"><img src="https://raw.githubusercontent.com/DanRobo76/VMC-HELTY-FLOW/main/immagini/Informazioni/12_voc.png" alt="Fasce di concentrazione VOC" width="100%"></a>
 
 
-                  <pre style="font-size: smaller;">
-                        VOC ≤ 0     <font color="rgb(128, 0, 128)">Assente «-» [Nessuna Allerta]</font>
-                    0 < VOC ≤ 300   <font color="rgb(128, 0, 128)">Bassa Concentrazione [Nessuna Allerta]</font>
-                  300 < VOC ≤ 600   <font color="rgb(100, 100, 100)">Moderata
-                  Concentrazione [Allerta Pop-Up]</font>
-                        VOC > 600   <font color="rgb(100, 100, 100)">Pessima Concentrazione [Allerta Pop-Up]</font>
-
-                    «-» = sensore non presente o valore non valido
-                  </pre>
+                  <table width="100%">
+                  <tr><th style="padding: 4px 8px; border: 1px solid #c3c2b7;">VOC [ppb]</th><th style="padding: 4px 8px; border: 1px solid #c3c2b7;">Fascia</th><th style="padding: 4px 8px; border: 1px solid #c3c2b7;">Avviso</th></tr>
+                  <tr><td style="padding: 4px 8px; border: 1px solid #c3c2b7;">VOC ≤ 0</td><td style="padding: 4px 8px; border: 1px solid #c3c2b7;">Assente «-»</td><td style="padding: 4px 8px; border: 1px solid #c3c2b7;">nessuno</td></tr>
+                  <tr><td style="padding: 4px 8px; border: 1px solid #c3c2b7;">0 &lt; VOC ≤ 300</td><td style="padding: 4px 8px; border: 1px solid #c3c2b7;">Bassa Concentrazione</td><td style="padding: 4px 8px; border: 1px solid #c3c2b7;">nessuno</td></tr>
+                  <tr><td style="padding: 4px 8px; border: 1px solid #c3c2b7;">300 &lt; VOC ≤ 600</td><td style="padding: 4px 8px; border: 1px solid #c3c2b7;">Moderata Concentrazione</td><td style="padding: 4px 8px; border: 1px solid #c3c2b7;">Pop-Up</td></tr>
+                  <tr><td style="padding: 4px 8px; border: 1px solid #c3c2b7;">VOC &gt; 600</td><td style="padding: 4px 8px; border: 1px solid #c3c2b7;">Pessima Concentrazione</td><td style="padding: 4px 8px; border: 1px solid #c3c2b7;">Pop-Up</td></tr>
+                  </table>
+                  <table><tr><td>«-» = sensore non presente o valore non valido.</td></tr></table>
 
                   <br>
 
                   <table><tr><td align="justify">
-                  <b>Riquadro di avviso Inquinanti.</b> Vale quanto descritto alla voce 11.
+                  <b>Riquadro di avviso Inquinanti.</b> Vale quanto descritto alla voce 10.
                   </td></tr></table>
                   <table><tr><td align="justify">
                   <b>Valori impostabili.</b> [Offset VOC Int.] da −1000 a +1000 ppb (passo 1 ppb), si somma
@@ -10964,7 +10861,7 @@ cards:
 
                   <details>
 
-                  <summary><b>13 Calendario</b></summary>
+                  <summary><b>12 Calendario</b></summary>
 
                   <br>
 
@@ -11067,7 +10964,7 @@ cards:
 
                   <details>
 
-                  <summary><b>14 Free Heating / Free Cooling</b></summary>
+                  <summary><b>13 Free Heating / Free Cooling</b></summary>
 
                   <br>
 
@@ -11104,19 +11001,19 @@ cards:
                   <table><tr><td align="justify">
                   <b>Valori impostabili.</b> [Set Inizio Mese] e [Set Fine Mese] del Free Heating e del Free
                   Cooling: da Gennaio a Dicembre. I mesi fuori da entrambe le Fasce risultano non
-                  programmati («Disabilitata», voce 15).
+                  programmati («Disabilitata», voce 14).
                   </td></tr></table>
                   </details>
 
 
                   <details>
 
-                  <summary><b>15 Riscaldamento / Raffrescamento</b></summary>
+                  <summary><b>14 Riscaldamento / Raffrescamento</b></summary>
 
                   <table><tr><td align="justify">
                   <b>Che cos'è.</b> Il controllo che il Package esegue quando la VMC lavora in velocità Free
                   Cool./Heat. (scambiatore escluso: l'aria esterna entra direttamente). Verifica che l'aria
-                  esterna serva davvero allo scopo del mese programmato nella voce 14, confrontando la
+                  esterna serva davvero allo scopo del mese programmato nella voce 13, confrontando la
                   Temperatura Esterna con la Temperatura Interna (entrambe con i loro Offset).
                   <br><br>
                   <b>Free Heating</b> (riscaldare): serve aria esterna più calda o uguale a quella interna.
@@ -11128,6 +11025,12 @@ cards:
                   arresta (Velocità 0) dopo 24 secondi, mostrando un avviso, e riparte in Free Cool./Heat. non
                   appena la condizione torna favorevole. Se sono presenti Inquinanti (allerta CO₂ e/o VOC) la
                   VMC passa invece a Velocità 1 dopo 20 secondi.
+                  <br><br>
+                  <b>Cambio di velocità durante l'avviso.</b> Se, con la VMC arrestata dall'avviso, si sceglie
+                  un'altra velocità (ad esempio Velocità 1), la ripresa automatica in Free Cool./Heat. viene
+                  annullata: la VMC resta sulla velocità scelta, con lo scambiatore attivo, e non torna da sola
+                  in Free quando la condizione ritorna favorevole. Per riattivarla premere il tasto Free Heating
+                  / Free Cooling.
                   <br><br>
                   <b>Mesi non programmati.</b> Se il mese corrente non rientra in nessuna Fascia (stato
                   «Disabilitata») viene mostrato solo l'avviso di Raffrescamento o di Riscaldamento: la VMC
@@ -11156,9 +11059,9 @@ cards:
                   <br><br>
                   <b>Programmazione Giornaliera / Mensile.</b> Controllare la scheda Status Programmazione
                   Giornaliera: se compare «Disabilitata» per un mese che si voleva programmare, rivedere e
-                  correggere i mesi impostati nella voce 14.
+                  correggere i mesi impostati nella voce 13.
                   <br><br>
-                  <b>Valori impostabili.</b> Solo i mesi della voce 14: non ci sono soglie di temperatura da
+                  <b>Valori impostabili.</b> Solo i mesi della voce 13: non ci sono soglie di temperatura da
                   impostare, il confronto è diretto tra Temperatura Esterna e Interna.
                   </td></tr></table>
 
@@ -11167,7 +11070,7 @@ cards:
 
                   <details>
 
-                  <summary><b>16 Profili</b></summary>
+                  <summary><b>15 Profili</b></summary>
 
                   <br>
 
@@ -11311,7 +11214,7 @@ cards:
 
                   <details>
 
-                  <summary><b>17 Booleans ON</b></summary>
+                  <summary><b>16 Booleans ON</b></summary>
 
                   <table><tr><td align="justify">
                   <b>Che cos'è.</b> Un pannello di diagnosi che mostra, in tempo reale, le variabili booleane
@@ -12017,7 +11920,7 @@ cards:
 
 
                   <details> 
-                    <summary><b>18 Logiche di Funzionamento</b></summary> 
+                    <summary><b>17 Logiche di Funzionamento</b></summary> 
                     <table><tr><td align="justify">
                     <b>PRIORITA' DI ATTIVAZIONE DEGLI ALLARMI (Secondi per l'Attivazione e per la Ripresa):</b><br>
                     - Congelamento ≤ -18 [°C] Temp. Ext.: 0 Secondi. Durante il Congelamento la VMC resta ferma: se si prova a cambiarle Velocità viene riportata subito a Velocità 0 e, se non si ferma, il comando di arresto viene ripetuto finché non si ferma (circa ogni 7-8 Secondi);<br>
@@ -12026,7 +11929,7 @@ cards:
                     - Sup. Lim. Δ PdR con Inquinanti: 12 Secondi;<br>
                     - Sup. Lim. Δ PdR: 16 Secondi. Se l'allerta inizia con la VMC a Velocità 0, l'Umidità non la avvia fino al termine dell'allerta; se durante l'allerta si cambia Velocità, la VMC viene riportata a Velocità 0 e la nuova Velocità viene memorizzata e ripristinata al termine dell'allerta, anche al posto della ripresa in Free Cool./Heat.;<br>
                     - Free Cool./Heat. con Inquinanti: 20 Secondi;<br>
-                    - Free Cool./Heat.: 24 Secondi;<br>
+                    - Free Cool./Heat.: 24 Secondi. Se durante l'avviso si sceglie un'altra Velocità, la ripresa automatica in Free Cool./Heat. viene annullata e la VMC resta sulla Velocità scelta;<br>
                     - Umidità: 28 Secondi (la logica Umidità memorizza subito la Velocità in uso); se durante l'allerta si cambia Velocità, la nuova Velocità viene memorizzata dopo 4 Secondi e mantenuta a fine Umidità;<br>
                     - Black-Out: 32 Secondi per il Rilevamento e per il Ripristino.<br>
                     <br>
@@ -12061,7 +11964,7 @@ cards:
 
                   <details>
 
-                  <summary><strong>19 Indice di Benessere&nbsp;(Punto di
+                  <summary><strong>18 Indice di Benessere&nbsp;(Punto di
                   Rugiada)</strong></summary>
 
                   <table><tr><td align="justify">
@@ -12114,7 +12017,7 @@ cards:
 
                   <details>
 
-                  <summary><strong>20 Andamento Rischio
+                  <summary><strong>19 Andamento Rischio
                   Muffa&nbsp;</strong></summary>
 
                   <p align="center">
@@ -12242,29 +12145,11 @@ cards:
                   T (°C), per ciascun periodo di analisi (4, 8 e 12 Settimane):
 
 
-                  <table border="1" style="width:100%; border-collapse:
-                  collapse;">
-                    <thead>
-                      <tr style="background-color: #f2f2f2;">
-                        <th style="padding: 10px; border: 1px solid black;">Formula</th>
-                        <th style="padding: 10px; border: 1px solid black;">&nbsp;&nbspIntervallo (%)&nbsp;&nbsp</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      <tr>
-                        <td style="padding: 10px; border: 1px solid black;"><strong>&nbsp;&nbspc₁ =</strong> 20 × e^(−0.15·T) + 73&nbsp;&nbsp</td>
-                        <td style="padding: 10px; border: 1px solid black;">&nbsp;&nbsp72 % – 100 %</td>
-                      </tr>
-                      <tr>
-                        <td style="padding: 10px; border: 1px solid black;"><strong>&nbsp;&nbspc₂ =</strong> 17 × e^(−0.11·T) + 80&nbsp;&nbsp</td>
-                        <td style="padding: 10px; border: 1px solid black;">&nbsp;&nbsp79 % – 100 %</td>
-                      </tr>
-                      <tr>
-                        <td style="padding: 10px; border: 1px solid black;"><strong>&nbsp;&nbspc₃ =</strong> 15 × e^(−0.10·T) + 85&nbsp;&nbsp</td>
-                        <td style="padding: 10px; border: 1px solid black;">&nbsp;&nbsp84 % – 100 %</td>
-                      </tr>
-                    </tbody>
-                  </table>
+                  <a href="https://raw.githubusercontent.com/DanRobo76/VMC-HELTY-FLOW/main/immagini/Informazioni/formula_rischio_muffa.png" target="_blank"><img src="https://raw.githubusercontent.com/DanRobo76/VMC-HELTY-FLOW/main/immagini/Informazioni/formula_rischio_muffa.png" alt="Curve critiche di umidità del rischio muffa" width="55%"></a>
+                  <table><tr><td align="justify">
+                  T = temperatura media [°C] del periodo; c<sub>1</sub>, c<sub>2</sub>, c<sub>3</sub> = soglie di umidità [%],
+                  limitate rispettivamente tra 72 e 100 %, tra 79 e 100 % e tra 84 e 100 %.
+                  </td></tr></table>
 
 
                   <br>
@@ -12315,7 +12200,7 @@ cards:
 
                   <details>
 
-                  <summary><strong>21 Ricambi Aria al Giorno</strong></summary>
+                  <summary><strong>20 Ricambi Aria al Giorno</strong></summary>
 
                   <br>
 
@@ -12327,12 +12212,16 @@ cards:
                   sommata la portata della velocità in uso:
                   </td></tr></table>
 
-                  <pre style="font-size: smaller;">
-                    Velocità 1:  10 m³/h   Velocità 2:  17 m³/h
-                    Velocità 3:  26 m³/h   Velocità 4:  37 m³/h
-                    Iperventil.: 42 m³/h   Notturna:    10 m³/h *
-                    Free Cool./Heat.: 26 m³/h *
-                  </pre>
+                  <table width="100%">
+                  <tr><th style="padding: 4px 8px; border: 1px solid #c3c2b7;">Velocità</th><th style="padding: 4px 8px; border: 1px solid #c3c2b7;">Portata [m³/h]</th></tr>
+                  <tr><td style="padding: 4px 8px; border: 1px solid #c3c2b7;">Velocità 1</td><td style="padding: 4px 8px; border: 1px solid #c3c2b7;">10</td></tr>
+                  <tr><td style="padding: 4px 8px; border: 1px solid #c3c2b7;">Velocità 2</td><td style="padding: 4px 8px; border: 1px solid #c3c2b7;">17</td></tr>
+                  <tr><td style="padding: 4px 8px; border: 1px solid #c3c2b7;">Velocità 3</td><td style="padding: 4px 8px; border: 1px solid #c3c2b7;">26</td></tr>
+                  <tr><td style="padding: 4px 8px; border: 1px solid #c3c2b7;">Velocità 4</td><td style="padding: 4px 8px; border: 1px solid #c3c2b7;">37</td></tr>
+                  <tr><td style="padding: 4px 8px; border: 1px solid #c3c2b7;">Iperventilazione</td><td style="padding: 4px 8px; border: 1px solid #c3c2b7;">42</td></tr>
+                  <tr><td style="padding: 4px 8px; border: 1px solid #c3c2b7;">Notturna</td><td style="padding: 4px 8px; border: 1px solid #c3c2b7;">10 *</td></tr>
+                  <tr><td style="padding: 4px 8px; border: 1px solid #c3c2b7;">Free Cool./Heat.</td><td style="padding: 4px 8px; border: 1px solid #c3c2b7;">26 *</td></tr>
+                  </table>
 
                   <table><tr><td align="justify">
                   <b>Da dove vengono le portate.</b> Le portate di Velocità 1, 2, 3, 4 e Iperventilazione (10, 17,
@@ -12343,9 +12232,9 @@ cards:
                   <b>Quanto dura un ricambio.</b> Un ricambio è il cambio completo dell'aria della stanza: la VMC
                   deve far passare tanta aria quanto è il volume della stanza. Il tempo si ottiene dividendo il
                   volume della stanza per la portata della velocità in uso:
-                  <br><br>
-                  <b>Tempo [ore] = [Volume ambiente Int.] [m³] ÷ Portata [m³/h]</b>
-                  <br><br>
+                  </td></tr></table>
+                  <a href="https://raw.githubusercontent.com/DanRobo76/VMC-HELTY-FLOW/main/immagini/Informazioni/formula_tempo_ricambio.png" target="_blank"><img src="https://raw.githubusercontent.com/DanRobo76/VMC-HELTY-FLOW/main/immagini/Informazioni/formula_tempo_ricambio.png" alt="Tempo per un ricambio completo" width="70%"></a>
+                  <table><tr><td align="justify">
                   <b>Esempio.</b> A Velocità 1 in una stanza da 50 m³ (20 m² con soffitto a 2,5 m), il tempo per
                   cambiare tutta l'aria è pari a 50 m³ : 10 m³/h, ovvero a 5 ore. Più alta è la portata, più breve è
                   il tempo; con una stanza grande il doppio il tempo raddoppia.
@@ -12360,9 +12249,9 @@ cards:
                   impostato, il ricambio è completato e il conteggio parziale riparte da zero. Il conteggio
                   parziale riparte da zero anche quando cambia la velocità e al riavvio di Home Assistant.
                   <br><br>
-                  <b>Totali del giorno.</b> Totale Aria Scambiata [m³] e Totale N° Ricambi Aria
-                  (= Aria Totale ÷ Volume ambiente) si azzerano a mezzanotte.
+                  <b>Totali del giorno.</b> Totale Aria Scambiata [m³] e Totale N° Ricambi Aria si azzerano a mezzanotte.
                   </td></tr></table>
+                  <a href="https://raw.githubusercontent.com/DanRobo76/VMC-HELTY-FLOW/main/immagini/Informazioni/formula_numero_ricambi.png" target="_blank"><img src="https://raw.githubusercontent.com/DanRobo76/VMC-HELTY-FLOW/main/immagini/Informazioni/formula_numero_ricambi.png" alt="Numero di ricambi d'aria del giorno" width="75%"></a>
 
                   <br>
 
@@ -12375,7 +12264,7 @@ cards:
 
 
                   <details>
-                  <summary><b>22 Elenco VMC Installate</b></summary>
+                  <summary><b>21 Elenco VMC Installate</b></summary>
                   <table><tr><td align="justify">
                   <b>Che cosa mostra.</b> Lo stato in tempo reale di tutte le VMC installate: una colonna
                   per ogni VMC e una riga per ogni grandezza, così su ogni riga si confrontano a colpo d'occhio tutte le VMC.
@@ -12415,7 +12304,7 @@ cards:
                   </details>
 
                   <details>
-                  <summary><b>23 Intestazione Animata e Scritte Alert</b></summary>
+                  <summary><b>22 Intestazione Animata e Scritte Alert</b></summary>
                   <table><tr><td align="justify">
                   <b>Che cos'è.</b> L'immagine in cima alla scheda mostra lo stato della VMC. Quando la velocità è diversa da
                   0 l'aria esterna entra da sinistra, con la polvere, ed esce pulita a destra; a Velocità 0 e con la VMC
@@ -12443,7 +12332,7 @@ cards:
                   <tr><th style="padding: 4px 8px; border: 1px solid #c3c2b7;">Scritta</th><th style="padding: 4px 8px; border: 1px solid #c3c2b7;">Tasti</th><th style="padding: 4px 8px; border: 1px solid #c3c2b7;">Allerta</th><th style="padding: 4px 8px; border: 1px solid #c3c2b7;">Premendo il tasto</th></tr>
                   <tr><td style="padding: 4px 8px; border: 1px solid #c3c2b7;">Alert</td><td style="padding: 4px 8px; border: 1px solid #c3c2b7;">Velocità 1, 2, 3, 4, Notturna, Iperventilazione, Free</td><td style="padding: 4px 8px; border: 1px solid #c3c2b7;">Punto di Rugiada sfavorevole (interruttore PdR su ON) o Congelamento</td><td style="padding: 4px 8px; border: 1px solid #c3c2b7;">La VMC viene arrestata (Velocità 0). Con Punto di Rugiada sfavorevole e Inquinanti presenti la VMC mantiene la velocità scelta</td></tr>
                   <tr><td style="padding: 4px 8px; border: 1px solid #c3c2b7;">Alert Δ Temp.</td><td style="padding: 4px 8px; border: 1px solid #c3c2b7;">Velocità 2, 3, 4, Iperventilazione, Free</td><td style="padding: 4px 8px; border: 1px solid #c3c2b7;">Diff. Temp. > 23 °C</td><td style="padding: 4px 8px; border: 1px solid #c3c2b7;">La VMC viene portata a Velocità 1</td></tr>
-                  <tr><td style="padding: 4px 8px; border: 1px solid #c3c2b7;">Alert Free</td><td style="padding: 4px 8px; border: 1px solid #c3c2b7;">Free</td><td style="padding: 4px 8px; border: 1px solid #c3c2b7;">Mese programmato Free Heating / Free Cooling in condizioni sfavorevoli (voce 15)</td><td style="padding: 4px 8px; border: 1px solid #c3c2b7;">La VMC viene arrestata (Velocità 0); con Inquinanti presenti o allarme Umidità in corso viene portata a Velocità 1</td></tr>
+                  <tr><td style="padding: 4px 8px; border: 1px solid #c3c2b7;">Alert Free</td><td style="padding: 4px 8px; border: 1px solid #c3c2b7;">Free</td><td style="padding: 4px 8px; border: 1px solid #c3c2b7;">Mese programmato Free Heating / Free Cooling in condizioni sfavorevoli (voce 14)</td><td style="padding: 4px 8px; border: 1px solid #c3c2b7;">La VMC viene arrestata (Velocità 0); con Inquinanti presenti o allarme Umidità in corso viene portata a Velocità 1</td></tr>
                   </table>
                   <table><tr><td align="justify">
                   <b>Come funziona.</b> Colore e scritte sono calcolati dai sensori [Stato LED Interfaccia] e [Alert Avvio
@@ -12455,7 +12344,7 @@ cards:
 
                   <!-- >>> INIZIO SEZIONE CLONA VMC (SOLO MASTER, RIMOSSA DA VMC_SCRIPT_CLONA.SH) <<< -->
                   <details>
-                  <summary><b>24 Clonazione VMC</b></summary>
+                  <summary><b>23 Clonazione VMC</b></summary>
                   <table><tr><td align="justify">
                   <b>Che cos'è.</b> La Finestra Clona permette di aggiungere al Package altre VMC Helty Flow, ognuna con il suo
                   nome e il suo IP. Per ogni nuova VMC crea una cartella con i file pronti all'uso, copiati da quelli della VMC
