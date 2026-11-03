@@ -4189,10 +4189,7 @@ triggers:
       }}
     id: Congelamento OFF
     trigger: template
-  - alias: >-
-      Spia Velocità 0 Congelamento se Spia Congelamento ON e Spia Delta Temp Off
-      e e Spia Velocità 1, 2, 3, 4, Notturna, Iperventilazione, Free Heating
-      Congelamento = Off
+  - alias: "Spia Velocità 0 Congelamento se Spia Congelamento ON (anche con Spia Δ Temp. ON: dominio del Congelamento) e Spia Velocità 1, 2, 3, 4, Notturna, Iperventilazione, Free Heating Congelamento = Off"
     value_template: |
       {{
         states('sensor.vmc_master_status_ventola_lettura_codice_interpretato') == 'Velocità 0'
@@ -4202,8 +4199,6 @@ triggers:
           or
           states('sensor.vmc_master_temp_esterna_status_senza_offset')|float(0) <= -18
         )
-        and
-        states('input_boolean.vmc_master_delta_temp_verifica_soglia_valore_spia') == 'off'
         and
         states('sensor.vmc_master_status_ip_interfaccia') == 'ON-Line'
         and
@@ -4228,9 +4223,7 @@ triggers:
     id: spia_velocita_0_congelamento
     enabled: true
     trigger: template
-  - alias: >-
-      Spia Velocità 1 Congelamento se Spia Congelamento ON e Spia Delta Temp
-      Off 
+  - alias: "Spia Velocità 1 Congelamento se Spia Congelamento ON (anche con Spia Δ Temp. ON: dominio del Congelamento)"
     value_template: |
       {{
         states('sensor.vmc_master_status_ventola_lettura_codice_interpretato') == 'Velocità 1'
@@ -4240,8 +4233,6 @@ triggers:
           or
           states('sensor.vmc_master_temp_esterna_status_senza_offset')|float(0) <= -18
         )
-        and
-        states('input_boolean.vmc_master_delta_temp_verifica_soglia_valore_spia') == 'off'
         and
         states('sensor.vmc_master_status_ip_interfaccia') == 'ON-Line'
         and
@@ -4259,9 +4250,7 @@ triggers:
     id: spia_velocita_1_congelamento
     enabled: true
     trigger: template
-  - alias: >-
-      Spia Velocità 2 Congelamento se Spia Congelamento ON e Spia Delta Temp
-      Off 
+  - alias: "Spia Velocità 2 Congelamento se Spia Congelamento ON (anche con Spia Δ Temp. ON: dominio del Congelamento)"
     value_template: |
       {{
         states('sensor.vmc_master_status_ventola_lettura_codice_interpretato') == 'Velocità 2'
@@ -4271,8 +4260,6 @@ triggers:
           or
           states('sensor.vmc_master_temp_esterna_status_senza_offset')|float(0) <= -18
         )
-        and
-        states('input_boolean.vmc_master_delta_temp_verifica_soglia_valore_spia') == 'off'
         and
         states('sensor.vmc_master_status_ip_interfaccia') == 'ON-Line'
         and
@@ -4290,9 +4277,7 @@ triggers:
     id: spia_velocita_2_congelamento
     enabled: true
     trigger: template
-  - alias: >-
-      Spia Velocità 3 Congelamento se Spia Congelamento ON e Spia Delta Temp
-      Off 
+  - alias: "Spia Velocità 3 Congelamento se Spia Congelamento ON (anche con Spia Δ Temp. ON: dominio del Congelamento)"
     value_template: |
       {{
         states('sensor.vmc_master_status_ventola_lettura_codice_interpretato') == 'Velocità 3'
@@ -4302,8 +4287,6 @@ triggers:
           or
           states('sensor.vmc_master_temp_esterna_status_senza_offset')|float(0) <= -18
         )
-        and
-        states('input_boolean.vmc_master_delta_temp_verifica_soglia_valore_spia') == 'off'
         and
         states('sensor.vmc_master_status_ip_interfaccia') == 'ON-Line'
         and
@@ -4321,9 +4304,7 @@ triggers:
     id: spia_velocita_3_congelamento
     enabled: true
     trigger: template
-  - alias: >-
-      Spia Velocità 4 Congelamento se Spia Congelamento ON e Spia Delta Temp
-      Off 
+  - alias: "Spia Velocità 4 Congelamento se Spia Congelamento ON (anche con Spia Δ Temp. ON: dominio del Congelamento)"
     value_template: |
       {{
         states('sensor.vmc_master_status_ventola_lettura_codice_interpretato') == 'Velocità 4'
@@ -4333,8 +4314,6 @@ triggers:
           or
           states('sensor.vmc_master_temp_esterna_status_senza_offset')|float(0) <= -18
         )
-        and
-        states('input_boolean.vmc_master_delta_temp_verifica_soglia_valore_spia') == 'off'
         and
         states('sensor.vmc_master_status_ip_interfaccia') == 'ON-Line'
         and
@@ -4352,9 +4331,7 @@ triggers:
     id: spia_velocita_4_congelamento
     enabled: true
     trigger: template
-  - alias: >-
-      Spia Velocità Iperventilazione Congelamento se Spia Congelamento ON e Spia
-      Delta Temp Off 
+  - alias: "Spia Velocità Iperventilazione Congelamento se Spia Congelamento ON (anche con Spia Δ Temp. ON: dominio del Congelamento)"
     value_template: |
       {{
         states('sensor.vmc_master_status_ventola_lettura_codice_interpretato') == 'Iperventilazione'
@@ -4364,8 +4341,6 @@ triggers:
           or
           states('sensor.vmc_master_temp_esterna_status_senza_offset')|float(0) <= -18
         )
-        and
-        states('input_boolean.vmc_master_delta_temp_verifica_soglia_valore_spia') == 'off'
         and
         states('sensor.vmc_master_status_ip_interfaccia') == 'ON-Line'
         and
@@ -4383,9 +4358,7 @@ triggers:
     id: spia_velocita_iperventilazione_congelamento
     enabled: true
     trigger: template
-  - alias: >-
-      Spia Velocità Notturna Congelamento se Spia Congelamento ON e Spia Delta
-      Temp Off 
+  - alias: "Spia Velocità Notturna Congelamento se Spia Congelamento ON (anche con Spia Δ Temp. ON: dominio del Congelamento)"
     value_template: |
       {{
         states('sensor.vmc_master_status_ventola_lettura_codice_interpretato') == 'Notturna'
@@ -4395,8 +4368,6 @@ triggers:
           or
           states('sensor.vmc_master_temp_esterna_status_senza_offset')|float(0) <= -18
         )
-        and
-        states('input_boolean.vmc_master_delta_temp_verifica_soglia_valore_spia') == 'off'
         and
         states('sensor.vmc_master_status_ip_interfaccia') == 'ON-Line'
         and
@@ -4414,9 +4385,7 @@ triggers:
     id: spia_velocita_notturna_congelamento
     enabled: true
     trigger: template
-  - alias: >-
-      Spia Velocità Free Cooling Congelamento se Spia Congelamento ON e Spia
-      Delta Temp Off 
+  - alias: "Spia Velocità Free Cooling Congelamento se Spia Congelamento ON (anche con Spia Δ Temp. ON: dominio del Congelamento)"
     value_template: |
       {{
         states('sensor.vmc_master_status_ventola_lettura_codice_interpretato') == 'Free Cooling'
@@ -4426,8 +4395,6 @@ triggers:
           or
           states('sensor.vmc_master_temp_esterna_status_senza_offset')|float(0) <= -18
         )
-        and
-        states('input_boolean.vmc_master_delta_temp_verifica_soglia_valore_spia') == 'off'
         and
         states('sensor.vmc_master_status_ip_interfaccia') == 'ON-Line'
         and
@@ -7436,7 +7403,16 @@ actions:
                     - delay:
                         hours: 0
                         minutes: 0
-                        seconds: 4
+                        seconds: 1
+                        milliseconds: 0
+                    - action: homeassistant.update_entity
+                      target:
+                        entity_id: sensor.vmc_master_status_ventola
+                      alias: Rilettura immediata della velocità (la velocità non ancora aggiornata non va presa per una scelta dell'utente)
+                    - delay:
+                        hours: 0
+                        minutes: 0
+                        seconds: 3
                         milliseconds: 0
                   until:
                     - alias: Controlla se la Velocità è diversa da Velocità 0
@@ -7524,7 +7500,16 @@ actions:
                     - delay:
                         hours: 0
                         minutes: 0
-                        seconds: 4
+                        seconds: 1
+                        milliseconds: 0
+                    - action: homeassistant.update_entity
+                      target:
+                        entity_id: sensor.vmc_master_status_ventola
+                      alias: Rilettura immediata della velocità (la velocità non ancora aggiornata non va presa per una scelta dell'utente)
+                    - delay:
+                        hours: 0
+                        minutes: 0
+                        seconds: 3
                         milliseconds: 0
                   until:
                     - alias: Controlla se la Velocità è diversa da Velocità 0
@@ -7603,7 +7588,16 @@ actions:
                     - delay:
                         hours: 0
                         minutes: 0
-                        seconds: 4
+                        seconds: 1
+                        milliseconds: 0
+                    - action: homeassistant.update_entity
+                      target:
+                        entity_id: sensor.vmc_master_status_ventola
+                      alias: Rilettura immediata della velocità (la velocità non ancora aggiornata non va presa per una scelta dell'utente)
+                    - delay:
+                        hours: 0
+                        minutes: 0
+                        seconds: 3
                         milliseconds: 0
                   until:
                     - alias: Controlla se la Velocità è diversa da Velocità 0
@@ -7683,7 +7677,16 @@ actions:
                     - delay:
                         hours: 0
                         minutes: 0
-                        seconds: 4
+                        seconds: 1
+                        milliseconds: 0
+                    - action: homeassistant.update_entity
+                      target:
+                        entity_id: sensor.vmc_master_status_ventola
+                      alias: Rilettura immediata della velocità (la velocità non ancora aggiornata non va presa per una scelta dell'utente)
+                    - delay:
+                        hours: 0
+                        minutes: 0
+                        seconds: 3
                         milliseconds: 0
                   until:
                     - alias: Controlla se la Velocità è diversa da Velocità 0
@@ -7763,7 +7766,16 @@ actions:
                     - delay:
                         hours: 0
                         minutes: 0
-                        seconds: 4
+                        seconds: 1
+                        milliseconds: 0
+                    - action: homeassistant.update_entity
+                      target:
+                        entity_id: sensor.vmc_master_status_ventola
+                      alias: Rilettura immediata della velocità (la velocità non ancora aggiornata non va presa per una scelta dell'utente)
+                    - delay:
+                        hours: 0
+                        minutes: 0
+                        seconds: 3
                         milliseconds: 0
                   until:
                     - alias: Controlla se la Velocità è diversa da Velocità 0
@@ -7840,7 +7852,16 @@ actions:
                     - delay:
                         hours: 0
                         minutes: 0
-                        seconds: 4
+                        seconds: 1
+                        milliseconds: 0
+                    - action: homeassistant.update_entity
+                      target:
+                        entity_id: sensor.vmc_master_status_ventola
+                      alias: Rilettura immediata della velocità (la velocità non ancora aggiornata non va presa per una scelta dell'utente)
+                    - delay:
+                        hours: 0
+                        minutes: 0
+                        seconds: 3
                         milliseconds: 0
                   until:
                     - alias: Ripeti finchè la Velocità = Velocità 0
@@ -7921,7 +7942,16 @@ actions:
                     - delay:
                         hours: 0
                         minutes: 0
-                        seconds: 4
+                        seconds: 1
+                        milliseconds: 0
+                    - action: homeassistant.update_entity
+                      target:
+                        entity_id: sensor.vmc_master_status_ventola
+                      alias: Rilettura immediata della velocità (la velocità non ancora aggiornata non va presa per una scelta dell'utente)
+                    - delay:
+                        hours: 0
+                        minutes: 0
+                        seconds: 3
                         milliseconds: 0
                   until:
                     - alias: Controlla se la Velocità è diversa da Velocità 0
@@ -8004,7 +8034,16 @@ actions:
                             - delay:
                                 hours: 0
                                 minutes: 0
-                                seconds: 4
+                                seconds: 1
+                                milliseconds: 0
+                            - action: homeassistant.update_entity
+                              target:
+                                entity_id: sensor.vmc_master_status_ventola
+                              alias: Rilettura immediata della velocità (la velocità non ancora aggiornata non va presa per una scelta dell'utente)
+                            - delay:
+                                hours: 0
+                                minutes: 0
+                                seconds: 3
                                 milliseconds: 0
                           until:
                             - condition: template
@@ -8056,7 +8095,16 @@ actions:
                             - delay:
                                 hours: 0
                                 minutes: 0
-                                seconds: 4
+                                seconds: 1
+                                milliseconds: 0
+                            - action: homeassistant.update_entity
+                              target:
+                                entity_id: sensor.vmc_master_status_ventola
+                              alias: Rilettura immediata della velocità (la velocità non ancora aggiornata non va presa per una scelta dell'utente)
+                            - delay:
+                                hours: 0
+                                minutes: 0
+                                seconds: 3
                                 milliseconds: 0
                           until:
                             - condition: template
@@ -8107,7 +8155,16 @@ actions:
                             - delay:
                                 hours: 0
                                 minutes: 0
-                                seconds: 4
+                                seconds: 1
+                                milliseconds: 0
+                            - action: homeassistant.update_entity
+                              target:
+                                entity_id: sensor.vmc_master_status_ventola
+                              alias: Rilettura immediata della velocità (la velocità non ancora aggiornata non va presa per una scelta dell'utente)
+                            - delay:
+                                hours: 0
+                                minutes: 0
+                                seconds: 3
                                 milliseconds: 0
                           until:
                             - condition: template
@@ -8159,7 +8216,16 @@ actions:
                     - delay:
                         hours: 0
                         minutes: 0
-                        seconds: 4
+                        seconds: 1
+                        milliseconds: 0
+                    - action: homeassistant.update_entity
+                      target:
+                        entity_id: sensor.vmc_master_status_ventola
+                      alias: Rilettura immediata della velocità (la velocità non ancora aggiornata non va presa per una scelta dell'utente)
+                    - delay:
+                        hours: 0
+                        minutes: 0
+                        seconds: 3
                         milliseconds: 0
                   until:
                     - condition: template
@@ -8207,7 +8273,16 @@ actions:
                     - delay:
                         hours: 0
                         minutes: 0
-                        seconds: 4
+                        seconds: 1
+                        milliseconds: 0
+                    - action: homeassistant.update_entity
+                      target:
+                        entity_id: sensor.vmc_master_status_ventola
+                      alias: Rilettura immediata della velocità (la velocità non ancora aggiornata non va presa per una scelta dell'utente)
+                    - delay:
+                        hours: 0
+                        minutes: 0
+                        seconds: 3
                         milliseconds: 0
                   until:
                     - condition: template
@@ -8255,7 +8330,16 @@ actions:
                     - delay:
                         hours: 0
                         minutes: 0
-                        seconds: 4
+                        seconds: 1
+                        milliseconds: 0
+                    - action: homeassistant.update_entity
+                      target:
+                        entity_id: sensor.vmc_master_status_ventola
+                      alias: Rilettura immediata della velocità (la velocità non ancora aggiornata non va presa per una scelta dell'utente)
+                    - delay:
+                        hours: 0
+                        minutes: 0
+                        seconds: 3
                         milliseconds: 0
                   until:
                     - condition: template
@@ -8304,7 +8388,16 @@ actions:
                     - delay:
                         hours: 0
                         minutes: 0
-                        seconds: 4
+                        seconds: 1
+                        milliseconds: 0
+                    - action: homeassistant.update_entity
+                      target:
+                        entity_id: sensor.vmc_master_status_ventola
+                      alias: Rilettura immediata della velocità (la velocità non ancora aggiornata non va presa per una scelta dell'utente)
+                    - delay:
+                        hours: 0
+                        minutes: 0
+                        seconds: 3
                         milliseconds: 0
                   until:
                     - condition: template
@@ -8411,7 +8504,16 @@ actions:
                         - delay:
                             hours: 0
                             minutes: 0
-                            seconds: 4
+                            seconds: 1
+                            milliseconds: 0
+                        - action: homeassistant.update_entity
+                          target:
+                            entity_id: sensor.vmc_master_status_ventola
+                          alias: Rilettura immediata della velocità (la velocità non ancora aggiornata non va presa per una scelta dell'utente)
+                        - delay:
+                            hours: 0
+                            minutes: 0
+                            seconds: 3
                             milliseconds: 0
                       until:
                         - condition: template
@@ -8504,7 +8606,16 @@ actions:
                         - delay:
                             hours: 0
                             minutes: 0
-                            seconds: 4
+                            seconds: 1
+                            milliseconds: 0
+                        - action: homeassistant.update_entity
+                          target:
+                            entity_id: sensor.vmc_master_status_ventola
+                          alias: Rilettura immediata della velocità (la velocità non ancora aggiornata non va presa per una scelta dell'utente)
+                        - delay:
+                            hours: 0
+                            minutes: 0
+                            seconds: 3
                             milliseconds: 0
                       until:
                         - condition: template
@@ -8586,7 +8697,16 @@ actions:
                         - delay:
                             hours: 0
                             minutes: 0
-                            seconds: 4
+                            seconds: 1
+                            milliseconds: 0
+                        - action: homeassistant.update_entity
+                          target:
+                            entity_id: sensor.vmc_master_status_ventola
+                          alias: Rilettura immediata della velocità (la velocità non ancora aggiornata non va presa per una scelta dell'utente)
+                        - delay:
+                            hours: 0
+                            minutes: 0
+                            seconds: 3
                             milliseconds: 0
                       until:
                         - condition: template
@@ -8669,7 +8789,16 @@ actions:
                         - delay:
                             hours: 0
                             minutes: 0
-                            seconds: 4
+                            seconds: 1
+                            milliseconds: 0
+                        - action: homeassistant.update_entity
+                          target:
+                            entity_id: sensor.vmc_master_status_ventola
+                          alias: Rilettura immediata della velocità (la velocità non ancora aggiornata non va presa per una scelta dell'utente)
+                        - delay:
+                            hours: 0
+                            minutes: 0
+                            seconds: 3
                             milliseconds: 0
                       until:
                         - condition: template
@@ -8752,7 +8881,16 @@ actions:
                         - delay:
                             hours: 0
                             minutes: 0
-                            seconds: 4
+                            seconds: 1
+                            milliseconds: 0
+                        - action: homeassistant.update_entity
+                          target:
+                            entity_id: sensor.vmc_master_status_ventola
+                          alias: Rilettura immediata della velocità (la velocità non ancora aggiornata non va presa per una scelta dell'utente)
+                        - delay:
+                            hours: 0
+                            minutes: 0
+                            seconds: 3
                             milliseconds: 0
                       until:
                         - condition: template
@@ -8807,7 +8945,16 @@ actions:
                     - delay:
                         hours: 0
                         minutes: 0
-                        seconds: 4
+                        seconds: 1
+                        milliseconds: 0
+                    - action: homeassistant.update_entity
+                      target:
+                        entity_id: sensor.vmc_master_status_ventola
+                      alias: Rilettura immediata della velocità (la velocità non ancora aggiornata non va presa per una scelta dell'utente)
+                    - delay:
+                        hours: 0
+                        minutes: 0
+                        seconds: 3
                         milliseconds: 0
                   until:
                     - condition: template
@@ -8841,7 +8988,16 @@ actions:
                 - delay:
                     hours: 0
                     minutes: 0
-                    seconds: 4
+                    seconds: 1
+                    milliseconds: 0
+                - action: homeassistant.update_entity
+                  target:
+                    entity_id: sensor.vmc_master_status_ventola
+                  alias: Rilettura immediata della velocità (la velocità non ancora aggiornata non va presa per una scelta dell'utente)
+                - delay:
+                    hours: 0
+                    minutes: 0
+                    seconds: 3
                     milliseconds: 0
               until:
                 - condition: template
@@ -8899,7 +9055,16 @@ actions:
                 - delay:
                     hours: 0
                     minutes: 0
-                    seconds: 4
+                    seconds: 1
+                    milliseconds: 0
+                - action: homeassistant.update_entity
+                  target:
+                    entity_id: sensor.vmc_master_status_ventola
+                  alias: Rilettura immediata della velocità (la velocità non ancora aggiornata non va presa per una scelta dell'utente)
+                - delay:
+                    hours: 0
+                    minutes: 0
+                    seconds: 3
                     milliseconds: 0
               until:
                 - condition: template
@@ -8936,7 +9101,16 @@ actions:
                 - delay:
                     hours: 0
                     minutes: 0
-                    seconds: 4
+                    seconds: 1
+                    milliseconds: 0
+                - action: homeassistant.update_entity
+                  target:
+                    entity_id: sensor.vmc_master_status_ventola
+                  alias: Rilettura immediata della velocità (la velocità non ancora aggiornata non va presa per una scelta dell'utente)
+                - delay:
+                    hours: 0
+                    minutes: 0
+                    seconds: 3
                     milliseconds: 0
               until:
                 - condition: template
@@ -9019,7 +9193,16 @@ actions:
                 - delay:
                     hours: 0
                     minutes: 0
-                    seconds: 4
+                    seconds: 1
+                    milliseconds: 0
+                - action: homeassistant.update_entity
+                  target:
+                    entity_id: sensor.vmc_master_status_ventola
+                  alias: Rilettura immediata della velocità (la velocità non ancora aggiornata non va presa per una scelta dell'utente)
+                - delay:
+                    hours: 0
+                    minutes: 0
+                    seconds: 3
                     milliseconds: 0
               until:
                 - condition: template
@@ -9102,7 +9285,16 @@ actions:
                 - delay:
                     hours: 0
                     minutes: 0
-                    seconds: 4
+                    seconds: 1
+                    milliseconds: 0
+                - action: homeassistant.update_entity
+                  target:
+                    entity_id: sensor.vmc_master_status_ventola
+                  alias: Rilettura immediata della velocità (la velocità non ancora aggiornata non va presa per una scelta dell'utente)
+                - delay:
+                    hours: 0
+                    minutes: 0
+                    seconds: 3
                     milliseconds: 0
               until:
                 - condition: template
@@ -9185,7 +9377,16 @@ actions:
                 - delay:
                     hours: 0
                     minutes: 0
-                    seconds: 4
+                    seconds: 1
+                    milliseconds: 0
+                - action: homeassistant.update_entity
+                  target:
+                    entity_id: sensor.vmc_master_status_ventola
+                  alias: Rilettura immediata della velocità (la velocità non ancora aggiornata non va presa per una scelta dell'utente)
+                - delay:
+                    hours: 0
+                    minutes: 0
+                    seconds: 3
                     milliseconds: 0
               until:
                 - condition: template
@@ -9268,7 +9469,16 @@ actions:
                 - delay:
                     hours: 0
                     minutes: 0
-                    seconds: 4
+                    seconds: 1
+                    milliseconds: 0
+                - action: homeassistant.update_entity
+                  target:
+                    entity_id: sensor.vmc_master_status_ventola
+                  alias: Rilettura immediata della velocità (la velocità non ancora aggiornata non va presa per una scelta dell'utente)
+                - delay:
+                    hours: 0
+                    minutes: 0
+                    seconds: 3
                     milliseconds: 0
               until:
                 - condition: template
@@ -9434,7 +9644,16 @@ actions:
                 - delay:
                     hours: 0
                     minutes: 0
-                    seconds: 4
+                    seconds: 1
+                    milliseconds: 0
+                - action: homeassistant.update_entity
+                  target:
+                    entity_id: sensor.vmc_master_status_ventola
+                  alias: Rilettura immediata della velocità (la velocità non ancora aggiornata non va presa per una scelta dell'utente)
+                - delay:
+                    hours: 0
+                    minutes: 0
+                    seconds: 3
                     milliseconds: 0
               until:
                 - condition: template
@@ -9564,7 +9783,16 @@ actions:
                 - delay:
                     hours: 0
                     minutes: 0
-                    seconds: 4
+                    seconds: 1
+                    milliseconds: 0
+                - action: homeassistant.update_entity
+                  target:
+                    entity_id: sensor.vmc_master_status_ventola
+                  alias: Rilettura immediata della velocità (la velocità non ancora aggiornata non va presa per una scelta dell'utente)
+                - delay:
+                    hours: 0
+                    minutes: 0
+                    seconds: 3
                     milliseconds: 0
               until:
                 - condition: template
@@ -9648,7 +9876,16 @@ actions:
                 - delay:
                     hours: 0
                     minutes: 0
-                    seconds: 4
+                    seconds: 1
+                    milliseconds: 0
+                - action: homeassistant.update_entity
+                  target:
+                    entity_id: sensor.vmc_master_status_ventola
+                  alias: Rilettura immediata della velocità (la velocità non ancora aggiornata non va presa per una scelta dell'utente)
+                - delay:
+                    hours: 0
+                    minutes: 0
+                    seconds: 3
                     milliseconds: 0
               until:
                 - condition: template
@@ -9732,7 +9969,16 @@ actions:
                 - delay:
                     hours: 0
                     minutes: 0
-                    seconds: 4
+                    seconds: 1
+                    milliseconds: 0
+                - action: homeassistant.update_entity
+                  target:
+                    entity_id: sensor.vmc_master_status_ventola
+                  alias: Rilettura immediata della velocità (la velocità non ancora aggiornata non va presa per una scelta dell'utente)
+                - delay:
+                    hours: 0
+                    minutes: 0
+                    seconds: 3
                     milliseconds: 0
               until:
                 - condition: template
@@ -9816,7 +10062,16 @@ actions:
                 - delay:
                     hours: 0
                     minutes: 0
-                    seconds: 4
+                    seconds: 1
+                    milliseconds: 0
+                - action: homeassistant.update_entity
+                  target:
+                    entity_id: sensor.vmc_master_status_ventola
+                  alias: Rilettura immediata della velocità (la velocità non ancora aggiornata non va presa per una scelta dell'utente)
+                - delay:
+                    hours: 0
+                    minutes: 0
+                    seconds: 3
                     milliseconds: 0
               until:
                 - condition: template
@@ -9910,7 +10165,16 @@ actions:
                         - delay:
                             hours: 0
                             minutes: 0
-                            seconds: 4
+                            seconds: 1
+                            milliseconds: 0
+                        - action: homeassistant.update_entity
+                          target:
+                            entity_id: sensor.vmc_master_status_ventola
+                          alias: Rilettura immediata della velocità (la velocità non ancora aggiornata non va presa per una scelta dell'utente)
+                        - delay:
+                            hours: 0
+                            minutes: 0
+                            seconds: 3
                             milliseconds: 0
                       until:
                         - condition: template
@@ -9994,7 +10258,16 @@ actions:
                         - delay:
                             hours: 0
                             minutes: 0
-                            seconds: 4
+                            seconds: 1
+                            milliseconds: 0
+                        - action: homeassistant.update_entity
+                          target:
+                            entity_id: sensor.vmc_master_status_ventola
+                          alias: Rilettura immediata della velocità (la velocità non ancora aggiornata non va presa per una scelta dell'utente)
+                        - delay:
+                            hours: 0
+                            minutes: 0
+                            seconds: 3
                             milliseconds: 0
                       until:
                         - condition: template
@@ -10076,7 +10349,16 @@ actions:
                         - delay:
                             hours: 0
                             minutes: 0
-                            seconds: 4
+                            seconds: 1
+                            milliseconds: 0
+                        - action: homeassistant.update_entity
+                          target:
+                            entity_id: sensor.vmc_master_status_ventola
+                          alias: Rilettura immediata della velocità (la velocità non ancora aggiornata non va presa per una scelta dell'utente)
+                        - delay:
+                            hours: 0
+                            minutes: 0
+                            seconds: 3
                             milliseconds: 0
                       until:
                         - condition: template
@@ -10304,7 +10586,16 @@ actions:
                 - delay:
                     hours: 0
                     minutes: 0
-                    seconds: 4
+                    seconds: 1
+                    milliseconds: 0
+                - action: homeassistant.update_entity
+                  target:
+                    entity_id: sensor.vmc_master_status_ventola
+                  alias: Rilettura immediata della velocità (la velocità non ancora aggiornata non va presa per una scelta dell'utente)
+                - delay:
+                    hours: 0
+                    minutes: 0
+                    seconds: 3
                     milliseconds: 0
               until:
                 - condition: template
@@ -10399,7 +10690,16 @@ actions:
                         - delay:
                             hours: 0
                             minutes: 0
-                            seconds: 4
+                            seconds: 1
+                            milliseconds: 0
+                        - action: homeassistant.update_entity
+                          target:
+                            entity_id: sensor.vmc_master_status_ventola
+                          alias: Rilettura immediata della velocità (la velocità non ancora aggiornata non va presa per una scelta dell'utente)
+                        - delay:
+                            hours: 0
+                            minutes: 0
+                            seconds: 3
                             milliseconds: 0
                       until:
                         - condition: template
@@ -10544,7 +10844,16 @@ actions:
                         - delay:
                             hours: 0
                             minutes: 0
-                            seconds: 4
+                            seconds: 1
+                            milliseconds: 0
+                        - action: homeassistant.update_entity
+                          target:
+                            entity_id: sensor.vmc_master_status_ventola
+                          alias: Rilettura immediata della velocità (la velocità non ancora aggiornata non va presa per una scelta dell'utente)
+                        - delay:
+                            hours: 0
+                            minutes: 0
+                            seconds: 3
                             milliseconds: 0
                       until:
                         - condition: template
@@ -10660,7 +10969,16 @@ actions:
                 - delay:
                     hours: 0
                     minutes: 0
-                    seconds: 4
+                    seconds: 1
+                    milliseconds: 0
+                - action: homeassistant.update_entity
+                  target:
+                    entity_id: sensor.vmc_master_status_ventola
+                  alias: Rilettura immediata della velocità (la velocità non ancora aggiornata non va presa per una scelta dell'utente)
+                - delay:
+                    hours: 0
+                    minutes: 0
+                    seconds: 3
                     milliseconds: 0
               until:
                 - alias: Controlla se la Velocità è uguale a Velocità 1
@@ -10757,7 +11075,16 @@ actions:
                 - delay:
                     hours: 0
                     minutes: 0
-                    seconds: 4
+                    seconds: 1
+                    milliseconds: 0
+                - action: homeassistant.update_entity
+                  target:
+                    entity_id: sensor.vmc_master_status_ventola
+                  alias: Rilettura immediata della velocità (la velocità non ancora aggiornata non va presa per una scelta dell'utente)
+                - delay:
+                    hours: 0
+                    minutes: 0
+                    seconds: 3
                     milliseconds: 0
               until:
                 - alias: Controlla se la Velocità è uguale a Velocità 1
@@ -10840,7 +11167,16 @@ actions:
                 - delay:
                     hours: 0
                     minutes: 0
-                    seconds: 4
+                    seconds: 1
+                    milliseconds: 0
+                - action: homeassistant.update_entity
+                  target:
+                    entity_id: sensor.vmc_master_status_ventola
+                  alias: Rilettura immediata della velocità (la velocità non ancora aggiornata non va presa per una scelta dell'utente)
+                - delay:
+                    hours: 0
+                    minutes: 0
+                    seconds: 3
                     milliseconds: 0
               until:
                 - condition: template
@@ -10922,7 +11258,16 @@ actions:
                 - delay:
                     hours: 0
                     minutes: 0
-                    seconds: 4
+                    seconds: 1
+                    milliseconds: 0
+                - action: homeassistant.update_entity
+                  target:
+                    entity_id: sensor.vmc_master_status_ventola
+                  alias: Rilettura immediata della velocità (la velocità non ancora aggiornata non va presa per una scelta dell'utente)
+                - delay:
+                    hours: 0
+                    minutes: 0
+                    seconds: 3
                     milliseconds: 0
               until:
                 - alias: Controlla se la Velocità è diversa da Velocità 0
@@ -10978,7 +11323,16 @@ actions:
                 - delay:
                     hours: 0
                     minutes: 0
-                    seconds: 4
+                    seconds: 1
+                    milliseconds: 0
+                - action: homeassistant.update_entity
+                  target:
+                    entity_id: sensor.vmc_master_status_ventola
+                  alias: Rilettura immediata della velocità (la velocità non ancora aggiornata non va presa per una scelta dell'utente)
+                - delay:
+                    hours: 0
+                    minutes: 0
+                    seconds: 3
                     milliseconds: 0
               until:
                 - alias: Controlla se la Velocità è uguale a Velocità Free Heating
@@ -11034,7 +11388,16 @@ actions:
                 - delay:
                     hours: 0
                     minutes: 0
-                    seconds: 4
+                    seconds: 1
+                    milliseconds: 0
+                - action: homeassistant.update_entity
+                  target:
+                    entity_id: sensor.vmc_master_status_ventola
+                  alias: Rilettura immediata della velocità (la velocità non ancora aggiornata non va presa per una scelta dell'utente)
+                - delay:
+                    hours: 0
+                    minutes: 0
+                    seconds: 3
                     milliseconds: 0
               until:
                 - alias: Controlla se la Velocità è uguale a Velocità Free Cooling
@@ -11130,7 +11493,16 @@ actions:
                         - delay:
                             hours: 0
                             minutes: 0
-                            seconds: 4
+                            seconds: 1
+                            milliseconds: 0
+                        - action: homeassistant.update_entity
+                          target:
+                            entity_id: sensor.vmc_master_status_ventola
+                          alias: Rilettura immediata della velocità (la velocità non ancora aggiornata non va presa per una scelta dell'utente)
+                        - delay:
+                            hours: 0
+                            minutes: 0
+                            seconds: 3
                             milliseconds: 0
                       until:
                         - condition: template
@@ -11296,7 +11668,16 @@ actions:
                         - delay:
                             hours: 0
                             minutes: 0
-                            seconds: 4
+                            seconds: 1
+                            milliseconds: 0
+                        - action: homeassistant.update_entity
+                          target:
+                            entity_id: sensor.vmc_master_status_ventola
+                          alias: Rilettura immediata della velocità (la velocità non ancora aggiornata non va presa per una scelta dell'utente)
+                        - delay:
+                            hours: 0
+                            minutes: 0
+                            seconds: 3
                             milliseconds: 0
                       until:
                         - alias: Controlla se la Velocità è uguale a Velocità 1
@@ -11408,7 +11789,16 @@ actions:
                         - delay:
                             hours: 0
                             minutes: 0
-                            seconds: 4
+                            seconds: 1
+                            milliseconds: 0
+                        - action: homeassistant.update_entity
+                          target:
+                            entity_id: sensor.vmc_master_status_ventola
+                          alias: Rilettura immediata della velocità (la velocità non ancora aggiornata non va presa per una scelta dell'utente)
+                        - delay:
+                            hours: 0
+                            minutes: 0
+                            seconds: 3
                             milliseconds: 0
                       until:
                         - condition: template
@@ -11574,7 +11964,16 @@ actions:
                         - delay:
                             hours: 0
                             minutes: 0
-                            seconds: 4
+                            seconds: 1
+                            milliseconds: 0
+                        - action: homeassistant.update_entity
+                          target:
+                            entity_id: sensor.vmc_master_status_ventola
+                          alias: Rilettura immediata della velocità (la velocità non ancora aggiornata non va presa per una scelta dell'utente)
+                        - delay:
+                            hours: 0
+                            minutes: 0
+                            seconds: 3
                             milliseconds: 0
                       until:
                         - alias: Controlla se la Velocità è uguale a Velocità 1
@@ -11673,7 +12072,16 @@ actions:
                         - delay:
                             hours: 0
                             minutes: 0
-                            seconds: 4
+                            seconds: 1
+                            milliseconds: 0
+                        - action: homeassistant.update_entity
+                          target:
+                            entity_id: sensor.vmc_master_status_ventola
+                          alias: Rilettura immediata della velocità (la velocità non ancora aggiornata non va presa per una scelta dell'utente)
+                        - delay:
+                            hours: 0
+                            minutes: 0
+                            seconds: 3
                             milliseconds: 0
                       until:
                         - alias: Controlla se la Velocità è diversa da Velocità 0
@@ -11790,7 +12198,16 @@ actions:
                         - delay:
                             hours: 0
                             minutes: 0
-                            seconds: 4
+                            seconds: 1
+                            milliseconds: 0
+                        - action: homeassistant.update_entity
+                          target:
+                            entity_id: sensor.vmc_master_status_ventola
+                          alias: Rilettura immediata della velocità (la velocità non ancora aggiornata non va presa per una scelta dell'utente)
+                        - delay:
+                            hours: 0
+                            minutes: 0
+                            seconds: 3
                             milliseconds: 0
                       until:
                         - condition: template
@@ -11899,7 +12316,16 @@ actions:
                         - delay:
                             hours: 0
                             minutes: 0
-                            seconds: 4
+                            seconds: 1
+                            milliseconds: 0
+                        - action: homeassistant.update_entity
+                          target:
+                            entity_id: sensor.vmc_master_status_ventola
+                          alias: Rilettura immediata della velocità (la velocità non ancora aggiornata non va presa per una scelta dell'utente)
+                        - delay:
+                            hours: 0
+                            minutes: 0
+                            seconds: 3
                             milliseconds: 0
                       until:
                         - condition: template
@@ -12051,7 +12477,16 @@ actions:
                         - delay:
                             hours: 0
                             minutes: 0
-                            seconds: 5
+                            seconds: 1
+                            milliseconds: 0
+                        - action: homeassistant.update_entity
+                          target:
+                            entity_id: sensor.vmc_master_status_ventola
+                          alias: Rilettura immediata della velocità (la velocità non ancora aggiornata non va presa per una scelta dell'utente)
+                        - delay:
+                            hours: 0
+                            minutes: 0
+                            seconds: 4
                             milliseconds: 0
                       until:
                         - condition: template
@@ -13220,7 +13655,16 @@ actions:
                         - delay:
                             hours: 0
                             minutes: 0
-                            seconds: 4
+                            seconds: 1
+                            milliseconds: 0
+                        - action: homeassistant.update_entity
+                          target:
+                            entity_id: sensor.vmc_master_status_ventola
+                          alias: Rilettura immediata della velocità (la velocità non ancora aggiornata non va presa per una scelta dell'utente)
+                        - delay:
+                            hours: 0
+                            minutes: 0
+                            seconds: 3
                             milliseconds: 0
                       until:
                         - condition: template
@@ -13369,7 +13813,16 @@ actions:
                         - delay:
                             hours: 0
                             minutes: 0
-                            seconds: 4
+                            seconds: 1
+                            milliseconds: 0
+                        - action: homeassistant.update_entity
+                          target:
+                            entity_id: sensor.vmc_master_status_ventola
+                          alias: Rilettura immediata della velocità (la velocità non ancora aggiornata non va presa per una scelta dell'utente)
+                        - delay:
+                            hours: 0
+                            minutes: 0
+                            seconds: 3
                             milliseconds: 0
                       until:
                         - condition: template
@@ -13517,7 +13970,16 @@ actions:
                         - delay:
                             hours: 0
                             minutes: 0
-                            seconds: 4
+                            seconds: 1
+                            milliseconds: 0
+                        - action: homeassistant.update_entity
+                          target:
+                            entity_id: sensor.vmc_master_status_ventola
+                          alias: Rilettura immediata della velocità (la velocità non ancora aggiornata non va presa per una scelta dell'utente)
+                        - delay:
+                            hours: 0
+                            minutes: 0
+                            seconds: 3
                             milliseconds: 0
                       until:
                         - condition: template
@@ -13665,7 +14127,16 @@ actions:
                         - delay:
                             hours: 0
                             minutes: 0
-                            seconds: 4
+                            seconds: 1
+                            milliseconds: 0
+                        - action: homeassistant.update_entity
+                          target:
+                            entity_id: sensor.vmc_master_status_ventola
+                          alias: Rilettura immediata della velocità (la velocità non ancora aggiornata non va presa per una scelta dell'utente)
+                        - delay:
+                            hours: 0
+                            minutes: 0
+                            seconds: 3
                             milliseconds: 0
                       until:
                         - condition: template
@@ -13813,7 +14284,16 @@ actions:
                         - delay:
                             hours: 0
                             minutes: 0
-                            seconds: 4
+                            seconds: 1
+                            milliseconds: 0
+                        - action: homeassistant.update_entity
+                          target:
+                            entity_id: sensor.vmc_master_status_ventola
+                          alias: Rilettura immediata della velocità (la velocità non ancora aggiornata non va presa per una scelta dell'utente)
+                        - delay:
+                            hours: 0
+                            minutes: 0
+                            seconds: 3
                             milliseconds: 0
                       until:
                         - condition: template
@@ -13961,7 +14441,16 @@ actions:
                         - delay:
                             hours: 0
                             minutes: 0
-                            seconds: 4
+                            seconds: 1
+                            milliseconds: 0
+                        - action: homeassistant.update_entity
+                          target:
+                            entity_id: sensor.vmc_master_status_ventola
+                          alias: Rilettura immediata della velocità (la velocità non ancora aggiornata non va presa per una scelta dell'utente)
+                        - delay:
+                            hours: 0
+                            minutes: 0
+                            seconds: 3
                             milliseconds: 0
                       until:
                         - condition: template
@@ -14000,7 +14489,16 @@ actions:
                         - delay:
                             hours: 0
                             minutes: 0
-                            seconds: 4
+                            seconds: 1
+                            milliseconds: 0
+                        - action: homeassistant.update_entity
+                          target:
+                            entity_id: sensor.vmc_master_status_ventola
+                          alias: Rilettura immediata della velocità (la velocità non ancora aggiornata non va presa per una scelta dell'utente)
+                        - delay:
+                            hours: 0
+                            minutes: 0
+                            seconds: 3
                             milliseconds: 0
                       until:
                         - condition: template
@@ -14040,7 +14538,16 @@ actions:
                         - delay:
                             hours: 0
                             minutes: 0
-                            seconds: 4
+                            seconds: 1
+                            milliseconds: 0
+                        - action: homeassistant.update_entity
+                          target:
+                            entity_id: sensor.vmc_master_status_ventola
+                          alias: Rilettura immediata della velocità (la velocità non ancora aggiornata non va presa per una scelta dell'utente)
+                        - delay:
+                            hours: 0
+                            minutes: 0
+                            seconds: 3
                             milliseconds: 0
                       until:
                         - condition: template
@@ -14281,7 +14788,16 @@ actions:
                         - delay:
                             hours: 0
                             minutes: 0
-                            seconds: 4
+                            seconds: 1
+                            milliseconds: 0
+                        - action: homeassistant.update_entity
+                          target:
+                            entity_id: sensor.vmc_master_status_ventola
+                          alias: Rilettura immediata della velocità (la velocità non ancora aggiornata non va presa per una scelta dell'utente)
+                        - delay:
+                            hours: 0
+                            minutes: 0
+                            seconds: 3
                             milliseconds: 0
                       until:
                         - condition: template
@@ -14361,7 +14877,16 @@ actions:
                         - delay:
                             hours: 0
                             minutes: 0
-                            seconds: 4
+                            seconds: 1
+                            milliseconds: 0
+                        - action: homeassistant.update_entity
+                          target:
+                            entity_id: sensor.vmc_master_status_ventola
+                          alias: Rilettura immediata della velocità (la velocità non ancora aggiornata non va presa per una scelta dell'utente)
+                        - delay:
+                            hours: 0
+                            minutes: 0
+                            seconds: 3
                             milliseconds: 0
                       until:
                         - condition: template
@@ -14453,7 +14978,16 @@ actions:
                                 - delay:
                                     hours: 0
                                     minutes: 0
-                                    seconds: 4
+                                    seconds: 1
+                                    milliseconds: 0
+                                - action: homeassistant.update_entity
+                                  target:
+                                    entity_id: sensor.vmc_master_status_ventola
+                                  alias: Rilettura immediata della velocità (la velocità non ancora aggiornata non va presa per una scelta dell'utente)
+                                - delay:
+                                    hours: 0
+                                    minutes: 0
+                                    seconds: 3
                                     milliseconds: 0
                               until:
                                 - condition: template
@@ -14557,7 +15091,16 @@ actions:
                                 - delay:
                                     hours: 0
                                     minutes: 0
-                                    seconds: 4
+                                    seconds: 1
+                                    milliseconds: 0
+                                - action: homeassistant.update_entity
+                                  target:
+                                    entity_id: sensor.vmc_master_status_ventola
+                                  alias: Rilettura immediata della velocità (la velocità non ancora aggiornata non va presa per una scelta dell'utente)
+                                - delay:
+                                    hours: 0
+                                    minutes: 0
+                                    seconds: 3
                                     milliseconds: 0
                               until:
                                 - condition: template
@@ -14609,7 +15152,16 @@ actions:
                                 - delay:
                                     hours: 0
                                     minutes: 0
-                                    seconds: 4
+                                    seconds: 1
+                                    milliseconds: 0
+                                - action: homeassistant.update_entity
+                                  target:
+                                    entity_id: sensor.vmc_master_status_ventola
+                                  alias: Rilettura immediata della velocità (la velocità non ancora aggiornata non va presa per una scelta dell'utente)
+                                - delay:
+                                    hours: 0
+                                    minutes: 0
+                                    seconds: 3
                                     milliseconds: 0
                               until:
                                 - condition: template
@@ -14660,7 +15212,16 @@ actions:
                                 - delay:
                                     hours: 0
                                     minutes: 0
-                                    seconds: 4
+                                    seconds: 1
+                                    milliseconds: 0
+                                - action: homeassistant.update_entity
+                                  target:
+                                    entity_id: sensor.vmc_master_status_ventola
+                                  alias: Rilettura immediata della velocità (la velocità non ancora aggiornata non va presa per una scelta dell'utente)
+                                - delay:
+                                    hours: 0
+                                    minutes: 0
+                                    seconds: 3
                                     milliseconds: 0
                               until:
                                 - condition: template
@@ -14711,7 +15272,16 @@ actions:
                                 - delay:
                                     hours: 0
                                     minutes: 0
-                                    seconds: 4
+                                    seconds: 1
+                                    milliseconds: 0
+                                - action: homeassistant.update_entity
+                                  target:
+                                    entity_id: sensor.vmc_master_status_ventola
+                                  alias: Rilettura immediata della velocità (la velocità non ancora aggiornata non va presa per una scelta dell'utente)
+                                - delay:
+                                    hours: 0
+                                    minutes: 0
+                                    seconds: 3
                                     milliseconds: 0
                               until:
                                 - condition: template
@@ -14762,7 +15332,16 @@ actions:
                                 - delay:
                                     hours: 0
                                     minutes: 0
-                                    seconds: 4
+                                    seconds: 1
+                                    milliseconds: 0
+                                - action: homeassistant.update_entity
+                                  target:
+                                    entity_id: sensor.vmc_master_status_ventola
+                                  alias: Rilettura immediata della velocità (la velocità non ancora aggiornata non va presa per una scelta dell'utente)
+                                - delay:
+                                    hours: 0
+                                    minutes: 0
+                                    seconds: 3
                                     milliseconds: 0
                               until:
                                 - condition: template
@@ -14813,7 +15392,16 @@ actions:
                                 - delay:
                                     hours: 0
                                     minutes: 0
-                                    seconds: 4
+                                    seconds: 1
+                                    milliseconds: 0
+                                - action: homeassistant.update_entity
+                                  target:
+                                    entity_id: sensor.vmc_master_status_ventola
+                                  alias: Rilettura immediata della velocità (la velocità non ancora aggiornata non va presa per una scelta dell'utente)
+                                - delay:
+                                    hours: 0
+                                    minutes: 0
+                                    seconds: 3
                                     milliseconds: 0
                               until:
                                 - condition: template
@@ -15019,7 +15607,16 @@ actions:
                         - delay:
                             hours: 0
                             minutes: 0
-                            seconds: 4
+                            seconds: 1
+                            milliseconds: 0
+                        - action: homeassistant.update_entity
+                          target:
+                            entity_id: sensor.vmc_master_status_ventola
+                          alias: Rilettura immediata della velocità (la velocità non ancora aggiornata non va presa per una scelta dell'utente)
+                        - delay:
+                            hours: 0
+                            minutes: 0
+                            seconds: 3
                             milliseconds: 0
                       until:
                         - condition: template
@@ -15119,7 +15716,16 @@ actions:
                         - delay:
                             hours: 0
                             minutes: 0
-                            seconds: 4
+                            seconds: 1
+                            milliseconds: 0
+                        - action: homeassistant.update_entity
+                          target:
+                            entity_id: sensor.vmc_master_status_ventola
+                          alias: Rilettura immediata della velocità (la velocità non ancora aggiornata non va presa per una scelta dell'utente)
+                        - delay:
+                            hours: 0
+                            minutes: 0
+                            seconds: 3
                             milliseconds: 0
                       until:
                         - condition: template
@@ -15219,7 +15825,16 @@ actions:
                         - delay:
                             hours: 0
                             minutes: 0
-                            seconds: 4
+                            seconds: 1
+                            milliseconds: 0
+                        - action: homeassistant.update_entity
+                          target:
+                            entity_id: sensor.vmc_master_status_ventola
+                          alias: Rilettura immediata della velocità (la velocità non ancora aggiornata non va presa per una scelta dell'utente)
+                        - delay:
+                            hours: 0
+                            minutes: 0
+                            seconds: 3
                             milliseconds: 0
                       until:
                         - condition: template
@@ -15318,7 +15933,16 @@ actions:
                         - delay:
                             hours: 0
                             minutes: 0
-                            seconds: 4
+                            seconds: 1
+                            milliseconds: 0
+                        - action: homeassistant.update_entity
+                          target:
+                            entity_id: sensor.vmc_master_status_ventola
+                          alias: Rilettura immediata della velocità (la velocità non ancora aggiornata non va presa per una scelta dell'utente)
+                        - delay:
+                            hours: 0
+                            minutes: 0
+                            seconds: 3
                             milliseconds: 0
                       until:
                         - condition: template
@@ -15398,7 +16022,16 @@ actions:
                         - delay:
                             hours: 0
                             minutes: 0
-                            seconds: 4
+                            seconds: 1
+                            milliseconds: 0
+                        - action: homeassistant.update_entity
+                          target:
+                            entity_id: sensor.vmc_master_status_ventola
+                          alias: Rilettura immediata della velocità (la velocità non ancora aggiornata non va presa per una scelta dell'utente)
+                        - delay:
+                            hours: 0
+                            minutes: 0
+                            seconds: 3
                             milliseconds: 0
                       until:
                         - condition: template
@@ -15436,7 +16069,16 @@ actions:
                         - delay:
                             hours: 0
                             minutes: 0
-                            seconds: 4
+                            seconds: 1
+                            milliseconds: 0
+                        - action: homeassistant.update_entity
+                          target:
+                            entity_id: sensor.vmc_master_status_ventola
+                          alias: Rilettura immediata della velocità (la velocità non ancora aggiornata non va presa per una scelta dell'utente)
+                        - delay:
+                            hours: 0
+                            minutes: 0
+                            seconds: 3
                             milliseconds: 0
                       until:
                         - condition: template
@@ -15517,7 +16159,16 @@ actions:
                         - delay:
                             hours: 0
                             minutes: 0
-                            seconds: 4
+                            seconds: 1
+                            milliseconds: 0
+                        - action: homeassistant.update_entity
+                          target:
+                            entity_id: sensor.vmc_master_status_ventola
+                          alias: Rilettura immediata della velocità (la velocità non ancora aggiornata non va presa per una scelta dell'utente)
+                        - delay:
+                            hours: 0
+                            minutes: 0
+                            seconds: 3
                             milliseconds: 0
                       until:
                         - condition: template
@@ -15555,7 +16206,16 @@ actions:
                         - delay:
                             hours: 0
                             minutes: 0
-                            seconds: 4
+                            seconds: 1
+                            milliseconds: 0
+                        - action: homeassistant.update_entity
+                          target:
+                            entity_id: sensor.vmc_master_status_ventola
+                          alias: Rilettura immediata della velocità (la velocità non ancora aggiornata non va presa per una scelta dell'utente)
+                        - delay:
+                            hours: 0
+                            minutes: 0
+                            seconds: 3
                             milliseconds: 0
                       until:
                         - condition: template
@@ -15636,7 +16296,16 @@ actions:
                         - delay:
                             hours: 0
                             minutes: 0
-                            seconds: 4
+                            seconds: 1
+                            milliseconds: 0
+                        - action: homeassistant.update_entity
+                          target:
+                            entity_id: sensor.vmc_master_status_ventola
+                          alias: Rilettura immediata della velocità (la velocità non ancora aggiornata non va presa per una scelta dell'utente)
+                        - delay:
+                            hours: 0
+                            minutes: 0
+                            seconds: 3
                             milliseconds: 0
                       until:
                         - condition: template
@@ -15674,7 +16343,16 @@ actions:
                         - delay:
                             hours: 0
                             minutes: 0
-                            seconds: 4
+                            seconds: 1
+                            milliseconds: 0
+                        - action: homeassistant.update_entity
+                          target:
+                            entity_id: sensor.vmc_master_status_ventola
+                          alias: Rilettura immediata della velocità (la velocità non ancora aggiornata non va presa per una scelta dell'utente)
+                        - delay:
+                            hours: 0
+                            minutes: 0
+                            seconds: 3
                             milliseconds: 0
                       until:
                         - condition: template
@@ -15755,7 +16433,16 @@ actions:
                         - delay:
                             hours: 0
                             minutes: 0
-                            seconds: 4
+                            seconds: 1
+                            milliseconds: 0
+                        - action: homeassistant.update_entity
+                          target:
+                            entity_id: sensor.vmc_master_status_ventola
+                          alias: Rilettura immediata della velocità (la velocità non ancora aggiornata non va presa per una scelta dell'utente)
+                        - delay:
+                            hours: 0
+                            minutes: 0
+                            seconds: 3
                             milliseconds: 0
                       until:
                         - condition: template
@@ -15793,7 +16480,16 @@ actions:
                         - delay:
                             hours: 0
                             minutes: 0
-                            seconds: 4
+                            seconds: 1
+                            milliseconds: 0
+                        - action: homeassistant.update_entity
+                          target:
+                            entity_id: sensor.vmc_master_status_ventola
+                          alias: Rilettura immediata della velocità (la velocità non ancora aggiornata non va presa per una scelta dell'utente)
+                        - delay:
+                            hours: 0
+                            minutes: 0
+                            seconds: 3
                             milliseconds: 0
                       until:
                         - condition: template
@@ -15874,7 +16570,16 @@ actions:
                         - delay:
                             hours: 0
                             minutes: 0
-                            seconds: 4
+                            seconds: 1
+                            milliseconds: 0
+                        - action: homeassistant.update_entity
+                          target:
+                            entity_id: sensor.vmc_master_status_ventola
+                          alias: Rilettura immediata della velocità (la velocità non ancora aggiornata non va presa per una scelta dell'utente)
+                        - delay:
+                            hours: 0
+                            minutes: 0
+                            seconds: 3
                             milliseconds: 0
                       until:
                         - condition: template
@@ -15912,7 +16617,16 @@ actions:
                         - delay:
                             hours: 0
                             minutes: 0
-                            seconds: 4
+                            seconds: 1
+                            milliseconds: 0
+                        - action: homeassistant.update_entity
+                          target:
+                            entity_id: sensor.vmc_master_status_ventola
+                          alias: Rilettura immediata della velocità (la velocità non ancora aggiornata non va presa per una scelta dell'utente)
+                        - delay:
+                            hours: 0
+                            minutes: 0
+                            seconds: 3
                             milliseconds: 0
                       until:
                         - condition: template
@@ -15993,7 +16707,16 @@ actions:
                         - delay:
                             hours: 0
                             minutes: 0
-                            seconds: 4
+                            seconds: 1
+                            milliseconds: 0
+                        - action: homeassistant.update_entity
+                          target:
+                            entity_id: sensor.vmc_master_status_ventola
+                          alias: Rilettura immediata della velocità (la velocità non ancora aggiornata non va presa per una scelta dell'utente)
+                        - delay:
+                            hours: 0
+                            minutes: 0
+                            seconds: 3
                             milliseconds: 0
                       until:
                         - condition: template
@@ -16031,7 +16754,16 @@ actions:
                         - delay:
                             hours: 0
                             minutes: 0
-                            seconds: 4
+                            seconds: 1
+                            milliseconds: 0
+                        - action: homeassistant.update_entity
+                          target:
+                            entity_id: sensor.vmc_master_status_ventola
+                          alias: Rilettura immediata della velocità (la velocità non ancora aggiornata non va presa per una scelta dell'utente)
+                        - delay:
+                            hours: 0
+                            minutes: 0
+                            seconds: 3
                             milliseconds: 0
                       until:
                         - condition: template
@@ -16113,7 +16845,16 @@ actions:
                         - delay:
                             hours: 0
                             minutes: 0
-                            seconds: 4
+                            seconds: 1
+                            milliseconds: 0
+                        - action: homeassistant.update_entity
+                          target:
+                            entity_id: sensor.vmc_master_status_ventola
+                          alias: Rilettura immediata della velocità (la velocità non ancora aggiornata non va presa per una scelta dell'utente)
+                        - delay:
+                            hours: 0
+                            minutes: 0
+                            seconds: 3
                             milliseconds: 0
                       until:
                         - condition: template
@@ -16151,7 +16892,16 @@ actions:
                         - delay:
                             hours: 0
                             minutes: 0
-                            seconds: 4
+                            seconds: 1
+                            milliseconds: 0
+                        - action: homeassistant.update_entity
+                          target:
+                            entity_id: sensor.vmc_master_status_ventola
+                          alias: Rilettura immediata della velocità (la velocità non ancora aggiornata non va presa per una scelta dell'utente)
+                        - delay:
+                            hours: 0
+                            minutes: 0
+                            seconds: 3
                             milliseconds: 0
                       until:
                         - condition: template
@@ -16825,7 +17575,16 @@ actions:
                         - delay:
                             hours: 0
                             minutes: 0
-                            seconds: 4
+                            seconds: 1
+                            milliseconds: 0
+                        - action: homeassistant.update_entity
+                          target:
+                            entity_id: sensor.vmc_master_status_ventola
+                          alias: Rilettura immediata della velocità (la velocità non ancora aggiornata non va presa per una scelta dell'utente)
+                        - delay:
+                            hours: 0
+                            minutes: 0
+                            seconds: 3
                             milliseconds: 0
                       until:
                         - condition: template
@@ -17067,7 +17826,16 @@ actions:
                         - delay:
                             hours: 0
                             minutes: 0
-                            seconds: 4
+                            seconds: 1
+                            milliseconds: 0
+                        - action: homeassistant.update_entity
+                          target:
+                            entity_id: sensor.vmc_master_status_ventola
+                          alias: Rilettura immediata della velocità (la velocità non ancora aggiornata non va presa per una scelta dell'utente)
+                        - delay:
+                            hours: 0
+                            minutes: 0
+                            seconds: 3
                             milliseconds: 0
                       until:
                         - condition: template
@@ -18065,7 +18833,16 @@ actions:
                         - delay:
                             hours: 0
                             minutes: 0
-                            seconds: 4
+                            seconds: 1
+                            milliseconds: 0
+                        - action: homeassistant.update_entity
+                          target:
+                            entity_id: sensor.vmc_master_status_ventola
+                          alias: Rilettura immediata della velocità (la velocità non ancora aggiornata non va presa per una scelta dell'utente)
+                        - delay:
+                            hours: 0
+                            minutes: 0
+                            seconds: 3
                             milliseconds: 0
                       until:
                         - condition: template
@@ -18547,7 +19324,16 @@ actions:
                         - delay:
                             hours: 0
                             minutes: 0
-                            seconds: 4
+                            seconds: 1
+                            milliseconds: 0
+                        - action: homeassistant.update_entity
+                          target:
+                            entity_id: sensor.vmc_master_status_ventola
+                          alias: Rilettura immediata della velocità (la velocità non ancora aggiornata non va presa per una scelta dell'utente)
+                        - delay:
+                            hours: 0
+                            minutes: 0
+                            seconds: 3
                             milliseconds: 0
                       until:
                         - condition: template
@@ -19029,7 +19815,16 @@ actions:
                         - delay:
                             hours: 0
                             minutes: 0
-                            seconds: 4
+                            seconds: 1
+                            milliseconds: 0
+                        - action: homeassistant.update_entity
+                          target:
+                            entity_id: sensor.vmc_master_status_ventola
+                          alias: Rilettura immediata della velocità (la velocità non ancora aggiornata non va presa per una scelta dell'utente)
+                        - delay:
+                            hours: 0
+                            minutes: 0
+                            seconds: 3
                             milliseconds: 0
                       until:
                         - condition: template
@@ -19511,7 +20306,16 @@ actions:
                         - delay:
                             hours: 0
                             minutes: 0
-                            seconds: 4
+                            seconds: 1
+                            milliseconds: 0
+                        - action: homeassistant.update_entity
+                          target:
+                            entity_id: sensor.vmc_master_status_ventola
+                          alias: Rilettura immediata della velocità (la velocità non ancora aggiornata non va presa per una scelta dell'utente)
+                        - delay:
+                            hours: 0
+                            minutes: 0
+                            seconds: 3
                             milliseconds: 0
                       until:
                         - condition: template
@@ -19992,7 +20796,16 @@ actions:
                         - delay:
                             hours: 0
                             minutes: 0
-                            seconds: 4
+                            seconds: 1
+                            milliseconds: 0
+                        - action: homeassistant.update_entity
+                          target:
+                            entity_id: sensor.vmc_master_status_ventola
+                          alias: Rilettura immediata della velocità (la velocità non ancora aggiornata non va presa per una scelta dell'utente)
+                        - delay:
+                            hours: 0
+                            minutes: 0
+                            seconds: 3
                             milliseconds: 0
                       until:
                         - condition: template
@@ -20473,7 +21286,16 @@ actions:
                         - delay:
                             hours: 0
                             minutes: 0
-                            seconds: 4
+                            seconds: 1
+                            milliseconds: 0
+                        - action: homeassistant.update_entity
+                          target:
+                            entity_id: sensor.vmc_master_status_ventola
+                          alias: Rilettura immediata della velocità (la velocità non ancora aggiornata non va presa per una scelta dell'utente)
+                        - delay:
+                            hours: 0
+                            minutes: 0
+                            seconds: 3
                             milliseconds: 0
                       until:
                         - condition: template
@@ -21392,7 +22214,16 @@ actions:
                         - delay:
                             hours: 0
                             minutes: 0
-                            seconds: 4
+                            seconds: 1
+                            milliseconds: 0
+                        - action: homeassistant.update_entity
+                          target:
+                            entity_id: sensor.vmc_master_status_ventola
+                          alias: Rilettura immediata della velocità (la velocità non ancora aggiornata non va presa per una scelta dell'utente)
+                        - delay:
+                            hours: 0
+                            minutes: 0
+                            seconds: 3
                             milliseconds: 0
                       until:
                         - condition: template
@@ -21481,7 +22312,16 @@ actions:
                         - delay:
                             hours: 0
                             minutes: 0
-                            seconds: 4
+                            seconds: 1
+                            milliseconds: 0
+                        - action: homeassistant.update_entity
+                          target:
+                            entity_id: sensor.vmc_master_status_ventola
+                          alias: Rilettura immediata della velocità (la velocità non ancora aggiornata non va presa per una scelta dell'utente)
+                        - delay:
+                            hours: 0
+                            minutes: 0
+                            seconds: 3
                             milliseconds: 0
                       until:
                         - condition: template
@@ -21559,7 +22399,16 @@ actions:
                         - delay:
                             hours: 0
                             minutes: 0
-                            seconds: 4
+                            seconds: 1
+                            milliseconds: 0
+                        - action: homeassistant.update_entity
+                          target:
+                            entity_id: sensor.vmc_master_status_ventola
+                          alias: Rilettura immediata della velocità (la velocità non ancora aggiornata non va presa per una scelta dell'utente)
+                        - delay:
+                            hours: 0
+                            minutes: 0
+                            seconds: 3
                             milliseconds: 0
                       until:
                         - condition: template
@@ -21637,7 +22486,16 @@ actions:
                         - delay:
                             hours: 0
                             minutes: 0
-                            seconds: 4
+                            seconds: 1
+                            milliseconds: 0
+                        - action: homeassistant.update_entity
+                          target:
+                            entity_id: sensor.vmc_master_status_ventola
+                          alias: Rilettura immediata della velocità (la velocità non ancora aggiornata non va presa per una scelta dell'utente)
+                        - delay:
+                            hours: 0
+                            minutes: 0
+                            seconds: 3
                             milliseconds: 0
                       until:
                         - condition: template
@@ -21715,7 +22573,16 @@ actions:
                         - delay:
                             hours: 0
                             minutes: 0
-                            seconds: 4
+                            seconds: 1
+                            milliseconds: 0
+                        - action: homeassistant.update_entity
+                          target:
+                            entity_id: sensor.vmc_master_status_ventola
+                          alias: Rilettura immediata della velocità (la velocità non ancora aggiornata non va presa per una scelta dell'utente)
+                        - delay:
+                            hours: 0
+                            minutes: 0
+                            seconds: 3
                             milliseconds: 0
                       until:
                         - condition: template
@@ -21793,7 +22660,16 @@ actions:
                         - delay:
                             hours: 0
                             minutes: 0
-                            seconds: 4
+                            seconds: 1
+                            milliseconds: 0
+                        - action: homeassistant.update_entity
+                          target:
+                            entity_id: sensor.vmc_master_status_ventola
+                          alias: Rilettura immediata della velocità (la velocità non ancora aggiornata non va presa per una scelta dell'utente)
+                        - delay:
+                            hours: 0
+                            minutes: 0
+                            seconds: 3
                             milliseconds: 0
                       until:
                         - condition: template
@@ -21871,7 +22747,16 @@ actions:
                         - delay:
                             hours: 0
                             minutes: 0
-                            seconds: 4
+                            seconds: 1
+                            milliseconds: 0
+                        - action: homeassistant.update_entity
+                          target:
+                            entity_id: sensor.vmc_master_status_ventola
+                          alias: Rilettura immediata della velocità (la velocità non ancora aggiornata non va presa per una scelta dell'utente)
+                        - delay:
+                            hours: 0
+                            minutes: 0
+                            seconds: 3
                             milliseconds: 0
                       until:
                         - condition: template
@@ -21949,7 +22834,16 @@ actions:
                         - delay:
                             hours: 0
                             minutes: 0
-                            seconds: 4
+                            seconds: 1
+                            milliseconds: 0
+                        - action: homeassistant.update_entity
+                          target:
+                            entity_id: sensor.vmc_master_status_ventola
+                          alias: Rilettura immediata della velocità (la velocità non ancora aggiornata non va presa per una scelta dell'utente)
+                        - delay:
+                            hours: 0
+                            minutes: 0
+                            seconds: 3
                             milliseconds: 0
                       until:
                         - condition: template
@@ -22029,7 +22923,16 @@ actions:
                         - delay:
                             hours: 0
                             minutes: 0
-                            seconds: 4
+                            seconds: 1
+                            milliseconds: 0
+                        - action: homeassistant.update_entity
+                          target:
+                            entity_id: sensor.vmc_master_status_ventola
+                          alias: Rilettura immediata della velocità (la velocità non ancora aggiornata non va presa per una scelta dell'utente)
+                        - delay:
+                            hours: 0
+                            minutes: 0
+                            seconds: 3
                             milliseconds: 0
                       until:
                         - condition: template
@@ -22295,7 +23198,16 @@ actions:
                 - delay:
                     hours: 0
                     minutes: 0
-                    seconds: 4
+                    seconds: 1
+                    milliseconds: 0
+                - action: homeassistant.update_entity
+                  target:
+                    entity_id: sensor.vmc_master_status_ventola
+                  alias: Rilettura immediata della velocità (la velocità non ancora aggiornata non va presa per una scelta dell'utente)
+                - delay:
+                    hours: 0
+                    minutes: 0
+                    seconds: 3
                     milliseconds: 0
               until:
                 - condition: template
@@ -22330,7 +23242,16 @@ actions:
                 - delay:
                     hours: 0
                     minutes: 0
-                    seconds: 4
+                    seconds: 1
+                    milliseconds: 0
+                - action: homeassistant.update_entity
+                  target:
+                    entity_id: sensor.vmc_master_status_ventola
+                  alias: Rilettura immediata della velocità (la velocità non ancora aggiornata non va presa per una scelta dell'utente)
+                - delay:
+                    hours: 0
+                    minutes: 0
+                    seconds: 3
                     milliseconds: 0
               until:
                 - condition: template
@@ -22408,7 +23329,16 @@ actions:
                         - delay:
                             hours: 0
                             minutes: 0
-                            seconds: 4
+                            seconds: 1
+                            milliseconds: 0
+                        - action: homeassistant.update_entity
+                          target:
+                            entity_id: sensor.vmc_master_status_ventola
+                          alias: Rilettura immediata della velocità (la velocità non ancora aggiornata non va presa per una scelta dell'utente)
+                        - delay:
+                            hours: 0
+                            minutes: 0
+                            seconds: 3
                             milliseconds: 0
                       until:
                         - condition: template
@@ -22474,7 +23404,16 @@ actions:
                         - delay:
                             hours: 0
                             minutes: 0
-                            seconds: 4
+                            seconds: 1
+                            milliseconds: 0
+                        - action: homeassistant.update_entity
+                          target:
+                            entity_id: sensor.vmc_master_status_ventola
+                          alias: Rilettura immediata della velocità (la velocità non ancora aggiornata non va presa per una scelta dell'utente)
+                        - delay:
+                            hours: 0
+                            minutes: 0
+                            seconds: 3
                             milliseconds: 0
                       until:
                         - condition: template
@@ -22552,7 +23491,16 @@ actions:
                         - delay:
                             hours: 0
                             minutes: 0
-                            seconds: 4
+                            seconds: 1
+                            milliseconds: 0
+                        - action: homeassistant.update_entity
+                          target:
+                            entity_id: sensor.vmc_master_status_ventola
+                          alias: Rilettura immediata della velocità (la velocità non ancora aggiornata non va presa per una scelta dell'utente)
+                        - delay:
+                            hours: 0
+                            minutes: 0
+                            seconds: 3
                             milliseconds: 0
                       until:
                         - condition: template
@@ -22619,7 +23567,16 @@ actions:
                         - delay:
                             hours: 0
                             minutes: 0
-                            seconds: 4
+                            seconds: 1
+                            milliseconds: 0
+                        - action: homeassistant.update_entity
+                          target:
+                            entity_id: sensor.vmc_master_status_ventola
+                          alias: Rilettura immediata della velocità (la velocità non ancora aggiornata non va presa per una scelta dell'utente)
+                        - delay:
+                            hours: 0
+                            minutes: 0
+                            seconds: 3
                             milliseconds: 0
                       until:
                         - condition: template
@@ -23204,7 +24161,19 @@ actions:
                           sequence:
                             - action: shell_command.vmc_master_velocita_1
                             - delay:
-                                seconds: 5
+                                hours: 0
+                                minutes: 0
+                                seconds: 1
+                                milliseconds: 0
+                            - action: homeassistant.update_entity
+                              target:
+                                entity_id: sensor.vmc_master_status_ventola
+                              alias: Rilettura immediata della velocità (lo 0 non ancora aggiornato non va preso per una scelta dell'utente)
+                            - delay:
+                                hours: 0
+                                minutes: 0
+                                seconds: 4
+                                milliseconds: 0
                           until:
                             - condition: template
                               value_template: "{{ states('sensor.vmc_master_status_ventola_lettura_codice_interpretato') == 'Velocità 1' or (vel_prima_del_comando not in ['Non disponibile', 'unknown', 'unavailable', ''] and states('sensor.vmc_master_status_ventola_lettura_codice_interpretato') not in [vel_prima_del_comando, 'Non disponibile', 'unknown', 'unavailable', '']) }}"
@@ -23245,7 +24214,16 @@ actions:
                             - delay:
                                 hours: 0
                                 minutes: 0
-                                seconds: 5
+                                seconds: 1
+                                milliseconds: 0
+                            - action: homeassistant.update_entity
+                              target:
+                                entity_id: sensor.vmc_master_status_ventola
+                              alias: Rilettura immediata della velocità (lo 0 non ancora aggiornato non va preso per una scelta dell'utente)
+                            - delay:
+                                hours: 0
+                                minutes: 0
+                                seconds: 4
                                 milliseconds: 0
                           until:
                             - condition: template
@@ -23288,7 +24266,16 @@ actions:
                             - delay:
                                 hours: 0
                                 minutes: 0
-                                seconds: 5
+                                seconds: 1
+                                milliseconds: 0
+                            - action: homeassistant.update_entity
+                              target:
+                                entity_id: sensor.vmc_master_status_ventola
+                              alias: Rilettura immediata della velocità (lo 0 non ancora aggiornato non va preso per una scelta dell'utente)
+                            - delay:
+                                hours: 0
+                                minutes: 0
+                                seconds: 4
                                 milliseconds: 0
                           until:
                             - condition: template
@@ -23331,7 +24318,16 @@ actions:
                             - delay:
                                 hours: 0
                                 minutes: 0
-                                seconds: 5
+                                seconds: 1
+                                milliseconds: 0
+                            - action: homeassistant.update_entity
+                              target:
+                                entity_id: sensor.vmc_master_status_ventola
+                              alias: Rilettura immediata della velocità (lo 0 non ancora aggiornato non va preso per una scelta dell'utente)
+                            - delay:
+                                hours: 0
+                                minutes: 0
+                                seconds: 4
                                 milliseconds: 0
                           until:
                             - condition: template
@@ -23374,7 +24370,16 @@ actions:
                             - delay:
                                 hours: 0
                                 minutes: 0
-                                seconds: 5
+                                seconds: 1
+                                milliseconds: 0
+                            - action: homeassistant.update_entity
+                              target:
+                                entity_id: sensor.vmc_master_status_ventola
+                              alias: Rilettura immediata della velocità (lo 0 non ancora aggiornato non va preso per una scelta dell'utente)
+                            - delay:
+                                hours: 0
+                                minutes: 0
+                                seconds: 4
                                 milliseconds: 0
                           until:
                             - condition: template
@@ -23417,7 +24422,16 @@ actions:
                             - delay:
                                 hours: 0
                                 minutes: 0
-                                seconds: 5
+                                seconds: 1
+                                milliseconds: 0
+                            - action: homeassistant.update_entity
+                              target:
+                                entity_id: sensor.vmc_master_status_ventola
+                              alias: Rilettura immediata della velocità (lo 0 non ancora aggiornato non va preso per una scelta dell'utente)
+                            - delay:
+                                hours: 0
+                                minutes: 0
+                                seconds: 4
                                 milliseconds: 0
                           until:
                             - condition: template
@@ -23460,7 +24474,16 @@ actions:
                             - delay:
                                 hours: 0
                                 minutes: 0
-                                seconds: 5
+                                seconds: 1
+                                milliseconds: 0
+                            - action: homeassistant.update_entity
+                              target:
+                                entity_id: sensor.vmc_master_status_ventola
+                              alias: Rilettura immediata della velocità (lo 0 non ancora aggiornato non va preso per una scelta dell'utente)
+                            - delay:
+                                hours: 0
+                                minutes: 0
+                                seconds: 4
                                 milliseconds: 0
                           until:
                             - condition: template
@@ -23524,7 +24547,16 @@ actions:
                             - delay:
                                 hours: 0
                                 minutes: 0
-                                seconds: 5
+                                seconds: 1
+                                milliseconds: 0
+                            - action: homeassistant.update_entity
+                              target:
+                                entity_id: sensor.vmc_master_status_ventola
+                              alias: Rilettura immediata della velocità (lo 0 non ancora aggiornato non va preso per una scelta dell'utente)
+                            - delay:
+                                hours: 0
+                                minutes: 0
+                                seconds: 4
                                 milliseconds: 0
                           until:
                             - condition: template
@@ -23588,7 +24620,16 @@ actions:
                             - delay:
                                 hours: 0
                                 minutes: 0
-                                seconds: 5
+                                seconds: 1
+                                milliseconds: 0
+                            - action: homeassistant.update_entity
+                              target:
+                                entity_id: sensor.vmc_master_status_ventola
+                              alias: Rilettura immediata della velocità (lo 0 non ancora aggiornato non va preso per una scelta dell'utente)
+                            - delay:
+                                hours: 0
+                                minutes: 0
+                                seconds: 4
                                 milliseconds: 0
                           until:
                             - condition: template
@@ -23631,7 +24672,16 @@ actions:
                             - delay:
                                 hours: 0
                                 minutes: 0
-                                seconds: 5
+                                seconds: 1
+                                milliseconds: 0
+                            - action: homeassistant.update_entity
+                              target:
+                                entity_id: sensor.vmc_master_status_ventola
+                              alias: Rilettura immediata della velocità (lo 0 non ancora aggiornato non va preso per una scelta dell'utente)
+                            - delay:
+                                hours: 0
+                                minutes: 0
+                                seconds: 4
                                 milliseconds: 0
                           until:
                             - condition: template
@@ -23677,7 +24727,16 @@ actions:
                             - delay:
                                 hours: 0
                                 minutes: 0
-                                seconds: 5
+                                seconds: 1
+                                milliseconds: 0
+                            - action: homeassistant.update_entity
+                              target:
+                                entity_id: sensor.vmc_master_status_ventola
+                              alias: Rilettura immediata della velocità (la velocità non ancora aggiornata non va presa per una scelta dell'utente)
+                            - delay:
+                                hours: 0
+                                minutes: 0
+                                seconds: 4
                                 milliseconds: 0
                           until:
                             - condition: template
@@ -23721,7 +24780,16 @@ actions:
                             - delay:
                                 hours: 0
                                 minutes: 0
-                                seconds: 5
+                                seconds: 1
+                                milliseconds: 0
+                            - action: homeassistant.update_entity
+                              target:
+                                entity_id: sensor.vmc_master_status_ventola
+                              alias: Rilettura immediata della velocità (la velocità non ancora aggiornata non va presa per una scelta dell'utente)
+                            - delay:
+                                hours: 0
+                                minutes: 0
+                                seconds: 4
                                 milliseconds: 0
                           until:
                             - condition: template
@@ -23765,7 +24833,16 @@ actions:
                             - delay:
                                 hours: 0
                                 minutes: 0
-                                seconds: 5
+                                seconds: 1
+                                milliseconds: 0
+                            - action: homeassistant.update_entity
+                              target:
+                                entity_id: sensor.vmc_master_status_ventola
+                              alias: Rilettura immediata della velocità (la velocità non ancora aggiornata non va presa per una scelta dell'utente)
+                            - delay:
+                                hours: 0
+                                minutes: 0
+                                seconds: 4
                                 milliseconds: 0
                           until:
                             - condition: template
@@ -23809,7 +24886,16 @@ actions:
                             - delay:
                                 hours: 0
                                 minutes: 0
-                                seconds: 5
+                                seconds: 1
+                                milliseconds: 0
+                            - action: homeassistant.update_entity
+                              target:
+                                entity_id: sensor.vmc_master_status_ventola
+                              alias: Rilettura immediata della velocità (la velocità non ancora aggiornata non va presa per una scelta dell'utente)
+                            - delay:
+                                hours: 0
+                                minutes: 0
+                                seconds: 4
                                 milliseconds: 0
                           until:
                             - condition: template
@@ -23853,7 +24939,16 @@ actions:
                             - delay:
                                 hours: 0
                                 minutes: 0
-                                seconds: 5
+                                seconds: 1
+                                milliseconds: 0
+                            - action: homeassistant.update_entity
+                              target:
+                                entity_id: sensor.vmc_master_status_ventola
+                              alias: Rilettura immediata della velocità (la velocità non ancora aggiornata non va presa per una scelta dell'utente)
+                            - delay:
+                                hours: 0
+                                minutes: 0
+                                seconds: 4
                                 milliseconds: 0
                           until:
                             - condition: template
@@ -23897,7 +24992,16 @@ actions:
                             - delay:
                                 hours: 0
                                 minutes: 0
-                                seconds: 5
+                                seconds: 1
+                                milliseconds: 0
+                            - action: homeassistant.update_entity
+                              target:
+                                entity_id: sensor.vmc_master_status_ventola
+                              alias: Rilettura immediata della velocità (la velocità non ancora aggiornata non va presa per una scelta dell'utente)
+                            - delay:
+                                hours: 0
+                                minutes: 0
+                                seconds: 4
                                 milliseconds: 0
                           until:
                             - condition: template
@@ -23941,7 +25045,16 @@ actions:
                             - delay:
                                 hours: 0
                                 minutes: 0
-                                seconds: 5
+                                seconds: 1
+                                milliseconds: 0
+                            - action: homeassistant.update_entity
+                              target:
+                                entity_id: sensor.vmc_master_status_ventola
+                              alias: Rilettura immediata della velocità (la velocità non ancora aggiornata non va presa per una scelta dell'utente)
+                            - delay:
+                                hours: 0
+                                minutes: 0
+                                seconds: 4
                                 milliseconds: 0
                           until:
                             - condition: template
@@ -24000,7 +25113,16 @@ actions:
                         - delay:
                             hours: 0
                             minutes: 0
-                            seconds: 5
+                            seconds: 1
+                            milliseconds: 0
+                        - action: homeassistant.update_entity
+                          target:
+                            entity_id: sensor.vmc_master_status_ventola
+                          alias: Rilettura immediata della velocità (la velocità non ancora aggiornata non va presa per una scelta dell'utente)
+                        - delay:
+                            hours: 0
+                            minutes: 0
+                            seconds: 4
                             milliseconds: 0
                       until:
                         - condition: template
@@ -24040,7 +25162,16 @@ actions:
                         - delay:
                             hours: 0
                             minutes: 0
-                            seconds: 5
+                            seconds: 1
+                            milliseconds: 0
+                        - action: homeassistant.update_entity
+                          target:
+                            entity_id: sensor.vmc_master_status_ventola
+                          alias: Rilettura immediata della velocità (la velocità non ancora aggiornata non va presa per una scelta dell'utente)
+                        - delay:
+                            hours: 0
+                            minutes: 0
+                            seconds: 4
                             milliseconds: 0
                       until:
                         - condition: template
@@ -24080,7 +25211,16 @@ actions:
                         - delay:
                             hours: 0
                             minutes: 0
-                            seconds: 5
+                            seconds: 1
+                            milliseconds: 0
+                        - action: homeassistant.update_entity
+                          target:
+                            entity_id: sensor.vmc_master_status_ventola
+                          alias: Rilettura immediata della velocità (la velocità non ancora aggiornata non va presa per una scelta dell'utente)
+                        - delay:
+                            hours: 0
+                            minutes: 0
+                            seconds: 4
                             milliseconds: 0
                       until:
                         - condition: template
@@ -24120,7 +25260,16 @@ actions:
                         - delay:
                             hours: 0
                             minutes: 0
-                            seconds: 5
+                            seconds: 1
+                            milliseconds: 0
+                        - action: homeassistant.update_entity
+                          target:
+                            entity_id: sensor.vmc_master_status_ventola
+                          alias: Rilettura immediata della velocità (la velocità non ancora aggiornata non va presa per una scelta dell'utente)
+                        - delay:
+                            hours: 0
+                            minutes: 0
+                            seconds: 4
                             milliseconds: 0
                       until:
                         - condition: template
@@ -24160,7 +25309,16 @@ actions:
                         - delay:
                             hours: 0
                             minutes: 0
-                            seconds: 5
+                            seconds: 1
+                            milliseconds: 0
+                        - action: homeassistant.update_entity
+                          target:
+                            entity_id: sensor.vmc_master_status_ventola
+                          alias: Rilettura immediata della velocità (la velocità non ancora aggiornata non va presa per una scelta dell'utente)
+                        - delay:
+                            hours: 0
+                            minutes: 0
+                            seconds: 4
                             milliseconds: 0
                       until:
                         - condition: template
@@ -24200,7 +25358,16 @@ actions:
                         - delay:
                             hours: 0
                             minutes: 0
-                            seconds: 5
+                            seconds: 1
+                            milliseconds: 0
+                        - action: homeassistant.update_entity
+                          target:
+                            entity_id: sensor.vmc_master_status_ventola
+                          alias: Rilettura immediata della velocità (la velocità non ancora aggiornata non va presa per una scelta dell'utente)
+                        - delay:
+                            hours: 0
+                            minutes: 0
+                            seconds: 4
                             milliseconds: 0
                       until:
                         - condition: template
@@ -24289,7 +25456,16 @@ actions:
                         - delay:
                             hours: 0
                             minutes: 0
-                            seconds: 5
+                            seconds: 1
+                            milliseconds: 0
+                        - action: homeassistant.update_entity
+                          target:
+                            entity_id: sensor.vmc_master_status_ventola
+                          alias: Rilettura immediata della velocità (la velocità non ancora aggiornata non va presa per una scelta dell'utente)
+                        - delay:
+                            hours: 0
+                            minutes: 0
+                            seconds: 4
                             milliseconds: 0
                       until:
                         - condition: template
@@ -24330,7 +25506,16 @@ actions:
                 - delay:
                     hours: 0
                     minutes: 0
-                    seconds: 5
+                    seconds: 1
+                    milliseconds: 0
+                - action: homeassistant.update_entity
+                  target:
+                    entity_id: sensor.vmc_master_status_ventola
+                  alias: Rilettura immediata della velocità (la velocità non ancora aggiornata non va presa per una scelta dell'utente)
+                - delay:
+                    hours: 0
+                    minutes: 0
+                    seconds: 4
                     milliseconds: 0
               until:
                 - condition: template
@@ -24407,7 +25592,16 @@ actions:
                         - delay:
                             hours: 0
                             minutes: 0
-                            seconds: 5
+                            seconds: 1
+                            milliseconds: 0
+                        - action: homeassistant.update_entity
+                          target:
+                            entity_id: sensor.vmc_master_status_ventola
+                          alias: Rilettura immediata della velocità (la velocità non ancora aggiornata non va presa per una scelta dell'utente)
+                        - delay:
+                            hours: 0
+                            minutes: 0
+                            seconds: 4
                             milliseconds: 0
                       until:
                         - condition: template
@@ -24454,7 +25648,16 @@ actions:
                         - delay:
                             hours: 0
                             minutes: 0
-                            seconds: 5
+                            seconds: 1
+                            milliseconds: 0
+                        - action: homeassistant.update_entity
+                          target:
+                            entity_id: sensor.vmc_master_status_ventola
+                          alias: Rilettura immediata della velocità (la velocità non ancora aggiornata non va presa per una scelta dell'utente)
+                        - delay:
+                            hours: 0
+                            minutes: 0
+                            seconds: 4
                             milliseconds: 0
                       until:
                         - condition: template
@@ -24534,7 +25737,16 @@ actions:
                     - delay:
                         hours: 0
                         minutes: 0
-                        seconds: 5
+                        seconds: 1
+                        milliseconds: 0
+                    - action: homeassistant.update_entity
+                      target:
+                        entity_id: sensor.vmc_master_status_ventola
+                      alias: Rilettura immediata della velocità (la velocità non ancora aggiornata non va presa per una scelta dell'utente)
+                    - delay:
+                        hours: 0
+                        minutes: 0
+                        seconds: 4
                         milliseconds: 0
                   until:
                     - condition: template
@@ -24599,7 +25811,16 @@ actions:
                     - delay:
                         hours: 0
                         minutes: 0
-                        seconds: 5
+                        seconds: 1
+                        milliseconds: 0
+                    - action: homeassistant.update_entity
+                      target:
+                        entity_id: sensor.vmc_master_status_ventola
+                      alias: Rilettura immediata della velocità (la velocità non ancora aggiornata non va presa per una scelta dell'utente)
+                    - delay:
+                        hours: 0
+                        minutes: 0
+                        seconds: 4
                         milliseconds: 0
                   until:
                     - condition: template
@@ -24664,7 +25885,16 @@ actions:
                     - delay:
                         hours: 0
                         minutes: 0
-                        seconds: 5
+                        seconds: 1
+                        milliseconds: 0
+                    - action: homeassistant.update_entity
+                      target:
+                        entity_id: sensor.vmc_master_status_ventola
+                      alias: Rilettura immediata della velocità (la velocità non ancora aggiornata non va presa per una scelta dell'utente)
+                    - delay:
+                        hours: 0
+                        minutes: 0
+                        seconds: 4
                         milliseconds: 0
                   until:
                     - condition: template
@@ -24729,7 +25959,16 @@ actions:
                     - delay:
                         hours: 0
                         minutes: 0
-                        seconds: 5
+                        seconds: 1
+                        milliseconds: 0
+                    - action: homeassistant.update_entity
+                      target:
+                        entity_id: sensor.vmc_master_status_ventola
+                      alias: Rilettura immediata della velocità (la velocità non ancora aggiornata non va presa per una scelta dell'utente)
+                    - delay:
+                        hours: 0
+                        minutes: 0
+                        seconds: 4
                         milliseconds: 0
                   until:
                     - condition: template
@@ -24794,7 +26033,16 @@ actions:
                     - delay:
                         hours: 0
                         minutes: 0
-                        seconds: 5
+                        seconds: 1
+                        milliseconds: 0
+                    - action: homeassistant.update_entity
+                      target:
+                        entity_id: sensor.vmc_master_status_ventola
+                      alias: Rilettura immediata della velocità (la velocità non ancora aggiornata non va presa per una scelta dell'utente)
+                    - delay:
+                        hours: 0
+                        minutes: 0
+                        seconds: 4
                         milliseconds: 0
                   until:
                     - condition: template
@@ -24883,7 +26131,16 @@ actions:
                     - delay:
                         hours: 0
                         minutes: 0
-                        seconds: 5
+                        seconds: 1
+                        milliseconds: 0
+                    - action: homeassistant.update_entity
+                      target:
+                        entity_id: sensor.vmc_master_status_ventola
+                      alias: Rilettura immediata della velocità (la velocità non ancora aggiornata non va presa per una scelta dell'utente)
+                    - delay:
+                        hours: 0
+                        minutes: 0
+                        seconds: 4
                         milliseconds: 0
                   until:
                     - condition: template
@@ -24975,7 +26232,16 @@ actions:
                         - delay:
                             hours: 0
                             minutes: 0
-                            seconds: 4
+                            seconds: 1
+                            milliseconds: 0
+                        - action: homeassistant.update_entity
+                          target:
+                            entity_id: sensor.vmc_master_status_ventola
+                          alias: Rilettura immediata della velocità (la velocità non ancora aggiornata non va presa per una scelta dell'utente)
+                        - delay:
+                            hours: 0
+                            minutes: 0
+                            seconds: 3
                             milliseconds: 0
                       until:
                         - condition: template
@@ -25053,7 +26319,16 @@ actions:
                         - delay:
                             hours: 0
                             minutes: 0
-                            seconds: 4
+                            seconds: 1
+                            milliseconds: 0
+                        - action: homeassistant.update_entity
+                          target:
+                            entity_id: sensor.vmc_master_status_ventola
+                          alias: Rilettura immediata della velocità (la velocità non ancora aggiornata non va presa per una scelta dell'utente)
+                        - delay:
+                            hours: 0
+                            minutes: 0
+                            seconds: 3
                             milliseconds: 0
                       until:
                         - condition: template
@@ -25107,7 +26382,16 @@ actions:
                         - delay:
                             hours: 0
                             minutes: 0
-                            seconds: 4
+                            seconds: 1
+                            milliseconds: 0
+                        - action: homeassistant.update_entity
+                          target:
+                            entity_id: sensor.vmc_master_status_ventola
+                          alias: Rilettura immediata della velocità (la velocità non ancora aggiornata non va presa per una scelta dell'utente)
+                        - delay:
+                            hours: 0
+                            minutes: 0
+                            seconds: 3
                             milliseconds: 0
                       until:
                         - condition: template
@@ -25161,7 +26445,16 @@ actions:
                         - delay:
                             hours: 0
                             minutes: 0
-                            seconds: 4
+                            seconds: 1
+                            milliseconds: 0
+                        - action: homeassistant.update_entity
+                          target:
+                            entity_id: sensor.vmc_master_status_ventola
+                          alias: Rilettura immediata della velocità (la velocità non ancora aggiornata non va presa per una scelta dell'utente)
+                        - delay:
+                            hours: 0
+                            minutes: 0
+                            seconds: 3
                             milliseconds: 0
                       until:
                         - condition: template
@@ -25215,7 +26508,16 @@ actions:
                         - delay:
                             hours: 0
                             minutes: 0
-                            seconds: 4
+                            seconds: 1
+                            milliseconds: 0
+                        - action: homeassistant.update_entity
+                          target:
+                            entity_id: sensor.vmc_master_status_ventola
+                          alias: Rilettura immediata della velocità (la velocità non ancora aggiornata non va presa per una scelta dell'utente)
+                        - delay:
+                            hours: 0
+                            minutes: 0
+                            seconds: 3
                             milliseconds: 0
                       until:
                         - condition: template
@@ -25268,7 +26570,16 @@ actions:
                         - delay:
                             hours: 0
                             minutes: 0
-                            seconds: 4
+                            seconds: 1
+                            milliseconds: 0
+                        - action: homeassistant.update_entity
+                          target:
+                            entity_id: sensor.vmc_master_status_ventola
+                          alias: Rilettura immediata della velocità (la velocità non ancora aggiornata non va presa per una scelta dell'utente)
+                        - delay:
+                            hours: 0
+                            minutes: 0
+                            seconds: 3
                             milliseconds: 0
                       until:
                         - condition: template
@@ -25321,7 +26632,16 @@ actions:
                         - delay:
                             hours: 0
                             minutes: 0
-                            seconds: 4
+                            seconds: 1
+                            milliseconds: 0
+                        - action: homeassistant.update_entity
+                          target:
+                            entity_id: sensor.vmc_master_status_ventola
+                          alias: Rilettura immediata della velocità (la velocità non ancora aggiornata non va presa per una scelta dell'utente)
+                        - delay:
+                            hours: 0
+                            minutes: 0
+                            seconds: 3
                             milliseconds: 0
                       until:
                         - condition: template
@@ -25375,7 +26695,16 @@ actions:
                         - delay:
                             hours: 0
                             minutes: 0
-                            seconds: 4
+                            seconds: 1
+                            milliseconds: 0
+                        - action: homeassistant.update_entity
+                          target:
+                            entity_id: sensor.vmc_master_status_ventola
+                          alias: Rilettura immediata della velocità (la velocità non ancora aggiornata non va presa per una scelta dell'utente)
+                        - delay:
+                            hours: 0
+                            minutes: 0
+                            seconds: 3
                             milliseconds: 0
                       until:
                         - condition: template
@@ -25431,7 +26760,16 @@ actions:
                         - delay:
                             hours: 0
                             minutes: 0
-                            seconds: 4
+                            seconds: 1
+                            milliseconds: 0
+                        - action: homeassistant.update_entity
+                          target:
+                            entity_id: sensor.vmc_master_status_ventola
+                          alias: Rilettura immediata della velocità (la velocità non ancora aggiornata non va presa per una scelta dell'utente)
+                        - delay:
+                            hours: 0
+                            minutes: 0
+                            seconds: 3
                             milliseconds: 0
                       until:
                         - condition: template
@@ -25476,7 +26814,16 @@ actions:
                         - delay:
                             hours: 0
                             minutes: 0
-                            seconds: 4
+                            seconds: 1
+                            milliseconds: 0
+                        - action: homeassistant.update_entity
+                          target:
+                            entity_id: sensor.vmc_master_status_ventola
+                          alias: Rilettura immediata della velocità (la velocità non ancora aggiornata non va presa per una scelta dell'utente)
+                        - delay:
+                            hours: 0
+                            minutes: 0
+                            seconds: 3
                             milliseconds: 0
                       until:
                         - condition: template
@@ -25521,7 +26868,16 @@ actions:
                         - delay:
                             hours: 0
                             minutes: 0
-                            seconds: 4
+                            seconds: 1
+                            milliseconds: 0
+                        - action: homeassistant.update_entity
+                          target:
+                            entity_id: sensor.vmc_master_status_ventola
+                          alias: Rilettura immediata della velocità (la velocità non ancora aggiornata non va presa per una scelta dell'utente)
+                        - delay:
+                            hours: 0
+                            minutes: 0
+                            seconds: 3
                             milliseconds: 0
                       until:
                         - condition: template
@@ -25566,7 +26922,16 @@ actions:
                         - delay:
                             hours: 0
                             minutes: 0
-                            seconds: 4
+                            seconds: 1
+                            milliseconds: 0
+                        - action: homeassistant.update_entity
+                          target:
+                            entity_id: sensor.vmc_master_status_ventola
+                          alias: Rilettura immediata della velocità (la velocità non ancora aggiornata non va presa per una scelta dell'utente)
+                        - delay:
+                            hours: 0
+                            minutes: 0
+                            seconds: 3
                             milliseconds: 0
                       until:
                         - condition: template
@@ -25612,7 +26977,16 @@ actions:
                         - delay:
                             hours: 0
                             minutes: 0
-                            seconds: 4
+                            seconds: 1
+                            milliseconds: 0
+                        - action: homeassistant.update_entity
+                          target:
+                            entity_id: sensor.vmc_master_status_ventola
+                          alias: Rilettura immediata della velocità (la velocità non ancora aggiornata non va presa per una scelta dell'utente)
+                        - delay:
+                            hours: 0
+                            minutes: 0
+                            seconds: 3
                             milliseconds: 0
                       until:
                         - condition: template
@@ -25657,7 +27031,16 @@ actions:
                         - delay:
                             hours: 0
                             minutes: 0
-                            seconds: 4
+                            seconds: 1
+                            milliseconds: 0
+                        - action: homeassistant.update_entity
+                          target:
+                            entity_id: sensor.vmc_master_status_ventola
+                          alias: Rilettura immediata della velocità (la velocità non ancora aggiornata non va presa per una scelta dell'utente)
+                        - delay:
+                            hours: 0
+                            minutes: 0
+                            seconds: 3
                             milliseconds: 0
                       until:
                         - condition: template
@@ -25702,7 +27085,16 @@ actions:
                         - delay:
                             hours: 0
                             minutes: 0
-                            seconds: 4
+                            seconds: 1
+                            milliseconds: 0
+                        - action: homeassistant.update_entity
+                          target:
+                            entity_id: sensor.vmc_master_status_ventola
+                          alias: Rilettura immediata della velocità (la velocità non ancora aggiornata non va presa per una scelta dell'utente)
+                        - delay:
+                            hours: 0
+                            minutes: 0
+                            seconds: 3
                             milliseconds: 0
                       until:
                         - condition: template
@@ -25749,7 +27141,16 @@ actions:
                         - delay:
                             hours: 0
                             minutes: 0
-                            seconds: 4
+                            seconds: 1
+                            milliseconds: 0
+                        - action: homeassistant.update_entity
+                          target:
+                            entity_id: sensor.vmc_master_status_ventola
+                          alias: Rilettura immediata della velocità (la velocità non ancora aggiornata non va presa per una scelta dell'utente)
+                        - delay:
+                            hours: 0
+                            minutes: 0
+                            seconds: 3
                             milliseconds: 0
                       until:
                         - condition: template
