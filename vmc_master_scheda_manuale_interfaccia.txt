@@ -187,7 +187,7 @@ cards:
         Valore Offset Min settato per l'Anidride Carbonica, CO₂: {{
         state_attr('input_number.vmc_master_offset_co2', 'min') | float  }}
 
-        Valore Offset Min settato per i Composti Organici Volatici, VOC: {{
+        Valore Offset Min settato per i Composti Organici Volatili, VOC: {{
         state_attr('input_number.vmc_master_offset_voc', 'min') | float  }}
 
 
@@ -208,10 +208,10 @@ cards:
         Valore Offset settato per l'Umidità Interna: {{
         states('input_number.vmc_master_offset_umidita_interna') | float  }}
 
-        Valore Offset Minimo settato per l'Anidride Carbonica, CO₂: {{
+        Valore Offset settato per l'Anidride Carbonica, CO₂: {{
         states('input_number.vmc_master_offset_co2') | float  }}
 
-        Valore Offset Minimo settato per i Composti Organici Volatici, VOC: {{
+        Valore Offset settato per i Composti Organici Volatili, VOC: {{
         states('input_number.vmc_master_offset_voc') | float  }}
 
 
@@ -445,6 +445,17 @@ cards:
     card:
       type: markdown
       content: >
+        {% set cal_g = ['lunedi','martedi','mercoledi','giovedi','venerdi','sabato','domenica'][now().weekday()] %}
+        {% set cal_G = ['Lunedi','Martedi','Mercoledi','Giovedi','Venerdi','Sabato','Domenica'][now().weekday()] %}
+        {% set cal_n = now().strftime('%H:%M') %}
+        {% set cal_in1 = cal_n >= states('input_datetime.vmc_master_accensione_' ~ cal_g)[0:5] and cal_n < states('input_datetime.vmc_master_spegnimento_' ~ cal_g)[0:5] %}
+        {% set cal_in2 = cal_n >= states('input_datetime.vmc_master_accensione_' ~ cal_g ~ '_2')[0:5] and cal_n < states('input_datetime.vmc_master_spegnimento_' ~ cal_g ~ '_2')[0:5] %}
+        {% set cal_sp1 = is_state('input_boolean.vmc_master_spia_calendario_' ~ cal_g ~ '_1', 'on') %}
+        {% set cal_sp2 = is_state('input_boolean.vmc_master_spia_calendario_' ~ cal_g ~ '_2', 'on') %}
+        {% set cal_on = is_state('input_boolean.vmc_master_opzioni_accendi_spegni_vmc_vs_calendario', 'on') %}
+        {% set cal_uscita = (cal_sp1 and not cal_in1) or (cal_sp2 and not cal_in2) %}
+        {% set cal_ingresso = cal_on and ((states('sensor.vmc_master_status_accensione_vmc_tramite_calendario') == cal_G and cal_in1 and not cal_sp1) or (states('sensor.vmc_master_status_accensione_vmc_tramite_calendario_2') == cal_G and cal_in2 and not cal_sp2)) %}
+        {% set ti_vmc_ripresa = states('sensor.vmc_master_temp_interna_status_senza_offset') | float(0) %}
         {% set freeheating_cooling =
         states('sensor.vmc_master_status_mese_corrente_freeheating_o_freecooling')
         %}
@@ -495,10 +506,10 @@ cards:
 
           - Temperatura Esterna VMC: {{congelamento_vmc}} °C
 
-        VMC settata a Velocità 0, si consiglia di Non avviare la VMC
+        VMC settata a Velocità 0, si consiglia di non avviare la VMC
 
 
-        {% if spia_velocita_0=="on"%}RIPRESA AUTOMATICA DELLA VMC SULLA
+        {% if cal_uscita %}AL TERMINE DELL'ALLERTA LA VMC RESTERÀ A <strong>VELOCITÀ 0</strong> (FASCIA DEL CALENDARIO TERMINATA DURANTE L'ALLERTA), NON APPENA:{% elif cal_ingresso %}RIPRESA AUTOMATICA DELLA VMC SULLA <strong>VELOCITÀ DELLA FASCIA DEL CALENDARIO</strong> (DOPO CIRCA 8 SECONDI), NON APPENA:{% elif spia_velocita_0=="on"%}RIPRESA AUTOMATICA DELLA VMC SULLA
         <strong>VELOCITA' 0</strong> , NON APPENA:{% elif spia_velocita_1=="on"
         %}RIPRESA AUTOMATICA DELLA VMC SULLA <strong>VELOCITA' 1</strong>, NON
         APPENA:{% elif spia_velocita_2=="on" %}RIPRESA AUTOMATICA DELLA VMC
@@ -516,10 +527,13 @@ cards:
         freeheating_cooling=="Disabilitata" %}RIPRESA AUTOMATICA DELLA VMC SULLA
         <strong>VELOCITA' FREE COOL./HEAT.</strong>, NON APPENA:{% elif
         spia_iperventilazione=="on" %}RIPRESA AUTOMATICA DELLA VMC SULLA
-        <strong>VELOCITA' IPERVENTILAZIONE</strong>, NON APPENA:{% else %}{%
+        <strong>VELOCITA' IPERVENTILAZIONE</strong>, NON APPENA:{% else %}RIPRESA AUTOMATICA DELLA VMC, NON APPENA:{%
         endif %}
 
           - Temperatura Esterna VMC:  >  -18 °C
+
+        {% if is_state('sensor.vmc_master_congelamento_verifica_soglia', 'Si') and not cal_uscita and ti_vmc_ripresa + 18 > 23 %}ALLA RIPRESA, SE LA DIFF. TEMP. (INT-EST) SARÀ ANCORA > 23 °C, LA VMC ANDRÀ PRIMA A <strong>VELOCITÀ 1</strong>, FINCHÉ LA DIFFERENZA NON SCENDERÀ A 23 °C O MENO.{% endif %}
+
 
         Impostazione di Default della VMC - Vedere Libretto di Uso e
         Manutenzione
@@ -537,11 +551,11 @@ cards:
 
           - Temperatura Esterna VMC: {{congelamento_vmc}} °C
 
-        VMC settata a Velocità 0, si consiglia di Non avviare la VMC
+        VMC settata a Velocità 0, si consiglia di non avviare la VMC
 
           - Temperatura Esterna: {{congelamento}} °C
 
-        {% if spia_velocita_0=="on"%}RIPRESA AUTOMATICA DELLA VMC SULLA
+        {% if cal_uscita %}AL TERMINE DELL'ALLERTA LA VMC RESTERÀ A <strong>VELOCITÀ 0</strong> (FASCIA DEL CALENDARIO TERMINATA DURANTE L'ALLERTA), NON APPENA:{% elif cal_ingresso %}RIPRESA AUTOMATICA DELLA VMC SULLA <strong>VELOCITÀ DELLA FASCIA DEL CALENDARIO</strong> (DOPO CIRCA 8 SECONDI), NON APPENA:{% elif spia_velocita_0=="on"%}RIPRESA AUTOMATICA DELLA VMC SULLA
         <strong>VELOCITA' 0</strong> , NON APPENA:{% elif spia_velocita_1=="on"
         %}RIPRESA AUTOMATICA DELLA VMC SULLA <strong>VELOCITA' 1</strong>, NON
         APPENA:{% elif spia_velocita_2=="on" %}RIPRESA AUTOMATICA DELLA VMC
@@ -559,13 +573,17 @@ cards:
         freeheating_cooling=="Disabilitata" %}RIPRESA AUTOMATICA DELLA VMC SULLA
         <strong>VELOCITA' FREE COOL./HEAT.</strong>, NON APPENA:{% elif
         spia_iperventilazione=="on" %}RIPRESA AUTOMATICA DELLA VMC SULLA
-        <strong>VELOCITA' IPERVENTILAZIONE</strong>, NON APPENA:{% else %}{%
+        <strong>VELOCITA' IPERVENTILAZIONE</strong>, NON APPENA:{% else %}RIPRESA AUTOMATICA DELLA VMC, NON APPENA:{%
         endif %}
 
           - Temperatura Esterna VMC:  >  -18 °C
 
         La temperatura esterna {{congelamento}} °C si sta avvicinando a valori
-        prossimi dei -18 °C
+        prossimi ai -18 °C
+
+
+        {% if is_state('sensor.vmc_master_congelamento_verifica_soglia', 'Si') and not cal_uscita and ti_vmc_ripresa + 18 > 23 %}ALLA RIPRESA, SE LA DIFF. TEMP. (INT-EST) SARÀ ANCORA > 23 °C, LA VMC ANDRÀ PRIMA A <strong>VELOCITÀ 1</strong>, FINCHÉ LA DIFFERENZA NON SCENDERÀ A 23 °C O MENO.{% endif %}
+
 
 
         Impostazione di Default della VMC - Vedere Libretto di Uso e
@@ -585,10 +603,10 @@ cards:
           
           - Temperatura Esterna:     {{congelamento}} °C
 
-        VMC settata a Velocità 0, si consiglia di Non avviare la VMC
+        VMC settata a Velocità 0, si consiglia di non avviare la VMC
 
 
-        {% if spia_velocita_0=="on"%}RIPRESA AUTOMATICA DELLA VMC SULLA
+        {% if cal_uscita %}AL TERMINE DELL'ALLERTA LA VMC RESTERÀ A <strong>VELOCITÀ 0</strong> (FASCIA DEL CALENDARIO TERMINATA DURANTE L'ALLERTA), NON APPENA:{% elif cal_ingresso %}RIPRESA AUTOMATICA DELLA VMC SULLA <strong>VELOCITÀ DELLA FASCIA DEL CALENDARIO</strong> (DOPO CIRCA 8 SECONDI), NON APPENA:{% elif spia_velocita_0=="on"%}RIPRESA AUTOMATICA DELLA VMC SULLA
         <strong>VELOCITA' 0</strong> , NON APPENA:{% elif spia_velocita_1=="on"
         %}RIPRESA AUTOMATICA DELLA VMC SULLA <strong>VELOCITA' 1</strong>, NON
         APPENA:{% elif spia_velocita_2=="on" %}RIPRESA AUTOMATICA DELLA VMC
@@ -606,12 +624,15 @@ cards:
         freeheating_cooling=="Disabilitata" %}RIPRESA AUTOMATICA DELLA VMC SULLA
         <strong>VELOCITA' FREE COOL./HEAT.</strong>, NON APPENA:{% elif
         spia_iperventilazione=="on" %}RIPRESA AUTOMATICA DELLA VMC SULLA
-        <strong>VELOCITA' IPERVENTILAZIONE</strong>, NON APPENA:{% else %}{%
+        <strong>VELOCITA' IPERVENTILAZIONE</strong>, NON APPENA:{% else %}RIPRESA AUTOMATICA DELLA VMC, NON APPENA:{%
         endif %}
 
           - Temperatura Esterna VMC:  >  -18 °C
           
           - Temperatura Esterna:      >  -18 °C
+
+        {% if is_state('sensor.vmc_master_congelamento_verifica_soglia', 'Si') and not cal_uscita and ti_vmc_ripresa + 18 > 23 %}ALLA RIPRESA, SE LA DIFF. TEMP. (INT-EST) SARÀ ANCORA > 23 °C, LA VMC ANDRÀ PRIMA A <strong>VELOCITÀ 1</strong>, FINCHÉ LA DIFFERENZA NON SCENDERÀ A 23 °C O MENO.{% endif %}
+
 
         Impostazione di Default della VMC - Vedere Libretto di Uso e
         Manutenzione
@@ -628,10 +649,10 @@ cards:
 
           - Temperatura Esterna: {{congelamento}} °C
 
-        VMC settata a Velocità 0, si consiglia di Non avviare la VMC
+        VMC settata a Velocità 0, si consiglia di non avviare la VMC
 
 
-        {% if spia_velocita_0=="on"%}RIPRESA AUTOMATICA DELLA VMC SULLA
+        {% if cal_uscita %}AL TERMINE DELL'ALLERTA LA VMC RESTERÀ A <strong>VELOCITÀ 0</strong> (FASCIA DEL CALENDARIO TERMINATA DURANTE L'ALLERTA), NON APPENA:{% elif cal_ingresso %}RIPRESA AUTOMATICA DELLA VMC SULLA <strong>VELOCITÀ DELLA FASCIA DEL CALENDARIO</strong> (DOPO CIRCA 8 SECONDI), NON APPENA:{% elif spia_velocita_0=="on"%}RIPRESA AUTOMATICA DELLA VMC SULLA
         <strong>VELOCITA' 0</strong> , NON APPENA:{% elif spia_velocita_1=="on"
         %}RIPRESA AUTOMATICA DELLA VMC SULLA <strong>VELOCITA' 1</strong>, NON
         APPENA:{% elif spia_velocita_2=="on" %}RIPRESA AUTOMATICA DELLA VMC
@@ -649,10 +670,13 @@ cards:
         freeheating_cooling=="Disabilitata" %}RIPRESA AUTOMATICA DELLA VMC SULLA
         <strong>VELOCITA' FREE COOL./HEAT.</strong>, NON APPENA:{% elif
         spia_iperventilazione=="on" %}RIPRESA AUTOMATICA DELLA VMC SULLA
-        <strong>VELOCITA' IPERVENTILAZIONE</strong>, NON APPENA:{% else %}{%
+        <strong>VELOCITA' IPERVENTILAZIONE</strong>, NON APPENA:{% else %}RIPRESA AUTOMATICA DELLA VMC, NON APPENA:{%
         endif %}
 
           - Temperatura Esterna:  >  -18 °C
+
+        {% if is_state('sensor.vmc_master_congelamento_verifica_soglia', 'Si') and not cal_uscita and ti_vmc_ripresa + 18 > 23 %}ALLA RIPRESA, SE LA DIFF. TEMP. (INT-EST) SARÀ ANCORA > 23 °C, LA VMC ANDRÀ PRIMA A <strong>VELOCITÀ 1</strong>, FINCHÉ LA DIFFERENZA NON SCENDERÀ A 23 °C O MENO.{% endif %}
+
 
         Impostazione di Default della VMC - Vedere Libretto di Uso e
         Manutenzione
@@ -670,10 +694,10 @@ cards:
 
           - Temperatura Esterna: {{congelamento}} °C
 
-        VMC settata a Velocità 0, si consiglia di Non avviare la VMC
+        VMC settata a Velocità 0, si consiglia di non avviare la VMC
 
 
-        {% if spia_velocita_0=="on"%}RIPRESA AUTOMATICA DELLA VMC SULLA
+        {% if cal_uscita %}AL TERMINE DELL'ALLERTA LA VMC RESTERÀ A <strong>VELOCITÀ 0</strong> (FASCIA DEL CALENDARIO TERMINATA DURANTE L'ALLERTA), NON APPENA:{% elif cal_ingresso %}RIPRESA AUTOMATICA DELLA VMC SULLA <strong>VELOCITÀ DELLA FASCIA DEL CALENDARIO</strong> (DOPO CIRCA 8 SECONDI), NON APPENA:{% elif spia_velocita_0=="on"%}RIPRESA AUTOMATICA DELLA VMC SULLA
         <strong>VELOCITA' 0</strong> , NON APPENA:{% elif spia_velocita_1=="on"
         %}RIPRESA AUTOMATICA DELLA VMC SULLA <strong>VELOCITA' 1</strong>, NON
         APPENA:{% elif spia_velocita_2=="on" %}RIPRESA AUTOMATICA DELLA VMC
@@ -691,13 +715,17 @@ cards:
         freeheating_cooling=="Disabilitata" %}RIPRESA AUTOMATICA DELLA VMC SULLA
         <strong>VELOCITA' FREE COOL./HEAT.</strong>, NON APPENA:{% elif
         spia_iperventilazione=="on" %}RIPRESA AUTOMATICA DELLA VMC SULLA
-        <strong>VELOCITA' IPERVENTILAZIONE</strong>, NON APPENA:{% else %}{%
+        <strong>VELOCITA' IPERVENTILAZIONE</strong>, NON APPENA:{% else %}RIPRESA AUTOMATICA DELLA VMC, NON APPENA:{%
         endif %}
 
           - Temperatura Esterna:  >  -18 °C
 
         La temperatura esterna rilevata dalla VMC {{congelamento_vmc}} °C si sta
-        avvicinando a valori prossimi dei -18 °C
+        avvicinando a valori prossimi ai -18 °C
+
+
+        {% if is_state('sensor.vmc_master_congelamento_verifica_soglia', 'Si') and not cal_uscita and ti_vmc_ripresa + 18 > 23 %}ALLA RIPRESA, SE LA DIFF. TEMP. (INT-EST) SARÀ ANCORA > 23 °C, LA VMC ANDRÀ PRIMA A <strong>VELOCITÀ 1</strong>, FINCHÉ LA DIFFERENZA NON SCENDERÀ A 23 °C O MENO.{% endif %}
+
 
 
         Impostazione di Default della VMC - Vedere Libretto di Uso e
@@ -727,7 +755,7 @@ cards:
         Avvio VMC a Velocità 0, Attendere..
 
 
-        {% if spia_velocita_0=="on"%}RIPRESA AUTOMATICA DELLA VMC SULLA
+        {% if cal_uscita %}AL TERMINE DELL'ALLERTA LA VMC RESTERÀ A <strong>VELOCITÀ 0</strong> (FASCIA DEL CALENDARIO TERMINATA DURANTE L'ALLERTA), NON APPENA:{% elif cal_ingresso %}RIPRESA AUTOMATICA DELLA VMC SULLA <strong>VELOCITÀ DELLA FASCIA DEL CALENDARIO</strong> (DOPO CIRCA 8 SECONDI), NON APPENA:{% elif spia_velocita_0=="on"%}RIPRESA AUTOMATICA DELLA VMC SULLA
         <strong>VELOCITA' 0</strong> , NON APPENA:{% elif spia_velocita_1=="on"
         %}RIPRESA AUTOMATICA DELLA VMC SULLA <strong>VELOCITA' 1</strong>, NON
         APPENA:{% elif spia_velocita_2=="on" %}RIPRESA AUTOMATICA DELLA VMC
@@ -745,10 +773,13 @@ cards:
         freeheating_cooling=="Disabilitata" %}RIPRESA AUTOMATICA DELLA VMC SULLA
         <strong>VELOCITA' FREE COOL./HEAT.</strong>, NON APPENA:{% elif
         spia_iperventilazione=="on" %}RIPRESA AUTOMATICA DELLA VMC SULLA
-        <strong>VELOCITA' IPERVENTILAZIONE</strong>, NON APPENA:{% else %}{%
+        <strong>VELOCITA' IPERVENTILAZIONE</strong>, NON APPENA:{% else %}RIPRESA AUTOMATICA DELLA VMC, NON APPENA:{%
         endif %}
 
           - Temperatura Esterna VMC:  >  -18 °C
+
+        {% if is_state('sensor.vmc_master_congelamento_verifica_soglia', 'Si') and not cal_uscita and ti_vmc_ripresa + 18 > 23 %}ALLA RIPRESA, SE LA DIFF. TEMP. (INT-EST) SARÀ ANCORA > 23 °C, LA VMC ANDRÀ PRIMA A <strong>VELOCITÀ 1</strong>, FINCHÉ LA DIFFERENZA NON SCENDERÀ A 23 °C O MENO.{% endif %}
+
 
         Impostazione di Default della VMC - Vedere Libretto di Uso e
         Manutenzione
@@ -769,7 +800,7 @@ cards:
         Avvio VMC a Velocità 0, Attendere..
 
 
-        {% if spia_velocita_0=="on"%}RIPRESA AUTOMATICA DELLA VMC SULLA
+        {% if cal_uscita %}AL TERMINE DELL'ALLERTA LA VMC RESTERÀ A <strong>VELOCITÀ 0</strong> (FASCIA DEL CALENDARIO TERMINATA DURANTE L'ALLERTA), NON APPENA:{% elif cal_ingresso %}RIPRESA AUTOMATICA DELLA VMC SULLA <strong>VELOCITÀ DELLA FASCIA DEL CALENDARIO</strong> (DOPO CIRCA 8 SECONDI), NON APPENA:{% elif spia_velocita_0=="on"%}RIPRESA AUTOMATICA DELLA VMC SULLA
         <strong>VELOCITA' 0</strong> , NON APPENA:{% elif spia_velocita_1=="on"
         %}RIPRESA AUTOMATICA DELLA VMC SULLA <strong>VELOCITA' 1</strong>, NON
         APPENA:{% elif spia_velocita_2=="on" %}RIPRESA AUTOMATICA DELLA VMC
@@ -787,13 +818,17 @@ cards:
         freeheating_cooling=="Disabilitata" %}RIPRESA AUTOMATICA DELLA VMC SULLA
         <strong>VELOCITA' FREE COOL./HEAT.</strong>, NON APPENA:{% elif
         spia_iperventilazione=="on" %}RIPRESA AUTOMATICA DELLA VMC SULLA
-        <strong>VELOCITA' IPERVENTILAZIONE</strong>, NON APPENA:{% else %}{%
+        <strong>VELOCITA' IPERVENTILAZIONE</strong>, NON APPENA:{% else %}RIPRESA AUTOMATICA DELLA VMC, NON APPENA:{%
         endif %}
 
           - Temperatura Esterna VMC:  >  -18 °C
 
         La temperatura esterna rilevata {{congelamento}} °C si sta avvicinando a
-        valori prossimi dei -18 °C
+        valori prossimi ai -18 °C
+
+
+        {% if is_state('sensor.vmc_master_congelamento_verifica_soglia', 'Si') and not cal_uscita and ti_vmc_ripresa + 18 > 23 %}ALLA RIPRESA, SE LA DIFF. TEMP. (INT-EST) SARÀ ANCORA > 23 °C, LA VMC ANDRÀ PRIMA A <strong>VELOCITÀ 1</strong>, FINCHÉ LA DIFFERENZA NON SCENDERÀ A 23 °C O MENO.{% endif %}
+
 
 
         Impostazione di Default della VMC - Vedere Libretto di Uso e
@@ -815,7 +850,7 @@ cards:
         Avvio VMC a Velocità 0, Attendere..
 
 
-        {% if spia_velocita_0=="on"%}RIPRESA AUTOMATICA DELLA VMC SULLA
+        {% if cal_uscita %}AL TERMINE DELL'ALLERTA LA VMC RESTERÀ A <strong>VELOCITÀ 0</strong> (FASCIA DEL CALENDARIO TERMINATA DURANTE L'ALLERTA), NON APPENA:{% elif cal_ingresso %}RIPRESA AUTOMATICA DELLA VMC SULLA <strong>VELOCITÀ DELLA FASCIA DEL CALENDARIO</strong> (DOPO CIRCA 8 SECONDI), NON APPENA:{% elif spia_velocita_0=="on"%}RIPRESA AUTOMATICA DELLA VMC SULLA
         <strong>VELOCITA' 0</strong> , NON APPENA:{% elif spia_velocita_1=="on"
         %}RIPRESA AUTOMATICA DELLA VMC SULLA <strong>VELOCITA' 1</strong>, NON
         APPENA:{% elif spia_velocita_2=="on" %}RIPRESA AUTOMATICA DELLA VMC
@@ -833,10 +868,13 @@ cards:
         freeheating_cooling=="Disabilitata" %}RIPRESA AUTOMATICA DELLA VMC SULLA
         <strong>VELOCITA' FREE COOL./HEAT.</strong>, NON APPENA:{% elif
         spia_iperventilazione=="on" %}RIPRESA AUTOMATICA DELLA VMC SULLA
-        <strong>VELOCITA' IPERVENTILAZIONE</strong>, NON APPENA:{% else %}{%
+        <strong>VELOCITA' IPERVENTILAZIONE</strong>, NON APPENA:{% else %}RIPRESA AUTOMATICA DELLA VMC, NON APPENA:{%
         endif %}
 
           - Temperatura Esterna:  >  -18 °C
+
+        {% if is_state('sensor.vmc_master_congelamento_verifica_soglia', 'Si') and not cal_uscita and ti_vmc_ripresa + 18 > 23 %}ALLA RIPRESA, SE LA DIFF. TEMP. (INT-EST) SARÀ ANCORA > 23 °C, LA VMC ANDRÀ PRIMA A <strong>VELOCITÀ 1</strong>, FINCHÉ LA DIFFERENZA NON SCENDERÀ A 23 °C O MENO.{% endif %}
+
 
         Impostazione di Default della VMC - Vedere Libretto di Uso e
         Manutenzione
@@ -857,7 +895,7 @@ cards:
         Avvio VMC a Velocità 0, Attendere..
 
 
-        {% if spia_velocita_0=="on"%}RIPRESA AUTOMATICA DELLA VMC SULLA
+        {% if cal_uscita %}AL TERMINE DELL'ALLERTA LA VMC RESTERÀ A <strong>VELOCITÀ 0</strong> (FASCIA DEL CALENDARIO TERMINATA DURANTE L'ALLERTA), NON APPENA:{% elif cal_ingresso %}RIPRESA AUTOMATICA DELLA VMC SULLA <strong>VELOCITÀ DELLA FASCIA DEL CALENDARIO</strong> (DOPO CIRCA 8 SECONDI), NON APPENA:{% elif spia_velocita_0=="on"%}RIPRESA AUTOMATICA DELLA VMC SULLA
         <strong>VELOCITA' 0</strong> , NON APPENA:{% elif spia_velocita_1=="on"
         %}RIPRESA AUTOMATICA DELLA VMC SULLA <strong>VELOCITA' 1</strong>, NON
         APPENA:{% elif spia_velocita_2=="on" %}RIPRESA AUTOMATICA DELLA VMC
@@ -875,13 +913,17 @@ cards:
         freeheating_cooling=="Disabilitata" %}RIPRESA AUTOMATICA DELLA VMC SULLA
         <strong>VELOCITA' FREE COOL./HEAT.</strong>, NON APPENA:{% elif
         spia_iperventilazione=="on" %}RIPRESA AUTOMATICA DELLA VMC SULLA
-        <strong>VELOCITA' IPERVENTILAZIONE</strong>, NON APPENA:{% else %}{%
+        <strong>VELOCITA' IPERVENTILAZIONE</strong>, NON APPENA:{% else %}RIPRESA AUTOMATICA DELLA VMC, NON APPENA:{%
         endif %}
 
           - Temperatura Esterna:  >  -18 °C
 
         La temperatura esterna rilevata dalla VMC  {{congelamento_vmc}} °C si
-        sta avvicinando a valori prossimi dei -18 °C
+        sta avvicinando a valori prossimi ai -18 °C
+
+
+        {% if is_state('sensor.vmc_master_congelamento_verifica_soglia', 'Si') and not cal_uscita and ti_vmc_ripresa + 18 > 23 %}ALLA RIPRESA, SE LA DIFF. TEMP. (INT-EST) SARÀ ANCORA > 23 °C, LA VMC ANDRÀ PRIMA A <strong>VELOCITÀ 1</strong>, FINCHÉ LA DIFFERENZA NON SCENDERÀ A 23 °C O MENO.{% endif %}
+
 
 
         Impostazione di Default della VMC - Vedere Libretto di Uso e
@@ -904,7 +946,7 @@ cards:
         Avvio VMC a Velocità 0, Attendere..
 
 
-        {% if spia_velocita_0=="on"%}RIPRESA AUTOMATICA DELLA VMC SULLA
+        {% if cal_uscita %}AL TERMINE DELL'ALLERTA LA VMC RESTERÀ A <strong>VELOCITÀ 0</strong> (FASCIA DEL CALENDARIO TERMINATA DURANTE L'ALLERTA), NON APPENA:{% elif cal_ingresso %}RIPRESA AUTOMATICA DELLA VMC SULLA <strong>VELOCITÀ DELLA FASCIA DEL CALENDARIO</strong> (DOPO CIRCA 8 SECONDI), NON APPENA:{% elif spia_velocita_0=="on"%}RIPRESA AUTOMATICA DELLA VMC SULLA
         <strong>VELOCITA' 0</strong> , NON APPENA:{% elif spia_velocita_1=="on"
         %}RIPRESA AUTOMATICA DELLA VMC SULLA <strong>VELOCITA' 1</strong>, NON
         APPENA:{% elif spia_velocita_2=="on" %}RIPRESA AUTOMATICA DELLA VMC
@@ -922,12 +964,15 @@ cards:
         freeheating_cooling=="Disabilitata" %}RIPRESA AUTOMATICA DELLA VMC SULLA
         <strong>VELOCITA' FREE COOL./HEAT.</strong>, NON APPENA:{% elif
         spia_iperventilazione=="on" %}RIPRESA AUTOMATICA DELLA VMC SULLA
-        <strong>VELOCITA' IPERVENTILAZIONE</strong>, NON APPENA:{% else %}{%
+        <strong>VELOCITA' IPERVENTILAZIONE</strong>, NON APPENA:{% else %}RIPRESA AUTOMATICA DELLA VMC, NON APPENA:{%
         endif %}
 
           - Temperatura Esterna VMC:  >  -18 °C
           
           - Temperatura Esterna:      >  -18 °C
+
+        {% if is_state('sensor.vmc_master_congelamento_verifica_soglia', 'Si') and not cal_uscita and ti_vmc_ripresa + 18 > 23 %}ALLA RIPRESA, SE LA DIFF. TEMP. (INT-EST) SARÀ ANCORA > 23 °C, LA VMC ANDRÀ PRIMA A <strong>VELOCITÀ 1</strong>, FINCHÉ LA DIFFERENZA NON SCENDERÀ A 23 °C O MENO.{% endif %}
+
 
         Impostazione di Default della VMC - Vedere Libretto di Uso e
         Manutenzione
@@ -956,10 +1001,14 @@ cards:
           - Temperatura Esterna VMC: {{congelamento_vmc}} °C
 
         La temperatura esterna rilevata dalla VMC si sta avvicinando a valori
-        prossimi dei -18 °C.
+        prossimi ai -18 °C.
 
 
-        Superato o eguagliato i -18 °C, la VMC verrà settata a Velocità 0
+        Raggiunti o superati i -18 °C, la VMC verrà settata a Velocità 0
+
+
+        {% if is_state('sensor.vmc_master_congelamento_verifica_soglia', 'Si') and not cal_uscita and ti_vmc_ripresa + 18 > 23 %}ALLA RIPRESA, SE LA DIFF. TEMP. (INT-EST) SARÀ ANCORA > 23 °C, LA VMC ANDRÀ PRIMA A <strong>VELOCITÀ 1</strong>, FINCHÉ LA DIFFERENZA NON SCENDERÀ A 23 °C O MENO.{% endif %}
+
 
 
         Impostazione di Default della VMC - Vedere Libretto di Uso e
@@ -978,10 +1027,14 @@ cards:
 
           - Temperatura Esterna: {{congelamento}} °C
 
-        La temperatura esterna si sta avvicinando a valori prossimi dei -18 °C.
+        La temperatura esterna si sta avvicinando a valori prossimi ai -18 °C.
 
 
-        Superato o eguagliato i -18 °C, la VMC verrà settata a Velocità 0
+        Raggiunti o superati i -18 °C, la VMC verrà settata a Velocità 0
+
+
+        {% if is_state('sensor.vmc_master_congelamento_verifica_soglia', 'Si') and not cal_uscita and ti_vmc_ripresa + 18 > 23 %}ALLA RIPRESA, SE LA DIFF. TEMP. (INT-EST) SARÀ ANCORA > 23 °C, LA VMC ANDRÀ PRIMA A <strong>VELOCITÀ 1</strong>, FINCHÉ LA DIFFERENZA NON SCENDERÀ A 23 °C O MENO.{% endif %}
+
 
 
         Impostazione di Default della VMC - Vedere Libretto di Uso e
@@ -1003,11 +1056,15 @@ cards:
             - Temperatura Esterna:     {{congelamento}} °C
 
         La temperatura esterna rilevata dalla VMC si sta avvicinando a valori
-        prossimi dei -18 °C.
+        prossimi ai -18 °C.
             
-        La temperatura esterna si sta avvicinando a valori prossimi dei -18 °C.
+        La temperatura esterna si sta avvicinando a valori prossimi ai -18 °C.
             
-        Superato o eguagliato i -18 °C, la VMC verrà settata a Velocità 0
+        Raggiunti o superati i -18 °C, la VMC verrà settata a Velocità 0
+
+
+        {% if is_state('sensor.vmc_master_congelamento_verifica_soglia', 'Si') and not cal_uscita and ti_vmc_ripresa + 18 > 23 %}ALLA RIPRESA, SE LA DIFF. TEMP. (INT-EST) SARÀ ANCORA > 23 °C, LA VMC ANDRÀ PRIMA A <strong>VELOCITÀ 1</strong>, FINCHÉ LA DIFFERENZA NON SCENDERÀ A 23 °C O MENO.{% endif %}
+
 
 
         Impostazione di Default della VMC - Vedere Libretto di Uso e
@@ -1026,7 +1083,7 @@ cards:
         (congelamento_vmc > -15 and congelamento > -15) %}
          <font color="rgb(128, 0, 128)"><font size="+1"><strong><ha-icon icon="mdi:alarm-light-off-outline"></ha-icon></strong></font><span style="padding-right: 10px;"></span><font size="+1"><strong> NESSUNA ALLERTA CONGELAMENTO NEI SENSORI INTERNI ED ESTERNI DELLA VMC </strong></font>
 
-        {% if spia_velocita_0=="on"%}RIPRESA AUTOMATICA DELLA VMC SULLA
+        {% if cal_uscita %}AL TERMINE DELL'ALLERTA LA VMC RESTERÀ A <strong>VELOCITÀ 0</strong> (FASCIA DEL CALENDARIO TERMINATA DURANTE L'ALLERTA), NON APPENA:{% elif cal_ingresso %}RIPRESA AUTOMATICA DELLA VMC SULLA <strong>VELOCITÀ DELLA FASCIA DEL CALENDARIO</strong> (DOPO CIRCA 8 SECONDI), NON APPENA:{% elif spia_velocita_0=="on"%}RIPRESA AUTOMATICA DELLA VMC SULLA
         <strong>VELOCITA' 0</strong>{% elif spia_velocita_1=="on" %}RIPRESA
         AUTOMATICA DELLA VMC SULLA <strong>VELOCITA' 1</strong>{% elif
         spia_velocita_2=="on" %}RIPRESA AUTOMATICA DELLA VMC SULLA
@@ -1044,6 +1101,10 @@ cards:
         <strong>VELOCITA' FREE COOL./HEAT.</strong>{% elif
         spia_iperventilazione=="on" %}RIPRESA AUTOMATICA DELLA VMC SULLA
         <strong>VELOCITA' IPERVENTILAZIONE</strong>{% else %}{% endif %}
+
+
+        {% if is_state('sensor.vmc_master_congelamento_verifica_soglia', 'Si') and not cal_uscita and ti_vmc_ripresa + 18 > 23 %}ALLA RIPRESA, SE LA DIFF. TEMP. (INT-EST) SARÀ ANCORA > 23 °C, LA VMC ANDRÀ PRIMA A <strong>VELOCITÀ 1</strong>, FINCHÉ LA DIFFERENZA NON SCENDERÀ A 23 °C O MENO.{% endif %}
+
 
 
         Impostazione di Default della VMC - Vedere Libretto di Uso e
@@ -1145,6 +1206,17 @@ cards:
     card:
       type: markdown
       content: >-
+        {% set cal_g = ['lunedi','martedi','mercoledi','giovedi','venerdi','sabato','domenica'][now().weekday()] %}
+        {% set cal_G = ['Lunedi','Martedi','Mercoledi','Giovedi','Venerdi','Sabato','Domenica'][now().weekday()] %}
+        {% set cal_n = now().strftime('%H:%M') %}
+        {% set cal_in1 = cal_n >= states('input_datetime.vmc_master_accensione_' ~ cal_g)[0:5] and cal_n < states('input_datetime.vmc_master_spegnimento_' ~ cal_g)[0:5] %}
+        {% set cal_in2 = cal_n >= states('input_datetime.vmc_master_accensione_' ~ cal_g ~ '_2')[0:5] and cal_n < states('input_datetime.vmc_master_spegnimento_' ~ cal_g ~ '_2')[0:5] %}
+        {% set cal_sp1 = is_state('input_boolean.vmc_master_spia_calendario_' ~ cal_g ~ '_1', 'on') %}
+        {% set cal_sp2 = is_state('input_boolean.vmc_master_spia_calendario_' ~ cal_g ~ '_2', 'on') %}
+        {% set cal_on = is_state('input_boolean.vmc_master_opzioni_accendi_spegni_vmc_vs_calendario', 'on') %}
+        {% set cal_uscita = (cal_sp1 and not cal_in1) or (cal_sp2 and not cal_in2) %}
+        {% set cal_ingresso = cal_on and ((states('sensor.vmc_master_status_accensione_vmc_tramite_calendario') == cal_G and cal_in1 and not cal_sp1) or (states('sensor.vmc_master_status_accensione_vmc_tramite_calendario_2') == cal_G and cal_in2 and not cal_sp2)) %}
+        {% set ti_vmc_ripresa = states('sensor.vmc_master_temp_interna_status_senza_offset') | float(0) %}
         {% set freeheating_cooling =
         states('sensor.vmc_master_status_mese_corrente_freeheating_o_freecooling')
         %}
@@ -1213,7 +1285,7 @@ cards:
         PRIORITA' ALLERTA CONGELAMENTO
 
 
-        {% if spia_velocita_0=="on"%}RIPRESA AUTOMATICA DELLA VMC SULLA
+        {% if cal_uscita %}AL TERMINE DELL'ALLERTA LA VMC RESTERÀ A <strong>VELOCITÀ 0</strong> (FASCIA DEL CALENDARIO TERMINATA DURANTE L'ALLERTA), NON APPENA:{% elif cal_ingresso %}RIPRESA AUTOMATICA DELLA VMC SULLA <strong>VELOCITÀ DELLA FASCIA DEL CALENDARIO</strong> (DOPO CIRCA 8 SECONDI), NON APPENA:{% elif spia_velocita_0=="on"%}RIPRESA AUTOMATICA DELLA VMC SULLA
         <strong>VELOCITA' 0</strong>{% elif spia_velocita_1=="on" %}RIPRESA
         AUTOMATICA DELLA VMC SULLA <strong>VELOCITA' 1</strong>{% elif
         spia_velocita_2=="on" %}RIPRESA AUTOMATICA DELLA VMC SULLA
@@ -1279,10 +1351,10 @@ cards:
           - Temperatura Interna:     {{temperatura_interna}} °C
           - Temperatura Esterna:     {{temperatura_esterna}} °C
           
-          - VMC Diff. Temp. Int-Est: {{delta}} °C
+          - Diff. Temp. Int-Est: {{delta}} °C
 
         La Differenza tra temperatura interna ed esterna si sta avvicinando a
-        valori prossimi dei 23 °C
+        valori prossimi ai 23 °C
 
 
         Impostazione di Default della VMC - Vedere Libretto di Uso e
@@ -1306,7 +1378,7 @@ cards:
           - Temperatura Interna:     {{temperatura_interna}} °C
           - Temperatura Esterna:     {{temperatura_esterna}} °C
           
-          - VMC Diff. Temp. Int-Est: {{delta}} °C
+          - Diff. Temp. Int-Est: {{delta}} °C
 
         Avvio VMC a Velocità 1, Attendere..
 
@@ -1327,7 +1399,7 @@ cards:
           - Temperatura Interna:     {{temperatura_interna}} °C
           - Temperatura Esterna:     {{temperatura_esterna}} °C
           
-          - VMC Diff. Temp. Int-Est: {{delta}} °C
+          - Diff. Temp. Int-Est: {{delta}} °C
 
         Avvio VMC a Velocità 1, Attendere..
 
@@ -1348,7 +1420,7 @@ cards:
           - Temperatura Interna:     {{temperatura_interna}} °C
           - Temperatura Esterna:     {{temperatura_esterna}} °C
           
-          - VMC Diff. Temp. Int-Est: {{delta}} °C
+          - Diff. Temp. Int-Est: {{delta}} °C
 
         Avvio VMC a Velocità 1, Attendere..
 
@@ -1358,7 +1430,7 @@ cards:
           - VMC Diff. Temp. Int-Est: {{delta_vmc}} °C
 
         La Differenza tra temperatura interna ed esterna della VMC si sta
-        avvicinando a valori prossimi dei 23 °C
+        avvicinando a valori prossimi ai 23 °C
 
 
         Impostazione di Default della VMC - Vedere Libretto di Uso e
@@ -1382,7 +1454,7 @@ cards:
         VMC settata a Velocità 1
 
 
-        {% if spia_velocita_0=="on"%}RIPRESA AUTOMATICA DELLA VMC SULLA
+        {% if cal_uscita %}AL TERMINE DELL'ALLERTA LA VMC RESTERÀ A <strong>VELOCITÀ 0</strong> (FASCIA DEL CALENDARIO TERMINATA DURANTE L'ALLERTA), NON APPENA:{% elif cal_ingresso %}RIPRESA AUTOMATICA DELLA VMC SULLA <strong>VELOCITÀ DELLA FASCIA DEL CALENDARIO</strong> (DOPO CIRCA 8 SECONDI), NON APPENA:{% elif spia_velocita_0=="on"%}RIPRESA AUTOMATICA DELLA VMC SULLA
         <strong>VELOCITA' 0</strong> , NON APPENA:{% elif spia_velocita_1=="on"
         %}RIPRESA AUTOMATICA DELLA VMC SULLA <strong>VELOCITA' 1</strong>, NON
         APPENA:{% elif spia_velocita_2=="on" %}RIPRESA AUTOMATICA DELLA VMC
@@ -1400,7 +1472,7 @@ cards:
         freeheating_cooling=="Disabilitata" %}RIPRESA AUTOMATICA DELLA VMC SULLA
         <strong>VELOCITA' FREE COOL./HEAT.</strong>, NON APPENA:{% elif
         spia_iperventilazione=="on" %}RIPRESA AUTOMATICA DELLA VMC SULLA
-        <strong>VELOCITA' IPERVENTILAZIONE</strong>, NON APPENA:{% else %}{%
+        <strong>VELOCITA' IPERVENTILAZIONE</strong>, NON APPENA:{% else %}RIPRESA AUTOMATICA DELLA VMC, NON APPENA:{%
         endif %}
 
           - DIFF. TEMP. (INT-EST)  ≤  23
@@ -1426,7 +1498,7 @@ cards:
         VMC settata a Velocità 1
 
 
-        {% if spia_velocita_0=="on"%}RIPRESA AUTOMATICA DELLA VMC SULLA
+        {% if cal_uscita %}AL TERMINE DELL'ALLERTA LA VMC RESTERÀ A <strong>VELOCITÀ 0</strong> (FASCIA DEL CALENDARIO TERMINATA DURANTE L'ALLERTA), NON APPENA:{% elif cal_ingresso %}RIPRESA AUTOMATICA DELLA VMC SULLA <strong>VELOCITÀ DELLA FASCIA DEL CALENDARIO</strong> (DOPO CIRCA 8 SECONDI), NON APPENA:{% elif spia_velocita_0=="on"%}RIPRESA AUTOMATICA DELLA VMC SULLA
         <strong>VELOCITA' 0</strong> , NON APPENA:{% elif spia_velocita_1=="on"
         %}RIPRESA AUTOMATICA DELLA VMC SULLA <strong>VELOCITA' 1</strong>, NON
         APPENA:{% elif spia_velocita_2=="on" %}RIPRESA AUTOMATICA DELLA VMC
@@ -1444,7 +1516,7 @@ cards:
         freeheating_cooling=="Disabilitata" %}RIPRESA AUTOMATICA DELLA VMC SULLA
         <strong>VELOCITA' FREE COOL./HEAT.</strong>, NON APPENA:{% elif
         spia_iperventilazione=="on" %}RIPRESA AUTOMATICA DELLA VMC SULLA
-        <strong>VELOCITA' IPERVENTILAZIONE</strong>, NON APPENA:{% else %}{%
+        <strong>VELOCITA' IPERVENTILAZIONE</strong>, NON APPENA:{% else %}RIPRESA AUTOMATICA DELLA VMC, NON APPENA:{%
         endif %}
 
           - DIFF. TEMP. (INT-EST)  ≤  23
@@ -1452,10 +1524,10 @@ cards:
           - Temperatura Interna:     {{temperatura_interna}} °C
           - Temperatura Esterna:     {{temperatura_esterna}} °C
           
-          - VMC Diff. Temp. Int-Est: {{delta}} °C
+          - Diff. Temp. Int-Est: {{delta}} °C
 
         La Differenza tra temperatura interna ed esterna si sta avvicinando a
-        valori prossimi dei 23 °C
+        valori prossimi ai 23 °C
 
 
         Impostazione di Default della VMC - Vedere Libretto di Uso e
@@ -1475,12 +1547,12 @@ cards:
           - Temperatura Interna:     {{temperatura_interna}} °C
           - Temperatura Esterna:     {{temperatura_esterna}} °C
           
-          - VMC Diff. Temp. Int-Est: {{delta}} °C
+          - Diff. Temp. Int-Est: {{delta}} °C
 
         VMC settata a Velocità 1
 
 
-        {% if spia_velocita_0=="on"%}RIPRESA AUTOMATICA DELLA VMC SULLA
+        {% if cal_uscita %}AL TERMINE DELL'ALLERTA LA VMC RESTERÀ A <strong>VELOCITÀ 0</strong> (FASCIA DEL CALENDARIO TERMINATA DURANTE L'ALLERTA), NON APPENA:{% elif cal_ingresso %}RIPRESA AUTOMATICA DELLA VMC SULLA <strong>VELOCITÀ DELLA FASCIA DEL CALENDARIO</strong> (DOPO CIRCA 8 SECONDI), NON APPENA:{% elif spia_velocita_0=="on"%}RIPRESA AUTOMATICA DELLA VMC SULLA
         <strong>VELOCITA' 0</strong> , NON APPENA:{% elif spia_velocita_1=="on"
         %}RIPRESA AUTOMATICA DELLA VMC SULLA <strong>VELOCITA' 1</strong>, NON
         APPENA:{% elif spia_velocita_2=="on" %}RIPRESA AUTOMATICA DELLA VMC
@@ -1498,7 +1570,7 @@ cards:
         freeheating_cooling=="Disabilitata" %}RIPRESA AUTOMATICA DELLA VMC SULLA
         <strong>VELOCITA' FREE COOL./HEAT.</strong>, NON APPENA:{% elif
         spia_iperventilazione=="on" %}RIPRESA AUTOMATICA DELLA VMC SULLA
-        <strong>VELOCITA' IPERVENTILAZIONE</strong>, NON APPENA:{% else %}{%
+        <strong>VELOCITA' IPERVENTILAZIONE</strong>, NON APPENA:{% else %}RIPRESA AUTOMATICA DELLA VMC, NON APPENA:{%
         endif %}
 
           - DIFF. TEMP. (INT-EST)  ≤  23
@@ -1519,12 +1591,12 @@ cards:
           - Temperatura Interna:     {{temperatura_interna}} °C
           - Temperatura Esterna:     {{temperatura_esterna}} °C
           
-          - VMC Diff. Temp. Int-Est: {{delta}} °C
+          - Diff. Temp. Int-Est: {{delta}} °C
 
         VMC settata a Velocità 1
 
 
-        {% if spia_velocita_0=="on"%}RIPRESA AUTOMATICA DELLA VMC SULLA
+        {% if cal_uscita %}AL TERMINE DELL'ALLERTA LA VMC RESTERÀ A <strong>VELOCITÀ 0</strong> (FASCIA DEL CALENDARIO TERMINATA DURANTE L'ALLERTA), NON APPENA:{% elif cal_ingresso %}RIPRESA AUTOMATICA DELLA VMC SULLA <strong>VELOCITÀ DELLA FASCIA DEL CALENDARIO</strong> (DOPO CIRCA 8 SECONDI), NON APPENA:{% elif spia_velocita_0=="on"%}RIPRESA AUTOMATICA DELLA VMC SULLA
         <strong>VELOCITA' 0</strong> , NON APPENA:{% elif spia_velocita_1=="on"
         %}RIPRESA AUTOMATICA DELLA VMC SULLA <strong>VELOCITA' 1</strong>, NON
         APPENA:{% elif spia_velocita_2=="on" %}RIPRESA AUTOMATICA DELLA VMC
@@ -1542,7 +1614,7 @@ cards:
         freeheating_cooling=="Disabilitata" %}RIPRESA AUTOMATICA DELLA VMC SULLA
         <strong>VELOCITA' FREE COOL./HEAT.</strong>, NON APPENA:{% elif
         spia_iperventilazione=="on" %}RIPRESA AUTOMATICA DELLA VMC SULLA
-        <strong>VELOCITA' IPERVENTILAZIONE</strong>, NON APPENA:{% else %}{%
+        <strong>VELOCITA' IPERVENTILAZIONE</strong>, NON APPENA:{% else %}RIPRESA AUTOMATICA DELLA VMC, NON APPENA:{%
         endif %}
 
           - DIFF. TEMP. (INT-EST)  ≤  23
@@ -1553,7 +1625,7 @@ cards:
           - VMC Diff. Temp. Int-Est: {{delta_vmc}} °C
 
         La Differenza tra temperatura interna ed esterna della VMC si sta
-        avvicinando a valori prossimi dei 23 °C
+        avvicinando a valori prossimi ai 23 °C
 
 
         Impostazione di Default della VMC - Vedere Libretto di Uso e
@@ -1576,12 +1648,12 @@ cards:
           - Temperatura Interna:     {{temperatura_interna}} °C
           - Temperatura Esterna:     {{temperatura_esterna}} °C
           
-          - VMC Diff. Temp. Int-Est: {{delta}} °C
+          - Diff. Temp. Int-Est: {{delta}} °C
 
         VMC settata a Velocità 1
 
 
-        {% if spia_velocita_0=="on"%}RIPRESA AUTOMATICA DELLA VMC SULLA
+        {% if cal_uscita %}AL TERMINE DELL'ALLERTA LA VMC RESTERÀ A <strong>VELOCITÀ 0</strong> (FASCIA DEL CALENDARIO TERMINATA DURANTE L'ALLERTA), NON APPENA:{% elif cal_ingresso %}RIPRESA AUTOMATICA DELLA VMC SULLA <strong>VELOCITÀ DELLA FASCIA DEL CALENDARIO</strong> (DOPO CIRCA 8 SECONDI), NON APPENA:{% elif spia_velocita_0=="on"%}RIPRESA AUTOMATICA DELLA VMC SULLA
         <strong>VELOCITA' 0</strong> , NON APPENA:{% elif spia_velocita_1=="on"
         %}RIPRESA AUTOMATICA DELLA VMC SULLA <strong>VELOCITA' 1</strong>, NON
         APPENA:{% elif spia_velocita_2=="on" %}RIPRESA AUTOMATICA DELLA VMC
@@ -1599,7 +1671,7 @@ cards:
         freeheating_cooling=="Disabilitata" %}RIPRESA AUTOMATICA DELLA VMC SULLA
         <strong>VELOCITA' FREE COOL./HEAT.</strong>, NON APPENA:{% elif
         spia_iperventilazione=="on" %}RIPRESA AUTOMATICA DELLA VMC SULLA
-        <strong>VELOCITA' IPERVENTILAZIONE</strong>, NON APPENA:{% else %}{%
+        <strong>VELOCITA' IPERVENTILAZIONE</strong>, NON APPENA:{% else %}RIPRESA AUTOMATICA DELLA VMC, NON APPENA:{%
         endif %}
 
           - DIFF. TEMP. (INT-EST)  ≤  23
@@ -1627,10 +1699,10 @@ cards:
           - VMC Diff. Temp. Int-Est: {{delta_vmc}} °C
 
         La Differenza tra temperatura interna ed esterna della VMC si sta
-        avvicinando a valori prossimi dei 23 °C
+        avvicinando a valori prossimi ai 23 °C
 
 
-        Superato i 23 °C, la VMC verrà settata a Velocità 1
+        Superati i 23 °C, la VMC verrà settata a Velocità 1
 
 
         Impostazione di Default della VMC - Vedere Libretto di Uso e
@@ -1649,13 +1721,13 @@ cards:
           - Temperatura Interna:     {{temperatura_interna}} °C
           - Temperatura Esterna:     {{temperatura_esterna}} °C
           
-          - VMC Diff. Temp. Int-Est: {{delta}} °C
+          - Diff. Temp. Int-Est: {{delta}} °C
 
         La Differenza tra temperatura interna ed esterna si sta avvicinando a
-        valori prossimi dei 23 °C
+        valori prossimi ai 23 °C
 
 
-        Superato i 23 °C, la VMC verrà settata a Velocità 1
+        Superati i 23 °C, la VMC verrà settata a Velocità 1
 
 
         Impostazione di Default della VMC - Vedere Libretto di Uso e
@@ -1679,16 +1751,16 @@ cards:
             - Temperatura Interna:     {{temperatura_interna}} °C
             - Temperatura Esterna:     {{temperatura_esterna}} °C
             
-            - VMC Diff. Temp. Int-Est: {{delta}} °C
+            - Diff. Temp. Int-Est: {{delta}} °C
 
         La Differenza tra temperatura interna ed esterna della VMC si sta
-        avvicinando a valori prossimi dei 23 °C
+        avvicinando a valori prossimi ai 23 °C
 
 
         La Differenza tra temperatura interna ed esterna si sta avvicinando a
-        valori prossimi dei 23 °C
+        valori prossimi ai 23 °C
             
-        Superato i 23 °C, la VMC verrà settata a Velocità 1
+        Superati i 23 °C, la VMC verrà settata a Velocità 1
 
 
         Impostazione di Default della VMC - Vedere Libretto di Uso e
@@ -1707,7 +1779,7 @@ cards:
         (delta_vmc < 20 and delta < 20) %}
          <font color="rgb(128, 0, 128)"><font size="+1"><strong><ha-icon icon="mdi:alarm-light-off-outline"></ha-icon></strong></font><span style="padding-right: 10px;"></span><font size="+1"><strong> NESSUNA ALLERTA DIFF. TEMP. (INT-EST) > 23 [°C] NEI SENSORI INTERNI ED ESTERNI DELLA VMC </strong></font>
 
-        {% if spia_velocita_0=="on"%}RIPRESA AUTOMATICA DELLA VMC SULLA
+        {% if cal_uscita %}AL TERMINE DELL'ALLERTA LA VMC RESTERÀ A <strong>VELOCITÀ 0</strong> (FASCIA DEL CALENDARIO TERMINATA DURANTE L'ALLERTA), NON APPENA:{% elif cal_ingresso %}RIPRESA AUTOMATICA DELLA VMC SULLA <strong>VELOCITÀ DELLA FASCIA DEL CALENDARIO</strong> (DOPO CIRCA 8 SECONDI), NON APPENA:{% elif spia_velocita_0=="on"%}RIPRESA AUTOMATICA DELLA VMC SULLA
         <strong>VELOCITA' 0</strong>{% elif spia_velocita_1=="on" %}RIPRESA
         AUTOMATICA DELLA VMC SULLA <strong>VELOCITA' 1</strong>{% elif
         spia_velocita_2=="on" %}RIPRESA AUTOMATICA DELLA VMC SULLA
@@ -2900,14 +2972,14 @@ cards:
         spia_velocita_2=="on" or spia_velocita_3=="on" or spia_velocita_4=="on"
         or spia_notturna=="on" or spia_freecooling=="on" or
         spia_iperventilazione=="on")%}
-          - LA DIFFERENZA DEL PUNTO DI RUGIADA ESTERNO, {{states('sensor.vmc_master_punto_di_rugiada_esterno') | float(0) }} [°C] - PUNTO DI RUGIADA INTERNO, {{states('sensor.vmc_master_punto_di_rugiada_interno') | float(0) }} [°C] SARÀ MINORE DEL LIM. Δ P. DI RUGIADA {{states('input_number.vmc_master_offset_verifica_impiego_vmc') | float(0) }} [°C] DEL VALORE SETTATO;
+          - LA DIFFERENZA DEL PUNTO DI RUGIADA ESTERNO, {{states('sensor.vmc_master_punto_di_rugiada_esterno') | float(0) }} [°C] - PUNTO DI RUGIADA INTERNO, {{states('sensor.vmc_master_punto_di_rugiada_interno') | float(0) }} [°C] SARÀ MINORE DEL LIM. Δ P. DI RUGIADA IMPOSTATO ({{states('input_number.vmc_master_offset_verifica_impiego_vmc') | float(0) }} °C);
             e
-          - L'OPZIONE [VMC ON/OFF, IN FUNZIONE DEL LIM. Δ P. Di RUGIADA] RIMARRÀ IMPOSTATA SU ACCESO
+          - L'OPZIONE [VMC ON/OFF, IN FUNZIONE DEL LIM. Δ P. DI RUGIADA] RIMARRÀ IMPOSTATA SU ACCESO
         <strong>DIVERSAMENTE LA VMC VERRA' ARRESTATA</strong>
             e 
-          - IL PUNTO DI RUGIADA INTERNO SIA DIVERSO DA [NON CALCOLABILE]
+          - IL PUNTO DI RUGIADA INTERNO SARÀ DIVERSO DA [NON CALCOLABILE]
             e
-          - IL PUNTO DI RUGIADA ESTERNO SIA DIVERSO DA [NON CALCOLABILE]
+          - IL PUNTO DI RUGIADA ESTERNO SARÀ DIVERSO DA [NON CALCOLABILE]
          
         {% else %}{% endif %}
 
@@ -2966,14 +3038,14 @@ cards:
         spia_velocita_2=="on" or spia_velocita_3=="on" or spia_velocita_4=="on"
         or spia_notturna=="on" or spia_freecooling=="on" or
         spia_iperventilazione=="on")%}
-          - LA DIFFERENZA DEL PUNTO DI RUGIADA ESTERNO, {{states('sensor.vmc_master_punto_di_rugiada_esterno') | float(0) }} [°C] - PUNTO DI RUGIADA INTERNO, {{states('sensor.vmc_master_punto_di_rugiada_interno') | float(0) }} [°C] SARÀ MINORE DEL LIM. Δ P. DI RUGIADA {{states('input_number.vmc_master_offset_verifica_impiego_vmc') | float(0) }} [°C] DEL VALORE SETTATO;
+          - LA DIFFERENZA DEL PUNTO DI RUGIADA ESTERNO, {{states('sensor.vmc_master_punto_di_rugiada_esterno') | float(0) }} [°C] - PUNTO DI RUGIADA INTERNO, {{states('sensor.vmc_master_punto_di_rugiada_interno') | float(0) }} [°C] SARÀ MINORE DEL LIM. Δ P. DI RUGIADA IMPOSTATO ({{states('input_number.vmc_master_offset_verifica_impiego_vmc') | float(0) }} °C);
             e
-          - L'OPZIONE [VMC ON/OFF, IN FUNZIONE DEL LIM. Δ P. Di RUGIADA] RIMARRÀ IMPOSTATA SU ACCESO
+          - L'OPZIONE [VMC ON/OFF, IN FUNZIONE DEL LIM. Δ P. DI RUGIADA] RIMARRÀ IMPOSTATA SU ACCESO
         <strong>DIVERSAMENTE LA VMC VERRA' ARRESTATA</strong>
             e 
-          - IL PUNTO DI RUGIADA INTERNO SIA DIVERSO DA [NON CALCOLABILE]
+          - IL PUNTO DI RUGIADA INTERNO SARÀ DIVERSO DA [NON CALCOLABILE]
             e
-          - IL PUNTO DI RUGIADA ESTERNO SIA DIVERSO DA [NON CALCOLABILE]
+          - IL PUNTO DI RUGIADA ESTERNO SARÀ DIVERSO DA [NON CALCOLABILE]
 
         {% else %}{% endif %}
 
@@ -3028,17 +3100,19 @@ cards:
         spia_velocita_2=="on" or spia_velocita_3=="on" or spia_velocita_4=="on"
         or spia_notturna=="on" or spia_freecooling=="on" or
         spia_iperventilazione=="on")%}
-          - LA DIFFERENZA DEL PUNTO DI RUGIADA ESTERNO, {{states('sensor.vmc_master_punto_di_rugiada_esterno') | float(0) }} [°C] - PUNTO DI RUGIADA INTERNO, {{states('sensor.vmc_master_punto_di_rugiada_interno') | float(0) }} [°C] SARÀ MINORE DEL LIM. Δ P. DI RUGIADA {{states('input_number.vmc_master_offset_verifica_impiego_vmc') | float(0) }} [°C] DEL VALORE SETTATO;
+          - LA DIFFERENZA DEL PUNTO DI RUGIADA ESTERNO, {{states('sensor.vmc_master_punto_di_rugiada_esterno') | float(0) }} [°C] - PUNTO DI RUGIADA INTERNO, {{states('sensor.vmc_master_punto_di_rugiada_interno') | float(0) }} [°C] SARÀ MINORE DEL LIM. Δ P. DI RUGIADA IMPOSTATO ({{states('input_number.vmc_master_offset_verifica_impiego_vmc') | float(0) }} °C);
             e
-          - L'OPZIONE [VMC ON/OFF, IN FUNZIONE DEL LIM. Δ P. Di RUGIADA] RIMARRÀ IMPOSTATA SU ACCESO
+          - L'OPZIONE [VMC ON/OFF, IN FUNZIONE DEL LIM. Δ P. DI RUGIADA] RIMARRÀ IMPOSTATA SU ACCESO
         <strong>DIVERSAMENTE LA VMC VERRA' ARRESTATA</strong>
             e 
-          - IL PUNTO DI RUGIADA INTERNO SIA DIVERSO DA [NON CALCOLABILE]
+          - IL PUNTO DI RUGIADA INTERNO SARÀ DIVERSO DA [NON CALCOLABILE]
             e
-          - IL PUNTO DI RUGIADA ESTERNO SIA DIVERSO DA [NON CALCOLABILE]
+          - IL PUNTO DI RUGIADA ESTERNO SARÀ DIVERSO DA [NON CALCOLABILE]
 
         {% else %}{% endif %}
 
+
+        NOTA: LA VMC RESTA IN FUNZIONE PER DARE PRIORITÀ ALL'ASPIRAZIONE DEGLI INQUINANTI; AL LORO RIENTRO SI ARRESTERÀ FINO AL TERMINE DELL'ALLERTA PER IL LIM. Δ P. DI RUGIADA.
 
         Msg. 3, VMC ON/OFF, in Funzione del Lim. ∆ P. di Rugiada Allarmato
 
@@ -3089,17 +3163,19 @@ cards:
         spia_velocita_2=="on" or spia_velocita_3=="on" or spia_velocita_4=="on"
         or spia_notturna=="on" or spia_freecooling=="on" or
         spia_iperventilazione=="on")%}
-          - LA DIFFERENZA DEL PUNTO DI RUGIADA ESTERNO, {{states('sensor.vmc_master_punto_di_rugiada_esterno') | float(0) }} [°C] - PUNTO DI RUGIADA INTERNO, {{states('sensor.vmc_master_punto_di_rugiada_interno') | float(0) }} [°C] SARÀ MINORE DEL LIM. Δ P. DI RUGIADA {{states('input_number.vmc_master_offset_verifica_impiego_vmc') | float(0) }} [°C] DEL VALORE SETTATO;
+          - LA DIFFERENZA DEL PUNTO DI RUGIADA ESTERNO, {{states('sensor.vmc_master_punto_di_rugiada_esterno') | float(0) }} [°C] - PUNTO DI RUGIADA INTERNO, {{states('sensor.vmc_master_punto_di_rugiada_interno') | float(0) }} [°C] SARÀ MINORE DEL LIM. Δ P. DI RUGIADA IMPOSTATO ({{states('input_number.vmc_master_offset_verifica_impiego_vmc') | float(0) }} °C);
             e
-          - L'OPZIONE [VMC ON/OFF, IN FUNZIONE DEL LIM. Δ P. Di RUGIADA] RIMARRÀ IMPOSTATA SU ACCESO
+          - L'OPZIONE [VMC ON/OFF, IN FUNZIONE DEL LIM. Δ P. DI RUGIADA] RIMARRÀ IMPOSTATA SU ACCESO
         <strong>DIVERSAMENTE LA VMC VERRA' ARRESTATA</strong>
             e 
-          - IL PUNTO DI RUGIADA INTERNO SIA DIVERSO DA [NON CALCOLABILE]
+          - IL PUNTO DI RUGIADA INTERNO SARÀ DIVERSO DA [NON CALCOLABILE]
             e
-          - IL PUNTO DI RUGIADA ESTERNO SIA DIVERSO DA [NON CALCOLABILE]
+          - IL PUNTO DI RUGIADA ESTERNO SARÀ DIVERSO DA [NON CALCOLABILE]
 
         {% else %}{% endif %}
 
+
+        {{ "NOTA: LA VMC RESTA IN FUNZIONE PER DARE PRIORITÀ ALL'ASPIRAZIONE DEGLI INQUINANTI; AL LORO RIENTRO SI ARRESTERÀ FINO AL TERMINE DELL'ALLERTA PER IL LIM. Δ P. DI RUGIADA." if (is_state('sensor.vmc_master_alert_monitoraggio_voc','Allerta') and is_state('input_boolean.vmc_master_opzioni_accendi_spegni_vmc_vs_co2_e_voc','on')) else "" }}
 
         Msg. 4, VMC ON/OFF, in Funzione del Lim. ∆ P. di Rugiada Allarmato
 
@@ -3167,14 +3243,14 @@ cards:
         spia_velocita_2=="on" or spia_velocita_3=="on" or spia_velocita_4=="on"
         or spia_notturna=="on" or spia_freecooling=="on" or
         spia_iperventilazione=="on")%}
-          - LA DIFFERENZA DEL PUNTO DI RUGIADA ESTERNO, {{states('sensor.vmc_master_punto_di_rugiada_esterno') | float(0) }} [°C] - PUNTO DI RUGIADA INTERNO, {{states('sensor.vmc_master_punto_di_rugiada_interno') | float(0) }} [°C] SARÀ MINORE DEL LIM. Δ P. DI RUGIADA {{states('input_number.vmc_master_offset_verifica_impiego_vmc') | float(0) }} [°C] DEL VALORE SETTATO;
+          - LA DIFFERENZA DEL PUNTO DI RUGIADA ESTERNO, {{states('sensor.vmc_master_punto_di_rugiada_esterno') | float(0) }} [°C] - PUNTO DI RUGIADA INTERNO, {{states('sensor.vmc_master_punto_di_rugiada_interno') | float(0) }} [°C] SARÀ MINORE DEL LIM. Δ P. DI RUGIADA IMPOSTATO ({{states('input_number.vmc_master_offset_verifica_impiego_vmc') | float(0) }} °C);
             e
-          - L'OPZIONE [VMC ON/OFF, IN FUNZIONE DEL LIM. Δ P. Di RUGIADA] RIMARRÀ IMPOSTATA SU ACCESO
+          - L'OPZIONE [VMC ON/OFF, IN FUNZIONE DEL LIM. Δ P. DI RUGIADA] RIMARRÀ IMPOSTATA SU ACCESO
         <strong>DIVERSAMENTE LA VMC VERRA' ARRESTATA</strong>
             e 
-          - IL PUNTO DI RUGIADA INTERNO SIA DIVERSO DA [NON CALCOLABILE]
+          - IL PUNTO DI RUGIADA INTERNO SARÀ DIVERSO DA [NON CALCOLABILE]
             e
-          - IL PUNTO DI RUGIADA ESTERNO SIA DIVERSO DA [NON CALCOLABILE]
+          - IL PUNTO DI RUGIADA ESTERNO SARÀ DIVERSO DA [NON CALCOLABILE]
 
         {% else %}{% endif %}
 
@@ -3645,14 +3721,14 @@ cards:
         spia_velocita_2=="on" or spia_velocita_3=="on" or spia_velocita_4=="on"
         or spia_notturna=="on" or spia_freecooling=="on" or
         spia_iperventilazione=="on")%}
-          - LA DIFFERENZA DEL PUNTO DI RUGIADA ESTERNO, {{states('sensor.vmc_master_punto_di_rugiada_esterno') | float(0) }} [°C] - PUNTO DI RUGIADA INTERNO, {{states('sensor.vmc_master_punto_di_rugiada_interno') | float(0) }} [°C] SARÀ MINORE DEL LIM. Δ P. DI RUGIADA {{states('input_number.vmc_master_offset_verifica_impiego_vmc') | float(0) }} [°C] DEL VALORE SETTATO;
+          - LA DIFFERENZA DEL PUNTO DI RUGIADA ESTERNO, {{states('sensor.vmc_master_punto_di_rugiada_esterno') | float(0) }} [°C] - PUNTO DI RUGIADA INTERNO, {{states('sensor.vmc_master_punto_di_rugiada_interno') | float(0) }} [°C] SARÀ MINORE DEL LIM. Δ P. DI RUGIADA IMPOSTATO ({{states('input_number.vmc_master_offset_verifica_impiego_vmc') | float(0) }} °C);
             e
-          - L'OPZIONE [VMC ON/OFF, IN FUNZIONE DEL LIM. Δ P. Di RUGIADA] RIMARRÀ IMPOSTATA SU ACCESO
+          - L'OPZIONE [VMC ON/OFF, IN FUNZIONE DEL LIM. Δ P. DI RUGIADA] RIMARRÀ IMPOSTATA SU ACCESO
         <strong>DIVERSAMENTE LA VMC VERRA' ARRESTATA</strong>
             e 
-          - IL PUNTO DI RUGIADA INTERNO SIA DIVERSO DA [NON CALCOLABILE]
+          - IL PUNTO DI RUGIADA INTERNO SARÀ DIVERSO DA [NON CALCOLABILE]
             e
-          - IL PUNTO DI RUGIADA ESTERNO SIA DIVERSO DA [NON CALCOLABILE]
+          - IL PUNTO DI RUGIADA ESTERNO SARÀ DIVERSO DA [NON CALCOLABILE]
           
 
         <strong>SI CONSIGLIA DI IMPOSTARE SU ACCESO L'OPZIONE [VMC ON/OFF, in
@@ -3727,14 +3803,14 @@ cards:
         spia_velocita_2=="on" or spia_velocita_3=="on" or spia_velocita_4=="on"
         or spia_notturna=="on" or spia_freecooling=="on" or
         spia_iperventilazione=="on")%}
-          - LA DIFFERENZA DEL PUNTO DI RUGIADA ESTERNO, {{states('sensor.vmc_master_punto_di_rugiada_esterno') | float(0) }} [°C] - PUNTO DI RUGIADA INTERNO, {{states('sensor.vmc_master_punto_di_rugiada_interno') | float(0) }} [°C] SARÀ MINORE DEL LIM. Δ P. DI RUGIADA {{states('input_number.vmc_master_offset_verifica_impiego_vmc') | float(0) }} [°C] DEL VALORE SETTATO;
+          - LA DIFFERENZA DEL PUNTO DI RUGIADA ESTERNO, {{states('sensor.vmc_master_punto_di_rugiada_esterno') | float(0) }} [°C] - PUNTO DI RUGIADA INTERNO, {{states('sensor.vmc_master_punto_di_rugiada_interno') | float(0) }} [°C] SARÀ MINORE DEL LIM. Δ P. DI RUGIADA IMPOSTATO ({{states('input_number.vmc_master_offset_verifica_impiego_vmc') | float(0) }} °C);
             e
-          - L'OPZIONE [VMC ON/OFF, IN FUNZIONE DEL LIM. Δ P. Di RUGIADA] RIMARRÀ IMPOSTATA SU ACCESO
+          - L'OPZIONE [VMC ON/OFF, IN FUNZIONE DEL LIM. Δ P. DI RUGIADA] RIMARRÀ IMPOSTATA SU ACCESO
         <strong>DIVERSAMENTE LA VMC VERRA' ARRESTATA</strong>
             e 
-          - IL PUNTO DI RUGIADA INTERNO SIA DIVERSO DA [NON CALCOLABILE]
+          - IL PUNTO DI RUGIADA INTERNO SARÀ DIVERSO DA [NON CALCOLABILE]
             e
-          - IL PUNTO DI RUGIADA ESTERNO SIA DIVERSO DA [NON CALCOLABILE]
+          - IL PUNTO DI RUGIADA ESTERNO SARÀ DIVERSO DA [NON CALCOLABILE]
 
         {% else %}{% endif %}
 
@@ -3805,14 +3881,14 @@ cards:
         spia_velocita_2=="on" or spia_velocita_3=="on" or spia_velocita_4=="on"
         or spia_notturna=="on" or spia_freecooling=="on" or
         spia_iperventilazione=="on")%}
-          - LA DIFFERENZA DEL PUNTO DI RUGIADA ESTERNO, {{states('sensor.vmc_master_punto_di_rugiada_esterno') | float(0) }} [°C] - PUNTO DI RUGIADA INTERNO, {{states('sensor.vmc_master_punto_di_rugiada_interno') | float(0) }} [°C] SARÀ MINORE DEL LIM. Δ P. DI RUGIADA {{states('input_number.vmc_master_offset_verifica_impiego_vmc') | float(0) }} [°C] DEL VALORE SETTATO;
+          - LA DIFFERENZA DEL PUNTO DI RUGIADA ESTERNO, {{states('sensor.vmc_master_punto_di_rugiada_esterno') | float(0) }} [°C] - PUNTO DI RUGIADA INTERNO, {{states('sensor.vmc_master_punto_di_rugiada_interno') | float(0) }} [°C] SARÀ MINORE DEL LIM. Δ P. DI RUGIADA IMPOSTATO ({{states('input_number.vmc_master_offset_verifica_impiego_vmc') | float(0) }} °C);
             e
-          - L'OPZIONE [VMC ON/OFF, IN FUNZIONE DEL LIM. Δ P. Di RUGIADA] RIMARRÀ IMPOSTATA SU ACCESO
+          - L'OPZIONE [VMC ON/OFF, IN FUNZIONE DEL LIM. Δ P. DI RUGIADA] RIMARRÀ IMPOSTATA SU ACCESO
         <strong>DIVERSAMENTE LA VMC VERRA' ARRESTATA</strong>
             e 
-          - IL PUNTO DI RUGIADA INTERNO SIA DIVERSO DA [NON CALCOLABILE]
+          - IL PUNTO DI RUGIADA INTERNO SARÀ DIVERSO DA [NON CALCOLABILE]
             e
-          - IL PUNTO DI RUGIADA ESTERNO SIA DIVERSO DA [NON CALCOLABILE]
+          - IL PUNTO DI RUGIADA ESTERNO SARÀ DIVERSO DA [NON CALCOLABILE]
 
 
         <strong>SI CONSIGLIA DI IMPOSTARE SU ACCESO L'OPZIONE [VMC ON/OFF, in
@@ -4351,7 +4427,7 @@ cards:
         states('sensor.vmc_master_punto_di_rugiada_verifica_confronto_valore')}}
 
 
-        {% if spia_velocita_0=="on"%}FINE DEL MANTENIMENTO DELLA VMC SU
+        {% if not is_state('input_boolean.vmc_master_opzioni_accendi_spegni_vmc_vs_pdr', 'on') %}{% elif spia_velocita_0=="on"%}FINE DEL MANTENIMENTO DELLA VMC SU
         <strong>VELOCITA' 0</strong>, ATTENDERE..
 
         {% elif spia_velocita_1=="on" %}RIPRESA AUTOMATICA DELLA VMC SULLA
@@ -4384,7 +4460,7 @@ cards:
         {% elif spia_iperventilazione=="on" %}RIPRESA AUTOMATICA DELLA VMC SULLA
         <strong>VELOCITA' IPERVENTILAZIONE</strong>, ATTENDERE..
 
-        {%elif spia_velocita_1_co2_o_voc_pdr=="on"%}RIPRESA AUTOMATICA DELLA VMC
+        {%elif spia_velocita_1_co2_o_voc_pdr=="on" and is_state('input_boolean.vmc_master_spia_co2_o_voc', 'off')%}RIPRESA AUTOMATICA DELLA VMC
         SULLA <strong>VELOCITA' 0</strong>, ATTENDERE..{% else %}{% endif %}
 
 
@@ -5394,7 +5470,7 @@ cards:
 
         <strong>DIVERSAMENTE SI CONFERMA L'ARRESTO DELLA VMC:</strong>
 
-          - NON APPENA L'ANIDRIDE CARBONICA, CO₂ ≤ DI 800 ppm e/o I COMPOSTI ORGANICI VOLATICI, VOC ≤ DI 300 ppb
+          - NON APPENA L'ANIDRIDE CARBONICA, CO₂ ≤ DI 800 ppm e/o I COMPOSTI ORGANICI VOLATILI, VOC ≤ DI 300 ppb
             o
           - FINCHE' L'OPZIONE [VMC ON/OFF, in Funzione del Lim. CO₂ e/o VOC] RIMARRÀ IMPOSTATA SU ACCESO
         <strong> DIVERSAMENTE VERRÀ ANNULLATA LA RIPRESA AUTOMATICA, CONFERMANDO
@@ -6368,7 +6444,7 @@ cards:
 
           {{states('sensor.vmc_master_umidita_interna_status_verifica_soglia_valore')}}
 
-          {% if is_state('input_boolean.vmc_master_umidita_verifica_soglia_valore_spia','on') and is_state('input_boolean.vmc_master_opzioni_accendi_spegni_vmc_vs_umidita','on') %}NON E' POSSIBILE DISABILITARE L'OPZIONE [VMC ON/OFF, in Funzione dell'Umidità Interna] FINO ALLA FINE DELLA FASCIA DEL CALENDARIO{% endif %}
+          {% if is_state('input_boolean.vmc_master_umidita_verifica_soglia_valore_spia','on') and is_state('input_boolean.vmc_master_opzioni_accendi_spegni_vmc_vs_umidita','on') %}NON E' POSSIBILE DISABILITARE L'OPZIONE [VMC ON/OFF, in Funzione dell'Umidità Interna] FINO ALLA FINE DELLA FASCIA DEL CALENDARIO{% else %}DURANTE LA FASCIA DEL CALENDARIO L'UMIDITÀ NON COMANDA LA VMC: LA VMC FUNZIONA ALLA VELOCITÀ DELLA FASCIA{% endif %}
 
           Msg. 1.1
           {% elif is_state('sensor.vmc_master_alert_monitoraggio_umidita','Nessuna Allerta') and is_state('sensor.vmc_master_status_ip_interfaccia', 'ON-Line') and states('sensor.vmc_master_umidita_interna_status_verifica_soglia_valore')!='[Non Calcolabile]'%}
@@ -6653,7 +6729,7 @@ cards:
 
         SE VIENE MANTENUTA LA VELOCITÀ: <strong>{{
         states('input_select.vmc_master_speed_umidita') }}</strong>, AL TERMINE
-        DELL'ALLARME UMIDITÀ LA VMC VERRA' ARRESTATA; DIVERSAMENTE, VERRÀ
+        DELL'ALLERTA UMIDITÀ LA VMC VERRA' ARRESTATA; DIVERSAMENTE, VERRÀ
         MANTENUTA LA NUOVA VELOCITÀ IMPOSTATA
         {% endif %}
 
@@ -6769,7 +6845,7 @@ cards:
 
         SE VIENE MANTENUTA LA VELOCITÀ: <strong>{{
         states('input_select.vmc_master_speed_umidita') }}</strong>, AL TERMINE
-        DELL'ALLARME UMIDITÀ LA VMC VERRA' ARRESTATA; DIVERSAMENTE, VERRÀ
+        DELL'ALLERTA UMIDITÀ LA VMC VERRA' ARRESTATA; DIVERSAMENTE, VERRÀ
         MANTENUTA LA NUOVA VELOCITÀ IMPOSTATA
         {% endif %}
 
@@ -6993,7 +7069,7 @@ cards:
           {% elif messaggio == "Se Avviata in Velocità Free Cool./Heat. (Allerta Riscaldamento)" %} Free Cool./Heat.
           {% elif messaggio == "Se Avviata in Velocità Free Cool./Heat. (Allerta Raffrescamento, Presenza di Inquinanti)" %} Free Cool./Heat.
           {% elif messaggio == "Se Avviata in Velocità Free Cool./Heat. (Allerta Riscaldamento, Presenza di Inquinanti)" %} Free Cool./Heat.
-        {% endif %}</strong> E TERMINA L'ALLARME UMIDITÀ, LA VMC RITORNERÀ ALLA
+        {% endif %}</strong> E TERMINA L'ALLERTA UMIDITÀ, LA VMC RITORNERÀ ALLA
         VELOCITÀ 0, DIVERSAMENTE MANTERRÀ LA VELOCITÀ IMPOSTATA
 
               {% else %}
@@ -7035,8 +7111,7 @@ cards:
 
         DIVERSAMENTE, SE VIENE AVVIATA LA VMC A UNA VELOCITA' DIVERSA DA
         VELOCITA': <strong>{{ states('input_select.vmc_master_speed_umidita')
-        }}</strong>, AL TERMINE DELL' ALLERTA UMIDITA' VERRÀ RIPRISTINATA LA
-        VELOCITÀ PRECEDENTEMENTE IMPOSTATA
+        }}</strong>, AL TERMINE DELL' ALLERTA UMIDITA' VERRÀ MANTENUTA LA NUOVA VELOCITÀ IMPOSTATA
 
                 {% elif states('input_select.vmc_master_speed_umidita') == 'Free Cool./Heat.' %}
         SI CONSIGLIA DI AVVIARE LA VMC SU UNA VELOCITÀ DIVERSA DA <strong>{{
@@ -7051,7 +7126,7 @@ cards:
 
         SE VIENE MANTENUTA LA VELOCITÀ: <strong>{{
         states('input_select.vmc_master_speed_umidita') }}</strong>, AL TERMINE
-        DELL'ALLARME UMIDITÀ LA VMC VERRA' ARRESTATA; DIVERSAMENTE, VERRÀ
+        DELL'ALLERTA UMIDITÀ LA VMC VERRA' ARRESTATA; DIVERSAMENTE, VERRÀ
         MANTENUTA LA NUOVA VELOCITÀ IMPOSTATA
                 {% endif %}
               {% endif %}
@@ -7287,7 +7362,7 @@ cards:
 
           {{states('sensor.vmc_master_umidita_interna_status_verifica_soglia_valore')}}
 
-          <strong>SI CONSIGLIA DI ACCENDERE L'OPZIONE [VMC ON/OFF, in Funzione dell'Umidità Interna] IN MODO DA DARE PRIORITA' ALL' ASPIRAZIONE DELL'UMIDITA' INTERNA, COMPATTIBILMENTE CON LE ALTRE ALLERTE</strong>
+          <strong>SI CONSIGLIA DI ACCENDERE L'OPZIONE [VMC ON/OFF, in Funzione dell'Umidità Interna] IN MODO DA DARE PRIORITA' ALL' ASPIRAZIONE DELL'UMIDITA' INTERNA, COMPATIBILMENTE CON LE ALTRE ALLERTE</strong>
 
         Msg. 6
 
@@ -9293,6 +9368,7 @@ cards:
                           'automation.automazione_vmc_master',
                           'automation.vmc_master_riepilogo_audio_avvio',
                           'automation.vmc_master_audio_allerte_e_stato',
+                          'automation.vmc_master_riallineamento_allerte_al_riavvio',
                           'sensor.vmc_master_temperatura_esterna_selezionata',
                           'sensor.vmc_master_temperatura_interna_selezionata',
                           'sensor.vmc_master_umidita_esterna_selezionata',
@@ -9427,6 +9503,7 @@ cards:
                           'input_number.vmc_master_offset_verifica_impiego_vmc',
                           'input_number.vmc_master_volume_da_inserire',
                           'input_number.vmc_master_umidita_avvio',
+                          'input_number.vmc_master_fase_riallineamento_al_riavvio',
                           'input_number.vmc_master_aria_scambiata_v1',
                           'input_number.vmc_master_aria_scambiata_v2',
                           'input_number.vmc_master_aria_scambiata_v3',
@@ -10530,8 +10607,8 @@ cards:
 
                   <table><tr><td align="justify">
                   <b>Calcolo.</b> Formula di Magnus-Tetens (sotto), con la temperatura T [°C] e l'umidità relativa UR [%]
-                  dell'ambiente Interno ed Esterno. Il valore risulta [Non Calcolabile] se UR ≤ 0 % oppure
-                  UR > 100 %. Più l'aria è umida, più il punto di rugiada si avvicina alla temperatura dell'aria.
+                  dell'ambiente Interno ed Esterno. Il valore risulta [Non Calcolabile] se UR ≤ 0 %; oltre il 100 %
+                  (ad esempio per l'Offset) l'umidità viene limitata a 100 % e il valore è calcolabile. Più l'aria è umida, più il punto di rugiada si avvicina alla temperatura dell'aria.
                   </td></tr></table>
                   <a href="https://raw.githubusercontent.com/DanRobo76/VMC-HELTY-FLOW/main/immagini/Informazioni/formula_punto_di_rugiada.png" target="_blank"><img src="https://raw.githubusercontent.com/DanRobo76/VMC-HELTY-FLOW/main/immagini/Informazioni/formula_punto_di_rugiada.png" alt="Formula del Punto di Rugiada" width="60%"></a>
                   <table><tr><td align="justify">
@@ -10557,7 +10634,7 @@ cards:
                   <tr><td style="padding: 4px 8px; border: 1px solid #c3c2b7;">1 % ≤ U ≤ 35 %</td><td style="padding: 4px 8px; border: 1px solid #c3c2b7;">Possibile Secchezza, Disidratazione</td><td style="padding: 4px 8px; border: 1px solid #c3c2b7;">Pop-Up</td><td style="padding: 4px 8px; border: 1px solid #c3c2b7;">si avvia (aria secca: si fa entrare aria dall'esterno)</td></tr>
                   <tr><td style="padding: 4px 8px; border: 1px solid #c3c2b7;">35 % &lt; U &lt; Limite</td><td style="padding: 4px 8px; border: 1px solid #c3c2b7;">Normale</td><td style="padding: 4px 8px; border: 1px solid #c3c2b7;">nessuno</td><td style="padding: 4px 8px; border: 1px solid #c3c2b7;">si arresta</td></tr>
                   <tr><td style="padding: 4px 8px; border: 1px solid #c3c2b7;">Limite ≤ U ≤ 100 %</td><td style="padding: 4px 8px; border: 1px solid #c3c2b7;">Possibile Muffe, Batteri</td><td style="padding: 4px 8px; border: 1px solid #c3c2b7;">Pop-Up</td><td style="padding: 4px 8px; border: 1px solid #c3c2b7;">si avvia</td></tr>
-                  <tr><td style="padding: 4px 8px; border: 1px solid #c3c2b7;">U &gt; 100 %</td><td style="padding: 4px 8px; border: 1px solid #c3c2b7;">[Non Calcolabile]</td><td style="padding: 4px 8px; border: 1px solid #c3c2b7;">nessuno</td><td style="padding: 4px 8px; border: 1px solid #c3c2b7;">—</td></tr>
+                  <tr><td style="padding: 4px 8px; border: 1px solid #c3c2b7;">U &gt; 100 % (con Offset)</td><td style="padding: 4px 8px; border: 1px solid #c3c2b7;">limitata a 100 %: Possibile Muffe, Batteri</td><td style="padding: 4px 8px; border: 1px solid #c3c2b7;">Pop-Up</td><td style="padding: 4px 8px; border: 1px solid #c3c2b7;">si avvia</td></tr>
                   </table>
                   <table><tr><td align="justify">
                   Limite = [Avvio VMC per Umidità ≥], ora impostato a {{ (states('input_number.vmc_master_umidita_avvio') | float(0)) | round(1) | string | replace('.', ',') }} %. All'avvio la VMC va alla
@@ -10596,7 +10673,7 @@ cards:
                   Possibile Muffe, Batteri.
                   <br>• [Set Velocità Umidità di Avvio]: Velocità 0, 1, 2, 3, 4, Notturna, Iperventilazione, Free Cool./Heat.
                   <br>• [Offset Umidità Int.]: da −100 a +100 % (passo 0,1 %), si somma al valore letto.
-                  <br>Fisse: le soglie dell'1 % e del 35 %; sotto l'1 % e sopra il 100 % il valore è [Non Calcolabile].
+                  <br>Fisse: le soglie dell'1 % e del 35 %; sotto l'1 % il valore è [Non Calcolabile]; sopra il 100 % (con l'Offset) è limitato a 100 %.
                   </td></tr></table>
                   </details>
 
@@ -10616,7 +10693,7 @@ cards:
                   <b>Δ P. di Rugiada</b> = Punto di Rugiada Esterno − Punto di Rugiada Interno [°C]. Il Package
                   confronta il Δ solo con il Set (da -10 a +10 °C, passo 1 °C); la tabella seguente è indicativa.
                   <br><br>
-                  <b>Se il Δ supera il Set</b> e l'impostazione [VMC ON/OFF, in Funzione del Lim. Δ P. di
+                  <b>Se il Δ raggiunge o supera il Set</b> e l'impostazione [VMC ON/OFF, in Funzione del Lim. Δ P. di
                   Rugiada] è attiva, la VMC si arresta e riparte non appena le condizioni lo permettono.
                   </td></tr></table>
 
@@ -10983,10 +11060,10 @@ cards:
                   <strong>Regole:</strong>
 
                   - l'Impostazione VMC ON/OFF, in Funzione della Vel. Free
-                  Heating, deve essere impostato su "ON"
+                  Heating, deve essere impostata su "ON"
 
                   - l'Impostazione VMC ON/OFF, in Funzione della Vel. Free
-                  Cooling, deve essere impostato su "ON"
+                  Cooling, deve essere impostata su "ON"
 
                   - i mesi di ogni fascia (Set Inizio Mese - Set Fine Mese)
                   devono essere contigui
@@ -11191,7 +11268,7 @@ cards:
 
                   Da impiegare solo la prima volta appena installato il Package.
 
-                  Attiva i 6 Profili sopra Esposti, Attiva gli Avvisi e la
+                  Attiva i 6 Profili sopra Esposti, Azzera gli Offset dei Sensori, Attiva gli Avvisi e la
                   Notifica Status VMC, Attiva lo Status Pannello
                   Led, Disattiva lo Status Routine Sensori, Arresta la VMC,
                   Inizializza tutte le Variabili Booleane su [False] e Riavvia
@@ -11923,9 +12000,9 @@ cards:
                     <summary><b>17 Logiche di Funzionamento</b></summary> 
                     <table><tr><td align="justify">
                     <b>PRIORITA' DI ATTIVAZIONE DEGLI ALLARMI (Secondi per l'Attivazione e per la Ripresa):</b><br>
-                    - Congelamento ≤ -18 [°C] Temp. Ext.: 0 Secondi. Durante il Congelamento la VMC resta ferma: se si prova a cambiarle Velocità viene riportata subito a Velocità 0 e, se non si ferma, il comando di arresto viene ripetuto finché non si ferma (circa ogni 7-8 Secondi);<br>
+                    - Congelamento ≤ -18 [°C] Temp. Ext.: 0 Secondi. Durante il Congelamento la VMC resta ferma: se si prova a cambiarle Velocità viene riportata subito a Velocità 0 e, se non si ferma, il comando di arresto viene ripetuto finché non si ferma (circa ogni 4 Secondi);<br>
                     - VMC Sensori Int. Δ Temp. > 23 [°C]: 4 Secondi;<br>
-                    - Inquinanti (CO₂ e VOC): 8 Secondi;<br>
+                    - Inquinanti (CO₂ e VOC): 8 Secondi. Se la VMC è partita da Velocità 0 resta a Velocità 1 fino al rientro degli Inquinanti, poi torna a Velocità 0; se nel frattempo l'utente sceglie un'altra Velocità (anche durante il Congelamento o il Δ Temp.) questa viene mantenuta, anche dopo il rientro;<br>
                     - Sup. Lim. Δ PdR con Inquinanti: 12 Secondi;<br>
                     - Sup. Lim. Δ PdR: 16 Secondi. Se l'allerta inizia con la VMC a Velocità 0, l'Umidità non la avvia fino al termine dell'allerta; se durante l'allerta si cambia Velocità, la VMC viene riportata a Velocità 0 e la nuova Velocità viene memorizzata e ripristinata al termine dell'allerta, anche al posto della ripresa in Free Cool./Heat.;<br>
                     - Free Cool./Heat. con Inquinanti: 20 Secondi;<br>
@@ -12277,7 +12354,7 @@ cards:
                   <tr><th style="padding: 4px 8px; border: 1px solid #c3c2b7;">VMC</th>{%- for l in ns.vmc %}<th style="padding: 4px 8px; border: 1px solid #c3c2b7;"><ha-icon icon="mdi:hvac"></ha-icon> {{ states('sensor.vmc_' ~ l ~ '_nome_status') }}</th>{%- endfor %}</tr>
                   <tr><td colspan="{{ ns.vmc | count + 1 }}" style="padding: 4px 8px; border: 1px solid #c3c2b7;"><b>Stato</b></td></tr>
                   <tr><td style="padding: 4px 8px; border: 1px solid #c3c2b7;">Velocità</td>{%- for l in ns.vmc %}<td style="padding: 4px 8px; border: 1px solid #c3c2b7;">{{ states('sensor.vmc_' ~ l ~ '_status_ventola_lettura_codice_interpretato_interfaccia') }}</td>{%- endfor %}</tr>
-                  <tr><td style="padding: 4px 8px; border: 1px solid #c3c2b7;">Calcolo Portata Ventola</td>{%- for l in ns.vmc %}<td style="padding: 4px 8px; border: 1px solid #c3c2b7;">{{ states('sensor.vmc_' ~ l ~ '_status_calcolo_portata_ventola') }}</td>{%- endfor %}</tr>
+                  <tr><td style="padding: 4px 8px; border: 1px solid #c3c2b7;">Tempo ricambio aria</td>{%- for l in ns.vmc %}<td style="padding: 4px 8px; border: 1px solid #c3c2b7;">{{ states('sensor.vmc_' ~ l ~ '_status_calcolo_portata_ventola') }}</td>{%- endfor %}</tr>
                   <tr><td style="padding: 4px 8px; border: 1px solid #c3c2b7;">Portata Ventola (codice interpretato)</td>{%- for l in ns.vmc %}<td style="padding: 4px 8px; border: 1px solid #c3c2b7;">{{ states('sensor.vmc_' ~ l ~ '_status_portata_ventola_lettura_codice_interpretato') }}</td>{%- endfor %}</tr>
                   <tr><td style="padding: 4px 8px; border: 1px solid #c3c2b7;">Status Sensori VMC</td>{%- for l in ns.vmc %}<td style="padding: 4px 8px; border: 1px solid #c3c2b7;">{{ states('sensor.vmc_' ~ l ~ '_status_sensori_lettura_codice_interpretato') }}</td>{%- endfor %}</tr>
                   <tr><td style="padding: 4px 8px; border: 1px solid #c3c2b7;">Status Pannello LED</td>{%- for l in ns.vmc %}<td style="padding: 4px 8px; border: 1px solid #c3c2b7;">{{ states('sensor.vmc_' ~ l ~ '_status_led_pannello_lettura_codice_interpretato') }}</td>{%- endfor %}</tr>
@@ -12288,7 +12365,7 @@ cards:
                   <tr><td style="padding: 4px 8px; border: 1px solid #c3c2b7;">Umidità Interna</td>{%- for l in ns.vmc %}<td style="padding: 4px 8px; border: 1px solid #c3c2b7;">{{ states('sensor.vmc_' ~ l ~ '_umidita_interna_status') }}</td>{%- endfor %}</tr>
                   <tr><td style="padding: 4px 8px; border: 1px solid #c3c2b7;">CO₂</td>{%- for l in ns.vmc %}<td style="padding: 4px 8px; border: 1px solid #c3c2b7;">{{ states('sensor.vmc_' ~ l ~ '_co2_status') }}</td>{%- endfor %}</tr>
                   <tr><td style="padding: 4px 8px; border: 1px solid #c3c2b7;">VOC</td>{%- for l in ns.vmc %}<td style="padding: 4px 8px; border: 1px solid #c3c2b7;">{{ states('sensor.vmc_' ~ l ~ '_voc_status') }}</td>{%- endfor %}</tr>
-                  <tr><td style="padding: 4px 8px; border: 1px solid #c3c2b7;">Punto di Rugiada</td>{%- for l in ns.vmc %}<td style="padding: 4px 8px; border: 1px solid #c3c2b7;">{{ states('sensor.vmc_' ~ l ~ '_punto_di_rugiada_valore') }}</td>{%- endfor %}</tr>
+                  <tr><td style="padding: 4px 8px; border: 1px solid #c3c2b7;">Δ Punto di Rugiada [Ext-Int]</td>{%- for l in ns.vmc %}<td style="padding: 4px 8px; border: 1px solid #c3c2b7;">{{ states('sensor.vmc_' ~ l ~ '_punto_di_rugiada_valore') }}</td>{%- endfor %}</tr>
                   <tr><td style="padding: 4px 8px; border: 1px solid #c3c2b7;">Umidità Assoluta Esterna</td>{%- for l in ns.vmc %}<td style="padding: 4px 8px; border: 1px solid #c3c2b7;">{{ states('sensor.vmc_' ~ l ~ '_umidita_assoluta_esterna') }}</td>{%- endfor %}</tr>
                   <tr><td style="padding: 4px 8px; border: 1px solid #c3c2b7;">Umidità Assoluta Interna</td>{%- for l in ns.vmc %}<td style="padding: 4px 8px; border: 1px solid #c3c2b7;">{{ states('sensor.vmc_' ~ l ~ '_umidita_assoluta_interna') }}</td>{%- endfor %}</tr>
                   <tr><td colspan="{{ ns.vmc | count + 1 }}" style="padding: 4px 8px; border: 1px solid #c3c2b7;"><b>Verifiche e Allerte</b></td></tr>
