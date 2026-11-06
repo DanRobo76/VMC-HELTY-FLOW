@@ -103,14 +103,17 @@ description: >-
   PRIORITA' DI ATTIVAZIONE DEGLI ALLARMI (Secondi per l'Attivazione e per la
   Ripresa):
 
-  - Congelamento ≤ -18 [°C] Temp. Ext.: 0 Secondi. Durante il Congelamento la
-  VMC resta ferma: se si prova a cambiarle Velocità viene riportata subito a
-  Velocità 0 e, se non si ferma, il comando di arresto viene ripetuto finché non
-  si ferma (circa ogni 7-8 Secondi);
+  - Congelamento ≤ -18 [°C] Temp. Ext.: 0 Secondi. Durante il Congelamento la VMC
+  resta ferma: se si prova a cambiarle Velocità viene riportata subito a Velocità
+  0 e, se non si ferma, il comando di arresto viene ripetuto finché non si ferma
+  (circa ogni 4 Secondi);
 
   - VMC Sensori Int. Δ Temp. > 23 [°C]: 4 Secondi;
 
-  - Inquinanti (CO₂ e VOC): 8 Secondi;
+  - Inquinanti (CO₂ e VOC): 8 Secondi. Se la VMC è partita da Velocità 0 resta a
+  Velocità 1 fino al rientro degli Inquinanti, poi torna a Velocità 0; se nel
+  frattempo l'utente sceglie un'altra Velocità (anche durante il Congelamento o
+  il Δ Temp.) questa viene mantenuta, anche dopo il rientro;
 
   - Sup. Lim. Δ PdR con Inquinanti: 12 Secondi;
 
@@ -122,7 +125,9 @@ description: >-
 
   - Free Cool./Heat. con Inquinanti: 20 Secondi;
 
-  - Free Cool./Heat.: 24 Secondi;
+  - Free Cool./Heat.: 24 Secondi. Se durante l'avviso si sceglie un'altra
+  Velocità, la ripresa automatica in Free Cool./Heat. viene annullata e la VMC
+  resta sulla Velocità scelta;
 
   - Umidità: 28 Secondi (la logica Umidità memorizza subito la Velocità in uso);
   se durante l'allerta si cambia Velocità, la nuova Velocità viene memorizzata
@@ -131,9 +136,20 @@ description: >-
   - Black-Out: 32 Secondi per il Rilevamento e per il Ripristino.
 
 
+  CAMBIO MANUALE DELLA VELOCITÀ: ogni comando dell'automazione viene ripetuto
+  ogni 4-5 Secondi finché la VMC non lo esegue; se nel frattempo si sceglie
+  un'altra Velocità (Telecomando, scheda o App), la ripetizione si interrompe e
+  la scelta viene rispettata e gestita dalle regole sopra (es. memorizzata dal
+  Lim. Δ PdR o dall'Umidità). Fanno eccezione Congelamento e Δ Temp., che
+  impongono comunque la loro Velocità.
+
+
   CALENDARIO: 3 Secondi per l'Ingresso e per l'Uscita dalla Fascia oraria;
   all'Ingresso il comando alla VMC parte dopo ulteriori 5 Secondi (attesa dello
-  script della Fascia).
+  script della Fascia). All'interno della Fascia, a VMC avviata, hanno effetto
+  Congelamento, Δ Temp., Inquinanti, Lim. Δ Punto di Rugiada e Free Cooling /
+  Free Heating; Umidità e Black-Out non hanno effetto. All'uscita dalla Fascia la
+  VMC si arresta.
 
 
   COSA SUCCEDE SE SI SPEGNE UN INTERRUTTORE (CO₂/VOC, Punto di Rugiada, Free
@@ -157,9 +173,13 @@ description: >-
 
   - se, con l'allerta Umidità in corso, inizia una fascia del Calendario,
   l'interruttore dell'Umidità non si può spegnere fino alla fine della fascia,
-  anche se nel frattempo l'umidità è rientrata. Se invece si entra prima nel
-  Calendario, oppure è già in corso un'altra allerta, e poi sale l'umidità,
-  l'allerta Umidità non scatta e l'interruttore si spegne normalmente;
+  anche se nel frattempo l'umidità è rientrata: durante la fascia la VMC funziona
+  alla velocità della fascia; alla fine della fascia si arresta, le spie si
+  azzerano e, se l'umidità è ancora fuori soglia, dopo 28 secondi l'allerta
+  Umidità riparte con la [Set Velocità Umidità di Avvio], altrimenti la VMC resta
+  a Velocità 0. Se invece si entra prima nel Calendario, oppure è già in corso
+  un'altra allerta, e poi sale l'umidità, l'allerta Umidità non scatta e
+  l'interruttore si spegne normalmente;
 
   - l'interruttore del Calendario, spento durante una fascia, ferma la VMC; se
   però sono presenti Inquinanti e l'interruttore degli Inquinanti è acceso, la
