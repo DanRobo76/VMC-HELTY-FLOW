@@ -11387,7 +11387,7 @@ cards:
                   'on') %}vmc_master_opzioni_free_heating_o_free_cooling: On
                   <br>{% endif %}{% if
                   is_state('input_boolean.vmc_master_opzioni_avvisi', 'on')
-                  %}vmc_master_opzioni_avvisi_vmc: On <br>{% endif %}{% if
+                  %}vmc_master_opzioni_avvisi: On <br>{% endif %}{% if
                   is_state('input_boolean.vmc_master_opzioni_avvisi_grafici',
                   'on') %}vmc_master_opzioni_avvisi_grafici: On <br>{% endif
                   %}{% if
@@ -11449,7 +11449,7 @@ cards:
                   'on') %}vmc_master_opzioni_accendi_spegni_vmc_vs_co2_e_voc:
                   On<br>{% endif %}{% if
                   is_state('input_boolean.vmc_master_notifica_audio', 'on')
-                  %}vmc_master_notifica_audio:On<br>{% endif %}</pre>
+                  %}vmc_master_notifica_audio: On <br>{% endif %}</pre>
 
                   {% endif %}
 
@@ -11478,7 +11478,7 @@ cards:
                   %}vmc_master_notifica_status_vmc: On <br>{% endif %}{% if
                   is_state('input_boolean.vmc_master_avvio_home_assistant_in_corso_per_audio',
                   'on')
-                  %}vmc_master_avvio_home_assistant_in_corso_per_audio:On<br>{%
+                  %}vmc_master_avvio_home_assistant_in_corso_per_audio: On <br>{%
                   endif %}</details></pre>{% endif %}
 
 

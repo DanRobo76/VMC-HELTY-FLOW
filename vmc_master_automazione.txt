@@ -11528,6 +11528,15 @@ actions:
                         input_boolean.vmc_master_opzioni_accendi_spegni_vmc_vs_freeheating
                     enabled: true
                     action: input_boolean.turn_on
+                  - alias: Mese corrente non più programmato per il Free Heating -> spegne anche l'attesa Free, come il ramo c0 (correzione O2)
+                    if:
+                      - condition: template
+                        value_template: "{{ states('sensor.vmc_master_status_freeheating') != 'OK' }}"
+                    then:
+                      - data: {}
+                        target:
+                          entity_id: input_boolean.vmc_master_spia_velocita_freecooling_un_solo_avvio_per_programmazione_freeheating
+                        action: input_boolean.turn_off
                 alias: se Spia Congelamento ON o Spia Delta Temp ON
         alias: >-
           Disattivazione VMC ON/OFF, in Funzione della Vel. Free Heating
@@ -11824,6 +11833,15 @@ actions:
                         input_boolean.vmc_master_opzioni_accendi_spegni_vmc_vs_freecooling
                     enabled: true
                     action: input_boolean.turn_on
+                  - alias: Mese corrente non più programmato per il Free Cooling -> spegne anche l'attesa Free, come il ramo c0 (correzione O2)
+                    if:
+                      - condition: template
+                        value_template: "{{ states('sensor.vmc_master_status_freecooling') != 'OK' }}"
+                    then:
+                      - data: {}
+                        target:
+                          entity_id: input_boolean.vmc_master_spia_velocita_freecooling_un_solo_avvio_per_programmazione_freecooling
+                        action: input_boolean.turn_off
                 alias: se Spia Congelamento ON o Spia Delta Temp ON
         alias: >-
           Disattivazione VMC ON/OFF, in Funzione della Vel. Free Cooling
