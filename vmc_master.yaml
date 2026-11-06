@@ -118,6 +118,8 @@ homeassistant:
       icon: mdi:hvac
     automation.vmc_master_audio_allerte_e_stato:
       icon: mdi:hvac
+    automation.vmc_master_riallineamento_allerte_al_riavvio:
+      icon: mdi:hvac
     automation.automazione_vmc_master:
       icon: mdi:hvac
 ################### Fine Icone delle Automazioni ###################
@@ -891,7 +893,7 @@ template:
 
   - sensor:
       - default_entity_id: sensor.vmc_master_voc_status_senza_offset            # [CONFIGURAZIONE, 1 RICHIAMO] [INTERFACCIA, 2 RICHIAMI] [AUTOMAZIONE, 0 RICHIAMI] SENSORE DI LETTURA COMPOSTI ORGANICI VOLATICI INTERNI MEMORIZZATI NELLA VMC SENZA OFFSET MANUALE ESPRESSI IN PPB [DEFAULT VMC], PREVIA VERIFICA DI AVVENUTA LETTURA DEI DATI "SENSORI" MEMORIZZATI NELLA VMC
-        name: "Composti Organici Volatici, VOC Int. [ppb]"
+        name: "Composti Organici Volatili, VOC Int. [ppb]"
         unique_id: vmc_master_voc_status_senza_offset
         state: >
           {% set stati = ["sconosciuto", "unknown", "", none, "unavailable", "Non disponibile"] %}
@@ -930,7 +932,7 @@ template:
             {% if umidita_soglia_float is none %}
               [Non Calcolabile]
             {% else %}
-              {% if umidita_soglia_float > 0 and umidita_soglia_float <= 35 %}
+              {% if umidita_soglia_float >= 1 and umidita_soglia_float <= 35 %}
                 UMIDITÀ AL {{ umidita_soglia_float }}%. POSSIBILE SECCHEZZA, DISIDRATAZIONE. SI CONSIGLIA DI UMIDIFICARE L'AMBIENTE.
               {% elif umidita_soglia_float > 35 and umidita_soglia_float < umidita_soglia_limite %}
                 UMIDITÀ AL {{ umidita_soglia_float }}%. SITUAZIONE NORMALE.
@@ -984,11 +986,11 @@ template:
                   {% else %}
                     {% set diff = (PdRe_val - PdRi_val) | round(2) %}
                     {% if diff < Delta %}
-                      Δ PUNTO DI RUGIADA RILEVATO {{ diff }} °C MINORE DI {{ Delta }} °C DEL VALORE SETTATO.
+                      Δ PUNTO DI RUGIADA RILEVATO {{ diff }} °C, MINORE DEL VALORE IMPOSTATO ({{ Delta }} °C).
                     {% elif diff == Delta %}
-                      Δ PUNTO DI RUGIADA RILEVATO {{ diff }} °C UGUALE A {{ Delta }} °C DEL VALORE SETTATO.
+                      Δ PUNTO DI RUGIADA RILEVATO {{ diff }} °C, UGUALE AL VALORE IMPOSTATO ({{ Delta }} °C).
                     {% else %}
-                      Δ PUNTO DI RUGIADA RILEVATO {{ diff }} °C MAGGIORE DI {{ Delta }} °C DEL VALORE SETTATO.
+                      Δ PUNTO DI RUGIADA RILEVATO {{ diff }} °C, MAGGIORE DEL VALORE IMPOSTATO ({{ Delta }} °C).
                     {% endif %}
                   {% endif %}
                 {% endif %}
@@ -1714,15 +1716,15 @@ template:
               {% set minuti = (tempo_sec % 3600) // 60 %}
               {% set secondi = tempo_sec % 60 %}
               {% if ore > 0 %}
-                {{ ore }} ore{{ ", " if minuti > 0 or secondi > 0 else "" }}
-                {{ minuti ~ " minuti" if minuti > 0 else "" }}
+                {{ ore }} {{ "ora" if ore == 1 else "ore" }}{{ ", " if minuti > 0 or secondi > 0 else "" }}
+                {{ (minuti ~ (" minuto" if minuti == 1 else " minuti")) if minuti > 0 else "" }}
                 {{ " e " if secondi > 0 and minuti > 0 else "" }}
-                {{ secondi ~ " secondi" if secondi > 0 else "" }}
+                {{ (secondi ~ (" secondo" if secondi == 1 else " secondi")) if secondi > 0 else "" }}
               {% elif minuti > 0 %}
-                {{ minuti }} minuti{{ " e " if secondi > 0 else "" }}
-                {{ secondi ~ " secondi" if secondi > 0 else "" }}
+                {{ minuti }} {{ "minuto" if minuti == 1 else "minuti" }}{{ " e " if secondi > 0 else "" }}
+                {{ (secondi ~ (" secondo" if secondi == 1 else " secondi")) if secondi > 0 else "" }}
               {% else %}
-                {{ secondi }} secondi
+                {{ secondi }} {{ "secondo" if secondi == 1 else "secondi" }}
               {% endif %}
             {% endif %}
           {% endif %}
@@ -1799,13 +1801,13 @@ template:
               {% set secondi = (tempo_sec % 60) %}
       
               {% if ore == 0 and minuti == 0 %}
-                {{ secondi }} secondi
+                {{ secondi }} {{ "secondo" if secondi == 1 else "secondi" }}
               {% elif ore == 0 %}
-                {{ minuti }} minuti
+                {{ minuti }} {{ "minuto" if minuti == 1 else "minuti" }}
               {% elif minuti == 0 %}
-                {{ ore }} ore
+                {{ ore }} {{ "ora" if ore == 1 else "ore" }}
               {% else %}
-                {{ ore }} ore e {{ minuti }} minuti
+                {{ ore }} {{ "ora" if ore == 1 else "ore" }} e {{ minuti }} {{ "minuto" if minuti == 1 else "minuti" }}
               {% endif %}
             {% endif %}
           {% endif %}
@@ -3218,6 +3220,17 @@ input_number:
     mode: slider
     unit_of_measurement: "volume"
     icon: mdi:knob
+
+################### Inizio Creazione Fase di Riallineamento delle Allerte al Riavvio di Home Assistant ###################
+  vmc_master_fase_riallineamento_al_riavvio:                                    # [CONFIGURAZIONE, 7 RICHIAMI] [INTERFACCIA, 1 RICHIAMO] [AUTOMAZIONE, 96 RICHIAMI] FASE DEL RIALLINEAMENTO DELLE ALLERTE FINITE A HOME ASSISTANT SPENTO (0 = FUNZIONAMENTO NORMALE)
+    name: "Fase Riallineamento Allerte al Riavvio"
+    min: 0
+    max: 4
+    step: 1
+    initial: 0
+    mode: box
+    icon: mdi:restart
+################### Fine Creazione Fase di Riallineamento delle Allerte al Riavvio di Home Assistant ###################
 ################### Fine Creazione Etichette Interfaccia Lovelace  ############################################################################################################################################################################
 
 ################### Inizio Creazione Switch Booleani impiegati nell'Interfaccia Lovelace per mostrare o meno le Opzioni ####################################################################################
@@ -5026,6 +5039,7 @@ script:
             - automation.automazione_vmc_master
             - automation.vmc_master_riepilogo_audio_avvio
             - automation.vmc_master_audio_allerte_e_stato
+            - automation.vmc_master_riallineamento_allerte_al_riavvio
             - sensor.vmc_master_temperatura_esterna_selezionata
             - sensor.vmc_master_temperatura_interna_selezionata
             - sensor.vmc_master_umidita_esterna_selezionata
@@ -5160,6 +5174,7 @@ script:
             - input_number.vmc_master_offset_verifica_impiego_vmc
             - input_number.vmc_master_volume_da_inserire
             - input_number.vmc_master_umidita_avvio     
+            - input_number.vmc_master_fase_riallineamento_al_riavvio
             - input_number.vmc_master_aria_scambiata_v1
             - input_number.vmc_master_aria_scambiata_v2
             - input_number.vmc_master_aria_scambiata_v3
@@ -16088,6 +16103,55 @@ automation:
 ################### Fine Creazione Audio Allerte & Stato con Home Assistant già Avviato ###################
 ################### Fine Creazione Automazione per Allerte Audio #####################
 
+################### Inizio Creazione Automazione di Riallineamento delle Allerte al Riavvio di Home Assistant ###################
+  - id: "vmc_master_riallineamento_allerte_al_riavvio"                          # [CONFIGURAZIONE, 3 RICHIAMI] [INTERFACCIA, 1 RICHIAMO] [AUTOMAZIONE, 0 RICHIAMI]
+    alias: "VMC Master - Riallineamento Allerte al Riavvio"
+    description: >
+      Se Home Assistant si riavvia (aggiornamento, black-out) durante un'allerta che finisce mentre è spento, spie e memorie
+      restano accese e i trigger di fine allerta dell'Automazione VMC Master, già veri all'avvio, non scattano. Questa
+      automazione sospende le fini allerta per 60 s (sensori e VMC letti) e poi le riattiva per gradi: Black-Out, Congelamento
+      e Diff. Temp.; dopo 40 s Inquinanti; dopo altri 40 s Punto di Rugiada, Free Heating/Cooling, Calendario e Umidità.
+      Ogni allerta finita a HA spento si chiude così come una fine allerta normale; poi la fase torna a 0 (nessun effetto).
+    mode: restart
+    triggers:
+      - trigger: homeassistant
+        event: start
+    actions:
+      - action: input_number.set_value
+        target:
+          entity_id: input_number.vmc_master_fase_riallineamento_al_riavvio
+        data:
+          value: 1
+      - delay:
+          seconds: 60
+      - action: input_number.set_value
+        target:
+          entity_id: input_number.vmc_master_fase_riallineamento_al_riavvio
+        data:
+          value: 2
+      - delay:
+          seconds: 40
+      - action: input_number.set_value
+        target:
+          entity_id: input_number.vmc_master_fase_riallineamento_al_riavvio
+        data:
+          value: 3
+      - delay:
+          seconds: 40
+      - action: input_number.set_value
+        target:
+          entity_id: input_number.vmc_master_fase_riallineamento_al_riavvio
+        data:
+          value: 4
+      - delay:
+          seconds: 60
+      - action: input_number.set_value
+        target:
+          entity_id: input_number.vmc_master_fase_riallineamento_al_riavvio
+        data:
+          value: 0
+################### Fine Creazione Automazione di Riallineamento delle Allerte al Riavvio di Home Assistant ###################
+
 ################### Fine Creazione Automazione #######################################
 
 ################### Inizio Creazione dei Servizi ovvero i Comandi da impartire alla VMC #################################################################################################################################
@@ -16134,6 +16198,7 @@ recorder:
       - automation.automazione_vmc_master
       - automation.vmc_master_riepilogo_audio_avvio
       - automation.vmc_master_audio_allerte_e_stato
+      - automation.vmc_master_riallineamento_allerte_al_riavvio
       - sensor.vmc_master_temperatura_esterna_selezionata
       - sensor.vmc_master_temperatura_interna_selezionata
       - sensor.vmc_master_umidita_esterna_selezionata
@@ -16268,6 +16333,7 @@ recorder:
       - input_number.vmc_master_offset_verifica_impiego_vmc
       - input_number.vmc_master_volume_da_inserire
       - input_number.vmc_master_umidita_avvio     
+      - input_number.vmc_master_fase_riallineamento_al_riavvio
       - input_number.vmc_master_aria_scambiata_v1
       - input_number.vmc_master_aria_scambiata_v2
       - input_number.vmc_master_aria_scambiata_v3

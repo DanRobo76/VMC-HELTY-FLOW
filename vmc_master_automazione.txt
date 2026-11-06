@@ -924,7 +924,7 @@ triggers:
       Condizioni Favorevoli Ripristinate su Velocità 0 se Spia Congelamento Off
       e Spia Delta Temp Off e se Spia Inquinanti OFF Vs PdR
     value_template: |
-      {{
+      {{ (
       (
         states('sensor.vmc_master_punto_di_rugiada_verifica_confronto') != "Se ne sconsiglia l'impiego"
         and states('input_boolean.vmc_master_opzioni_accendi_spegni_vmc_vs_pdr') == 'on'
@@ -942,8 +942,7 @@ triggers:
         and states('input_boolean.vmc_master_spia_velocita_notturna') == 'off'
         and states('input_boolean.vmc_master_spia_velocita_freecooling') == 'off'
         and states('input_boolean.vmc_master_spia_velocita_iperventilazione') == 'off'
-      )
-      }}
+      ) ) and (states('input_number.vmc_master_fase_riallineamento_al_riavvio') | float(0) == 0 or states('input_number.vmc_master_fase_riallineamento_al_riavvio') | float(0) >= 4) }}
     id: Rip. Vel. 0 No PdR
     for:
       hours: 0
@@ -954,7 +953,7 @@ triggers:
       Condizioni Favorevoli Ripristinate su Velocità 0 (VMC ferma) -> Spia PdR Velocità
       0 OFF se Spia Congelamento Off e Spia Delta Temp Off e se Spia Inquinanti OFF
     value_template: |
-      {{
+      {{ (
       states('sensor.vmc_master_punto_di_rugiada_verifica_confronto') != "Se ne sconsiglia l'impiego"
       and states('input_boolean.vmc_master_opzioni_accendi_spegni_vmc_vs_pdr') == 'on'
       and states('input_boolean.vmc_master_spia_velocita_0_un_solo_avvio') == 'on'
@@ -973,8 +972,7 @@ triggers:
           and states('input_boolean.vmc_master_spia_velocita_notturna') == 'off'
           and states('input_boolean.vmc_master_spia_velocita_freecooling') == 'off'
           and states('input_boolean.vmc_master_spia_velocita_iperventilazione') == 'off'
-      )
-      }}
+      ) ) and (states('input_number.vmc_master_fase_riallineamento_al_riavvio') | float(0) == 0 or states('input_number.vmc_master_fase_riallineamento_al_riavvio') | float(0) >= 4) }}
     id: Rip. Vel. 0 No PdR -> Spia PdR Velocità 0 OFF
     for:
       hours: 0
@@ -985,7 +983,7 @@ triggers:
       Condizioni Favorevoli Ripristinate su Velocità 1 se Spia Congelamento Off
       e Spia Delta Temp Off e se Spia Inquinanti OFF
     value_template: >
-      {{
+      {{ (
 
       (
         (
@@ -1019,9 +1017,7 @@ triggers:
 
       and
       states('sensor.vmc_master_status_ventola_lettura_codice_interpretato_interfaccia')
-      != 'Non disponibile'
-
-      }}
+      != 'Non disponibile' ) and (states('input_number.vmc_master_fase_riallineamento_al_riavvio') | float(0) == 0 or states('input_number.vmc_master_fase_riallineamento_al_riavvio') | float(0) >= 4) }}
     id: Rip. Vel. 1 No PdR
     for:
       hours: 0
@@ -1032,7 +1028,7 @@ triggers:
       Condizioni Favorevoli Ripristinate su Velocità 2 se Spia Congelamento Off
       e Spia Delta Temp Off e se Spia Inquinanti OFF
     value_template: >
-      {{
+      {{ (
 
       (
         (
@@ -1066,9 +1062,7 @@ triggers:
 
       and
       states('sensor.vmc_master_status_ventola_lettura_codice_interpretato_interfaccia')
-      != 'Non disponibile'
-
-      }}
+      != 'Non disponibile' ) and (states('input_number.vmc_master_fase_riallineamento_al_riavvio') | float(0) == 0 or states('input_number.vmc_master_fase_riallineamento_al_riavvio') | float(0) >= 4) }}
     id: Rip. Vel. 2 No PdR
     for:
       hours: 0
@@ -1079,7 +1073,7 @@ triggers:
       Condizioni Favorevoli Ripristinate su Velocità 3 se Spia Congelamento Off
       e Spia Delta Temp Off e se Spia Inquinanti OFF
     value_template: >
-      {{
+      {{ (
 
       (
         (
@@ -1113,9 +1107,7 @@ triggers:
 
       and
       states('sensor.vmc_master_status_ventola_lettura_codice_interpretato_interfaccia')
-      != 'Non disponibile'
-
-      }}
+      != 'Non disponibile' ) and (states('input_number.vmc_master_fase_riallineamento_al_riavvio') | float(0) == 0 or states('input_number.vmc_master_fase_riallineamento_al_riavvio') | float(0) >= 4) }}
     id: Rip. Vel. 3 No PdR
     for:
       hours: 0
@@ -1126,7 +1118,7 @@ triggers:
       Condizioni Favorevoli Ripristinate su Velocità 4 se Spia Congelamento Off
       e Spia Delta Temp Off e se Spia Inquinanti OFF
     value_template: >
-      {{
+      {{ (
 
       (
         (
@@ -1160,9 +1152,7 @@ triggers:
 
       and
       states('sensor.vmc_master_status_ventola_lettura_codice_interpretato_interfaccia')
-      != 'Non disponibile'
-
-      }}
+      != 'Non disponibile' ) and (states('input_number.vmc_master_fase_riallineamento_al_riavvio') | float(0) == 0 or states('input_number.vmc_master_fase_riallineamento_al_riavvio') | float(0) >= 4) }}
     id: Rip. Vel. 4 No PdR
     for:
       hours: 0
@@ -1173,7 +1163,7 @@ triggers:
       Condizioni Favorevoli Ripristinate su Velocità Notturna se Spia
       Congelamento Off e Spia Delta Temp Off e se Spia Inquinanti OFF
     value_template: >
-      {{
+      {{ (
 
       (
         (
@@ -1207,9 +1197,7 @@ triggers:
 
       and
       states('sensor.vmc_master_status_ventola_lettura_codice_interpretato_interfaccia')
-      != 'Non disponibile'
-
-      }}
+      != 'Non disponibile' ) and (states('input_number.vmc_master_fase_riallineamento_al_riavvio') | float(0) == 0 or states('input_number.vmc_master_fase_riallineamento_al_riavvio') | float(0) >= 4) }}
     id: Rip. Notturno No PdR
     for:
       hours: 0
@@ -1220,7 +1208,7 @@ triggers:
       Condizioni Favorevoli Ripristinate su Velocità Iperventilazione se Spia
       Congelamento Off e Spia Delta Temp Off e se Spia Inquinanti OFF
     value_template: >
-      {{
+      {{ (
 
       (
         (
@@ -1254,9 +1242,7 @@ triggers:
 
       and
       states('sensor.vmc_master_status_ventola_lettura_codice_interpretato_interfaccia')
-      != 'Non disponibile'
-
-      }}
+      != 'Non disponibile' ) and (states('input_number.vmc_master_fase_riallineamento_al_riavvio') | float(0) == 0 or states('input_number.vmc_master_fase_riallineamento_al_riavvio') | float(0) >= 4) }}
     id: Rip. Iperventilazione No PdR
     for:
       hours: 0
@@ -1267,7 +1253,7 @@ triggers:
       Condizioni Favorevoli Ripristinate su Velocità Free Cool./Heat. se Spia
       Congelamento Off e Spia Delta Temp Off e se Spia Inquinanti OFF
     value_template: >
-      {{
+      {{ (
 
       (
         (
@@ -1301,9 +1287,7 @@ triggers:
 
       and
       states('sensor.vmc_master_status_ventola_lettura_codice_interpretato_interfaccia')
-      != 'Non disponibile'
-
-      }}
+      != 'Non disponibile' ) and (states('input_number.vmc_master_fase_riallineamento_al_riavvio') | float(0) == 0 or states('input_number.vmc_master_fase_riallineamento_al_riavvio') | float(0) >= 4) }}
     id: Rip. Free Cool./Heat. No PdR
     for:
       hours: 0
@@ -1316,7 +1300,7 @@ triggers:
       La Spia vmc_master_spia_velocita_freecooling_un_solo_avvio è ON solo se
       Spia Free Heating è ON oppure  Spia Free Cooling è ON
     value_template: |
-      {{
+      {{ (
         states('sensor.vmc_master_punto_di_rugiada_verifica_confronto') != "Se ne sconsiglia l'impiego"
         and states('input_boolean.vmc_master_opzioni_accendi_spegni_vmc_vs_pdr') == 'on'
         and (
@@ -1350,8 +1334,7 @@ triggers:
           and states('input_boolean.vmc_master_spia_velocita_freecooling') == 'off'
           and states('input_boolean.vmc_master_spia_velocita_iperventilazione') == 'off'
         )
-        and states('sensor.vmc_master_status_ventola_lettura_codice_interpretato_interfaccia') != 'Non disponibile'
-      }}
+        and states('sensor.vmc_master_status_ventola_lettura_codice_interpretato_interfaccia') != 'Non disponibile' ) and (states('input_number.vmc_master_fase_riallineamento_al_riavvio') | float(0) == 0 or states('input_number.vmc_master_fase_riallineamento_al_riavvio') | float(0) >= 4) }}
     id: Rip. Vel. 1 No PdR se Spia Inquinanti ON
     for:
       hours: 0
@@ -1362,7 +1345,7 @@ triggers:
       Condizioni Favorevoli Ripristinate su Velocità 2 se Spia Congelamento Off
       e Spia Delta Temp Off e se Spia Inquinanti ON
     value_template: >
-      {{
+      {{ (
 
       (
         (
@@ -1394,9 +1377,7 @@ triggers:
 
       and
       states('sensor.vmc_master_status_ventola_lettura_codice_interpretato_interfaccia')
-      != 'Non disponibile'
-
-      }}
+      != 'Non disponibile' ) and (states('input_number.vmc_master_fase_riallineamento_al_riavvio') | float(0) == 0 or states('input_number.vmc_master_fase_riallineamento_al_riavvio') | float(0) >= 4) }}
     id: Rip. Vel. 2 No PdR se Spia Inquinanti ON
     for:
       hours: 0
@@ -1407,7 +1388,7 @@ triggers:
       Condizioni Favorevoli Ripristinate su Velocità 3 se Spia Congelamento Off
       e Spia Delta Temp Off e se Spia Inquinanti ON
     value_template: >
-      {{
+      {{ (
 
       (
         (
@@ -1439,9 +1420,7 @@ triggers:
 
       and
       states('sensor.vmc_master_status_ventola_lettura_codice_interpretato_interfaccia')
-      != 'Non disponibile'
-
-      }}
+      != 'Non disponibile' ) and (states('input_number.vmc_master_fase_riallineamento_al_riavvio') | float(0) == 0 or states('input_number.vmc_master_fase_riallineamento_al_riavvio') | float(0) >= 4) }}
     id: Rip. Vel. 3 No PdR  se Spia Inquinanti ON
     for:
       hours: 0
@@ -1452,7 +1431,7 @@ triggers:
       Condizioni Favorevoli Ripristinate su Velocità 4 se Spia Congelamento Off
       e Spia Delta Temp Off e se Spia Inquinanti ON
     value_template: >
-      {{
+      {{ (
 
       (
         (
@@ -1484,9 +1463,7 @@ triggers:
 
       and
       states('sensor.vmc_master_status_ventola_lettura_codice_interpretato_interfaccia')
-      != 'Non disponibile'
-
-      }}
+      != 'Non disponibile' ) and (states('input_number.vmc_master_fase_riallineamento_al_riavvio') | float(0) == 0 or states('input_number.vmc_master_fase_riallineamento_al_riavvio') | float(0) >= 4) }}
     id: Rip. Vel. 4 No PdR se Spia Inquinanti ON
     for:
       hours: 0
@@ -1497,7 +1474,7 @@ triggers:
       Condizioni Favorevoli Ripristinate su Velocità Notturna se Spia
       Congelamento Off e Spia Delta Temp Off e se Spia Inquinanti ON
     value_template: >
-      {{
+      {{ (
 
       (
         (
@@ -1529,9 +1506,7 @@ triggers:
 
       and
       states('sensor.vmc_master_status_ventola_lettura_codice_interpretato_interfaccia')
-      != 'Non disponibile'
-
-      }}
+      != 'Non disponibile' ) and (states('input_number.vmc_master_fase_riallineamento_al_riavvio') | float(0) == 0 or states('input_number.vmc_master_fase_riallineamento_al_riavvio') | float(0) >= 4) }}
     id: Rip. Notturno No PdR se Spia Inquinanti ON
     for:
       hours: 0
@@ -1542,7 +1517,7 @@ triggers:
       Condizioni Favorevoli Ripristinate su Velocità Iperventilazione se Spia
       Congelamento Off e Spia Delta Temp Off e se Spia Inquinanti ON
     value_template: >
-      {{
+      {{ (
 
       (
         (
@@ -1574,9 +1549,7 @@ triggers:
 
       and
       states('sensor.vmc_master_status_ventola_lettura_codice_interpretato_interfaccia')
-      != 'Non disponibile'
-
-      }}
+      != 'Non disponibile' ) and (states('input_number.vmc_master_fase_riallineamento_al_riavvio') | float(0) == 0 or states('input_number.vmc_master_fase_riallineamento_al_riavvio') | float(0) >= 4) }}
     id: Rip. Iperventilazione No PdR se Spia Inquinanti ON
     for:
       hours: 0
@@ -1587,7 +1560,7 @@ triggers:
       Condizioni Favorevoli Ripristinate su Velocità Free Cool./Heat. se Spia
       Congelamento Off e Spia Delta Temp Off e se Spia Inquinanti ON
     value_template: |2-
-            {{ ( (states('sensor.vmc_master_punto_di_rugiada_verifica_confronto')!="Se ne sconsiglia l\'impiego" and
+            {{ ( ( (states('sensor.vmc_master_punto_di_rugiada_verifica_confronto')!="Se ne sconsiglia l\'impiego" and
             states('input_boolean.vmc_master_opzioni_accendi_spegni_vmc_vs_pdr') ==
             'on' and
             states('input_boolean.vmc_master_spia_velocita_freecooling_un_solo_avvio')==
@@ -1634,7 +1607,7 @@ triggers:
             states('input_boolean.vmc_master_spia_velocita_freecooling') == 'off' and
             states('input_boolean.vmc_master_spia_velocita_iperventilazione') ==
             'off') and
-            states('sensor.vmc_master_status_ventola_lettura_codice_interpretato_interfaccia')!='Non disponibile'}}
+            states('sensor.vmc_master_status_ventola_lettura_codice_interpretato_interfaccia')!='Non disponibile' ) and (states('input_number.vmc_master_fase_riallineamento_al_riavvio') | float(0) == 0 or states('input_number.vmc_master_fase_riallineamento_al_riavvio') | float(0) >= 4) }}
     id: Rip. Free Cool./Heat. No PdR se Spia Inquinanti ON
     for:
       hours: 0
@@ -1773,7 +1746,7 @@ triggers:
       Free Heating se Spia Congelamento Off e Spia Delta Temp Off e se Spia
       Inquinanti OFF
     value_template: |
-      {{
+      {{ (
       (
         states('sensor.vmc_master_alert_monitoraggio_free_heating_o_free_cooling_allert_interfaccia_avvisi') in [
           'Nessuna Allerta Free Heating Programmato',
@@ -1793,8 +1766,7 @@ triggers:
         and states('input_boolean.vmc_master_spia_velocita_freecooling') == 'off'
         and states('input_boolean.vmc_master_spia_velocita_iperventilazione') == 'off'
         and states('sensor.vmc_master_status_ventola_lettura_codice_interpretato_interfaccia') != 'Non disponibile'
-      )
-      }}
+      ) ) and (states('input_number.vmc_master_fase_riallineamento_al_riavvio') | float(0) == 0 or states('input_number.vmc_master_fase_riallineamento_al_riavvio') | float(0) >= 4) }}
     id: 'Rip. Free Heating No TeVsTi '
     for:
       hours: 0
@@ -1806,7 +1778,7 @@ triggers:
       Free Cooling se Spia Congelamento Off e Spia Delta Temp Off e se Spia
       Inquinanti OFF
     value_template: |
-      {{
+      {{ (
       (
         states('sensor.vmc_master_alert_monitoraggio_free_heating_o_free_cooling_allert_interfaccia_avvisi') in [
           'Nessuna Allerta Free Cooling Programmato',
@@ -1826,8 +1798,7 @@ triggers:
         and states('input_boolean.vmc_master_spia_velocita_freecooling') == 'off'
         and states('input_boolean.vmc_master_spia_velocita_iperventilazione') == 'off'
         and states('sensor.vmc_master_status_ventola_lettura_codice_interpretato_interfaccia') != 'Non disponibile'
-      )
-      }}
+      ) ) and (states('input_number.vmc_master_fase_riallineamento_al_riavvio') | float(0) == 0 or states('input_number.vmc_master_fase_riallineamento_al_riavvio') | float(0) >= 4) }}
     id: 'Rip. Free Cooling No TeVsTi '
     for:
       hours: 0
@@ -1839,7 +1810,7 @@ triggers:
       Free Heating se Spia Congelamento Off e Spia Delta Temp Off e se Spia
       Inquinanti ON
     value_template: |
-      {{
+      {{ (
       (
         states('sensor.vmc_master_alert_monitoraggio_free_heating_o_free_cooling_allert_interfaccia_avvisi') in [
           'Nessuna Allerta Free Heating Programmato',
@@ -1859,8 +1830,7 @@ triggers:
         and states('input_boolean.vmc_master_spia_velocita_freecooling') == 'off'
         and states('input_boolean.vmc_master_spia_velocita_iperventilazione') == 'off'
         and states('sensor.vmc_master_status_ventola_lettura_codice_interpretato_interfaccia') != 'Non disponibile'
-      )
-      }}
+      ) ) and (states('input_number.vmc_master_fase_riallineamento_al_riavvio') | float(0) == 0 or states('input_number.vmc_master_fase_riallineamento_al_riavvio') | float(0) >= 4) }}
     id: Rip. Free Heating No TeVsTi e Spia Inquinanti ON
     for:
       hours: 0
@@ -1872,7 +1842,7 @@ triggers:
       Free Cooling se Spia Congelamento Off e Spia Delta Temp Off e se Spia
       Inquinanti ON
     value_template: |
-      {{
+      {{ (
       (
         states('sensor.vmc_master_alert_monitoraggio_free_heating_o_free_cooling_allert_interfaccia_avvisi') in [
           'Nessuna Allerta Free Cooling Programmato',
@@ -1892,8 +1862,7 @@ triggers:
         and states('input_boolean.vmc_master_spia_velocita_freecooling') == 'off'
         and states('input_boolean.vmc_master_spia_velocita_iperventilazione') == 'off'
         and states('sensor.vmc_master_status_ventola_lettura_codice_interpretato_interfaccia') != 'Non disponibile'
-      )
-      }}
+      ) ) and (states('input_number.vmc_master_fase_riallineamento_al_riavvio') | float(0) == 0 or states('input_number.vmc_master_fase_riallineamento_al_riavvio') | float(0) >= 4) }}
     id: Rip. Free Cooling No TeVsTi e Spia Inquinanti ON
     for:
       hours: 0
@@ -2103,7 +2072,7 @@ triggers:
       Armato ed Attivato tra le Fascie del Calendario -> Velocità 1, se Spia
       Inquinanti ON
     value_template: |
-      {{
+      {{ (
       (
         (
           states('input_boolean.vmc_master_opzioni_accendi_spegni_vmc_vs_calendario') == 'off'
@@ -2135,8 +2104,7 @@ triggers:
         and states('input_boolean.vmc_master_spia_velocita_notturna') == 'off'
         and states('input_boolean.vmc_master_spia_velocita_freecooling') == 'off'
         and states('input_boolean.vmc_master_spia_velocita_iperventilazione') == 'off'
-      )
-      }}
+      ) ) and (states('input_number.vmc_master_fase_riallineamento_al_riavvio') | float(0) == 0 or states('input_number.vmc_master_fase_riallineamento_al_riavvio') | float(0) >= 4) }}
     id: Calendario Off tra Fascie e Spia Inquinanti ON
     trigger: template
   - alias: >-
@@ -2144,7 +2112,7 @@ triggers:
       Armato ed Attivato tra le Fascie del Calendario -> Velocità 0 se Spia
       Inquinanti OFF
     value_template: |
-      {{
+      {{ (
       (
         (
           states('input_boolean.vmc_master_opzioni_accendi_spegni_vmc_vs_calendario') == 'off'
@@ -2176,8 +2144,7 @@ triggers:
         and states('input_boolean.vmc_master_spia_velocita_notturna') == 'off'
         and states('input_boolean.vmc_master_spia_velocita_freecooling') == 'off'
         and states('input_boolean.vmc_master_spia_velocita_iperventilazione') == 'off'
-      )
-      }}
+      ) ) and (states('input_number.vmc_master_fase_riallineamento_al_riavvio') | float(0) == 0 or states('input_number.vmc_master_fase_riallineamento_al_riavvio') | float(0) >= 4) }}
     id: Calendario Off tra Fascie
     trigger: template
   - trigger: state
@@ -2591,7 +2558,7 @@ triggers:
       seconds: 32
   - alias: Black-Out Velocità 1 [OFF, Ripristino]
     value_template: |
-      {{
+      {{ (
         states('sensor.vmc_master_status_ip_interfaccia') == "ON-Line"
         and states('input_boolean.vmc_master_spia_velocita_0') == 'off'
         and states('input_boolean.vmc_master_spia_velocita_1') == 'on'
@@ -2614,8 +2581,7 @@ triggers:
         and states('input_boolean.vmc_master_spia_calendario_sabato_1') == 'off'
         and states('input_boolean.vmc_master_spia_calendario_sabato_2') == 'off'
         and states('input_boolean.vmc_master_spia_calendario_domenica_1') == 'off'
-        and states('input_boolean.vmc_master_spia_calendario_domenica_2') == 'off'
-      }}
+        and states('input_boolean.vmc_master_spia_calendario_domenica_2') == 'off' ) and (states('input_number.vmc_master_fase_riallineamento_al_riavvio') | float(0) == 0 or states('input_number.vmc_master_fase_riallineamento_al_riavvio') | float(0) >= 2) }}
     id: Black-Out Off Vel. 1
     trigger: template
     for:
@@ -2624,7 +2590,7 @@ triggers:
       seconds: 32
   - alias: Black-Out Velocità 2 [OFF, Ripristino]
     value_template: |
-      {{
+      {{ (
         states('sensor.vmc_master_status_ip_interfaccia') == "ON-Line"
         and states('input_boolean.vmc_master_spia_velocita_2') == "on"
         and states('input_boolean.vmc_master_spia_velocita_0') == 'off'
@@ -2647,8 +2613,7 @@ triggers:
         and states('input_boolean.vmc_master_spia_calendario_sabato_1') == 'off'
         and states('input_boolean.vmc_master_spia_calendario_sabato_2') == 'off'
         and states('input_boolean.vmc_master_spia_calendario_domenica_1') == 'off'
-        and states('input_boolean.vmc_master_spia_calendario_domenica_2') == 'off'
-      }}
+        and states('input_boolean.vmc_master_spia_calendario_domenica_2') == 'off' ) and (states('input_number.vmc_master_fase_riallineamento_al_riavvio') | float(0) == 0 or states('input_number.vmc_master_fase_riallineamento_al_riavvio') | float(0) >= 2) }}
     id: Black-Out Off Vel. 2
     trigger: template
     for:
@@ -2657,7 +2622,7 @@ triggers:
       seconds: 32
   - alias: Black-Out Velocità 3 [OFF, Ripristino]
     value_template: |
-      {{
+      {{ (
         states('sensor.vmc_master_status_ip_interfaccia') == "ON-Line"
         and states('input_boolean.vmc_master_spia_velocita_3') == "on"
         and states('input_boolean.vmc_master_spia_velocita_0') == 'off'
@@ -2680,8 +2645,7 @@ triggers:
         and states('input_boolean.vmc_master_spia_calendario_sabato_1') == 'off'
         and states('input_boolean.vmc_master_spia_calendario_sabato_2') == 'off'
         and states('input_boolean.vmc_master_spia_calendario_domenica_1') == 'off'
-        and states('input_boolean.vmc_master_spia_calendario_domenica_2') == 'off'
-      }}
+        and states('input_boolean.vmc_master_spia_calendario_domenica_2') == 'off' ) and (states('input_number.vmc_master_fase_riallineamento_al_riavvio') | float(0) == 0 or states('input_number.vmc_master_fase_riallineamento_al_riavvio') | float(0) >= 2) }}
     id: Black-Out Off Vel. 3
     trigger: template
     for:
@@ -2690,7 +2654,7 @@ triggers:
       seconds: 32
   - alias: Black-Out Velocità 4 [OFF, Ripristino]
     value_template: |
-      {{
+      {{ (
       (
         states('sensor.vmc_master_status_ip_interfaccia') == "ON-Line"
         and states('input_boolean.vmc_master_spia_velocita_4') == "on"
@@ -2717,8 +2681,7 @@ triggers:
         and states('input_boolean.vmc_master_spia_calendario_sabato_2') == 'off'
         and states('input_boolean.vmc_master_spia_calendario_domenica_1') == 'off'
         and states('input_boolean.vmc_master_spia_calendario_domenica_2') == 'off'
-      )
-      }}
+      ) ) and (states('input_number.vmc_master_fase_riallineamento_al_riavvio') | float(0) == 0 or states('input_number.vmc_master_fase_riallineamento_al_riavvio') | float(0) >= 2) }}
     id: Black-Out Off Vel. 4
     trigger: template
     for:
@@ -2727,7 +2690,7 @@ triggers:
       seconds: 32
   - alias: Black-Out Velocità Notturna [OFF, Ripristino]
     value_template: |
-      {{
+      {{ (
       (
         states('sensor.vmc_master_status_ip_interfaccia') == "ON-Line"
         and states('input_boolean.vmc_master_spia_velocita_notturna') == "on"
@@ -2754,8 +2717,7 @@ triggers:
         and states('input_boolean.vmc_master_spia_calendario_sabato_2') == 'off'
         and states('input_boolean.vmc_master_spia_calendario_domenica_1') == 'off'
         and states('input_boolean.vmc_master_spia_calendario_domenica_2') == 'off'
-      )
-      }}
+      ) ) and (states('input_number.vmc_master_fase_riallineamento_al_riavvio') | float(0) == 0 or states('input_number.vmc_master_fase_riallineamento_al_riavvio') | float(0) >= 2) }}
     id: Black-Out Off Notturna
     trigger: template
     for:
@@ -2764,7 +2726,7 @@ triggers:
       seconds: 32
   - alias: Black-Out Velocità Iperventilazione [OFF, Ripristino]
     value_template: |
-      {{
+      {{ (
       (
         states('sensor.vmc_master_status_ip_interfaccia') == "ON-Line"
         and states('input_boolean.vmc_master_spia_velocita_iperventilazione') == "on"
@@ -2791,8 +2753,7 @@ triggers:
         and states('input_boolean.vmc_master_spia_calendario_sabato_2') == 'off'
         and states('input_boolean.vmc_master_spia_calendario_domenica_1') == 'off'
         and states('input_boolean.vmc_master_spia_calendario_domenica_2') == 'off'
-      )
-      }}
+      ) ) and (states('input_number.vmc_master_fase_riallineamento_al_riavvio') | float(0) == 0 or states('input_number.vmc_master_fase_riallineamento_al_riavvio') | float(0) >= 2) }}
     id: Black-Out Off Iperventilazione
     trigger: template
     for:
@@ -2801,7 +2762,7 @@ triggers:
       seconds: 32
   - alias: Black-Out Velocità Free Cool./Heat. [OFF, Ripristino]
     value_template: |
-      {{
+      {{ (
       (
         states('sensor.vmc_master_status_ip_interfaccia') == "ON-Line"
         and states('input_boolean.vmc_master_spia_velocita_freecooling') == "on"
@@ -2828,8 +2789,7 @@ triggers:
         and states('input_boolean.vmc_master_spia_calendario_sabato_2') == 'off'
         and states('input_boolean.vmc_master_spia_calendario_domenica_1') == 'off'
         and states('input_boolean.vmc_master_spia_calendario_domenica_2') == 'off'
-      )
-      }}
+      ) ) and (states('input_number.vmc_master_fase_riallineamento_al_riavvio') | float(0) == 0 or states('input_number.vmc_master_fase_riallineamento_al_riavvio') | float(0) >= 2) }}
     id: Black-Out Off Free Cool./Heat.
     trigger: template
     for:
@@ -2838,7 +2798,7 @@ triggers:
       seconds: 32
   - alias: Black-Out Velocità 0 [OFF, Ripristino]
     value_template: |
-      {{
+      {{ (
       (
         states('sensor.vmc_master_status_ip_interfaccia') == "ON-Line"
         and states('input_boolean.vmc_master_spia_velocita_0') == "on"
@@ -2865,8 +2825,7 @@ triggers:
         and states('input_boolean.vmc_master_spia_calendario_sabato_2') == 'off'
         and states('input_boolean.vmc_master_spia_calendario_domenica_1') == 'off'
         and states('input_boolean.vmc_master_spia_calendario_domenica_2') == 'off'
-      )
-      }}
+      ) ) and (states('input_number.vmc_master_fase_riallineamento_al_riavvio') | float(0) == 0 or states('input_number.vmc_master_fase_riallineamento_al_riavvio') | float(0) >= 2) }}
     id: Black-Out Off Vel. 0
     trigger: template
     for:
@@ -2904,7 +2863,7 @@ triggers:
       All'Esterno della 1° Fascia Lunedì se Spia Congelamento Off e Spia Delta
       Temp Off
     value_template: >-
-      {{(
+      {{ ((
       ((((states('sensor.vmc_master_status_accensione_vmc_tramite_calendario') 
       == "Lunedi") and
       (states('sensor.vmc_master_status_spegnimento_vmc_tramite_calendario') ==
@@ -2921,7 +2880,7 @@ triggers:
       states('input_boolean.vmc_master_delta_temp_verifica_soglia_valore_spia')==
       'off') and
       states('sensor.vmc_master_status_ventola_lettura_codice_interpretato_interfaccia')!='Non
-      disponibile'}}
+      disponibile' ) and (states('input_number.vmc_master_fase_riallineamento_al_riavvio') | float(0) == 0 or states('input_number.vmc_master_fase_riallineamento_al_riavvio') | float(0) >= 4) }}
     id: 1° Lunedì Off
     for:
       hours: 0
@@ -2959,7 +2918,7 @@ triggers:
       All'Esterno della 2° Fascia Lunedì se Spia Congelamento Off e Spia Delta
       Temp Off
     value_template: >-
-      {{(
+      {{ ((
       ((((states('sensor.vmc_master_status_accensione_vmc_tramite_calendario_2')
       == "Lunedi") and
       (states('sensor.vmc_master_status_spegnimento_vmc_tramite_calendario_2')
@@ -2976,7 +2935,7 @@ triggers:
       states('input_boolean.vmc_master_delta_temp_verifica_soglia_valore_spia')==
       'off') and
       states('sensor.vmc_master_status_ventola_lettura_codice_interpretato_interfaccia')!='Non
-      disponibile'}}
+      disponibile' ) and (states('input_number.vmc_master_fase_riallineamento_al_riavvio') | float(0) == 0 or states('input_number.vmc_master_fase_riallineamento_al_riavvio') | float(0) >= 4) }}
     id: 2° Lunedì Off
     for:
       hours: 0
@@ -3014,7 +2973,7 @@ triggers:
       All'Esterno della 1° Fascia Martedì se Spia Congelamento Off e Spia Delta
       Temp Off
     value_template: >-
-      {{(
+      {{ ((
       ((((states('sensor.vmc_master_status_accensione_vmc_tramite_calendario') 
       == "Martedi") and
       (states('sensor.vmc_master_status_spegnimento_vmc_tramite_calendario') ==
@@ -3031,7 +2990,7 @@ triggers:
       states('input_boolean.vmc_master_delta_temp_verifica_soglia_valore_spia')==
       'off') and
       states('sensor.vmc_master_status_ventola_lettura_codice_interpretato_interfaccia')!='Non
-      disponibile'}}
+      disponibile' ) and (states('input_number.vmc_master_fase_riallineamento_al_riavvio') | float(0) == 0 or states('input_number.vmc_master_fase_riallineamento_al_riavvio') | float(0) >= 4) }}
     id: 1° Martedì Off
     for:
       hours: 0
@@ -3069,7 +3028,7 @@ triggers:
       All'Esterno della 2° Fascia Martedì se Spia Congelamento Off e Spia Delta
       Temp Off
     value_template: >-
-      {{(
+      {{ ((
       ((((states('sensor.vmc_master_status_accensione_vmc_tramite_calendario_2')
       == "Martedi") and
       (states('sensor.vmc_master_status_spegnimento_vmc_tramite_calendario_2')
@@ -3086,7 +3045,7 @@ triggers:
       states('input_boolean.vmc_master_delta_temp_verifica_soglia_valore_spia')==
       'off') and
       states('sensor.vmc_master_status_ventola_lettura_codice_interpretato_interfaccia')!='Non
-      disponibile'}}
+      disponibile' ) and (states('input_number.vmc_master_fase_riallineamento_al_riavvio') | float(0) == 0 or states('input_number.vmc_master_fase_riallineamento_al_riavvio') | float(0) >= 4) }}
     id: 2° Martedì Off
     for:
       hours: 0
@@ -3124,7 +3083,7 @@ triggers:
       All'Esterno della 1° Fascia Mercoledì se Spia Congelamento Off e Spia
       Delta Temp Off
     value_template: >-
-      {{(
+      {{ ((
       ((((states('sensor.vmc_master_status_accensione_vmc_tramite_calendario') 
       == "Mercoledi") and
       (states('sensor.vmc_master_status_spegnimento_vmc_tramite_calendario') ==
@@ -3141,7 +3100,7 @@ triggers:
       states('input_boolean.vmc_master_delta_temp_verifica_soglia_valore_spia')==
       'off') and
       states('sensor.vmc_master_status_ventola_lettura_codice_interpretato_interfaccia')!='Non
-      disponibile'}}
+      disponibile' ) and (states('input_number.vmc_master_fase_riallineamento_al_riavvio') | float(0) == 0 or states('input_number.vmc_master_fase_riallineamento_al_riavvio') | float(0) >= 4) }}
     id: 1° Mercoledì Off
     for:
       hours: 0
@@ -3179,7 +3138,7 @@ triggers:
       All'Esterno della 2° Fascia Mercoledì se Spia Congelamento Off e Spia
       Delta Temp Off
     value_template: >-
-      {{(
+      {{ ((
       ((((states('sensor.vmc_master_status_accensione_vmc_tramite_calendario_2')
       == "Mercoledi") and
       (states('sensor.vmc_master_status_spegnimento_vmc_tramite_calendario_2')
@@ -3196,7 +3155,7 @@ triggers:
       states('input_boolean.vmc_master_delta_temp_verifica_soglia_valore_spia')==
       'off') and
       states('sensor.vmc_master_status_ventola_lettura_codice_interpretato_interfaccia')!='Non
-      disponibile'}}
+      disponibile' ) and (states('input_number.vmc_master_fase_riallineamento_al_riavvio') | float(0) == 0 or states('input_number.vmc_master_fase_riallineamento_al_riavvio') | float(0) >= 4) }}
     id: 2° Mercoledì Off
     for:
       hours: 0
@@ -3234,7 +3193,7 @@ triggers:
       All'Esterno della 1° Fascia Giovedì se Spia Congelamento Off e Spia Delta
       Temp Off
     value_template: >-
-      {{(
+      {{ ((
       ((((states('sensor.vmc_master_status_accensione_vmc_tramite_calendario') 
       == "Giovedi") and
       (states('sensor.vmc_master_status_spegnimento_vmc_tramite_calendario') ==
@@ -3251,7 +3210,7 @@ triggers:
       states('input_boolean.vmc_master_delta_temp_verifica_soglia_valore_spia')==
       'off') and
       states('sensor.vmc_master_status_ventola_lettura_codice_interpretato_interfaccia')!='Non
-      disponibile'}}
+      disponibile' ) and (states('input_number.vmc_master_fase_riallineamento_al_riavvio') | float(0) == 0 or states('input_number.vmc_master_fase_riallineamento_al_riavvio') | float(0) >= 4) }}
     id: 1° Giovedì Off
     for:
       hours: 0
@@ -3289,7 +3248,7 @@ triggers:
       All'Esterno della 2° Fascia Giovedì se Spia Congelamento Off e Spia Delta
       Temp Off
     value_template: >-
-      {{(
+      {{ ((
       ((((states('sensor.vmc_master_status_accensione_vmc_tramite_calendario_2')
       == "Giovedi") and
       (states('sensor.vmc_master_status_spegnimento_vmc_tramite_calendario_2')
@@ -3306,7 +3265,7 @@ triggers:
       states('input_boolean.vmc_master_delta_temp_verifica_soglia_valore_spia')==
       'off') and
       states('sensor.vmc_master_status_ventola_lettura_codice_interpretato_interfaccia')!='Non
-      disponibile'}}
+      disponibile' ) and (states('input_number.vmc_master_fase_riallineamento_al_riavvio') | float(0) == 0 or states('input_number.vmc_master_fase_riallineamento_al_riavvio') | float(0) >= 4) }}
     id: 2° Giovedì Off
     for:
       hours: 0
@@ -3344,7 +3303,7 @@ triggers:
       All'Esterno della 1° Fascia Venerdì se Spia Congelamento Off e Spia Delta
       Temp Off
     value_template: >-
-      {{(
+      {{ ((
       ((((states('sensor.vmc_master_status_accensione_vmc_tramite_calendario') 
       == "Venerdi") and
       (states('sensor.vmc_master_status_spegnimento_vmc_tramite_calendario') ==
@@ -3361,7 +3320,7 @@ triggers:
       states('input_boolean.vmc_master_delta_temp_verifica_soglia_valore_spia')==
       'off') and
       states('sensor.vmc_master_status_ventola_lettura_codice_interpretato_interfaccia')!='Non
-      disponibile'}}
+      disponibile' ) and (states('input_number.vmc_master_fase_riallineamento_al_riavvio') | float(0) == 0 or states('input_number.vmc_master_fase_riallineamento_al_riavvio') | float(0) >= 4) }}
     id: 1° Venerdì Off
     for:
       hours: 0
@@ -3399,7 +3358,7 @@ triggers:
       All'Esterno della 2° Fascia Venerdì se Spia Congelamento Off e Spia Delta
       Temp Off
     value_template: >-
-      {{(
+      {{ ((
       ((((states('sensor.vmc_master_status_accensione_vmc_tramite_calendario_2')
       == "Venerdi") and
       (states('sensor.vmc_master_status_spegnimento_vmc_tramite_calendario_2')
@@ -3416,7 +3375,7 @@ triggers:
       states('input_boolean.vmc_master_delta_temp_verifica_soglia_valore_spia')==
       'off') and
       states('sensor.vmc_master_status_ventola_lettura_codice_interpretato_interfaccia')!='Non
-      disponibile'}}
+      disponibile' ) and (states('input_number.vmc_master_fase_riallineamento_al_riavvio') | float(0) == 0 or states('input_number.vmc_master_fase_riallineamento_al_riavvio') | float(0) >= 4) }}
     id: 2° Venerdì Off
     for:
       hours: 0
@@ -3454,7 +3413,7 @@ triggers:
       All'Esterno della 1° Fascia Sabato se Spia Congelamento Off e Spia Delta
       Temp Off
     value_template: >-
-      {{(
+      {{ ((
       ((((states('sensor.vmc_master_status_accensione_vmc_tramite_calendario') 
       == "Sabato") and
       (states('sensor.vmc_master_status_spegnimento_vmc_tramite_calendario') ==
@@ -3471,7 +3430,7 @@ triggers:
       states('input_boolean.vmc_master_delta_temp_verifica_soglia_valore_spia')==
       'off') and
       states('sensor.vmc_master_status_ventola_lettura_codice_interpretato_interfaccia')!='Non
-      disponibile'}}
+      disponibile' ) and (states('input_number.vmc_master_fase_riallineamento_al_riavvio') | float(0) == 0 or states('input_number.vmc_master_fase_riallineamento_al_riavvio') | float(0) >= 4) }}
     id: 1° Sabato Off
     for:
       hours: 0
@@ -3509,7 +3468,7 @@ triggers:
       All'Esterno della 2° Fascia Sabato se Spia Congelamento Off e Spia Delta
       Temp Off
     value_template: >-
-      {{(
+      {{ ((
       ((((states('sensor.vmc_master_status_accensione_vmc_tramite_calendario_2')
       == "Sabato") and
       (states('sensor.vmc_master_status_spegnimento_vmc_tramite_calendario_2')
@@ -3526,7 +3485,7 @@ triggers:
       states('input_boolean.vmc_master_delta_temp_verifica_soglia_valore_spia')==
       'off') and
       states('sensor.vmc_master_status_ventola_lettura_codice_interpretato_interfaccia')!='Non
-      disponibile'}}
+      disponibile' ) and (states('input_number.vmc_master_fase_riallineamento_al_riavvio') | float(0) == 0 or states('input_number.vmc_master_fase_riallineamento_al_riavvio') | float(0) >= 4) }}
     id: 2° Sabato Off
     for:
       hours: 0
@@ -3564,7 +3523,7 @@ triggers:
       All'Esterno della 1° Fascia Domenica se Spia Congelamento Off e Spia Delta
       Temp Off
     value_template: >-
-      {{(
+      {{ ((
       ((((states('sensor.vmc_master_status_accensione_vmc_tramite_calendario') 
       == "Domenica") and
       (states('sensor.vmc_master_status_spegnimento_vmc_tramite_calendario') ==
@@ -3581,7 +3540,7 @@ triggers:
       states('input_boolean.vmc_master_delta_temp_verifica_soglia_valore_spia')==
       'off') and
       states('sensor.vmc_master_status_ventola_lettura_codice_interpretato_interfaccia')!='Non
-      disponibile'}}
+      disponibile' ) and (states('input_number.vmc_master_fase_riallineamento_al_riavvio') | float(0) == 0 or states('input_number.vmc_master_fase_riallineamento_al_riavvio') | float(0) >= 4) }}
     id: 1° Domenica Off
     for:
       hours: 0
@@ -3619,7 +3578,7 @@ triggers:
       All'Esterno della 2° Fascia Domenica se Spia Congelamento Off e Spia Delta
       Temp Off
     value_template: >-
-      {{(
+      {{ ((
       ((((states('sensor.vmc_master_status_accensione_vmc_tramite_calendario_2')
       == "Domenica") and
       (states('sensor.vmc_master_status_spegnimento_vmc_tramite_calendario_2')
@@ -3636,7 +3595,7 @@ triggers:
       states('input_boolean.vmc_master_delta_temp_verifica_soglia_valore_spia')==
       'off') and
       states('sensor.vmc_master_status_ventola_lettura_codice_interpretato_interfaccia')!='Non
-      disponibile'}}
+      disponibile' ) and (states('input_number.vmc_master_fase_riallineamento_al_riavvio') | float(0) == 0 or states('input_number.vmc_master_fase_riallineamento_al_riavvio') | float(0) >= 4) }}
     id: 2° Domenica Off
     for:
       hours: 0
@@ -3831,7 +3790,7 @@ triggers:
     trigger: template
   - alias: Disattivazione Automatica VMC per Inquinanti CO2 e/o VOC Rilevati
     value_template: |
-      {{
+      {{ (
       (
         states('sensor.vmc_master_alert_monitoraggio_co2') != 'Allerta'
         and states('sensor.vmc_master_alert_monitoraggio_voc') != 'Allerta'
@@ -3861,8 +3820,7 @@ triggers:
         and states('input_boolean.vmc_master_spia_velocita_notturna') == 'off'
         and states('input_boolean.vmc_master_spia_velocita_freecooling') == 'off'
         and states('input_boolean.vmc_master_spia_velocita_iperventilazione') == 'off'
-      )
-      }}
+      ) ) and (states('input_number.vmc_master_fase_riallineamento_al_riavvio') | float(0) == 0 or states('input_number.vmc_master_fase_riallineamento_al_riavvio') | float(0) >= 3) }}
     id: inquinanti_co2_voc_off
     for:
       hours: 0
@@ -4162,7 +4120,7 @@ triggers:
     trigger: template
   - alias: Congelamento OFF
     value_template: |
-      {{
+      {{ (
         states('sensor.vmc_master_congelamento_verifica_soglia') != 'Si'
         and states('sensor.vmc_master_status_ip_interfaccia') == 'ON-Line'
         and states('sensor.vmc_master_status_ventola_lettura_codice_interpretato_interfaccia') != 'Non disponibile'
@@ -4185,8 +4143,7 @@ triggers:
           states('input_boolean.vmc_master_spia_velocita_notturna') == 'off' and
           states('input_boolean.vmc_master_spia_velocita_freecooling') == 'off' and
           states('input_boolean.vmc_master_spia_velocita_iperventilazione') == 'off'
-        )
-      }}
+        ) ) and (states('input_number.vmc_master_fase_riallineamento_al_riavvio') | float(0) == 0 or states('input_number.vmc_master_fase_riallineamento_al_riavvio') | float(0) >= 2) }}
     id: Congelamento OFF
     trigger: template
   - alias: "Spia Velocità 0 Congelamento se Spia Congelamento ON (anche con Spia Δ Temp. ON: dominio del Congelamento) e Spia Velocità 1, 2, 3, 4, Notturna, Iperventilazione, Free Heating Congelamento = Off"
@@ -5265,8 +5222,7 @@ triggers:
     value_template: >
       {{ 
 
-      states('sensor.vmc_master_co2_status') in ["sconosciuto", "unknown", "",
-      none, "unavailable", "Non disponibile","-100"] and
+      states('sensor.vmc_master_co2_interna_selezionata') == '-100' and
 
       states('input_boolean.vmc_master_notifica_status_vmc') == 'on' and
 
@@ -5525,7 +5481,7 @@ triggers:
       CALENDARIO]
     trigger: template
     value_template: |-
-      {{ 
+      {{ ( 
         states('input_boolean.vmc_master_opzioni_accendi_spegni_vmc_vs_umidita') == 'on' and
         states('sensor.vmc_master_alert_monitoraggio_umidita') != 'Allerta' and 
         states('input_boolean.vmc_master_umidita_verifica_soglia_valore_spia') == 'on' and
@@ -5600,7 +5556,7 @@ triggers:
           states('input_boolean.vmc_master_spia_calendario_sabato_2') == 'off' and
           states('input_boolean.vmc_master_spia_calendario_domenica_1') == 'off' and
           states('input_boolean.vmc_master_spia_calendario_domenica_2') == 'off'
-        ) }}
+        ) ) and (states('input_number.vmc_master_fase_riallineamento_al_riavvio') | float(0) == 0 or states('input_number.vmc_master_fase_riallineamento_al_riavvio') | float(0) >= 4) }}
     id: spia_umidita_off
     for:
       hours: 0
@@ -6378,7 +6334,7 @@ triggers:
       seconds: 4
   - alias: Δ Temp. > 23 [°C] OFF
     value_template: >
-      {{ 
+      {{ ( 
 
       states('sensor.vmc_master_delta_temp_verifica_soglia') != 'Si' and
 
@@ -6444,9 +6400,7 @@ triggers:
       'off' and
 
       states('input_boolean.vmc_master_spia_velocita_freecooling_congelamento')
-      == 'off'
-
-      }}
+      == 'off' ) and (states('input_number.vmc_master_fase_riallineamento_al_riavvio') | float(0) == 0 or states('input_number.vmc_master_fase_riallineamento_al_riavvio') | float(0) >= 2) }}
     id: delta_temp_OFF
     trigger: template
     for:
@@ -10604,6 +10558,9 @@ actions:
           Condizioni Favorevoli Ripristinate su Velocità Iperventilazione se
           Spia Congelamento Off e Spia Delta Temp Off e se se Spia Inquinanti ON
       - conditions:
+          - condition: template
+            alias: Solo se a cambiare è l'interruttore PdR (non le memorie accese da altre logiche)
+            value_template: "{{ trigger.entity_id == 'input_boolean.vmc_master_opzioni_accendi_spegni_vmc_vs_pdr' }}"
           - condition: trigger
             id: ' Disattivazione Lim. Δ P. di Rugiada, precedentemente Armato ed Attivato'
         sequence:
@@ -10726,6 +10683,9 @@ actions:
           precedentemente Armato ed Attivato -> Velocità 0 se Spia Inquinanti
           OFF
       - conditions:
+          - condition: template
+            alias: Solo se a cambiare è l'interruttore PdR (non le memorie accese da altre logiche)
+            value_template: "{{ trigger.entity_id == 'input_boolean.vmc_master_opzioni_accendi_spegni_vmc_vs_pdr' }}"
           - condition: trigger
             id:
               - ' Disattivazione Lim. Δ P. di Rugiada, precedentemente Armato ed Attivato e Spia Inquinanti ON'
@@ -11568,6 +11528,15 @@ actions:
                         input_boolean.vmc_master_opzioni_accendi_spegni_vmc_vs_freeheating
                     enabled: true
                     action: input_boolean.turn_on
+                  - alias: Mese corrente non più programmato per il Free Heating -> spegne anche l'attesa Free, come il ramo c0 (correzione O2)
+                    if:
+                      - condition: template
+                        value_template: "{{ states('sensor.vmc_master_status_freeheating') != 'OK' }}"
+                    then:
+                      - data: {}
+                        target:
+                          entity_id: input_boolean.vmc_master_spia_velocita_freecooling_un_solo_avvio_per_programmazione_freeheating
+                        action: input_boolean.turn_off
                 alias: se Spia Congelamento ON o Spia Delta Temp ON
         alias: >-
           Disattivazione VMC ON/OFF, in Funzione della Vel. Free Heating
@@ -11864,6 +11833,15 @@ actions:
                         input_boolean.vmc_master_opzioni_accendi_spegni_vmc_vs_freecooling
                     enabled: true
                     action: input_boolean.turn_on
+                  - alias: Mese corrente non più programmato per il Free Cooling -> spegne anche l'attesa Free, come il ramo c0 (correzione O2)
+                    if:
+                      - condition: template
+                        value_template: "{{ states('sensor.vmc_master_status_freecooling') != 'OK' }}"
+                    then:
+                      - data: {}
+                        target:
+                          entity_id: input_boolean.vmc_master_spia_velocita_freecooling_un_solo_avvio_per_programmazione_freecooling
+                        action: input_boolean.turn_off
                 alias: se Spia Congelamento ON o Spia Delta Temp ON
         alias: >-
           Disattivazione VMC ON/OFF, in Funzione della Vel. Free Cooling
@@ -13641,7 +13619,7 @@ actions:
                     condition: template
                     value_template: >-
                       {{ (
-                      states('input_boolean.vmc_master_spia_velocita_1_un_solo_avvio')=='on'
+                      (states('input_boolean.vmc_master_spia_velocita_1_un_solo_avvio')=='on' and states('sensor.vmc_master_status_ventola_lettura_codice_interpretato')=='Velocità 0')
                       or
                       states('input_boolean.vmc_master_spia_velocita_1_co2_o_voc')=='on')}}
                 sequence:
@@ -13679,7 +13657,7 @@ actions:
                     condition: template
                     value_template: >-
                       {{
-                      states('input_boolean.vmc_master_spia_velocita_2_un_solo_avvio')=='on'
+                      (states('input_boolean.vmc_master_spia_velocita_2_un_solo_avvio')=='on' and states('sensor.vmc_master_status_ventola_lettura_codice_interpretato')=='Velocità 0')
                       or
                       states('input_boolean.vmc_master_spia_velocita_2_co2_o_voc')=='on'
                       }}
@@ -13694,9 +13672,20 @@ actions:
                               - input_boolean.vmc_master_spia_co2_o_voc
                               - >-
                                 input_boolean.vmc_master_spia_velocita_2_co2_o_voc
-                              - >-
-                                input_boolean.vmc_master_spia_velocita_2_un_solo_avvio
                           action: input_boolean.turn_on
+                        - alias: Memoria del PdR solo con interruttore PdR acceso (correzione R4)
+                          if:
+                            - condition: state
+                              entity_id: input_boolean.vmc_master_opzioni_accendi_spegni_vmc_vs_pdr
+                              state: 'on'
+                          then:
+                            - action: input_boolean.turn_on
+                              target:
+                                entity_id: input_boolean.vmc_master_spia_velocita_2_un_solo_avvio
+                          else:
+                            - action: input_boolean.turn_off
+                              target:
+                                entity_id: input_boolean.vmc_master_spia_velocita_2_un_solo_avvio
                         - data: {}
                           target:
                             entity_id:
@@ -13781,7 +13770,7 @@ actions:
                             'off' and 
 
                             states('input_boolean.vmc_master_spia_velocita_2_un_solo_avvio')==
-                            'on' and 
+                            ('on' if is_state('input_boolean.vmc_master_opzioni_accendi_spegni_vmc_vs_pdr', 'on') else 'off') and 
 
                             states('input_boolean.vmc_master_spia_velocita_3_un_solo_avvio')==
                             'off' and 
@@ -13837,7 +13826,7 @@ actions:
                     condition: template
                     value_template: >-
                       {{ (
-                      states('input_boolean.vmc_master_spia_velocita_3_un_solo_avvio')=='on'
+                      (states('input_boolean.vmc_master_spia_velocita_3_un_solo_avvio')=='on' and states('sensor.vmc_master_status_ventola_lettura_codice_interpretato')=='Velocità 0')
                       or
                       states('input_boolean.vmc_master_spia_velocita_3_co2_o_voc')=='on')}}
                 sequence:
@@ -13851,9 +13840,20 @@ actions:
                               - input_boolean.vmc_master_spia_co2_o_voc
                               - >-
                                 input_boolean.vmc_master_spia_velocita_3_co2_o_voc
-                              - >-
-                                input_boolean.vmc_master_spia_velocita_3_un_solo_avvio
                           action: input_boolean.turn_on
+                        - alias: Memoria del PdR solo con interruttore PdR acceso (correzione R4)
+                          if:
+                            - condition: state
+                              entity_id: input_boolean.vmc_master_opzioni_accendi_spegni_vmc_vs_pdr
+                              state: 'on'
+                          then:
+                            - action: input_boolean.turn_on
+                              target:
+                                entity_id: input_boolean.vmc_master_spia_velocita_3_un_solo_avvio
+                          else:
+                            - action: input_boolean.turn_off
+                              target:
+                                entity_id: input_boolean.vmc_master_spia_velocita_3_un_solo_avvio
                         - data: {}
                           target:
                             entity_id:
@@ -13941,7 +13941,7 @@ actions:
                             'off' and 
 
                             states('input_boolean.vmc_master_spia_velocita_3_un_solo_avvio')==
-                            'on' and 
+                            ('on' if is_state('input_boolean.vmc_master_opzioni_accendi_spegni_vmc_vs_pdr', 'on') else 'off') and 
 
                             states('input_boolean.vmc_master_spia_velocita_4_un_solo_avvio')==
                             'off' and 
@@ -13994,7 +13994,7 @@ actions:
                     condition: template
                     value_template: >-
                       {{ (
-                      states('input_boolean.vmc_master_spia_velocita_4_un_solo_avvio')=='on'
+                      (states('input_boolean.vmc_master_spia_velocita_4_un_solo_avvio')=='on' and states('sensor.vmc_master_status_ventola_lettura_codice_interpretato')=='Velocità 0')
                       or
                       states('input_boolean.vmc_master_spia_velocita_4_co2_o_voc')=='on')}}
                 sequence:
@@ -14008,9 +14008,20 @@ actions:
                               - input_boolean.vmc_master_spia_co2_o_voc
                               - >-
                                 input_boolean.vmc_master_spia_velocita_4_co2_o_voc
-                              - >-
-                                input_boolean.vmc_master_spia_velocita_4_un_solo_avvio
                           action: input_boolean.turn_on
+                        - alias: Memoria del PdR solo con interruttore PdR acceso (correzione R4)
+                          if:
+                            - condition: state
+                              entity_id: input_boolean.vmc_master_opzioni_accendi_spegni_vmc_vs_pdr
+                              state: 'on'
+                          then:
+                            - action: input_boolean.turn_on
+                              target:
+                                entity_id: input_boolean.vmc_master_spia_velocita_4_un_solo_avvio
+                          else:
+                            - action: input_boolean.turn_off
+                              target:
+                                entity_id: input_boolean.vmc_master_spia_velocita_4_un_solo_avvio
                         - data: {}
                           target:
                             entity_id:
@@ -14101,7 +14112,7 @@ actions:
                             'off' and 
 
                             states('input_boolean.vmc_master_spia_velocita_4_un_solo_avvio')==
-                            'on' and 
+                            ('on' if is_state('input_boolean.vmc_master_opzioni_accendi_spegni_vmc_vs_pdr', 'on') else 'off') and 
 
                             states('input_boolean.vmc_master_spia_velocita_notturna_un_solo_avvio')==
                             'off' and 
@@ -14151,7 +14162,7 @@ actions:
                     condition: template
                     value_template: >-
                       {{ (
-                      states('input_boolean.vmc_master_spia_velocita_notturna_un_solo_avvio')=='on'
+                      (states('input_boolean.vmc_master_spia_velocita_notturna_un_solo_avvio')=='on' and states('sensor.vmc_master_status_ventola_lettura_codice_interpretato')=='Velocità 0')
                       or
                       states('input_boolean.vmc_master_spia_velocita_notturna_co2_o_voc')=='on')}}
                 sequence:
@@ -14165,9 +14176,20 @@ actions:
                               - input_boolean.vmc_master_spia_co2_o_voc
                               - >-
                                 input_boolean.vmc_master_spia_velocita_notturna_co2_o_voc
-                              - >-
-                                input_boolean.vmc_master_spia_velocita_notturna_un_solo_avvio
                           action: input_boolean.turn_on
+                        - alias: Memoria del PdR solo con interruttore PdR acceso (correzione R4)
+                          if:
+                            - condition: state
+                              entity_id: input_boolean.vmc_master_opzioni_accendi_spegni_vmc_vs_pdr
+                              state: 'on'
+                          then:
+                            - action: input_boolean.turn_on
+                              target:
+                                entity_id: input_boolean.vmc_master_spia_velocita_notturna_un_solo_avvio
+                          else:
+                            - action: input_boolean.turn_off
+                              target:
+                                entity_id: input_boolean.vmc_master_spia_velocita_notturna_un_solo_avvio
                         - data: {}
                           target:
                             entity_id:
@@ -14261,7 +14283,7 @@ actions:
                             'off' and 
 
                             states('input_boolean.vmc_master_spia_velocita_notturna_un_solo_avvio')==
-                            'on' and 
+                            ('on' if is_state('input_boolean.vmc_master_opzioni_accendi_spegni_vmc_vs_pdr', 'on') else 'off') and 
 
                             states('input_boolean.vmc_master_spia_velocita_iperventilazione_un_solo_avvio')==
                             'off' and 
@@ -14308,7 +14330,7 @@ actions:
                     condition: template
                     value_template: >-
                       {{ (
-                      states('input_boolean.vmc_master_spia_velocita_iperventilazione_un_solo_avvio')=='on'
+                      (states('input_boolean.vmc_master_spia_velocita_iperventilazione_un_solo_avvio')=='on' and states('sensor.vmc_master_status_ventola_lettura_codice_interpretato')=='Velocità 0')
                       or
                       states('input_boolean.vmc_master_spia_velocita_iperventilazione_co2_o_voc')=='on')}}
                 sequence:
@@ -14327,9 +14349,20 @@ actions:
                                     - input_boolean.vmc_master_spia_co2_o_voc
                                     - >-
                                       input_boolean.vmc_master_spia_velocita_iperventilazione_co2_o_voc
-                                    - >-
-                                      input_boolean.vmc_master_spia_velocita_iperventilazione_un_solo_avvio
                                 action: input_boolean.turn_on
+                              - alias: Memoria del PdR solo con interruttore PdR acceso (correzione R4)
+                                if:
+                                  - condition: state
+                                    entity_id: input_boolean.vmc_master_opzioni_accendi_spegni_vmc_vs_pdr
+                                    state: 'on'
+                                then:
+                                  - action: input_boolean.turn_on
+                                    target:
+                                      entity_id: input_boolean.vmc_master_spia_velocita_iperventilazione_un_solo_avvio
+                                else:
+                                  - action: input_boolean.turn_off
+                                    target:
+                                      entity_id: input_boolean.vmc_master_spia_velocita_iperventilazione_un_solo_avvio
                               - data: {}
                                 target:
                                   entity_id:
@@ -14426,7 +14459,7 @@ actions:
                                   'off' and 
 
                                   states('input_boolean.vmc_master_spia_velocita_iperventilazione_un_solo_avvio')==
-                                  'on' and 
+                                  ('on' if is_state('input_boolean.vmc_master_opzioni_accendi_spegni_vmc_vs_pdr', 'on') else 'off') and 
 
                                   states('input_boolean.vmc_master_spia_velocita_freecooling_un_solo_avvio')==
                                   'off' and 
@@ -14466,7 +14499,7 @@ actions:
                     condition: template
                     value_template: >-
                       {{ (
-                      states('input_boolean.vmc_master_spia_velocita_freecooling_un_solo_avvio')=='on'
+                      (states('input_boolean.vmc_master_spia_velocita_freecooling_un_solo_avvio')=='on' and states('sensor.vmc_master_status_ventola_lettura_codice_interpretato') in ['Velocità 0', 'Free Cooling'])
                       or
                       states('input_boolean.vmc_master_spia_velocita_freecooling_co2_o_voc')=='on')
                       and (
@@ -14515,7 +14548,7 @@ actions:
                     condition: template
                     value_template: >-
                       {{ (
-                      states('input_boolean.vmc_master_spia_velocita_freecooling_un_solo_avvio')=='on'
+                      (states('input_boolean.vmc_master_spia_velocita_freecooling_un_solo_avvio')=='on' and states('sensor.vmc_master_status_ventola_lettura_codice_interpretato') in ['Velocità 0', 'Free Cooling'])
                       or
                       states('input_boolean.vmc_master_spia_velocita_freecooling_co2_o_voc')=='on')
                       and (
@@ -14711,6 +14744,19 @@ actions:
                       entity_id: >-
                         input_boolean.vmc_master_spia_co2_o_voc_partenza_ritorno_velocita_0
                     action: input_boolean.turn_off
+                  - alias: Velocità scelta dall'utente durante il PdR -> annulla la Ripresa Free (correzione R9)
+                    if:
+                      - condition: template
+                        value_template: "{{ states('sensor.vmc_master_status_ventola_lettura_codice_interpretato') != 'Free Cooling' }}"
+                    then:
+                      - data: {}
+                        target:
+                          entity_id:
+                            - >-
+                              input_boolean.vmc_master_spia_velocita_freecooling_un_solo_avvio_per_programmazione_freecooling
+                            - >-
+                              input_boolean.vmc_master_spia_velocita_freecooling_un_solo_avvio_per_programmazione_freeheating
+                        action: input_boolean.turn_off
                 alias: >-
                   Velocità diversa da 0 e con PdR On  su qualsiasi Velocità e
                   (FreeHeating Programmato su On o FreeCooling Programmato su
@@ -15043,6 +15089,34 @@ actions:
                                 - >-
                                   input_boolean.vmc_master_spia_velocita_freecooling_un_solo_avvio
                             action: input_boolean.turn_off
+                          - alias: Inquinanti partiti da Velocità 0 rientrati durante il Δ Temp. -> a fine allerta Velocità 0, nota 1 (correzione R7)
+                            if:
+                              - condition: state
+                                entity_id: input_boolean.vmc_master_spia_velocita_1_delta_temp_verifica_soglia_valore
+                                state: "on"
+                            then:
+                              - data: {}
+                                target:
+                                  entity_id: input_boolean.vmc_master_spia_velocita_0_delta_temp_verifica_soglia_valore
+                                action: input_boolean.turn_on
+                              - data: {}
+                                target:
+                                  entity_id: input_boolean.vmc_master_spia_velocita_1_delta_temp_verifica_soglia_valore
+                                action: input_boolean.turn_off
+                          - alias: Inquinanti partiti da Velocità 0 rientrati durante il Congelamento -> a fine allerta Velocità 0, nota 1 (correzione R7)
+                            if:
+                              - condition: state
+                                entity_id: input_boolean.vmc_master_spia_velocita_1_congelamento
+                                state: "on"
+                            then:
+                              - data: {}
+                                target:
+                                  entity_id: input_boolean.vmc_master_spia_velocita_0_congelamento
+                                action: input_boolean.turn_on
+                              - data: {}
+                                target:
+                                  entity_id: input_boolean.vmc_master_spia_velocita_1_congelamento
+                                action: input_boolean.turn_off
                         alias: se Spia Congelamento ON o Spia Delta Temp ON
                 alias: >-
                   vmc_master_spia_velocita_0_co2_o_voc=on o
@@ -15458,8 +15532,17 @@ actions:
                                       condition: template
                                       value_template: "{{ states('input_boolean.vmc_master_spia_velocita_freecooling_un_solo_avvio_per_programmazione_freecooling') == 'on' or states('input_boolean.vmc_master_spia_velocita_freecooling_un_solo_avvio_per_programmazione_freeheating') == 'on' }}"
                                   then:
-                                    - data: {}
-                                      action: shell_command.vmc_master_velocita_0
+                                    - if:
+                                        - alias: Allerta Umidità ancora in corso -> Velocità 1, nota 3 (correzione R8)
+                                          condition: state
+                                          entity_id: input_boolean.vmc_master_umidita_verifica_soglia_valore_spia
+                                          state: "on"
+                                      then:
+                                        - data: {}
+                                          action: shell_command.vmc_master_velocita_1
+                                      else:
+                                        - data: {}
+                                          action: shell_command.vmc_master_velocita_0
                                   else:
                                     - data: {}
                                       action: shell_command.vmc_master_freecooling
@@ -15473,7 +15556,7 @@ actions:
                                   value_template: >-
                                     {{
                                     states('sensor.vmc_master_status_ventola_lettura_codice_interpretato')
-                                    == ('Velocità 0' if (states('input_boolean.vmc_master_spia_velocita_freecooling_un_solo_avvio_per_programmazione_freecooling') == 'on' or states('input_boolean.vmc_master_spia_velocita_freecooling_un_solo_avvio_per_programmazione_freeheating') == 'on') else 'Free Cooling') }}
+                                    == (('Velocità 1' if states('input_boolean.vmc_master_umidita_verifica_soglia_valore_spia') == 'on' else 'Velocità 0') if (states('input_boolean.vmc_master_spia_velocita_freecooling_un_solo_avvio_per_programmazione_freecooling') == 'on' or states('input_boolean.vmc_master_spia_velocita_freecooling_un_solo_avvio_per_programmazione_freeheating') == 'on') else 'Free Cooling') }}
                         alias: se Spia Congelamento Off e Spia Delta Temp Off
                       - conditions:
                           - alias: se Spia Congelamento ON o Spia Delta Temp ON
@@ -15766,59 +15849,25 @@ actions:
                       states('input_boolean.vmc_master_spia_velocita_freecooling_un_solo_avvio_per_programmazione_freeheating')=='on'))}}
                     enabled: true
                 sequence:
-                  - variables:
-                      vel_prima_del_comando: "{{ states('sensor.vmc_master_status_ventola_lettura_codice_interpretato') }}"
-                    alias: Memorizza la velocità prima del comando (un cambio fatto dall'utente ferma il ciclo di conferma)
-                  - repeat:
-                      sequence:
+                  - alias: 'VMC che non ha eseguito l''avvio (velocità mai cambiata dall''inizio dell''allerta) -> come l''avvio normale: l''attesa del Free resta (03-11-2026)'
+                    if:
+                    - condition: template
+                      value_template: "{{ states.sensor.vmc_master_status_ventola_lettura_codice_interpretato is not none and states.input_boolean.vmc_master_spia_co2_o_voc is not none\n   and states.sensor.vmc_master_status_ventola_lettura_codice_interpretato.last_changed <= states.input_boolean.vmc_master_spia_co2_o_voc.last_changed }}"
+                    then:
+                    - variables:
+                        vel_prima_del_comando: '{{ states(''sensor.vmc_master_status_ventola_lettura_codice_interpretato'') }}'
+                      alias: Memorizza la velocità prima del comando (un cambio fatto dall'utente ferma il ciclo di conferma)
+                    - repeat:
+                        sequence:
                         - data: {}
                           target:
                             entity_id:
-                              - >-
-                                input_boolean.vmc_master_spia_velocita_1_co2_o_voc_pdr
-                              - >-
-                                input_boolean.vmc_master_spia_co2_o_voc_partenza_ritorno_velocita_0
-                              - input_boolean.vmc_master_spia_co2_o_voc
-                              - >-
-                                input_boolean.vmc_master_spia_velocita_1_co2_o_voc
+                            - input_boolean.vmc_master_spia_velocita_1_co2_o_voc
                           action: input_boolean.turn_on
-                        - data: {}
+                        - metadata: {}
+                          data: {}
                           target:
-                            entity_id:
-                              - >-
-                                input_boolean.vmc_master_spia_velocita_0_co2_o_voc
-                              - >-
-                                input_boolean.vmc_master_spia_velocita_2_co2_o_voc
-                              - >-
-                                input_boolean.vmc_master_spia_velocita_3_co2_o_voc
-                              - >-
-                                input_boolean.vmc_master_spia_velocita_4_co2_o_voc
-                              - >-
-                                input_boolean.vmc_master_spia_velocita_notturna_co2_o_voc
-                              - >-
-                                input_boolean.vmc_master_spia_velocita_iperventilazione_co2_o_voc
-                              - >-
-                                input_boolean.vmc_master_spia_velocita_freecooling_co2_o_voc
-                              - >-
-                                input_boolean.vmc_master_spia_velocita_0_un_solo_avvio
-                              - >-
-                                input_boolean.vmc_master_spia_velocita_1_un_solo_avvio
-                              - >-
-                                input_boolean.vmc_master_spia_velocita_2_un_solo_avvio
-                              - >-
-                                input_boolean.vmc_master_spia_velocita_3_un_solo_avvio
-                              - >-
-                                input_boolean.vmc_master_spia_velocita_4_un_solo_avvio
-                              - >-
-                                input_boolean.vmc_master_spia_velocita_freecooling_un_solo_avvio
-                              - >-
-                                input_boolean.vmc_master_spia_velocita_iperventilazione_un_solo_avvio
-                              - >-
-                                input_boolean.vmc_master_spia_velocita_notturna_un_solo_avvio
-                              - >-
-                                input_boolean.vmc_master_spia_velocita_freecooling_un_solo_avvio_per_programmazione_freecooling
-                              - >-
-                                input_boolean.vmc_master_spia_velocita_freecooling_un_solo_avvio_per_programmazione_freeheating
+                            entity_id: input_boolean.vmc_master_spia_velocita_freecooling_co2_o_voc
                           action: input_boolean.turn_off
                         - data: {}
                           action: shell_command.vmc_master_velocita_1
@@ -15836,9 +15885,83 @@ actions:
                             minutes: 0
                             seconds: 3
                             milliseconds: 0
-                      until:
+                        until:
                         - condition: template
-                          value_template: "{{ states('sensor.vmc_master_status_ventola_lettura_codice_interpretato') == 'Velocità 1' or (vel_prima_del_comando not in ['Non disponibile', 'unknown', 'unavailable', ''] and states('sensor.vmc_master_status_ventola_lettura_codice_interpretato') not in [vel_prima_del_comando, 'Non disponibile', 'unknown', 'unavailable', '']) }}"
+                          value_template: '{{ states(''sensor.vmc_master_status_ventola_lettura_codice_interpretato'') == ''Velocità 1'' or (vel_prima_del_comando not in [''Non disponibile'', ''unknown'', ''unavailable'', ''''] and states(''sensor.vmc_master_status_ventola_lettura_codice_interpretato'') not in [vel_prima_del_comando, ''Non disponibile'', ''unknown'', ''unavailable'', '''']) }}'
+                    else:
+                      - variables:
+                          vel_prima_del_comando: "{{ states('sensor.vmc_master_status_ventola_lettura_codice_interpretato') }}"
+                        alias: Memorizza la velocità prima del comando (un cambio fatto dall'utente ferma il ciclo di conferma)
+                      - repeat:
+                          sequence:
+                            - data: {}
+                              target:
+                                entity_id:
+                                  - >-
+                                    input_boolean.vmc_master_spia_velocita_1_co2_o_voc_pdr
+                                  - >-
+                                    input_boolean.vmc_master_spia_co2_o_voc_partenza_ritorno_velocita_0
+                                  - input_boolean.vmc_master_spia_co2_o_voc
+                                  - >-
+                                    input_boolean.vmc_master_spia_velocita_1_co2_o_voc
+                              action: input_boolean.turn_on
+                            - data: {}
+                              target:
+                                entity_id:
+                                  - >-
+                                    input_boolean.vmc_master_spia_velocita_0_co2_o_voc
+                                  - >-
+                                    input_boolean.vmc_master_spia_velocita_2_co2_o_voc
+                                  - >-
+                                    input_boolean.vmc_master_spia_velocita_3_co2_o_voc
+                                  - >-
+                                    input_boolean.vmc_master_spia_velocita_4_co2_o_voc
+                                  - >-
+                                    input_boolean.vmc_master_spia_velocita_notturna_co2_o_voc
+                                  - >-
+                                    input_boolean.vmc_master_spia_velocita_iperventilazione_co2_o_voc
+                                  - >-
+                                    input_boolean.vmc_master_spia_velocita_freecooling_co2_o_voc
+                                  - >-
+                                    input_boolean.vmc_master_spia_velocita_0_un_solo_avvio
+                                  - >-
+                                    input_boolean.vmc_master_spia_velocita_1_un_solo_avvio
+                                  - >-
+                                    input_boolean.vmc_master_spia_velocita_2_un_solo_avvio
+                                  - >-
+                                    input_boolean.vmc_master_spia_velocita_3_un_solo_avvio
+                                  - >-
+                                    input_boolean.vmc_master_spia_velocita_4_un_solo_avvio
+                                  - >-
+                                    input_boolean.vmc_master_spia_velocita_freecooling_un_solo_avvio
+                                  - >-
+                                    input_boolean.vmc_master_spia_velocita_iperventilazione_un_solo_avvio
+                                  - >-
+                                    input_boolean.vmc_master_spia_velocita_notturna_un_solo_avvio
+                                  - >-
+                                    input_boolean.vmc_master_spia_velocita_freecooling_un_solo_avvio_per_programmazione_freecooling
+                                  - >-
+                                    input_boolean.vmc_master_spia_velocita_freecooling_un_solo_avvio_per_programmazione_freeheating
+                              action: input_boolean.turn_off
+                            - data: {}
+                              action: shell_command.vmc_master_velocita_1
+                            - delay:
+                                hours: 0
+                                minutes: 0
+                                seconds: 1
+                                milliseconds: 0
+                            - action: homeassistant.update_entity
+                              target:
+                                entity_id: sensor.vmc_master_status_ventola
+                              alias: Rilettura immediata della velocità (la velocità non ancora aggiornata non va presa per una scelta dell'utente)
+                            - delay:
+                                hours: 0
+                                minutes: 0
+                                seconds: 3
+                                milliseconds: 0
+                          until:
+                            - condition: template
+                              value_template: "{{ states('sensor.vmc_master_status_ventola_lettura_codice_interpretato') == 'Velocità 1' or (vel_prima_del_comando not in ['Non disponibile', 'unknown', 'unavailable', ''] and states('sensor.vmc_master_status_ventola_lettura_codice_interpretato') not in [vel_prima_del_comando, 'Non disponibile', 'unknown', 'unavailable', '']) }}"
                 alias: >-
                   Verifica Velocità 0 e Almeno una Spia Inquinamento ON e (Spia
                   un solo Avvio FreeCooling o Heating ON)
@@ -16911,6 +17034,31 @@ actions:
                   Caso Velocità 0 con PdR su Velocità Free Cooling OFF e Spia
                   Inquinanti su Velocità Free Cooling ON -> Velocità Free
                   Cooling
+            default:
+            - alias: 'Nessun ramo riconosciuto: la VMC è ferma con Inquinanti in corso -> Velocità 1 (R2, 03-11-2026)'
+              variables:
+                vel_prima_del_comando: '{{ states(''sensor.vmc_master_status_ventola_lettura_codice_interpretato'') }}'
+            - repeat:
+                sequence:
+                - data: {}
+                  action: shell_command.vmc_master_velocita_1
+                - delay:
+                    hours: 0
+                    minutes: 0
+                    seconds: 1
+                    milliseconds: 0
+                - action: homeassistant.update_entity
+                  target:
+                    entity_id: sensor.vmc_master_status_ventola
+                  alias: Rilettura immediata della velocità (la velocità non ancora aggiornata non va presa per una scelta dell'utente)
+                - delay:
+                    hours: 0
+                    minutes: 0
+                    seconds: 3
+                    milliseconds: 0
+                until:
+                - condition: template
+                  value_template: '{{ states(''sensor.vmc_master_status_ventola_lettura_codice_interpretato'') == ''Velocità 1'' or (vel_prima_del_comando not in [''Non disponibile'', ''unknown'', ''unavailable'', ''''] and states(''sensor.vmc_master_status_ventola_lettura_codice_interpretato'') not in [vel_prima_del_comando, ''Non disponibile'', ''unknown'', ''unavailable'', '''']) }}'
         alias: >-
           Spia Velocità 0 CO₂ e/o VOC se Spia Congelamento Off e Spia Delta Temp
           Off
@@ -18824,6 +18972,15 @@ actions:
                                       entity_id: >-
                                         input_boolean.vmc_master_spia_velocita_1_un_solo_avvio
                                     action: input_boolean.turn_on
+                                  - alias: Velocità 1 scelta dall'utente durante il PdR -> annulla la Ripresa Free (correzione R6)
+                                    data: {}
+                                    target:
+                                      entity_id:
+                                        - >-
+                                          input_boolean.vmc_master_spia_velocita_freecooling_un_solo_avvio_per_programmazione_freecooling
+                                        - >-
+                                          input_boolean.vmc_master_spia_velocita_freecooling_un_solo_avvio_per_programmazione_freeheating
+                                    action: input_boolean.turn_off
                                 alias: Spie Inquinanti OFF Pdr ON
                         alias: Spia Free Heating ON o Spia Free Colling ON
                   - repeat:
@@ -22238,6 +22395,35 @@ actions:
             id:
               - Congelamento OFF
         sequence:
+          - alias: Calendario in transizione (fascia finita o iniziata durante Congelamento) -> nessuna ripresa, decide il Calendario (C1/C2)
+            if:
+              - condition: template
+                value_template: >-
+                  {% set g = ['lunedi','martedi','mercoledi','giovedi','venerdi','sabato','domenica'][now().weekday()] %}
+                  {% set G = ['Lunedi','Martedi','Mercoledi','Giovedi','Venerdi','Sabato','Domenica'][now().weekday()] %}
+                  {% set n = now().strftime('%H:%M') %}
+                  {% set in1 = n >= states('input_datetime.vmc_master_accensione_' ~ g)[0:5] and n < states('input_datetime.vmc_master_spegnimento_' ~ g)[0:5] %}
+                  {% set in2 = n >= states('input_datetime.vmc_master_accensione_' ~ g ~ '_2')[0:5] and n < states('input_datetime.vmc_master_spegnimento_' ~ g ~ '_2')[0:5] %}
+                  {% set sp1 = is_state('input_boolean.vmc_master_spia_calendario_' ~ g ~ '_1', 'on') %}
+                  {% set sp2 = is_state('input_boolean.vmc_master_spia_calendario_' ~ g ~ '_2', 'on') %}
+                  {% set cal = is_state('input_boolean.vmc_master_opzioni_accendi_spegni_vmc_vs_calendario', 'on') %}
+                  {% set ok1 = states('sensor.vmc_master_status_accensione_vmc_tramite_calendario') == G %}
+                  {% set ok2 = states('sensor.vmc_master_status_accensione_vmc_tramite_calendario_2') == G %}
+                  {{ (sp1 and not in1) or (sp2 and not in2) or (cal and ok1 and in1 and not sp1) or (cal and ok2 and in2 and not sp2) }}
+            then:
+              - action: input_boolean.turn_off
+                target:
+                  entity_id:
+                    - input_boolean.vmc_master_congelamento_verifica_soglia_valore_spia
+                    - input_boolean.vmc_master_spia_velocita_0_congelamento
+                    - input_boolean.vmc_master_spia_velocita_1_congelamento
+                    - input_boolean.vmc_master_spia_velocita_2_congelamento
+                    - input_boolean.vmc_master_spia_velocita_3_congelamento
+                    - input_boolean.vmc_master_spia_velocita_4_congelamento
+                    - input_boolean.vmc_master_spia_velocita_iperventilazione_congelamento
+                    - input_boolean.vmc_master_spia_velocita_notturna_congelamento
+                    - input_boolean.vmc_master_spia_velocita_freecooling_congelamento
+              - stop: Ripresa lasciata al Calendario
           - alias: Ripristino Velocità
             choose:
               - conditions:
@@ -22334,6 +22520,26 @@ actions:
                       {{states('input_boolean.vmc_master_spia_velocita_1_congelamento')==
                       'on'}}
                 sequence:
+                  - alias: Inquinanti in corso e velocità scelta dall'utente durante Congelamento -> diventa la memoria degli Inquinanti (regola 03-11-2026)
+                    if:
+                      - condition: template
+                        value_template: "{{ is_state('input_boolean.vmc_master_spia_co2_o_voc', 'on') and not is_state('input_boolean.vmc_master_spia_velocita_1_co2_o_voc', 'on') }}"
+                    then:
+                      - action: input_boolean.turn_on
+                        target:
+                          entity_id: input_boolean.vmc_master_spia_velocita_1_co2_o_voc
+                      - action: input_boolean.turn_off
+                        target:
+                          entity_id:
+                            - input_boolean.vmc_master_spia_velocita_0_co2_o_voc
+                            - input_boolean.vmc_master_spia_velocita_2_co2_o_voc
+                            - input_boolean.vmc_master_spia_velocita_3_co2_o_voc
+                            - input_boolean.vmc_master_spia_velocita_4_co2_o_voc
+                            - input_boolean.vmc_master_spia_velocita_iperventilazione_co2_o_voc
+                            - input_boolean.vmc_master_spia_velocita_notturna_co2_o_voc
+                            - input_boolean.vmc_master_spia_velocita_freecooling_co2_o_voc
+                            - input_boolean.vmc_master_spia_co2_o_voc_partenza_ritorno_velocita_0
+                            - input_boolean.vmc_master_spia_velocita_1_co2_o_voc_pdr
                   - alias: Ripeti Finchè Tutte le Spie Congelamento sono OFF
                     repeat:
                       sequence:
@@ -22421,6 +22627,26 @@ actions:
                       {{states('input_boolean.vmc_master_spia_velocita_2_congelamento')==
                       'on'}}
                 sequence:
+                  - alias: Inquinanti in corso e velocità scelta dall'utente durante Congelamento -> diventa la memoria degli Inquinanti (regola 03-11-2026)
+                    if:
+                      - condition: template
+                        value_template: "{{ is_state('input_boolean.vmc_master_spia_co2_o_voc', 'on') and not is_state('input_boolean.vmc_master_spia_velocita_2_co2_o_voc', 'on') }}"
+                    then:
+                      - action: input_boolean.turn_on
+                        target:
+                          entity_id: input_boolean.vmc_master_spia_velocita_2_co2_o_voc
+                      - action: input_boolean.turn_off
+                        target:
+                          entity_id:
+                            - input_boolean.vmc_master_spia_velocita_0_co2_o_voc
+                            - input_boolean.vmc_master_spia_velocita_1_co2_o_voc
+                            - input_boolean.vmc_master_spia_velocita_3_co2_o_voc
+                            - input_boolean.vmc_master_spia_velocita_4_co2_o_voc
+                            - input_boolean.vmc_master_spia_velocita_iperventilazione_co2_o_voc
+                            - input_boolean.vmc_master_spia_velocita_notturna_co2_o_voc
+                            - input_boolean.vmc_master_spia_velocita_freecooling_co2_o_voc
+                            - input_boolean.vmc_master_spia_co2_o_voc_partenza_ritorno_velocita_0
+                            - input_boolean.vmc_master_spia_velocita_1_co2_o_voc_pdr
                   - alias: Ripeti Finchè Tutte le Spie Congelamento sono OFF
                     repeat:
                       sequence:
@@ -22508,6 +22734,26 @@ actions:
                       {{states('input_boolean.vmc_master_spia_velocita_3_congelamento')==
                       'on'}}
                 sequence:
+                  - alias: Inquinanti in corso e velocità scelta dall'utente durante Congelamento -> diventa la memoria degli Inquinanti (regola 03-11-2026)
+                    if:
+                      - condition: template
+                        value_template: "{{ is_state('input_boolean.vmc_master_spia_co2_o_voc', 'on') and not is_state('input_boolean.vmc_master_spia_velocita_3_co2_o_voc', 'on') }}"
+                    then:
+                      - action: input_boolean.turn_on
+                        target:
+                          entity_id: input_boolean.vmc_master_spia_velocita_3_co2_o_voc
+                      - action: input_boolean.turn_off
+                        target:
+                          entity_id:
+                            - input_boolean.vmc_master_spia_velocita_0_co2_o_voc
+                            - input_boolean.vmc_master_spia_velocita_1_co2_o_voc
+                            - input_boolean.vmc_master_spia_velocita_2_co2_o_voc
+                            - input_boolean.vmc_master_spia_velocita_4_co2_o_voc
+                            - input_boolean.vmc_master_spia_velocita_iperventilazione_co2_o_voc
+                            - input_boolean.vmc_master_spia_velocita_notturna_co2_o_voc
+                            - input_boolean.vmc_master_spia_velocita_freecooling_co2_o_voc
+                            - input_boolean.vmc_master_spia_co2_o_voc_partenza_ritorno_velocita_0
+                            - input_boolean.vmc_master_spia_velocita_1_co2_o_voc_pdr
                   - alias: Ripeti Finchè Tutte le Spie Congelamento sono OFF
                     repeat:
                       sequence:
@@ -22595,6 +22841,26 @@ actions:
                       {{states('input_boolean.vmc_master_spia_velocita_4_congelamento')==
                       'on'}}
                 sequence:
+                  - alias: Inquinanti in corso e velocità scelta dall'utente durante Congelamento -> diventa la memoria degli Inquinanti (regola 03-11-2026)
+                    if:
+                      - condition: template
+                        value_template: "{{ is_state('input_boolean.vmc_master_spia_co2_o_voc', 'on') and not is_state('input_boolean.vmc_master_spia_velocita_4_co2_o_voc', 'on') }}"
+                    then:
+                      - action: input_boolean.turn_on
+                        target:
+                          entity_id: input_boolean.vmc_master_spia_velocita_4_co2_o_voc
+                      - action: input_boolean.turn_off
+                        target:
+                          entity_id:
+                            - input_boolean.vmc_master_spia_velocita_0_co2_o_voc
+                            - input_boolean.vmc_master_spia_velocita_1_co2_o_voc
+                            - input_boolean.vmc_master_spia_velocita_2_co2_o_voc
+                            - input_boolean.vmc_master_spia_velocita_3_co2_o_voc
+                            - input_boolean.vmc_master_spia_velocita_iperventilazione_co2_o_voc
+                            - input_boolean.vmc_master_spia_velocita_notturna_co2_o_voc
+                            - input_boolean.vmc_master_spia_velocita_freecooling_co2_o_voc
+                            - input_boolean.vmc_master_spia_co2_o_voc_partenza_ritorno_velocita_0
+                            - input_boolean.vmc_master_spia_velocita_1_co2_o_voc_pdr
                   - alias: Ripeti Finchè Tutte le Spie Congelamento sono OFF
                     repeat:
                       sequence:
@@ -22682,6 +22948,26 @@ actions:
                       {{states('input_boolean.vmc_master_spia_velocita_iperventilazione_congelamento')==
                       'on'}}
                 sequence:
+                  - alias: Inquinanti in corso e velocità scelta dall'utente durante Congelamento -> diventa la memoria degli Inquinanti (regola 03-11-2026)
+                    if:
+                      - condition: template
+                        value_template: "{{ is_state('input_boolean.vmc_master_spia_co2_o_voc', 'on') and not is_state('input_boolean.vmc_master_spia_velocita_iperventilazione_co2_o_voc', 'on') }}"
+                    then:
+                      - action: input_boolean.turn_on
+                        target:
+                          entity_id: input_boolean.vmc_master_spia_velocita_iperventilazione_co2_o_voc
+                      - action: input_boolean.turn_off
+                        target:
+                          entity_id:
+                            - input_boolean.vmc_master_spia_velocita_0_co2_o_voc
+                            - input_boolean.vmc_master_spia_velocita_1_co2_o_voc
+                            - input_boolean.vmc_master_spia_velocita_2_co2_o_voc
+                            - input_boolean.vmc_master_spia_velocita_3_co2_o_voc
+                            - input_boolean.vmc_master_spia_velocita_4_co2_o_voc
+                            - input_boolean.vmc_master_spia_velocita_notturna_co2_o_voc
+                            - input_boolean.vmc_master_spia_velocita_freecooling_co2_o_voc
+                            - input_boolean.vmc_master_spia_co2_o_voc_partenza_ritorno_velocita_0
+                            - input_boolean.vmc_master_spia_velocita_1_co2_o_voc_pdr
                   - alias: Ripeti Finchè Tutte le Spie Congelamento sono OFF
                     repeat:
                       sequence:
@@ -22769,6 +23055,26 @@ actions:
                       {{states('input_boolean.vmc_master_spia_velocita_notturna_congelamento')==
                       'on'}}
                 sequence:
+                  - alias: Inquinanti in corso e velocità scelta dall'utente durante Congelamento -> diventa la memoria degli Inquinanti (regola 03-11-2026)
+                    if:
+                      - condition: template
+                        value_template: "{{ is_state('input_boolean.vmc_master_spia_co2_o_voc', 'on') and not is_state('input_boolean.vmc_master_spia_velocita_notturna_co2_o_voc', 'on') }}"
+                    then:
+                      - action: input_boolean.turn_on
+                        target:
+                          entity_id: input_boolean.vmc_master_spia_velocita_notturna_co2_o_voc
+                      - action: input_boolean.turn_off
+                        target:
+                          entity_id:
+                            - input_boolean.vmc_master_spia_velocita_0_co2_o_voc
+                            - input_boolean.vmc_master_spia_velocita_1_co2_o_voc
+                            - input_boolean.vmc_master_spia_velocita_2_co2_o_voc
+                            - input_boolean.vmc_master_spia_velocita_3_co2_o_voc
+                            - input_boolean.vmc_master_spia_velocita_4_co2_o_voc
+                            - input_boolean.vmc_master_spia_velocita_iperventilazione_co2_o_voc
+                            - input_boolean.vmc_master_spia_velocita_freecooling_co2_o_voc
+                            - input_boolean.vmc_master_spia_co2_o_voc_partenza_ritorno_velocita_0
+                            - input_boolean.vmc_master_spia_velocita_1_co2_o_voc_pdr
                   - alias: Ripeti Finchè Tutte le Spie Congelamento sono OFF
                     repeat:
                       sequence:
@@ -22858,6 +23164,26 @@ actions:
                       {{states('input_boolean.vmc_master_spia_velocita_freecooling_congelamento')==
                       'on'}}
                 sequence:
+                  - alias: Inquinanti in corso e velocità scelta dall'utente durante Congelamento -> diventa la memoria degli Inquinanti (regola 03-11-2026)
+                    if:
+                      - condition: template
+                        value_template: "{{ is_state('input_boolean.vmc_master_spia_co2_o_voc', 'on') and not is_state('input_boolean.vmc_master_spia_velocita_freecooling_co2_o_voc', 'on') }}"
+                    then:
+                      - action: input_boolean.turn_on
+                        target:
+                          entity_id: input_boolean.vmc_master_spia_velocita_freecooling_co2_o_voc
+                      - action: input_boolean.turn_off
+                        target:
+                          entity_id:
+                            - input_boolean.vmc_master_spia_velocita_0_co2_o_voc
+                            - input_boolean.vmc_master_spia_velocita_1_co2_o_voc
+                            - input_boolean.vmc_master_spia_velocita_2_co2_o_voc
+                            - input_boolean.vmc_master_spia_velocita_3_co2_o_voc
+                            - input_boolean.vmc_master_spia_velocita_4_co2_o_voc
+                            - input_boolean.vmc_master_spia_velocita_iperventilazione_co2_o_voc
+                            - input_boolean.vmc_master_spia_velocita_notturna_co2_o_voc
+                            - input_boolean.vmc_master_spia_co2_o_voc_partenza_ritorno_velocita_0
+                            - input_boolean.vmc_master_spia_velocita_1_co2_o_voc_pdr
                   - alias: Ripeti Finchè Tutte le Spie Congelamento sono OFF
                     repeat:
                       sequence:
@@ -26719,6 +27045,35 @@ actions:
             id:
               - delta_temp_OFF
         sequence:
+          - alias: Calendario in transizione (fascia finita o iniziata durante Δ Temp.) -> nessuna ripresa, decide il Calendario (C1/C2)
+            if:
+              - condition: template
+                value_template: >-
+                  {% set g = ['lunedi','martedi','mercoledi','giovedi','venerdi','sabato','domenica'][now().weekday()] %}
+                  {% set G = ['Lunedi','Martedi','Mercoledi','Giovedi','Venerdi','Sabato','Domenica'][now().weekday()] %}
+                  {% set n = now().strftime('%H:%M') %}
+                  {% set in1 = n >= states('input_datetime.vmc_master_accensione_' ~ g)[0:5] and n < states('input_datetime.vmc_master_spegnimento_' ~ g)[0:5] %}
+                  {% set in2 = n >= states('input_datetime.vmc_master_accensione_' ~ g ~ '_2')[0:5] and n < states('input_datetime.vmc_master_spegnimento_' ~ g ~ '_2')[0:5] %}
+                  {% set sp1 = is_state('input_boolean.vmc_master_spia_calendario_' ~ g ~ '_1', 'on') %}
+                  {% set sp2 = is_state('input_boolean.vmc_master_spia_calendario_' ~ g ~ '_2', 'on') %}
+                  {% set cal = is_state('input_boolean.vmc_master_opzioni_accendi_spegni_vmc_vs_calendario', 'on') %}
+                  {% set ok1 = states('sensor.vmc_master_status_accensione_vmc_tramite_calendario') == G %}
+                  {% set ok2 = states('sensor.vmc_master_status_accensione_vmc_tramite_calendario_2') == G %}
+                  {{ (sp1 and not in1) or (sp2 and not in2) or (cal and ok1 and in1 and not sp1) or (cal and ok2 and in2 and not sp2) }}
+            then:
+              - action: input_boolean.turn_off
+                target:
+                  entity_id:
+                    - input_boolean.vmc_master_delta_temp_verifica_soglia_valore_spia
+                    - input_boolean.vmc_master_spia_velocita_0_delta_temp_verifica_soglia_valore
+                    - input_boolean.vmc_master_spia_velocita_1_delta_temp_verifica_soglia_valore
+                    - input_boolean.vmc_master_spia_velocita_2_delta_temp_verifica_soglia_valore
+                    - input_boolean.vmc_master_spia_velocita_3_delta_temp_verifica_soglia_valore
+                    - input_boolean.vmc_master_spia_velocita_4_delta_temp_verifica_soglia_valore
+                    - input_boolean.vmc_master_spia_velocita_iperventilazione_delta_temp_verifica_soglia_valore
+                    - input_boolean.vmc_master_spia_velocita_notturna_delta_temp_verifica_soglia_valore
+                    - input_boolean.vmc_master_spia_velocita_freecooling_delta_temp_verifica_soglia_valore
+              - stop: Ripresa lasciata al Calendario
           - alias: Ripristino Velocità
             choose:
               - conditions:
@@ -26782,6 +27137,26 @@ actions:
                       {{states('input_boolean.vmc_master_spia_velocita_1_delta_temp_verifica_soglia_valore')==
                       'on'}}
                 sequence:
+                  - alias: Inquinanti in corso e velocità scelta dall'utente durante Δ Temp. -> diventa la memoria degli Inquinanti (regola 03-11-2026)
+                    if:
+                      - condition: template
+                        value_template: "{{ is_state('input_boolean.vmc_master_spia_co2_o_voc', 'on') and not is_state('input_boolean.vmc_master_spia_velocita_1_co2_o_voc', 'on') }}"
+                    then:
+                      - action: input_boolean.turn_on
+                        target:
+                          entity_id: input_boolean.vmc_master_spia_velocita_1_co2_o_voc
+                      - action: input_boolean.turn_off
+                        target:
+                          entity_id:
+                            - input_boolean.vmc_master_spia_velocita_0_co2_o_voc
+                            - input_boolean.vmc_master_spia_velocita_2_co2_o_voc
+                            - input_boolean.vmc_master_spia_velocita_3_co2_o_voc
+                            - input_boolean.vmc_master_spia_velocita_4_co2_o_voc
+                            - input_boolean.vmc_master_spia_velocita_iperventilazione_co2_o_voc
+                            - input_boolean.vmc_master_spia_velocita_notturna_co2_o_voc
+                            - input_boolean.vmc_master_spia_velocita_freecooling_co2_o_voc
+                            - input_boolean.vmc_master_spia_co2_o_voc_partenza_ritorno_velocita_0
+                            - input_boolean.vmc_master_spia_velocita_1_co2_o_voc_pdr
                   - data: {}
                     target:
                       entity_id:
@@ -26836,6 +27211,26 @@ actions:
                       {{states('input_boolean.vmc_master_spia_velocita_2_delta_temp_verifica_soglia_valore')==
                       'on'}}
                 sequence:
+                  - alias: Inquinanti in corso e velocità scelta dall'utente durante Δ Temp. -> diventa la memoria degli Inquinanti (regola 03-11-2026)
+                    if:
+                      - condition: template
+                        value_template: "{{ is_state('input_boolean.vmc_master_spia_co2_o_voc', 'on') and not is_state('input_boolean.vmc_master_spia_velocita_2_co2_o_voc', 'on') }}"
+                    then:
+                      - action: input_boolean.turn_on
+                        target:
+                          entity_id: input_boolean.vmc_master_spia_velocita_2_co2_o_voc
+                      - action: input_boolean.turn_off
+                        target:
+                          entity_id:
+                            - input_boolean.vmc_master_spia_velocita_0_co2_o_voc
+                            - input_boolean.vmc_master_spia_velocita_1_co2_o_voc
+                            - input_boolean.vmc_master_spia_velocita_3_co2_o_voc
+                            - input_boolean.vmc_master_spia_velocita_4_co2_o_voc
+                            - input_boolean.vmc_master_spia_velocita_iperventilazione_co2_o_voc
+                            - input_boolean.vmc_master_spia_velocita_notturna_co2_o_voc
+                            - input_boolean.vmc_master_spia_velocita_freecooling_co2_o_voc
+                            - input_boolean.vmc_master_spia_co2_o_voc_partenza_ritorno_velocita_0
+                            - input_boolean.vmc_master_spia_velocita_1_co2_o_voc_pdr
                   - data: {}
                     target:
                       entity_id:
@@ -26890,6 +27285,26 @@ actions:
                       {{states('input_boolean.vmc_master_spia_velocita_3_delta_temp_verifica_soglia_valore')==
                       'on'}}
                 sequence:
+                  - alias: Inquinanti in corso e velocità scelta dall'utente durante Δ Temp. -> diventa la memoria degli Inquinanti (regola 03-11-2026)
+                    if:
+                      - condition: template
+                        value_template: "{{ is_state('input_boolean.vmc_master_spia_co2_o_voc', 'on') and not is_state('input_boolean.vmc_master_spia_velocita_3_co2_o_voc', 'on') }}"
+                    then:
+                      - action: input_boolean.turn_on
+                        target:
+                          entity_id: input_boolean.vmc_master_spia_velocita_3_co2_o_voc
+                      - action: input_boolean.turn_off
+                        target:
+                          entity_id:
+                            - input_boolean.vmc_master_spia_velocita_0_co2_o_voc
+                            - input_boolean.vmc_master_spia_velocita_1_co2_o_voc
+                            - input_boolean.vmc_master_spia_velocita_2_co2_o_voc
+                            - input_boolean.vmc_master_spia_velocita_4_co2_o_voc
+                            - input_boolean.vmc_master_spia_velocita_iperventilazione_co2_o_voc
+                            - input_boolean.vmc_master_spia_velocita_notturna_co2_o_voc
+                            - input_boolean.vmc_master_spia_velocita_freecooling_co2_o_voc
+                            - input_boolean.vmc_master_spia_co2_o_voc_partenza_ritorno_velocita_0
+                            - input_boolean.vmc_master_spia_velocita_1_co2_o_voc_pdr
                   - data: {}
                     target:
                       entity_id:
@@ -26945,6 +27360,26 @@ actions:
                       {{states('input_boolean.vmc_master_spia_velocita_4_delta_temp_verifica_soglia_valore')==
                       'on'}}
                 sequence:
+                  - alias: Inquinanti in corso e velocità scelta dall'utente durante Δ Temp. -> diventa la memoria degli Inquinanti (regola 03-11-2026)
+                    if:
+                      - condition: template
+                        value_template: "{{ is_state('input_boolean.vmc_master_spia_co2_o_voc', 'on') and not is_state('input_boolean.vmc_master_spia_velocita_4_co2_o_voc', 'on') }}"
+                    then:
+                      - action: input_boolean.turn_on
+                        target:
+                          entity_id: input_boolean.vmc_master_spia_velocita_4_co2_o_voc
+                      - action: input_boolean.turn_off
+                        target:
+                          entity_id:
+                            - input_boolean.vmc_master_spia_velocita_0_co2_o_voc
+                            - input_boolean.vmc_master_spia_velocita_1_co2_o_voc
+                            - input_boolean.vmc_master_spia_velocita_2_co2_o_voc
+                            - input_boolean.vmc_master_spia_velocita_3_co2_o_voc
+                            - input_boolean.vmc_master_spia_velocita_iperventilazione_co2_o_voc
+                            - input_boolean.vmc_master_spia_velocita_notturna_co2_o_voc
+                            - input_boolean.vmc_master_spia_velocita_freecooling_co2_o_voc
+                            - input_boolean.vmc_master_spia_co2_o_voc_partenza_ritorno_velocita_0
+                            - input_boolean.vmc_master_spia_velocita_1_co2_o_voc_pdr
                   - data: {}
                     target:
                       entity_id:
@@ -26999,6 +27434,26 @@ actions:
                       {{states('input_boolean.vmc_master_spia_velocita_iperventilazione_delta_temp_verifica_soglia_valore')==
                       'on'}}
                 sequence:
+                  - alias: Inquinanti in corso e velocità scelta dall'utente durante Δ Temp. -> diventa la memoria degli Inquinanti (regola 03-11-2026)
+                    if:
+                      - condition: template
+                        value_template: "{{ is_state('input_boolean.vmc_master_spia_co2_o_voc', 'on') and not is_state('input_boolean.vmc_master_spia_velocita_iperventilazione_co2_o_voc', 'on') }}"
+                    then:
+                      - action: input_boolean.turn_on
+                        target:
+                          entity_id: input_boolean.vmc_master_spia_velocita_iperventilazione_co2_o_voc
+                      - action: input_boolean.turn_off
+                        target:
+                          entity_id:
+                            - input_boolean.vmc_master_spia_velocita_0_co2_o_voc
+                            - input_boolean.vmc_master_spia_velocita_1_co2_o_voc
+                            - input_boolean.vmc_master_spia_velocita_2_co2_o_voc
+                            - input_boolean.vmc_master_spia_velocita_3_co2_o_voc
+                            - input_boolean.vmc_master_spia_velocita_4_co2_o_voc
+                            - input_boolean.vmc_master_spia_velocita_notturna_co2_o_voc
+                            - input_boolean.vmc_master_spia_velocita_freecooling_co2_o_voc
+                            - input_boolean.vmc_master_spia_co2_o_voc_partenza_ritorno_velocita_0
+                            - input_boolean.vmc_master_spia_velocita_1_co2_o_voc_pdr
                   - data: {}
                     target:
                       entity_id:
@@ -27053,6 +27508,26 @@ actions:
                       {{states('input_boolean.vmc_master_spia_velocita_notturna_delta_temp_verifica_soglia_valore')==
                       'on'}}
                 sequence:
+                  - alias: Inquinanti in corso e velocità scelta dall'utente durante Δ Temp. -> diventa la memoria degli Inquinanti (regola 03-11-2026)
+                    if:
+                      - condition: template
+                        value_template: "{{ is_state('input_boolean.vmc_master_spia_co2_o_voc', 'on') and not is_state('input_boolean.vmc_master_spia_velocita_notturna_co2_o_voc', 'on') }}"
+                    then:
+                      - action: input_boolean.turn_on
+                        target:
+                          entity_id: input_boolean.vmc_master_spia_velocita_notturna_co2_o_voc
+                      - action: input_boolean.turn_off
+                        target:
+                          entity_id:
+                            - input_boolean.vmc_master_spia_velocita_0_co2_o_voc
+                            - input_boolean.vmc_master_spia_velocita_1_co2_o_voc
+                            - input_boolean.vmc_master_spia_velocita_2_co2_o_voc
+                            - input_boolean.vmc_master_spia_velocita_3_co2_o_voc
+                            - input_boolean.vmc_master_spia_velocita_4_co2_o_voc
+                            - input_boolean.vmc_master_spia_velocita_iperventilazione_co2_o_voc
+                            - input_boolean.vmc_master_spia_velocita_freecooling_co2_o_voc
+                            - input_boolean.vmc_master_spia_co2_o_voc_partenza_ritorno_velocita_0
+                            - input_boolean.vmc_master_spia_velocita_1_co2_o_voc_pdr
                   - data: {}
                     target:
                       entity_id:
@@ -27109,6 +27584,26 @@ actions:
                       {{states('input_boolean.vmc_master_spia_velocita_freecooling_delta_temp_verifica_soglia_valore')==
                       'on'}}
                 sequence:
+                  - alias: Inquinanti in corso e velocità scelta dall'utente durante Δ Temp. -> diventa la memoria degli Inquinanti (regola 03-11-2026)
+                    if:
+                      - condition: template
+                        value_template: "{{ is_state('input_boolean.vmc_master_spia_co2_o_voc', 'on') and not is_state('input_boolean.vmc_master_spia_velocita_freecooling_co2_o_voc', 'on') }}"
+                    then:
+                      - action: input_boolean.turn_on
+                        target:
+                          entity_id: input_boolean.vmc_master_spia_velocita_freecooling_co2_o_voc
+                      - action: input_boolean.turn_off
+                        target:
+                          entity_id:
+                            - input_boolean.vmc_master_spia_velocita_0_co2_o_voc
+                            - input_boolean.vmc_master_spia_velocita_1_co2_o_voc
+                            - input_boolean.vmc_master_spia_velocita_2_co2_o_voc
+                            - input_boolean.vmc_master_spia_velocita_3_co2_o_voc
+                            - input_boolean.vmc_master_spia_velocita_4_co2_o_voc
+                            - input_boolean.vmc_master_spia_velocita_iperventilazione_co2_o_voc
+                            - input_boolean.vmc_master_spia_velocita_notturna_co2_o_voc
+                            - input_boolean.vmc_master_spia_co2_o_voc_partenza_ritorno_velocita_0
+                            - input_boolean.vmc_master_spia_velocita_1_co2_o_voc_pdr
                   - data: {}
                     target:
                       entity_id:
