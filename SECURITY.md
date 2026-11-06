@@ -93,7 +93,7 @@ Il comportamento della VMC per ogni allarme è riassunto nella tabella <strong>L
 #
 
 ### - ENTITA' ESCLUSE NEL DB DI HOME ASSISTANT
-Nel File <strong>vmc_[NOME].yaml</strong> sono escluse dal Recorder 318 entità aggiornate di frequente (altre 31 sono già registrate, perché precedute dal simbolo #). Aggiungere o Togliere le Entità da escludere nel campo:
+Nel File <strong>vmc_[NOME].yaml</strong> sono escluse dal Recorder 320 entità aggiornate di frequente (altre 31 sono già registrate, perché precedute dal simbolo #). Aggiungere o Togliere le Entità da escludere nel campo:
 
 <pre style="font-size:10px; background-color: #d9ffcc;">
 #################################################################################################################################
