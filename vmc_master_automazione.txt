@@ -112,8 +112,11 @@ description: >-
 
   - Inquinanti (CO₂ e VOC): 8 Secondi. Se la VMC è partita da Velocità 0 resta a
   Velocità 1 fino al rientro degli Inquinanti, poi torna a Velocità 0; se nel
-  frattempo l'utente sceglie un'altra Velocità (anche durante il Congelamento o
-  il Δ Temp.) questa viene mantenuta, anche dopo il rientro;
+  frattempo l'utente sceglie un'altra Velocità diversa da 0 (anche durante il
+  Congelamento o il Δ Temp.) questa viene mantenuta, anche dopo il rientro; se
+  invece sceglie Velocità 0 con gli Inquinanti ancora presenti, dopo circa 8
+  Secondi la VMC riparte a Velocità 1 e al rientro degli Inquinanti torna a
+  Velocità 0, anche se prima dell'allerta era a un'altra Velocità;
 
   - Sup. Lim. Δ PdR con Inquinanti: 12 Secondi;
 
@@ -131,17 +134,65 @@ description: >-
 
   - Umidità: 28 Secondi (la logica Umidità memorizza subito la Velocità in uso);
   se durante l'allerta si cambia Velocità, la nuova Velocità viene memorizzata
-  dopo 4 Secondi e mantenuta a fine Umidità;
+  dopo 4 Secondi e mantenuta a fine Umidità; se però l'Umidità ha avviato la VMC
+  da Velocità 0 e la VMC risulta ancora, o di nuovo, a Velocità 0, dopo 4 Secondi
+  viene riportata alla [Set Velocità Umidità di Avvio] e a fine Umidità torna a
+  Velocità 0 (per fermarla si spegne l'interruttore dell'Umidità);
 
   - Black-Out: 32 Secondi per il Rilevamento e per il Ripristino.
 
 
-  CAMBIO MANUALE DELLA VELOCITÀ: ogni comando dell'automazione viene ripetuto
-  ogni 4-5 Secondi finché la VMC non lo esegue; se nel frattempo si sceglie
-  un'altra Velocità (Telecomando, scheda o App), la ripetizione si interrompe e
-  la scelta viene rispettata e gestita dalle regole sopra (es. memorizzata dal
-  Lim. Δ PdR o dall'Umidità). Fanno eccezione Congelamento e Δ Temp., che
-  impongono comunque la loro Velocità.
+  CAMBIO MANUALE DELLA VELOCITÀ: ogni comando dell'automazione viene ripetuto ogni
+  4-5 Secondi finché la VMC non lo esegue; se nel frattempo si sceglie un'altra
+  Velocità (Telecomando, scheda o App), la ripetizione si interrompe e la scelta
+  viene rispettata e gestita dalle regole sopra (es. memorizzata dal Lim. Δ PdR o
+  dall'Umidità). Fanno eccezione Congelamento e Δ Temp., che impongono comunque la
+  loro Velocità, gli Inquinanti ancora presenti, che riavviano la VMC fermata a
+  Velocità 0, e l'Umidità che ha avviato la VMC da Velocità 0, che la riporta alla
+  velocità di avvio.
+
+
+  CAMBIO DI VELOCITÀ DURANTE UN'ALLERTA (comportamento misurato):
+
+  - Congelamento: si sceglie un'altra Velocità → viene riportata subito a Velocità
+  0; a fine allerta va alla Velocità scelta; si sceglie Velocità 0 → la VMC è già
+  ferma: nessun effetto; a fine allerta torna alla Velocità di prima;
+
+  - Δ Temp. > 23 °C: si sceglie un'altra Velocità → viene riportata a Velocità 1;
+  a fine allerta va alla Velocità scelta; si sceglie Velocità 0 → viene riportata
+  a Velocità 1; a fine allerta resta a Velocità 0;
+
+  - Inquinanti (CO₂ e VOC): si sceglie un'altra Velocità → viene mantenuta, anche
+  dopo il rientro degli Inquinanti; si sceglie Velocità 0 → dopo circa 8 Secondi
+  riparte a Velocità 1; al rientro degli Inquinanti torna a Velocità 0;
+
+  - Lim. Δ Punto di Rugiada: si sceglie un'altra Velocità → viene riportata a
+  Velocità 0; la Velocità scelta viene memorizzata e ripristinata a fine allerta;
+  si sceglie Velocità 0 → la VMC è già ferma: nessun effetto; a fine allerta torna
+  alla Velocità di prima;
+
+  - Free Cool./Heat. sfavorevole (VMC ferma in attesa): si sceglie un'altra
+  Velocità → la VMC va alla Velocità scelta e la ripresa automatica in Free
+  Cool./Heat. viene annullata; si sceglie Velocità 0 → la VMC è già ferma: nessun
+  effetto; quando le condizioni tornano favorevoli riprende in Free Cool./Heat.;
+
+  - Umidità, con la VMC già in moto all'inizio: si sceglie un'altra Velocità →
+  memorizzata dopo 4 Secondi e mantenuta a fine Umidità; si sceglie Velocità 0 →
+  la VMC si ferma e resta a Velocità 0, anche a fine Umidità;
+
+  - Umidità, con la VMC avviata da Velocità 0: si sceglie un'altra Velocità → una
+  Velocità diversa da quella di avvio viene memorizzata dopo 4 Secondi e mantenuta
+  a fine Umidità; la stessa Velocità di avvio non cambia nulla; si sceglie
+  Velocità 0 → dopo 4 Secondi riparte alla [Set Velocità Umidità di Avvio]; a fine
+  Umidità torna a Velocità 0. Per fermarla si spegne l'interruttore dell'Umidità.
+
+  Esempio: la VMC è a Velocità 2 e la CO₂ sale; si sceglie Velocità 0: dopo circa
+  8 Secondi la VMC riparte a Velocità 1 e, quando la CO₂ rientra, torna a Velocità
+  0. Se la CO₂ rientra subito dopo la scelta, alla fine la VMC resta a Velocità 0.
+
+  Esempio: la VMC è a Velocità 0 e l'Umidità la avvia in Notturna; si sceglie
+  Velocità 0: dopo 4 Secondi la VMC torna in Notturna e, quando l'umidità rientra,
+  torna a Velocità 0.
 
 
   CALENDARIO: 3 Secondi per l'Ingresso e per l'Uscita dalla Fascia oraria;
