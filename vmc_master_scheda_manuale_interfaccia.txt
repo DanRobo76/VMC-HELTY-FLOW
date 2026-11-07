@@ -10441,7 +10441,7 @@ cards:
                   una donazione libera tramite PayPal: ogni contributo aiuta a dedicare tempo a nuove funzioni, correzioni
                   e aggiornamenti.
                   </td></tr></table>
-                  <table><tr><td width="130"><a href="https://www.paypal.com/ncp/payment/8LT4JJW7MHW6U" target="_blank"><img src="https://raw.githubusercontent.com/DanRobo76/VMC-HELTY-FLOW/main/VMC-HELTY-FLOW-qrcode.png" alt="QR code PayPal per sostenere il progetto" width="130"></a></td><td>
+                  <table><tr><td width="130"><a href="https://www.paypal.com/ncp/payment/8LT4JJW7MHW6U" target="_blank"><img src="https://raw.githubusercontent.com/DanRobo76/VMC-HELTY-FLOW/main/immagini/Informazioni/VMC-HELTY-FLOW-qrcode.png" alt="QR code PayPal per sostenere il progetto" width="130"></a></td><td>
                   <ha-icon icon="mdi:hand-heart-outline"></ha-icon> <b><a href="https://www.paypal.com/ncp/payment/8LT4JJW7MHW6U" target="_blank">Offrimi un ginseng ☕</a></b><br><br>
                   Inquadra il codice QR oppure tocca il link per aprire la pagina PayPal.<br><br>
                   <b>Grazie per il tuo supporto!</b>
@@ -12054,8 +12054,8 @@ cards:
                     <a href="https://raw.githubusercontent.com/DanRobo76/VMC-HELTY-FLOW/main/immagini/Informazioni/18_priorita_allarmi.png?v=20261107" target="_blank"><img src="https://raw.githubusercontent.com/DanRobo76/VMC-HELTY-FLOW/main/immagini/Informazioni/18_priorita_allarmi.png?v=20261107" alt="Priorità degli allarmi" width="100%"></a>
                     <br>
                     <p>&nbsp;&nbsp;&nbsp;&nbsp;
-                      <a href="https://raw.githubusercontent.com/DanRobo76/VMC-HELTY-FLOW/main/Logiche%20di%20Funzionamento.png">
-                        <img src="https://raw.githubusercontent.com/DanRobo76/VMC-HELTY-FLOW/main/Logiche%20di%20Funzionamento.png" alt="Logiche di Funzionamento" width="80%">
+                      <a href="https://raw.githubusercontent.com/DanRobo76/VMC-HELTY-FLOW/main/immagini/Informazioni/Logiche%20di%20Funzionamento.png">
+                        <img src="https://raw.githubusercontent.com/DanRobo76/VMC-HELTY-FLOW/main/immagini/Informazioni/Logiche%20di%20Funzionamento.png" alt="Logiche di Funzionamento" width="80%">
                       </a> 
                     </p> 
                   </details>
@@ -12109,7 +12109,7 @@ cards:
                   [°C] e ogni colonna un'umidità relativa [%]: la cella riporta il Punto di Rugiada che ne
                   risulta e il colore la fascia dell'Indice di Benessere. Tocca l'immagine per ingrandirla.
                   </td></tr></table>
-                  <a href="https://raw.githubusercontent.com/DanRobo76/VMC-HELTY-FLOW/main/Indice%20di%20Benessere.png?v=2" target="_blank"><img src="https://raw.githubusercontent.com/DanRobo76/VMC-HELTY-FLOW/main/Indice%20di%20Benessere.png?v=2" alt="Indice di Benessere – tabella" width="100%"></a>
+                  <a href="https://raw.githubusercontent.com/DanRobo76/VMC-HELTY-FLOW/main/immagini/Informazioni/Indice%20di%20Benessere.png?v=2" target="_blank"><img src="https://raw.githubusercontent.com/DanRobo76/VMC-HELTY-FLOW/main/immagini/Informazioni/Indice%20di%20Benessere.png?v=2" alt="Indice di Benessere – tabella" width="100%"></a>
 
                   </details>
 
@@ -12123,8 +12123,8 @@ cards:
                   Muffa&nbsp;</strong></summary>
 
                   <p align="center">
-                    <a href="https://raw.githubusercontent.com/DanRobo76/VMC-HELTY-FLOW/e7374203f3e78f6e00e57e12ddad196822e024e0/Logiche%20Rischio%20Crescita%20Muffa%20Modello%20di%20Hukka%20e%20Viitanen%20(1999).png" target="_blank">
-                      <img src="https://raw.githubusercontent.com/DanRobo76/VMC-HELTY-FLOW/e7374203f3e78f6e00e57e12ddad196822e024e0/Logiche%20Rischio%20Crescita%20Muffa%20Modello%20di%20Hukka%20e%20Viitanen%20(1999).png"
+                    <a href="https://raw.githubusercontent.com/DanRobo76/VMC-HELTY-FLOW/main/immagini/Informazioni/Logiche%20Rischio%20Crescita%20Muffa%20Modello%20di%20Hukka%20e%20Viitanen%20(1999).png" target="_blank">
+                      <img src="https://raw.githubusercontent.com/DanRobo76/VMC-HELTY-FLOW/main/immagini/Informazioni/Logiche%20Rischio%20Crescita%20Muffa%20Modello%20di%20Hukka%20e%20Viitanen%20(1999).png"
                            alt="Grafico Muffa – Modello di Hukka & Viitanen (1999)"
                            style="max-width:90%;height:auto;">
                     </a>
