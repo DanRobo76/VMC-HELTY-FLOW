@@ -2,7 +2,7 @@
 
 Immagini mostrate in cima alla scheda **VMC HELTY FLOW** (voce 22 del pannello informazioni).
 
-Formato: **WebP** con sfondo trasparente (animato per le velocità, fermo per Velocità 0, OFF-Line e icona), 1520 × 540 pixel; icona 480 × 266 pixel.
+Formato: **WebP** con sfondo trasparente (animato per le velocità e per `ferma_allerta`, con il LED che lampeggia; fermo per le altre immagini di Velocità 0, OFF-Line e icona), 1520 × 540 pixel; icona 480 × 266 pixel.
 
 ## Significato del nome
 
@@ -34,7 +34,7 @@ Velocità con la stessa portata usano la stessa animazione.
 |---|---|
 | `ferma_off_line.webp` | VMC OFF-Line o non disponibile (LED grigio) |
 | `ferma_normale.webp` | Velocità 0 senza allerte (LED bianco, solo la VMC senza flussi) |
-| `ferma_allerta.webp` | Velocità 0 per un'allerta che blocca la VMC (LED giallo) |
+| `ferma_allerta.webp` | Velocità 0 per un'allerta che blocca la VMC (LED giallo lampeggiante, solo la VMC senza flussi) |
 
 ## Altre immagini
 
