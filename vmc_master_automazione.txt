@@ -112,8 +112,11 @@ description: >-
 
   - Inquinanti (CO₂ e VOC): 8 Secondi. Se la VMC è partita da Velocità 0 resta a
   Velocità 1 fino al rientro degli Inquinanti, poi torna a Velocità 0; se nel
-  frattempo l'utente sceglie un'altra Velocità (anche durante il Congelamento o
-  il Δ Temp.) questa viene mantenuta, anche dopo il rientro;
+  frattempo l'utente sceglie un'altra Velocità diversa da 0 (anche durante il
+  Congelamento o il Δ Temp.) questa viene mantenuta, anche dopo il rientro; se
+  invece sceglie Velocità 0 con gli Inquinanti ancora presenti, dopo circa 8
+  Secondi la VMC riparte a Velocità 1 e al rientro degli Inquinanti torna a
+  Velocità 0, anche se prima dell'allerta era a un'altra Velocità;
 
   - Sup. Lim. Δ PdR con Inquinanti: 12 Secondi;
 
@@ -131,17 +134,65 @@ description: >-
 
   - Umidità: 28 Secondi (la logica Umidità memorizza subito la Velocità in uso);
   se durante l'allerta si cambia Velocità, la nuova Velocità viene memorizzata
-  dopo 4 Secondi e mantenuta a fine Umidità;
+  dopo 4 Secondi e mantenuta a fine Umidità; se però l'Umidità ha avviato la VMC
+  da Velocità 0 e la VMC risulta ancora, o di nuovo, a Velocità 0, dopo 4 Secondi
+  viene riportata alla [Set Velocità Umidità di Avvio] e a fine Umidità torna a
+  Velocità 0 (per fermarla si spegne l'interruttore dell'Umidità);
 
   - Black-Out: 32 Secondi per il Rilevamento e per il Ripristino.
 
 
-  CAMBIO MANUALE DELLA VELOCITÀ: ogni comando dell'automazione viene ripetuto
-  ogni 4-5 Secondi finché la VMC non lo esegue; se nel frattempo si sceglie
-  un'altra Velocità (Telecomando, scheda o App), la ripetizione si interrompe e
-  la scelta viene rispettata e gestita dalle regole sopra (es. memorizzata dal
-  Lim. Δ PdR o dall'Umidità). Fanno eccezione Congelamento e Δ Temp., che
-  impongono comunque la loro Velocità.
+  CAMBIO MANUALE DELLA VELOCITÀ: ogni comando dell'automazione viene ripetuto ogni
+  4-5 Secondi finché la VMC non lo esegue; se nel frattempo si sceglie un'altra
+  Velocità (Telecomando, scheda o App), la ripetizione si interrompe e la scelta
+  viene rispettata e gestita dalle regole sopra (es. memorizzata dal Lim. Δ PdR o
+  dall'Umidità). Fanno eccezione Congelamento e Δ Temp., che impongono comunque la
+  loro Velocità, gli Inquinanti ancora presenti, che riavviano la VMC fermata a
+  Velocità 0, e l'Umidità che ha avviato la VMC da Velocità 0, che la riporta alla
+  velocità di avvio.
+
+
+  CAMBIO DI VELOCITÀ DURANTE UN'ALLERTA (comportamento misurato):
+
+  - Congelamento: si sceglie un'altra Velocità → viene riportata subito a Velocità
+  0; a fine allerta va alla Velocità scelta; si sceglie Velocità 0 → la VMC è già
+  ferma: nessun effetto; a fine allerta torna alla Velocità di prima;
+
+  - Δ Temp. > 23 °C: si sceglie un'altra Velocità → viene riportata a Velocità 1;
+  a fine allerta va alla Velocità scelta; si sceglie Velocità 0 → viene riportata
+  a Velocità 1; a fine allerta resta a Velocità 0;
+
+  - Inquinanti (CO₂ e VOC): si sceglie un'altra Velocità → viene mantenuta, anche
+  dopo il rientro degli Inquinanti; si sceglie Velocità 0 → dopo circa 8 Secondi
+  riparte a Velocità 1; al rientro degli Inquinanti torna a Velocità 0;
+
+  - Lim. Δ Punto di Rugiada: si sceglie un'altra Velocità → viene riportata a
+  Velocità 0; la Velocità scelta viene memorizzata e ripristinata a fine allerta;
+  si sceglie Velocità 0 → la VMC è già ferma: nessun effetto; a fine allerta torna
+  alla Velocità di prima;
+
+  - Free Cool./Heat. sfavorevole (VMC ferma in attesa): si sceglie un'altra
+  Velocità → la VMC va alla Velocità scelta e la ripresa automatica in Free
+  Cool./Heat. viene annullata; si sceglie Velocità 0 → la VMC è già ferma: nessun
+  effetto; quando le condizioni tornano favorevoli riprende in Free Cool./Heat.;
+
+  - Umidità, con la VMC già in moto all'inizio: si sceglie un'altra Velocità →
+  memorizzata dopo 4 Secondi e mantenuta a fine Umidità; si sceglie Velocità 0 →
+  la VMC si ferma e resta a Velocità 0, anche a fine Umidità;
+
+  - Umidità, con la VMC avviata da Velocità 0: si sceglie un'altra Velocità → una
+  Velocità diversa da quella di avvio viene memorizzata dopo 4 Secondi e mantenuta
+  a fine Umidità; la stessa Velocità di avvio non cambia nulla; si sceglie
+  Velocità 0 → dopo 4 Secondi riparte alla [Set Velocità Umidità di Avvio]; a fine
+  Umidità torna a Velocità 0. Per fermarla si spegne l'interruttore dell'Umidità.
+
+  Esempio: la VMC è a Velocità 2 e la CO₂ sale; si sceglie Velocità 0: dopo circa
+  8 Secondi la VMC riparte a Velocità 1 e, quando la CO₂ rientra, torna a Velocità
+  0. Se la CO₂ rientra subito dopo la scelta, alla fine la VMC resta a Velocità 0.
+
+  Esempio: la VMC è a Velocità 0 e l'Umidità la avvia in Notturna; si sceglie
+  Velocità 0: dopo 4 Secondi la VMC torna in Notturna e, quando l'umidità rientra,
+  torna a Velocità 0.
 
 
   CALENDARIO: 3 Secondi per l'Ingresso e per l'Uscita dalla Fascia oraria;
@@ -7401,6 +7452,56 @@ actions:
                     - >-
                       input_boolean.vmc_master_spia_co2_o_voc_partenza_ritorno_velocita_0
                 action: input_boolean.turn_off
+              - variables:
+                  vel_prima_del_comando: "{{ states('sensor.vmc_master_status_ventola_lettura_codice_interpretato') }}"
+                alias: Memoria Inquinanti/PdR senza Inquinanti in corso -> spenta la memoria, si arresta la VMC come nel ramo principale (correzione O3)
+              - alias: >-
+                  Lancia il Comando Velocità 0 Finchè la Velocità diventa
+                  Velocità 0
+                repeat:
+                  sequence:
+                    - data: {}
+                      target:
+                        entity_id: input_boolean.vmc_master_spia_velocita_1_un_solo_avvio
+                      action: input_boolean.turn_on
+                    - data: {}
+                      target:
+                        entity_id:
+                          - >-
+                            input_boolean.vmc_master_spia_velocita_0_un_solo_avvio
+                          - >-
+                            input_boolean.vmc_master_spia_velocita_2_un_solo_avvio
+                          - >-
+                            input_boolean.vmc_master_spia_velocita_3_un_solo_avvio
+                          - >-
+                            input_boolean.vmc_master_spia_velocita_4_un_solo_avvio
+                          - >-
+                            input_boolean.vmc_master_spia_velocita_freecooling_un_solo_avvio
+                          - >-
+                            input_boolean.vmc_master_spia_velocita_iperventilazione_un_solo_avvio
+                          - >-
+                            input_boolean.vmc_master_spia_velocita_notturna_un_solo_avvio
+                      action: input_boolean.turn_off
+                    - data: {}
+                      action: shell_command.vmc_master_velocita_0
+                    - delay:
+                        hours: 0
+                        minutes: 0
+                        seconds: 1
+                        milliseconds: 0
+                    - action: homeassistant.update_entity
+                      target:
+                        entity_id: sensor.vmc_master_status_ventola
+                      alias: Rilettura immediata della velocità (la velocità non ancora aggiornata non va presa per una scelta dell'utente)
+                    - delay:
+                        hours: 0
+                        minutes: 0
+                        seconds: 3
+                        milliseconds: 0
+                  until:
+                    - alias: Controlla se la Velocità è diversa da Velocità 0
+                      condition: template
+                      value_template: "{{ states('sensor.vmc_master_status_ventola_lettura_codice_interpretato') == 'Velocità 0' or (vel_prima_del_comando not in ['Non disponibile', 'unknown', 'unavailable', ''] and states('sensor.vmc_master_status_ventola_lettura_codice_interpretato') not in [vel_prima_del_comando, 'Non disponibile', 'unknown', 'unavailable', '']) }}"
         alias: >-
           Condizioni Sfavorevoli a Velocità 1 -> Imposta Velocità 0 se Spia
           Congelamento Off e Spia Delta Temp Off e se Spia Inquinanti OFF
@@ -14998,49 +15099,36 @@ actions:
                             alias: Memorizza la velocità prima del comando (un cambio fatto dall'utente ferma il ciclo di conferma)
                           - repeat:
                               sequence:
+                                - alias: Fine Inquinanti -> prima il comando Velocità 0, poi spegne le memorie di velocità scelta e le memorie Inquinanti (correzione O5)
+                                  data: {}
+                                  action: shell_command.vmc_master_velocita_0
                                 - data: {}
                                   target:
                                     entity_id:
-                                      - input_boolean.vmc_master_spia_co2_o_voc
-                                      - >-
-                                        input_boolean.vmc_master_spia_co2_o_voc_partenza_ritorno_velocita_0
-                                      - >-
-                                        input_boolean.vmc_master_spia_velocita_1_co2_o_voc_pdr
-                                      - >-
-                                        input_boolean.vmc_master_spia_velocita_0_co2_o_voc
-                                      - >-
-                                        input_boolean.vmc_master_spia_velocita_1_co2_o_voc
-                                      - >-
-                                        input_boolean.vmc_master_spia_velocita_2_co2_o_voc
-                                      - >-
-                                        input_boolean.vmc_master_spia_velocita_3_co2_o_voc
-                                      - >-
-                                        input_boolean.vmc_master_spia_velocita_4_co2_o_voc
-                                      - >-
-                                        input_boolean.vmc_master_spia_velocita_iperventilazione_co2_o_voc
-                                      - >-
-                                        input_boolean.vmc_master_spia_velocita_notturna_co2_o_voc
-                                      - >-
-                                        input_boolean.vmc_master_spia_velocita_freecooling_co2_o_voc
-                                      - >-
-                                        input_boolean.vmc_master_spia_velocita_0_un_solo_avvio
-                                      - >-
-                                        input_boolean.vmc_master_spia_velocita_1_un_solo_avvio
-                                      - >-
-                                        input_boolean.vmc_master_spia_velocita_2_un_solo_avvio
-                                      - >-
-                                        input_boolean.vmc_master_spia_velocita_3_un_solo_avvio
-                                      - >-
-                                        input_boolean.vmc_master_spia_velocita_4_un_solo_avvio
-                                      - >-
-                                        input_boolean.vmc_master_spia_velocita_notturna_un_solo_avvio
-                                      - >-
-                                        input_boolean.vmc_master_spia_velocita_iperventilazione_un_solo_avvio
-                                      - >-
-                                        input_boolean.vmc_master_spia_velocita_freecooling_un_solo_avvio
+                                    - input_boolean.vmc_master_spia_velocita_0_un_solo_avvio
+                                    - input_boolean.vmc_master_spia_velocita_1_un_solo_avvio
+                                    - input_boolean.vmc_master_spia_velocita_2_un_solo_avvio
+                                    - input_boolean.vmc_master_spia_velocita_3_un_solo_avvio
+                                    - input_boolean.vmc_master_spia_velocita_4_un_solo_avvio
+                                    - input_boolean.vmc_master_spia_velocita_notturna_un_solo_avvio
+                                    - input_boolean.vmc_master_spia_velocita_iperventilazione_un_solo_avvio
+                                    - input_boolean.vmc_master_spia_velocita_freecooling_un_solo_avvio
                                   action: input_boolean.turn_off
                                 - data: {}
-                                  action: shell_command.vmc_master_velocita_0
+                                  target:
+                                    entity_id:
+                                    - input_boolean.vmc_master_spia_co2_o_voc
+                                    - input_boolean.vmc_master_spia_co2_o_voc_partenza_ritorno_velocita_0
+                                    - input_boolean.vmc_master_spia_velocita_1_co2_o_voc_pdr
+                                    - input_boolean.vmc_master_spia_velocita_0_co2_o_voc
+                                    - input_boolean.vmc_master_spia_velocita_1_co2_o_voc
+                                    - input_boolean.vmc_master_spia_velocita_2_co2_o_voc
+                                    - input_boolean.vmc_master_spia_velocita_3_co2_o_voc
+                                    - input_boolean.vmc_master_spia_velocita_4_co2_o_voc
+                                    - input_boolean.vmc_master_spia_velocita_iperventilazione_co2_o_voc
+                                    - input_boolean.vmc_master_spia_velocita_notturna_co2_o_voc
+                                    - input_boolean.vmc_master_spia_velocita_freecooling_co2_o_voc
+                                  action: input_boolean.turn_off
                                 - delay:
                                     hours: 0
                                     minutes: 0
@@ -15219,7 +15307,7 @@ actions:
                 alias: Ritorno a Velocità 1
               - conditions:
                   - condition: template
-                    value_template: ' {{states(''input_boolean.vmc_master_spia_velocita_2_co2_o_voc'')==''on''}}'
+                    value_template: " {{states('input_boolean.vmc_master_spia_velocita_2_co2_o_voc')=='on'}}"
                 sequence:
                   - choose:
                       - conditions:
@@ -15279,7 +15367,7 @@ actions:
                 alias: Ritorno a Velocità 2
               - conditions:
                   - condition: template
-                    value_template: ' {{states(''input_boolean.vmc_master_spia_velocita_3_co2_o_voc'')==''on''}}'
+                    value_template: " {{states('input_boolean.vmc_master_spia_velocita_3_co2_o_voc')=='on'}}"
                 sequence:
                   - choose:
                       - conditions:
@@ -15339,7 +15427,7 @@ actions:
                 alias: Ritorno a Velocità 3
               - conditions:
                   - condition: template
-                    value_template: ' {{states(''input_boolean.vmc_master_spia_velocita_4_co2_o_voc'')==''on''}}'
+                    value_template: " {{states('input_boolean.vmc_master_spia_velocita_4_co2_o_voc')=='on'}}"
                 sequence:
                   - choose:
                       - conditions:
@@ -15399,7 +15487,7 @@ actions:
                 alias: Ritorno a Velocità 4
               - conditions:
                   - condition: template
-                    value_template: ' {{states(''input_boolean.vmc_master_spia_velocita_notturna_co2_o_voc'')==''on''}}'
+                    value_template: " {{states('input_boolean.vmc_master_spia_velocita_notturna_co2_o_voc')=='on'}}"
                 sequence:
                   - choose:
                       - conditions:
@@ -15459,7 +15547,7 @@ actions:
                 alias: Ritorno a Velocità Notturna
               - conditions:
                   - condition: template
-                    value_template: ' {{states(''input_boolean.vmc_master_spia_velocita_iperventilazione_co2_o_voc'')==''on''}}'
+                    value_template: " {{states('input_boolean.vmc_master_spia_velocita_iperventilazione_co2_o_voc')=='on'}}"
                 sequence:
                   - choose:
                       - conditions:
@@ -15869,13 +15957,13 @@ actions:
                       states('input_boolean.vmc_master_spia_velocita_freecooling_un_solo_avvio_per_programmazione_freeheating')=='on'))}}
                     enabled: true
                 sequence:
-                  - alias: 'VMC che non ha eseguito l''avvio (velocità mai cambiata dall''inizio dell''allerta) -> come l''avvio normale: l''attesa del Free resta (03-11-2026)'
+                  - alias: "VMC che non ha eseguito l'avvio (velocità mai cambiata dall'inizio dell'allerta) -> come l'avvio normale: l'attesa del Free resta (03-11-2026)"
                     if:
                     - condition: template
                       value_template: "{{ states.sensor.vmc_master_status_ventola_lettura_codice_interpretato is not none and states.input_boolean.vmc_master_spia_co2_o_voc is not none\n   and states.sensor.vmc_master_status_ventola_lettura_codice_interpretato.last_changed <= states.input_boolean.vmc_master_spia_co2_o_voc.last_changed }}"
                     then:
                     - variables:
-                        vel_prima_del_comando: '{{ states(''sensor.vmc_master_status_ventola_lettura_codice_interpretato'') }}'
+                        vel_prima_del_comando: "{{ states('sensor.vmc_master_status_ventola_lettura_codice_interpretato') }}"
                       alias: Memorizza la velocità prima del comando (un cambio fatto dall'utente ferma il ciclo di conferma)
                     - repeat:
                         sequence:
@@ -15907,7 +15995,7 @@ actions:
                             milliseconds: 0
                         until:
                         - condition: template
-                          value_template: '{{ states(''sensor.vmc_master_status_ventola_lettura_codice_interpretato'') == ''Velocità 1'' or (vel_prima_del_comando not in [''Non disponibile'', ''unknown'', ''unavailable'', ''''] and states(''sensor.vmc_master_status_ventola_lettura_codice_interpretato'') not in [vel_prima_del_comando, ''Non disponibile'', ''unknown'', ''unavailable'', '''']) }}'
+                          value_template: "{{ states('sensor.vmc_master_status_ventola_lettura_codice_interpretato') == 'Velocità 1' or (vel_prima_del_comando not in ['Non disponibile', 'unknown', 'unavailable', ''] and states('sensor.vmc_master_status_ventola_lettura_codice_interpretato') not in [vel_prima_del_comando, 'Non disponibile', 'unknown', 'unavailable', '']) }}"
                     else:
                       - variables:
                           vel_prima_del_comando: "{{ states('sensor.vmc_master_status_ventola_lettura_codice_interpretato') }}"
@@ -16022,54 +16110,33 @@ actions:
                     alias: Memorizza la velocità prima del comando (un cambio fatto dall'utente ferma il ciclo di conferma)
                   - repeat:
                       sequence:
-                        - data: {}
+                        - alias: Inquinanti con la VMC in attesa del Free e memorie Inquinanti spente -> memoria Inquinanti 1, l'attesa Free resta come nel ramo c2 (correzione O4)
+                          data: {}
                           target:
                             entity_id:
-                              - >-
-                                input_boolean.vmc_master_spia_velocita_1_co2_o_voc_pdr
-                              - >-
-                                input_boolean.vmc_master_spia_co2_o_voc_partenza_ritorno_velocita_0
                               - input_boolean.vmc_master_spia_co2_o_voc
-                              - >-
-                                input_boolean.vmc_master_spia_velocita_1_co2_o_voc
+                              - input_boolean.vmc_master_spia_velocita_1_co2_o_voc
                           action: input_boolean.turn_on
                         - data: {}
                           target:
                             entity_id:
-                              - >-
-                                input_boolean.vmc_master_spia_velocita_0_co2_o_voc
-                              - >-
-                                input_boolean.vmc_master_spia_velocita_2_co2_o_voc
-                              - >-
-                                input_boolean.vmc_master_spia_velocita_3_co2_o_voc
-                              - >-
-                                input_boolean.vmc_master_spia_velocita_4_co2_o_voc
-                              - >-
-                                input_boolean.vmc_master_spia_velocita_notturna_co2_o_voc
-                              - >-
-                                input_boolean.vmc_master_spia_velocita_iperventilazione_co2_o_voc
-                              - >-
-                                input_boolean.vmc_master_spia_velocita_freecooling_co2_o_voc
-                              - >-
-                                input_boolean.vmc_master_spia_velocita_0_un_solo_avvio
-                              - >-
-                                input_boolean.vmc_master_spia_velocita_1_un_solo_avvio
-                              - >-
-                                input_boolean.vmc_master_spia_velocita_2_un_solo_avvio
-                              - >-
-                                input_boolean.vmc_master_spia_velocita_3_un_solo_avvio
-                              - >-
-                                input_boolean.vmc_master_spia_velocita_4_un_solo_avvio
-                              - >-
-                                input_boolean.vmc_master_spia_velocita_freecooling_un_solo_avvio
-                              - >-
-                                input_boolean.vmc_master_spia_velocita_iperventilazione_un_solo_avvio
-                              - >-
-                                input_boolean.vmc_master_spia_velocita_notturna_un_solo_avvio
-                              - >-
-                                input_boolean.vmc_master_spia_velocita_freecooling_un_solo_avvio_per_programmazione_freecooling
-                              - >-
-                                input_boolean.vmc_master_spia_velocita_freecooling_un_solo_avvio_per_programmazione_freeheating
+                              - input_boolean.vmc_master_spia_velocita_1_co2_o_voc_pdr
+                              - input_boolean.vmc_master_spia_co2_o_voc_partenza_ritorno_velocita_0
+                              - input_boolean.vmc_master_spia_velocita_0_co2_o_voc
+                              - input_boolean.vmc_master_spia_velocita_2_co2_o_voc
+                              - input_boolean.vmc_master_spia_velocita_3_co2_o_voc
+                              - input_boolean.vmc_master_spia_velocita_4_co2_o_voc
+                              - input_boolean.vmc_master_spia_velocita_notturna_co2_o_voc
+                              - input_boolean.vmc_master_spia_velocita_iperventilazione_co2_o_voc
+                              - input_boolean.vmc_master_spia_velocita_freecooling_co2_o_voc
+                              - input_boolean.vmc_master_spia_velocita_0_un_solo_avvio
+                              - input_boolean.vmc_master_spia_velocita_1_un_solo_avvio
+                              - input_boolean.vmc_master_spia_velocita_2_un_solo_avvio
+                              - input_boolean.vmc_master_spia_velocita_3_un_solo_avvio
+                              - input_boolean.vmc_master_spia_velocita_4_un_solo_avvio
+                              - input_boolean.vmc_master_spia_velocita_freecooling_un_solo_avvio
+                              - input_boolean.vmc_master_spia_velocita_iperventilazione_un_solo_avvio
+                              - input_boolean.vmc_master_spia_velocita_notturna_un_solo_avvio
                           action: input_boolean.turn_off
                         - data: {}
                           action: shell_command.vmc_master_velocita_1
@@ -17057,7 +17124,7 @@ actions:
             default:
             - alias: 'Nessun ramo riconosciuto: la VMC è ferma con Inquinanti in corso -> Velocità 1 (R2, 03-11-2026)'
               variables:
-                vel_prima_del_comando: '{{ states(''sensor.vmc_master_status_ventola_lettura_codice_interpretato'') }}'
+                vel_prima_del_comando: "{{ states('sensor.vmc_master_status_ventola_lettura_codice_interpretato') }}"
             - repeat:
                 sequence:
                 - data: {}
@@ -17078,7 +17145,7 @@ actions:
                     milliseconds: 0
                 until:
                 - condition: template
-                  value_template: '{{ states(''sensor.vmc_master_status_ventola_lettura_codice_interpretato'') == ''Velocità 1'' or (vel_prima_del_comando not in [''Non disponibile'', ''unknown'', ''unavailable'', ''''] and states(''sensor.vmc_master_status_ventola_lettura_codice_interpretato'') not in [vel_prima_del_comando, ''Non disponibile'', ''unknown'', ''unavailable'', '''']) }}'
+                  value_template: "{{ states('sensor.vmc_master_status_ventola_lettura_codice_interpretato') == 'Velocità 1' or (vel_prima_del_comando not in ['Non disponibile', 'unknown', 'unavailable', ''] and states('sensor.vmc_master_status_ventola_lettura_codice_interpretato') not in [vel_prima_del_comando, 'Non disponibile', 'unknown', 'unavailable', '']) }}"
         alias: >-
           Spia Velocità 0 CO₂ e/o VOC se Spia Congelamento Off e Spia Delta Temp
           Off
@@ -23438,7 +23505,7 @@ actions:
                   ON e
                   vmc_master_spia_velocita_freecooling_un_solo_avvio_per_programmazione_freeheating
                   OFF con PdR OFF e vmc_master_spia_velocita_1_co2_o_voc=ON e
-                  vmc_master_spia_velocita_freecooling_un_solo_avvio='on''
+                  vmc_master_spia_velocita_freecooling_un_solo_avvio='on'
               - conditions:
                   - condition: and
                     conditions:
@@ -23627,48 +23694,33 @@ actions:
                     alias: Memorizza la velocità prima del comando (un cambio fatto dall'utente ferma il ciclo di conferma)
                   - repeat:
                       sequence:
-                        - data: {}
+                        - alias: PdR con memoria Free, Free sfavorevole e attesa Free spenta -> riaccende l'attesa Free (come le opzioni 139/140) e memoria Inquinanti 1 senza «partiti da 0», come il ramo gemello c1 (correzione O6)
+                          data: {}
                           target:
                             entity_id:
-                              - >-
-                                input_boolean.vmc_master_spia_velocita_1_co2_o_voc_pdr
-                              - >-
-                                input_boolean.vmc_master_spia_co2_o_voc_partenza_ritorno_velocita_0
                               - input_boolean.vmc_master_spia_co2_o_voc
-                              - >-
-                                input_boolean.vmc_master_spia_velocita_1_co2_o_voc
+                              - input_boolean.vmc_master_spia_velocita_1_co2_o_voc
+                              - input_boolean.vmc_master_spia_velocita_freecooling_un_solo_avvio_per_programmazione_freeheating
                           action: input_boolean.turn_on
                         - data: {}
                           target:
                             entity_id:
-                              - >-
-                                input_boolean.vmc_master_spia_velocita_0_co2_o_voc
-                              - >-
-                                input_boolean.vmc_master_spia_velocita_2_co2_o_voc
-                              - >-
-                                input_boolean.vmc_master_spia_velocita_3_co2_o_voc
-                              - >-
-                                input_boolean.vmc_master_spia_velocita_4_co2_o_voc
-                              - >-
-                                input_boolean.vmc_master_spia_velocita_notturna_co2_o_voc
-                              - >-
-                                input_boolean.vmc_master_spia_velocita_iperventilazione_co2_o_voc
-                              - >-
-                                input_boolean.vmc_master_spia_velocita_freecooling_co2_o_voc
-                              - >-
-                                input_boolean.vmc_master_spia_velocita_0_un_solo_avvio
-                              - >-
-                                input_boolean.vmc_master_spia_velocita_1_un_solo_avvio
-                              - >-
-                                input_boolean.vmc_master_spia_velocita_2_un_solo_avvio
-                              - >-
-                                input_boolean.vmc_master_spia_velocita_3_un_solo_avvio
-                              - >-
-                                input_boolean.vmc_master_spia_velocita_4_un_solo_avvio
-                              - >-
-                                input_boolean.vmc_master_spia_velocita_iperventilazione_un_solo_avvio
-                              - >-
-                                input_boolean.vmc_master_spia_velocita_notturna_un_solo_avvio
+                              - input_boolean.vmc_master_spia_velocita_0_co2_o_voc
+                              - input_boolean.vmc_master_spia_velocita_1_co2_o_voc_pdr
+                              - input_boolean.vmc_master_spia_co2_o_voc_partenza_ritorno_velocita_0
+                              - input_boolean.vmc_master_spia_velocita_2_co2_o_voc
+                              - input_boolean.vmc_master_spia_velocita_3_co2_o_voc
+                              - input_boolean.vmc_master_spia_velocita_4_co2_o_voc
+                              - input_boolean.vmc_master_spia_velocita_notturna_co2_o_voc
+                              - input_boolean.vmc_master_spia_velocita_iperventilazione_co2_o_voc
+                              - input_boolean.vmc_master_spia_velocita_freecooling_co2_o_voc
+                              - input_boolean.vmc_master_spia_velocita_0_un_solo_avvio
+                              - input_boolean.vmc_master_spia_velocita_1_un_solo_avvio
+                              - input_boolean.vmc_master_spia_velocita_2_un_solo_avvio
+                              - input_boolean.vmc_master_spia_velocita_3_un_solo_avvio
+                              - input_boolean.vmc_master_spia_velocita_4_un_solo_avvio
+                              - input_boolean.vmc_master_spia_velocita_iperventilazione_un_solo_avvio
+                              - input_boolean.vmc_master_spia_velocita_notturna_un_solo_avvio
                           action: input_boolean.turn_off
                         - data: {}
                           action: shell_command.vmc_master_velocita_1
@@ -23865,48 +23917,33 @@ actions:
                     alias: Memorizza la velocità prima del comando (un cambio fatto dall'utente ferma il ciclo di conferma)
                   - repeat:
                       sequence:
-                        - data: {}
+                        - alias: PdR con memoria Free, Free sfavorevole e attesa Free spenta -> riaccende l'attesa Free (come le opzioni 139/140) e memoria Inquinanti 1 senza «partiti da 0», come il ramo gemello c0 (correzione O6)
+                          data: {}
                           target:
                             entity_id:
-                              - >-
-                                input_boolean.vmc_master_spia_velocita_1_co2_o_voc_pdr
-                              - >-
-                                input_boolean.vmc_master_spia_co2_o_voc_partenza_ritorno_velocita_0
                               - input_boolean.vmc_master_spia_co2_o_voc
-                              - >-
-                                input_boolean.vmc_master_spia_velocita_1_co2_o_voc
+                              - input_boolean.vmc_master_spia_velocita_1_co2_o_voc
+                              - input_boolean.vmc_master_spia_velocita_freecooling_un_solo_avvio_per_programmazione_freecooling
                           action: input_boolean.turn_on
                         - data: {}
                           target:
                             entity_id:
-                              - >-
-                                input_boolean.vmc_master_spia_velocita_0_co2_o_voc
-                              - >-
-                                input_boolean.vmc_master_spia_velocita_2_co2_o_voc
-                              - >-
-                                input_boolean.vmc_master_spia_velocita_3_co2_o_voc
-                              - >-
-                                input_boolean.vmc_master_spia_velocita_4_co2_o_voc
-                              - >-
-                                input_boolean.vmc_master_spia_velocita_notturna_co2_o_voc
-                              - >-
-                                input_boolean.vmc_master_spia_velocita_iperventilazione_co2_o_voc
-                              - >-
-                                input_boolean.vmc_master_spia_velocita_freecooling_co2_o_voc
-                              - >-
-                                input_boolean.vmc_master_spia_velocita_0_un_solo_avvio
-                              - >-
-                                input_boolean.vmc_master_spia_velocita_1_un_solo_avvio
-                              - >-
-                                input_boolean.vmc_master_spia_velocita_2_un_solo_avvio
-                              - >-
-                                input_boolean.vmc_master_spia_velocita_3_un_solo_avvio
-                              - >-
-                                input_boolean.vmc_master_spia_velocita_4_un_solo_avvio
-                              - >-
-                                input_boolean.vmc_master_spia_velocita_iperventilazione_un_solo_avvio
-                              - >-
-                                input_boolean.vmc_master_spia_velocita_notturna_un_solo_avvio
+                              - input_boolean.vmc_master_spia_velocita_0_co2_o_voc
+                              - input_boolean.vmc_master_spia_velocita_1_co2_o_voc_pdr
+                              - input_boolean.vmc_master_spia_co2_o_voc_partenza_ritorno_velocita_0
+                              - input_boolean.vmc_master_spia_velocita_2_co2_o_voc
+                              - input_boolean.vmc_master_spia_velocita_3_co2_o_voc
+                              - input_boolean.vmc_master_spia_velocita_4_co2_o_voc
+                              - input_boolean.vmc_master_spia_velocita_notturna_co2_o_voc
+                              - input_boolean.vmc_master_spia_velocita_iperventilazione_co2_o_voc
+                              - input_boolean.vmc_master_spia_velocita_freecooling_co2_o_voc
+                              - input_boolean.vmc_master_spia_velocita_0_un_solo_avvio
+                              - input_boolean.vmc_master_spia_velocita_1_un_solo_avvio
+                              - input_boolean.vmc_master_spia_velocita_2_un_solo_avvio
+                              - input_boolean.vmc_master_spia_velocita_3_un_solo_avvio
+                              - input_boolean.vmc_master_spia_velocita_4_un_solo_avvio
+                              - input_boolean.vmc_master_spia_velocita_iperventilazione_un_solo_avvio
+                              - input_boolean.vmc_master_spia_velocita_notturna_un_solo_avvio
                           action: input_boolean.turn_off
                         - data: {}
                           action: shell_command.vmc_master_velocita_1
@@ -25814,49 +25851,77 @@ actions:
             id:
               - umidita_velocita_0
         sequence:
-          - action: input_boolean.turn_on
-            metadata: {}
-            data: {}
-            target:
-              entity_id: input_boolean.vmc_master_spia_umidita_velocita_0
-          - action: input_boolean.turn_off
-            metadata: {}
-            data: {}
-            target:
-              entity_id:
-                - input_boolean.vmc_master_spia_umidita_velocita_1
-                - input_boolean.vmc_master_spia_umidita_velocita_2
-                - input_boolean.vmc_master_spia_umidita_velocita_3
-                - input_boolean.vmc_master_spia_umidita_velocita_4
-                - input_boolean.vmc_master_spia_umidita_velocita_notturna
-                - >-
-                  input_boolean.vmc_master_spia_umidita_velocita_iperventilazione
-                - input_boolean.vmc_master_spia_umidita_velocita_freecooling
-          - variables:
-              vel_prima_del_comando: "{{ states('sensor.vmc_master_status_ventola_lettura_codice_interpretato') }}"
-            alias: Memorizza la velocità prima del comando (un cambio fatto dall'utente ferma il ciclo di conferma)
-          - repeat:
-              sequence:
-                - action: shell_command.vmc_master_velocita_0
-                  metadata: {}
-                  data: {}
-                - delay:
-                    hours: 0
-                    minutes: 0
-                    seconds: 1
-                    milliseconds: 0
-                - action: homeassistant.update_entity
-                  target:
-                    entity_id: sensor.vmc_master_status_ventola
-                  alias: Rilettura immediata della velocità (la velocità non ancora aggiornata non va presa per una scelta dell'utente)
-                - delay:
-                    hours: 0
-                    minutes: 0
-                    seconds: 4
-                    milliseconds: 0
-              until:
-                - condition: template
-                  value_template: "{{ states('sensor.vmc_master_status_ventola_lettura_codice_interpretato') == 'Velocità 0' or (vel_prima_del_comando not in ['Non disponibile', 'unknown', 'unavailable', ''] and states('sensor.vmc_master_status_ventola_lettura_codice_interpretato') not in [vel_prima_del_comando, 'Non disponibile', 'unknown', 'unavailable', '']) }}"
+          - alias: Umidità che ha avviato la VMC da Velocità 0 e VMC ancora (o di nuovo) a 0 -> rimanda la velocità di avvio dell'opzione 175, la memoria resta (correzione U3)
+            if:
+              - condition: template
+                value_template: "{{ is_state('input_boolean.vmc_master_spia_umidita_velocita_0', 'on') and states('input_select.vmc_master_speed_umidita') != 'Velocità 0' and not (trigger.from_state is defined and trigger.from_state is not none and trigger.from_state.state in ['Non disponibile', 'sconosciuto', 'unknown', 'unavailable', '', 'OFF-Line']) }}"
+                alias: Memoria «a fine allerta torna a 0» dell'avvio da Velocità 0, programmata diversa da 0, lettura della velocità non appena tornata disponibile
+            then:
+              - variables:
+                  vel_prima_del_comando: "{{ states('sensor.vmc_master_status_ventola_lettura_codice_interpretato') }}"
+                  free_con_allerte: "{{ states('input_select.vmc_master_speed_umidita') == 'Free Cool./Heat.' and\n   (\n    states('sensor.vmc_master_alert_monitoraggio_free_heating_o_free_cooling_allert_interfaccia_avvisi') in [\n      \"Allerta Free Heating Programmato (Raffrescamento Arrestato)\",\n      \"Allerta Free Heating Programmato (Raffrescamento in atto)\",\n      \"Allerta Free Heating Programmato (Raffrescamento in atto, Presenza di Inquinanti)\",\n      \"Allerta Free Heating Programmato (Raffrescamento Arrestato, Presenza di Inquinanti)\",\n      \"Allerta Free Cooling Programmato (Riscaldamento in atto)\",\n      \"Allerta Free Cooling Programmato (Riscaldamento Arrestato)\",\n      \"Allerta Free Cooling Programmato (Riscaldamento Arrestato, Presenza di Inquinanti)\",\n      \"Allerta Free Cooling Programmato (Riscaldamento in atto, Presenza di Inquinanti)\",\n      \"Allerta Raffrescamento in atto\",\n      \"Allerta Riscaldamento in atto\",\n      \"Allerta Riscaldamento in atto, Presenza di Inquinanti\",\n      \"Allerta Raffrescamento in atto, Presenza di Inquinanti\",\n      \"Non Avviare in Velocità Free Heating Programmato (Allerta Raffrescamento)\",\n      \"Non Avviare in Velocità Free Heating Programmato (Allerta Raffrescamento, Presenza di Inquinanti)\",\n      \"Non Avviare in Velocità Free Cooling Programmato (Allerta Riscaldamento)\",\n      \"Non Avviare in Velocità Free Cooling Programmato (Allerta Riscaldamento, Presenza di Inquinanti)\"\n    ]\n  )\n}}"
+                  vel_avvio: "{{ 'Velocità 1' if free_con_allerte else states('input_select.vmc_master_speed_umidita') }}"
+                  comando_avvio: "{{ {'Velocità 1': 'velocita_1', 'Velocità 2': 'velocita_2', 'Velocità 3': 'velocita_3', 'Velocità 4': 'velocita_4', 'Notturna': 'notturna', 'Iperventilazione': 'iperventilazione', 'Free Cool./Heat.': 'freecooling'}.get(vel_avvio, 'velocita_1') }}"
+                alias: Velocità di avvio come nell'opzione 175 (programmata; Velocità 1 se è programmata Free Cool./Heat. con allerte Free)
+              - repeat:
+                  sequence:
+                    - action: "shell_command.vmc_master_{{ comando_avvio }}"
+                      data: {}
+                    - delay:
+                        seconds: 1
+                    - action: homeassistant.update_entity
+                      target:
+                        entity_id: sensor.vmc_master_status_ventola
+                      alias: Rilettura immediata della velocità (la velocità non ancora aggiornata non va presa per una scelta dell'utente)
+                    - delay:
+                        seconds: 4
+                  until:
+                    - condition: template
+                      value_template: "{{ states('sensor.vmc_master_status_ventola_lettura_codice_interpretato') not in [vel_prima_del_comando, 'Non disponibile', 'unknown', 'unavailable', ''] }}"
+            else:
+              - action: input_boolean.turn_on
+                metadata: {}
+                data: {}
+                target:
+                  entity_id: input_boolean.vmc_master_spia_umidita_velocita_0
+              - action: input_boolean.turn_off
+                metadata: {}
+                data: {}
+                target:
+                  entity_id:
+                    - input_boolean.vmc_master_spia_umidita_velocita_1
+                    - input_boolean.vmc_master_spia_umidita_velocita_2
+                    - input_boolean.vmc_master_spia_umidita_velocita_3
+                    - input_boolean.vmc_master_spia_umidita_velocita_4
+                    - input_boolean.vmc_master_spia_umidita_velocita_notturna
+                    - >-
+                      input_boolean.vmc_master_spia_umidita_velocita_iperventilazione
+                    - input_boolean.vmc_master_spia_umidita_velocita_freecooling
+              - variables:
+                  vel_prima_del_comando: "{{ states('sensor.vmc_master_status_ventola_lettura_codice_interpretato') }}"
+                alias: Memorizza la velocità prima del comando (un cambio fatto dall'utente ferma il ciclo di conferma)
+              - repeat:
+                  sequence:
+                    - action: shell_command.vmc_master_velocita_0
+                      metadata: {}
+                      data: {}
+                    - delay:
+                        hours: 0
+                        minutes: 0
+                        seconds: 1
+                        milliseconds: 0
+                    - action: homeassistant.update_entity
+                      target:
+                        entity_id: sensor.vmc_master_status_ventola
+                      alias: Rilettura immediata della velocità (la velocità non ancora aggiornata non va presa per una scelta dell'utente)
+                    - delay:
+                        hours: 0
+                        minutes: 0
+                        seconds: 4
+                        milliseconds: 0
+                  until:
+                    - condition: template
+                      value_template: "{{ states('sensor.vmc_master_status_ventola_lettura_codice_interpretato') == 'Velocità 0' or (vel_prima_del_comando not in ['Non disponibile', 'unknown', 'unavailable', ''] and states('sensor.vmc_master_status_ventola_lettura_codice_interpretato') not in [vel_prima_del_comando, 'Non disponibile', 'unknown', 'unavailable', '']) }}"
         alias: Umidità ON Vel. 0 [Spia Umidità ON]
       - conditions:
           - condition: trigger
