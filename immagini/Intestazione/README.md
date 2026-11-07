@@ -2,7 +2,7 @@
 
 Immagini mostrate in cima alla scheda **VMC HELTY FLOW** (voce 22 del pannello informazioni).
 
-Formato: **WebP** (animato per le velocità, fermo per Velocità 0, OFF-Line e icona), 1520 × 540 pixel.
+Formato: **WebP** con sfondo trasparente (animato per le velocità, fermo per Velocità 0, OFF-Line e icona), 1520 × 540 pixel; icona 480 × 266 pixel.
 
 ## Significato del nome
 
