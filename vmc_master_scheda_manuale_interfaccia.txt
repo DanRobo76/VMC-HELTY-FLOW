@@ -116,7 +116,7 @@ cards:
       header:
         type: picture
         image: >-
-          https://raw.githubusercontent.com/DanRobo76/VMC-HELTY-FLOW/main/immagini/Intestazione/ferma_off_line.webp?v=20261107
+          https://raw.githubusercontent.com/DanRobo76/VMC-HELTY-FLOW/main/immagini/Intestazione/ferma_off_line.webp?v=20261107b
         tap_action:
           action: none
         hold_action:
@@ -7632,7 +7632,7 @@ cards:
               - entity: input_boolean.vmc_master_opzioni_lettura_sensori
             header:
               type: picture
-              image: https://raw.githubusercontent.com/DanRobo76/VMC-HELTY-FLOW/main/immagini/Intestazione/ferma_off_line.webp?v=20261107
+              image: https://raw.githubusercontent.com/DanRobo76/VMC-HELTY-FLOW/main/immagini/Intestazione/ferma_off_line.webp?v=20261107b
               tap_action:
                 action: call-service
                 service: input_boolean.toggle
@@ -7674,7 +7674,7 @@ cards:
               - entity: input_boolean.vmc_master_opzioni_lettura_sensori
             header:
               type: picture
-              image: https://raw.githubusercontent.com/DanRobo76/VMC-HELTY-FLOW/main/immagini/Intestazione/ferma_normale.webp?v=20261107
+              image: https://raw.githubusercontent.com/DanRobo76/VMC-HELTY-FLOW/main/immagini/Intestazione/ferma_normale.webp?v=20261107b
               tap_action:
                 action: call-service
                 service: input_boolean.toggle
@@ -7716,7 +7716,7 @@ cards:
               - entity: input_boolean.vmc_master_opzioni_lettura_sensori
             header:
               type: picture
-              image: https://raw.githubusercontent.com/DanRobo76/VMC-HELTY-FLOW/main/immagini/Intestazione/ferma_allerta.webp?v=20261107
+              image: https://raw.githubusercontent.com/DanRobo76/VMC-HELTY-FLOW/main/immagini/Intestazione/ferma_allerta.webp?v=20261107b
               tap_action:
                 action: call-service
                 service: input_boolean.toggle
@@ -12411,21 +12411,23 @@ cards:
                   <b>Che cos'è.</b> L'immagine in cima alla scheda mostra lo stato della VMC. Quando la velocità è diversa da
                   0 l'aria esterna entra da sinistra, con la polvere, ed esce pulita a destra: il flusso in entrata ha il
                   colore dell'allerta in corso (verde senza allerte), quello in uscita è sempre verde. A Velocità 0 e con
-                  la VMC OFF-Line l'immagine è ferma.
+                  la VMC OFF-Line si vede solo la VMC, senza flussi, con il LED animato: il LED bianco si accende e si spegne
+                  lentamente, come un respiro; il LED giallo (allerta che blocca la VMC) e il LED grigio (OFF-Line)
+                  lampeggiano.
                   <br><br>
                   <b>Colore del LED e del flusso.</b>
                   </td></tr></table>
                   <table>
                   <tr><th style="padding: 4px 8px; border: 1px solid #c3c2b7;">Colore</th><th style="padding: 4px 8px; border: 1px solid #c3c2b7;">Immagine</th><th style="padding: 4px 8px; border: 1px solid #c3c2b7;">Quando</th></tr>
-                  <tr><td style="padding: 4px 8px; border: 1px solid #c3c2b7;"><font color="#a6ada2">■</font> Grigio</td><td style="padding: 4px 8px; border: 1px solid #c3c2b7;">ferma</td><td style="padding: 4px 8px; border: 1px solid #c3c2b7;">VMC OFF-Line o Non disponibile</td></tr>
-                  <tr><td style="padding: 4px 8px; border: 1px solid #c3c2b7;"><font color="#a0c48c">■</font> Bianco</td><td style="padding: 4px 8px; border: 1px solid #c3c2b7;">ferma</td><td style="padding: 4px 8px; border: 1px solid #c3c2b7;">Velocità 0 senza allerte</td></tr>
+                  <tr><td style="padding: 4px 8px; border: 1px solid #c3c2b7;"><font color="#a6ada2">■</font> Grigio</td><td style="padding: 4px 8px; border: 1px solid #c3c2b7;">ferma, senza flussi, LED lampeggiante</td><td style="padding: 4px 8px; border: 1px solid #c3c2b7;">VMC OFF-Line o Non disponibile</td></tr>
+                  <tr><td style="padding: 4px 8px; border: 1px solid #c3c2b7;"><font color="#a0c48c">■</font> Bianco</td><td style="padding: 4px 8px; border: 1px solid #c3c2b7;">ferma, senza flussi, LED che respira</td><td style="padding: 4px 8px; border: 1px solid #c3c2b7;">Velocità 0 senza allerte</td></tr>
                   <tr><td style="padding: 4px 8px; border: 1px solid #c3c2b7;"><font color="#a0c48c">■</font> Bianco</td><td style="padding: 4px 8px; border: 1px solid #c3c2b7;">in movimento</td><td style="padding: 4px 8px; border: 1px solid #c3c2b7;">In funzione senza allerte, anche durante una Fascia del Calendario</td></tr>
-                  <tr><td style="padding: 4px 8px; border: 1px solid #c3c2b7;"><font color="#c8b33d">■</font> Giallo</td><td style="padding: 4px 8px; border: 1px solid #c3c2b7;">ferma</td><td style="padding: 4px 8px; border: 1px solid #c3c2b7;">Velocità 0 con un'allerta che blocca la VMC: Congelamento, Punto di Rugiada sfavorevole (interruttore PdR su ON), Free programmato sfavorevole, Diff. Temp. > 23 °C</td></tr>
+                  <tr><td style="padding: 4px 8px; border: 1px solid #c3c2b7;"><font color="#c8b33d">■</font> Giallo</td><td style="padding: 4px 8px; border: 1px solid #c3c2b7;">ferma, senza flussi, LED lampeggiante</td><td style="padding: 4px 8px; border: 1px solid #c3c2b7;">Velocità 0 con un'allerta che blocca la VMC: Congelamento, Punto di Rugiada sfavorevole (interruttore PdR su ON), Free programmato sfavorevole, Diff. Temp. > 23 °C</td></tr>
                   <tr><td style="padding: 4px 8px; border: 1px solid #c3c2b7;"><font color="#c8b33d">■</font> Giallo</td><td style="padding: 4px 8px; border: 1px solid #c3c2b7;">in movimento</td><td style="padding: 4px 8px; border: 1px solid #c3c2b7;">VMC portata a Velocità 1 dalla Diff. Temp. > 23 °C</td></tr>
                   <tr><td style="padding: 4px 8px; border: 1px solid #c3c2b7;"><font color="#6dbccb">■</font> Blu</td><td style="padding: 4px 8px; border: 1px solid #c3c2b7;">in movimento</td><td style="padding: 4px 8px; border: 1px solid #c3c2b7;">VMC in funzione per allarme Umidità</td></tr>
                   <tr><td style="padding: 4px 8px; border: 1px solid #c3c2b7;"><font color="#d45b5b">■</font> Rosso</td><td style="padding: 4px 8px; border: 1px solid #c3c2b7;">in movimento</td><td style="padding: 4px 8px; border: 1px solid #c3c2b7;">VMC in funzione per allarme Inquinanti, anche insieme all'Umidità o con Punto di Rugiada / Free sfavorevoli</td></tr>
                   </table>
-                  <a href="https://raw.githubusercontent.com/DanRobo76/VMC-HELTY-FLOW/main/immagini/Informazioni/23_intestazione.png?v=20261107" target="_blank"><img src="https://raw.githubusercontent.com/DanRobo76/VMC-HELTY-FLOW/main/immagini/Informazioni/23_intestazione.png?v=20261107" alt="Colore del LED e del flusso" width="100%"></a>
+                  <a href="https://raw.githubusercontent.com/DanRobo76/VMC-HELTY-FLOW/main/immagini/Informazioni/23_intestazione.png?v=20261107b" target="_blank"><img src="https://raw.githubusercontent.com/DanRobo76/VMC-HELTY-FLOW/main/immagini/Informazioni/23_intestazione.png?v=20261107b" alt="Colore del LED e del flusso" width="100%"></a>
                   <table><tr><td align="justify">
                   <b>Scritte Alert sotto i tasti.</b> Sotto un tasto di velocità compare la scritta Alert quando, premendolo,
                   la VMC viene subito bloccata o ridotta da un'allerta già presente. Il tasto Velocità 0 non mostra mai
