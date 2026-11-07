@@ -23454,7 +23454,7 @@ actions:
                   ON e
                   vmc_master_spia_velocita_freecooling_un_solo_avvio_per_programmazione_freeheating
                   OFF con PdR OFF e vmc_master_spia_velocita_1_co2_o_voc=ON e
-                  vmc_master_spia_velocita_freecooling_un_solo_avvio='on''
+                  vmc_master_spia_velocita_freecooling_un_solo_avvio='on'
               - conditions:
                   - condition: and
                     conditions:
