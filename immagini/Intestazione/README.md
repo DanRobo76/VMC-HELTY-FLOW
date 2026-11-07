@@ -30,13 +30,13 @@ Il nome di ogni file è formato da **situazione** + **velocità della VMC**. Vel
 
 ## VMC ferma o non raggiungibile
 
-A Velocità 0 si vede solo la VMC, senza flussi. Con la VMC OFF-Line le linee del flusso restano visibili ma ferme.
+A Velocità 0 e con la VMC OFF-Line si vede solo la VMC, senza flussi, con il LED animato: il bianco si accende e si spegne lentamente come un respiro (4 secondi), il giallo e il grigio lampeggiano una volta al secondo.
 
 | LED e velocità | Immagine | Quando |
 |---|---|---|
-| **Bianco**, Velocità 0<br>`ferma_normale.webp` | <img src="ferma_normale.webp" width="380" alt="VMC ferma, LED bianco, senza flussi"> | VMC a Velocità 0 senza allerte |
+| **Bianco che respira**, Velocità 0<br>`ferma_normale.webp` | <img src="ferma_normale.webp" width="380" alt="VMC ferma, LED bianco che respira, senza flussi"> | VMC a Velocità 0 senza allerte |
 | **Giallo lampeggiante**, Velocità 0<br>`ferma_allerta.webp` | <img src="ferma_allerta.webp" width="380" alt="VMC ferma, LED giallo lampeggiante, senza flussi"> | VMC ferma per un'allerta: Congelamento, Punto di Rugiada sfavorevole, Free programmato sfavorevole, Diff. Temp. > 23 °C |
-| **Grigio**, qualsiasi velocità<br>`ferma_off_line.webp` | <img src="ferma_off_line.webp" width="380" alt="VMC con LED grigio e linee del flusso ferme"> | VMC OFF-Line o Non disponibile |
+| **Grigio lampeggiante**, qualsiasi velocità<br>`ferma_off_line.webp` | <img src="ferma_off_line.webp" width="380" alt="VMC ferma, LED grigio lampeggiante, senza flussi"> | VMC OFF-Line o Non disponibile |
 
 ## In funzione, nessuna allerta (`normale`, LED bianco)
 
@@ -94,4 +94,4 @@ La Diff. Temp. > 23 °C porta la VMC a Velocità 1: è il caso abituale, con `al
 
 ## Formato
 
-**WebP** con sfondo trasparente, 1520 × 540 pixel (icona 480 × 266 pixel): animato per le velocità e per `ferma_allerta`, con il LED che lampeggia; fermo per `ferma_normale`, `ferma_off_line` e l'icona.
+**WebP** con sfondo trasparente, 1520 × 540 pixel (icona 480 × 266 pixel): animato per le velocità e per le tre immagini di Velocità 0 e OFF-Line (LED che respira o lampeggia); fermo solo per l'icona.
