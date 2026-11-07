@@ -116,7 +116,7 @@ cards:
       header:
         type: picture
         image: >-
-          https://raw.githubusercontent.com/DanRobo76/VMC-HELTY-FLOW/main/immagini/Intestazione/ferma_off_line.webp
+          https://raw.githubusercontent.com/DanRobo76/VMC-HELTY-FLOW/main/immagini/Intestazione/ferma_off_line.webp?v=20261107
         tap_action:
           action: none
         hold_action:
@@ -7632,7 +7632,7 @@ cards:
               - entity: input_boolean.vmc_master_opzioni_lettura_sensori
             header:
               type: picture
-              image: https://raw.githubusercontent.com/DanRobo76/VMC-HELTY-FLOW/main/immagini/Intestazione/ferma_off_line.webp
+              image: https://raw.githubusercontent.com/DanRobo76/VMC-HELTY-FLOW/main/immagini/Intestazione/ferma_off_line.webp?v=20261107
               tap_action:
                 action: call-service
                 service: input_boolean.toggle
@@ -7674,7 +7674,7 @@ cards:
               - entity: input_boolean.vmc_master_opzioni_lettura_sensori
             header:
               type: picture
-              image: https://raw.githubusercontent.com/DanRobo76/VMC-HELTY-FLOW/main/immagini/Intestazione/ferma_normale.webp
+              image: https://raw.githubusercontent.com/DanRobo76/VMC-HELTY-FLOW/main/immagini/Intestazione/ferma_normale.webp?v=20261107
               tap_action:
                 action: call-service
                 service: input_boolean.toggle
@@ -7716,7 +7716,7 @@ cards:
               - entity: input_boolean.vmc_master_opzioni_lettura_sensori
             header:
               type: picture
-              image: https://raw.githubusercontent.com/DanRobo76/VMC-HELTY-FLOW/main/immagini/Intestazione/ferma_allerta.webp
+              image: https://raw.githubusercontent.com/DanRobo76/VMC-HELTY-FLOW/main/immagini/Intestazione/ferma_allerta.webp?v=20261107
               tap_action:
                 action: call-service
                 service: input_boolean.toggle
@@ -7760,7 +7760,7 @@ cards:
               - entity: input_boolean.vmc_master_opzioni_lettura_sensori
             header:
               type: picture
-              image: https://raw.githubusercontent.com/DanRobo76/VMC-HELTY-FLOW/main/immagini/Intestazione/normale_velocita_1_notturna.webp
+              image: https://raw.githubusercontent.com/DanRobo76/VMC-HELTY-FLOW/main/immagini/Intestazione/normale_velocita_1_notturna.webp?v=20261107
               tap_action:
                 action: call-service
                 service: input_boolean.toggle
@@ -7803,7 +7803,7 @@ cards:
               - entity: input_boolean.vmc_master_opzioni_lettura_sensori
             header:
               type: picture
-              image: https://raw.githubusercontent.com/DanRobo76/VMC-HELTY-FLOW/main/immagini/Intestazione/normale_velocita_2.webp
+              image: https://raw.githubusercontent.com/DanRobo76/VMC-HELTY-FLOW/main/immagini/Intestazione/normale_velocita_2.webp?v=20261107
               tap_action:
                 action: call-service
                 service: input_boolean.toggle
@@ -7849,7 +7849,7 @@ cards:
               - entity: input_boolean.vmc_master_opzioni_lettura_sensori
             header:
               type: picture
-              image: https://raw.githubusercontent.com/DanRobo76/VMC-HELTY-FLOW/main/immagini/Intestazione/normale_velocita_3_free.webp
+              image: https://raw.githubusercontent.com/DanRobo76/VMC-HELTY-FLOW/main/immagini/Intestazione/normale_velocita_3_free.webp?v=20261107
               tap_action:
                 action: call-service
                 service: input_boolean.toggle
@@ -7892,7 +7892,7 @@ cards:
               - entity: input_boolean.vmc_master_opzioni_lettura_sensori
             header:
               type: picture
-              image: https://raw.githubusercontent.com/DanRobo76/VMC-HELTY-FLOW/main/immagini/Intestazione/normale_velocita_4.webp
+              image: https://raw.githubusercontent.com/DanRobo76/VMC-HELTY-FLOW/main/immagini/Intestazione/normale_velocita_4.webp?v=20261107
               tap_action:
                 action: call-service
                 service: input_boolean.toggle
@@ -7935,7 +7935,7 @@ cards:
               - entity: input_boolean.vmc_master_opzioni_lettura_sensori
             header:
               type: picture
-              image: https://raw.githubusercontent.com/DanRobo76/VMC-HELTY-FLOW/main/immagini/Intestazione/normale_iperventilazione.webp
+              image: https://raw.githubusercontent.com/DanRobo76/VMC-HELTY-FLOW/main/immagini/Intestazione/normale_iperventilazione.webp?v=20261107
               tap_action:
                 action: call-service
                 service: input_boolean.toggle
@@ -7979,7 +7979,7 @@ cards:
               - entity: input_boolean.vmc_master_opzioni_lettura_sensori
             header:
               type: picture
-              image: https://raw.githubusercontent.com/DanRobo76/VMC-HELTY-FLOW/main/immagini/Intestazione/umidita_velocita_1_notturna.webp
+              image: https://raw.githubusercontent.com/DanRobo76/VMC-HELTY-FLOW/main/immagini/Intestazione/umidita_velocita_1_notturna.webp?v=20261107
               tap_action:
                 action: call-service
                 service: input_boolean.toggle
@@ -8022,7 +8022,7 @@ cards:
               - entity: input_boolean.vmc_master_opzioni_lettura_sensori
             header:
               type: picture
-              image: https://raw.githubusercontent.com/DanRobo76/VMC-HELTY-FLOW/main/immagini/Intestazione/umidita_velocita_2.webp
+              image: https://raw.githubusercontent.com/DanRobo76/VMC-HELTY-FLOW/main/immagini/Intestazione/umidita_velocita_2.webp?v=20261107
               tap_action:
                 action: call-service
                 service: input_boolean.toggle
@@ -8068,7 +8068,7 @@ cards:
               - entity: input_boolean.vmc_master_opzioni_lettura_sensori
             header:
               type: picture
-              image: https://raw.githubusercontent.com/DanRobo76/VMC-HELTY-FLOW/main/immagini/Intestazione/umidita_velocita_3_free.webp
+              image: https://raw.githubusercontent.com/DanRobo76/VMC-HELTY-FLOW/main/immagini/Intestazione/umidita_velocita_3_free.webp?v=20261107
               tap_action:
                 action: call-service
                 service: input_boolean.toggle
@@ -8111,7 +8111,7 @@ cards:
               - entity: input_boolean.vmc_master_opzioni_lettura_sensori
             header:
               type: picture
-              image: https://raw.githubusercontent.com/DanRobo76/VMC-HELTY-FLOW/main/immagini/Intestazione/umidita_velocita_4.webp
+              image: https://raw.githubusercontent.com/DanRobo76/VMC-HELTY-FLOW/main/immagini/Intestazione/umidita_velocita_4.webp?v=20261107
               tap_action:
                 action: call-service
                 service: input_boolean.toggle
@@ -8154,7 +8154,7 @@ cards:
               - entity: input_boolean.vmc_master_opzioni_lettura_sensori
             header:
               type: picture
-              image: https://raw.githubusercontent.com/DanRobo76/VMC-HELTY-FLOW/main/immagini/Intestazione/umidita_iperventilazione.webp
+              image: https://raw.githubusercontent.com/DanRobo76/VMC-HELTY-FLOW/main/immagini/Intestazione/umidita_iperventilazione.webp?v=20261107
               tap_action:
                 action: call-service
                 service: input_boolean.toggle
@@ -8198,7 +8198,7 @@ cards:
               - entity: input_boolean.vmc_master_opzioni_lettura_sensori
             header:
               type: picture
-              image: https://raw.githubusercontent.com/DanRobo76/VMC-HELTY-FLOW/main/immagini/Intestazione/inquinanti_velocita_1_notturna.webp
+              image: https://raw.githubusercontent.com/DanRobo76/VMC-HELTY-FLOW/main/immagini/Intestazione/inquinanti_velocita_1_notturna.webp?v=20261107
               tap_action:
                 action: call-service
                 service: input_boolean.toggle
@@ -8241,7 +8241,7 @@ cards:
               - entity: input_boolean.vmc_master_opzioni_lettura_sensori
             header:
               type: picture
-              image: https://raw.githubusercontent.com/DanRobo76/VMC-HELTY-FLOW/main/immagini/Intestazione/inquinanti_velocita_2.webp
+              image: https://raw.githubusercontent.com/DanRobo76/VMC-HELTY-FLOW/main/immagini/Intestazione/inquinanti_velocita_2.webp?v=20261107
               tap_action:
                 action: call-service
                 service: input_boolean.toggle
@@ -8287,7 +8287,7 @@ cards:
               - entity: input_boolean.vmc_master_opzioni_lettura_sensori
             header:
               type: picture
-              image: https://raw.githubusercontent.com/DanRobo76/VMC-HELTY-FLOW/main/immagini/Intestazione/inquinanti_velocita_3_free.webp
+              image: https://raw.githubusercontent.com/DanRobo76/VMC-HELTY-FLOW/main/immagini/Intestazione/inquinanti_velocita_3_free.webp?v=20261107
               tap_action:
                 action: call-service
                 service: input_boolean.toggle
@@ -8330,7 +8330,7 @@ cards:
               - entity: input_boolean.vmc_master_opzioni_lettura_sensori
             header:
               type: picture
-              image: https://raw.githubusercontent.com/DanRobo76/VMC-HELTY-FLOW/main/immagini/Intestazione/inquinanti_velocita_4.webp
+              image: https://raw.githubusercontent.com/DanRobo76/VMC-HELTY-FLOW/main/immagini/Intestazione/inquinanti_velocita_4.webp?v=20261107
               tap_action:
                 action: call-service
                 service: input_boolean.toggle
@@ -8373,7 +8373,7 @@ cards:
               - entity: input_boolean.vmc_master_opzioni_lettura_sensori
             header:
               type: picture
-              image: https://raw.githubusercontent.com/DanRobo76/VMC-HELTY-FLOW/main/immagini/Intestazione/inquinanti_iperventilazione.webp
+              image: https://raw.githubusercontent.com/DanRobo76/VMC-HELTY-FLOW/main/immagini/Intestazione/inquinanti_iperventilazione.webp?v=20261107
               tap_action:
                 action: call-service
                 service: input_boolean.toggle
@@ -8417,7 +8417,7 @@ cards:
               - entity: input_boolean.vmc_master_opzioni_lettura_sensori
             header:
               type: picture
-              image: https://raw.githubusercontent.com/DanRobo76/VMC-HELTY-FLOW/main/immagini/Intestazione/allerta_velocita_1_notturna.webp
+              image: https://raw.githubusercontent.com/DanRobo76/VMC-HELTY-FLOW/main/immagini/Intestazione/allerta_velocita_1_notturna.webp?v=20261107
               tap_action:
                 action: call-service
                 service: input_boolean.toggle
@@ -8460,7 +8460,7 @@ cards:
               - entity: input_boolean.vmc_master_opzioni_lettura_sensori
             header:
               type: picture
-              image: https://raw.githubusercontent.com/DanRobo76/VMC-HELTY-FLOW/main/immagini/Intestazione/allerta_velocita_2.webp
+              image: https://raw.githubusercontent.com/DanRobo76/VMC-HELTY-FLOW/main/immagini/Intestazione/allerta_velocita_2.webp?v=20261107
               tap_action:
                 action: call-service
                 service: input_boolean.toggle
@@ -8506,7 +8506,7 @@ cards:
               - entity: input_boolean.vmc_master_opzioni_lettura_sensori
             header:
               type: picture
-              image: https://raw.githubusercontent.com/DanRobo76/VMC-HELTY-FLOW/main/immagini/Intestazione/allerta_velocita_3_free.webp
+              image: https://raw.githubusercontent.com/DanRobo76/VMC-HELTY-FLOW/main/immagini/Intestazione/allerta_velocita_3_free.webp?v=20261107
               tap_action:
                 action: call-service
                 service: input_boolean.toggle
@@ -8549,7 +8549,7 @@ cards:
               - entity: input_boolean.vmc_master_opzioni_lettura_sensori
             header:
               type: picture
-              image: https://raw.githubusercontent.com/DanRobo76/VMC-HELTY-FLOW/main/immagini/Intestazione/allerta_velocita_4.webp
+              image: https://raw.githubusercontent.com/DanRobo76/VMC-HELTY-FLOW/main/immagini/Intestazione/allerta_velocita_4.webp?v=20261107
               tap_action:
                 action: call-service
                 service: input_boolean.toggle
@@ -8592,7 +8592,7 @@ cards:
               - entity: input_boolean.vmc_master_opzioni_lettura_sensori
             header:
               type: picture
-              image: https://raw.githubusercontent.com/DanRobo76/VMC-HELTY-FLOW/main/immagini/Intestazione/allerta_iperventilazione.webp
+              image: https://raw.githubusercontent.com/DanRobo76/VMC-HELTY-FLOW/main/immagini/Intestazione/allerta_iperventilazione.webp?v=20261107
               tap_action:
                 action: call-service
                 service: input_boolean.toggle
@@ -10410,7 +10410,7 @@ cards:
             cards:
               - type: markdown
                 content: >-
-                  <table align="center"><tr><td width="96"><img src="https://raw.githubusercontent.com/DanRobo76/VMC-HELTY-FLOW/main/immagini/Intestazione/icona_vmc.webp" width="96" alt="VMC"></td><td>
+                  <table align="center"><tr><td width="96"><img src="https://raw.githubusercontent.com/DanRobo76/VMC-HELTY-FLOW/main/immagini/Intestazione/icona_vmc.webp?v=20261107" width="96" alt="VMC"></td><td>
                   <b>VMC HELTY FLOW Plus/Elite</b><br>
                   Release installata: <b>{{ states('sensor.vmc_master_versione_corrente') }}</b><br>
                   {% set _i = states('sensor.vmc_master_versione_corrente') | trim | regex_replace('^[^0-9]*', '') %}{% set _r = states('sensor.vmc_master_versione_repository') | trim | regex_replace('^[^0-9]*', '') %}{% if _i is match('^[0-9]+([.][0-9]+)*$') and _r is match('^[0-9]+([.][0-9]+)*$') and (_r.split('.') | map('int') | list) > (_i.split('.') | map('int') | list) %}<ha-icon icon="mdi:arrow-up-bold-circle-outline"></ha-icon> <b>Aggiornamento disponibile: {{ states('sensor.vmc_master_versione_repository') }}</b>{% else %}<ha-icon icon="mdi:check-circle-outline"></ha-icon> Nessun aggiornamento{% endif %}<br>
@@ -10534,7 +10534,7 @@ cards:
                   VMC resta ferma: se si prova a cambiarle velocità, viene riportata a Velocità 0.
                   </td></tr></table>
 
-                  <a href="https://raw.githubusercontent.com/DanRobo76/VMC-HELTY-FLOW/main/immagini/Informazioni/04_congelamento.png" target="_blank"><img src="https://raw.githubusercontent.com/DanRobo76/VMC-HELTY-FLOW/main/immagini/Informazioni/04_congelamento.png" alt="Soglie di Congelamento" width="100%"></a>
+                  <a href="https://raw.githubusercontent.com/DanRobo76/VMC-HELTY-FLOW/main/immagini/Informazioni/04_congelamento.png?v=20261107" target="_blank"><img src="https://raw.githubusercontent.com/DanRobo76/VMC-HELTY-FLOW/main/immagini/Informazioni/04_congelamento.png?v=20261107" alt="Soglie di Congelamento" width="100%"></a>
 
                   <table><tr><td align="justify">
                   <b>Priorità sulle impostazioni.</b> I sensori interni della VMC hanno priorità sui sensori
@@ -10569,7 +10569,7 @@ cards:
                   differenza è compresa tra 20 °C e 23 °C.
                   </td></tr></table>
 
-                  <a href="https://raw.githubusercontent.com/DanRobo76/VMC-HELTY-FLOW/main/immagini/Informazioni/05_diff_temperatura.png" target="_blank"><img src="https://raw.githubusercontent.com/DanRobo76/VMC-HELTY-FLOW/main/immagini/Informazioni/05_diff_temperatura.png" alt="Soglie della differenza di temperatura" width="100%"></a>
+                  <a href="https://raw.githubusercontent.com/DanRobo76/VMC-HELTY-FLOW/main/immagini/Informazioni/05_diff_temperatura.png?v=20261107" target="_blank"><img src="https://raw.githubusercontent.com/DanRobo76/VMC-HELTY-FLOW/main/immagini/Informazioni/05_diff_temperatura.png?v=20261107" alt="Soglie della differenza di temperatura" width="100%"></a>
 
                   <table><tr><td align="justify">
                   <b>Priorità sulle impostazioni.</b> I sensori interni della VMC hanno priorità sui sensori
@@ -10603,14 +10603,14 @@ cards:
                   ponti termici, e che favorisce la muffa.
                   </td></tr></table>
 
-                  <a href="https://raw.githubusercontent.com/DanRobo76/VMC-HELTY-FLOW/main/immagini/Informazioni/06_punto_di_rugiada.png" target="_blank"><img src="https://raw.githubusercontent.com/DanRobo76/VMC-HELTY-FLOW/main/immagini/Informazioni/06_punto_di_rugiada.png" alt="Punto di Rugiada in funzione dell'umidità relativa" width="100%"></a>
+                  <a href="https://raw.githubusercontent.com/DanRobo76/VMC-HELTY-FLOW/main/immagini/Informazioni/06_punto_di_rugiada.png?v=20261107" target="_blank"><img src="https://raw.githubusercontent.com/DanRobo76/VMC-HELTY-FLOW/main/immagini/Informazioni/06_punto_di_rugiada.png?v=20261107" alt="Punto di Rugiada in funzione dell'umidità relativa" width="100%"></a>
 
                   <table><tr><td align="justify">
                   <b>Calcolo.</b> Formula di Magnus-Tetens (sotto), con la temperatura T [°C] e l'umidità relativa UR [%]
                   dell'ambiente Interno ed Esterno. Il valore risulta [Non Calcolabile] se UR ≤ 0 %; oltre il 100 %
                   (ad esempio per l'Offset) l'umidità viene limitata a 100 % e il valore è calcolabile. Più l'aria è umida, più il punto di rugiada si avvicina alla temperatura dell'aria.
                   </td></tr></table>
-                  <a href="https://raw.githubusercontent.com/DanRobo76/VMC-HELTY-FLOW/main/immagini/Informazioni/formula_punto_di_rugiada.png" target="_blank"><img src="https://raw.githubusercontent.com/DanRobo76/VMC-HELTY-FLOW/main/immagini/Informazioni/formula_punto_di_rugiada.png" alt="Formula del Punto di Rugiada" width="60%"></a>
+                  <a href="https://raw.githubusercontent.com/DanRobo76/VMC-HELTY-FLOW/main/immagini/Informazioni/formula_punto_di_rugiada.png?v=20261107" target="_blank"><img src="https://raw.githubusercontent.com/DanRobo76/VMC-HELTY-FLOW/main/immagini/Informazioni/formula_punto_di_rugiada.png?v=20261107" alt="Formula del Punto di Rugiada" width="60%"></a>
                   <table><tr><td align="justify">
                   E<sub>s</sub> = pressione di vapore saturo [hPa]; E = pressione di vapore [hPa]; T<sub>d</sub> = Punto di Rugiada [°C].
                   </td></tr></table>
@@ -10640,7 +10640,7 @@ cards:
                   Limite = [Avvio VMC per Umidità ≥], ora impostato a {{ (states('input_number.vmc_master_umidita_avvio') | float(0)) | round(1) | string | replace('.', ',') }} %. All'avvio la VMC va alla
                   [Set Velocità Umidità di Avvio]; all'arresto torna alla velocità memorizzata.
                   </td></tr></table>
-                  <a href="https://raw.githubusercontent.com/DanRobo76/VMC-HELTY-FLOW/main/immagini/Informazioni/07_umidita_avvio_arresto.png" target="_blank"><img src="https://raw.githubusercontent.com/DanRobo76/VMC-HELTY-FLOW/main/immagini/Informazioni/07_umidita_avvio_arresto.png" alt="Avvio e arresto in funzione dell'umidità" width="100%"></a>
+                  <a href="https://raw.githubusercontent.com/DanRobo76/VMC-HELTY-FLOW/main/immagini/Informazioni/07_umidita_avvio_arresto.png?v=20261107" target="_blank"><img src="https://raw.githubusercontent.com/DanRobo76/VMC-HELTY-FLOW/main/immagini/Informazioni/07_umidita_avvio_arresto.png?v=20261107" alt="Avvio e arresto in funzione dell'umidità" width="100%"></a>
                   <table><tr><td align="justify">
                   <b>Note.</b>
                   <br><br>
@@ -10697,7 +10697,7 @@ cards:
                   Rugiada] è attiva, la VMC si arresta e riparte non appena le condizioni lo permettono.
                   </td></tr></table>
 
-                  <a href="https://raw.githubusercontent.com/DanRobo76/VMC-HELTY-FLOW/main/immagini/Informazioni/08_delta_punto_di_rugiada.png" target="_blank"><img src="https://raw.githubusercontent.com/DanRobo76/VMC-HELTY-FLOW/main/immagini/Informazioni/08_delta_punto_di_rugiada.png" alt="Verifica del Lim. Delta Punto di Rugiada" width="100%"></a>
+                  <a href="https://raw.githubusercontent.com/DanRobo76/VMC-HELTY-FLOW/main/immagini/Informazioni/08_delta_punto_di_rugiada.png?v=20261107" target="_blank"><img src="https://raw.githubusercontent.com/DanRobo76/VMC-HELTY-FLOW/main/immagini/Informazioni/08_delta_punto_di_rugiada.png?v=20261107" alt="Verifica del Lim. Delta Punto di Rugiada" width="100%"></a>
 
                   <b>Tabella di Attivazione della VMC in Base al Punto di
                   Rugiada:</b><br>
@@ -10811,7 +10811,7 @@ cards:
                   attivare la VMC.
 
 
-                  <a href="https://raw.githubusercontent.com/DanRobo76/VMC-HELTY-FLOW/main/immagini/Informazioni/formula_delta_pdr.png" target="_blank"><img src="https://raw.githubusercontent.com/DanRobo76/VMC-HELTY-FLOW/main/immagini/Informazioni/formula_delta_pdr.png" alt="Confronto del Δ Punto di Rugiada con il Set" width="90%"></a>
+                  <a href="https://raw.githubusercontent.com/DanRobo76/VMC-HELTY-FLOW/main/immagini/Informazioni/formula_delta_pdr.png?v=20261107" target="_blank"><img src="https://raw.githubusercontent.com/DanRobo76/VMC-HELTY-FLOW/main/immagini/Informazioni/formula_delta_pdr.png?v=20261107" alt="Confronto del Δ Punto di Rugiada con il Set" width="90%"></a>
                   <table><tr><td align="justify">
                   Si può impiegare = [Nessuna Allerta]; Se ne sconsiglia l'impiego = [Allerta]. Se l'impostazione
                   [VMC ON/OFF, in Funzione del Lim. Δ P. di Rugiada] è attiva e il Δ raggiunge o supera il
@@ -10838,7 +10838,7 @@ cards:
                   </td></tr></table>
 
 
-                  <a href="https://raw.githubusercontent.com/DanRobo76/VMC-HELTY-FLOW/main/immagini/Informazioni/formula_umidita_assoluta.png" target="_blank"><img src="https://raw.githubusercontent.com/DanRobo76/VMC-HELTY-FLOW/main/immagini/Informazioni/formula_umidita_assoluta.png" alt="Formula dell'Umidità Assoluta" width="75%"></a>
+                  <a href="https://raw.githubusercontent.com/DanRobo76/VMC-HELTY-FLOW/main/immagini/Informazioni/formula_umidita_assoluta.png?v=20261107" target="_blank"><img src="https://raw.githubusercontent.com/DanRobo76/VMC-HELTY-FLOW/main/immagini/Informazioni/formula_umidita_assoluta.png?v=20261107" alt="Formula dell'Umidità Assoluta" width="75%"></a>
                   <table><tr><td align="justify">
                   UR = Umidità Relativa [%]; T = Temperatura [°C]; UA = Umidità Assoluta [g/m³]. Si calcola per
                   l'ambiente Interno e per quello Esterno. Solo informativo: non genera allerte.
@@ -10865,7 +10865,7 @@ cards:
                   indicatore della necessità di ricambio d'aria. Oltre 800 ppm compare l'Allerta Pop-Up.
                   </td></tr></table>
 
-                  <a href="https://raw.githubusercontent.com/DanRobo76/VMC-HELTY-FLOW/main/immagini/Informazioni/11_co2.png" target="_blank"><img src="https://raw.githubusercontent.com/DanRobo76/VMC-HELTY-FLOW/main/immagini/Informazioni/11_co2.png" alt="Fasce di concentrazione CO2" width="100%"></a>
+                  <a href="https://raw.githubusercontent.com/DanRobo76/VMC-HELTY-FLOW/main/immagini/Informazioni/11_co2.png?v=20261107" target="_blank"><img src="https://raw.githubusercontent.com/DanRobo76/VMC-HELTY-FLOW/main/immagini/Informazioni/11_co2.png?v=20261107" alt="Fasce di concentrazione CO2" width="100%"></a>
 
 
                   <table width="100%">
@@ -10912,7 +10912,7 @@ cards:
                   Pop-Up.
                   </td></tr></table>
 
-                  <a href="https://raw.githubusercontent.com/DanRobo76/VMC-HELTY-FLOW/main/immagini/Informazioni/12_voc.png" target="_blank"><img src="https://raw.githubusercontent.com/DanRobo76/VMC-HELTY-FLOW/main/immagini/Informazioni/12_voc.png" alt="Fasce di concentrazione VOC" width="100%"></a>
+                  <a href="https://raw.githubusercontent.com/DanRobo76/VMC-HELTY-FLOW/main/immagini/Informazioni/12_voc.png?v=20261107" target="_blank"><img src="https://raw.githubusercontent.com/DanRobo76/VMC-HELTY-FLOW/main/immagini/Informazioni/12_voc.png?v=20261107" alt="Fasce di concentrazione VOC" width="100%"></a>
 
 
                   <table width="100%">
@@ -10950,7 +10950,7 @@ cards:
                   <b>Come interviene.</b> L'ingresso e l'uscita dalla Fascia avvengono dopo 3 secondi;
                   all'uscita la VMC si arresta.
                   </td></tr></table>
-                  <a href="https://raw.githubusercontent.com/DanRobo76/VMC-HELTY-FLOW/main/immagini/Informazioni/13_calendario.png" target="_blank"><img src="https://raw.githubusercontent.com/DanRobo76/VMC-HELTY-FLOW/main/immagini/Informazioni/13_calendario.png" alt="Esempio di programmazione del Calendario" width="100%"></a>
+                  <a href="https://raw.githubusercontent.com/DanRobo76/VMC-HELTY-FLOW/main/immagini/Informazioni/13_calendario.png?v=20261107" target="_blank"><img src="https://raw.githubusercontent.com/DanRobo76/VMC-HELTY-FLOW/main/immagini/Informazioni/13_calendario.png?v=20261107" alt="Esempio di programmazione del Calendario" width="100%"></a>
                   <pre style="font-size: smaller;">
 
                   <strong>Regole:</strong>
@@ -11054,7 +11054,7 @@ cards:
                   <b>Come si imposta.</b> Per ogni Fascia (Set Inizio Mese - Set Fine Mese) dal menù
                   "Opzioni -> Opzioni - Free Heating / Free Cooling".
                   </td></tr></table>
-                  <a href="https://raw.githubusercontent.com/DanRobo76/VMC-HELTY-FLOW/main/immagini/Informazioni/14_free_heating_cooling.png" target="_blank"><img src="https://raw.githubusercontent.com/DanRobo76/VMC-HELTY-FLOW/main/immagini/Informazioni/14_free_heating_cooling.png" alt="Programmazione mensile Free Heating / Free Cooling" width="100%"></a>
+                  <a href="https://raw.githubusercontent.com/DanRobo76/VMC-HELTY-FLOW/main/immagini/Informazioni/14_free_heating_cooling.png?v=20261107" target="_blank"><img src="https://raw.githubusercontent.com/DanRobo76/VMC-HELTY-FLOW/main/immagini/Informazioni/14_free_heating_cooling.png?v=20261107" alt="Programmazione mensile Free Heating / Free Cooling" width="100%"></a>
                   <pre style="font-size: smaller;">
 
                   <strong>Regole:</strong>
@@ -11096,7 +11096,7 @@ cards:
                   <b>Free Heating</b> (riscaldare): serve aria esterna più calda o uguale a quella interna.
                   <b>Free Cooling</b> (raffrescare): serve aria esterna più fresca o uguale a quella interna.
                   </td></tr></table>
-                  <a href="https://raw.githubusercontent.com/DanRobo76/VMC-HELTY-FLOW/main/immagini/Informazioni/15_free_logica.png" target="_blank"><img src="https://raw.githubusercontent.com/DanRobo76/VMC-HELTY-FLOW/main/immagini/Informazioni/15_free_logica.png" alt="Velocità Free Cool./Heat.: logica" width="100%"></a>
+                  <a href="https://raw.githubusercontent.com/DanRobo76/VMC-HELTY-FLOW/main/immagini/Informazioni/15_free_logica.png?v=20261107" target="_blank"><img src="https://raw.githubusercontent.com/DanRobo76/VMC-HELTY-FLOW/main/immagini/Informazioni/15_free_logica.png?v=20261107" alt="Velocità Free Cool./Heat.: logica" width="100%"></a>
                   <table><tr><td align="justify">
                   <b>Come interviene.</b> Nei mesi programmati, se la condizione non è favorevole la VMC si
                   arresta (Velocità 0) dopo 24 secondi, mostrando un avviso, e riparte in Free Cool./Heat. non
@@ -11122,7 +11122,7 @@ cards:
                   stesso modo, in Free Cooling la VMC porta in casa aria esterna più fresca e riduce il lavoro del
                   condizionatore.
                   </td></tr></table>
-                  <a href="https://raw.githubusercontent.com/DanRobo76/VMC-HELTY-FLOW/main/immagini/Informazioni/15_free_heating_giornata.png" target="_blank"><img src="https://raw.githubusercontent.com/DanRobo76/VMC-HELTY-FLOW/main/immagini/Informazioni/15_free_heating_giornata.png" alt="Esempio di giornata in Free Heating" width="100%"></a>
+                  <a href="https://raw.githubusercontent.com/DanRobo76/VMC-HELTY-FLOW/main/immagini/Informazioni/15_free_heating_giornata.png?v=20261107" target="_blank"><img src="https://raw.githubusercontent.com/DanRobo76/VMC-HELTY-FLOW/main/immagini/Informazioni/15_free_heating_giornata.png?v=20261107" alt="Esempio di giornata in Free Heating" width="100%"></a>
                   <table><tr><td align="justify">
                   <b>Esempio di programmazione.</b> Free Heating da Novembre a Maggio, Free Cooling da Luglio
                   a Ottobre: il Mese di Giugno è un mese non programmato, pertanto se si impiega la velocità
@@ -12026,7 +12026,7 @@ cards:
                     - l'interruttore del Calendario, spento durante una fascia, ferma la VMC; se però sono presenti Inquinanti e l'interruttore degli Inquinanti è acceso, la VMC non si ferma: passa a Velocità 1 e si ferma quando gli Inquinanti rientrano;<br>
                     - se invece la sua funzione non sta comandando la VMC, spegnendo l'interruttore la VMC non cambia Velocità: la funzione semplicemente non interverrà più finché l'interruttore resta spento. Esempio: la VMC gira a Velocità 2 scelta dall'utente e il Punto di Rugiada non è intervenuto; spegnendo il suo interruttore la VMC resta a Velocità 2.<br>
                     </td></tr></table>
-                    <a href="https://raw.githubusercontent.com/DanRobo76/VMC-HELTY-FLOW/main/immagini/Informazioni/18_priorita_allarmi.png" target="_blank"><img src="https://raw.githubusercontent.com/DanRobo76/VMC-HELTY-FLOW/main/immagini/Informazioni/18_priorita_allarmi.png" alt="Priorità degli allarmi" width="100%"></a>
+                    <a href="https://raw.githubusercontent.com/DanRobo76/VMC-HELTY-FLOW/main/immagini/Informazioni/18_priorita_allarmi.png?v=20261107" target="_blank"><img src="https://raw.githubusercontent.com/DanRobo76/VMC-HELTY-FLOW/main/immagini/Informazioni/18_priorita_allarmi.png?v=20261107" alt="Priorità degli allarmi" width="100%"></a>
                     <br>
                     <p>&nbsp;&nbsp;&nbsp;&nbsp;
                       <a href="https://raw.githubusercontent.com/DanRobo76/VMC-HELTY-FLOW/main/Logiche%20di%20Funzionamento.png">
@@ -12070,7 +12070,7 @@ cards:
                   <tr><td style="padding: 4px 8px; border: 1px solid #c3c2b7;">da 7 a 10 °C</td><td style="padding: 4px 8px; border: 1px solid #c3c2b7;"><font color="#66ccff">■</font> Secco</td></tr>
                   <tr><td style="padding: 4px 8px; border: 1px solid #c3c2b7;">&lt; 7 °C</td><td style="padding: 4px 8px; border: 1px solid #c3c2b7;"><font color="#9e9d96">■</font> «–» (fuori scala, non classificato)</td></tr>
                   </table>
-                  <a href="https://raw.githubusercontent.com/DanRobo76/VMC-HELTY-FLOW/main/immagini/Informazioni/19_indice_benessere.png" target="_blank"><img src="https://raw.githubusercontent.com/DanRobo76/VMC-HELTY-FLOW/main/immagini/Informazioni/19_indice_benessere.png" alt="Indice di Benessere: come si ricava" width="100%"></a>
+                  <a href="https://raw.githubusercontent.com/DanRobo76/VMC-HELTY-FLOW/main/immagini/Informazioni/19_indice_benessere.png?v=20261107" target="_blank"><img src="https://raw.githubusercontent.com/DanRobo76/VMC-HELTY-FLOW/main/immagini/Informazioni/19_indice_benessere.png?v=20261107" alt="Indice di Benessere: come si ricava" width="100%"></a>
                   <table><tr><td align="justify">
                   <b>Esempi.</b> A 20 °C con umidità al 60 % il Punto di Rugiada è 12,0 °C: Confortevole, Liv. 1.
                   A 26 °C con umidità al 70 % sale a 20,1 °C: Fastidioso.
@@ -12222,7 +12222,7 @@ cards:
                   T (°C), per ciascun periodo di analisi (4, 8 e 12 Settimane):
 
 
-                  <a href="https://raw.githubusercontent.com/DanRobo76/VMC-HELTY-FLOW/main/immagini/Informazioni/formula_rischio_muffa.png" target="_blank"><img src="https://raw.githubusercontent.com/DanRobo76/VMC-HELTY-FLOW/main/immagini/Informazioni/formula_rischio_muffa.png" alt="Curve critiche di umidità del rischio muffa" width="55%"></a>
+                  <a href="https://raw.githubusercontent.com/DanRobo76/VMC-HELTY-FLOW/main/immagini/Informazioni/formula_rischio_muffa.png?v=20261107" target="_blank"><img src="https://raw.githubusercontent.com/DanRobo76/VMC-HELTY-FLOW/main/immagini/Informazioni/formula_rischio_muffa.png?v=20261107" alt="Curve critiche di umidità del rischio muffa" width="55%"></a>
                   <table><tr><td align="justify">
                   T = temperatura media [°C] del periodo; c<sub>1</sub>, c<sub>2</sub>, c<sub>3</sub> = soglie di umidità [%],
                   limitate rispettivamente tra 72 e 100 %, tra 79 e 100 % e tra 84 e 100 %.
@@ -12310,7 +12310,7 @@ cards:
                   deve far passare tanta aria quanto è il volume della stanza. Il tempo si ottiene dividendo il
                   volume della stanza per la portata della velocità in uso:
                   </td></tr></table>
-                  <a href="https://raw.githubusercontent.com/DanRobo76/VMC-HELTY-FLOW/main/immagini/Informazioni/formula_tempo_ricambio.png" target="_blank"><img src="https://raw.githubusercontent.com/DanRobo76/VMC-HELTY-FLOW/main/immagini/Informazioni/formula_tempo_ricambio.png" alt="Tempo per un ricambio completo" width="70%"></a>
+                  <a href="https://raw.githubusercontent.com/DanRobo76/VMC-HELTY-FLOW/main/immagini/Informazioni/formula_tempo_ricambio.png?v=20261107" target="_blank"><img src="https://raw.githubusercontent.com/DanRobo76/VMC-HELTY-FLOW/main/immagini/Informazioni/formula_tempo_ricambio.png?v=20261107" alt="Tempo per un ricambio completo" width="70%"></a>
                   <table><tr><td align="justify">
                   <b>Esempio.</b> A Velocità 1 in una stanza da 50 m³ (20 m² con soffitto a 2,5 m), il tempo per
                   cambiare tutta l'aria è pari a 50 m³ : 10 m³/h, ovvero a 5 ore. Più alta è la portata, più breve è
@@ -12319,7 +12319,7 @@ cards:
                   Di seguito le tempistiche necessarie per cambiare tutta l'aria in funzione delle diverse velocità,
                   prendendo ad esempio la stanza da 50 m³.
                   </td></tr></table>
-                  <a href="https://raw.githubusercontent.com/DanRobo76/VMC-HELTY-FLOW/main/immagini/Informazioni/21_ricambi_aria.png" target="_blank"><img src="https://raw.githubusercontent.com/DanRobo76/VMC-HELTY-FLOW/main/immagini/Informazioni/21_ricambi_aria.png" alt="Tempo per un ricambio d'aria completo" width="100%"></a>
+                  <a href="https://raw.githubusercontent.com/DanRobo76/VMC-HELTY-FLOW/main/immagini/Informazioni/21_ricambi_aria.png?v=20261107" target="_blank"><img src="https://raw.githubusercontent.com/DanRobo76/VMC-HELTY-FLOW/main/immagini/Informazioni/21_ricambi_aria.png?v=20261107" alt="Tempo per un ricambio d'aria completo" width="100%"></a>
 
                   <table><tr><td align="justify">
                   <b>Ricambio in corso.</b> Quando l'aria scambiata raggiunge il [Volume ambiente Int.]
@@ -12328,7 +12328,7 @@ cards:
                   <br><br>
                   <b>Totali del giorno.</b> Totale Aria Scambiata [m³] e Totale N° Ricambi Aria si azzerano a mezzanotte.
                   </td></tr></table>
-                  <a href="https://raw.githubusercontent.com/DanRobo76/VMC-HELTY-FLOW/main/immagini/Informazioni/formula_numero_ricambi.png" target="_blank"><img src="https://raw.githubusercontent.com/DanRobo76/VMC-HELTY-FLOW/main/immagini/Informazioni/formula_numero_ricambi.png" alt="Numero di ricambi d'aria del giorno" width="75%"></a>
+                  <a href="https://raw.githubusercontent.com/DanRobo76/VMC-HELTY-FLOW/main/immagini/Informazioni/formula_numero_ricambi.png?v=20261107" target="_blank"><img src="https://raw.githubusercontent.com/DanRobo76/VMC-HELTY-FLOW/main/immagini/Informazioni/formula_numero_ricambi.png?v=20261107" alt="Numero di ricambi d'aria del giorno" width="75%"></a>
 
                   <br>
 
@@ -12400,7 +12400,7 @@ cards:
                   <tr><td style="padding: 4px 8px; border: 1px solid #c3c2b7;"><font color="#6dbccb">■</font> Blu</td><td style="padding: 4px 8px; border: 1px solid #c3c2b7;">in movimento</td><td style="padding: 4px 8px; border: 1px solid #c3c2b7;">VMC in funzione per allarme Umidità</td></tr>
                   <tr><td style="padding: 4px 8px; border: 1px solid #c3c2b7;"><font color="#d45b5b">■</font> Rosso</td><td style="padding: 4px 8px; border: 1px solid #c3c2b7;">in movimento</td><td style="padding: 4px 8px; border: 1px solid #c3c2b7;">VMC in funzione per allarme Inquinanti, anche insieme all'Umidità o con Punto di Rugiada / Free sfavorevoli</td></tr>
                   </table>
-                  <a href="https://raw.githubusercontent.com/DanRobo76/VMC-HELTY-FLOW/main/immagini/Informazioni/23_intestazione.png" target="_blank"><img src="https://raw.githubusercontent.com/DanRobo76/VMC-HELTY-FLOW/main/immagini/Informazioni/23_intestazione.png" alt="Colore del LED e del flusso" width="100%"></a>
+                  <a href="https://raw.githubusercontent.com/DanRobo76/VMC-HELTY-FLOW/main/immagini/Informazioni/23_intestazione.png?v=20261107" target="_blank"><img src="https://raw.githubusercontent.com/DanRobo76/VMC-HELTY-FLOW/main/immagini/Informazioni/23_intestazione.png?v=20261107" alt="Colore del LED e del flusso" width="100%"></a>
                   <table><tr><td align="justify">
                   <b>Scritte Alert sotto i tasti.</b> Sotto un tasto di velocità compare la scritta Alert quando, premendolo,
                   la VMC viene subito bloccata o ridotta da un'allerta già presente. Il tasto Velocità 0 non mostra mai
