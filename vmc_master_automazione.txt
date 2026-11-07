@@ -15256,7 +15256,7 @@ actions:
                 alias: Ritorno a Velocità 1
               - conditions:
                   - condition: template
-                    value_template: ' {{states(''input_boolean.vmc_master_spia_velocita_2_co2_o_voc'')==''on''}}'
+                    value_template: " {{states('input_boolean.vmc_master_spia_velocita_2_co2_o_voc')=='on'}}"
                 sequence:
                   - choose:
                       - conditions:
@@ -15316,7 +15316,7 @@ actions:
                 alias: Ritorno a Velocità 2
               - conditions:
                   - condition: template
-                    value_template: ' {{states(''input_boolean.vmc_master_spia_velocita_3_co2_o_voc'')==''on''}}'
+                    value_template: " {{states('input_boolean.vmc_master_spia_velocita_3_co2_o_voc')=='on'}}"
                 sequence:
                   - choose:
                       - conditions:
@@ -15376,7 +15376,7 @@ actions:
                 alias: Ritorno a Velocità 3
               - conditions:
                   - condition: template
-                    value_template: ' {{states(''input_boolean.vmc_master_spia_velocita_4_co2_o_voc'')==''on''}}'
+                    value_template: " {{states('input_boolean.vmc_master_spia_velocita_4_co2_o_voc')=='on'}}"
                 sequence:
                   - choose:
                       - conditions:
@@ -15436,7 +15436,7 @@ actions:
                 alias: Ritorno a Velocità 4
               - conditions:
                   - condition: template
-                    value_template: ' {{states(''input_boolean.vmc_master_spia_velocita_notturna_co2_o_voc'')==''on''}}'
+                    value_template: " {{states('input_boolean.vmc_master_spia_velocita_notturna_co2_o_voc')=='on'}}"
                 sequence:
                   - choose:
                       - conditions:
@@ -15496,7 +15496,7 @@ actions:
                 alias: Ritorno a Velocità Notturna
               - conditions:
                   - condition: template
-                    value_template: ' {{states(''input_boolean.vmc_master_spia_velocita_iperventilazione_co2_o_voc'')==''on''}}'
+                    value_template: " {{states('input_boolean.vmc_master_spia_velocita_iperventilazione_co2_o_voc')=='on'}}"
                 sequence:
                   - choose:
                       - conditions:
@@ -15906,13 +15906,13 @@ actions:
                       states('input_boolean.vmc_master_spia_velocita_freecooling_un_solo_avvio_per_programmazione_freeheating')=='on'))}}
                     enabled: true
                 sequence:
-                  - alias: 'VMC che non ha eseguito l''avvio (velocità mai cambiata dall''inizio dell''allerta) -> come l''avvio normale: l''attesa del Free resta (03-11-2026)'
+                  - alias: "VMC che non ha eseguito l'avvio (velocità mai cambiata dall'inizio dell'allerta) -> come l'avvio normale: l'attesa del Free resta (03-11-2026)"
                     if:
                     - condition: template
                       value_template: "{{ states.sensor.vmc_master_status_ventola_lettura_codice_interpretato is not none and states.input_boolean.vmc_master_spia_co2_o_voc is not none\n   and states.sensor.vmc_master_status_ventola_lettura_codice_interpretato.last_changed <= states.input_boolean.vmc_master_spia_co2_o_voc.last_changed }}"
                     then:
                     - variables:
-                        vel_prima_del_comando: '{{ states(''sensor.vmc_master_status_ventola_lettura_codice_interpretato'') }}'
+                        vel_prima_del_comando: "{{ states('sensor.vmc_master_status_ventola_lettura_codice_interpretato') }}"
                       alias: Memorizza la velocità prima del comando (un cambio fatto dall'utente ferma il ciclo di conferma)
                     - repeat:
                         sequence:
@@ -15944,7 +15944,7 @@ actions:
                             milliseconds: 0
                         until:
                         - condition: template
-                          value_template: '{{ states(''sensor.vmc_master_status_ventola_lettura_codice_interpretato'') == ''Velocità 1'' or (vel_prima_del_comando not in [''Non disponibile'', ''unknown'', ''unavailable'', ''''] and states(''sensor.vmc_master_status_ventola_lettura_codice_interpretato'') not in [vel_prima_del_comando, ''Non disponibile'', ''unknown'', ''unavailable'', '''']) }}'
+                          value_template: "{{ states('sensor.vmc_master_status_ventola_lettura_codice_interpretato') == 'Velocità 1' or (vel_prima_del_comando not in ['Non disponibile', 'unknown', 'unavailable', ''] and states('sensor.vmc_master_status_ventola_lettura_codice_interpretato') not in [vel_prima_del_comando, 'Non disponibile', 'unknown', 'unavailable', '']) }}"
                     else:
                       - variables:
                           vel_prima_del_comando: "{{ states('sensor.vmc_master_status_ventola_lettura_codice_interpretato') }}"
@@ -17073,7 +17073,7 @@ actions:
             default:
             - alias: 'Nessun ramo riconosciuto: la VMC è ferma con Inquinanti in corso -> Velocità 1 (R2, 03-11-2026)'
               variables:
-                vel_prima_del_comando: '{{ states(''sensor.vmc_master_status_ventola_lettura_codice_interpretato'') }}'
+                vel_prima_del_comando: "{{ states('sensor.vmc_master_status_ventola_lettura_codice_interpretato') }}"
             - repeat:
                 sequence:
                 - data: {}
@@ -17094,7 +17094,7 @@ actions:
                     milliseconds: 0
                 until:
                 - condition: template
-                  value_template: '{{ states(''sensor.vmc_master_status_ventola_lettura_codice_interpretato'') == ''Velocità 1'' or (vel_prima_del_comando not in [''Non disponibile'', ''unknown'', ''unavailable'', ''''] and states(''sensor.vmc_master_status_ventola_lettura_codice_interpretato'') not in [vel_prima_del_comando, ''Non disponibile'', ''unknown'', ''unavailable'', '''']) }}'
+                  value_template: "{{ states('sensor.vmc_master_status_ventola_lettura_codice_interpretato') == 'Velocità 1' or (vel_prima_del_comando not in ['Non disponibile', 'unknown', 'unavailable', ''] and states('sensor.vmc_master_status_ventola_lettura_codice_interpretato') not in [vel_prima_del_comando, 'Non disponibile', 'unknown', 'unavailable', '']) }}"
         alias: >-
           Spia Velocità 0 CO₂ e/o VOC se Spia Congelamento Off e Spia Delta Temp
           Off
