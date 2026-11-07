@@ -33,7 +33,7 @@ Velocità con la stessa portata usano la stessa animazione.
 | File | Quando |
 |---|---|
 | `ferma_off_line.webp` | VMC OFF-Line o non disponibile (LED grigio) |
-| `ferma_normale.webp` | Velocità 0 senza allerte (LED bianco) |
+| `ferma_normale.webp` | Velocità 0 senza allerte (LED bianco, solo la VMC senza flussi) |
 | `ferma_allerta.webp` | Velocità 0 per un'allerta che blocca la VMC (LED giallo) |
 
 ## Altre immagini
