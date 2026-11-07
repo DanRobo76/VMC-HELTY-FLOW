@@ -10650,6 +10650,15 @@ cards:
                   Velocità 0 oppure se la velocità programmata coincide con quella attuale. In tutti gli altri
                   casi mantiene la nuova velocità impostata, indipendentemente dalla presenza di umidità.
                   <br><br>
+                  • Se l'Umidità ha avviato la VMC da Velocità 0 e la VMC risulta ancora, o di nuovo, a Velocità 0
+                  per 4 secondi (ad esempio perché la VMC conferma il cambio in ritardo, oppure perché si sceglie
+                  Velocità 0), viene riportata alla [Set Velocità Umidità di Avvio] (Velocità 1 se è programmata
+                  Free Cool./Heat. con un'allerta Free) e a fine Umidità torna a Velocità 0: la partenza da
+                  Velocità 0 l'ha decisa la logica dell'Umidità, che prevale. Per fermare la VMC durante l'allerta
+                  si spegne l'interruttore [VMC ON/OFF, in Funzione dell'Umidità Interna]. Se invece la VMC era già
+                  in moto all'inizio dell'allerta, oppure durante l'allerta si è scelta prima una velocità diversa
+                  da quella di avvio, la Velocità 0 scelta viene memorizzata e mantenuta anche a fine Umidità.
+                  <br><br>
                   • Se è programmata la velocità Free Cool./Heat., la mantiene in assenza di allerte;
                   diversamente viene impostata la Velocità 1.
                   <br><br>
@@ -12002,18 +12011,34 @@ cards:
                     <b>PRIORITA' DI ATTIVAZIONE DEGLI ALLARMI (Secondi per l'Attivazione e per la Ripresa):</b><br>
                     - Congelamento ≤ -18 [°C] Temp. Ext.: 0 Secondi. Durante il Congelamento la VMC resta ferma: se si prova a cambiarle Velocità viene riportata subito a Velocità 0 e, se non si ferma, il comando di arresto viene ripetuto finché non si ferma (circa ogni 4 Secondi);<br>
                     - VMC Sensori Int. Δ Temp. > 23 [°C]: 4 Secondi;<br>
-                    - Inquinanti (CO₂ e VOC): 8 Secondi. Se la VMC è partita da Velocità 0 resta a Velocità 1 fino al rientro degli Inquinanti, poi torna a Velocità 0; se nel frattempo l'utente sceglie un'altra Velocità (anche durante il Congelamento o il Δ Temp.) questa viene mantenuta, anche dopo il rientro;<br>
+                    - Inquinanti (CO₂ e VOC): 8 Secondi. Se la VMC è partita da Velocità 0 resta a Velocità 1 fino al rientro degli Inquinanti, poi torna a Velocità 0; se nel frattempo l'utente sceglie un'altra Velocità diversa da 0 (anche durante il Congelamento o il Δ Temp.) questa viene mantenuta, anche dopo il rientro; se invece sceglie Velocità 0 con gli Inquinanti ancora presenti, dopo circa 8 Secondi la VMC riparte a Velocità 1 e al rientro degli Inquinanti torna a Velocità 0, anche se prima dell'allerta era a un'altra Velocità;<br>
                     - Sup. Lim. Δ PdR con Inquinanti: 12 Secondi;<br>
                     - Sup. Lim. Δ PdR: 16 Secondi. Se l'allerta inizia con la VMC a Velocità 0, l'Umidità non la avvia fino al termine dell'allerta; se durante l'allerta si cambia Velocità, la VMC viene riportata a Velocità 0 e la nuova Velocità viene memorizzata e ripristinata al termine dell'allerta, anche al posto della ripresa in Free Cool./Heat.;<br>
                     - Free Cool./Heat. con Inquinanti: 20 Secondi;<br>
                     - Free Cool./Heat.: 24 Secondi. Se durante l'avviso si sceglie un'altra Velocità, la ripresa automatica in Free Cool./Heat. viene annullata e la VMC resta sulla Velocità scelta;<br>
-                    - Umidità: 28 Secondi (la logica Umidità memorizza subito la Velocità in uso); se durante l'allerta si cambia Velocità, la nuova Velocità viene memorizzata dopo 4 Secondi e mantenuta a fine Umidità;<br>
+                    - Umidità: 28 Secondi (la logica Umidità memorizza subito la Velocità in uso); se durante l'allerta si cambia Velocità, la nuova Velocità viene memorizzata dopo 4 Secondi e mantenuta a fine Umidità; se però l'Umidità ha avviato la VMC da Velocità 0 e la VMC risulta ancora, o di nuovo, a Velocità 0, dopo 4 Secondi viene riportata alla [Set Velocità Umidità di Avvio] e a fine Umidità torna a Velocità 0 (per fermarla si spegne l'interruttore dell'Umidità);<br>
                     - Black-Out: 32 Secondi per il Rilevamento e per il Ripristino.<br>
                     <br>
                     <b>CAMBIO MANUALE DELLA VELOCITÀ:</b> ogni comando dell'automazione viene ripetuto ogni 4-5 Secondi finché la VMC non
                     lo esegue; se nel frattempo si sceglie un'altra Velocità (Telecomando, scheda o App), la ripetizione si interrompe e la scelta
                     viene rispettata e gestita dalle regole sopra (es. memorizzata dal Lim. Δ PdR o dall'Umidità). Fanno eccezione Congelamento e
-                    Δ Temp., che impongono comunque la loro Velocità.<br>
+                    Δ Temp., che impongono comunque la loro Velocità, gli Inquinanti ancora presenti, che riavviano la VMC fermata a Velocità 0, e
+                    l'Umidità che ha avviato la VMC da Velocità 0, che la riporta alla velocità di avvio.<br>
+                    </td></tr></table>
+                    <table width="100%">
+                    <tr><th colspan="3" style="padding: 4px 8px; border: 1px solid #c3c2b7;">CAMBIO DI VELOCITÀ DURANTE UN'ALLERTA (comportamento misurato)</th></tr>
+                    <tr><th style="padding: 4px 8px; border: 1px solid #c3c2b7;">Allerta in corso</th><th style="padding: 4px 8px; border: 1px solid #c3c2b7;">Si sceglie un'altra Velocità</th><th style="padding: 4px 8px; border: 1px solid #c3c2b7;">Si sceglie Velocità 0</th></tr>
+                    <tr><td style="padding: 4px 8px; border: 1px solid #c3c2b7;">Congelamento</td><td style="padding: 4px 8px; border: 1px solid #c3c2b7;">Viene riportata subito a Velocità 0; a fine allerta va alla Velocità scelta</td><td style="padding: 4px 8px; border: 1px solid #c3c2b7;">La VMC è già ferma: nessun effetto; a fine allerta torna alla Velocità di prima</td></tr>
+                    <tr><td style="padding: 4px 8px; border: 1px solid #c3c2b7;">Δ Temp. &gt; 23 °C</td><td style="padding: 4px 8px; border: 1px solid #c3c2b7;">Viene riportata a Velocità 1; a fine allerta va alla Velocità scelta</td><td style="padding: 4px 8px; border: 1px solid #c3c2b7;">Viene riportata a Velocità 1; a fine allerta resta a Velocità 0</td></tr>
+                    <tr><td style="padding: 4px 8px; border: 1px solid #c3c2b7;">Inquinanti (CO₂ e VOC)</td><td style="padding: 4px 8px; border: 1px solid #c3c2b7;">Viene mantenuta, anche dopo il rientro degli Inquinanti</td><td style="padding: 4px 8px; border: 1px solid #c3c2b7;">Dopo circa 8 Secondi riparte a Velocità 1; al rientro degli Inquinanti torna a Velocità 0</td></tr>
+                    <tr><td style="padding: 4px 8px; border: 1px solid #c3c2b7;">Lim. Δ Punto di Rugiada</td><td style="padding: 4px 8px; border: 1px solid #c3c2b7;">Viene riportata a Velocità 0; la Velocità scelta viene memorizzata e ripristinata a fine allerta</td><td style="padding: 4px 8px; border: 1px solid #c3c2b7;">La VMC è già ferma: nessun effetto; a fine allerta torna alla Velocità di prima</td></tr>
+                    <tr><td style="padding: 4px 8px; border: 1px solid #c3c2b7;">Free Cool./Heat. sfavorevole (VMC ferma in attesa)</td><td style="padding: 4px 8px; border: 1px solid #c3c2b7;">La VMC va alla Velocità scelta e la ripresa automatica in Free Cool./Heat. viene annullata</td><td style="padding: 4px 8px; border: 1px solid #c3c2b7;">La VMC è già ferma: nessun effetto; quando le condizioni tornano favorevoli riprende in Free Cool./Heat.</td></tr>
+                    <tr><td style="padding: 4px 8px; border: 1px solid #c3c2b7;">Umidità, con la VMC già in moto all'inizio</td><td style="padding: 4px 8px; border: 1px solid #c3c2b7;">Memorizzata dopo 4 Secondi e mantenuta a fine Umidità</td><td style="padding: 4px 8px; border: 1px solid #c3c2b7;">La VMC si ferma e resta a Velocità 0, anche a fine Umidità</td></tr>
+                    <tr><td style="padding: 4px 8px; border: 1px solid #c3c2b7;">Umidità, con la VMC avviata da Velocità 0</td><td style="padding: 4px 8px; border: 1px solid #c3c2b7;">Una Velocità diversa da quella di avvio viene memorizzata dopo 4 Secondi e mantenuta a fine Umidità; la stessa Velocità di avvio non cambia nulla</td><td style="padding: 4px 8px; border: 1px solid #c3c2b7;">Dopo 4 Secondi riparte alla [Set Velocità Umidità di Avvio]; a fine Umidità torna a Velocità 0. Per fermarla si spegne l'interruttore dell'Umidità</td></tr>
+                    </table>
+                    <table><tr><td align="justify">
+                    Esempio: la VMC è a Velocità 2 e la CO₂ sale; si sceglie Velocità 0: dopo circa 8 Secondi la VMC riparte a Velocità 1 e, quando la CO₂ rientra, torna a Velocità 0. Se la CO₂ rientra subito dopo la scelta, alla fine la VMC resta a Velocità 0.<br>
+                    Esempio: la VMC è a Velocità 0 e l'Umidità la avvia in Notturna; si sceglie Velocità 0: dopo 4 Secondi la VMC torna in Notturna e, quando l'umidità rientra, torna a Velocità 0.<br>
                     <br>
                     <b>CALENDARIO:</b> 3 Secondi per l'Ingresso e per l'Uscita dalla Fascia oraria; all'Ingresso il comando alla VMC parte dopo ulteriori 5 Secondi (attesa dello script della Fascia).<br>
                     All'interno della Fascia, a VMC avviata, hanno effetto Congelamento, Δ Temp., Inquinanti, Lim. Δ Punto di Rugiada e Free Cooling / Free Heating; Umidità e Black-Out non hanno effetto. All'uscita dalla Fascia la VMC si arresta.<br>
