@@ -24224,9 +24224,7 @@ actions:
                 Non Disponibile: {{
                 states('input_text.vmc_master_last_temp_external_entity') }}
 
-                Impiegato per il rilevamento: {{
-                state_attr('sensor.vmc_master_temp_esterna_status',
-                'friendly_name') }}
+                Impiegato per il rilevamento: {{ (state_attr('sensor.vmc_master_temp_esterna_status', 'friendly_name') or (((device_name('sensor.vmc_master_temp_esterna_status') or '') ~ ' ' ~ ((entity_name('sensor.vmc_master_temp_esterna_status') or '') if entity_name is defined else '')) | trim)) }}
 
                 Data {{ now().strftime('%d-%m-%Y') }} Ora
                 {{now().strftime('%H:%M:%S') }}
@@ -24247,9 +24245,7 @@ actions:
                 Non Disponibile: {{
                 states('input_text.vmc_master_last_temp_internal_entity') }}
 
-                Impiegato per il rilevamento: {{
-                state_attr('sensor.vmc_master_temp_interna_status',
-                'friendly_name') }}
+                Impiegato per il rilevamento: {{ (state_attr('sensor.vmc_master_temp_interna_status', 'friendly_name') or (((device_name('sensor.vmc_master_temp_interna_status') or '') ~ ' ' ~ ((entity_name('sensor.vmc_master_temp_interna_status') or '') if entity_name is defined else '')) | trim)) }}
 
                 Data {{ now().strftime('%d-%m-%Y') }} Ora
                 {{now().strftime('%H:%M:%S') }}
@@ -24270,9 +24266,7 @@ actions:
                 Non Disponibile: {{
                 states('input_text.vmc_master_last_humidity_external_entity') }}
 
-                Impiegato per il rilevamento: {{
-                state_attr('sensor.vmc_master_umidita_esterna_status',
-                'friendly_name') }}
+                Impiegato per il rilevamento: {{ (state_attr('sensor.vmc_master_umidita_esterna_status', 'friendly_name') or (((device_name('sensor.vmc_master_umidita_esterna_status') or '') ~ ' ' ~ ((entity_name('sensor.vmc_master_umidita_esterna_status') or '') if entity_name is defined else '')) | trim)) }}
 
                 Data {{ now().strftime('%d-%m-%Y') }} Ora
                 {{now().strftime('%H:%M:%S') }}
@@ -24293,9 +24287,7 @@ actions:
                 Non Disponibile: {{
                 states('input_text.vmc_master_last_humidity_internal_entity') }}
 
-                Impiegato per il rilevamento: {{
-                state_attr('sensor.vmc_master_umidita_interna_status',
-                'friendly_name') }}
+                Impiegato per il rilevamento: {{ (state_attr('sensor.vmc_master_umidita_interna_status', 'friendly_name') or (((device_name('sensor.vmc_master_umidita_interna_status') or '') ~ ' ' ~ ((entity_name('sensor.vmc_master_umidita_interna_status') or '') if entity_name is defined else '')) | trim)) }}
 
                 Data {{ now().strftime('%d-%m-%Y') }} Ora
                 {{now().strftime('%H:%M:%S') }}
@@ -24316,8 +24308,7 @@ actions:
                 Non Disponibile: {{
                 states('input_text.vmc_master_last_co2_internal_entity') }}
 
-                Impiegato per il rilevamento: {{
-                state_attr('sensor.vmc_master_co2_status', 'friendly_name') }}
+                Impiegato per il rilevamento: {{ (state_attr('sensor.vmc_master_co2_status', 'friendly_name') or (((device_name('sensor.vmc_master_co2_status') or '') ~ ' ' ~ ((entity_name('sensor.vmc_master_co2_status') or '') if entity_name is defined else '')) | trim)) }}
 
                 Data {{ now().strftime('%d-%m-%Y') }} Ora
                 {{now().strftime('%H:%M:%S') }}

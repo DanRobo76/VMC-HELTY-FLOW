@@ -8,13 +8,15 @@ Formato: **WebP** con sfondo trasparente (animato per le velocità, fermo per Ve
 
 Il nome di ogni file è formato da **situazione** + **velocità della VMC**.
 
-| Situazione | Colore del LED e del flusso | Quando |
+| Situazione | Colore del LED e del flusso in entrata (a sinistra) | Quando |
 |---|---|---|
-| `normale` | bianco | nessuna allerta |
+| `normale` | LED bianco; in movimento flusso verde | nessuna allerta |
 | `allerta` | giallo | allerta che blocca o riduce la VMC (Congelamento, Diff. Temp., Punto di Rugiada, Free programmato) |
 | `umidita` | blu | VMC in funzione per allarme Umidità |
 | `inquinanti` | rosso | VMC in funzione per allarme Inquinanti (CO₂ / VOC) |
 | `off_line` | grigio | VMC OFF-Line o non disponibile |
+
+Il flusso in uscita (a destra, aria pulita) è sempre verde.
 
 | Velocità nel nome | Portata | Flusso animato |
 |---|---|---|
