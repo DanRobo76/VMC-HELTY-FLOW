@@ -355,7 +355,7 @@
   Clicca sul link oppure scansiona il QR code qui sotto.
   <br><br>
   <a href="https://www.paypal.com/ncp/payment/8LT4JJW7MHW6U">
-    <img src="https://raw.githubusercontent.com/DanRobo76/VMC-HELTY-FLOW/main/VMC-HELTY-FLOW-qrcode.png"
+    <img src="https://raw.githubusercontent.com/DanRobo76/VMC-HELTY-FLOW/main/immagini/Informazioni/VMC-HELTY-FLOW-qrcode.png"
          alt="QR code PayPal per sostenere VMC MASTER"
          width="200">
   </a>
@@ -712,7 +712,7 @@
   Click the link or scan the QR code below.
   <br><br>
   <a href="https://www.paypal.com/ncp/payment/8LT4JJW7MHW6U">
-    <img src="https://raw.githubusercontent.com/DanRobo76/VMC-HELTY-FLOW/main/VMC-HELTY-FLOW-qrcode.png"
+    <img src="https://raw.githubusercontent.com/DanRobo76/VMC-HELTY-FLOW/main/immagini/Informazioni/VMC-HELTY-FLOW-qrcode.png"
          alt="PayPal QR code to support VMC MASTER"
          width="200">
   </a>
