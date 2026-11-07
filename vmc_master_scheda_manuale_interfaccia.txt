@@ -9726,7 +9726,7 @@ cards:
                         </table>
                         <details><summary><b>Elenco completo delle {{ elenco | count }} entità</b></summary>
                         <table width="100%"><tr><th style="padding: 4px 8px; border: 1px solid #c3c2b7;">Nome</th><th style="padding: 4px 8px; border: 1px solid #c3c2b7;">Entità</th></tr>
-                        {%- for e in elenco -%}<tr><td style="padding: 4px 8px; border: 1px solid #c3c2b7;">{{ state_attr(e, 'friendly_name') or '–' }}</td><td style="padding: 4px 8px; border: 1px solid #c3c2b7;"><small>{{ e }}</small></td></tr>{%- endfor -%}
+                        {%- for e in elenco -%}<tr><td style="padding: 4px 8px; border: 1px solid #c3c2b7;">{{ (state_attr(e, 'friendly_name') or (((device_name(e) or '') ~ ' ' ~ ((entity_name(e) or '') if entity_name is defined else '')) | trim)) or '–' }}</td><td style="padding: 4px 8px; border: 1px solid #c3c2b7;"><small>{{ e }}</small></td></tr>{%- endfor -%}
                         </table>
                         </details>
                     - type: horizontal-stack
@@ -12384,8 +12384,9 @@ cards:
                   <summary><b>22 Intestazione Animata e Scritte Alert</b></summary>
                   <table><tr><td align="justify">
                   <b>Che cos'è.</b> L'immagine in cima alla scheda mostra lo stato della VMC. Quando la velocità è diversa da
-                  0 l'aria esterna entra da sinistra, con la polvere, ed esce pulita a destra; a Velocità 0 e con la VMC
-                  OFF-Line l'immagine è ferma.
+                  0 l'aria esterna entra da sinistra, con la polvere, ed esce pulita a destra: il flusso in entrata ha il
+                  colore dell'allerta in corso (verde senza allerte), quello in uscita è sempre verde. A Velocità 0 e con
+                  la VMC OFF-Line l'immagine è ferma.
                   <br><br>
                   <b>Colore del LED e del flusso.</b>
                   </td></tr></table>
