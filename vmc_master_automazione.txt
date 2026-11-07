@@ -25800,49 +25800,77 @@ actions:
             id:
               - umidita_velocita_0
         sequence:
-          - action: input_boolean.turn_on
-            metadata: {}
-            data: {}
-            target:
-              entity_id: input_boolean.vmc_master_spia_umidita_velocita_0
-          - action: input_boolean.turn_off
-            metadata: {}
-            data: {}
-            target:
-              entity_id:
-                - input_boolean.vmc_master_spia_umidita_velocita_1
-                - input_boolean.vmc_master_spia_umidita_velocita_2
-                - input_boolean.vmc_master_spia_umidita_velocita_3
-                - input_boolean.vmc_master_spia_umidita_velocita_4
-                - input_boolean.vmc_master_spia_umidita_velocita_notturna
-                - >-
-                  input_boolean.vmc_master_spia_umidita_velocita_iperventilazione
-                - input_boolean.vmc_master_spia_umidita_velocita_freecooling
-          - variables:
-              vel_prima_del_comando: "{{ states('sensor.vmc_master_status_ventola_lettura_codice_interpretato') }}"
-            alias: Memorizza la velocità prima del comando (un cambio fatto dall'utente ferma il ciclo di conferma)
-          - repeat:
-              sequence:
-                - action: shell_command.vmc_master_velocita_0
-                  metadata: {}
-                  data: {}
-                - delay:
-                    hours: 0
-                    minutes: 0
-                    seconds: 1
-                    milliseconds: 0
-                - action: homeassistant.update_entity
-                  target:
-                    entity_id: sensor.vmc_master_status_ventola
-                  alias: Rilettura immediata della velocità (la velocità non ancora aggiornata non va presa per una scelta dell'utente)
-                - delay:
-                    hours: 0
-                    minutes: 0
-                    seconds: 4
-                    milliseconds: 0
-              until:
-                - condition: template
-                  value_template: "{{ states('sensor.vmc_master_status_ventola_lettura_codice_interpretato') == 'Velocità 0' or (vel_prima_del_comando not in ['Non disponibile', 'unknown', 'unavailable', ''] and states('sensor.vmc_master_status_ventola_lettura_codice_interpretato') not in [vel_prima_del_comando, 'Non disponibile', 'unknown', 'unavailable', '']) }}"
+          - alias: Umidità che ha avviato la VMC da Velocità 0 e VMC ancora (o di nuovo) a 0 -> rimanda la velocità di avvio dell'opzione 175, la memoria resta (correzione U3)
+            if:
+              - condition: template
+                value_template: "{{ is_state('input_boolean.vmc_master_spia_umidita_velocita_0', 'on') and states('input_select.vmc_master_speed_umidita') != 'Velocità 0' and not (trigger.from_state is defined and trigger.from_state is not none and trigger.from_state.state in ['Non disponibile', 'sconosciuto', 'unknown', 'unavailable', '', 'OFF-Line']) }}"
+                alias: Memoria «a fine allerta torna a 0» dell'avvio da Velocità 0, programmata diversa da 0, lettura della velocità non appena tornata disponibile
+            then:
+              - variables:
+                  vel_prima_del_comando: "{{ states('sensor.vmc_master_status_ventola_lettura_codice_interpretato') }}"
+                  free_con_allerte: "{{ states('input_select.vmc_master_speed_umidita') == 'Free Cool./Heat.' and\n   (\n    states('sensor.vmc_master_alert_monitoraggio_free_heating_o_free_cooling_allert_interfaccia_avvisi') in [\n      \"Allerta Free Heating Programmato (Raffrescamento Arrestato)\",\n      \"Allerta Free Heating Programmato (Raffrescamento in atto)\",\n      \"Allerta Free Heating Programmato (Raffrescamento in atto, Presenza di Inquinanti)\",\n      \"Allerta Free Heating Programmato (Raffrescamento Arrestato, Presenza di Inquinanti)\",\n      \"Allerta Free Cooling Programmato (Riscaldamento in atto)\",\n      \"Allerta Free Cooling Programmato (Riscaldamento Arrestato)\",\n      \"Allerta Free Cooling Programmato (Riscaldamento Arrestato, Presenza di Inquinanti)\",\n      \"Allerta Free Cooling Programmato (Riscaldamento in atto, Presenza di Inquinanti)\",\n      \"Allerta Raffrescamento in atto\",\n      \"Allerta Riscaldamento in atto\",\n      \"Allerta Riscaldamento in atto, Presenza di Inquinanti\",\n      \"Allerta Raffrescamento in atto, Presenza di Inquinanti\",\n      \"Non Avviare in Velocità Free Heating Programmato (Allerta Raffrescamento)\",\n      \"Non Avviare in Velocità Free Heating Programmato (Allerta Raffrescamento, Presenza di Inquinanti)\",\n      \"Non Avviare in Velocità Free Cooling Programmato (Allerta Riscaldamento)\",\n      \"Non Avviare in Velocità Free Cooling Programmato (Allerta Riscaldamento, Presenza di Inquinanti)\"\n    ]\n  )\n}}"
+                  vel_avvio: "{{ 'Velocità 1' if free_con_allerte else states('input_select.vmc_master_speed_umidita') }}"
+                  comando_avvio: "{{ {'Velocità 1': 'velocita_1', 'Velocità 2': 'velocita_2', 'Velocità 3': 'velocita_3', 'Velocità 4': 'velocita_4', 'Notturna': 'notturna', 'Iperventilazione': 'iperventilazione', 'Free Cool./Heat.': 'freecooling'}.get(vel_avvio, 'velocita_1') }}"
+                alias: Velocità di avvio come nell'opzione 175 (programmata; Velocità 1 se è programmata Free Cool./Heat. con allerte Free)
+              - repeat:
+                  sequence:
+                    - action: "shell_command.vmc_master_{{ comando_avvio }}"
+                      data: {}
+                    - delay:
+                        seconds: 1
+                    - action: homeassistant.update_entity
+                      target:
+                        entity_id: sensor.vmc_master_status_ventola
+                      alias: Rilettura immediata della velocità (la velocità non ancora aggiornata non va presa per una scelta dell'utente)
+                    - delay:
+                        seconds: 4
+                  until:
+                    - condition: template
+                      value_template: "{{ states('sensor.vmc_master_status_ventola_lettura_codice_interpretato') not in [vel_prima_del_comando, 'Non disponibile', 'unknown', 'unavailable', ''] }}"
+            else:
+              - action: input_boolean.turn_on
+                metadata: {}
+                data: {}
+                target:
+                  entity_id: input_boolean.vmc_master_spia_umidita_velocita_0
+              - action: input_boolean.turn_off
+                metadata: {}
+                data: {}
+                target:
+                  entity_id:
+                    - input_boolean.vmc_master_spia_umidita_velocita_1
+                    - input_boolean.vmc_master_spia_umidita_velocita_2
+                    - input_boolean.vmc_master_spia_umidita_velocita_3
+                    - input_boolean.vmc_master_spia_umidita_velocita_4
+                    - input_boolean.vmc_master_spia_umidita_velocita_notturna
+                    - >-
+                      input_boolean.vmc_master_spia_umidita_velocita_iperventilazione
+                    - input_boolean.vmc_master_spia_umidita_velocita_freecooling
+              - variables:
+                  vel_prima_del_comando: "{{ states('sensor.vmc_master_status_ventola_lettura_codice_interpretato') }}"
+                alias: Memorizza la velocità prima del comando (un cambio fatto dall'utente ferma il ciclo di conferma)
+              - repeat:
+                  sequence:
+                    - action: shell_command.vmc_master_velocita_0
+                      metadata: {}
+                      data: {}
+                    - delay:
+                        hours: 0
+                        minutes: 0
+                        seconds: 1
+                        milliseconds: 0
+                    - action: homeassistant.update_entity
+                      target:
+                        entity_id: sensor.vmc_master_status_ventola
+                      alias: Rilettura immediata della velocità (la velocità non ancora aggiornata non va presa per una scelta dell'utente)
+                    - delay:
+                        hours: 0
+                        minutes: 0
+                        seconds: 4
+                        milliseconds: 0
+                  until:
+                    - condition: template
+                      value_template: "{{ states('sensor.vmc_master_status_ventola_lettura_codice_interpretato') == 'Velocità 0' or (vel_prima_del_comando not in ['Non disponibile', 'unknown', 'unavailable', ''] and states('sensor.vmc_master_status_ventola_lettura_codice_interpretato') not in [vel_prima_del_comando, 'Non disponibile', 'unknown', 'unavailable', '']) }}"
         alias: Umidità ON Vel. 0 [Spia Umidità ON]
       - conditions:
           - condition: trigger
