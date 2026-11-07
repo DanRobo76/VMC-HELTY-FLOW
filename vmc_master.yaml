@@ -5013,7 +5013,7 @@ script:
           minutes: 0
           seconds: 5
           milliseconds: 0
-    description: Resetta il FIltro all'interno della VMC una volta sostituito lo stesso
+    description: Resetta il Filtro all'interno della VMC una volta sostituito lo stesso
 
   vmc_master_pulisci_cronologia_audio:                                          # [CONFIGURAZIONE, 2 RICHIAMI] [INTERFACCIA, 3 RICHIAMI] [AUTOMAZIONE, 0 RICHIAMI]
     alias: "VMC Master - Pulisci cronologia Audio"
@@ -15669,8 +15669,9 @@ automation:
     description: >
       Aggiorna l’aria scambiata in base alla portata della VMC. Ogni secondo calcola
       l'incremento volumetrico in funzione della velocità. Se cambia velocità,
-      azzera il conteggio dei ricambi aria al giorno e forza il reset del countdown
-      per il prossimo ricambio completo.
+      azzera il conteggio parziale del ricambio in corso e forza il reset del
+      countdown per il prossimo ricambio completo; i totali del giorno si azzerano
+      a mezzanotte.
     triggers:
       - seconds: /1
         trigger: time_pattern
@@ -15806,7 +15807,7 @@ automation:
   - id: "vmc_master_riepilogo_audio_avvio"                                      # [CONFIGURAZIONE, 3 RICHIAMI] [INTERFACCIA, 1 RICHIAMO] [AUTOMAZIONE, 0 RICHIAMI]
     alias: "VMC Master - Riepilogo Audio Avvio"
     description: >
-      Gestisce tutti gli avvisi audio VMC, con Home Asisstant in fase di Avvio:
+      Gestisce tutti gli avvisi audio VMC, con Home Assistant in fase di Avvio:
       - Allerta/Nessuna Allerta Black-Out
       - Stato velocità
       - Allerta/Nessuna Allerta Congelamento
@@ -15926,7 +15927,7 @@ automation:
   - id: "vmc_master_audio_allerte_e_stato"                                      # [CONFIGURAZIONE, 3 RICHIAMI] [INTERFACCIA, 1 RICHIAMO] [AUTOMAZIONE, 0 RICHIAMI]
     alias: "VMC Master - Audio Allerte e Stato"
     description: >
-      Gestisce tutti gli avvisi audio VMC, con Home Asisstant già Avviato:
+      Gestisce tutti gli avvisi audio VMC, con Home Assistant già Avviato:
       - Allerta/Nessuna Allerta Black-Out
       - Stato velocità
       - Allerta/Nessuna Allerta Congelamento
