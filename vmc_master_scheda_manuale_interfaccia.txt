@@ -8618,14 +8618,16 @@ cards:
               ['Inquinanti', 'input_boolean.vmc_master_spia_velocita_{}_co2_o_voc', ['0']],
               ['Inquinanti', 'input_boolean.vmc_master_spia_co2_o_voc_partenza_ritorno_velocita_0', ['0']],
               ['Lim. Δ Punto di Rugiada', 'input_boolean.vmc_master_spia_velocita_{}_un_solo_avvio', nomi.keys() | list],
+              ['Lim. Δ Punto di Rugiada', 'input_boolean.vmc_master_spia_velocita_1_co2_o_voc_pdr', ['0']],
               ['Avviso Free', 'input_boolean.vmc_master_spia_velocita_{}_un_solo_avvio_per_programmazione_freecooling', ['freecooling']],
               ['Avviso Free', 'input_boolean.vmc_master_spia_velocita_{}_un_solo_avvio_per_programmazione_freeheating', ['freecooling']],
               ['Umidità', 'input_boolean.vmc_master_spia_umidita_velocita_{}', nomi.keys() | list]
             ] -%}
-            {%- set ns = namespace(righe=[]) -%}
+            {%- set ns = namespace(righe=[], viste=[]) -%}
             {%- for a in allerte -%}{%- for k in a[2] -%}
-              {%- if is_state(a[1] | replace('{}', k), 'on') and k != att_k and ('<b>' ~ nomi[k] ~ '</b> (' ~ a[0] ~ ')') not in ns.righe -%}
+              {%- if is_state(a[1] | replace('{}', k), 'on') and k != att_k and k not in ns.viste -%}
                 {%- set ns.righe = ns.righe + ['<b>' ~ nomi[k] ~ '</b> (' ~ a[0] ~ ')'] -%}
+                {%- set ns.viste = ns.viste + [k] -%}
               {%- endif -%}
             {%- endfor -%}{%- endfor -%}
             {%- if ns.righe | count > 0 and att != 'Non disponibile' -%}
@@ -12530,7 +12532,7 @@ cards:
                   e il contenuto del file della scheda in una nuova scheda «Manuale» dell'interfaccia.
                   <br>5. Per aggiungere un'altra VMC premere «Ripeti Clona/Elimina VMC» e ripetere dal punto 2: si possono clonare
                   tutte le VMC che si vuole, senza riavviare.
-                  <br>6. Terminate le clonazioni, riavviare Home Assistant con il pulsante «Riavvia Home Assistant» (popup «Vuoi Procedere?»)
+                  <br>6. Terminate le clonazioni, riavviare Home Assistant con il pulsante «Riavvia Home Assistant» (popup «Vuoi Procedere?»)
                   oppure dal menu
                   Impostazioni → Sistema: solo dopo il riavvio le VMC clonate sono attive, con tutte le loro entità.
                   <br>7. Dopo il riavvio, nella scheda di ogni VMC clonata eseguire «VMC &lt;nome&gt; - Profilo Inizializzazione»
