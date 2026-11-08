@@ -1859,6 +1859,9 @@ cards:
             entity: input_boolean.vmc_master_spia_velocita_0_co2_o_voc
             state: "on"
           - condition: state
+            entity: input_boolean.vmc_master_spia_co2_o_voc_partenza_ritorno_velocita_0
+            state: "on"
+          - condition: state
             entity: input_boolean.vmc_master_spia_velocita_1_co2_o_voc
             state: "on"
           - condition: state
