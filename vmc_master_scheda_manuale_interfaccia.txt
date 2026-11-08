@@ -12532,7 +12532,7 @@ cards:
                   e il contenuto del file della scheda in una nuova scheda «Manuale» dell'interfaccia.
                   <br>5. Per aggiungere un'altra VMC premere «Ripeti Clona/Elimina VMC» e ripetere dal punto 2: si possono clonare
                   tutte le VMC che si vuole, senza riavviare.
-                  <br>6. Terminate le clonazioni, riavviare Home Assistant con il pulsante «Riavvia Home Assistant» (popup «Vuoi Procedere?»)
+                  <br>6. Terminate le clonazioni, riavviare Home Assistant con il pulsante «Riavvia Home Assistant» (popup «Vuoi Procedere?»)
                   oppure dal menu
                   Impostazioni → Sistema: solo dopo il riavvio le VMC clonate sono attive, con tutte le loro entità.
                   <br>7. Dopo il riavvio, nella scheda di ogni VMC clonata eseguire «VMC &lt;nome&gt; - Profilo Inizializzazione»
