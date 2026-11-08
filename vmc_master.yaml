@@ -522,7 +522,7 @@ template:
         icon: mdi:fan
 
   - sensor:
-      - default_entity_id: sensor.vmc_master_velocita_registrata                 # [CONFIGURAZIONE, 3 RICHIAMI] [INTERFACCIA, 3 RICHIAMI] [AUTOMAZIONE, 0 RICHIAMI] VELOCITA' MEMORIZZATA DALLE ALLERTE E RIPRISTINATA A FINE ALLERTA (DIVERSA DALLA VELOCITA' ATTUALE), «Nessuna» SE NON C'E'
+      - default_entity_id: sensor.vmc_master_velocita_registrata                 # [CONFIGURAZIONE, 2 RICHIAMI] [INTERFACCIA, 3 RICHIAMI] [AUTOMAZIONE, 0 RICHIAMI] VELOCITA' MEMORIZZATA DALLE ALLERTE E RIPRISTINATA A FINE ALLERTA (DIVERSA DALLA VELOCITA' ATTUALE), «Nessuna» SE NON C'E'
         name: "Velocità Registrata"
         unique_id: vmc_master_velocita_registrata
         icon: mdi:restore
@@ -2972,91 +2972,91 @@ input_text:
     icon: mdi:form-textbox
 
 ################### Inizio Creazione Testi per il Countdown in Scheda delle Attese dell'Automazione ###################
-  vmc_master_countdown_pdr_cambio:                               # [CONFIGURAZIONE, 3 RICHIAMI] [INTERFACCIA, 1 RICHIAMO] [AUTOMAZIONE, 0 RICHIAMI] TESTO DELL'AZIONE «CAMBIO VELOCITÀ PER LIM. Δ PDR» IN ATTESA (SCRITTO DA vmc_master_countdown_attese_automazione)
+  vmc_master_countdown_pdr_cambio:                               # [CONFIGURAZIONE, 2 RICHIAMI] [INTERFACCIA, 0 RICHIAMI] [AUTOMAZIONE, 0 RICHIAMI] TESTO DELL'AZIONE «CAMBIO VELOCITÀ PER LIM. Δ PDR» IN ATTESA (SCRITTO DA vmc_master_countdown_attese_automazione)
     name: "Cambio Velocità per Lim. Δ PdR - Trigger in Attesa"
     max: 255
     icon: mdi:timer-sand
-  vmc_master_countdown_pdr_ripristino:                           # [CONFIGURAZIONE, 3 RICHIAMI] [INTERFACCIA, 1 RICHIAMO] [AUTOMAZIONE, 0 RICHIAMI] TESTO DELL'AZIONE «RIPRISTINO DOPO LIM. Δ PDR» IN ATTESA (SCRITTO DA vmc_master_countdown_attese_automazione)
+  vmc_master_countdown_pdr_ripristino:                           # [CONFIGURAZIONE, 2 RICHIAMI] [INTERFACCIA, 0 RICHIAMI] [AUTOMAZIONE, 0 RICHIAMI] TESTO DELL'AZIONE «RIPRISTINO DOPO LIM. Δ PDR» IN ATTESA (SCRITTO DA vmc_master_countdown_attese_automazione)
     name: "Ripristino dopo Lim. Δ PdR - Trigger in Attesa"
     max: 255
     icon: mdi:timer-sand
-  vmc_master_countdown_free_heating_annullamento:                # [CONFIGURAZIONE, 3 RICHIAMI] [INTERFACCIA, 1 RICHIAMO] [AUTOMAZIONE, 0 RICHIAMI] TESTO DELL'AZIONE «ANNULLAMENTO MEMORIA FREE HEATING» IN ATTESA (SCRITTO DA vmc_master_countdown_attese_automazione)
+  vmc_master_countdown_free_heating_annullamento:                # [CONFIGURAZIONE, 2 RICHIAMI] [INTERFACCIA, 0 RICHIAMI] [AUTOMAZIONE, 0 RICHIAMI] TESTO DELL'AZIONE «ANNULLAMENTO MEMORIA FREE HEATING» IN ATTESA (SCRITTO DA vmc_master_countdown_attese_automazione)
     name: "Annullamento Memoria Free Heating - Trigger in Attesa"
     max: 255
     icon: mdi:timer-sand
-  vmc_master_countdown_free_heating_sospensione:                 # [CONFIGURAZIONE, 3 RICHIAMI] [INTERFACCIA, 1 RICHIAMO] [AUTOMAZIONE, 0 RICHIAMI] TESTO DELL'AZIONE «SOSPENSIONE FREE HEATING» IN ATTESA (SCRITTO DA vmc_master_countdown_attese_automazione)
+  vmc_master_countdown_free_heating_sospensione:                 # [CONFIGURAZIONE, 2 RICHIAMI] [INTERFACCIA, 0 RICHIAMI] [AUTOMAZIONE, 0 RICHIAMI] TESTO DELL'AZIONE «SOSPENSIONE FREE HEATING» IN ATTESA (SCRITTO DA vmc_master_countdown_attese_automazione)
     name: "Sospensione Free Heating - Trigger in Attesa"
     max: 255
     icon: mdi:timer-sand
-  vmc_master_countdown_free_heating_ripristino:                  # [CONFIGURAZIONE, 3 RICHIAMI] [INTERFACCIA, 1 RICHIAMO] [AUTOMAZIONE, 0 RICHIAMI] TESTO DELL'AZIONE «RIPRISTINO FREE HEATING» IN ATTESA (SCRITTO DA vmc_master_countdown_attese_automazione)
+  vmc_master_countdown_free_heating_ripristino:                  # [CONFIGURAZIONE, 2 RICHIAMI] [INTERFACCIA, 0 RICHIAMI] [AUTOMAZIONE, 0 RICHIAMI] TESTO DELL'AZIONE «RIPRISTINO FREE HEATING» IN ATTESA (SCRITTO DA vmc_master_countdown_attese_automazione)
     name: "Ripristino Free Heating - Trigger in Attesa"
     max: 255
     icon: mdi:timer-sand
-  vmc_master_countdown_free_cooling_annullamento:                # [CONFIGURAZIONE, 3 RICHIAMI] [INTERFACCIA, 1 RICHIAMO] [AUTOMAZIONE, 0 RICHIAMI] TESTO DELL'AZIONE «ANNULLAMENTO MEMORIA FREE COOLING» IN ATTESA (SCRITTO DA vmc_master_countdown_attese_automazione)
+  vmc_master_countdown_free_cooling_annullamento:                # [CONFIGURAZIONE, 2 RICHIAMI] [INTERFACCIA, 0 RICHIAMI] [AUTOMAZIONE, 0 RICHIAMI] TESTO DELL'AZIONE «ANNULLAMENTO MEMORIA FREE COOLING» IN ATTESA (SCRITTO DA vmc_master_countdown_attese_automazione)
     name: "Annullamento Memoria Free Cooling - Trigger in Attesa"
     max: 255
     icon: mdi:timer-sand
-  vmc_master_countdown_free_cooling_sospensione:                 # [CONFIGURAZIONE, 3 RICHIAMI] [INTERFACCIA, 1 RICHIAMO] [AUTOMAZIONE, 0 RICHIAMI] TESTO DELL'AZIONE «SOSPENSIONE FREE COOLING» IN ATTESA (SCRITTO DA vmc_master_countdown_attese_automazione)
+  vmc_master_countdown_free_cooling_sospensione:                 # [CONFIGURAZIONE, 2 RICHIAMI] [INTERFACCIA, 0 RICHIAMI] [AUTOMAZIONE, 0 RICHIAMI] TESTO DELL'AZIONE «SOSPENSIONE FREE COOLING» IN ATTESA (SCRITTO DA vmc_master_countdown_attese_automazione)
     name: "Sospensione Free Cooling - Trigger in Attesa"
     max: 255
     icon: mdi:timer-sand
-  vmc_master_countdown_free_cooling_ripristino:                  # [CONFIGURAZIONE, 3 RICHIAMI] [INTERFACCIA, 1 RICHIAMO] [AUTOMAZIONE, 0 RICHIAMI] TESTO DELL'AZIONE «RIPRISTINO FREE COOLING» IN ATTESA (SCRITTO DA vmc_master_countdown_attese_automazione)
+  vmc_master_countdown_free_cooling_ripristino:                  # [CONFIGURAZIONE, 2 RICHIAMI] [INTERFACCIA, 0 RICHIAMI] [AUTOMAZIONE, 0 RICHIAMI] TESTO DELL'AZIONE «RIPRISTINO FREE COOLING» IN ATTESA (SCRITTO DA vmc_master_countdown_attese_automazione)
     name: "Ripristino Free Cooling - Trigger in Attesa"
     max: 255
     icon: mdi:timer-sand
-  vmc_master_countdown_inquinanti_avvio:                         # [CONFIGURAZIONE, 3 RICHIAMI] [INTERFACCIA, 1 RICHIAMO] [AUTOMAZIONE, 0 RICHIAMI] TESTO DELL'AZIONE «AVVIO ALLERTA INQUINANTI» IN ATTESA (SCRITTO DA vmc_master_countdown_attese_automazione)
+  vmc_master_countdown_inquinanti_avvio:                         # [CONFIGURAZIONE, 2 RICHIAMI] [INTERFACCIA, 0 RICHIAMI] [AUTOMAZIONE, 0 RICHIAMI] TESTO DELL'AZIONE «AVVIO ALLERTA INQUINANTI» IN ATTESA (SCRITTO DA vmc_master_countdown_attese_automazione)
     name: "Avvio Allerta Inquinanti - Trigger in Attesa"
     max: 255
     icon: mdi:timer-sand
-  vmc_master_countdown_inquinanti_fine:                          # [CONFIGURAZIONE, 3 RICHIAMI] [INTERFACCIA, 1 RICHIAMO] [AUTOMAZIONE, 0 RICHIAMI] TESTO DELL'AZIONE «FINE ALLERTA INQUINANTI» IN ATTESA (SCRITTO DA vmc_master_countdown_attese_automazione)
+  vmc_master_countdown_inquinanti_fine:                          # [CONFIGURAZIONE, 2 RICHIAMI] [INTERFACCIA, 0 RICHIAMI] [AUTOMAZIONE, 0 RICHIAMI] TESTO DELL'AZIONE «FINE ALLERTA INQUINANTI» IN ATTESA (SCRITTO DA vmc_master_countdown_attese_automazione)
     name: "Fine Allerta Inquinanti - Trigger in Attesa"
     max: 255
     icon: mdi:timer-sand
-  vmc_master_countdown_inquinanti_memoria:                       # [CONFIGURAZIONE, 3 RICHIAMI] [INTERFACCIA, 1 RICHIAMO] [AUTOMAZIONE, 0 RICHIAMI] TESTO DELL'AZIONE «MEMORIZZAZIONE VELOCITÀ (INQUINANTI)» IN ATTESA (SCRITTO DA vmc_master_countdown_attese_automazione)
+  vmc_master_countdown_inquinanti_memoria:                       # [CONFIGURAZIONE, 2 RICHIAMI] [INTERFACCIA, 0 RICHIAMI] [AUTOMAZIONE, 0 RICHIAMI] TESTO DELL'AZIONE «MEMORIZZAZIONE VELOCITÀ (INQUINANTI)» IN ATTESA (SCRITTO DA vmc_master_countdown_attese_automazione)
     name: "Memorizzazione Velocità (Inquinanti) - Trigger in Attesa"
     max: 255
     icon: mdi:timer-sand
-  vmc_master_countdown_umidita_avvio:                            # [CONFIGURAZIONE, 3 RICHIAMI] [INTERFACCIA, 1 RICHIAMO] [AUTOMAZIONE, 0 RICHIAMI] TESTO DELL'AZIONE «AVVIO ALLERTA UMIDITÀ» IN ATTESA (SCRITTO DA vmc_master_countdown_attese_automazione)
+  vmc_master_countdown_umidita_avvio:                            # [CONFIGURAZIONE, 2 RICHIAMI] [INTERFACCIA, 0 RICHIAMI] [AUTOMAZIONE, 0 RICHIAMI] TESTO DELL'AZIONE «AVVIO ALLERTA UMIDITÀ» IN ATTESA (SCRITTO DA vmc_master_countdown_attese_automazione)
     name: "Avvio Allerta Umidità - Trigger in Attesa"
     max: 255
     icon: mdi:timer-sand
-  vmc_master_countdown_umidita_fine:                             # [CONFIGURAZIONE, 3 RICHIAMI] [INTERFACCIA, 1 RICHIAMO] [AUTOMAZIONE, 0 RICHIAMI] TESTO DELL'AZIONE «FINE ALLERTA UMIDITÀ» IN ATTESA (SCRITTO DA vmc_master_countdown_attese_automazione)
+  vmc_master_countdown_umidita_fine:                             # [CONFIGURAZIONE, 2 RICHIAMI] [INTERFACCIA, 0 RICHIAMI] [AUTOMAZIONE, 0 RICHIAMI] TESTO DELL'AZIONE «FINE ALLERTA UMIDITÀ» IN ATTESA (SCRITTO DA vmc_master_countdown_attese_automazione)
     name: "Fine Allerta Umidità - Trigger in Attesa"
     max: 255
     icon: mdi:timer-sand
-  vmc_master_countdown_umidita_memoria:                          # [CONFIGURAZIONE, 3 RICHIAMI] [INTERFACCIA, 1 RICHIAMO] [AUTOMAZIONE, 0 RICHIAMI] TESTO DELL'AZIONE «MEMORIZZAZIONE VELOCITÀ (UMIDITÀ)» IN ATTESA (SCRITTO DA vmc_master_countdown_attese_automazione)
+  vmc_master_countdown_umidita_memoria:                          # [CONFIGURAZIONE, 2 RICHIAMI] [INTERFACCIA, 0 RICHIAMI] [AUTOMAZIONE, 0 RICHIAMI] TESTO DELL'AZIONE «MEMORIZZAZIONE VELOCITÀ (UMIDITÀ)» IN ATTESA (SCRITTO DA vmc_master_countdown_attese_automazione)
     name: "Memorizzazione Velocità (Umidità) - Trigger in Attesa"
     max: 255
     icon: mdi:timer-sand
-  vmc_master_countdown_delta_avvio:                              # [CONFIGURAZIONE, 3 RICHIAMI] [INTERFACCIA, 1 RICHIAMO] [AUTOMAZIONE, 0 RICHIAMI] TESTO DELL'AZIONE «AVVIO ALLERTA Δ TEMP.» IN ATTESA (SCRITTO DA vmc_master_countdown_attese_automazione)
+  vmc_master_countdown_delta_avvio:                              # [CONFIGURAZIONE, 2 RICHIAMI] [INTERFACCIA, 0 RICHIAMI] [AUTOMAZIONE, 0 RICHIAMI] TESTO DELL'AZIONE «AVVIO ALLERTA Δ TEMP.» IN ATTESA (SCRITTO DA vmc_master_countdown_attese_automazione)
     name: "Avvio Allerta Δ Temp. - Trigger in Attesa"
     max: 255
     icon: mdi:timer-sand
-  vmc_master_countdown_delta_fine:                               # [CONFIGURAZIONE, 3 RICHIAMI] [INTERFACCIA, 1 RICHIAMO] [AUTOMAZIONE, 0 RICHIAMI] TESTO DELL'AZIONE «FINE ALLERTA Δ TEMP.» IN ATTESA (SCRITTO DA vmc_master_countdown_attese_automazione)
+  vmc_master_countdown_delta_fine:                               # [CONFIGURAZIONE, 2 RICHIAMI] [INTERFACCIA, 0 RICHIAMI] [AUTOMAZIONE, 0 RICHIAMI] TESTO DELL'AZIONE «FINE ALLERTA Δ TEMP.» IN ATTESA (SCRITTO DA vmc_master_countdown_attese_automazione)
     name: "Fine Allerta Δ Temp. - Trigger in Attesa"
     max: 255
     icon: mdi:timer-sand
-  vmc_master_countdown_delta_memoria:                            # [CONFIGURAZIONE, 3 RICHIAMI] [INTERFACCIA, 1 RICHIAMO] [AUTOMAZIONE, 0 RICHIAMI] TESTO DELL'AZIONE «MEMORIZZAZIONE VELOCITÀ (Δ TEMP.)» IN ATTESA (SCRITTO DA vmc_master_countdown_attese_automazione)
+  vmc_master_countdown_delta_memoria:                            # [CONFIGURAZIONE, 2 RICHIAMI] [INTERFACCIA, 0 RICHIAMI] [AUTOMAZIONE, 0 RICHIAMI] TESTO DELL'AZIONE «MEMORIZZAZIONE VELOCITÀ (Δ TEMP.)» IN ATTESA (SCRITTO DA vmc_master_countdown_attese_automazione)
     name: "Memorizzazione Velocità (Δ Temp.) - Trigger in Attesa"
     max: 255
     icon: mdi:timer-sand
-  vmc_master_countdown_blackout_rilevazione:                     # [CONFIGURAZIONE, 3 RICHIAMI] [INTERFACCIA, 1 RICHIAMO] [AUTOMAZIONE, 0 RICHIAMI] TESTO DELL'AZIONE «RILEVAZIONE BLACK-OUT» IN ATTESA (SCRITTO DA vmc_master_countdown_attese_automazione)
+  vmc_master_countdown_blackout_rilevazione:                     # [CONFIGURAZIONE, 2 RICHIAMI] [INTERFACCIA, 0 RICHIAMI] [AUTOMAZIONE, 0 RICHIAMI] TESTO DELL'AZIONE «RILEVAZIONE BLACK-OUT» IN ATTESA (SCRITTO DA vmc_master_countdown_attese_automazione)
     name: "Rilevazione Black-Out - Trigger in Attesa"
     max: 255
     icon: mdi:timer-sand
-  vmc_master_countdown_blackout_ripristino:                      # [CONFIGURAZIONE, 3 RICHIAMI] [INTERFACCIA, 1 RICHIAMO] [AUTOMAZIONE, 0 RICHIAMI] TESTO DELL'AZIONE «RIPRISTINO DOPO BLACK-OUT» IN ATTESA (SCRITTO DA vmc_master_countdown_attese_automazione)
+  vmc_master_countdown_blackout_ripristino:                      # [CONFIGURAZIONE, 2 RICHIAMI] [INTERFACCIA, 0 RICHIAMI] [AUTOMAZIONE, 0 RICHIAMI] TESTO DELL'AZIONE «RIPRISTINO DOPO BLACK-OUT» IN ATTESA (SCRITTO DA vmc_master_countdown_attese_automazione)
     name: "Ripristino dopo Black-Out - Trigger in Attesa"
     max: 255
     icon: mdi:timer-sand
-  vmc_master_countdown_calendario_inizio:                        # [CONFIGURAZIONE, 3 RICHIAMI] [INTERFACCIA, 1 RICHIAMO] [AUTOMAZIONE, 0 RICHIAMI] TESTO DELL'AZIONE «INIZIO FASCIA» IN ATTESA (SCRITTO DA vmc_master_countdown_attese_automazione)
+  vmc_master_countdown_calendario_inizio:                        # [CONFIGURAZIONE, 2 RICHIAMI] [INTERFACCIA, 0 RICHIAMI] [AUTOMAZIONE, 0 RICHIAMI] TESTO DELL'AZIONE «INIZIO FASCIA» IN ATTESA (SCRITTO DA vmc_master_countdown_attese_automazione)
     name: "Inizio Fascia - Trigger in Attesa"
     max: 255
     icon: mdi:timer-sand
-  vmc_master_countdown_calendario_fine:                          # [CONFIGURAZIONE, 3 RICHIAMI] [INTERFACCIA, 1 RICHIAMO] [AUTOMAZIONE, 0 RICHIAMI] TESTO DELL'AZIONE «FINE FASCIA» IN ATTESA (SCRITTO DA vmc_master_countdown_attese_automazione)
+  vmc_master_countdown_calendario_fine:                          # [CONFIGURAZIONE, 2 RICHIAMI] [INTERFACCIA, 0 RICHIAMI] [AUTOMAZIONE, 0 RICHIAMI] TESTO DELL'AZIONE «FINE FASCIA» IN ATTESA (SCRITTO DA vmc_master_countdown_attese_automazione)
     name: "Fine Fascia - Trigger in Attesa"
     max: 255
     icon: mdi:timer-sand
-  vmc_master_countdown_avvisi:                                   # [CONFIGURAZIONE, 3 RICHIAMI] [INTERFACCIA, 1 RICHIAMO] [AUTOMAZIONE, 0 RICHIAMI] TESTO DELL'AZIONE «AGGIORNAMENTO AVVISI» IN ATTESA (SCRITTO DA vmc_master_countdown_attese_automazione)
+  vmc_master_countdown_avvisi:                                   # [CONFIGURAZIONE, 2 RICHIAMI] [INTERFACCIA, 0 RICHIAMI] [AUTOMAZIONE, 0 RICHIAMI] TESTO DELL'AZIONE «AGGIORNAMENTO AVVISI» IN ATTESA (SCRITTO DA vmc_master_countdown_attese_automazione)
     name: "Aggiornamento Avvisi - Trigger in Attesa"
     max: 255
     icon: mdi:timer-sand
@@ -3828,7 +3828,7 @@ input_number:
     icon: mdi:restart
 ################### Fine Creazione Fase di Riallineamento delle Allerte al Riavvio di Home Assistant ###################
 ################### Inizio Creazione Costanti dei Tempi di Attesa dei Trigger dell'Automazione (modificabili dalla scheda) ###################
-  vmc_master_attesa_pdr_cambio:                                                # [CONFIGURAZIONE, 1 RICHIAMO] [INTERFACCIA, 1 RICHIAMO] [AUTOMAZIONE, 12 RICHIAMI] TEMPO DI ATTESA [s] DI 12 TRIGGER DELL'AUTOMAZIONE VMC MASTER (VALORE ORIGINALE 16 s), LETTO ANCHE DAL COUNTDOWN
+  vmc_master_attesa_pdr_cambio:                                                # [CONFIGURAZIONE, 15 RICHIAMI] [INTERFACCIA, 1 RICHIAMO] [AUTOMAZIONE, 12 RICHIAMI] TEMPO DI ATTESA [s] DI 12 TRIGGER DELL'AUTOMAZIONE VMC MASTER (VALORE ORIGINALE 16 s), LETTO ANCHE DAL COUNTDOWN
     name: "Attesa Cambio Velocità per Lim. Δ PdR"
     min: 1
     max: 300
@@ -3836,7 +3836,7 @@ input_number:
     mode: box
     unit_of_measurement: s
     icon: mdi:timer-cog-outline
-  vmc_master_attesa_pdr_cambio_inquinanti:                                     # [CONFIGURAZIONE, 1 RICHIAMO] [INTERFACCIA, 1 RICHIAMO] [AUTOMAZIONE, 11 RICHIAMI] TEMPO DI ATTESA [s] DI 11 TRIGGER DELL'AUTOMAZIONE VMC MASTER (VALORE ORIGINALE 12 s), LETTO ANCHE DAL COUNTDOWN
+  vmc_master_attesa_pdr_cambio_inquinanti:                                     # [CONFIGURAZIONE, 14 RICHIAMI] [INTERFACCIA, 1 RICHIAMO] [AUTOMAZIONE, 11 RICHIAMI] TEMPO DI ATTESA [s] DI 11 TRIGGER DELL'AUTOMAZIONE VMC MASTER (VALORE ORIGINALE 12 s), LETTO ANCHE DAL COUNTDOWN
     name: "Attesa Cambio Velocità per Lim. Δ PdR (con Inquinanti)"
     min: 1
     max: 300
@@ -3844,7 +3844,7 @@ input_number:
     mode: box
     unit_of_measurement: s
     icon: mdi:timer-cog-outline
-  vmc_master_attesa_pdr_ripristino:                                            # [CONFIGURAZIONE, 1 RICHIAMO] [INTERFACCIA, 1 RICHIAMO] [AUTOMAZIONE, 9 RICHIAMI] TEMPO DI ATTESA [s] DI 9 TRIGGER DELL'AUTOMAZIONE VMC MASTER (VALORE ORIGINALE 16 s), LETTO ANCHE DAL COUNTDOWN
+  vmc_master_attesa_pdr_ripristino:                                            # [CONFIGURAZIONE, 12 RICHIAMI] [INTERFACCIA, 1 RICHIAMO] [AUTOMAZIONE, 9 RICHIAMI] TEMPO DI ATTESA [s] DI 9 TRIGGER DELL'AUTOMAZIONE VMC MASTER (VALORE ORIGINALE 16 s), LETTO ANCHE DAL COUNTDOWN
     name: "Attesa Ripristino dopo Lim. Δ PdR"
     min: 1
     max: 300
@@ -3852,7 +3852,7 @@ input_number:
     mode: box
     unit_of_measurement: s
     icon: mdi:timer-cog-outline
-  vmc_master_attesa_pdr_ripristino_inquinanti:                                 # [CONFIGURAZIONE, 1 RICHIAMO] [INTERFACCIA, 1 RICHIAMO] [AUTOMAZIONE, 7 RICHIAMI] TEMPO DI ATTESA [s] DI 7 TRIGGER DELL'AUTOMAZIONE VMC MASTER (VALORE ORIGINALE 12 s), LETTO ANCHE DAL COUNTDOWN
+  vmc_master_attesa_pdr_ripristino_inquinanti:                                 # [CONFIGURAZIONE, 10 RICHIAMI] [INTERFACCIA, 1 RICHIAMO] [AUTOMAZIONE, 7 RICHIAMI] TEMPO DI ATTESA [s] DI 7 TRIGGER DELL'AUTOMAZIONE VMC MASTER (VALORE ORIGINALE 12 s), LETTO ANCHE DAL COUNTDOWN
     name: "Attesa Ripristino dopo Lim. Δ PdR (con Inquinanti)"
     min: 1
     max: 300
@@ -3860,7 +3860,7 @@ input_number:
     mode: box
     unit_of_measurement: s
     icon: mdi:timer-cog-outline
-  vmc_master_attesa_free_sospensione:                                          # [CONFIGURAZIONE, 1 RICHIAMO] [INTERFACCIA, 1 RICHIAMO] [AUTOMAZIONE, 2 RICHIAMI] TEMPO DI ATTESA [s] DI 2 TRIGGER DELL'AUTOMAZIONE VMC MASTER (VALORE ORIGINALE 24 s), LETTO ANCHE DAL COUNTDOWN
+  vmc_master_attesa_free_sospensione:                                          # [CONFIGURAZIONE, 5 RICHIAMI] [INTERFACCIA, 1 RICHIAMO] [AUTOMAZIONE, 2 RICHIAMI] TEMPO DI ATTESA [s] DI 2 TRIGGER DELL'AUTOMAZIONE VMC MASTER (VALORE ORIGINALE 24 s), LETTO ANCHE DAL COUNTDOWN
     name: "Attesa Sospensione Free Heating/Cooling"
     min: 1
     max: 300
@@ -3868,7 +3868,7 @@ input_number:
     mode: box
     unit_of_measurement: s
     icon: mdi:timer-cog-outline
-  vmc_master_attesa_free_sospensione_inquinanti:                               # [CONFIGURAZIONE, 1 RICHIAMO] [INTERFACCIA, 1 RICHIAMO] [AUTOMAZIONE, 2 RICHIAMI] TEMPO DI ATTESA [s] DI 2 TRIGGER DELL'AUTOMAZIONE VMC MASTER (VALORE ORIGINALE 20 s), LETTO ANCHE DAL COUNTDOWN
+  vmc_master_attesa_free_sospensione_inquinanti:                               # [CONFIGURAZIONE, 5 RICHIAMI] [INTERFACCIA, 1 RICHIAMO] [AUTOMAZIONE, 2 RICHIAMI] TEMPO DI ATTESA [s] DI 2 TRIGGER DELL'AUTOMAZIONE VMC MASTER (VALORE ORIGINALE 20 s), LETTO ANCHE DAL COUNTDOWN
     name: "Attesa Sospensione Free Heating/Cooling (con Inquinanti)"
     min: 1
     max: 300
@@ -3876,7 +3876,7 @@ input_number:
     mode: box
     unit_of_measurement: s
     icon: mdi:timer-cog-outline
-  vmc_master_attesa_free_ripristino:                                           # [CONFIGURAZIONE, 1 RICHIAMO] [INTERFACCIA, 1 RICHIAMO] [AUTOMAZIONE, 2 RICHIAMI] TEMPO DI ATTESA [s] DI 2 TRIGGER DELL'AUTOMAZIONE VMC MASTER (VALORE ORIGINALE 24 s), LETTO ANCHE DAL COUNTDOWN
+  vmc_master_attesa_free_ripristino:                                           # [CONFIGURAZIONE, 5 RICHIAMI] [INTERFACCIA, 1 RICHIAMO] [AUTOMAZIONE, 2 RICHIAMI] TEMPO DI ATTESA [s] DI 2 TRIGGER DELL'AUTOMAZIONE VMC MASTER (VALORE ORIGINALE 24 s), LETTO ANCHE DAL COUNTDOWN
     name: "Attesa Ripristino Free Heating/Cooling"
     min: 1
     max: 300
@@ -3884,7 +3884,7 @@ input_number:
     mode: box
     unit_of_measurement: s
     icon: mdi:timer-cog-outline
-  vmc_master_attesa_free_ripristino_inquinanti:                                # [CONFIGURAZIONE, 1 RICHIAMO] [INTERFACCIA, 1 RICHIAMO] [AUTOMAZIONE, 2 RICHIAMI] TEMPO DI ATTESA [s] DI 2 TRIGGER DELL'AUTOMAZIONE VMC MASTER (VALORE ORIGINALE 20 s), LETTO ANCHE DAL COUNTDOWN
+  vmc_master_attesa_free_ripristino_inquinanti:                                # [CONFIGURAZIONE, 5 RICHIAMI] [INTERFACCIA, 1 RICHIAMO] [AUTOMAZIONE, 2 RICHIAMI] TEMPO DI ATTESA [s] DI 2 TRIGGER DELL'AUTOMAZIONE VMC MASTER (VALORE ORIGINALE 20 s), LETTO ANCHE DAL COUNTDOWN
     name: "Attesa Ripristino Free Heating/Cooling (con Inquinanti)"
     min: 1
     max: 300
@@ -3892,7 +3892,7 @@ input_number:
     mode: box
     unit_of_measurement: s
     icon: mdi:timer-cog-outline
-  vmc_master_attesa_blackout_rilevazione:                                      # [CONFIGURAZIONE, 1 RICHIAMO] [INTERFACCIA, 1 RICHIAMO] [AUTOMAZIONE, 10 RICHIAMI] TEMPO DI ATTESA [s] DI 10 TRIGGER DELL'AUTOMAZIONE VMC MASTER (VALORE ORIGINALE 32 s), LETTO ANCHE DAL COUNTDOWN
+  vmc_master_attesa_blackout_rilevazione:                                      # [CONFIGURAZIONE, 13 RICHIAMI] [INTERFACCIA, 1 RICHIAMO] [AUTOMAZIONE, 10 RICHIAMI] TEMPO DI ATTESA [s] DI 10 TRIGGER DELL'AUTOMAZIONE VMC MASTER (VALORE ORIGINALE 32 s), LETTO ANCHE DAL COUNTDOWN
     name: "Attesa Rilevazione Black-Out"
     min: 1
     max: 300
@@ -3900,7 +3900,7 @@ input_number:
     mode: box
     unit_of_measurement: s
     icon: mdi:timer-cog-outline
-  vmc_master_attesa_blackout_ripristino:                                       # [CONFIGURAZIONE, 1 RICHIAMO] [INTERFACCIA, 1 RICHIAMO] [AUTOMAZIONE, 8 RICHIAMI] TEMPO DI ATTESA [s] DI 8 TRIGGER DELL'AUTOMAZIONE VMC MASTER (VALORE ORIGINALE 32 s), LETTO ANCHE DAL COUNTDOWN
+  vmc_master_attesa_blackout_ripristino:                                       # [CONFIGURAZIONE, 11 RICHIAMI] [INTERFACCIA, 1 RICHIAMO] [AUTOMAZIONE, 8 RICHIAMI] TEMPO DI ATTESA [s] DI 8 TRIGGER DELL'AUTOMAZIONE VMC MASTER (VALORE ORIGINALE 32 s), LETTO ANCHE DAL COUNTDOWN
     name: "Attesa Ripristino dopo Black-Out"
     min: 1
     max: 300
@@ -3908,7 +3908,7 @@ input_number:
     mode: box
     unit_of_measurement: s
     icon: mdi:timer-cog-outline
-  vmc_master_attesa_calendario_inizio:                                         # [CONFIGURAZIONE, 1 RICHIAMO] [INTERFACCIA, 1 RICHIAMO] [AUTOMAZIONE, 14 RICHIAMI] TEMPO DI ATTESA [s] DI 14 TRIGGER DELL'AUTOMAZIONE VMC MASTER (VALORE ORIGINALE 3 s), LETTO ANCHE DAL COUNTDOWN
+  vmc_master_attesa_calendario_inizio:                                         # [CONFIGURAZIONE, 17 RICHIAMI] [INTERFACCIA, 1 RICHIAMO] [AUTOMAZIONE, 14 RICHIAMI] TEMPO DI ATTESA [s] DI 14 TRIGGER DELL'AUTOMAZIONE VMC MASTER (VALORE ORIGINALE 3 s), LETTO ANCHE DAL COUNTDOWN
     name: "Attesa Inizio Fascia"
     min: 1
     max: 300
@@ -3916,7 +3916,7 @@ input_number:
     mode: box
     unit_of_measurement: s
     icon: mdi:timer-cog-outline
-  vmc_master_attesa_calendario_fine:                                           # [CONFIGURAZIONE, 1 RICHIAMO] [INTERFACCIA, 1 RICHIAMO] [AUTOMAZIONE, 14 RICHIAMI] TEMPO DI ATTESA [s] DI 14 TRIGGER DELL'AUTOMAZIONE VMC MASTER (VALORE ORIGINALE 3 s), LETTO ANCHE DAL COUNTDOWN
+  vmc_master_attesa_calendario_fine:                                           # [CONFIGURAZIONE, 17 RICHIAMI] [INTERFACCIA, 1 RICHIAMO] [AUTOMAZIONE, 14 RICHIAMI] TEMPO DI ATTESA [s] DI 14 TRIGGER DELL'AUTOMAZIONE VMC MASTER (VALORE ORIGINALE 3 s), LETTO ANCHE DAL COUNTDOWN
     name: "Attesa Fine Fascia"
     min: 1
     max: 300
@@ -3924,7 +3924,7 @@ input_number:
     mode: box
     unit_of_measurement: s
     icon: mdi:timer-cog-outline
-  vmc_master_attesa_avvisi:                                                    # [CONFIGURAZIONE, 1 RICHIAMO] [INTERFACCIA, 1 RICHIAMO] [AUTOMAZIONE, 3 RICHIAMI] TEMPO DI ATTESA [s] DI 3 TRIGGER DELL'AUTOMAZIONE VMC MASTER (VALORE ORIGINALE 5 s), LETTO ANCHE DAL COUNTDOWN
+  vmc_master_attesa_avvisi:                                                    # [CONFIGURAZIONE, 6 RICHIAMI] [INTERFACCIA, 1 RICHIAMO] [AUTOMAZIONE, 3 RICHIAMI] TEMPO DI ATTESA [s] DI 3 TRIGGER DELL'AUTOMAZIONE VMC MASTER (VALORE ORIGINALE 5 s), LETTO ANCHE DAL COUNTDOWN
     name: "Attesa Aggiornamento Avvisi"
     min: 1
     max: 300
@@ -3932,7 +3932,7 @@ input_number:
     mode: box
     unit_of_measurement: s
     icon: mdi:timer-cog-outline
-  vmc_master_attesa_inquinanti_avvio:                                          # [CONFIGURAZIONE, 1 RICHIAMO] [INTERFACCIA, 1 RICHIAMO] [AUTOMAZIONE, 1 RICHIAMI] TEMPO DI ATTESA [s] DI 1 TRIGGER DELL'AUTOMAZIONE VMC MASTER (VALORE ORIGINALE 8 s), LETTO ANCHE DAL COUNTDOWN
+  vmc_master_attesa_inquinanti_avvio:                                          # [CONFIGURAZIONE, 4 RICHIAMI] [INTERFACCIA, 1 RICHIAMO] [AUTOMAZIONE, 1 RICHIAMO] TEMPO DI ATTESA [s] DI 1 TRIGGER DELL'AUTOMAZIONE VMC MASTER (VALORE ORIGINALE 8 s), LETTO ANCHE DAL COUNTDOWN
     name: "Attesa Avvio Allerta Inquinanti"
     min: 1
     max: 300
@@ -3940,7 +3940,7 @@ input_number:
     mode: box
     unit_of_measurement: s
     icon: mdi:timer-cog-outline
-  vmc_master_attesa_inquinanti_avvio_spia_pdr:                                 # [CONFIGURAZIONE, 1 RICHIAMO] [INTERFACCIA, 1 RICHIAMO] [AUTOMAZIONE, 1 RICHIAMI] TEMPO DI ATTESA [s] DI 1 TRIGGER DELL'AUTOMAZIONE VMC MASTER (VALORE ORIGINALE 4 s), LETTO ANCHE DAL COUNTDOWN
+  vmc_master_attesa_inquinanti_avvio_spia_pdr:                                 # [CONFIGURAZIONE, 4 RICHIAMI] [INTERFACCIA, 1 RICHIAMO] [AUTOMAZIONE, 1 RICHIAMO] TEMPO DI ATTESA [s] DI 1 TRIGGER DELL'AUTOMAZIONE VMC MASTER (VALORE ORIGINALE 4 s), LETTO ANCHE DAL COUNTDOWN
     name: "Attesa Avvio Allerta Inquinanti (con Spia PdR)"
     min: 1
     max: 300
@@ -3948,7 +3948,7 @@ input_number:
     mode: box
     unit_of_measurement: s
     icon: mdi:timer-cog-outline
-  vmc_master_attesa_inquinanti_fine:                                           # [CONFIGURAZIONE, 1 RICHIAMO] [INTERFACCIA, 1 RICHIAMO] [AUTOMAZIONE, 1 RICHIAMI] TEMPO DI ATTESA [s] DI 1 TRIGGER DELL'AUTOMAZIONE VMC MASTER (VALORE ORIGINALE 8 s), LETTO ANCHE DAL COUNTDOWN
+  vmc_master_attesa_inquinanti_fine:                                           # [CONFIGURAZIONE, 4 RICHIAMI] [INTERFACCIA, 1 RICHIAMO] [AUTOMAZIONE, 1 RICHIAMO] TEMPO DI ATTESA [s] DI 1 TRIGGER DELL'AUTOMAZIONE VMC MASTER (VALORE ORIGINALE 8 s), LETTO ANCHE DAL COUNTDOWN
     name: "Attesa Fine Allerta Inquinanti"
     min: 1
     max: 300
@@ -3956,7 +3956,7 @@ input_number:
     mode: box
     unit_of_measurement: s
     icon: mdi:timer-cog-outline
-  vmc_master_attesa_inquinanti_memoria:                                        # [CONFIGURAZIONE, 1 RICHIAMO] [INTERFACCIA, 1 RICHIAMO] [AUTOMAZIONE, 8 RICHIAMI] TEMPO DI ATTESA [s] DI 8 TRIGGER DELL'AUTOMAZIONE VMC MASTER (VALORE ORIGINALE 8 s), LETTO ANCHE DAL COUNTDOWN
+  vmc_master_attesa_inquinanti_memoria:                                        # [CONFIGURAZIONE, 11 RICHIAMI] [INTERFACCIA, 1 RICHIAMO] [AUTOMAZIONE, 8 RICHIAMI] TEMPO DI ATTESA [s] DI 8 TRIGGER DELL'AUTOMAZIONE VMC MASTER (VALORE ORIGINALE 8 s), LETTO ANCHE DAL COUNTDOWN
     name: "Attesa Memorizzazione Velocità (Inquinanti)"
     min: 1
     max: 300
@@ -3964,7 +3964,7 @@ input_number:
     mode: box
     unit_of_measurement: s
     icon: mdi:timer-cog-outline
-  vmc_master_attesa_free_annullamento:                                         # [CONFIGURAZIONE, 1 RICHIAMO] [INTERFACCIA, 1 RICHIAMO] [AUTOMAZIONE, 1 RICHIAMI] TEMPO DI ATTESA [s] DI 1 TRIGGER DELL'AUTOMAZIONE VMC MASTER (VALORE ORIGINALE 20 s), LETTO ANCHE DAL COUNTDOWN
+  vmc_master_attesa_free_annullamento:                                         # [CONFIGURAZIONE, 4 RICHIAMI] [INTERFACCIA, 1 RICHIAMO] [AUTOMAZIONE, 1 RICHIAMO] TEMPO DI ATTESA [s] DI 1 TRIGGER DELL'AUTOMAZIONE VMC MASTER (VALORE ORIGINALE 20 s), LETTO ANCHE DAL COUNTDOWN
     name: "Attesa Annullamento Memoria Free Heating/Cooling"
     min: 1
     max: 300
@@ -3972,7 +3972,7 @@ input_number:
     mode: box
     unit_of_measurement: s
     icon: mdi:timer-cog-outline
-  vmc_master_attesa_umidita_avvio:                                             # [CONFIGURAZIONE, 1 RICHIAMO] [INTERFACCIA, 1 RICHIAMO] [AUTOMAZIONE, 1 RICHIAMI] TEMPO DI ATTESA [s] DI 1 TRIGGER DELL'AUTOMAZIONE VMC MASTER (VALORE ORIGINALE 28 s), LETTO ANCHE DAL COUNTDOWN
+  vmc_master_attesa_umidita_avvio:                                             # [CONFIGURAZIONE, 4 RICHIAMI] [INTERFACCIA, 1 RICHIAMO] [AUTOMAZIONE, 1 RICHIAMO] TEMPO DI ATTESA [s] DI 1 TRIGGER DELL'AUTOMAZIONE VMC MASTER (VALORE ORIGINALE 28 s), LETTO ANCHE DAL COUNTDOWN
     name: "Attesa Avvio Allerta Umidità"
     min: 1
     max: 300
@@ -3980,7 +3980,7 @@ input_number:
     mode: box
     unit_of_measurement: s
     icon: mdi:timer-cog-outline
-  vmc_master_attesa_umidita_fine:                                              # [CONFIGURAZIONE, 1 RICHIAMO] [INTERFACCIA, 1 RICHIAMO] [AUTOMAZIONE, 1 RICHIAMI] TEMPO DI ATTESA [s] DI 1 TRIGGER DELL'AUTOMAZIONE VMC MASTER (VALORE ORIGINALE 28 s), LETTO ANCHE DAL COUNTDOWN
+  vmc_master_attesa_umidita_fine:                                              # [CONFIGURAZIONE, 4 RICHIAMI] [INTERFACCIA, 1 RICHIAMO] [AUTOMAZIONE, 1 RICHIAMO] TEMPO DI ATTESA [s] DI 1 TRIGGER DELL'AUTOMAZIONE VMC MASTER (VALORE ORIGINALE 28 s), LETTO ANCHE DAL COUNTDOWN
     name: "Attesa Fine Allerta Umidità"
     min: 1
     max: 300
@@ -3988,7 +3988,7 @@ input_number:
     mode: box
     unit_of_measurement: s
     icon: mdi:timer-cog-outline
-  vmc_master_attesa_umidita_memoria:                                           # [CONFIGURAZIONE, 1 RICHIAMO] [INTERFACCIA, 1 RICHIAMO] [AUTOMAZIONE, 8 RICHIAMI] TEMPO DI ATTESA [s] DI 8 TRIGGER DELL'AUTOMAZIONE VMC MASTER (VALORE ORIGINALE 4 s), LETTO ANCHE DAL COUNTDOWN
+  vmc_master_attesa_umidita_memoria:                                           # [CONFIGURAZIONE, 11 RICHIAMI] [INTERFACCIA, 1 RICHIAMO] [AUTOMAZIONE, 8 RICHIAMI] TEMPO DI ATTESA [s] DI 8 TRIGGER DELL'AUTOMAZIONE VMC MASTER (VALORE ORIGINALE 4 s), LETTO ANCHE DAL COUNTDOWN
     name: "Attesa Memorizzazione Velocità (Umidità)"
     min: 1
     max: 300
@@ -3996,7 +3996,7 @@ input_number:
     mode: box
     unit_of_measurement: s
     icon: mdi:timer-cog-outline
-  vmc_master_attesa_delta_avvio:                                               # [CONFIGURAZIONE, 1 RICHIAMO] [INTERFACCIA, 1 RICHIAMO] [AUTOMAZIONE, 1 RICHIAMI] TEMPO DI ATTESA [s] DI 1 TRIGGER DELL'AUTOMAZIONE VMC MASTER (VALORE ORIGINALE 4 s), LETTO ANCHE DAL COUNTDOWN
+  vmc_master_attesa_delta_avvio:                                               # [CONFIGURAZIONE, 4 RICHIAMI] [INTERFACCIA, 1 RICHIAMO] [AUTOMAZIONE, 1 RICHIAMO] TEMPO DI ATTESA [s] DI 1 TRIGGER DELL'AUTOMAZIONE VMC MASTER (VALORE ORIGINALE 4 s), LETTO ANCHE DAL COUNTDOWN
     name: "Attesa Avvio Allerta Δ Temp."
     min: 1
     max: 300
@@ -4004,7 +4004,7 @@ input_number:
     mode: box
     unit_of_measurement: s
     icon: mdi:timer-cog-outline
-  vmc_master_attesa_delta_fine:                                                # [CONFIGURAZIONE, 1 RICHIAMO] [INTERFACCIA, 1 RICHIAMO] [AUTOMAZIONE, 1 RICHIAMI] TEMPO DI ATTESA [s] DI 1 TRIGGER DELL'AUTOMAZIONE VMC MASTER (VALORE ORIGINALE 4 s), LETTO ANCHE DAL COUNTDOWN
+  vmc_master_attesa_delta_fine:                                                # [CONFIGURAZIONE, 4 RICHIAMI] [INTERFACCIA, 1 RICHIAMO] [AUTOMAZIONE, 1 RICHIAMO] TEMPO DI ATTESA [s] DI 1 TRIGGER DELL'AUTOMAZIONE VMC MASTER (VALORE ORIGINALE 4 s), LETTO ANCHE DAL COUNTDOWN
     name: "Attesa Fine Allerta Δ Temp."
     min: 1
     max: 300
@@ -4012,7 +4012,7 @@ input_number:
     mode: box
     unit_of_measurement: s
     icon: mdi:timer-cog-outline
-  vmc_master_attesa_delta_memoria:                                             # [CONFIGURAZIONE, 1 RICHIAMO] [INTERFACCIA, 1 RICHIAMO] [AUTOMAZIONE, 8 RICHIAMI] TEMPO DI ATTESA [s] DI 8 TRIGGER DELL'AUTOMAZIONE VMC MASTER (VALORE ORIGINALE 4 s), LETTO ANCHE DAL COUNTDOWN
+  vmc_master_attesa_delta_memoria:                                             # [CONFIGURAZIONE, 11 RICHIAMI] [INTERFACCIA, 1 RICHIAMO] [AUTOMAZIONE, 8 RICHIAMI] TEMPO DI ATTESA [s] DI 8 TRIGGER DELL'AUTOMAZIONE VMC MASTER (VALORE ORIGINALE 4 s), LETTO ANCHE DAL COUNTDOWN
     name: "Attesa Memorizzazione Velocità (Δ Temp.)"
     min: 1
     max: 300
@@ -4023,7 +4023,7 @@ input_number:
 ################### Fine Creazione Costanti dei Tempi di Attesa dei Trigger dell'Automazione ###################
 
 ################### Inizio Creazione Costanti degli Intervalli di Lettura della VMC (modificabili dalla scheda) ###################
-  vmc_master_intervallo_ping:                                                  # [CONFIGURAZIONE, 3 RICHIAMI] [INTERFACCIA, 2 RICHIAMI] [AUTOMAZIONE, 0 RICHIAMI] OGNI QUANTI SECONDI SI LEGGE «VERIFICA ON-LINE (PING)» (sensor.vmc_master_status_ip), VALORE ORIGINALE 10 s
+  vmc_master_intervallo_ping:                                                  # [CONFIGURAZIONE, 5 RICHIAMI] [INTERFACCIA, 2 RICHIAMI] [AUTOMAZIONE, 0 RICHIAMI] OGNI QUANTI SECONDI SI LEGGE «VERIFICA ON-LINE (PING)» (sensor.vmc_master_status_ip), VALORE ORIGINALE 10 s
     name: "Intervallo Lettura Verifica On-Line (Ping)"
     min: 5
     max: 3600
@@ -4031,7 +4031,7 @@ input_number:
     mode: box
     unit_of_measurement: s
     icon: mdi:timer-sync-outline
-  vmc_master_intervallo_ventilazione:                                          # [CONFIGURAZIONE, 3 RICHIAMI] [INTERFACCIA, 2 RICHIAMI] [AUTOMAZIONE, 0 RICHIAMI] OGNI QUANTI SECONDI SI LEGGE «SENSORI VENTILAZIONE» (sensor.vmc_master_status_ventola), VALORE ORIGINALE 5 s
+  vmc_master_intervallo_ventilazione:                                          # [CONFIGURAZIONE, 5 RICHIAMI] [INTERFACCIA, 2 RICHIAMI] [AUTOMAZIONE, 0 RICHIAMI] OGNI QUANTI SECONDI SI LEGGE «SENSORI VENTILAZIONE» (sensor.vmc_master_status_ventola), VALORE ORIGINALE 5 s
     name: "Intervallo Lettura Sensori Ventilazione"
     min: 2
     max: 3600
@@ -4039,7 +4039,7 @@ input_number:
     mode: box
     unit_of_measurement: s
     icon: mdi:timer-sync-outline
-  vmc_master_intervallo_ambientali:                                            # [CONFIGURAZIONE, 3 RICHIAMI] [INTERFACCIA, 2 RICHIAMI] [AUTOMAZIONE, 0 RICHIAMI] OGNI QUANTI SECONDI SI LEGGE «SENSORI AMBIENTALI» (sensor.vmc_master_sensori), VALORE ORIGINALE 1227 s
+  vmc_master_intervallo_ambientali:                                            # [CONFIGURAZIONE, 5 RICHIAMI] [INTERFACCIA, 2 RICHIAMI] [AUTOMAZIONE, 0 RICHIAMI] OGNI QUANTI SECONDI SI LEGGE «SENSORI AMBIENTALI» (sensor.vmc_master_sensori), VALORE ORIGINALE 1227 s
     name: "Intervallo Lettura Sensori Ambientali"
     min: 60
     max: 86400
@@ -4047,7 +4047,7 @@ input_number:
     mode: box
     unit_of_measurement: s
     icon: mdi:timer-sync-outline
-  vmc_master_intervallo_lan:                                                   # [CONFIGURAZIONE, 3 RICHIAMI] [INTERFACCIA, 2 RICHIAMI] [AUTOMAZIONE, 0 RICHIAMI] OGNI QUANTI SECONDI SI LEGGE «LAN» (sensor.vmc_master_lan), VALORE ORIGINALE 57641 s
+  vmc_master_intervallo_lan:                                                   # [CONFIGURAZIONE, 5 RICHIAMI] [INTERFACCIA, 2 RICHIAMI] [AUTOMAZIONE, 0 RICHIAMI] OGNI QUANTI SECONDI SI LEGGE «LAN» (sensor.vmc_master_lan), VALORE ORIGINALE 57641 s
     name: "Intervallo Lettura Lan"
     min: 600
     max: 172800
@@ -4055,7 +4055,7 @@ input_number:
     mode: box
     unit_of_measurement: s
     icon: mdi:timer-sync-outline
-  vmc_master_intervallo_nome:                                                  # [CONFIGURAZIONE, 3 RICHIAMI] [INTERFACCIA, 2 RICHIAMI] [AUTOMAZIONE, 0 RICHIAMI] OGNI QUANTI SECONDI SI LEGGE «NOME» (sensor.vmc_master_nome), VALORE ORIGINALE 43227 s
+  vmc_master_intervallo_nome:                                                  # [CONFIGURAZIONE, 5 RICHIAMI] [INTERFACCIA, 2 RICHIAMI] [AUTOMAZIONE, 0 RICHIAMI] OGNI QUANTI SECONDI SI LEGGE «NOME» (sensor.vmc_master_nome), VALORE ORIGINALE 43227 s
     name: "Intervallo Lettura Nome"
     min: 600
     max: 172800
@@ -4564,11 +4564,11 @@ input_boolean:
 ################### Fine Creazione Switch Booleano impiegato nell'Automazione, per l'Audio all'Avvio di Home Assistant ############################
 
 ################### Inizio Creazione Switch Booleani per i Tempi di Attesa dei Trigger dell'Automazione ###################
-  vmc_master_opzione_finestra_tempi_attesa:                                     # [CONFIGURAZIONE, 3 RICHIAMI] [INTERFACCIA, 3 RICHIAMI] [AUTOMAZIONE, 0 RICHIAMI] FINESTRA TEMPI DI ATTESA NEL PANNELLO OPZIONI
+  vmc_master_opzione_finestra_tempi_attesa:                                     # [CONFIGURAZIONE, 2 RICHIAMI] [INTERFACCIA, 2 RICHIAMI] [AUTOMAZIONE, 0 RICHIAMI] FINESTRA TEMPI DI ATTESA NEL PANNELLO OPZIONI
     name: "Finestra Tempi di Attesa"
     icon: mdi:timer-cog-outline
 
-  vmc_master_attese_inizializzate:                                              # [CONFIGURAZIONE, 4 RICHIAMI] [INTERFACCIA, 0 RICHIAMI] [AUTOMAZIONE, 0 RICHIAMI] ON = COSTANTI DEI TEMPI DI ATTESA GIA' IMPOSTATE AI VALORI ORIGINALI (AL PRIMO AVVIO LE IMPOSTA vmc_master_inizializza_tempi_attesa)
+  vmc_master_attese_inizializzate:                                              # [CONFIGURAZIONE, 5 RICHIAMI] [INTERFACCIA, 0 RICHIAMI] [AUTOMAZIONE, 0 RICHIAMI] ON = COSTANTI DEI TEMPI DI ATTESA GIA' IMPOSTATE AI VALORI ORIGINALI (AL PRIMO AVVIO LE IMPOSTA vmc_master_inizializza_tempi_attesa)
     name: "Tempi di Attesa Inizializzati"
     icon: mdi:timer-check-outline
 ################### Fine Creazione Switch Booleani per i Tempi di Attesa dei Trigger dell'Automazione ###################
@@ -4756,85 +4756,85 @@ input_datetime:
 
 ################### Inizio Creazione Timer per il Countdown in Scheda delle Attese dell'Automazione ###################
 timer:
-  vmc_master_countdown_pdr_cambio:                               # [CONFIGURAZIONE, 3 RICHIAMI] [INTERFACCIA, 2 RICHIAMI] [AUTOMAZIONE, 0 RICHIAMI] COUNTDOWN DELL'ATTESA IN CORSO DI UNO DEI 23 TRIGGER «CAMBIO VELOCITÀ PER LIM. Δ PDR» DELL'AUTOMAZIONE (AVVIATO DA vmc_master_countdown_attese_automazione)
+  vmc_master_countdown_pdr_cambio:                               # [CONFIGURAZIONE, 2 RICHIAMI] [INTERFACCIA, 3 RICHIAMI] [AUTOMAZIONE, 0 RICHIAMI] COUNTDOWN DELL'ATTESA IN CORSO DI UNO DEI 23 TRIGGER «CAMBIO VELOCITÀ PER LIM. Δ PDR» DELL'AUTOMAZIONE (AVVIATO DA vmc_master_countdown_attese_automazione)
     name: "Cambio Velocità per Lim. Δ PdR"
     icon: mdi:timer-sand
-  vmc_master_countdown_pdr_ripristino:                           # [CONFIGURAZIONE, 3 RICHIAMI] [INTERFACCIA, 2 RICHIAMI] [AUTOMAZIONE, 0 RICHIAMI] COUNTDOWN DELL'ATTESA IN CORSO DI UNO DEI 16 TRIGGER «RIPRISTINO DOPO LIM. Δ PDR» DELL'AUTOMAZIONE (AVVIATO DA vmc_master_countdown_attese_automazione)
+  vmc_master_countdown_pdr_ripristino:                           # [CONFIGURAZIONE, 2 RICHIAMI] [INTERFACCIA, 3 RICHIAMI] [AUTOMAZIONE, 0 RICHIAMI] COUNTDOWN DELL'ATTESA IN CORSO DI UNO DEI 16 TRIGGER «RIPRISTINO DOPO LIM. Δ PDR» DELL'AUTOMAZIONE (AVVIATO DA vmc_master_countdown_attese_automazione)
     name: "Ripristino dopo Lim. Δ PdR"
     icon: mdi:timer-sand
-  vmc_master_countdown_free_heating_annullamento:                # [CONFIGURAZIONE, 3 RICHIAMI] [INTERFACCIA, 2 RICHIAMI] [AUTOMAZIONE, 0 RICHIAMI] COUNTDOWN DELL'ATTESA IN CORSO DI UNO DEI 1 TRIGGER «ANNULLAMENTO MEMORIA FREE HEATING» DELL'AUTOMAZIONE (AVVIATO DA vmc_master_countdown_attese_automazione)
+  vmc_master_countdown_free_heating_annullamento:                # [CONFIGURAZIONE, 3 RICHIAMI] [INTERFACCIA, 3 RICHIAMI] [AUTOMAZIONE, 0 RICHIAMI] COUNTDOWN DELL'ATTESA IN CORSO DI UNO DEI 1 TRIGGER «ANNULLAMENTO MEMORIA FREE HEATING» DELL'AUTOMAZIONE (AVVIATO DA vmc_master_countdown_attese_automazione)
     name: "Annullamento Memoria Free Heating"
     icon: mdi:timer-sand
-  vmc_master_countdown_free_heating_sospensione:                 # [CONFIGURAZIONE, 3 RICHIAMI] [INTERFACCIA, 2 RICHIAMI] [AUTOMAZIONE, 0 RICHIAMI] COUNTDOWN DELL'ATTESA IN CORSO DI UNO DEI 2 TRIGGER «SOSPENSIONE FREE HEATING» DELL'AUTOMAZIONE (AVVIATO DA vmc_master_countdown_attese_automazione)
+  vmc_master_countdown_free_heating_sospensione:                 # [CONFIGURAZIONE, 2 RICHIAMI] [INTERFACCIA, 3 RICHIAMI] [AUTOMAZIONE, 0 RICHIAMI] COUNTDOWN DELL'ATTESA IN CORSO DI UNO DEI 2 TRIGGER «SOSPENSIONE FREE HEATING» DELL'AUTOMAZIONE (AVVIATO DA vmc_master_countdown_attese_automazione)
     name: "Sospensione Free Heating"
     icon: mdi:timer-sand
-  vmc_master_countdown_free_heating_ripristino:                  # [CONFIGURAZIONE, 3 RICHIAMI] [INTERFACCIA, 2 RICHIAMI] [AUTOMAZIONE, 0 RICHIAMI] COUNTDOWN DELL'ATTESA IN CORSO DI UNO DEI 2 TRIGGER «RIPRISTINO FREE HEATING» DELL'AUTOMAZIONE (AVVIATO DA vmc_master_countdown_attese_automazione)
+  vmc_master_countdown_free_heating_ripristino:                  # [CONFIGURAZIONE, 2 RICHIAMI] [INTERFACCIA, 3 RICHIAMI] [AUTOMAZIONE, 0 RICHIAMI] COUNTDOWN DELL'ATTESA IN CORSO DI UNO DEI 2 TRIGGER «RIPRISTINO FREE HEATING» DELL'AUTOMAZIONE (AVVIATO DA vmc_master_countdown_attese_automazione)
     name: "Ripristino Free Heating"
     icon: mdi:timer-sand
-  vmc_master_countdown_free_cooling_annullamento:                # [CONFIGURAZIONE, 3 RICHIAMI] [INTERFACCIA, 2 RICHIAMI] [AUTOMAZIONE, 0 RICHIAMI] COUNTDOWN DELL'ATTESA IN CORSO DI UNO DEI 1 TRIGGER «ANNULLAMENTO MEMORIA FREE COOLING» DELL'AUTOMAZIONE (AVVIATO DA vmc_master_countdown_attese_automazione)
+  vmc_master_countdown_free_cooling_annullamento:                # [CONFIGURAZIONE, 3 RICHIAMI] [INTERFACCIA, 3 RICHIAMI] [AUTOMAZIONE, 0 RICHIAMI] COUNTDOWN DELL'ATTESA IN CORSO DI UNO DEI 1 TRIGGER «ANNULLAMENTO MEMORIA FREE COOLING» DELL'AUTOMAZIONE (AVVIATO DA vmc_master_countdown_attese_automazione)
     name: "Annullamento Memoria Free Cooling"
     icon: mdi:timer-sand
-  vmc_master_countdown_free_cooling_sospensione:                 # [CONFIGURAZIONE, 3 RICHIAMI] [INTERFACCIA, 2 RICHIAMI] [AUTOMAZIONE, 0 RICHIAMI] COUNTDOWN DELL'ATTESA IN CORSO DI UNO DEI 2 TRIGGER «SOSPENSIONE FREE COOLING» DELL'AUTOMAZIONE (AVVIATO DA vmc_master_countdown_attese_automazione)
+  vmc_master_countdown_free_cooling_sospensione:                 # [CONFIGURAZIONE, 2 RICHIAMI] [INTERFACCIA, 3 RICHIAMI] [AUTOMAZIONE, 0 RICHIAMI] COUNTDOWN DELL'ATTESA IN CORSO DI UNO DEI 2 TRIGGER «SOSPENSIONE FREE COOLING» DELL'AUTOMAZIONE (AVVIATO DA vmc_master_countdown_attese_automazione)
     name: "Sospensione Free Cooling"
     icon: mdi:timer-sand
-  vmc_master_countdown_free_cooling_ripristino:                  # [CONFIGURAZIONE, 3 RICHIAMI] [INTERFACCIA, 2 RICHIAMI] [AUTOMAZIONE, 0 RICHIAMI] COUNTDOWN DELL'ATTESA IN CORSO DI UNO DEI 2 TRIGGER «RIPRISTINO FREE COOLING» DELL'AUTOMAZIONE (AVVIATO DA vmc_master_countdown_attese_automazione)
+  vmc_master_countdown_free_cooling_ripristino:                  # [CONFIGURAZIONE, 2 RICHIAMI] [INTERFACCIA, 3 RICHIAMI] [AUTOMAZIONE, 0 RICHIAMI] COUNTDOWN DELL'ATTESA IN CORSO DI UNO DEI 2 TRIGGER «RIPRISTINO FREE COOLING» DELL'AUTOMAZIONE (AVVIATO DA vmc_master_countdown_attese_automazione)
     name: "Ripristino Free Cooling"
     icon: mdi:timer-sand
-  vmc_master_countdown_inquinanti_avvio:                         # [CONFIGURAZIONE, 3 RICHIAMI] [INTERFACCIA, 2 RICHIAMI] [AUTOMAZIONE, 0 RICHIAMI] COUNTDOWN DELL'ATTESA IN CORSO DI UNO DEI 2 TRIGGER «AVVIO ALLERTA INQUINANTI» DELL'AUTOMAZIONE (AVVIATO DA vmc_master_countdown_attese_automazione)
+  vmc_master_countdown_inquinanti_avvio:                         # [CONFIGURAZIONE, 2 RICHIAMI] [INTERFACCIA, 3 RICHIAMI] [AUTOMAZIONE, 0 RICHIAMI] COUNTDOWN DELL'ATTESA IN CORSO DI UNO DEI 2 TRIGGER «AVVIO ALLERTA INQUINANTI» DELL'AUTOMAZIONE (AVVIATO DA vmc_master_countdown_attese_automazione)
     name: "Avvio Allerta Inquinanti"
     icon: mdi:timer-sand
-  vmc_master_countdown_inquinanti_fine:                          # [CONFIGURAZIONE, 3 RICHIAMI] [INTERFACCIA, 2 RICHIAMI] [AUTOMAZIONE, 0 RICHIAMI] COUNTDOWN DELL'ATTESA IN CORSO DI UNO DEI 1 TRIGGER «FINE ALLERTA INQUINANTI» DELL'AUTOMAZIONE (AVVIATO DA vmc_master_countdown_attese_automazione)
+  vmc_master_countdown_inquinanti_fine:                          # [CONFIGURAZIONE, 2 RICHIAMI] [INTERFACCIA, 3 RICHIAMI] [AUTOMAZIONE, 0 RICHIAMI] COUNTDOWN DELL'ATTESA IN CORSO DI UNO DEI 1 TRIGGER «FINE ALLERTA INQUINANTI» DELL'AUTOMAZIONE (AVVIATO DA vmc_master_countdown_attese_automazione)
     name: "Fine Allerta Inquinanti"
     icon: mdi:timer-sand
-  vmc_master_countdown_inquinanti_memoria:                       # [CONFIGURAZIONE, 3 RICHIAMI] [INTERFACCIA, 2 RICHIAMI] [AUTOMAZIONE, 0 RICHIAMI] COUNTDOWN DELL'ATTESA IN CORSO DI UNO DEI 8 TRIGGER «MEMORIZZAZIONE VELOCITÀ (INQUINANTI)» DELL'AUTOMAZIONE (AVVIATO DA vmc_master_countdown_attese_automazione)
+  vmc_master_countdown_inquinanti_memoria:                       # [CONFIGURAZIONE, 2 RICHIAMI] [INTERFACCIA, 3 RICHIAMI] [AUTOMAZIONE, 0 RICHIAMI] COUNTDOWN DELL'ATTESA IN CORSO DI UNO DEI 8 TRIGGER «MEMORIZZAZIONE VELOCITÀ (INQUINANTI)» DELL'AUTOMAZIONE (AVVIATO DA vmc_master_countdown_attese_automazione)
     name: "Memorizzazione Velocità (Inquinanti)"
     icon: mdi:timer-sand
-  vmc_master_countdown_umidita_avvio:                            # [CONFIGURAZIONE, 3 RICHIAMI] [INTERFACCIA, 2 RICHIAMI] [AUTOMAZIONE, 0 RICHIAMI] COUNTDOWN DELL'ATTESA IN CORSO DI UNO DEI 1 TRIGGER «AVVIO ALLERTA UMIDITÀ» DELL'AUTOMAZIONE (AVVIATO DA vmc_master_countdown_attese_automazione)
+  vmc_master_countdown_umidita_avvio:                            # [CONFIGURAZIONE, 2 RICHIAMI] [INTERFACCIA, 3 RICHIAMI] [AUTOMAZIONE, 0 RICHIAMI] COUNTDOWN DELL'ATTESA IN CORSO DI UNO DEI 1 TRIGGER «AVVIO ALLERTA UMIDITÀ» DELL'AUTOMAZIONE (AVVIATO DA vmc_master_countdown_attese_automazione)
     name: "Avvio Allerta Umidità"
     icon: mdi:timer-sand
-  vmc_master_countdown_umidita_fine:                             # [CONFIGURAZIONE, 3 RICHIAMI] [INTERFACCIA, 2 RICHIAMI] [AUTOMAZIONE, 0 RICHIAMI] COUNTDOWN DELL'ATTESA IN CORSO DI UNO DEI 1 TRIGGER «FINE ALLERTA UMIDITÀ» DELL'AUTOMAZIONE (AVVIATO DA vmc_master_countdown_attese_automazione)
+  vmc_master_countdown_umidita_fine:                             # [CONFIGURAZIONE, 2 RICHIAMI] [INTERFACCIA, 3 RICHIAMI] [AUTOMAZIONE, 0 RICHIAMI] COUNTDOWN DELL'ATTESA IN CORSO DI UNO DEI 1 TRIGGER «FINE ALLERTA UMIDITÀ» DELL'AUTOMAZIONE (AVVIATO DA vmc_master_countdown_attese_automazione)
     name: "Fine Allerta Umidità"
     icon: mdi:timer-sand
-  vmc_master_countdown_umidita_memoria:                          # [CONFIGURAZIONE, 3 RICHIAMI] [INTERFACCIA, 2 RICHIAMI] [AUTOMAZIONE, 0 RICHIAMI] COUNTDOWN DELL'ATTESA IN CORSO DI UNO DEI 8 TRIGGER «MEMORIZZAZIONE VELOCITÀ (UMIDITÀ)» DELL'AUTOMAZIONE (AVVIATO DA vmc_master_countdown_attese_automazione)
+  vmc_master_countdown_umidita_memoria:                          # [CONFIGURAZIONE, 2 RICHIAMI] [INTERFACCIA, 3 RICHIAMI] [AUTOMAZIONE, 0 RICHIAMI] COUNTDOWN DELL'ATTESA IN CORSO DI UNO DEI 8 TRIGGER «MEMORIZZAZIONE VELOCITÀ (UMIDITÀ)» DELL'AUTOMAZIONE (AVVIATO DA vmc_master_countdown_attese_automazione)
     name: "Memorizzazione Velocità (Umidità)"
     icon: mdi:timer-sand
-  vmc_master_countdown_delta_avvio:                              # [CONFIGURAZIONE, 3 RICHIAMI] [INTERFACCIA, 2 RICHIAMI] [AUTOMAZIONE, 0 RICHIAMI] COUNTDOWN DELL'ATTESA IN CORSO DI UNO DEI 1 TRIGGER «AVVIO ALLERTA Δ TEMP.» DELL'AUTOMAZIONE (AVVIATO DA vmc_master_countdown_attese_automazione)
+  vmc_master_countdown_delta_avvio:                              # [CONFIGURAZIONE, 2 RICHIAMI] [INTERFACCIA, 3 RICHIAMI] [AUTOMAZIONE, 0 RICHIAMI] COUNTDOWN DELL'ATTESA IN CORSO DI UNO DEI 1 TRIGGER «AVVIO ALLERTA Δ TEMP.» DELL'AUTOMAZIONE (AVVIATO DA vmc_master_countdown_attese_automazione)
     name: "Avvio Allerta Δ Temp."
     icon: mdi:timer-sand
-  vmc_master_countdown_delta_fine:                               # [CONFIGURAZIONE, 3 RICHIAMI] [INTERFACCIA, 2 RICHIAMI] [AUTOMAZIONE, 0 RICHIAMI] COUNTDOWN DELL'ATTESA IN CORSO DI UNO DEI 1 TRIGGER «FINE ALLERTA Δ TEMP.» DELL'AUTOMAZIONE (AVVIATO DA vmc_master_countdown_attese_automazione)
+  vmc_master_countdown_delta_fine:                               # [CONFIGURAZIONE, 2 RICHIAMI] [INTERFACCIA, 3 RICHIAMI] [AUTOMAZIONE, 0 RICHIAMI] COUNTDOWN DELL'ATTESA IN CORSO DI UNO DEI 1 TRIGGER «FINE ALLERTA Δ TEMP.» DELL'AUTOMAZIONE (AVVIATO DA vmc_master_countdown_attese_automazione)
     name: "Fine Allerta Δ Temp."
     icon: mdi:timer-sand
-  vmc_master_countdown_delta_memoria:                            # [CONFIGURAZIONE, 3 RICHIAMI] [INTERFACCIA, 2 RICHIAMI] [AUTOMAZIONE, 0 RICHIAMI] COUNTDOWN DELL'ATTESA IN CORSO DI UNO DEI 8 TRIGGER «MEMORIZZAZIONE VELOCITÀ (Δ TEMP.)» DELL'AUTOMAZIONE (AVVIATO DA vmc_master_countdown_attese_automazione)
+  vmc_master_countdown_delta_memoria:                            # [CONFIGURAZIONE, 2 RICHIAMI] [INTERFACCIA, 3 RICHIAMI] [AUTOMAZIONE, 0 RICHIAMI] COUNTDOWN DELL'ATTESA IN CORSO DI UNO DEI 8 TRIGGER «MEMORIZZAZIONE VELOCITÀ (Δ TEMP.)» DELL'AUTOMAZIONE (AVVIATO DA vmc_master_countdown_attese_automazione)
     name: "Memorizzazione Velocità (Δ Temp.)"
     icon: mdi:timer-sand
-  vmc_master_countdown_blackout_rilevazione:                     # [CONFIGURAZIONE, 3 RICHIAMI] [INTERFACCIA, 2 RICHIAMI] [AUTOMAZIONE, 0 RICHIAMI] COUNTDOWN DELL'ATTESA IN CORSO DI UNO DEI 10 TRIGGER «RILEVAZIONE BLACK-OUT» DELL'AUTOMAZIONE (AVVIATO DA vmc_master_countdown_attese_automazione)
+  vmc_master_countdown_blackout_rilevazione:                     # [CONFIGURAZIONE, 2 RICHIAMI] [INTERFACCIA, 3 RICHIAMI] [AUTOMAZIONE, 0 RICHIAMI] COUNTDOWN DELL'ATTESA IN CORSO DI UNO DEI 10 TRIGGER «RILEVAZIONE BLACK-OUT» DELL'AUTOMAZIONE (AVVIATO DA vmc_master_countdown_attese_automazione)
     name: "Rilevazione Black-Out"
     icon: mdi:timer-sand
-  vmc_master_countdown_blackout_ripristino:                      # [CONFIGURAZIONE, 3 RICHIAMI] [INTERFACCIA, 2 RICHIAMI] [AUTOMAZIONE, 0 RICHIAMI] COUNTDOWN DELL'ATTESA IN CORSO DI UNO DEI 8 TRIGGER «RIPRISTINO DOPO BLACK-OUT» DELL'AUTOMAZIONE (AVVIATO DA vmc_master_countdown_attese_automazione)
+  vmc_master_countdown_blackout_ripristino:                      # [CONFIGURAZIONE, 2 RICHIAMI] [INTERFACCIA, 3 RICHIAMI] [AUTOMAZIONE, 0 RICHIAMI] COUNTDOWN DELL'ATTESA IN CORSO DI UNO DEI 8 TRIGGER «RIPRISTINO DOPO BLACK-OUT» DELL'AUTOMAZIONE (AVVIATO DA vmc_master_countdown_attese_automazione)
     name: "Ripristino dopo Black-Out"
     icon: mdi:timer-sand
-  vmc_master_countdown_calendario_inizio:                        # [CONFIGURAZIONE, 3 RICHIAMI] [INTERFACCIA, 2 RICHIAMI] [AUTOMAZIONE, 0 RICHIAMI] COUNTDOWN DELL'ATTESA IN CORSO DI UNO DEI 14 TRIGGER «INIZIO FASCIA» DELL'AUTOMAZIONE (AVVIATO DA vmc_master_countdown_attese_automazione)
+  vmc_master_countdown_calendario_inizio:                        # [CONFIGURAZIONE, 2 RICHIAMI] [INTERFACCIA, 3 RICHIAMI] [AUTOMAZIONE, 0 RICHIAMI] COUNTDOWN DELL'ATTESA IN CORSO DI UNO DEI 14 TRIGGER «INIZIO FASCIA» DELL'AUTOMAZIONE (AVVIATO DA vmc_master_countdown_attese_automazione)
     name: "Inizio Fascia"
     icon: mdi:timer-sand
-  vmc_master_countdown_calendario_fine:                          # [CONFIGURAZIONE, 3 RICHIAMI] [INTERFACCIA, 2 RICHIAMI] [AUTOMAZIONE, 0 RICHIAMI] COUNTDOWN DELL'ATTESA IN CORSO DI UNO DEI 14 TRIGGER «FINE FASCIA» DELL'AUTOMAZIONE (AVVIATO DA vmc_master_countdown_attese_automazione)
+  vmc_master_countdown_calendario_fine:                          # [CONFIGURAZIONE, 2 RICHIAMI] [INTERFACCIA, 3 RICHIAMI] [AUTOMAZIONE, 0 RICHIAMI] COUNTDOWN DELL'ATTESA IN CORSO DI UNO DEI 14 TRIGGER «FINE FASCIA» DELL'AUTOMAZIONE (AVVIATO DA vmc_master_countdown_attese_automazione)
     name: "Fine Fascia"
     icon: mdi:timer-sand
-  vmc_master_countdown_avvisi:                                   # [CONFIGURAZIONE, 3 RICHIAMI] [INTERFACCIA, 2 RICHIAMI] [AUTOMAZIONE, 0 RICHIAMI] COUNTDOWN DELL'ATTESA IN CORSO DI UNO DEI 3 TRIGGER «AGGIORNAMENTO AVVISI» DELL'AUTOMAZIONE (AVVIATO DA vmc_master_countdown_attese_automazione)
+  vmc_master_countdown_avvisi:                                   # [CONFIGURAZIONE, 2 RICHIAMI] [INTERFACCIA, 3 RICHIAMI] [AUTOMAZIONE, 0 RICHIAMI] COUNTDOWN DELL'ATTESA IN CORSO DI UNO DEI 3 TRIGGER «AGGIORNAMENTO AVVISI» DELL'AUTOMAZIONE (AVVIATO DA vmc_master_countdown_attese_automazione)
     name: "Aggiornamento Avvisi"
     icon: mdi:timer-sand
-  vmc_master_lettura_ping:                                       # [CONFIGURAZIONE, 4 RICHIAMI] [INTERFACCIA, 2 RICHIAMI] [AUTOMAZIONE, 0 RICHIAMI] COUNTDOWN ALLA PROSSIMA LETTURA «VERIFICA ON-LINE (PING)» (GESTITO DA vmc_master_letture_vmc_countdown)
+  vmc_master_lettura_ping:                                       # [CONFIGURAZIONE, 2 RICHIAMI] [INTERFACCIA, 3 RICHIAMI] [AUTOMAZIONE, 0 RICHIAMI] COUNTDOWN ALLA PROSSIMA LETTURA «VERIFICA ON-LINE (PING)» (GESTITO DA vmc_master_letture_vmc_countdown)
     name: "Prossima Lettura Verifica On-Line (Ping)"
     icon: mdi:timer-sync-outline
-  vmc_master_lettura_ventilazione:                               # [CONFIGURAZIONE, 4 RICHIAMI] [INTERFACCIA, 2 RICHIAMI] [AUTOMAZIONE, 0 RICHIAMI] COUNTDOWN ALLA PROSSIMA LETTURA «SENSORI VENTILAZIONE» (GESTITO DA vmc_master_letture_vmc_countdown)
+  vmc_master_lettura_ventilazione:                               # [CONFIGURAZIONE, 2 RICHIAMI] [INTERFACCIA, 3 RICHIAMI] [AUTOMAZIONE, 0 RICHIAMI] COUNTDOWN ALLA PROSSIMA LETTURA «SENSORI VENTILAZIONE» (GESTITO DA vmc_master_letture_vmc_countdown)
     name: "Prossima Lettura Sensori Ventilazione"
     icon: mdi:timer-sync-outline
-  vmc_master_lettura_ambientali:                                 # [CONFIGURAZIONE, 4 RICHIAMI] [INTERFACCIA, 2 RICHIAMI] [AUTOMAZIONE, 0 RICHIAMI] COUNTDOWN ALLA PROSSIMA LETTURA «SENSORI AMBIENTALI» (GESTITO DA vmc_master_letture_vmc_countdown)
+  vmc_master_lettura_ambientali:                                 # [CONFIGURAZIONE, 2 RICHIAMI] [INTERFACCIA, 3 RICHIAMI] [AUTOMAZIONE, 0 RICHIAMI] COUNTDOWN ALLA PROSSIMA LETTURA «SENSORI AMBIENTALI» (GESTITO DA vmc_master_letture_vmc_countdown)
     name: "Prossima Lettura Sensori Ambientali"
     icon: mdi:timer-sync-outline
-  vmc_master_lettura_lan:                                        # [CONFIGURAZIONE, 4 RICHIAMI] [INTERFACCIA, 2 RICHIAMI] [AUTOMAZIONE, 0 RICHIAMI] COUNTDOWN ALLA PROSSIMA LETTURA «LAN» (GESTITO DA vmc_master_letture_vmc_countdown)
+  vmc_master_lettura_lan:                                        # [CONFIGURAZIONE, 2 RICHIAMI] [INTERFACCIA, 3 RICHIAMI] [AUTOMAZIONE, 0 RICHIAMI] COUNTDOWN ALLA PROSSIMA LETTURA «LAN» (GESTITO DA vmc_master_letture_vmc_countdown)
     name: "Prossima Lettura Lan"
     icon: mdi:timer-sync-outline
-  vmc_master_lettura_nome:                                       # [CONFIGURAZIONE, 4 RICHIAMI] [INTERFACCIA, 2 RICHIAMI] [AUTOMAZIONE, 0 RICHIAMI] COUNTDOWN ALLA PROSSIMA LETTURA «NOME» (GESTITO DA vmc_master_letture_vmc_countdown)
+  vmc_master_lettura_nome:                                       # [CONFIGURAZIONE, 2 RICHIAMI] [INTERFACCIA, 3 RICHIAMI] [AUTOMAZIONE, 0 RICHIAMI] COUNTDOWN ALLA PROSSIMA LETTURA «NOME» (GESTITO DA vmc_master_letture_vmc_countdown)
     name: "Prossima Lettura Nome"
     icon: mdi:timer-sync-outline
 ################### Fine Creazione Timer per il Countdown in Scheda delle Attese dell'Automazione ###################
@@ -16628,7 +16628,7 @@ script:
       Invia un messaggio audio al media player selezionato con il nome della VMC e l'avviso correlato in italiano.
       Imposta il volume dal sensore, attende n° secondi, verifica il range orario anche oltre la mezzanotte.
 ################### Inizio Creazione Script Ripristina Tempi di Attesa Originali ###################
-  vmc_master_ripristina_tempi_attesa:                                          # [CONFIGURAZIONE, 3 RICHIAMI] [INTERFACCIA, 1 RICHIAMO] [AUTOMAZIONE, 0 RICHIAMI] RIPORTA I TEMPI DI ATTESA AI VALORI ORIGINALI
+  vmc_master_ripristina_tempi_attesa:                                          # [CONFIGURAZIONE, 3 RICHIAMI] [INTERFACCIA, 2 RICHIAMI] [AUTOMAZIONE, 0 RICHIAMI] RIPORTA I TEMPI DI ATTESA AI VALORI ORIGINALI
     alias: "VMC Master - Ripristina Tempi Originali (Attese e Letture)"
     mode: single
     icon: mdi:timer-refresh-outline
