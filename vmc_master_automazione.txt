@@ -103,6 +103,11 @@ description: >-
   PRIORITA' DI ATTIVAZIONE DEGLI ALLARMI (Secondi per l'Attivazione e per la
   Ripresa):
 
+  I Secondi indicati sono i valori originali: ogni tempo di attesa e' una costante
+  (input_number.vmc_master_attesa_*) modificabile dalla scheda nella finestra
+  Opzioni > Tempi di Attesa e ripristinabile con il pulsante «Ripristina Tempi
+  di Attesa Originali». Il countdown della scheda legge le stesse costanti.
+
   - Congelamento ≤ -18 [°C] Temp. Ext.: 0 Secondi. Durante il Congelamento la VMC
   resta ferma: se si prova a cambiarle Velocità viene riportata subito a Velocità
   0 e, se non si ferma, il comando di arresto viene ripetuto finché non si ferma
@@ -467,9 +472,7 @@ triggers:
       }}
     id: PdR Vel. 1-> Imposta Velocità 0
     for:
-      hours: 0
-      minutes: 0
-      seconds: 16
+      seconds: "{{ states('input_number.vmc_master_attesa_pdr_cambio') | int(16) }}"
     trigger: template
   - alias: >-
       Condizioni Sfavorevoli a Velocità 2 -> Imposta Velocità 0 se Spia
@@ -508,9 +511,7 @@ triggers:
       }}
     id: PdR Vel. 2-> Imposta Velocità 0
     for:
-      hours: 0
-      minutes: 0
-      seconds: 16
+      seconds: "{{ states('input_number.vmc_master_attesa_pdr_cambio') | int(16) }}"
     trigger: template
   - alias: >-
       Condizioni Sfavorevoli a Velocità 3 -> Imposta Velocità 0 se Spia
@@ -549,9 +550,7 @@ triggers:
       }}
     id: PdR Vel. 3-> Imposta Velocità 0
     for:
-      hours: 0
-      minutes: 0
-      seconds: 16
+      seconds: "{{ states('input_number.vmc_master_attesa_pdr_cambio') | int(16) }}"
     trigger: template
   - alias: >-
       Condizioni Sfavorevoli a Velocità 4 -> Imposta Velocità 0 se Spia
@@ -590,9 +589,7 @@ triggers:
       }}
     id: PdR Vel. 4-> Imposta Velocità 0
     for:
-      hours: 0
-      minutes: 0
-      seconds: 16
+      seconds: "{{ states('input_number.vmc_master_attesa_pdr_cambio') | int(16) }}"
     trigger: template
   - alias: >-
       Condizioni Sfavorevoli a Velocità Notturna -> Imposta Velocità 0 se Spia
@@ -631,9 +628,7 @@ triggers:
       }}
     id: PdR Notturna -> Imposta Velocità 0
     for:
-      hours: 0
-      minutes: 0
-      seconds: 16
+      seconds: "{{ states('input_number.vmc_master_attesa_pdr_cambio') | int(16) }}"
     trigger: template
   - alias: >-
       Condizioni Sfavorevoli a Velocità Free Cool./Heat.-> Imposta Velocità 0 se
@@ -672,9 +667,7 @@ triggers:
       }}
     id: PdR Free-Cooling -> Imposta Velocità 0
     for:
-      hours: 0
-      minutes: 0
-      seconds: 16
+      seconds: "{{ states('input_number.vmc_master_attesa_pdr_cambio') | int(16) }}"
     trigger: template
   - alias: >-
       Condizioni Sfavorevoli a Velocità Iperventilazione -> Imposta Velocità 0
@@ -713,9 +706,7 @@ triggers:
       }}
     id: PdR Iperventilazione -> Imposta Velocità 0
     for:
-      hours: 0
-      minutes: 0
-      seconds: 16
+      seconds: "{{ states('input_number.vmc_master_attesa_pdr_cambio') | int(16) }}"
     trigger: template
   - alias: >-
       Condizioni Sfavorevoli a Velocità 0 (VMC ferma) -> Spia PdR Velocità 0 se Spia
@@ -757,9 +748,7 @@ triggers:
       }}
     id: PdR Vel. 0 -> Spia PdR Velocità 0
     for:
-      hours: 0
-      minutes: 0
-      seconds: 16
+      seconds: "{{ states('input_number.vmc_master_attesa_pdr_cambio') | int(16) }}"
     trigger: template
   - alias: >-
       Condizioni Sfavorevoli a Velocità 1 se Spia Congelamento Off e Spia Delta
@@ -787,9 +776,7 @@ triggers:
       }}
     id: PdR Vel. 1 se Spia Inquinanti ON
     for:
-      hours: 0
-      minutes: 0
-      seconds: 12
+      seconds: "{{ states('input_number.vmc_master_attesa_pdr_cambio_inquinanti') | int(12) }}"
     trigger: template
   - alias: >-
       Condizioni Sfavorevoli a Velocità 2 se Spia Congelamento Off e Spia Delta
@@ -817,9 +804,7 @@ triggers:
       }}
     id: PdR Vel. 2 se Spia Inquinanti ON
     for:
-      hours: 0
-      minutes: 0
-      seconds: 12
+      seconds: "{{ states('input_number.vmc_master_attesa_pdr_cambio_inquinanti') | int(12) }}"
     trigger: template
   - alias: >-
       Condizioni Sfavorevoli a Velocità 3 se Spia Congelamento Off e Spia Delta
@@ -847,9 +832,7 @@ triggers:
       }}
     id: PdR Vel. 3 se Spia Inquinanti ON
     for:
-      hours: 0
-      minutes: 0
-      seconds: 12
+      seconds: "{{ states('input_number.vmc_master_attesa_pdr_cambio_inquinanti') | int(12) }}"
     trigger: template
   - alias: >-
       Condizioni Sfavorevoli a Velocità 4 se Spia Congelamento Off e Spia Delta
@@ -877,9 +860,7 @@ triggers:
       }}
     id: PdR Vel. 4 se Spia Inquinanti ON
     for:
-      hours: 0
-      minutes: 0
-      seconds: 12
+      seconds: "{{ states('input_number.vmc_master_attesa_pdr_cambio_inquinanti') | int(12) }}"
     trigger: template
   - alias: >-
       Condizioni Sfavorevoli a Velocità Notturna se Spia Congelamento Off e Spia
@@ -907,9 +888,7 @@ triggers:
       }}
     id: PdR Notturna se Spia Inquinanti ON
     for:
-      hours: 0
-      minutes: 0
-      seconds: 12
+      seconds: "{{ states('input_number.vmc_master_attesa_pdr_cambio_inquinanti') | int(12) }}"
     trigger: template
   - alias: >-
       Condizioni Sfavorevoli a Velocità Free Cool./Heat. se Spia Congelamento
@@ -937,9 +916,7 @@ triggers:
       }}
     id: PdR Free-Cooling se Spia Inquinanti ON
     for:
-      hours: 0
-      minutes: 0
-      seconds: 12
+      seconds: "{{ states('input_number.vmc_master_attesa_pdr_cambio_inquinanti') | int(12) }}"
     trigger: template
   - alias: >-
       Condizioni Sfavorevoli a Velocità Iperventilazione se Spia Congelamento
@@ -967,9 +944,7 @@ triggers:
       }}
     id: PdR Iperventilazione se Spia Inquinanti ON
     for:
-      hours: 0
-      minutes: 0
-      seconds: 12
+      seconds: "{{ states('input_number.vmc_master_attesa_pdr_cambio_inquinanti') | int(12) }}"
     trigger: template
   - alias: >-
       Condizioni Favorevoli Ripristinate su Velocità 0 se Spia Congelamento Off
@@ -996,9 +971,7 @@ triggers:
       ) ) and (states('input_number.vmc_master_fase_riallineamento_al_riavvio') | float(0) == 0 or states('input_number.vmc_master_fase_riallineamento_al_riavvio') | float(0) >= 4) }}
     id: Rip. Vel. 0 No PdR
     for:
-      hours: 0
-      minutes: 0
-      seconds: 16
+      seconds: "{{ states('input_number.vmc_master_attesa_pdr_ripristino') | int(16) }}"
     trigger: template
   - alias: >-
       Condizioni Favorevoli Ripristinate su Velocità 0 (VMC ferma) -> Spia PdR Velocità
@@ -1026,9 +999,7 @@ triggers:
       ) ) and (states('input_number.vmc_master_fase_riallineamento_al_riavvio') | float(0) == 0 or states('input_number.vmc_master_fase_riallineamento_al_riavvio') | float(0) >= 4) }}
     id: Rip. Vel. 0 No PdR -> Spia PdR Velocità 0 OFF
     for:
-      hours: 0
-      minutes: 0
-      seconds: 16
+      seconds: "{{ states('input_number.vmc_master_attesa_pdr_ripristino') | int(16) }}"
     trigger: template
   - alias: >-
       Condizioni Favorevoli Ripristinate su Velocità 1 se Spia Congelamento Off
@@ -1071,9 +1042,7 @@ triggers:
       != 'Non disponibile' ) and (states('input_number.vmc_master_fase_riallineamento_al_riavvio') | float(0) == 0 or states('input_number.vmc_master_fase_riallineamento_al_riavvio') | float(0) >= 4) }}
     id: Rip. Vel. 1 No PdR
     for:
-      hours: 0
-      minutes: 0
-      seconds: 16
+      seconds: "{{ states('input_number.vmc_master_attesa_pdr_ripristino') | int(16) }}"
     trigger: template
   - alias: >-
       Condizioni Favorevoli Ripristinate su Velocità 2 se Spia Congelamento Off
@@ -1116,9 +1085,7 @@ triggers:
       != 'Non disponibile' ) and (states('input_number.vmc_master_fase_riallineamento_al_riavvio') | float(0) == 0 or states('input_number.vmc_master_fase_riallineamento_al_riavvio') | float(0) >= 4) }}
     id: Rip. Vel. 2 No PdR
     for:
-      hours: 0
-      minutes: 0
-      seconds: 16
+      seconds: "{{ states('input_number.vmc_master_attesa_pdr_ripristino') | int(16) }}"
     trigger: template
   - alias: >-
       Condizioni Favorevoli Ripristinate su Velocità 3 se Spia Congelamento Off
@@ -1161,9 +1128,7 @@ triggers:
       != 'Non disponibile' ) and (states('input_number.vmc_master_fase_riallineamento_al_riavvio') | float(0) == 0 or states('input_number.vmc_master_fase_riallineamento_al_riavvio') | float(0) >= 4) }}
     id: Rip. Vel. 3 No PdR
     for:
-      hours: 0
-      minutes: 0
-      seconds: 16
+      seconds: "{{ states('input_number.vmc_master_attesa_pdr_ripristino') | int(16) }}"
     trigger: template
   - alias: >-
       Condizioni Favorevoli Ripristinate su Velocità 4 se Spia Congelamento Off
@@ -1206,9 +1171,7 @@ triggers:
       != 'Non disponibile' ) and (states('input_number.vmc_master_fase_riallineamento_al_riavvio') | float(0) == 0 or states('input_number.vmc_master_fase_riallineamento_al_riavvio') | float(0) >= 4) }}
     id: Rip. Vel. 4 No PdR
     for:
-      hours: 0
-      minutes: 0
-      seconds: 16
+      seconds: "{{ states('input_number.vmc_master_attesa_pdr_ripristino') | int(16) }}"
     trigger: template
   - alias: >-
       Condizioni Favorevoli Ripristinate su Velocità Notturna se Spia
@@ -1251,9 +1214,7 @@ triggers:
       != 'Non disponibile' ) and (states('input_number.vmc_master_fase_riallineamento_al_riavvio') | float(0) == 0 or states('input_number.vmc_master_fase_riallineamento_al_riavvio') | float(0) >= 4) }}
     id: Rip. Notturno No PdR
     for:
-      hours: 0
-      minutes: 0
-      seconds: 16
+      seconds: "{{ states('input_number.vmc_master_attesa_pdr_ripristino') | int(16) }}"
     trigger: template
   - alias: >-
       Condizioni Favorevoli Ripristinate su Velocità Iperventilazione se Spia
@@ -1296,9 +1257,7 @@ triggers:
       != 'Non disponibile' ) and (states('input_number.vmc_master_fase_riallineamento_al_riavvio') | float(0) == 0 or states('input_number.vmc_master_fase_riallineamento_al_riavvio') | float(0) >= 4) }}
     id: Rip. Iperventilazione No PdR
     for:
-      hours: 0
-      minutes: 0
-      seconds: 16
+      seconds: "{{ states('input_number.vmc_master_attesa_pdr_ripristino') | int(16) }}"
     trigger: template
   - alias: >-
       Condizioni Favorevoli Ripristinate su Velocità Free Cool./Heat. se Spia
@@ -1341,9 +1300,7 @@ triggers:
       != 'Non disponibile' ) and (states('input_number.vmc_master_fase_riallineamento_al_riavvio') | float(0) == 0 or states('input_number.vmc_master_fase_riallineamento_al_riavvio') | float(0) >= 4) }}
     id: Rip. Free Cool./Heat. No PdR
     for:
-      hours: 0
-      minutes: 0
-      seconds: 16
+      seconds: "{{ states('input_number.vmc_master_attesa_pdr_ripristino') | int(16) }}"
     trigger: template
   - alias: >-
       Condizioni Favorevoli Ripristinate su Velocità 1 se Spia Congelamento Off
@@ -1388,9 +1345,7 @@ triggers:
         and states('sensor.vmc_master_status_ventola_lettura_codice_interpretato_interfaccia') != 'Non disponibile' ) and (states('input_number.vmc_master_fase_riallineamento_al_riavvio') | float(0) == 0 or states('input_number.vmc_master_fase_riallineamento_al_riavvio') | float(0) >= 4) }}
     id: Rip. Vel. 1 No PdR se Spia Inquinanti ON
     for:
-      hours: 0
-      minutes: 0
-      seconds: 12
+      seconds: "{{ states('input_number.vmc_master_attesa_pdr_ripristino_inquinanti') | int(12) }}"
     trigger: template
   - alias: >-
       Condizioni Favorevoli Ripristinate su Velocità 2 se Spia Congelamento Off
@@ -1431,9 +1386,7 @@ triggers:
       != 'Non disponibile' ) and (states('input_number.vmc_master_fase_riallineamento_al_riavvio') | float(0) == 0 or states('input_number.vmc_master_fase_riallineamento_al_riavvio') | float(0) >= 4) }}
     id: Rip. Vel. 2 No PdR se Spia Inquinanti ON
     for:
-      hours: 0
-      minutes: 0
-      seconds: 12
+      seconds: "{{ states('input_number.vmc_master_attesa_pdr_ripristino_inquinanti') | int(12) }}"
     trigger: template
   - alias: >-
       Condizioni Favorevoli Ripristinate su Velocità 3 se Spia Congelamento Off
@@ -1474,9 +1427,7 @@ triggers:
       != 'Non disponibile' ) and (states('input_number.vmc_master_fase_riallineamento_al_riavvio') | float(0) == 0 or states('input_number.vmc_master_fase_riallineamento_al_riavvio') | float(0) >= 4) }}
     id: Rip. Vel. 3 No PdR  se Spia Inquinanti ON
     for:
-      hours: 0
-      minutes: 0
-      seconds: 12
+      seconds: "{{ states('input_number.vmc_master_attesa_pdr_ripristino_inquinanti') | int(12) }}"
     trigger: template
   - alias: >-
       Condizioni Favorevoli Ripristinate su Velocità 4 se Spia Congelamento Off
@@ -1517,9 +1468,7 @@ triggers:
       != 'Non disponibile' ) and (states('input_number.vmc_master_fase_riallineamento_al_riavvio') | float(0) == 0 or states('input_number.vmc_master_fase_riallineamento_al_riavvio') | float(0) >= 4) }}
     id: Rip. Vel. 4 No PdR se Spia Inquinanti ON
     for:
-      hours: 0
-      minutes: 0
-      seconds: 12
+      seconds: "{{ states('input_number.vmc_master_attesa_pdr_ripristino_inquinanti') | int(12) }}"
     trigger: template
   - alias: >-
       Condizioni Favorevoli Ripristinate su Velocità Notturna se Spia
@@ -1560,9 +1509,7 @@ triggers:
       != 'Non disponibile' ) and (states('input_number.vmc_master_fase_riallineamento_al_riavvio') | float(0) == 0 or states('input_number.vmc_master_fase_riallineamento_al_riavvio') | float(0) >= 4) }}
     id: Rip. Notturno No PdR se Spia Inquinanti ON
     for:
-      hours: 0
-      minutes: 0
-      seconds: 12
+      seconds: "{{ states('input_number.vmc_master_attesa_pdr_ripristino_inquinanti') | int(12) }}"
     trigger: template
   - alias: >-
       Condizioni Favorevoli Ripristinate su Velocità Iperventilazione se Spia
@@ -1603,9 +1550,7 @@ triggers:
       != 'Non disponibile' ) and (states('input_number.vmc_master_fase_riallineamento_al_riavvio') | float(0) == 0 or states('input_number.vmc_master_fase_riallineamento_al_riavvio') | float(0) >= 4) }}
     id: Rip. Iperventilazione No PdR se Spia Inquinanti ON
     for:
-      hours: 0
-      minutes: 0
-      seconds: 12
+      seconds: "{{ states('input_number.vmc_master_attesa_pdr_ripristino_inquinanti') | int(12) }}"
     trigger: template
   - alias: >-
       Condizioni Favorevoli Ripristinate su Velocità Free Cool./Heat. se Spia
@@ -1634,9 +1579,7 @@ triggers:
             states('sensor.vmc_master_status_ventola_lettura_codice_interpretato_interfaccia')!='Non disponibile' ) and (states('input_number.vmc_master_fase_riallineamento_al_riavvio') | float(0) == 0 or states('input_number.vmc_master_fase_riallineamento_al_riavvio') | float(0) >= 4) }}
     id: Rip. Free Cool./Heat. No PdR se Spia Inquinanti ON
     for:
-      hours: 0
-      minutes: 0
-      seconds: 12
+      seconds: "{{ states('input_number.vmc_master_attesa_pdr_ripristino_inquinanti') | int(12) }}"
     trigger: template
   - alias: >-
       Condizioni Sfavorevoli Temp. Ext Vs Temp. Int. a Velocità Free Heating ->
@@ -1666,9 +1609,7 @@ triggers:
       }}
     id: TeVsTi Free-Heating -> Imposta Velocità 0
     for:
-      hours: 0
-      minutes: 0
-      seconds: 24
+      seconds: "{{ states('input_number.vmc_master_attesa_free_sospensione') | int(24) }}"
     trigger: template
   - alias: >-
       Condizioni Sfavorevoli Temp. Ext Vs Temp. Int. a Velocità Free Cooling ->
@@ -1698,9 +1639,7 @@ triggers:
       }}
     id: TeVsTi Free-Cooling -> Imposta Velocità 0
     for:
-      hours: 0
-      minutes: 0
-      seconds: 24
+      seconds: "{{ states('input_number.vmc_master_attesa_free_sospensione') | int(24) }}"
     trigger: template
   - alias: >-
       Condizioni Sfavorevoli Temp. Ext Vs Temp. Int. a Velocità Free Heating se
@@ -1729,9 +1668,7 @@ triggers:
       }}
     id: TeVsTi Free-Heating e Spia Inquinanti ON
     for:
-      hours: 0
-      minutes: 0
-      seconds: 20
+      seconds: "{{ states('input_number.vmc_master_attesa_free_sospensione_inquinanti') | int(20) }}"
     trigger: template
   - alias: >-
       Condizioni Sfavorevoli Temp. Ext Vs Temp. Int. a Velocità Free Cooling se
@@ -1760,9 +1697,7 @@ triggers:
       }}
     id: TeVsTi Free-Cooling e Spia Inquinanti ON
     for:
-      hours: 0
-      minutes: 0
-      seconds: 20
+      seconds: "{{ states('input_number.vmc_master_attesa_free_sospensione_inquinanti') | int(20) }}"
     enabled: true
     trigger: template
   - alias: >-
@@ -1793,9 +1728,7 @@ triggers:
       ) ) and (states('input_number.vmc_master_fase_riallineamento_al_riavvio') | float(0) == 0 or states('input_number.vmc_master_fase_riallineamento_al_riavvio') | float(0) >= 4) }}
     id: 'Rip. Free Heating No TeVsTi '
     for:
-      hours: 0
-      minutes: 0
-      seconds: 24
+      seconds: "{{ states('input_number.vmc_master_attesa_free_ripristino') | int(24) }}"
     trigger: template
   - alias: >-
       Condizioni Favorevoli Temp. Ext Vs Temp. Int. Ripristinate su Velocità
@@ -1825,9 +1758,7 @@ triggers:
       ) ) and (states('input_number.vmc_master_fase_riallineamento_al_riavvio') | float(0) == 0 or states('input_number.vmc_master_fase_riallineamento_al_riavvio') | float(0) >= 4) }}
     id: 'Rip. Free Cooling No TeVsTi '
     for:
-      hours: 0
-      minutes: 0
-      seconds: 24
+      seconds: "{{ states('input_number.vmc_master_attesa_free_ripristino') | int(24) }}"
     trigger: template
   - alias: >-
       Condizioni Favorevoli Temp. Ext Vs Temp. Int. Ripristinate su Velocità
@@ -1857,9 +1788,7 @@ triggers:
       ) ) and (states('input_number.vmc_master_fase_riallineamento_al_riavvio') | float(0) == 0 or states('input_number.vmc_master_fase_riallineamento_al_riavvio') | float(0) >= 4) }}
     id: Rip. Free Heating No TeVsTi e Spia Inquinanti ON
     for:
-      hours: 0
-      minutes: 0
-      seconds: 20
+      seconds: "{{ states('input_number.vmc_master_attesa_free_ripristino_inquinanti') | int(20) }}"
     trigger: template
   - alias: >-
       Condizioni Favorevoli Temp. Ext Vs Temp. Int. Ripristinate su Velocità
@@ -1889,9 +1818,7 @@ triggers:
       ) ) and (states('input_number.vmc_master_fase_riallineamento_al_riavvio') | float(0) == 0 or states('input_number.vmc_master_fase_riallineamento_al_riavvio') | float(0) >= 4) }}
     id: Rip. Free Cooling No TeVsTi e Spia Inquinanti ON
     for:
-      hours: 0
-      minutes: 0
-      seconds: 20
+      seconds: "{{ states('input_number.vmc_master_attesa_free_ripristino_inquinanti') | int(20) }}"
     trigger: template
   - alias: >-
       Disattivazione: VMC ON/OFF, in Funzione Inquinanti CO2 e/o VOC,
@@ -2215,9 +2142,7 @@ triggers:
     id: Black-Out a Velocità 0
     trigger: template
     for:
-      hours: 0
-      minutes: 0
-      seconds: 32
+      seconds: "{{ states('input_number.vmc_master_attesa_blackout_rilevazione') | int(32) }}"
   - alias: >-
       Black-Out Velocità 1 [ON] - [RILEVAZIONE DISATTIVATA SE SPIA GIORNO
       CALENDARIO E' ON] e [SPIE INQUINANTI OFF] e [SPIE FREECOOLING e FREEHEAING
@@ -2263,9 +2188,7 @@ triggers:
     id: Black-Out a Velocità 1
     trigger: template
     for:
-      hours: 0
-      minutes: 0
-      seconds: 32
+      seconds: "{{ states('input_number.vmc_master_attesa_blackout_rilevazione') | int(32) }}"
   - alias: >-
       Black-Out Velocità 1 [ON] - [RILEVAZIONE DISATTIVATA SE SPIA GIORNO
       CALENDARIO E' ON] e [SPIE INQUINANTI ON] e [SPIE FREECOOLING OFF e
@@ -2307,9 +2230,7 @@ triggers:
       FREEHEAING OFF]
     trigger: template
     for:
-      hours: 0
-      minutes: 0
-      seconds: 32
+      seconds: "{{ states('input_number.vmc_master_attesa_blackout_rilevazione') | int(32) }}"
   - alias: >-
       Black-Out Velocità 1 [ON] - [RILEVAZIONE DISATTIVATA SE SPIA GIORNO
       CALENDARIO E' ON] e [SPIE INQUINANTI ON] e [SPIE FREECOOLING ON o
@@ -2355,9 +2276,7 @@ triggers:
       FREEHEAING ON]
     trigger: template
     for:
-      hours: 0
-      minutes: 0
-      seconds: 32
+      seconds: "{{ states('input_number.vmc_master_attesa_blackout_rilevazione') | int(32) }}"
   - alias: >-
       Black-Out Velocità 2 [ON] - [RILEVAZIONE DISATTIVATA SE SPIA GIORNO
       CALENDARIO E' ON]
@@ -2392,9 +2311,7 @@ triggers:
     id: Black-Out a Velocità 2
     trigger: template
     for:
-      hours: 0
-      minutes: 0
-      seconds: 32
+      seconds: "{{ states('input_number.vmc_master_attesa_blackout_rilevazione') | int(32) }}"
   - alias: >-
       Black-Out Velocità 3 [ON] - [RILEVAZIONE DISATTIVATA SE SPIA GIORNO
       CALENDARIO E' ON]
@@ -2429,9 +2346,7 @@ triggers:
     id: Black-Out a Velocità 3
     trigger: template
     for:
-      hours: 0
-      minutes: 0
-      seconds: 32
+      seconds: "{{ states('input_number.vmc_master_attesa_blackout_rilevazione') | int(32) }}"
   - alias: >-
       Black-Out Velocità 4 [ON] - [RILEVAZIONE DISATTIVATA SE SPIA GIORNO
       CALENDARIO E' ON]
@@ -2466,9 +2381,7 @@ triggers:
     id: Black-Out a Velocità 4
     trigger: template
     for:
-      hours: 0
-      minutes: 0
-      seconds: 32
+      seconds: "{{ states('input_number.vmc_master_attesa_blackout_rilevazione') | int(32) }}"
   - alias: >-
       Black-Out Velocità Notturna [ON] - [RILEVAZIONE DISATTIVATA SE SPIA GIORNO
       CALENDARIO E' ON]
@@ -2503,9 +2416,7 @@ triggers:
     id: Black-Out Notturna
     trigger: template
     for:
-      hours: 0
-      minutes: 0
-      seconds: 32
+      seconds: "{{ states('input_number.vmc_master_attesa_blackout_rilevazione') | int(32) }}"
   - alias: >-
       Black-Out Velocità Iperventilazione [ON] - [RILEVAZIONE DISATTIVATA SE
       SPIA GIORNO CALENDARIO E' ON]
@@ -2540,9 +2451,7 @@ triggers:
     id: Black-Out Iperventilazione
     trigger: template
     for:
-      hours: 0
-      minutes: 0
-      seconds: 32
+      seconds: "{{ states('input_number.vmc_master_attesa_blackout_rilevazione') | int(32) }}"
   - alias: >-
       Black-Out Velocità Free Cool./Heat. [ON] - [RILEVAZIONE DISATTIVATA SE
       SPIA GIORNO CALENDARIO E' ON]
@@ -2577,9 +2486,7 @@ triggers:
     id: Black-Out Free Cool./Heat.
     trigger: template
     for:
-      hours: 0
-      minutes: 0
-      seconds: 32
+      seconds: "{{ states('input_number.vmc_master_attesa_blackout_rilevazione') | int(32) }}"
   - alias: Black-Out Velocità 1 [OFF, Ripristino]
     value_template: |
       {{ (
@@ -2609,9 +2516,7 @@ triggers:
     id: Black-Out Off Vel. 1
     trigger: template
     for:
-      hours: 0
-      minutes: 0
-      seconds: 32
+      seconds: "{{ states('input_number.vmc_master_attesa_blackout_ripristino') | int(32) }}"
   - alias: Black-Out Velocità 2 [OFF, Ripristino]
     value_template: |
       {{ (
@@ -2641,9 +2546,7 @@ triggers:
     id: Black-Out Off Vel. 2
     trigger: template
     for:
-      hours: 0
-      minutes: 0
-      seconds: 32
+      seconds: "{{ states('input_number.vmc_master_attesa_blackout_ripristino') | int(32) }}"
   - alias: Black-Out Velocità 3 [OFF, Ripristino]
     value_template: |
       {{ (
@@ -2673,9 +2576,7 @@ triggers:
     id: Black-Out Off Vel. 3
     trigger: template
     for:
-      hours: 0
-      minutes: 0
-      seconds: 32
+      seconds: "{{ states('input_number.vmc_master_attesa_blackout_ripristino') | int(32) }}"
   - alias: Black-Out Velocità 4 [OFF, Ripristino]
     value_template: |
       {{ (
@@ -2709,9 +2610,7 @@ triggers:
     id: Black-Out Off Vel. 4
     trigger: template
     for:
-      hours: 0
-      minutes: 0
-      seconds: 32
+      seconds: "{{ states('input_number.vmc_master_attesa_blackout_ripristino') | int(32) }}"
   - alias: Black-Out Velocità Notturna [OFF, Ripristino]
     value_template: |
       {{ (
@@ -2745,9 +2644,7 @@ triggers:
     id: Black-Out Off Notturna
     trigger: template
     for:
-      hours: 0
-      minutes: 0
-      seconds: 32
+      seconds: "{{ states('input_number.vmc_master_attesa_blackout_ripristino') | int(32) }}"
   - alias: Black-Out Velocità Iperventilazione [OFF, Ripristino]
     value_template: |
       {{ (
@@ -2781,9 +2678,7 @@ triggers:
     id: Black-Out Off Iperventilazione
     trigger: template
     for:
-      hours: 0
-      minutes: 0
-      seconds: 32
+      seconds: "{{ states('input_number.vmc_master_attesa_blackout_ripristino') | int(32) }}"
   - alias: Black-Out Velocità Free Cool./Heat. [OFF, Ripristino]
     value_template: |
       {{ (
@@ -2817,9 +2712,7 @@ triggers:
     id: Black-Out Off Free Cool./Heat.
     trigger: template
     for:
-      hours: 0
-      minutes: 0
-      seconds: 32
+      seconds: "{{ states('input_number.vmc_master_attesa_blackout_ripristino') | int(32) }}"
   - alias: Black-Out Velocità 0 [OFF, Ripristino]
     value_template: |
       {{ (
@@ -2853,9 +2746,7 @@ triggers:
     id: Black-Out Off Vel. 0
     trigger: template
     for:
-      hours: 0
-      minutes: 0
-      seconds: 32
+      seconds: "{{ states('input_number.vmc_master_attesa_blackout_ripristino') | int(32) }}"
   - alias: >-
       All'Interno della 1° Fascia Lunedì se Spia Congelamento Off e Spia Delta
       Temp Off
@@ -2879,9 +2770,7 @@ triggers:
       states('input_boolean.vmc_master_spia_calendario_lunedi_1')=='off' }}
     id: 1° Lunedì On
     for:
-      hours: 0
-      minutes: 0
-      seconds: 3
+      seconds: "{{ states('input_number.vmc_master_attesa_calendario_inizio') | int(3) }}"
     trigger: template
   - alias: >-
       All'Esterno della 1° Fascia Lunedì se Spia Congelamento Off e Spia Delta
@@ -2907,9 +2796,7 @@ triggers:
       disponibile' ) and (states('input_number.vmc_master_fase_riallineamento_al_riavvio') | float(0) == 0 or states('input_number.vmc_master_fase_riallineamento_al_riavvio') | float(0) >= 4) }}
     id: 1° Lunedì Off
     for:
-      hours: 0
-      minutes: 0
-      seconds: 3
+      seconds: "{{ states('input_number.vmc_master_attesa_calendario_fine') | int(3) }}"
     trigger: template
   - alias: >-
       All'Interno della 2° Fascia Lunedì se Spia Congelamento Off e Spia Delta
@@ -2934,9 +2821,7 @@ triggers:
       states('input_boolean.vmc_master_spia_calendario_lunedi_2')=='off' }}
     id: 2° Lunedì On
     for:
-      hours: 0
-      minutes: 0
-      seconds: 3
+      seconds: "{{ states('input_number.vmc_master_attesa_calendario_inizio') | int(3) }}"
     trigger: template
   - alias: >-
       All'Esterno della 2° Fascia Lunedì se Spia Congelamento Off e Spia Delta
@@ -2962,9 +2847,7 @@ triggers:
       disponibile' ) and (states('input_number.vmc_master_fase_riallineamento_al_riavvio') | float(0) == 0 or states('input_number.vmc_master_fase_riallineamento_al_riavvio') | float(0) >= 4) }}
     id: 2° Lunedì Off
     for:
-      hours: 0
-      minutes: 0
-      seconds: 3
+      seconds: "{{ states('input_number.vmc_master_attesa_calendario_fine') | int(3) }}"
     trigger: template
   - alias: >-
       All'Interno della 1° Fascia Martedì se Spia Congelamento Off e Spia Delta
@@ -2989,9 +2872,7 @@ triggers:
       states('input_boolean.vmc_master_spia_calendario_martedi_1')=='off' }}
     id: 1° Martedì On
     for:
-      hours: 0
-      minutes: 0
-      seconds: 3
+      seconds: "{{ states('input_number.vmc_master_attesa_calendario_inizio') | int(3) }}"
     trigger: template
   - alias: >-
       All'Esterno della 1° Fascia Martedì se Spia Congelamento Off e Spia Delta
@@ -3017,9 +2898,7 @@ triggers:
       disponibile' ) and (states('input_number.vmc_master_fase_riallineamento_al_riavvio') | float(0) == 0 or states('input_number.vmc_master_fase_riallineamento_al_riavvio') | float(0) >= 4) }}
     id: 1° Martedì Off
     for:
-      hours: 0
-      minutes: 0
-      seconds: 3
+      seconds: "{{ states('input_number.vmc_master_attesa_calendario_fine') | int(3) }}"
     trigger: template
   - alias: >-
       All'Interno della 2° Fascia Martedì se Spia Congelamento Off e Spia Delta
@@ -3044,9 +2923,7 @@ triggers:
       states('input_boolean.vmc_master_spia_calendario_martedi_2')=='off' }}
     id: 2° Martedì On
     for:
-      hours: 0
-      minutes: 0
-      seconds: 3
+      seconds: "{{ states('input_number.vmc_master_attesa_calendario_inizio') | int(3) }}"
     trigger: template
   - alias: >-
       All'Esterno della 2° Fascia Martedì se Spia Congelamento Off e Spia Delta
@@ -3072,9 +2949,7 @@ triggers:
       disponibile' ) and (states('input_number.vmc_master_fase_riallineamento_al_riavvio') | float(0) == 0 or states('input_number.vmc_master_fase_riallineamento_al_riavvio') | float(0) >= 4) }}
     id: 2° Martedì Off
     for:
-      hours: 0
-      minutes: 0
-      seconds: 3
+      seconds: "{{ states('input_number.vmc_master_attesa_calendario_fine') | int(3) }}"
     trigger: template
   - alias: >-
       All'Interno della 1° Fascia Mercoledì se Spia Congelamento Off e Spia
@@ -3099,9 +2974,7 @@ triggers:
       states('input_boolean.vmc_master_spia_calendario_mercoledi_1')=='off' }}
     id: 1° Mercoledì On
     for:
-      hours: 0
-      minutes: 0
-      seconds: 3
+      seconds: "{{ states('input_number.vmc_master_attesa_calendario_inizio') | int(3) }}"
     trigger: template
   - alias: >-
       All'Esterno della 1° Fascia Mercoledì se Spia Congelamento Off e Spia
@@ -3127,9 +3000,7 @@ triggers:
       disponibile' ) and (states('input_number.vmc_master_fase_riallineamento_al_riavvio') | float(0) == 0 or states('input_number.vmc_master_fase_riallineamento_al_riavvio') | float(0) >= 4) }}
     id: 1° Mercoledì Off
     for:
-      hours: 0
-      minutes: 0
-      seconds: 3
+      seconds: "{{ states('input_number.vmc_master_attesa_calendario_fine') | int(3) }}"
     trigger: template
   - alias: >-
       All'Interno della 2° Fascia Mercoledì se Spia Congelamento Off e Spia
@@ -3154,9 +3025,7 @@ triggers:
       states('input_boolean.vmc_master_spia_calendario_mercoledi_2')=='off' }}
     id: 2° Mercoledì On
     for:
-      hours: 0
-      minutes: 0
-      seconds: 3
+      seconds: "{{ states('input_number.vmc_master_attesa_calendario_inizio') | int(3) }}"
     trigger: template
   - alias: >-
       All'Esterno della 2° Fascia Mercoledì se Spia Congelamento Off e Spia
@@ -3182,9 +3051,7 @@ triggers:
       disponibile' ) and (states('input_number.vmc_master_fase_riallineamento_al_riavvio') | float(0) == 0 or states('input_number.vmc_master_fase_riallineamento_al_riavvio') | float(0) >= 4) }}
     id: 2° Mercoledì Off
     for:
-      hours: 0
-      minutes: 0
-      seconds: 3
+      seconds: "{{ states('input_number.vmc_master_attesa_calendario_fine') | int(3) }}"
     trigger: template
   - alias: >-
       All'Interno della 1° Fascia Giovedì se Spia Congelamento Off e Spia Delta
@@ -3209,9 +3076,7 @@ triggers:
       states('input_boolean.vmc_master_spia_calendario_giovedi_1')=='off' }}
     id: 1° Giovedì On
     for:
-      hours: 0
-      minutes: 0
-      seconds: 3
+      seconds: "{{ states('input_number.vmc_master_attesa_calendario_inizio') | int(3) }}"
     trigger: template
   - alias: >-
       All'Esterno della 1° Fascia Giovedì se Spia Congelamento Off e Spia Delta
@@ -3237,9 +3102,7 @@ triggers:
       disponibile' ) and (states('input_number.vmc_master_fase_riallineamento_al_riavvio') | float(0) == 0 or states('input_number.vmc_master_fase_riallineamento_al_riavvio') | float(0) >= 4) }}
     id: 1° Giovedì Off
     for:
-      hours: 0
-      minutes: 0
-      seconds: 3
+      seconds: "{{ states('input_number.vmc_master_attesa_calendario_fine') | int(3) }}"
     trigger: template
   - alias: >-
       All'Interno della 2° Fascia Giovedì se Spia Congelamento Off e Spia Delta
@@ -3264,9 +3127,7 @@ triggers:
       states('input_boolean.vmc_master_spia_calendario_giovedi_2')=='off' }}
     id: 2° Giovedì On
     for:
-      hours: 0
-      minutes: 0
-      seconds: 3
+      seconds: "{{ states('input_number.vmc_master_attesa_calendario_inizio') | int(3) }}"
     trigger: template
   - alias: >-
       All'Esterno della 2° Fascia Giovedì se Spia Congelamento Off e Spia Delta
@@ -3292,9 +3153,7 @@ triggers:
       disponibile' ) and (states('input_number.vmc_master_fase_riallineamento_al_riavvio') | float(0) == 0 or states('input_number.vmc_master_fase_riallineamento_al_riavvio') | float(0) >= 4) }}
     id: 2° Giovedì Off
     for:
-      hours: 0
-      minutes: 0
-      seconds: 3
+      seconds: "{{ states('input_number.vmc_master_attesa_calendario_fine') | int(3) }}"
     trigger: template
   - alias: >-
       All'Interno della 1° Fascia Venerdì se Spia Congelamento Off e Spia Delta
@@ -3319,9 +3178,7 @@ triggers:
       states('input_boolean.vmc_master_spia_calendario_venerdi_1')=='off' }}
     id: 1° Venerdì On
     for:
-      hours: 0
-      minutes: 0
-      seconds: 3
+      seconds: "{{ states('input_number.vmc_master_attesa_calendario_inizio') | int(3) }}"
     trigger: template
   - alias: >-
       All'Esterno della 1° Fascia Venerdì se Spia Congelamento Off e Spia Delta
@@ -3347,9 +3204,7 @@ triggers:
       disponibile' ) and (states('input_number.vmc_master_fase_riallineamento_al_riavvio') | float(0) == 0 or states('input_number.vmc_master_fase_riallineamento_al_riavvio') | float(0) >= 4) }}
     id: 1° Venerdì Off
     for:
-      hours: 0
-      minutes: 0
-      seconds: 3
+      seconds: "{{ states('input_number.vmc_master_attesa_calendario_fine') | int(3) }}"
     trigger: template
   - alias: >-
       All'Interno della 2° Fascia Venerdì se Spia Congelamento Off e Spia Delta
@@ -3374,9 +3229,7 @@ triggers:
       states('input_boolean.vmc_master_spia_calendario_venerdi_2')=='off' }}
     id: 2° Venerdì On
     for:
-      hours: 0
-      minutes: 0
-      seconds: 3
+      seconds: "{{ states('input_number.vmc_master_attesa_calendario_inizio') | int(3) }}"
     trigger: template
   - alias: >-
       All'Esterno della 2° Fascia Venerdì se Spia Congelamento Off e Spia Delta
@@ -3402,9 +3255,7 @@ triggers:
       disponibile' ) and (states('input_number.vmc_master_fase_riallineamento_al_riavvio') | float(0) == 0 or states('input_number.vmc_master_fase_riallineamento_al_riavvio') | float(0) >= 4) }}
     id: 2° Venerdì Off
     for:
-      hours: 0
-      minutes: 0
-      seconds: 3
+      seconds: "{{ states('input_number.vmc_master_attesa_calendario_fine') | int(3) }}"
     trigger: template
   - alias: >-
       All'Interno della 1° Fascia Sabato se Spia Congelamento Off e Spia Delta
@@ -3429,9 +3280,7 @@ triggers:
       states('input_boolean.vmc_master_spia_calendario_sabato_1')=='off' }}
     id: 1° Sabato On
     for:
-      hours: 0
-      minutes: 0
-      seconds: 3
+      seconds: "{{ states('input_number.vmc_master_attesa_calendario_inizio') | int(3) }}"
     trigger: template
   - alias: >-
       All'Esterno della 1° Fascia Sabato se Spia Congelamento Off e Spia Delta
@@ -3457,9 +3306,7 @@ triggers:
       disponibile' ) and (states('input_number.vmc_master_fase_riallineamento_al_riavvio') | float(0) == 0 or states('input_number.vmc_master_fase_riallineamento_al_riavvio') | float(0) >= 4) }}
     id: 1° Sabato Off
     for:
-      hours: 0
-      minutes: 0
-      seconds: 3
+      seconds: "{{ states('input_number.vmc_master_attesa_calendario_fine') | int(3) }}"
     trigger: template
   - alias: >-
       All'Interno della 2° Fascia Sabato se Spia Congelamento Off e Spia Delta
@@ -3484,9 +3331,7 @@ triggers:
       states('input_boolean.vmc_master_spia_calendario_sabato_2')=='off' }}
     id: 2° Sabato On
     for:
-      hours: 0
-      minutes: 0
-      seconds: 3
+      seconds: "{{ states('input_number.vmc_master_attesa_calendario_inizio') | int(3) }}"
     trigger: template
   - alias: >-
       All'Esterno della 2° Fascia Sabato se Spia Congelamento Off e Spia Delta
@@ -3512,9 +3357,7 @@ triggers:
       disponibile' ) and (states('input_number.vmc_master_fase_riallineamento_al_riavvio') | float(0) == 0 or states('input_number.vmc_master_fase_riallineamento_al_riavvio') | float(0) >= 4) }}
     id: 2° Sabato Off
     for:
-      hours: 0
-      minutes: 0
-      seconds: 3
+      seconds: "{{ states('input_number.vmc_master_attesa_calendario_fine') | int(3) }}"
     trigger: template
   - alias: >-
       All'Interno della 1° Fascia Domenica se Spia Congelamento Off e Spia Delta
@@ -3539,9 +3382,7 @@ triggers:
       states('input_boolean.vmc_master_spia_calendario_domenica_1')=='off' }}
     id: 1° Domenica On
     for:
-      hours: 0
-      minutes: 0
-      seconds: 3
+      seconds: "{{ states('input_number.vmc_master_attesa_calendario_inizio') | int(3) }}"
     trigger: template
   - alias: >-
       All'Esterno della 1° Fascia Domenica se Spia Congelamento Off e Spia Delta
@@ -3567,9 +3408,7 @@ triggers:
       disponibile' ) and (states('input_number.vmc_master_fase_riallineamento_al_riavvio') | float(0) == 0 or states('input_number.vmc_master_fase_riallineamento_al_riavvio') | float(0) >= 4) }}
     id: 1° Domenica Off
     for:
-      hours: 0
-      minutes: 0
-      seconds: 3
+      seconds: "{{ states('input_number.vmc_master_attesa_calendario_fine') | int(3) }}"
     trigger: template
   - alias: >-
       All'Interno della 2° Fascia Domenica se Spia Congelamento Off e Spia Delta
@@ -3594,9 +3433,7 @@ triggers:
       states('input_boolean.vmc_master_spia_calendario_domenica_2')=='off' }}
     id: 2° Domenica On
     for:
-      hours: 0
-      minutes: 0
-      seconds: 3
+      seconds: "{{ states('input_number.vmc_master_attesa_calendario_inizio') | int(3) }}"
     trigger: template
   - alias: >-
       All'Esterno della 2° Fascia Domenica se Spia Congelamento Off e Spia Delta
@@ -3622,9 +3459,7 @@ triggers:
       disponibile' ) and (states('input_number.vmc_master_fase_riallineamento_al_riavvio') | float(0) == 0 or states('input_number.vmc_master_fase_riallineamento_al_riavvio') | float(0) >= 4) }}
     id: 2° Domenica Off
     for:
-      hours: 0
-      minutes: 0
-      seconds: 3
+      seconds: "{{ states('input_number.vmc_master_attesa_calendario_fine') | int(3) }}"
     trigger: template
   - alias: Rinomina VMC
     value_template: |
@@ -3669,9 +3504,7 @@ triggers:
       }}
     id: Spia Avvisi On
     for:
-      hours: 0
-      minutes: 0
-      seconds: 5
+      seconds: "{{ states('input_number.vmc_master_attesa_avvisi') | int(5) }}"
     trigger: template
   - alias: Spia Avvisi Off
     value_template: |
@@ -3692,9 +3525,7 @@ triggers:
       }}
     id: Spia Avvisi Off
     for:
-      hours: 0
-      minutes: 0
-      seconds: 5
+      seconds: "{{ states('input_number.vmc_master_attesa_avvisi') | int(5) }}"
     trigger: template
   - alias: Verifica Aggiornamenti Repository VMC-HELTY-FLOW - ON
     value_template: |
@@ -3721,9 +3552,7 @@ triggers:
       }}
     id: Repository Update ON
     for:
-      hours: 0
-      minutes: 0
-      seconds: 5
+      seconds: "{{ states('input_number.vmc_master_attesa_avvisi') | int(5) }}"
     trigger: template
   - alias: Verifica Aggiornamenti Repository VMC-HELTY-FLOW - OFF
     value_template: |
@@ -3778,9 +3607,7 @@ triggers:
       }}
     id: inquinanti_co2_voc_on
     for:
-      hours: 0
-      minutes: 0
-      seconds: 8
+      seconds: "{{ states('input_number.vmc_master_attesa_inquinanti_avvio') | int(8) }}"
     trigger: template
   - alias: >-
       Inquinanti CO2 e/o VOC Rilevati con Spia PdR Velocità 0 (VMC ferma) -> Spia PdR
@@ -3808,9 +3635,7 @@ triggers:
       }}
     id: Inquinanti con Spia PdR Velocità 0 -> Spia PdR Velocità 0 OFF
     for:
-      hours: 0
-      minutes: 0
-      seconds: 4
+      seconds: "{{ states('input_number.vmc_master_attesa_inquinanti_avvio_spia_pdr') | int(4) }}"
     trigger: template
   - alias: Disattivazione Automatica VMC per Inquinanti CO2 e/o VOC Rilevati
     value_template: |
@@ -3847,9 +3672,7 @@ triggers:
       ) ) and (states('input_number.vmc_master_fase_riallineamento_al_riavvio') | float(0) == 0 or states('input_number.vmc_master_fase_riallineamento_al_riavvio') | float(0) >= 3) }}
     id: inquinanti_co2_voc_off
     for:
-      hours: 0
-      minutes: 0
-      seconds: 8
+      seconds: "{{ states('input_number.vmc_master_attesa_inquinanti_fine') | int(8) }}"
     trigger: template
   - alias: >-
       Spia Velocità 0 CO₂ e/o VOC se Spia Congelamento Off e Spia Delta Temp
@@ -3878,9 +3701,7 @@ triggers:
     enabled: true
     trigger: template
     for:
-      hours: 0
-      minutes: 0
-      seconds: 8
+      seconds: "{{ states('input_number.vmc_master_attesa_inquinanti_memoria') | int(8) }}"
   - alias: >-
       Spia Velocità 1 CO₂ e/o VOC se Spia Congelamento Off e Spia Delta Temp
       Off 
@@ -3907,9 +3728,7 @@ triggers:
     id: spia_velocita_1_inquinanti_co2_voc
     trigger: template
     for:
-      hours: 0
-      minutes: 0
-      seconds: 8
+      seconds: "{{ states('input_number.vmc_master_attesa_inquinanti_memoria') | int(8) }}"
   - alias: >-
       Spia Velocità 2 CO₂ e/o VOC se Spia Congelamento Off e Spia Delta Temp
       Off 
@@ -3936,9 +3755,7 @@ triggers:
     id: spia_velocita_2_inquinanti_co2_voc
     trigger: template
     for:
-      hours: 0
-      minutes: 0
-      seconds: 8
+      seconds: "{{ states('input_number.vmc_master_attesa_inquinanti_memoria') | int(8) }}"
   - alias: >-
       Spia Velocità 3 CO₂ e/o VOC se Spia Congelamento Off e Spia Delta Temp
       Off 
@@ -3964,9 +3781,7 @@ triggers:
       }}
     id: spia_velocita_3_inquinanti_co2_voc
     for:
-      hours: 0
-      minutes: 0
-      seconds: 8
+      seconds: "{{ states('input_number.vmc_master_attesa_inquinanti_memoria') | int(8) }}"
     trigger: template
   - alias: >-
       Spia Velocità 4 CO₂ e/o VOC se Spia Congelamento Off e Spia Delta Temp
@@ -3994,9 +3809,7 @@ triggers:
     id: spia_velocita_4_inquinanti_co2_voc
     trigger: template
     for:
-      hours: 0
-      minutes: 0
-      seconds: 8
+      seconds: "{{ states('input_number.vmc_master_attesa_inquinanti_memoria') | int(8) }}"
   - alias: >-
       Spia Velocità Notturna CO₂ e/o VOC se Spia Congelamento Off e Spia Delta
       Temp Off 
@@ -4023,9 +3836,7 @@ triggers:
     id: spia_velocita_notturna_inquinanti_co2_voc
     trigger: template
     for:
-      hours: 0
-      minutes: 0
-      seconds: 8
+      seconds: "{{ states('input_number.vmc_master_attesa_inquinanti_memoria') | int(8) }}"
   - alias: >-
       Spia Velocità Iperventilazione CO₂ e/o VOC se Spia Congelamento Off e Spia
       Delta Temp Off 
@@ -4052,9 +3863,7 @@ triggers:
     id: spia_velocita_iperventilazione_inquinanti_co2_voc
     trigger: template
     for:
-      hours: 0
-      minutes: 0
-      seconds: 8
+      seconds: "{{ states('input_number.vmc_master_attesa_inquinanti_memoria') | int(8) }}"
   - alias: >-
       Spia Velocità Free Heating/Cooling CO₂ e/o VOC se Spia Congelamento Off e
       Spia Delta Temp Off 
@@ -4081,9 +3890,7 @@ triggers:
     id: spia_velocita_freecooling_inquinanti_co2_voc
     trigger: template
     for:
-      hours: 0
-      minutes: 0
-      seconds: 8
+      seconds: "{{ states('input_number.vmc_master_attesa_inquinanti_memoria') | int(8) }}"
   - alias: Congelamento ON
     value_template: >
       {{
@@ -4432,9 +4239,7 @@ triggers:
     enabled: true
     trigger: template
     for:
-      hours: 0
-      minutes: 0
-      seconds: 20
+      seconds: "{{ states('input_number.vmc_master_attesa_free_annullamento') | int(20) }}"
   - alias: >-
       Condizioni Sfavorevoli a Velocità 0 con Spia FreeCooling PdR ON e Spia
       Inquinamento Velocita' 1 ON se Spia Congelamento Off e Spia Delta Temp Off
@@ -4467,9 +4272,7 @@ triggers:
               states('input_boolean.vmc_master_spia_velocita_iperventilazione') == 'off'
       ) }}
     for:
-      hours: 0
-      minutes: 0
-      seconds: 12
+      seconds: "{{ states('input_number.vmc_master_attesa_pdr_cambio_inquinanti') | int(12) }}"
     id: >-
       PdR Vel. 0 con Spia FreeCooling On e Inquinanti Vel. 1 ON  -> Imposta
       Velocità 1
@@ -4510,9 +4313,7 @@ triggers:
       ) }}
     id: PdR Spia Free Heating OFF e Spia FreeCooling ON -> Imposta Velocità 0
     for:
-      hours: 0
-      minutes: 0
-      seconds: 16
+      seconds: "{{ states('input_number.vmc_master_attesa_pdr_cambio') | int(16) }}"
     trigger: template
   - alias: >-
       Condizioni Sfavorevoli con Spia Free Heating OFF e Spia FreeCooling ON ->
@@ -4575,9 +4376,7 @@ triggers:
 
       }}
     for:
-      hours: 0
-      minutes: 0
-      seconds: 12
+      seconds: "{{ states('input_number.vmc_master_attesa_pdr_cambio_inquinanti') | int(12) }}"
     id: >-
       PdR Spia Free Heating OFF e Spia FreeCooling ON -> Imposta Velocità 1 se
       Spia Inquinanti ON
@@ -4643,9 +4442,7 @@ triggers:
 
       }}
     for:
-      hours: 0
-      minutes: 0
-      seconds: 16
+      seconds: "{{ states('input_number.vmc_master_attesa_pdr_cambio') | int(16) }}"
     id: PdR Spia Free Heating ON e Spia FreeCooling OFF -> Imposta Velocità 0
     trigger: template
   - alias: >-
@@ -4709,9 +4506,7 @@ triggers:
 
       }}
     for:
-      hours: 0
-      minutes: 0
-      seconds: 12
+      seconds: "{{ states('input_number.vmc_master_attesa_pdr_cambio_inquinanti') | int(12) }}"
     id: >-
       PdR Spia Free Heating ON e Spia FreeCooling OFF -> Imposta Velocità 1 se
       Spia Inquinanti ON
@@ -4747,9 +4542,7 @@ triggers:
         states('input_boolean.vmc_master_spia_velocita_iperventilazione') == 'off'
       }}
     for:
-      hours: 0
-      minutes: 0
-      seconds: 16
+      seconds: "{{ states('input_number.vmc_master_attesa_pdr_cambio') | int(16) }}"
     id: PdR Vel. 0 con Spia FreeHeating On -> Imposta Velocità 0
     trigger: template
   - alias: >-
@@ -4783,9 +4576,7 @@ triggers:
         states('input_boolean.vmc_master_spia_velocita_iperventilazione') == 'off'
       }}
     for:
-      hours: 0
-      minutes: 0
-      seconds: 16
+      seconds: "{{ states('input_number.vmc_master_attesa_pdr_cambio') | int(16) }}"
     id: PdR Vel. 0 con Spia FreeCooling On -> Imposta Velocità 0
     trigger: template
   - alias: >-
@@ -4819,9 +4610,7 @@ triggers:
         states('input_boolean.vmc_master_spia_velocita_iperventilazione') == 'off'
       }}
     for:
-      hours: 0
-      minutes: 0
-      seconds: 12
+      seconds: "{{ states('input_number.vmc_master_attesa_pdr_cambio_inquinanti') | int(12) }}"
     id: >-
       PdR Vel. 0 con Spia FreeHeating On e Inquinanti Vel. 1 ON  -> Imposta
       Velocità 1
@@ -5497,9 +5286,7 @@ triggers:
       }}
     id: spia_umidita_on
     for:
-      hours: 0
-      minutes: 0
-      seconds: 28
+      seconds: "{{ states('input_number.vmc_master_attesa_umidita_avvio') | int(28) }}"
   - alias: >-
       Spia Umidità OFF  [SOLO SE NON CI SONO ALTRE ALLERTE E FUORI DAL
       CALENDARIO]
@@ -5583,9 +5370,7 @@ triggers:
         ) ) and (states('input_number.vmc_master_fase_riallineamento_al_riavvio') | float(0) == 0 or states('input_number.vmc_master_fase_riallineamento_al_riavvio') | float(0) >= 4) }}
     id: spia_umidita_off
     for:
-      hours: 0
-      minutes: 0
-      seconds: 28
+      seconds: "{{ states('input_number.vmc_master_attesa_umidita_fine') | int(28) }}"
   - alias: Umidità ON Vel. 0 [Spia Umidità ON]
     trigger: template
     value_template: |
@@ -5671,9 +5456,7 @@ triggers:
     enabled: true
     id: umidita_velocita_0
     for:
-      hours: 0
-      minutes: 0
-      seconds: 4
+      seconds: "{{ states('input_number.vmc_master_attesa_umidita_memoria') | int(4) }}"
   - alias: Umidità ON a Vel. 1 [Spia Umidità ON]
     trigger: template
     value_template: |
@@ -5758,9 +5541,7 @@ triggers:
         ) }}
     id: umidita_velocita_1
     for:
-      hours: 0
-      minutes: 0
-      seconds: 4
+      seconds: "{{ states('input_number.vmc_master_attesa_umidita_memoria') | int(4) }}"
   - alias: Umidità ON a Vel. 2 [Spia Umidità ON]
     trigger: template
     value_template: |-
@@ -5843,9 +5624,7 @@ triggers:
         ) }}
     id: umidita_velocita_2
     for:
-      hours: 0
-      minutes: 0
-      seconds: 4
+      seconds: "{{ states('input_number.vmc_master_attesa_umidita_memoria') | int(4) }}"
   - alias: Umidità ON a Vel. 3 [Spia Umidità ON]
     trigger: template
     value_template: |-
@@ -5927,9 +5706,7 @@ triggers:
         ) }}
     id: umidita_velocita_3
     for:
-      hours: 0
-      minutes: 0
-      seconds: 4
+      seconds: "{{ states('input_number.vmc_master_attesa_umidita_memoria') | int(4) }}"
   - alias: Umidità ON a Vel. 4 [Spia Umidità ON]
     trigger: template
     value_template: |
@@ -6012,9 +5789,7 @@ triggers:
         ) }}
     id: umidita_velocita_4
     for:
-      hours: 0
-      minutes: 0
-      seconds: 4
+      seconds: "{{ states('input_number.vmc_master_attesa_umidita_memoria') | int(4) }}"
   - alias: Umidità ON a Vel. Notturna [Spia Umidità ON]
     trigger: template
     value_template: |-
@@ -6095,9 +5870,7 @@ triggers:
         ) }}
     id: umidita_velocita_notturna
     for:
-      hours: 0
-      minutes: 0
-      seconds: 4
+      seconds: "{{ states('input_number.vmc_master_attesa_umidita_memoria') | int(4) }}"
   - alias: Umidità ON a Vel. Iperventilazione [Spia Umidità ON]
     trigger: template
     value_template: |-
@@ -6179,9 +5952,7 @@ triggers:
         ) }}
     id: umidita_velocita_iperventilazione
     for:
-      hours: 0
-      minutes: 0
-      seconds: 4
+      seconds: "{{ states('input_number.vmc_master_attesa_umidita_memoria') | int(4) }}"
   - alias: Umidità ON a Vel. Free Cooling [Spia Umidità ON]
     trigger: template
     value_template: |-
@@ -6265,9 +6036,7 @@ triggers:
         ) }}
     id: umidita_velocita_free_cooling
     for:
-      hours: 0
-      minutes: 0
-      seconds: 4
+      seconds: "{{ states('input_number.vmc_master_attesa_umidita_memoria') | int(4) }}"
   - alias: Δ Temp. > 23 [°C] ON
     trigger: template
     value_template: >
@@ -6353,9 +6122,7 @@ triggers:
       }}
     id: delta_temp_ON
     for:
-      hours: 0
-      minutes: 0
-      seconds: 4
+      seconds: "{{ states('input_number.vmc_master_attesa_delta_avvio') | int(4) }}"
   - alias: Δ Temp. > 23 [°C] OFF
     value_template: >
       {{ ( 
@@ -6428,9 +6195,7 @@ triggers:
     id: delta_temp_OFF
     trigger: template
     for:
-      hours: 0
-      minutes: 0
-      seconds: 4
+      seconds: "{{ states('input_number.vmc_master_attesa_delta_fine') | int(4) }}"
   - alias: >-
       Spia Velocità 0 Δ Temp. > 23 [°C] se Spia Congelamento OFF e Spia Delta
       Temp ON 
@@ -6483,9 +6248,7 @@ triggers:
     enabled: true
     trigger: template
     for:
-      hours: 0
-      minutes: 0
-      seconds: 4
+      seconds: "{{ states('input_number.vmc_master_attesa_delta_memoria') | int(4) }}"
   - alias: >-
       Spia Velocità 1 Δ Temp. > 23 [°C] se Spia Congelamento OFF e Spia Delta
       Temp ON 
@@ -6538,9 +6301,7 @@ triggers:
     enabled: true
     trigger: template
     for:
-      hours: 0
-      minutes: 0
-      seconds: 4
+      seconds: "{{ states('input_number.vmc_master_attesa_delta_memoria') | int(4) }}"
   - alias: >-
       Spia Velocità 2 Δ Temp. > 23 [°C] se Spia Congelamento OFF e Spia Delta
       Temp ON 
@@ -6593,9 +6354,7 @@ triggers:
     enabled: true
     trigger: template
     for:
-      hours: 0
-      minutes: 0
-      seconds: 4
+      seconds: "{{ states('input_number.vmc_master_attesa_delta_memoria') | int(4) }}"
   - alias: >-
       Spia Velocità 3 Δ Temp. > 23 [°C] se Spia Congelamento OFF e Spia Delta
       Temp ON 
@@ -6648,9 +6407,7 @@ triggers:
     enabled: true
     trigger: template
     for:
-      hours: 0
-      minutes: 0
-      seconds: 4
+      seconds: "{{ states('input_number.vmc_master_attesa_delta_memoria') | int(4) }}"
   - alias: >-
       Spia Velocità 4 Δ Temp. > 23 [°C] se Spia Congelamento OFF e Spia Delta
       Temp ON 
@@ -6703,9 +6460,7 @@ triggers:
     enabled: true
     trigger: template
     for:
-      hours: 0
-      minutes: 0
-      seconds: 4
+      seconds: "{{ states('input_number.vmc_master_attesa_delta_memoria') | int(4) }}"
   - alias: >-
       Spia Velocità Notturna Δ Temp. > 23 [°C] se Spia Congelamento OFF e Spia
       Delta Temp ON 
@@ -6758,9 +6513,7 @@ triggers:
     enabled: true
     trigger: template
     for:
-      hours: 0
-      minutes: 0
-      seconds: 4
+      seconds: "{{ states('input_number.vmc_master_attesa_delta_memoria') | int(4) }}"
   - alias: >-
       Spia Velocità Iperventilazione Δ Temp. > 23 [°C] se Spia Congelamento OFF
       e Spia Delta Temp ON 
@@ -6813,9 +6566,7 @@ triggers:
     enabled: true
     trigger: template
     for:
-      hours: 0
-      minutes: 0
-      seconds: 4
+      seconds: "{{ states('input_number.vmc_master_attesa_delta_memoria') | int(4) }}"
   - alias: >-
       Spia Velocità Free Cooling Δ Temp. > 23 [°C] se Spia Congelamento OFF e
       Spia Delta Temp ON 
@@ -6868,9 +6619,7 @@ triggers:
     enabled: true
     trigger: template
     for:
-      hours: 0
-      minutes: 0
-      seconds: 4
+      seconds: "{{ states('input_number.vmc_master_attesa_delta_memoria') | int(4) }}"
 conditions: []
 actions:
   - choose:

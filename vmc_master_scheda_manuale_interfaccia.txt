@@ -8606,33 +8606,266 @@ cards:
                 service: input_boolean.toggle
                 service_data:
                   entity_id: input_boolean.vmc_master_opzioni_accendi_spegni_avvisi
-        - type: markdown
-          text_only: true
-          content: >-
-            {%- set nomi = {'0': 'Velocità 0', '1': 'Velocità 1', '2': 'Velocità 2', '3': 'Velocità 3', '4': 'Velocità 4', 'notturna': 'Notturna', 'iperventilazione': 'Iperventilazione', 'freecooling': 'Free Cool./Heat.'} -%}
-            {%- set att = states('sensor.vmc_master_status_ventola_lettura_codice_interpretato_interfaccia') -%}
-            {%- set att_k = 'freecooling' if att.startswith('Free') else ('notturna' if att == 'Notturna' else ('iperventilazione' if att == 'Iperventilazione' else att | replace('Velocità ', ''))) -%}
-            {%- set allerte = [
-              ['Congelamento', 'input_boolean.vmc_master_spia_velocita_{}_congelamento', nomi.keys() | list],
-              ['Δ Temp.', 'input_boolean.vmc_master_spia_velocita_{}_delta_temp_verifica_soglia_valore', nomi.keys() | list],
-              ['Inquinanti', 'input_boolean.vmc_master_spia_velocita_{}_co2_o_voc', ['0']],
-              ['Inquinanti', 'input_boolean.vmc_master_spia_co2_o_voc_partenza_ritorno_velocita_0', ['0']],
-              ['Lim. Δ Punto di Rugiada', 'input_boolean.vmc_master_spia_velocita_{}_un_solo_avvio', nomi.keys() | list],
-              ['Lim. Δ Punto di Rugiada', 'input_boolean.vmc_master_spia_velocita_1_co2_o_voc_pdr', ['0']],
-              ['Avviso Free', 'input_boolean.vmc_master_spia_velocita_{}_un_solo_avvio_per_programmazione_freecooling', ['freecooling']],
-              ['Avviso Free', 'input_boolean.vmc_master_spia_velocita_{}_un_solo_avvio_per_programmazione_freeheating', ['freecooling']],
-              ['Umidità', 'input_boolean.vmc_master_spia_umidita_velocita_{}', nomi.keys() | list]
-            ] -%}
-            {%- set ns = namespace(righe=[], viste=[]) -%}
-            {%- for a in allerte -%}{%- for k in a[2] -%}
-              {%- if is_state(a[1] | replace('{}', k), 'on') and k != att_k and k not in ns.viste -%}
-                {%- set ns.righe = ns.righe + ['<b>' ~ nomi[k] ~ '</b> (' ~ a[0] ~ ')'] -%}
-                {%- set ns.viste = ns.viste + [k] -%}
-              {%- endif -%}
-            {%- endfor -%}{%- endfor -%}
-            {%- if ns.righe | count > 0 and att != 'Non disponibile' -%}
-            <ha-alert alert-type="info">Velocità registrata: {{ ns.righe | join(' · ') }}{{ ', ripristinata a fine allerta' if ns.righe | count == 1 else '' }}</ha-alert>
-            {%- endif -%}
+        - type: conditional
+          conditions:
+            - condition: or
+              conditions:
+                - condition: state
+                  entity: sensor.vmc_master_velocita_registrata
+                  state_not: ["Nessuna", "unknown", "unavailable"]
+                - condition: state
+                  entity: timer.vmc_master_countdown_pdr_cambio
+                  state: active
+                - condition: state
+                  entity: timer.vmc_master_countdown_pdr_ripristino
+                  state: active
+                - condition: state
+                  entity: timer.vmc_master_countdown_free_heating_annullamento
+                  state: active
+                - condition: state
+                  entity: timer.vmc_master_countdown_free_heating_sospensione
+                  state: active
+                - condition: state
+                  entity: timer.vmc_master_countdown_free_heating_ripristino
+                  state: active
+                - condition: state
+                  entity: timer.vmc_master_countdown_free_cooling_annullamento
+                  state: active
+                - condition: state
+                  entity: timer.vmc_master_countdown_free_cooling_sospensione
+                  state: active
+                - condition: state
+                  entity: timer.vmc_master_countdown_free_cooling_ripristino
+                  state: active
+                - condition: state
+                  entity: timer.vmc_master_countdown_inquinanti_avvio
+                  state: active
+                - condition: state
+                  entity: timer.vmc_master_countdown_inquinanti_fine
+                  state: active
+                - condition: state
+                  entity: timer.vmc_master_countdown_inquinanti_memoria
+                  state: active
+                - condition: state
+                  entity: timer.vmc_master_countdown_umidita_avvio
+                  state: active
+                - condition: state
+                  entity: timer.vmc_master_countdown_umidita_fine
+                  state: active
+                - condition: state
+                  entity: timer.vmc_master_countdown_umidita_memoria
+                  state: active
+                - condition: state
+                  entity: timer.vmc_master_countdown_delta_avvio
+                  state: active
+                - condition: state
+                  entity: timer.vmc_master_countdown_delta_fine
+                  state: active
+                - condition: state
+                  entity: timer.vmc_master_countdown_delta_memoria
+                  state: active
+                - condition: state
+                  entity: timer.vmc_master_countdown_blackout_rilevazione
+                  state: active
+                - condition: state
+                  entity: timer.vmc_master_countdown_blackout_ripristino
+                  state: active
+                - condition: state
+                  entity: timer.vmc_master_countdown_calendario_inizio
+                  state: active
+                - condition: state
+                  entity: timer.vmc_master_countdown_calendario_fine
+                  state: active
+                - condition: state
+                  entity: timer.vmc_master_countdown_avvisi
+                  state: active
+          card:
+            type: entities
+            entities:
+              - type: conditional
+                conditions:
+                  - entity: sensor.vmc_master_velocita_registrata
+                    state_not: ["Nessuna", "unknown", "unavailable"]
+                row:
+                  entity: sensor.vmc_master_velocita_registrata
+                  name: "Velocità Registrata"
+                  icon: mdi:restore
+              - type: conditional
+                conditions:
+                  - entity: timer.vmc_master_countdown_pdr_cambio
+                    state: active
+                row:
+                  entity: timer.vmc_master_countdown_pdr_cambio
+                  name: "Cambio Velocità per Lim. Δ PdR"
+                  icon: mdi:timer-sand
+              - type: conditional
+                conditions:
+                  - entity: timer.vmc_master_countdown_pdr_ripristino
+                    state: active
+                row:
+                  entity: timer.vmc_master_countdown_pdr_ripristino
+                  name: "Ripristino dopo Lim. Δ PdR"
+                  icon: mdi:timer-sand
+              - type: conditional
+                conditions:
+                  - entity: timer.vmc_master_countdown_free_heating_annullamento
+                    state: active
+                row:
+                  entity: timer.vmc_master_countdown_free_heating_annullamento
+                  name: "Annullamento Memoria Free Heating"
+                  icon: mdi:timer-sand
+              - type: conditional
+                conditions:
+                  - entity: timer.vmc_master_countdown_free_heating_sospensione
+                    state: active
+                row:
+                  entity: timer.vmc_master_countdown_free_heating_sospensione
+                  name: "Sospensione Free Heating"
+                  icon: mdi:timer-sand
+              - type: conditional
+                conditions:
+                  - entity: timer.vmc_master_countdown_free_heating_ripristino
+                    state: active
+                row:
+                  entity: timer.vmc_master_countdown_free_heating_ripristino
+                  name: "Ripristino Free Heating"
+                  icon: mdi:timer-sand
+              - type: conditional
+                conditions:
+                  - entity: timer.vmc_master_countdown_free_cooling_annullamento
+                    state: active
+                row:
+                  entity: timer.vmc_master_countdown_free_cooling_annullamento
+                  name: "Annullamento Memoria Free Cooling"
+                  icon: mdi:timer-sand
+              - type: conditional
+                conditions:
+                  - entity: timer.vmc_master_countdown_free_cooling_sospensione
+                    state: active
+                row:
+                  entity: timer.vmc_master_countdown_free_cooling_sospensione
+                  name: "Sospensione Free Cooling"
+                  icon: mdi:timer-sand
+              - type: conditional
+                conditions:
+                  - entity: timer.vmc_master_countdown_free_cooling_ripristino
+                    state: active
+                row:
+                  entity: timer.vmc_master_countdown_free_cooling_ripristino
+                  name: "Ripristino Free Cooling"
+                  icon: mdi:timer-sand
+              - type: conditional
+                conditions:
+                  - entity: timer.vmc_master_countdown_inquinanti_avvio
+                    state: active
+                row:
+                  entity: timer.vmc_master_countdown_inquinanti_avvio
+                  name: "Avvio Allerta Inquinanti"
+                  icon: mdi:timer-sand
+              - type: conditional
+                conditions:
+                  - entity: timer.vmc_master_countdown_inquinanti_fine
+                    state: active
+                row:
+                  entity: timer.vmc_master_countdown_inquinanti_fine
+                  name: "Fine Allerta Inquinanti"
+                  icon: mdi:timer-sand
+              - type: conditional
+                conditions:
+                  - entity: timer.vmc_master_countdown_inquinanti_memoria
+                    state: active
+                row:
+                  entity: timer.vmc_master_countdown_inquinanti_memoria
+                  name: "Memorizzazione Velocità (Inquinanti)"
+                  icon: mdi:timer-sand
+              - type: conditional
+                conditions:
+                  - entity: timer.vmc_master_countdown_umidita_avvio
+                    state: active
+                row:
+                  entity: timer.vmc_master_countdown_umidita_avvio
+                  name: "Avvio Allerta Umidità"
+                  icon: mdi:timer-sand
+              - type: conditional
+                conditions:
+                  - entity: timer.vmc_master_countdown_umidita_fine
+                    state: active
+                row:
+                  entity: timer.vmc_master_countdown_umidita_fine
+                  name: "Fine Allerta Umidità"
+                  icon: mdi:timer-sand
+              - type: conditional
+                conditions:
+                  - entity: timer.vmc_master_countdown_umidita_memoria
+                    state: active
+                row:
+                  entity: timer.vmc_master_countdown_umidita_memoria
+                  name: "Memorizzazione Velocità (Umidità)"
+                  icon: mdi:timer-sand
+              - type: conditional
+                conditions:
+                  - entity: timer.vmc_master_countdown_delta_avvio
+                    state: active
+                row:
+                  entity: timer.vmc_master_countdown_delta_avvio
+                  name: "Avvio Allerta Δ Temp."
+                  icon: mdi:timer-sand
+              - type: conditional
+                conditions:
+                  - entity: timer.vmc_master_countdown_delta_fine
+                    state: active
+                row:
+                  entity: timer.vmc_master_countdown_delta_fine
+                  name: "Fine Allerta Δ Temp."
+                  icon: mdi:timer-sand
+              - type: conditional
+                conditions:
+                  - entity: timer.vmc_master_countdown_delta_memoria
+                    state: active
+                row:
+                  entity: timer.vmc_master_countdown_delta_memoria
+                  name: "Memorizzazione Velocità (Δ Temp.)"
+                  icon: mdi:timer-sand
+              - type: conditional
+                conditions:
+                  - entity: timer.vmc_master_countdown_blackout_rilevazione
+                    state: active
+                row:
+                  entity: timer.vmc_master_countdown_blackout_rilevazione
+                  name: "Rilevazione Black-Out"
+                  icon: mdi:timer-sand
+              - type: conditional
+                conditions:
+                  - entity: timer.vmc_master_countdown_blackout_ripristino
+                    state: active
+                row:
+                  entity: timer.vmc_master_countdown_blackout_ripristino
+                  name: "Ripristino dopo Black-Out"
+                  icon: mdi:timer-sand
+              - type: conditional
+                conditions:
+                  - entity: timer.vmc_master_countdown_calendario_inizio
+                    state: active
+                row:
+                  entity: timer.vmc_master_countdown_calendario_inizio
+                  name: "Inizio Fascia"
+                  icon: mdi:timer-sand
+              - type: conditional
+                conditions:
+                  - entity: timer.vmc_master_countdown_calendario_fine
+                    state: active
+                row:
+                  entity: timer.vmc_master_countdown_calendario_fine
+                  name: "Fine Fascia"
+                  icon: mdi:timer-sand
+              - type: conditional
+                conditions:
+                  - entity: timer.vmc_master_countdown_avvisi
+                    state: active
+                row:
+                  entity: timer.vmc_master_countdown_avvisi
+                  name: "Aggiornamento Avvisi"
+                  icon: mdi:timer-sand
         - type: conditional
           conditions:
             - condition: and
@@ -9382,7 +9615,107 @@ cards:
                         input_boolean.vmc_master_opzioni_free_heating_o_free_cooling
                     - entity: input_boolean.vmc_master_opzione_finestra_audio
                     - entity: input_boolean.vmc_master_opzione_finestra_clona
+                    - entity: input_boolean.vmc_master_opzione_finestra_tempi_attesa
                 show_header_toggle: false
+              - type: conditional
+                conditions:
+                  - condition: state
+                    entity: input_boolean.vmc_master_opzione_finestra_tempi_attesa
+                    state: 'on'
+                card:
+                  type: entities
+                  title: "Tempi di Attesa e Intervalli di Lettura"
+                  show_header_toggle: false
+                  state_color: false
+                  entities:
+                    - type: section
+                      label: "Lim. Δ Punto di Rugiada"
+                    - entity: input_number.vmc_master_attesa_pdr_cambio
+                      name: "Cambio Velocità per Lim. Δ PdR"
+                    - entity: input_number.vmc_master_attesa_pdr_cambio_inquinanti
+                      name: "Cambio Velocità per Lim. Δ PdR (con Inquinanti)"
+                    - entity: input_number.vmc_master_attesa_pdr_ripristino
+                      name: "Ripristino dopo Lim. Δ PdR"
+                    - entity: input_number.vmc_master_attesa_pdr_ripristino_inquinanti
+                      name: "Ripristino dopo Lim. Δ PdR (con Inquinanti)"
+                    - type: section
+                      label: "Free Heating / Free Cooling"
+                    - entity: input_number.vmc_master_attesa_free_sospensione
+                      name: "Sospensione Free Heating/Cooling"
+                    - entity: input_number.vmc_master_attesa_free_sospensione_inquinanti
+                      name: "Sospensione Free Heating/Cooling (con Inquinanti)"
+                    - entity: input_number.vmc_master_attesa_free_ripristino
+                      name: "Ripristino Free Heating/Cooling"
+                    - entity: input_number.vmc_master_attesa_free_ripristino_inquinanti
+                      name: "Ripristino Free Heating/Cooling (con Inquinanti)"
+                    - entity: input_number.vmc_master_attesa_free_annullamento
+                      name: "Annullamento Memoria Free Heating/Cooling"
+                    - type: section
+                      label: "Inquinanti CO₂/VOC"
+                    - entity: input_number.vmc_master_attesa_inquinanti_avvio
+                      name: "Avvio Allerta Inquinanti"
+                    - entity: input_number.vmc_master_attesa_inquinanti_avvio_spia_pdr
+                      name: "Avvio Allerta Inquinanti (con Spia PdR)"
+                    - entity: input_number.vmc_master_attesa_inquinanti_fine
+                      name: "Fine Allerta Inquinanti"
+                    - entity: input_number.vmc_master_attesa_inquinanti_memoria
+                      name: "Memorizzazione Velocità (Inquinanti)"
+                    - type: section
+                      label: "Umidità"
+                    - entity: input_number.vmc_master_attesa_umidita_avvio
+                      name: "Avvio Allerta Umidità"
+                    - entity: input_number.vmc_master_attesa_umidita_fine
+                      name: "Fine Allerta Umidità"
+                    - entity: input_number.vmc_master_attesa_umidita_memoria
+                      name: "Memorizzazione Velocità (Umidità)"
+                    - type: section
+                      label: "Δ Temp."
+                    - entity: input_number.vmc_master_attesa_delta_avvio
+                      name: "Avvio Allerta Δ Temp."
+                    - entity: input_number.vmc_master_attesa_delta_fine
+                      name: "Fine Allerta Δ Temp."
+                    - entity: input_number.vmc_master_attesa_delta_memoria
+                      name: "Memorizzazione Velocità (Δ Temp.)"
+                    - type: section
+                      label: "Black-Out"
+                    - entity: input_number.vmc_master_attesa_blackout_rilevazione
+                      name: "Rilevazione Black-Out"
+                    - entity: input_number.vmc_master_attesa_blackout_ripristino
+                      name: "Ripristino dopo Black-Out"
+                    - type: section
+                      label: "Programmazione Giornaliera"
+                    - entity: input_number.vmc_master_attesa_calendario_inizio
+                      name: "Inizio Fascia"
+                    - entity: input_number.vmc_master_attesa_calendario_fine
+                      name: "Fine Fascia"
+                    - type: section
+                      label: "Avvisi"
+                    - entity: input_number.vmc_master_attesa_avvisi
+                      name: "Aggiornamento Avvisi"
+                    - type: section
+                      label: "Intervalli di Lettura della VMC"
+                    - entity: input_number.vmc_master_intervallo_ping
+                      name: "Verifica On-Line (Ping)"
+                    - entity: input_number.vmc_master_intervallo_ventilazione
+                      name: "Sensori Ventilazione"
+                    - entity: input_number.vmc_master_intervallo_ambientali
+                      name: "Sensori Ambientali"
+                    - entity: input_number.vmc_master_intervallo_lan
+                      name: "Lan"
+                    - entity: input_number.vmc_master_intervallo_nome
+                      name: "Nome"
+                    - type: section
+                    - type: button
+                      entity: script.vmc_master_ripristina_tempi_attesa
+                      name: "Ripristina Tempi Originali"
+                      action_name: Esegui
+                      tap_action:
+                        action: perform-action
+                        perform_action: script.turn_on
+                        target:
+                          entity_id: script.vmc_master_ripristina_tempi_attesa
+                        confirmation:
+                          text: "Vuoi riportare tutti i tempi di attesa e gli intervalli di lettura ai valori originali?"
               - type: conditional
                 conditions:
                   - condition: state
@@ -10458,6 +10791,26 @@ cards:
           card:
             type: vertical-stack
             cards:
+              - type: entities
+                title: "Prossime Letture dalla VMC"
+                show_header_toggle: false
+                state_color: false
+                entities:
+                  - entity: timer.vmc_master_lettura_ping
+                    name: "Verifica On-Line (Ping)"
+                    icon: mdi:timer-sync-outline
+                  - entity: timer.vmc_master_lettura_ventilazione
+                    name: "Sensori Ventilazione"
+                    icon: mdi:timer-sync-outline
+                  - entity: timer.vmc_master_lettura_ambientali
+                    name: "Sensori Ambientali"
+                    icon: mdi:timer-sync-outline
+                  - entity: timer.vmc_master_lettura_lan
+                    name: "Lan"
+                    icon: mdi:timer-sync-outline
+                  - entity: timer.vmc_master_lettura_nome
+                    name: "Nome"
+                    icon: mdi:timer-sync-outline
               - type: markdown
                 content: >-
                   <table align="center"><tr><td width="96"><img src="https://raw.githubusercontent.com/DanRobo76/VMC-HELTY-FLOW/main/immagini/Intestazione/icona_vmc.webp?v=20261107" width="96" alt="VMC"></td><td>
@@ -10515,24 +10868,26 @@ cards:
                   il dato grezzo inviato dalla VMC. Se la VMC è OFF-Line viene mostrato «Non disponibile».
                   </td></tr></table>
 
+                  <strong>- Verifica On-Line (Ping)</strong> <pre style="font-size:6px; background-color: #d9ffcc;">{{ states('sensor.vmc_master_status_ip') }}</pre> <small>⏳ Prossimo ping {% if is_state('timer.vmc_master_lettura_ping', 'active') %}alle {{ as_timestamp(state_attr('timer.vmc_master_lettura_ping', 'finishes_at')) | timestamp_custom('%H:%M:%S') }}{% else %}in attesa{% endif %} (ogni {{ states('input_number.vmc_master_intervallo_ping') | int(0) }} s)</small>
+
                   <strong>- Sensori Ventilazione</strong>
                   <pre style="font-size:6px; background-color: #d9ffcc;">{% if
                   states('sensor.vmc_master_status_ip_interfaccia')=='OFF-Line'%}Non
                   disponibile{% else %}{{
                   states('sensor.vmc_master_status_ventola') }} {% endif
-                  %}</pre> <strong>- Sensori Ambientali</strong> <pre
+                  %}</pre> <small>⏳ Prossima lettura {% if is_state('timer.vmc_master_lettura_ventilazione', 'active') %}alle {{ as_timestamp(state_attr('timer.vmc_master_lettura_ventilazione', 'finishes_at')) | timestamp_custom('%H:%M:%S') }}{% else %}in attesa{% endif %} (ogni {{ states('input_number.vmc_master_intervallo_ventilazione') | int(0) }} s)</small> <strong>- Sensori Ambientali</strong> <pre
                   style="font-size:6px; background-color: #d9ffcc;">{% if
                   states('sensor.vmc_master_status_ip_interfaccia')=='OFF-Line'%}Non
                   disponibile{% else %}{{ states('sensor.vmc_master_sensori') }}
-                  {% endif %}</pre> <strong>- Lan</strong> <pre
+                  {% endif %}</pre> <small>⏳ Prossima lettura {% if is_state('timer.vmc_master_lettura_ambientali', 'active') %}alle {{ as_timestamp(state_attr('timer.vmc_master_lettura_ambientali', 'finishes_at')) | timestamp_custom('%H:%M:%S') }}{% else %}in attesa{% endif %} (ogni {{ states('input_number.vmc_master_intervallo_ambientali') | int(0) }} s)</small> <strong>- Lan</strong> <pre
                   style="font-size:6px; background-color: #d9ffcc;">{% if
                   states('sensor.vmc_master_status_ip_interfaccia')=='OFF-Line'%}Non
                   disponibile{% else %}{{ states('sensor.vmc_master_lan') }} {%
-                  endif %}</pre> <strong>- Nome</strong> <pre
+                  endif %}</pre> <small>⏳ Prossima lettura {% if is_state('timer.vmc_master_lettura_lan', 'active') %}alle {{ as_timestamp(state_attr('timer.vmc_master_lettura_lan', 'finishes_at')) | timestamp_custom('%H:%M:%S') }}{% else %}in attesa{% endif %} (ogni {{ states('input_number.vmc_master_intervallo_lan') | int(0) }} s)</small> <strong>- Nome</strong> <pre
                   style="font-size:6px; background-color: #d9ffcc;">{% if
                   states('sensor.vmc_master_status_ip_interfaccia')=='OFF-Line'%}Non
                   disponibile{% else %}{{ states('sensor.vmc_master_nome') }} {%
-                  endif %}</pre>
+                  endif %}</pre> <small>⏳ Prossima lettura {% if is_state('timer.vmc_master_lettura_nome', 'active') %}alle {{ as_timestamp(state_attr('timer.vmc_master_lettura_nome', 'finishes_at')) | timestamp_custom('%H:%M:%S') }}{% else %}in attesa{% endif %} (ogni {{ states('input_number.vmc_master_intervallo_nome') | int(0) }} s)</small>
 
                   </details>
 
