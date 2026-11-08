@@ -8933,18 +8933,21 @@ cards:
                   hold_action:
                     action: none
                 - show_name: true
+                  entity: binary_sensor.vmc_master_tasto_velocita_0
+                  state_color: true
                   show_icon: true
                   type: button
                   tap_action:
                     action: call-service
                     service: shell_command.vmc_master_velocita_0
                     target: {}
-                  show_state: true
+                  show_state: false
                   name: Velocità 0
-                  icon: mdi:numeric-0-box
                   hold_action:
                     action: none
                 - show_name: true
+                  entity: binary_sensor.vmc_master_tasto_velocita_1
+                  state_color: true
                   show_icon: true
                   type: button
                   tap_action:
@@ -8952,8 +8955,7 @@ cards:
                     service: shell_command.vmc_master_velocita_1
                     target: {}
                   name: Velocità 1
-                  show_state: true
-                  icon: mdi:numeric-1-box
+                  show_state: false
                   hold_action:
                     action: none
                   visibility:
@@ -8980,6 +8982,8 @@ cards:
                     state:
                     - Alert
                 - show_name: true
+                  entity: binary_sensor.vmc_master_tasto_velocita_2
+                  state_color: true
                   show_icon: true
                   type: button
                   tap_action:
@@ -8987,8 +8991,7 @@ cards:
                     service: shell_command.vmc_master_velocita_2
                     target: {}
                   name: Velocità 2
-                  show_state: true
-                  icon: mdi:numeric-2-box
+                  show_state: false
                   hold_action:
                     action: none
                   visibility:
@@ -9014,6 +9017,25 @@ cards:
                   - condition: state
                     entity: sensor.vmc_master_alert_avvio_interfaccia
                     state:
+                    - Alert
+                    - Alert Δ Temp.
+                - show_name: true
+                  entity: binary_sensor.vmc_master_tasto_velocita_3
+                  state_color: true
+                  show_icon: true
+                  type: button
+                  tap_action:
+                    action: call-service
+                    service: shell_command.vmc_master_velocita_3
+                    target: {}
+                  name: Velocità 3
+                  show_state: false
+                  hold_action:
+                    action: none
+                  visibility:
+                  - condition: state
+                    entity: sensor.vmc_master_alert_avvio_interfaccia
+                    state_not:
                     - Alert
                     - Alert Δ Temp.
                 - show_name: true
@@ -9028,24 +9050,6 @@ cards:
                   icon: mdi:numeric-3-box
                   hold_action:
                     action: none
-                  visibility:
-                  - condition: state
-                    entity: sensor.vmc_master_alert_avvio_interfaccia
-                    state_not:
-                    - Alert
-                    - Alert Δ Temp.
-                - show_name: true
-                  show_icon: true
-                  type: button
-                  tap_action:
-                    action: call-service
-                    service: shell_command.vmc_master_velocita_3
-                    target: {}
-                  name: Velocità 3
-                  show_state: true
-                  icon: mdi:numeric-3-box
-                  hold_action:
-                    action: none
                   entity: sensor.vmc_master_alert_avvio_interfaccia
                   visibility:
                   - condition: state
@@ -9054,6 +9058,8 @@ cards:
                     - Alert
                     - Alert Δ Temp.
                 - show_name: true
+                  entity: binary_sensor.vmc_master_tasto_velocita_4
+                  state_color: true
                   show_icon: true
                   type: button
                   tap_action:
@@ -9061,8 +9067,7 @@ cards:
                     service: shell_command.vmc_master_velocita_4
                     target: {}
                   name: Velocità 4
-                  show_state: true
-                  icon: mdi:numeric-4-box
+                  show_state: false
                   hold_action:
                     action: none
                   visibility:
@@ -9091,6 +9096,8 @@ cards:
                     - Alert
                     - Alert Δ Temp.
                 - show_name: true
+                  entity: binary_sensor.vmc_master_tasto_notturna
+                  state_color: true
                   show_icon: true
                   type: button
                   tap_action:
@@ -9098,8 +9105,7 @@ cards:
                     service: shell_command.vmc_master_notturna
                     target: {}
                   name: Notturna
-                  show_state: true
-                  icon: mdi:weather-night
+                  show_state: false
                   hold_action:
                     action: none
                   visibility:
@@ -9126,6 +9132,8 @@ cards:
                     state:
                     - Alert
                 - show_name: true
+                  entity: binary_sensor.vmc_master_tasto_iperventilazione
+                  state_color: true
                   show_icon: true
                   type: button
                   tap_action:
@@ -9133,8 +9141,7 @@ cards:
                     service: shell_command.vmc_master_iperventilazione
                     target: {}
                   name: Iperventil.
-                  show_state: true
-                  icon: mdi:wind-power
+                  show_state: false
                   hold_action:
                     action: none
                   visibility:
@@ -9163,14 +9170,15 @@ cards:
                     - Alert
                     - Alert Δ Temp.
                 - show_name: true
+                  entity: binary_sensor.vmc_master_tasto_free_heating
+                  state_color: true
                   show_icon: true
                   type: button
                   tap_action:
                     action: call-service
                     service: shell_command.vmc_master_freecooling
-                  icon: mdi:weather-sunny
                   name: Free Heating
-                  show_state: true
+                  show_state: false
                   hold_action:
                     action: none
                   visibility:
@@ -9215,14 +9223,15 @@ cards:
                     - Alert Δ Temp.
                     - Alert Free
                 - type: button
+                  entity: binary_sensor.vmc_master_tasto_free_cooling
+                  state_color: true
                   tap_action:
                     action: call-service
                     service: shell_command.vmc_master_freecooling
-                  icon: mdi:snowflake
                   name: Free Cooling
                   show_name: true
                   show_icon: true
-                  show_state: true
+                  show_state: false
                   hold_action:
                     action: none
                   visibility:
@@ -9267,14 +9276,15 @@ cards:
                     - Alert Δ Temp.
                     - Alert Free
                 - type: button
+                  entity: binary_sensor.vmc_master_tasto_free_cool_heat
+                  state_color: true
                   tap_action:
                     action: call-service
                     service: shell_command.vmc_master_freecooling
-                  icon: mdi:sun-snowflake-variant
                   name: Free Cool./Heat.
                   show_name: true
                   show_icon: true
-                  show_state: true
+                  show_state: false
                   hold_action:
                     action: none
                   visibility:
@@ -10791,26 +10801,6 @@ cards:
           card:
             type: vertical-stack
             cards:
-              - type: entities
-                title: "Prossime Letture dalla VMC"
-                show_header_toggle: false
-                state_color: false
-                entities:
-                  - entity: timer.vmc_master_lettura_ping
-                    name: "Verifica On-Line (Ping)"
-                    icon: mdi:timer-sync-outline
-                  - entity: timer.vmc_master_lettura_ventilazione
-                    name: "Sensori Ventilazione"
-                    icon: mdi:timer-sync-outline
-                  - entity: timer.vmc_master_lettura_ambientali
-                    name: "Sensori Ambientali"
-                    icon: mdi:timer-sync-outline
-                  - entity: timer.vmc_master_lettura_lan
-                    name: "Lan"
-                    icon: mdi:timer-sync-outline
-                  - entity: timer.vmc_master_lettura_nome
-                    name: "Nome"
-                    icon: mdi:timer-sync-outline
               - type: markdown
                 content: >-
                   <table align="center"><tr><td width="96"><img src="https://raw.githubusercontent.com/DanRobo76/VMC-HELTY-FLOW/main/immagini/Intestazione/icona_vmc.webp?v=20261107" width="96" alt="VMC"></td><td>
@@ -10868,26 +10858,26 @@ cards:
                   il dato grezzo inviato dalla VMC. Se la VMC è OFF-Line viene mostrato «Non disponibile».
                   </td></tr></table>
 
-                  <strong>- Verifica On-Line (Ping)</strong> <pre style="font-size:6px; background-color: #d9ffcc;">{{ states('sensor.vmc_master_status_ip') }}</pre> <small>⏳ Prossimo ping {% if is_state('timer.vmc_master_lettura_ping', 'active') %}alle {{ as_timestamp(state_attr('timer.vmc_master_lettura_ping', 'finishes_at')) | timestamp_custom('%H:%M:%S') }}{% else %}in attesa{% endif %} (ogni {{ states('input_number.vmc_master_intervallo_ping') | int(0) }} s)</small>
+                  <strong>- Verifica On-Line (Ping)</strong> <pre style="font-size:6px; background-color: #d9ffcc;">{{ states('sensor.vmc_master_status_ip') }}</pre>
 
                   <strong>- Sensori Ventilazione</strong>
                   <pre style="font-size:6px; background-color: #d9ffcc;">{% if
                   states('sensor.vmc_master_status_ip_interfaccia')=='OFF-Line'%}Non
                   disponibile{% else %}{{
                   states('sensor.vmc_master_status_ventola') }} {% endif
-                  %}</pre> <small>⏳ Prossima lettura {% if is_state('timer.vmc_master_lettura_ventilazione', 'active') %}alle {{ as_timestamp(state_attr('timer.vmc_master_lettura_ventilazione', 'finishes_at')) | timestamp_custom('%H:%M:%S') }}{% else %}in attesa{% endif %} (ogni {{ states('input_number.vmc_master_intervallo_ventilazione') | int(0) }} s)</small> <strong>- Sensori Ambientali</strong> <pre
+                  %}</pre> <strong>- Sensori Ambientali</strong> <pre
                   style="font-size:6px; background-color: #d9ffcc;">{% if
                   states('sensor.vmc_master_status_ip_interfaccia')=='OFF-Line'%}Non
                   disponibile{% else %}{{ states('sensor.vmc_master_sensori') }}
-                  {% endif %}</pre> <small>⏳ Prossima lettura {% if is_state('timer.vmc_master_lettura_ambientali', 'active') %}alle {{ as_timestamp(state_attr('timer.vmc_master_lettura_ambientali', 'finishes_at')) | timestamp_custom('%H:%M:%S') }}{% else %}in attesa{% endif %} (ogni {{ states('input_number.vmc_master_intervallo_ambientali') | int(0) }} s)</small> <strong>- Lan</strong> <pre
+                  {% endif %}</pre> <strong>- Lan</strong> <pre
                   style="font-size:6px; background-color: #d9ffcc;">{% if
                   states('sensor.vmc_master_status_ip_interfaccia')=='OFF-Line'%}Non
                   disponibile{% else %}{{ states('sensor.vmc_master_lan') }} {%
-                  endif %}</pre> <small>⏳ Prossima lettura {% if is_state('timer.vmc_master_lettura_lan', 'active') %}alle {{ as_timestamp(state_attr('timer.vmc_master_lettura_lan', 'finishes_at')) | timestamp_custom('%H:%M:%S') }}{% else %}in attesa{% endif %} (ogni {{ states('input_number.vmc_master_intervallo_lan') | int(0) }} s)</small> <strong>- Nome</strong> <pre
+                  endif %}</pre> <strong>- Nome</strong> <pre
                   style="font-size:6px; background-color: #d9ffcc;">{% if
                   states('sensor.vmc_master_status_ip_interfaccia')=='OFF-Line'%}Non
                   disponibile{% else %}{{ states('sensor.vmc_master_nome') }} {%
-                  endif %}</pre> <small>⏳ Prossima lettura {% if is_state('timer.vmc_master_lettura_nome', 'active') %}alle {{ as_timestamp(state_attr('timer.vmc_master_lettura_nome', 'finishes_at')) | timestamp_custom('%H:%M:%S') }}{% else %}in attesa{% endif %} (ogni {{ states('input_number.vmc_master_intervallo_nome') | int(0) }} s)</small>
+                  endif %}</pre>
 
                   </details>
 
@@ -12945,6 +12935,61 @@ cards:
                   </td></tr></table>
                   </details>
                   <!-- >>> FINE SEZIONE CLONA VMC (SOLO MASTER, RIMOSSA DA VMC_SCRIPT_CLONA.SH) <<< -->
+              - type: entities
+                show_header_toggle: false
+                state_color: true
+                entities:
+                  - type: conditional
+                    conditions:
+                      - entity: input_boolean.vmc_master_opzione_finestra_prossime_letture
+                        state: 'on'
+                    row:
+                      type: section
+                      label: "Prossime Letture dalla VMC"
+                  - type: conditional
+                    conditions:
+                      - entity: input_boolean.vmc_master_opzione_finestra_prossime_letture
+                        state: 'on'
+                    row:
+                      entity: timer.vmc_master_lettura_ping
+                      name: "Verifica On-Line (Ping)"
+                      icon: mdi:timer-sync-outline
+                  - type: conditional
+                    conditions:
+                      - entity: input_boolean.vmc_master_opzione_finestra_prossime_letture
+                        state: 'on'
+                    row:
+                      entity: timer.vmc_master_lettura_ventilazione
+                      name: "Sensori Ventilazione"
+                      icon: mdi:timer-sync-outline
+                  - type: conditional
+                    conditions:
+                      - entity: input_boolean.vmc_master_opzione_finestra_prossime_letture
+                        state: 'on'
+                    row:
+                      entity: timer.vmc_master_lettura_ambientali
+                      name: "Sensori Ambientali"
+                      icon: mdi:timer-sync-outline
+                  - type: conditional
+                    conditions:
+                      - entity: input_boolean.vmc_master_opzione_finestra_prossime_letture
+                        state: 'on'
+                    row:
+                      entity: timer.vmc_master_lettura_lan
+                      name: "Lan"
+                      icon: mdi:timer-sync-outline
+                  - type: conditional
+                    conditions:
+                      - entity: input_boolean.vmc_master_opzione_finestra_prossime_letture
+                        state: 'on'
+                    row:
+                      entity: timer.vmc_master_lettura_nome
+                      name: "Nome"
+                      icon: mdi:timer-sync-outline
+                footer:
+                  type: buttons
+                  entities:
+                    - entity: input_boolean.vmc_master_opzione_finestra_prossime_letture
         - type: conditional
           conditions:
             - condition: and

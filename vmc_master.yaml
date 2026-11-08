@@ -521,8 +521,80 @@ template:
           {% endif %}
         icon: mdi:fan
 
+  - binary_sensor:
+      - default_entity_id: binary_sensor.vmc_master_tasto_velocita_0                    # [CONFIGURAZIONE, 2 RICHIAMI] [INTERFACCIA, 1 RICHIAMO] [AUTOMAZIONE, 0 RICHIAMI] TASTO «VELOCITÀ 0» DEL TELECOMANDO: ON = VELOCITA' ATTIVA (ICONA DEL TASTO) O DA RIPRISTINARE (ICONA mdi:restore)
+        name: "Tasto Telecomando Velocità 0"
+        unique_id: vmc_master_tasto_velocita_0
+        state: >
+          {{ states('sensor.vmc_master_status_ventola_lettura_codice_interpretato_interfaccia') == 'Velocità 0' or 'Velocità 0' in states('sensor.vmc_master_velocita_registrata').split(' · ') }}
+        icon: >
+          {{ 'mdi:numeric-0-box' if states('sensor.vmc_master_status_ventola_lettura_codice_interpretato_interfaccia') == 'Velocità 0' or not ('Velocità 0' in states('sensor.vmc_master_velocita_registrata').split(' · ')) else 'mdi:restore' }}
+      - default_entity_id: binary_sensor.vmc_master_tasto_velocita_1                    # [CONFIGURAZIONE, 2 RICHIAMI] [INTERFACCIA, 1 RICHIAMO] [AUTOMAZIONE, 0 RICHIAMI] TASTO «VELOCITÀ 1» DEL TELECOMANDO: ON = VELOCITA' ATTIVA (ICONA DEL TASTO) O DA RIPRISTINARE (ICONA mdi:restore)
+        name: "Tasto Telecomando Velocità 1"
+        unique_id: vmc_master_tasto_velocita_1
+        state: >
+          {{ states('sensor.vmc_master_status_ventola_lettura_codice_interpretato_interfaccia') == 'Velocità 1' or 'Velocità 1' in states('sensor.vmc_master_velocita_registrata').split(' · ') }}
+        icon: >
+          {{ 'mdi:numeric-1-box' if states('sensor.vmc_master_status_ventola_lettura_codice_interpretato_interfaccia') == 'Velocità 1' or not ('Velocità 1' in states('sensor.vmc_master_velocita_registrata').split(' · ')) else 'mdi:restore' }}
+      - default_entity_id: binary_sensor.vmc_master_tasto_velocita_2                    # [CONFIGURAZIONE, 2 RICHIAMI] [INTERFACCIA, 1 RICHIAMO] [AUTOMAZIONE, 0 RICHIAMI] TASTO «VELOCITÀ 2» DEL TELECOMANDO: ON = VELOCITA' ATTIVA (ICONA DEL TASTO) O DA RIPRISTINARE (ICONA mdi:restore)
+        name: "Tasto Telecomando Velocità 2"
+        unique_id: vmc_master_tasto_velocita_2
+        state: >
+          {{ states('sensor.vmc_master_status_ventola_lettura_codice_interpretato_interfaccia') == 'Velocità 2' or 'Velocità 2' in states('sensor.vmc_master_velocita_registrata').split(' · ') }}
+        icon: >
+          {{ 'mdi:numeric-2-box' if states('sensor.vmc_master_status_ventola_lettura_codice_interpretato_interfaccia') == 'Velocità 2' or not ('Velocità 2' in states('sensor.vmc_master_velocita_registrata').split(' · ')) else 'mdi:restore' }}
+      - default_entity_id: binary_sensor.vmc_master_tasto_velocita_3                    # [CONFIGURAZIONE, 2 RICHIAMI] [INTERFACCIA, 1 RICHIAMO] [AUTOMAZIONE, 0 RICHIAMI] TASTO «VELOCITÀ 3» DEL TELECOMANDO: ON = VELOCITA' ATTIVA (ICONA DEL TASTO) O DA RIPRISTINARE (ICONA mdi:restore)
+        name: "Tasto Telecomando Velocità 3"
+        unique_id: vmc_master_tasto_velocita_3
+        state: >
+          {{ states('sensor.vmc_master_status_ventola_lettura_codice_interpretato_interfaccia') == 'Velocità 3' or 'Velocità 3' in states('sensor.vmc_master_velocita_registrata').split(' · ') }}
+        icon: >
+          {{ 'mdi:numeric-3-box' if states('sensor.vmc_master_status_ventola_lettura_codice_interpretato_interfaccia') == 'Velocità 3' or not ('Velocità 3' in states('sensor.vmc_master_velocita_registrata').split(' · ')) else 'mdi:restore' }}
+      - default_entity_id: binary_sensor.vmc_master_tasto_velocita_4                    # [CONFIGURAZIONE, 2 RICHIAMI] [INTERFACCIA, 1 RICHIAMO] [AUTOMAZIONE, 0 RICHIAMI] TASTO «VELOCITÀ 4» DEL TELECOMANDO: ON = VELOCITA' ATTIVA (ICONA DEL TASTO) O DA RIPRISTINARE (ICONA mdi:restore)
+        name: "Tasto Telecomando Velocità 4"
+        unique_id: vmc_master_tasto_velocita_4
+        state: >
+          {{ states('sensor.vmc_master_status_ventola_lettura_codice_interpretato_interfaccia') == 'Velocità 4' or 'Velocità 4' in states('sensor.vmc_master_velocita_registrata').split(' · ') }}
+        icon: >
+          {{ 'mdi:numeric-4-box' if states('sensor.vmc_master_status_ventola_lettura_codice_interpretato_interfaccia') == 'Velocità 4' or not ('Velocità 4' in states('sensor.vmc_master_velocita_registrata').split(' · ')) else 'mdi:restore' }}
+      - default_entity_id: binary_sensor.vmc_master_tasto_notturna                      # [CONFIGURAZIONE, 2 RICHIAMI] [INTERFACCIA, 1 RICHIAMO] [AUTOMAZIONE, 0 RICHIAMI] TASTO «NOTTURNA» DEL TELECOMANDO: ON = VELOCITA' ATTIVA (ICONA DEL TASTO) O DA RIPRISTINARE (ICONA mdi:restore)
+        name: "Tasto Telecomando Notturna"
+        unique_id: vmc_master_tasto_notturna
+        state: >
+          {{ states('sensor.vmc_master_status_ventola_lettura_codice_interpretato_interfaccia') == 'Notturna' or 'Notturna' in states('sensor.vmc_master_velocita_registrata').split(' · ') }}
+        icon: >
+          {{ 'mdi:weather-night' if states('sensor.vmc_master_status_ventola_lettura_codice_interpretato_interfaccia') == 'Notturna' or not ('Notturna' in states('sensor.vmc_master_velocita_registrata').split(' · ')) else 'mdi:restore' }}
+      - default_entity_id: binary_sensor.vmc_master_tasto_iperventilazione              # [CONFIGURAZIONE, 2 RICHIAMI] [INTERFACCIA, 1 RICHIAMO] [AUTOMAZIONE, 0 RICHIAMI] TASTO «IPERVENTILAZIONE» DEL TELECOMANDO: ON = VELOCITA' ATTIVA (ICONA DEL TASTO) O DA RIPRISTINARE (ICONA mdi:restore)
+        name: "Tasto Telecomando Iperventilazione"
+        unique_id: vmc_master_tasto_iperventilazione
+        state: >
+          {{ states('sensor.vmc_master_status_ventola_lettura_codice_interpretato_interfaccia') == 'Iperventilazione' or 'Iperventilazione' in states('sensor.vmc_master_velocita_registrata').split(' · ') }}
+        icon: >
+          {{ 'mdi:wind-power' if states('sensor.vmc_master_status_ventola_lettura_codice_interpretato_interfaccia') == 'Iperventilazione' or not ('Iperventilazione' in states('sensor.vmc_master_velocita_registrata').split(' · ')) else 'mdi:restore' }}
+      - default_entity_id: binary_sensor.vmc_master_tasto_free_heating                  # [CONFIGURAZIONE, 2 RICHIAMI] [INTERFACCIA, 1 RICHIAMO] [AUTOMAZIONE, 0 RICHIAMI] TASTO «FREE HEATING» DEL TELECOMANDO: ON = VELOCITA' ATTIVA (ICONA DEL TASTO) O DA RIPRISTINARE (ICONA mdi:restore)
+        name: "Tasto Telecomando Free Heating"
+        unique_id: vmc_master_tasto_free_heating
+        state: >
+          {{ states('sensor.vmc_master_status_ventola_lettura_codice_interpretato_interfaccia').startswith('Free') or states('sensor.vmc_master_velocita_registrata').split(' · ') | select('match', 'Free') | list | count > 0 }}
+        icon: >
+          {{ 'mdi:weather-sunny' if states('sensor.vmc_master_status_ventola_lettura_codice_interpretato_interfaccia').startswith('Free') or not (states('sensor.vmc_master_velocita_registrata').split(' · ') | select('match', 'Free') | list | count > 0) else 'mdi:restore' }}
+      - default_entity_id: binary_sensor.vmc_master_tasto_free_cooling                  # [CONFIGURAZIONE, 2 RICHIAMI] [INTERFACCIA, 1 RICHIAMO] [AUTOMAZIONE, 0 RICHIAMI] TASTO «FREE COOLING» DEL TELECOMANDO: ON = VELOCITA' ATTIVA (ICONA DEL TASTO) O DA RIPRISTINARE (ICONA mdi:restore)
+        name: "Tasto Telecomando Free Cooling"
+        unique_id: vmc_master_tasto_free_cooling
+        state: >
+          {{ states('sensor.vmc_master_status_ventola_lettura_codice_interpretato_interfaccia').startswith('Free') or states('sensor.vmc_master_velocita_registrata').split(' · ') | select('match', 'Free') | list | count > 0 }}
+        icon: >
+          {{ 'mdi:snowflake' if states('sensor.vmc_master_status_ventola_lettura_codice_interpretato_interfaccia').startswith('Free') or not (states('sensor.vmc_master_velocita_registrata').split(' · ') | select('match', 'Free') | list | count > 0) else 'mdi:restore' }}
+      - default_entity_id: binary_sensor.vmc_master_tasto_free_cool_heat                # [CONFIGURAZIONE, 2 RICHIAMI] [INTERFACCIA, 1 RICHIAMO] [AUTOMAZIONE, 0 RICHIAMI] TASTO «FREE COOL./HEAT.» DEL TELECOMANDO: ON = VELOCITA' ATTIVA (ICONA DEL TASTO) O DA RIPRISTINARE (ICONA mdi:restore)
+        name: "Tasto Telecomando Free Cool./Heat."
+        unique_id: vmc_master_tasto_free_cool_heat
+        state: >
+          {{ states('sensor.vmc_master_status_ventola_lettura_codice_interpretato_interfaccia').startswith('Free') or states('sensor.vmc_master_velocita_registrata').split(' · ') | select('match', 'Free') | list | count > 0 }}
+        icon: >
+          {{ 'mdi:sun-snowflake-variant' if states('sensor.vmc_master_status_ventola_lettura_codice_interpretato_interfaccia').startswith('Free') or not (states('sensor.vmc_master_velocita_registrata').split(' · ') | select('match', 'Free') | list | count > 0) else 'mdi:restore' }}
+
   - sensor:
-      - default_entity_id: sensor.vmc_master_velocita_registrata                 # [CONFIGURAZIONE, 2 RICHIAMI] [INTERFACCIA, 3 RICHIAMI] [AUTOMAZIONE, 0 RICHIAMI] VELOCITA' MEMORIZZATA DALLE ALLERTE E RIPRISTINATA A FINE ALLERTA (DIVERSA DALLA VELOCITA' ATTUALE), «Nessuna» SE NON C'E'
+      - default_entity_id: sensor.vmc_master_velocita_registrata                 # [CONFIGURAZIONE, 22 RICHIAMI] [INTERFACCIA, 3 RICHIAMI] [AUTOMAZIONE, 0 RICHIAMI] VELOCITA' MEMORIZZATA DALLE ALLERTE E RIPRISTINATA A FINE ALLERTA (DIVERSA DALLA VELOCITA' ATTUALE), «Nessuna» SE NON C'E'
         name: "Velocità Registrata"
         unique_id: vmc_master_velocita_registrata
         icon: mdi:restore
@@ -554,7 +626,7 @@ template:
           {{ (ns.righe | join(' · '))[:255] if ns.righe | count > 0 and att != 'Non disponibile' else 'Nessuna' }}
 
   - sensor:
-      - default_entity_id: sensor.vmc_master_status_ventola_lettura_codice_interpretato_interfaccia # [CONFIGURAZIONE, 234 RICHIAMI] [INTERFACCIA, 97 RICHIAMI] [AUTOMAZIONE, 134 RICHIAMI] SENSORE DI INTERPRETAZIONE DELLA LETTURA DEI DATI "VELOCITA'" MEMORIZZATI NELLA VMC CONVERITA IN "STRINGA" CON LA POSSIBILITA' DI VISUALIZZARE FREE COOLING O FREE HEATING O FREE C./H. (IN FUNZIONE DEL VALORE LETTO DEL SENSORE vmc_master_status_mese_corrente_freeheating_o_freecooling), PREVIA VERIFICA DI AVVENUTA LETTURA DEI DATI "VELOCITA'"" MEMORIZZATI NELLA VMC
+      - default_entity_id: sensor.vmc_master_status_ventola_lettura_codice_interpretato_interfaccia # [CONFIGURAZIONE, 254 RICHIAMI] [INTERFACCIA, 97 RICHIAMI] [AUTOMAZIONE, 134 RICHIAMI] SENSORE DI INTERPRETAZIONE DELLA LETTURA DEI DATI "VELOCITA'" MEMORIZZATI NELLA VMC CONVERITA IN "STRINGA" CON LA POSSIBILITA' DI VISUALIZZARE FREE COOLING O FREE HEATING O FREE C./H. (IN FUNZIONE DEL VALORE LETTO DEL SENSORE vmc_master_status_mese_corrente_freeheating_o_freecooling), PREVIA VERIFICA DI AVVENUTA LETTURA DEI DATI "VELOCITA'"" MEMORIZZATI NELLA VMC
         name: "Status Ventilazione"
         unique_id: vmc_master_status_ventola_lettura_codice_interpretato_interfaccia
         state: >
@@ -3094,6 +3166,7 @@ recorder:
       - automation.vmc_master_countdown_attese_automazione
       - automation.vmc_master_inizializza_tempi_di_attesa
       - automation.vmc_master_letture_vmc_con_countdown
+      - input_boolean.vmc_master_opzione_finestra_prossime_letture
       - timer.vmc_master_lettura_ping
       - timer.vmc_master_lettura_ventilazione
       - timer.vmc_master_lettura_ambientali
@@ -3106,6 +3179,16 @@ recorder:
       - input_number.vmc_master_intervallo_nome
       - script.vmc_master_ripristina_tempi_attesa
       - sensor.vmc_master_velocita_registrata
+      - binary_sensor.vmc_master_tasto_velocita_0
+      - binary_sensor.vmc_master_tasto_velocita_1
+      - binary_sensor.vmc_master_tasto_velocita_2
+      - binary_sensor.vmc_master_tasto_velocita_3
+      - binary_sensor.vmc_master_tasto_velocita_4
+      - binary_sensor.vmc_master_tasto_notturna
+      - binary_sensor.vmc_master_tasto_iperventilazione
+      - binary_sensor.vmc_master_tasto_free_heating
+      - binary_sensor.vmc_master_tasto_free_cooling
+      - binary_sensor.vmc_master_tasto_free_cool_heat
       - input_boolean.vmc_master_attese_inizializzate
       - input_boolean.vmc_master_opzione_finestra_tempi_attesa
       - timer.vmc_master_countdown_pdr_cambio
@@ -4023,7 +4106,7 @@ input_number:
 ################### Fine Creazione Costanti dei Tempi di Attesa dei Trigger dell'Automazione ###################
 
 ################### Inizio Creazione Costanti degli Intervalli di Lettura della VMC (modificabili dalla scheda) ###################
-  vmc_master_intervallo_ping:                                                  # [CONFIGURAZIONE, 5 RICHIAMI] [INTERFACCIA, 2 RICHIAMI] [AUTOMAZIONE, 0 RICHIAMI] OGNI QUANTI SECONDI SI LEGGE «VERIFICA ON-LINE (PING)» (sensor.vmc_master_status_ip), VALORE ORIGINALE 10 s
+  vmc_master_intervallo_ping:                                                  # [CONFIGURAZIONE, 5 RICHIAMI] [INTERFACCIA, 1 RICHIAMO] [AUTOMAZIONE, 0 RICHIAMI] OGNI QUANTI SECONDI SI LEGGE «VERIFICA ON-LINE (PING)» (sensor.vmc_master_status_ip), VALORE ORIGINALE 10 s
     name: "Intervallo Lettura Verifica On-Line (Ping)"
     min: 5
     max: 3600
@@ -4031,7 +4114,7 @@ input_number:
     mode: box
     unit_of_measurement: s
     icon: mdi:timer-sync-outline
-  vmc_master_intervallo_ventilazione:                                          # [CONFIGURAZIONE, 5 RICHIAMI] [INTERFACCIA, 2 RICHIAMI] [AUTOMAZIONE, 0 RICHIAMI] OGNI QUANTI SECONDI SI LEGGE «SENSORI VENTILAZIONE» (sensor.vmc_master_status_ventola), VALORE ORIGINALE 5 s
+  vmc_master_intervallo_ventilazione:                                          # [CONFIGURAZIONE, 5 RICHIAMI] [INTERFACCIA, 1 RICHIAMO] [AUTOMAZIONE, 0 RICHIAMI] OGNI QUANTI SECONDI SI LEGGE «SENSORI VENTILAZIONE» (sensor.vmc_master_status_ventola), VALORE ORIGINALE 5 s
     name: "Intervallo Lettura Sensori Ventilazione"
     min: 2
     max: 3600
@@ -4039,7 +4122,7 @@ input_number:
     mode: box
     unit_of_measurement: s
     icon: mdi:timer-sync-outline
-  vmc_master_intervallo_ambientali:                                            # [CONFIGURAZIONE, 5 RICHIAMI] [INTERFACCIA, 2 RICHIAMI] [AUTOMAZIONE, 0 RICHIAMI] OGNI QUANTI SECONDI SI LEGGE «SENSORI AMBIENTALI» (sensor.vmc_master_sensori), VALORE ORIGINALE 1227 s
+  vmc_master_intervallo_ambientali:                                            # [CONFIGURAZIONE, 5 RICHIAMI] [INTERFACCIA, 1 RICHIAMO] [AUTOMAZIONE, 0 RICHIAMI] OGNI QUANTI SECONDI SI LEGGE «SENSORI AMBIENTALI» (sensor.vmc_master_sensori), VALORE ORIGINALE 1227 s
     name: "Intervallo Lettura Sensori Ambientali"
     min: 60
     max: 86400
@@ -4047,7 +4130,7 @@ input_number:
     mode: box
     unit_of_measurement: s
     icon: mdi:timer-sync-outline
-  vmc_master_intervallo_lan:                                                   # [CONFIGURAZIONE, 5 RICHIAMI] [INTERFACCIA, 2 RICHIAMI] [AUTOMAZIONE, 0 RICHIAMI] OGNI QUANTI SECONDI SI LEGGE «LAN» (sensor.vmc_master_lan), VALORE ORIGINALE 57641 s
+  vmc_master_intervallo_lan:                                                   # [CONFIGURAZIONE, 5 RICHIAMI] [INTERFACCIA, 1 RICHIAMO] [AUTOMAZIONE, 0 RICHIAMI] OGNI QUANTI SECONDI SI LEGGE «LAN» (sensor.vmc_master_lan), VALORE ORIGINALE 57641 s
     name: "Intervallo Lettura Lan"
     min: 600
     max: 172800
@@ -4055,7 +4138,7 @@ input_number:
     mode: box
     unit_of_measurement: s
     icon: mdi:timer-sync-outline
-  vmc_master_intervallo_nome:                                                  # [CONFIGURAZIONE, 5 RICHIAMI] [INTERFACCIA, 2 RICHIAMI] [AUTOMAZIONE, 0 RICHIAMI] OGNI QUANTI SECONDI SI LEGGE «NOME» (sensor.vmc_master_nome), VALORE ORIGINALE 43227 s
+  vmc_master_intervallo_nome:                                                  # [CONFIGURAZIONE, 5 RICHIAMI] [INTERFACCIA, 1 RICHIAMO] [AUTOMAZIONE, 0 RICHIAMI] OGNI QUANTI SECONDI SI LEGGE «NOME» (sensor.vmc_master_nome), VALORE ORIGINALE 43227 s
     name: "Intervallo Lettura Nome"
     min: 600
     max: 172800
@@ -4571,6 +4654,10 @@ input_boolean:
   vmc_master_attese_inizializzate:                                              # [CONFIGURAZIONE, 5 RICHIAMI] [INTERFACCIA, 0 RICHIAMI] [AUTOMAZIONE, 0 RICHIAMI] ON = COSTANTI DEI TEMPI DI ATTESA GIA' IMPOSTATE AI VALORI ORIGINALI (AL PRIMO AVVIO LE IMPOSTA vmc_master_inizializza_tempi_attesa)
     name: "Tempi di Attesa Inizializzati"
     icon: mdi:timer-check-outline
+
+  vmc_master_opzione_finestra_prossime_letture:                                 # [CONFIGURAZIONE, 2 RICHIAMI] [INTERFACCIA, 7 RICHIAMI] [AUTOMAZIONE, 0 RICHIAMI] FINESTRA «PROSSIME LETTURE DALLA VMC» IN FONDO ALL'INDICE DELLA FINESTRA INFORMAZIONI
+    name: "Prossime Letture dalla VMC"
+    icon: mdi:timer-outline
 ################### Fine Creazione Switch Booleani per i Tempi di Attesa dei Trigger dell'Automazione ###################
 
 ################### Inizio Creazione input datetime per l'accensione e lo spegnimento della VMC per ogni giorno della settimana ###########################################################################################
@@ -4822,19 +4909,19 @@ timer:
   vmc_master_countdown_avvisi:                                   # [CONFIGURAZIONE, 2 RICHIAMI] [INTERFACCIA, 3 RICHIAMI] [AUTOMAZIONE, 0 RICHIAMI] COUNTDOWN DELL'ATTESA IN CORSO DI UNO DEI 3 TRIGGER «AGGIORNAMENTO AVVISI» DELL'AUTOMAZIONE (AVVIATO DA vmc_master_countdown_attese_automazione)
     name: "Aggiornamento Avvisi"
     icon: mdi:timer-sand
-  vmc_master_lettura_ping:                                       # [CONFIGURAZIONE, 2 RICHIAMI] [INTERFACCIA, 3 RICHIAMI] [AUTOMAZIONE, 0 RICHIAMI] COUNTDOWN ALLA PROSSIMA LETTURA «VERIFICA ON-LINE (PING)» (GESTITO DA vmc_master_letture_vmc_countdown)
+  vmc_master_lettura_ping:                                       # [CONFIGURAZIONE, 2 RICHIAMI] [INTERFACCIA, 1 RICHIAMO] [AUTOMAZIONE, 0 RICHIAMI] COUNTDOWN ALLA PROSSIMA LETTURA «VERIFICA ON-LINE (PING)» (GESTITO DA vmc_master_letture_vmc_countdown)
     name: "Prossima Lettura Verifica On-Line (Ping)"
     icon: mdi:timer-sync-outline
-  vmc_master_lettura_ventilazione:                               # [CONFIGURAZIONE, 2 RICHIAMI] [INTERFACCIA, 3 RICHIAMI] [AUTOMAZIONE, 0 RICHIAMI] COUNTDOWN ALLA PROSSIMA LETTURA «SENSORI VENTILAZIONE» (GESTITO DA vmc_master_letture_vmc_countdown)
+  vmc_master_lettura_ventilazione:                               # [CONFIGURAZIONE, 2 RICHIAMI] [INTERFACCIA, 1 RICHIAMO] [AUTOMAZIONE, 0 RICHIAMI] COUNTDOWN ALLA PROSSIMA LETTURA «SENSORI VENTILAZIONE» (GESTITO DA vmc_master_letture_vmc_countdown)
     name: "Prossima Lettura Sensori Ventilazione"
     icon: mdi:timer-sync-outline
-  vmc_master_lettura_ambientali:                                 # [CONFIGURAZIONE, 2 RICHIAMI] [INTERFACCIA, 3 RICHIAMI] [AUTOMAZIONE, 0 RICHIAMI] COUNTDOWN ALLA PROSSIMA LETTURA «SENSORI AMBIENTALI» (GESTITO DA vmc_master_letture_vmc_countdown)
+  vmc_master_lettura_ambientali:                                 # [CONFIGURAZIONE, 2 RICHIAMI] [INTERFACCIA, 1 RICHIAMO] [AUTOMAZIONE, 0 RICHIAMI] COUNTDOWN ALLA PROSSIMA LETTURA «SENSORI AMBIENTALI» (GESTITO DA vmc_master_letture_vmc_countdown)
     name: "Prossima Lettura Sensori Ambientali"
     icon: mdi:timer-sync-outline
-  vmc_master_lettura_lan:                                        # [CONFIGURAZIONE, 2 RICHIAMI] [INTERFACCIA, 3 RICHIAMI] [AUTOMAZIONE, 0 RICHIAMI] COUNTDOWN ALLA PROSSIMA LETTURA «LAN» (GESTITO DA vmc_master_letture_vmc_countdown)
+  vmc_master_lettura_lan:                                        # [CONFIGURAZIONE, 2 RICHIAMI] [INTERFACCIA, 1 RICHIAMO] [AUTOMAZIONE, 0 RICHIAMI] COUNTDOWN ALLA PROSSIMA LETTURA «LAN» (GESTITO DA vmc_master_letture_vmc_countdown)
     name: "Prossima Lettura Lan"
     icon: mdi:timer-sync-outline
-  vmc_master_lettura_nome:                                       # [CONFIGURAZIONE, 2 RICHIAMI] [INTERFACCIA, 3 RICHIAMI] [AUTOMAZIONE, 0 RICHIAMI] COUNTDOWN ALLA PROSSIMA LETTURA «NOME» (GESTITO DA vmc_master_letture_vmc_countdown)
+  vmc_master_lettura_nome:                                       # [CONFIGURAZIONE, 2 RICHIAMI] [INTERFACCIA, 1 RICHIAMO] [AUTOMAZIONE, 0 RICHIAMI] COUNTDOWN ALLA PROSSIMA LETTURA «NOME» (GESTITO DA vmc_master_letture_vmc_countdown)
     name: "Prossima Lettura Nome"
     icon: mdi:timer-sync-outline
 ################### Fine Creazione Timer per il Countdown in Scheda delle Attese dell'Automazione ###################
@@ -5973,6 +6060,7 @@ script:
             - automation.vmc_master_countdown_attese_automazione
             - automation.vmc_master_inizializza_tempi_di_attesa
             - automation.vmc_master_letture_vmc_con_countdown
+            - input_boolean.vmc_master_opzione_finestra_prossime_letture
             - timer.vmc_master_lettura_ping
             - timer.vmc_master_lettura_ventilazione
             - timer.vmc_master_lettura_ambientali
@@ -5985,6 +6073,16 @@ script:
             - input_number.vmc_master_intervallo_nome
             - script.vmc_master_ripristina_tempi_attesa
             - sensor.vmc_master_velocita_registrata
+            - binary_sensor.vmc_master_tasto_velocita_0
+            - binary_sensor.vmc_master_tasto_velocita_1
+            - binary_sensor.vmc_master_tasto_velocita_2
+            - binary_sensor.vmc_master_tasto_velocita_3
+            - binary_sensor.vmc_master_tasto_velocita_4
+            - binary_sensor.vmc_master_tasto_notturna
+            - binary_sensor.vmc_master_tasto_iperventilazione
+            - binary_sensor.vmc_master_tasto_free_heating
+            - binary_sensor.vmc_master_tasto_free_cooling
+            - binary_sensor.vmc_master_tasto_free_cool_heat
             - input_boolean.vmc_master_attese_inizializzate
             - input_boolean.vmc_master_opzione_finestra_tempi_attesa
             - timer.vmc_master_countdown_pdr_cambio
@@ -24793,6 +24891,14 @@ automation:
       - repeat:
           for_each: "{{ chiavi }}"
           sequence:
+            - variables:
+                secondi: "{{ states('input_number.vmc_master_intervallo_' ~ repeat.item) | int(60) }}"
+            - alias: "Fa ripartire subito il countdown (prima della lettura, cosi' il timer non resta mai inattivo)"
+              action: timer.start
+              target:
+                entity_id: "timer.vmc_master_lettura_{{ repeat.item }}"
+              data:
+                duration: "{{ '%02d:%02d:%02d' % (secondi // 3600, (secondi % 3600) // 60, secondi % 60) }}"
             - if:
                 - condition: template
                   value_template: "{{ trigger.id == 'scaduto' }}"
@@ -24801,13 +24907,6 @@ automation:
                   continue_on_error: true
                   target:
                     entity_id: "{{ sensori[repeat.item] }}"
-            - variables:
-                secondi: "{{ states('input_number.vmc_master_intervallo_' ~ repeat.item) | int(60) }}"
-            - action: timer.start
-              target:
-                entity_id: "timer.vmc_master_lettura_{{ repeat.item }}"
-              data:
-                duration: "{{ '%02d:%02d:%02d' % (secondi // 3600, (secondi % 3600) // 60, secondi % 60) }}"
 ################### Fine Creazione Automazione Letture della VMC con Countdown ###################
 
 ################### Inizio Creazione Automazione Inizializzazione dei Tempi di Attesa ###################
