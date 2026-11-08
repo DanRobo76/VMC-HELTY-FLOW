@@ -10101,9 +10101,101 @@ cards:
                           'script.vmc_master_audio_allerta_diff_temp',
                           'script.vmc_master_audio_nessuna_allerta_diff_temp',
                           'script.vmc_master_azzera_aria_scambiata_puntuale',
+                          'automation.vmc_master_countdown_attese_automazione',
+                          'automation.vmc_master_countdown_letture_vmc',
+                          'automation.vmc_master_esclusivita_finestre_opzioni',
+                          'automation.vmc_master_inizializza_tempi_di_attesa',
+                          'binary_sensor.vmc_master_tasto_velocita_0',
+                          'binary_sensor.vmc_master_tasto_velocita_1',
+                          'binary_sensor.vmc_master_tasto_velocita_2',
+                          'binary_sensor.vmc_master_tasto_velocita_3',
+                          'binary_sensor.vmc_master_tasto_velocita_4',
+                          'binary_sensor.vmc_master_tasto_notturna',
+                          'binary_sensor.vmc_master_tasto_iperventilazione',
+                          'binary_sensor.vmc_master_tasto_free_heating',
+                          'binary_sensor.vmc_master_tasto_free_cooling',
+                          'binary_sensor.vmc_master_tasto_free_cool_heat',
+                          'input_boolean.vmc_master_attese_inizializzate',
+                          'input_boolean.vmc_master_opzione_finestra_prossime_letture',
+                          'input_boolean.vmc_master_opzione_finestra_tempi_attesa',
+                          'input_number.vmc_master_attesa_pdr_cambio',
+                          'input_number.vmc_master_attesa_pdr_cambio_inquinanti',
+                          'input_number.vmc_master_attesa_pdr_ripristino',
+                          'input_number.vmc_master_attesa_pdr_ripristino_inquinanti',
+                          'input_number.vmc_master_attesa_free_sospensione',
+                          'input_number.vmc_master_attesa_free_sospensione_inquinanti',
+                          'input_number.vmc_master_attesa_free_ripristino',
+                          'input_number.vmc_master_attesa_free_ripristino_inquinanti',
+                          'input_number.vmc_master_attesa_blackout_rilevazione',
+                          'input_number.vmc_master_attesa_blackout_ripristino',
+                          'input_number.vmc_master_attesa_calendario_inizio',
+                          'input_number.vmc_master_attesa_calendario_fine',
+                          'input_number.vmc_master_attesa_avvisi',
+                          'input_number.vmc_master_attesa_inquinanti_avvio',
+                          'input_number.vmc_master_attesa_inquinanti_avvio_spia_pdr',
+                          'input_number.vmc_master_attesa_inquinanti_fine',
+                          'input_number.vmc_master_attesa_inquinanti_memoria',
+                          'input_number.vmc_master_attesa_free_annullamento',
+                          'input_number.vmc_master_attesa_umidita_avvio',
+                          'input_number.vmc_master_attesa_umidita_fine',
+                          'input_number.vmc_master_attesa_umidita_memoria',
+                          'input_number.vmc_master_attesa_delta_avvio',
+                          'input_number.vmc_master_attesa_delta_fine',
+                          'input_number.vmc_master_attesa_delta_memoria',
+                          'input_text.vmc_master_countdown_pdr_cambio',
+                          'input_text.vmc_master_countdown_pdr_ripristino',
+                          'input_text.vmc_master_countdown_free_heating_annullamento',
+                          'input_text.vmc_master_countdown_free_heating_sospensione',
+                          'input_text.vmc_master_countdown_free_heating_ripristino',
+                          'input_text.vmc_master_countdown_free_cooling_annullamento',
+                          'input_text.vmc_master_countdown_free_cooling_sospensione',
+                          'input_text.vmc_master_countdown_free_cooling_ripristino',
+                          'input_text.vmc_master_countdown_inquinanti_avvio',
+                          'input_text.vmc_master_countdown_inquinanti_fine',
+                          'input_text.vmc_master_countdown_inquinanti_memoria',
+                          'input_text.vmc_master_countdown_umidita_avvio',
+                          'input_text.vmc_master_countdown_umidita_fine',
+                          'input_text.vmc_master_countdown_umidita_memoria',
+                          'input_text.vmc_master_countdown_delta_avvio',
+                          'input_text.vmc_master_countdown_delta_fine',
+                          'input_text.vmc_master_countdown_delta_memoria',
+                          'input_text.vmc_master_countdown_blackout_rilevazione',
+                          'input_text.vmc_master_countdown_blackout_ripristino',
+                          'input_text.vmc_master_countdown_calendario_inizio',
+                          'input_text.vmc_master_countdown_calendario_fine',
+                          'input_text.vmc_master_countdown_avvisi',
+                          'script.vmc_master_ripristina_tempi_attesa',
+                          'sensor.vmc_master_velocita_registrata',
+                          'timer.vmc_master_countdown_pdr_cambio',
+                          'timer.vmc_master_countdown_pdr_ripristino',
+                          'timer.vmc_master_countdown_free_heating_annullamento',
+                          'timer.vmc_master_countdown_free_heating_sospensione',
+                          'timer.vmc_master_countdown_free_heating_ripristino',
+                          'timer.vmc_master_countdown_free_cooling_annullamento',
+                          'timer.vmc_master_countdown_free_cooling_sospensione',
+                          'timer.vmc_master_countdown_free_cooling_ripristino',
+                          'timer.vmc_master_countdown_inquinanti_avvio',
+                          'timer.vmc_master_countdown_inquinanti_fine',
+                          'timer.vmc_master_countdown_inquinanti_memoria',
+                          'timer.vmc_master_countdown_umidita_avvio',
+                          'timer.vmc_master_countdown_umidita_fine',
+                          'timer.vmc_master_countdown_umidita_memoria',
+                          'timer.vmc_master_countdown_delta_avvio',
+                          'timer.vmc_master_countdown_delta_fine',
+                          'timer.vmc_master_countdown_delta_memoria',
+                          'timer.vmc_master_countdown_blackout_rilevazione',
+                          'timer.vmc_master_countdown_blackout_ripristino',
+                          'timer.vmc_master_countdown_calendario_inizio',
+                          'timer.vmc_master_countdown_calendario_fine',
+                          'timer.vmc_master_countdown_avvisi',
+                          'timer.vmc_master_lettura_ping',
+                          'timer.vmc_master_lettura_ventilazione',
+                          'timer.vmc_master_lettura_ambientali',
+                          'timer.vmc_master_lettura_lan',
+                          'timer.vmc_master_lettura_nome',
                           'input_boolean.vmc_master_conferma_pulizia_cronologia'
                         ] -%}
-                        {%- set tipi = {'automation': 'Automazioni', 'button': 'Pulsanti', 'input_boolean': 'Interruttori (input_boolean)', 'input_datetime': 'Orari (input_datetime)', 'input_number': 'Valori numerici (input_number)', 'input_select': 'Selettori (input_select)', 'input_text': 'Testi (input_text)', 'script': 'Script', 'sensor': 'Sensori'} -%}
+                        {%- set tipi = {'automation': 'Automazioni', 'binary_sensor': 'Sensori binari', 'button': 'Pulsanti', 'input_boolean': 'Interruttori (input_boolean)', 'input_datetime': 'Orari (input_datetime)', 'input_number': 'Valori numerici (input_number)', 'input_select': 'Selettori (input_select)', 'input_text': 'Testi (input_text)', 'script': 'Script', 'sensor': 'Sensori', 'timer': 'Timer'} -%}
                         {%- set escluse = state_attr('input_select.vmc_master_entita_escluse_recorder', 'options') -%}
                         {%- set registrate = elenco | reject('in', escluse or []) | list -%}
                         {%- if escluse is not none -%}
@@ -10871,6 +10963,15 @@ cards:
                   <br><br>
                   <b>A cosa serve.</b> Alla diagnosi: se un valore dell'interfaccia sembra errato, qui si vede
                   il dato grezzo inviato dalla VMC. Se la VMC è OFF-Line viene mostrato «Non disponibile».
+                  <br><br>
+                  <b>Verifica On-Line (Ping).</b> Il riquadro «Verifica On-Line (Ping)» mostra se la VMC risponde in rete (ON-Line /
+                  OFF-Line); Home Assistant la controlla ogni 10 secondi.
+                  <br><br>
+                  <b>Prossime Letture.</b> Nel pannello Opzioni il pulsantino ⏱ accanto a quello di Clona apre la finestra
+                  «Prossime Letture dalla VMC»: per Ping (ogni 10 s), Sensori Ventilazione (ogni 5 s), Sensori Ambientali (ogni
+                  1227 s), Lan (ogni 57641 s) e Nome (ogni 43227 s) mostra il tempo che manca alla prossima lettura che Home
+                  Assistant fa da solo, calcolato dall'ultima lettura registrata. Gli intervalli sono gli scan_interval del file
+                  vmc_master.yaml e non si modificano dalla scheda.
                   </td></tr></table>
 
                   <strong>- Verifica On-Line (Ping)</strong> <pre style="font-size:6px; background-color: #d9ffcc;">{{ states('sensor.vmc_master_status_ip') }}</pre>
@@ -11827,6 +11928,9 @@ cards:
                   'on') %}vmc_master_opzione_finestra_audio: On <br>{% endif %}
                   {% if is_state('input_boolean.vmc_master_opzione_finestra_clona', 'on') %}vmc_master_opzione_finestra_clona: On <br>{% endif %}
                   {% if is_state('input_boolean.vmc_master_conferma_pulizia_cronologia', 'on') %}vmc_master_conferma_pulizia_cronologia: On <br>{% endif %}
+                  {% if is_state('input_boolean.vmc_master_opzione_finestra_prossime_letture', 'on') %}vmc_master_opzione_finestra_prossime_letture: On <br>{% endif %}
+                  {% if is_state('input_boolean.vmc_master_opzione_finestra_tempi_attesa', 'on') %}vmc_master_opzione_finestra_tempi_attesa: On <br>{% endif %}
+                  {% if is_state('input_boolean.vmc_master_attese_inizializzate', 'on') %}vmc_master_attese_inizializzate: On <br>{% endif %}
                   </pre>
 
                   {% endif %}
@@ -12424,6 +12528,12 @@ cards:
                     <summary><b>17 Logiche di Funzionamento</b></summary> 
                     <table><tr><td align="justify">
                     <b>PRIORITA' DI ATTIVAZIONE DEGLI ALLARMI (Secondi per l'Attivazione e per la Ripresa):</b><br>
+                    <i>I Secondi indicati sono i valori originali: ogni tempo di attesa si può modificare nel pannello Opzioni (pulsantino
+                    «Tempi di Attesa») e si riporta ai valori originali con «Ripristina Tempi di Attesa Originali». Mentre l'automazione
+                    aspetta, sotto il pannello VMC compare il riquadro con il «Tempo Mancante» dell'azione in attesa (es. «Annullamento
+                    Memoria Free Heating», «Cambio Velocità per Lim. Δ PdR») e la «Velocità Registrata», cioè la velocità che verrà
+                    ripristinata a fine allerta. Nella finestra Telecomando il tasto della velocità attiva è illuminato, quello della
+                    velocità da ripristinare è illuminato con l'icona ↺.</i><br><br>
                     - Congelamento ≤ -18 [°C] Temp. Ext.: 0 Secondi. Durante il Congelamento la VMC resta ferma: se si prova a cambiarle Velocità viene riportata subito a Velocità 0 e, se non si ferma, il comando di arresto viene ripetuto finché non si ferma (circa ogni 4 Secondi);<br>
                     - VMC Sensori Int. Δ Temp. > 23 [°C]: 4 Secondi;<br>
                     - Inquinanti (CO₂ e VOC): 8 Secondi. Se la VMC è partita da Velocità 0 resta a Velocità 1 fino al rientro degli Inquinanti, poi torna a Velocità 0; se nel frattempo l'utente sceglie un'altra Velocità diversa da 0 (anche durante il Congelamento o il Δ Temp.) questa viene mantenuta, anche dopo il rientro; se invece sceglie Velocità 0 con gli Inquinanti ancora presenti, dopo circa 8 Secondi la VMC riparte a Velocità 1 e al rientro degli Inquinanti torna a Velocità 0, anche se prima dell'allerta era a un'altra Velocità;<br>

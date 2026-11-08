@@ -82,6 +82,10 @@
 - <sub>Indicatore Andamento Rischio Muffa.</sub>
 - <sub>Indicatore che converte il punto di rugiada (TPdR) in una classificazione qualitativa del comfort igrometrico all'interno dell'ambiente.</sub>
 - <sub>Visualizza in tempo reale: il numero totale di ricambi d'aria effettuati nella giornata, il volume totale di aria scambiata (m³) e il tempo rimanente prima del prossimo ricambio completo [Cliccare su Telecomando].</sub>
+- <sub>Mostra in tempo reale il «Tempo Mancante» di ogni attesa dell'automazione (es. «Annullamento Memoria Free Heating», «Cambio Velocità per Lim. Δ PdR», «Ripristino dopo Black-Out») e la «Velocità Registrata» che verrà ripristinata a fine allerta, in un riquadro compatto sotto il pannello VMC.</sub>
+- <sub>I tempi di attesa dei trigger dell'automazione sono modificabili dalla scheda [Pannello Opzioni → Tempi di Attesa] e si riportano ai valori originali con «Ripristina Tempi di Attesa Originali».</sub>
+- <sub>Mostra il tempo che manca alla prossima lettura della VMC da parte di Home Assistant: Ping, Sensori Ventilazione, Sensori Ambientali, Lan e Nome [Pannello Opzioni → Prossime Letture dalla VMC].</sub>
+- <sub>Nella finestra Telecomando il tasto della velocità attiva è illuminato e quello della velocità da ripristinare è illuminato con l'icona ↺.</sub>
 - <sub>Elenca tutte le VMC installate in una tabella, una colonna per VMC [Pannello Informazioni → voce 21].</sub>
 - <sub>Intestazione animata: flusso d'aria proporzionale alla portata e colore del LED in funzione dello stato; scritte «Alert», «Alert Δ Temp.» e «Alert Free» sotto i tasti di velocità quando un'allerta bloccherebbe o ridurrebbe la VMC [Pannello Informazioni → voce 22].</sub>
 - <sub>Permette di selezionare le entità di: Temperatura (Interna ed Esterna), Umidità (Interna ed Esterna), Anidride Carbonica CO₂ (Interna) e Dispositivo Mobile, disponibili in Home Assistant, includendo anche le entità provenienti da fonti Meteo, per ottenere maggiore precisione e affidabilità rispetto ai sensori integrati della VMC.</sub>
@@ -439,6 +443,10 @@
 - <sub>Mould risk trend indicator.</sub>
 - <sub>Indicator that converts the dew point into a qualitative classification of indoor hygrometric comfort.</sub>
 - <sub>Shows in real time: the total number of air changes made during the day, the total volume of exchanged air (m³) and the time left before the next complete air change [Click on Remote control].</sub>
+- <sub>Shows in real time the «Tempo Mancante» (time left) of every wait of the automation (e.g. «Annullamento Memoria Free Heating», «Cambio Velocità per Lim. Δ PdR», «Ripristino dopo Black-Out») and the «Velocità Registrata» (saved speed) that will be restored at the end of the alert, in a compact box under the VMC panel.</sub>
+- <sub>The waiting times of the automation triggers can be changed from the card [Options panel → Tempi di Attesa] and reset to the original values with «Ripristina Tempi di Attesa Originali».</sub>
+- <sub>Shows the time left before Home Assistant's next reading of the unit: Ping, Ventilation Sensors, Environmental Sensors, Lan and Name [Options panel → Prossime Letture dalla VMC].</sub>
+- <sub>In the Remote control window the button of the active speed is lit, and the button of the speed to be restored is lit with the ↺ icon.</sub>
 - <sub>Lists all installed units in one table, one column per unit [Information Panel → item 21].</sub>
 - <sub>Animated header: airflow proportional to the flow rate and LED colour according to the state; «Alert», «Alert Δ Temp.» and «Alert Free» labels under the speed buttons when an alert would block or reduce the unit [Information Panel → item 22].</sub>
 - <sub>Select the Home Assistant entities for: Temperature (Indoor and Outdoor), Humidity (Indoor and Outdoor), Carbon Dioxide CO₂ (Indoor) and Mobile Device, including entities from weather sources, for greater precision and reliability than the unit's built-in sensors.</sub>
