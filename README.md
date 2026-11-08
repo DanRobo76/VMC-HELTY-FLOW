@@ -104,7 +104,7 @@
 - <sub>Calcola il tempo di ricambio d'aria in funzione della velocità.</sub>
 - <sub>Calcola la portata d'aria (m³/h) in funzione della velocità.</sub>
 - <sub>Calcola l'umidità assoluta esterna e interna (g/m³).</sub>
-- <sub>Pulisce la cronologia delle entità del Package mostrando prima, in un riquadro di conferma, il numero e l'elenco delle entità coinvolte.</sub>
+- <sub>Pulisce la cronologia delle entità del Package mostrando prima, in un riquadro di conferma, il numero e l'elenco delle entità coinvolte e quante di esse sono registrate nel database (le esclusioni si gestiscono in un unico elenco nella sezione «recorder» del file YAML).</sub>
 - <sub>Mostra avvisi in funzione di:</sub>
   - <sub>sensori CO₂ e/o VOC;</sub>
   - <sub>sensore umidità;</sub>
@@ -461,7 +461,7 @@
 - <sub>Calculates the air change time according to the speed.</sub>
 - <sub>Calculates the airflow (m³/h) according to the speed.</sub>
 - <sub>Calculates outdoor and indoor absolute humidity (g/m³).</sub>
-- <sub>Purges the history of the package entities, first showing in a confirmation box the number and the list of the entities involved.</sub>
+- <sub>Purges the history of the package entities, first showing in a confirmation box the number and the list of the entities involved and how many of them are recorded in the database (exclusions are managed in a single list in the «recorder» section of the YAML file).</sub>
 - <sub>Shows alerts based on:</sub>
   - <sub>CO₂ and/or VOC sensors;</sub>
   - <sub>humidity sensor;</sub>

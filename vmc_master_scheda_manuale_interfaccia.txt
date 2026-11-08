@@ -9716,6 +9716,26 @@ cards:
                           'input_boolean.vmc_master_conferma_pulizia_cronologia'
                         ] -%}
                         {%- set tipi = {'automation': 'Automazioni', 'button': 'Pulsanti', 'input_boolean': 'Interruttori (input_boolean)', 'input_datetime': 'Orari (input_datetime)', 'input_number': 'Valori numerici (input_number)', 'input_select': 'Selettori (input_select)', 'input_text': 'Testi (input_text)', 'script': 'Script', 'sensor': 'Sensori'} -%}
+                        {%- set escluse = state_attr('input_select.vmc_master_entita_escluse_recorder', 'options') -%}
+                        {%- set registrate = elenco | reject('in', escluse or []) | list -%}
+                        {%- if escluse is not none -%}
+                        <ha-icon icon="mdi:alert"></ha-icon> <b>Vuoi cancellare la cronologia della VMC «{{ states('sensor.vmc_master_nome_status') }}»? Entità registrate nel database: {{ registrate | count }} su {{ elenco | count }}</b>
+                        <br><br>
+                        Viene cancellato dal database di Home Assistant tutto lo storico (grafici e registro) delle entità elencate
+                        qui sotto. Le entità, i loro valori attuali e le impostazioni restano invariati. L'operazione non si può
+                        annullare.
+                        <br><br>
+                        Le {{ (elenco | count) - (registrate | count) }} entità escluse dal Recorder (file vmc_master.yaml, sezione «recorder») non vengono
+                        registrate: per loro si cancella solo l'eventuale storico rimasto da prima dell'esclusione.
+                        <table width="100%"><tr><th style="padding: 4px 8px; border: 1px solid #c3c2b7;">Tipo</th><th style="padding: 4px 8px; border: 1px solid #c3c2b7;">N° entità</th><th style="padding: 4px 8px; border: 1px solid #c3c2b7;">Registrate</th></tr>
+                        {%- for dom in tipi -%}{%- set n = elenco | select('match', dom ~ '\\.') | list | count -%}{%- set r = registrate | select('match', dom ~ '\\.') | list | count -%}{%- if n > 0 -%}<tr><td style="padding: 4px 8px; border: 1px solid #c3c2b7;">{{ tipi[dom] }}</td><td style="padding: 4px 8px; border: 1px solid #c3c2b7;">{{ n }}</td><td style="padding: 4px 8px; border: 1px solid #c3c2b7;">{{ r }}</td></tr>{%- endif -%}{%- endfor -%}
+                        </table>
+                        <details><summary><b>Elenco completo delle {{ elenco | count }} entità</b></summary>
+                        <table width="100%"><tr><th style="padding: 4px 8px; border: 1px solid #c3c2b7;">Nome</th><th style="padding: 4px 8px; border: 1px solid #c3c2b7;">Entità</th><th style="padding: 4px 8px; border: 1px solid #c3c2b7;">Registrata</th></tr>
+                        {%- for e in elenco -%}<tr><td style="padding: 4px 8px; border: 1px solid #c3c2b7;">{{ (state_attr(e, 'friendly_name') or (((device_name(e) or '') ~ ' ' ~ ((entity_name(e) or '') if entity_name is defined else '')) | trim)) or '–' }}</td><td style="padding: 4px 8px; border: 1px solid #c3c2b7;"><small>{{ e }}</small></td><td style="padding: 4px 8px; border: 1px solid #c3c2b7;">{{ 'Sì' if e in registrate else 'No' }}</td></tr>{%- endfor -%}
+                        </table>
+                        </details>
+                        {%- else -%}
                         <ha-icon icon="mdi:alert"></ha-icon> <b>Vuoi cancellare la cronologia di {{ elenco | count }} entità della VMC «{{ states('sensor.vmc_master_nome_status') }}»?</b>
                         <br><br>
                         Viene cancellato dal database di Home Assistant tutto lo storico (grafici e registro) delle entità elencate
@@ -9729,6 +9749,7 @@ cards:
                         {%- for e in elenco -%}<tr><td style="padding: 4px 8px; border: 1px solid #c3c2b7;">{{ (state_attr(e, 'friendly_name') or (((device_name(e) or '') ~ ' ' ~ ((entity_name(e) or '') if entity_name is defined else '')) | trim)) or '–' }}</td><td style="padding: 4px 8px; border: 1px solid #c3c2b7;"><small>{{ e }}</small></td></tr>{%- endfor -%}
                         </table>
                         </details>
+                        {%- endif -%}
                     - type: horizontal-stack
                       cards:
                         - show_name: true
@@ -11227,7 +11248,11 @@ cards:
                   Cancella dal database lo storico (grafici e registro) delle
                   entità del Package; entità e impostazioni restano invariate.
                   Prima di procedere mostra un riquadro con il numero e
-                  l'elenco delle entità e chiede conferma con «Sì» o «No».
+                  l'elenco delle entità, indica quante sono registrate nel
+                  database e chiede conferma con «Sì» o «No». Le entità da
+                  registrare o escludere si scelgono nell'unico elenco della
+                  sezione «recorder» del file vmc_master.yaml (riga commentata
+                  con # = registrata); dopo la modifica riavviare Home Assistant.
 
                   <br>
 
