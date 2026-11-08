@@ -8607,7 +8607,7 @@ cards:
                 service_data:
                   entity_id: input_boolean.vmc_master_opzioni_accendi_spegni_avvisi
         - type: markdown
-          show_empty: false
+          text_only: true
           content: >-
             {%- set nomi = {'0': 'Velocità 0', '1': 'Velocità 1', '2': 'Velocità 2', '3': 'Velocità 3', '4': 'Velocità 4', 'notturna': 'Notturna', 'iperventilazione': 'Iperventilazione', 'freecooling': 'Free Cool./Heat.'} -%}
             {%- set att = states('sensor.vmc_master_status_ventola_lettura_codice_interpretato_interfaccia') -%}
@@ -8631,7 +8631,7 @@ cards:
               {%- endif -%}
             {%- endfor -%}{%- endfor -%}
             {%- if ns.righe | count > 0 and att != 'Non disponibile' -%}
-            <small><ha-icon icon="mdi:restore"></ha-icon> Velocità registrata: {{ ns.righe | join(' · ') }}{{ ', ripristinata a fine allerta' if ns.righe | count == 1 else '' }}</small>
+            <ha-alert alert-type="info">Velocità registrata: {{ ns.righe | join(' · ') }}{{ ', ripristinata a fine allerta' if ns.righe | count == 1 else '' }}</ha-alert>
             {%- endif -%}
         - type: conditional
           conditions:
