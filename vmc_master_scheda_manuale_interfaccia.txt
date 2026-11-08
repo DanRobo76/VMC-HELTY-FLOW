@@ -7734,6 +7734,48 @@ cards:
           conditions:
           - condition: state
             entity: sensor.vmc_master_stato_led_interfaccia
+            state: giallo lento
+          - condition: state
+            entity: sensor.vmc_master_status_ventola_lettura_codice_interpretato_interfaccia
+            state: Velocità 0
+          card:
+            type: entities
+            entities:
+            - entity: sensor.vmc_master_nome_status
+              secondary_info: last-updated
+            - entity: sensor.vmc_master_status_ventola_lettura_codice_interpretato_interfaccia
+              secondary_info: last-updated
+            - entity: sensor.vmc_master_spia_pannello_alert_monitoraggio_totale
+              secondary_info: last-updated
+            state_color: true
+            show_header_toggle: true
+            title: Ventilazione Meccanica Controllata
+            footer:
+              type: buttons
+              entities:
+              - entity: input_boolean.vmc_master_opzioni_vmc
+              - entity: input_boolean.vmc_master_opzioni_monitoraggio_sensori
+              - entity: input_boolean.vmc_master_opzioni_interruttore_calendario
+              - entity: input_boolean.vmc_master_opzioni_offset_sensori
+              - entity: input_boolean.vmc_master_opzioni_avvisi
+              - entity: input_boolean.vmc_master_opzioni_lettura_sensori
+            header:
+              type: picture
+              image: https://raw.githubusercontent.com/DanRobo76/VMC-HELTY-FLOW/main/immagini/Intestazione/ferma_allerta_lenta.webp
+              tap_action:
+                action: call-service
+                service: input_boolean.toggle
+                service_data:
+                  entity_id: input_boolean.vmc_master_opzioni_accendi_spegni_avvisi
+              hold_action:
+                action: call-service
+                service: input_boolean.toggle
+                service_data:
+                  entity_id: input_boolean.vmc_master_opzioni_accendi_spegni_avvisi
+        - type: conditional
+          conditions:
+          - condition: state
+            entity: sensor.vmc_master_stato_led_interfaccia
             state: bianco
           - condition: state
             entity: sensor.vmc_master_status_ventola_lettura_codice_interpretato_interfaccia
@@ -12579,8 +12621,8 @@ cards:
                     <a href="https://raw.githubusercontent.com/DanRobo76/VMC-HELTY-FLOW/main/immagini/Informazioni/18_priorita_allarmi.png?v=20261107" target="_blank"><img src="https://raw.githubusercontent.com/DanRobo76/VMC-HELTY-FLOW/main/immagini/Informazioni/18_priorita_allarmi.png?v=20261107" alt="Priorità degli allarmi" width="100%"></a>
                     <br>
                     <p>&nbsp;&nbsp;&nbsp;&nbsp;
-                      <a href="https://raw.githubusercontent.com/DanRobo76/VMC-HELTY-FLOW/main/Logiche%20di%20Funzionamento.png">
-                        <img src="https://raw.githubusercontent.com/DanRobo76/VMC-HELTY-FLOW/main/Logiche%20di%20Funzionamento.png" alt="Logiche di Funzionamento" width="80%">
+                      <a href="https://raw.githubusercontent.com/DanRobo76/VMC-HELTY-FLOW/main/immagini/Informazioni/Logiche%20di%20Funzionamento.png">
+                        <img src="https://raw.githubusercontent.com/DanRobo76/VMC-HELTY-FLOW/main/immagini/Informazioni/Logiche%20di%20Funzionamento.png" alt="Logiche di Funzionamento" width="80%">
                       </a> 
                     </p> 
                   </details>
@@ -12937,17 +12979,18 @@ cards:
                   0 l'aria esterna entra da sinistra, con la polvere, ed esce pulita a destra: il flusso in entrata ha il
                   colore dell'allerta in corso (verde senza allerte), quello in uscita è sempre verde. A Velocità 0 e con
                   la VMC OFF-Line si vede solo la VMC, senza flussi, con il LED animato: il LED bianco si accende e si spegne
-                  lentamente, come un respiro; il LED giallo (allerta che blocca la VMC) e il LED grigio (OFF-Line)
-                  lampeggiano.
+                  lentamente, come un respiro, e allo stesso modo respira il LED giallo quando sono presenti Avvisi che non
+                  hanno fermato la VMC; il LED giallo (allerta che blocca la VMC) e il LED grigio (OFF-Line) lampeggiano.
                   <br><br>
                   <b>Colore del LED e del flusso.</b>
                   </td></tr></table>
                   <table>
                   <tr><th style="padding: 4px 8px; border: 1px solid #c3c2b7;">Colore</th><th style="padding: 4px 8px; border: 1px solid #c3c2b7;">Immagine</th><th style="padding: 4px 8px; border: 1px solid #c3c2b7;">Quando</th></tr>
                   <tr><td style="padding: 4px 8px; border: 1px solid #c3c2b7;"><font color="#a6ada2">■</font> Grigio</td><td style="padding: 4px 8px; border: 1px solid #c3c2b7;">ferma, senza flussi, LED lampeggiante</td><td style="padding: 4px 8px; border: 1px solid #c3c2b7;">VMC OFF-Line o Non disponibile</td></tr>
-                  <tr><td style="padding: 4px 8px; border: 1px solid #c3c2b7;"><font color="#a0c48c">■</font> Bianco</td><td style="padding: 4px 8px; border: 1px solid #c3c2b7;">ferma, senza flussi, LED che respira</td><td style="padding: 4px 8px; border: 1px solid #c3c2b7;">Velocità 0 senza allerte</td></tr>
+                  <tr><td style="padding: 4px 8px; border: 1px solid #c3c2b7;"><font color="#a0c48c">■</font> Bianco</td><td style="padding: 4px 8px; border: 1px solid #c3c2b7;">ferma, senza flussi, LED che respira</td><td style="padding: 4px 8px; border: 1px solid #c3c2b7;">Velocità 0 senza allerte e senza Avvisi</td></tr>
                   <tr><td style="padding: 4px 8px; border: 1px solid #c3c2b7;"><font color="#a0c48c">■</font> Bianco</td><td style="padding: 4px 8px; border: 1px solid #c3c2b7;">in movimento</td><td style="padding: 4px 8px; border: 1px solid #c3c2b7;">In funzione senza allerte, anche durante una Fascia del Calendario</td></tr>
                   <tr><td style="padding: 4px 8px; border: 1px solid #c3c2b7;"><font color="#c8b33d">■</font> Giallo</td><td style="padding: 4px 8px; border: 1px solid #c3c2b7;">ferma, senza flussi, LED lampeggiante</td><td style="padding: 4px 8px; border: 1px solid #c3c2b7;">Velocità 0 con un'allerta che blocca la VMC: Congelamento, Punto di Rugiada sfavorevole (interruttore PdR su ON), Free programmato sfavorevole, Diff. Temp. > 23 °C</td></tr>
+                  <tr><td style="padding: 4px 8px; border: 1px solid #c3c2b7;"><font color="#c8b33d">■</font> Giallo</td><td style="padding: 4px 8px; border: 1px solid #c3c2b7;">ferma, senza flussi, LED che respira</td><td style="padding: 4px 8px; border: 1px solid #c3c2b7;">Velocità 0 con Avvisi presenti (Status Monitoraggio in Allerta: Free, Inquinanti, Umidità, sensori non calcolabili, Black-Out...) che non hanno fermato la VMC, anche se gli Avvisi sono disabilitati</td></tr>
                   <tr><td style="padding: 4px 8px; border: 1px solid #c3c2b7;"><font color="#c8b33d">■</font> Giallo</td><td style="padding: 4px 8px; border: 1px solid #c3c2b7;">in movimento</td><td style="padding: 4px 8px; border: 1px solid #c3c2b7;">VMC portata a Velocità 1 dalla Diff. Temp. > 23 °C</td></tr>
                   <tr><td style="padding: 4px 8px; border: 1px solid #c3c2b7;"><font color="#6dbccb">■</font> Blu</td><td style="padding: 4px 8px; border: 1px solid #c3c2b7;">in movimento</td><td style="padding: 4px 8px; border: 1px solid #c3c2b7;">VMC in funzione per allarme Umidità</td></tr>
                   <tr><td style="padding: 4px 8px; border: 1px solid #c3c2b7;"><font color="#d45b5b">■</font> Rosso</td><td style="padding: 4px 8px; border: 1px solid #c3c2b7;">in movimento</td><td style="padding: 4px 8px; border: 1px solid #c3c2b7;">VMC in funzione per allarme Inquinanti, anche insieme all'Umidità o con Punto di Rugiada / Free sfavorevoli</td></tr>

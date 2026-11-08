@@ -7,6 +7,7 @@ Immagini mostrate in cima alla scheda **VMC HELTY FLOW** (voce 22 del pannello i
 1. **VMC non raggiungibile.** **Grigio**: VMC OFF-Line o velocità non leggibile. Vale a qualsiasi velocità.
 2. **VMC a Velocità 0.**
     - **Giallo** se è in corso un'allerta che blocca la VMC: Congelamento, Diff. Temp. > 23 °C, Punto di Rugiada sfavorevole (interruttore PdR su ON), Free programmato sfavorevole o in attesa di ripresa.
+    - altrimenti **Giallo lento** se ci sono Avvisi (sensore `Status Monitoraggio` in Allerta: Free, Inquinanti, Umidità, sensori non calcolabili, Black-Out...) che non hanno fermato la VMC, anche se gli Avvisi sono disabilitati.
     - **Bianco** in tutti gli altri casi.
 3. **VMC in funzione.**
     - **Giallo** con Diff. Temp. > 23 °C o Congelamento;
@@ -30,12 +31,13 @@ Il nome di ogni file è formato da **situazione** + **velocità della VMC**. Vel
 
 ## VMC ferma o non raggiungibile
 
-A Velocità 0 e con la VMC OFF-Line si vede solo la VMC, senza flussi, con il LED animato: il bianco si accende e si spegne lentamente come un respiro (4 secondi), il giallo e il grigio lampeggiano una volta al secondo.
+A Velocità 0 e con la VMC OFF-Line si vede solo la VMC, senza flussi, con il LED animato: il bianco e il giallo lento si accendono e si spengono lentamente come un respiro (4 secondi), il giallo e il grigio lampeggiano una volta al secondo.
 
 | LED e velocità | Immagine | Quando |
 |---|---|---|
-| **Bianco che respira**, Velocità 0<br>`ferma_normale.webp` | <img src="ferma_normale.webp" width="380" alt="VMC ferma, LED bianco che respira, senza flussi"> | VMC a Velocità 0 senza allerte |
+| **Bianco che respira**, Velocità 0<br>`ferma_normale.webp` | <img src="ferma_normale.webp" width="380" alt="VMC ferma, LED bianco che respira, senza flussi"> | VMC a Velocità 0 senza allerte e senza Avvisi |
 | **Giallo lampeggiante**, Velocità 0<br>`ferma_allerta.webp` | <img src="ferma_allerta.webp" width="380" alt="VMC ferma, LED giallo lampeggiante, senza flussi"> | VMC ferma per un'allerta: Congelamento, Punto di Rugiada sfavorevole, Free programmato sfavorevole, Diff. Temp. > 23 °C |
+| **Giallo che respira**, Velocità 0<br>`ferma_allerta_lenta.webp` | <img src="ferma_allerta_lenta.webp" width="380" alt="VMC ferma, LED giallo che respira, senza flussi"> | VMC a Velocità 0 con Avvisi presenti che non l'hanno fermata: Free, Inquinanti, Umidità, sensori non calcolabili, Black-Out... |
 | **Grigio lampeggiante**, qualsiasi velocità<br>`ferma_off_line.webp` | <img src="ferma_off_line.webp" width="380" alt="VMC ferma, LED grigio lampeggiante, senza flussi"> | VMC OFF-Line o Non disponibile |
 
 ## In funzione, nessuna allerta (`normale`, LED bianco)
@@ -94,4 +96,4 @@ La Diff. Temp. > 23 °C porta la VMC a Velocità 1: è il caso abituale, con `al
 
 ## Formato
 
-**WebP** con sfondo trasparente, 1520 × 540 pixel (icona 480 × 266 pixel): animato per le velocità e per le tre immagini di Velocità 0 e OFF-Line (LED che respira o lampeggia); fermo solo per l'icona.
+**WebP** con sfondo trasparente, 1520 × 540 pixel (icona 480 × 266 pixel): animato per le velocità e per le quattro immagini di Velocità 0 e OFF-Line (LED che respira o lampeggia); fermo solo per l'icona.

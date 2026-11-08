@@ -464,7 +464,7 @@ template:
           {% endif %}
 
   - sensor:
-      - default_entity_id: sensor.vmc_master_nome_status                        # [CONFIGURAZIONE, 35 RICHIAMI] [INTERFACCIA, 27 RICHIAMI] [AUTOMAZIONE, 7 RICHIAMI] SENSORE DI VERIFICA DI AVVENUTA LETTURA NOME MEMORIZZATA NELLA VMC
+      - default_entity_id: sensor.vmc_master_nome_status                        # [CONFIGURAZIONE, 35 RICHIAMI] [INTERFACCIA, 28 RICHIAMI] [AUTOMAZIONE, 7 RICHIAMI] SENSORE DI VERIFICA DI AVVENUTA LETTURA NOME MEMORIZZATA NELLA VMC
         name: "Nome"
         unique_id: vmc_master_nome_status
         state: >
@@ -628,7 +628,7 @@ template:
           {{ (ns.righe | join(' · '))[:255] if ns.righe | count > 0 and att != 'Non disponibile' else 'Nessuna' }}
 
   - sensor:
-      - default_entity_id: sensor.vmc_master_status_ventola_lettura_codice_interpretato_interfaccia # [CONFIGURAZIONE, 254 RICHIAMI] [INTERFACCIA, 97 RICHIAMI] [AUTOMAZIONE, 134 RICHIAMI] SENSORE DI INTERPRETAZIONE DELLA LETTURA DEI DATI "VELOCITA'" MEMORIZZATI NELLA VMC CONVERITA IN "STRINGA" CON LA POSSIBILITA' DI VISUALIZZARE FREE COOLING O FREE HEATING O FREE C./H. (IN FUNZIONE DEL VALORE LETTO DEL SENSORE vmc_master_status_mese_corrente_freeheating_o_freecooling), PREVIA VERIFICA DI AVVENUTA LETTURA DEI DATI "VELOCITA'"" MEMORIZZATI NELLA VMC
+      - default_entity_id: sensor.vmc_master_status_ventola_lettura_codice_interpretato_interfaccia # [CONFIGURAZIONE, 254 RICHIAMI] [INTERFACCIA, 99 RICHIAMI] [AUTOMAZIONE, 134 RICHIAMI] SENSORE DI INTERPRETAZIONE DELLA LETTURA DEI DATI "VELOCITA'" MEMORIZZATI NELLA VMC CONVERITA IN "STRINGA" CON LA POSSIBILITA' DI VISUALIZZARE FREE COOLING O FREE HEATING O FREE C./H. (IN FUNZIONE DEL VALORE LETTO DEL SENSORE vmc_master_status_mese_corrente_freeheating_o_freecooling), PREVIA VERIFICA DI AVVENUTA LETTURA DEI DATI "VELOCITA'"" MEMORIZZATI NELLA VMC
         name: "Status Ventilazione"
         unique_id: vmc_master_status_ventola_lettura_codice_interpretato_interfaccia
         state: >
@@ -1527,7 +1527,7 @@ template:
 # Sensori solo per l'interfaccia (immagine animata di intestazione e scritta Alert sotto i tasti di velocità).
 # Non sono usati da automazioni o script; leggono spie, allerte e velocità e si aggiornano da soli.
   - sensor:
-      - default_entity_id: sensor.vmc_master_stato_led_interfaccia              # [CONFIGURAZIONE, 2 RICHIAMI] [INTERFACCIA, 24 RICHIAMI] [AUTOMAZIONE, 0 RICHIAMI] COLORE DEL LED E DEL FLUSSO NELL'IMMAGINE DI INTESTAZIONE
+      - default_entity_id: sensor.vmc_master_stato_led_interfaccia              # [CONFIGURAZIONE, 2 RICHIAMI] [INTERFACCIA, 25 RICHIAMI] [AUTOMAZIONE, 0 RICHIAMI] COLORE DEL LED E DEL FLUSSO NELL'IMMAGINE DI INTESTAZIONE
         name: "Stato LED Interfaccia"
         unique_id: vmc_master_stato_led_interfaccia
         state: >
@@ -1546,7 +1546,9 @@ template:
                                     or is_state('input_boolean.vmc_master_spia_velocita_freecooling_un_solo_avvio_per_programmazione_freeheating', 'on')
                                     or is_state('input_boolean.vmc_master_spia_velocita_freecooling_un_solo_avvio_per_programmazione_freecooling', 'on') -%}
             {%- if vel == 'Velocità 0' -%}
-              {%- if congelamento or delta or pdr or free_bloccata -%} giallo {%- else -%} bianco {%- endif -%}
+              {%- if congelamento or delta or pdr or free_bloccata -%} giallo
+              {%- elif is_state('sensor.vmc_master_alert_monitoraggio_totale', 'Allerta') -%} giallo lento
+              {%- else -%} bianco {%- endif -%}
             {%- elif delta or congelamento -%}
               giallo
             {%- elif is_state('input_boolean.vmc_master_spia_co2_o_voc', 'on') -%}
@@ -2366,7 +2368,7 @@ template:
         icon: mdi:alarm-light-outline
 
   - sensor:
-      - default_entity_id: sensor.vmc_master_alert_monitoraggio_totale          # [CONFIGURAZIONE, 7 RICHIAMI] [INTERFACCIA, 1 RICHIAMO] [AUTOMAZIONE, 2 RICHIAMI] SENSORE ALLERTA MONITORAGGIO TOTALE: Umidità, CO₂, VOC, PdR, Congelamento, Delta, Free Heating Programmato e Free Cooling Programmato
+      - default_entity_id: sensor.vmc_master_alert_monitoraggio_totale          # [CONFIGURAZIONE, 8 RICHIAMI] [INTERFACCIA, 1 RICHIAMO] [AUTOMAZIONE, 2 RICHIAMI] SENSORE ALLERTA MONITORAGGIO TOTALE: Umidità, CO₂, VOC, PdR, Congelamento, Delta, Free Heating Programmato e Free Cooling Programmato
         name: "Status Monitoraggio"
         unique_id: vmc_master_alert_monitoraggio_totale
         state: >
@@ -2396,7 +2398,7 @@ template:
         icon: mdi:incognito-circle
 
   - sensor:
-      - default_entity_id: sensor.vmc_master_spia_pannello_alert_monitoraggio_totale # [CONFIGURAZIONE, 3 RICHIAMI] [INTERFACCIA, 24 RICHIAMI] [AUTOMAZIONE, 1 RICHIAMO] SENSORE PER MOSTRARE ALLERTA MONITORAGGIO TOTALE: Umidità, CO₂, VOC, PdR, Congelamento, Delta, Free Heating e Free Cooling
+      - default_entity_id: sensor.vmc_master_spia_pannello_alert_monitoraggio_totale # [CONFIGURAZIONE, 3 RICHIAMI] [INTERFACCIA, 25 RICHIAMI] [AUTOMAZIONE, 1 RICHIAMO] SENSORE PER MOSTRARE ALLERTA MONITORAGGIO TOTALE: Umidità, CO₂, VOC, PdR, Congelamento, Delta, Free Heating e Free Cooling
         name: "Avvisi"
         unique_id: vmc_master_spia_pannello_alert_monitoraggio_totale
         state: >
@@ -4123,7 +4125,7 @@ input_boolean:
     icon: mdi:delete-alert
 # >>> FINE SEZIONE CLONA VMC (SOLO MASTER, RIMOSSA DA VMC_SCRIPT_CLONA.SH) <<<
 
-  vmc_master_opzioni_avvisi:                                                    # [CONFIGURAZIONE, 3 RICHIAMI] [INTERFACCIA, 27 RICHIAMI] [AUTOMAZIONE, 9 RICHIAMI]
+  vmc_master_opzioni_avvisi:                                                    # [CONFIGURAZIONE, 3 RICHIAMI] [INTERFACCIA, 28 RICHIAMI] [AUTOMAZIONE, 9 RICHIAMI]
     name: "Avvisi"
     initial: false
     icon: mdi:alert-rhombus-outline
@@ -4133,12 +4135,12 @@ input_boolean:
     initial: false
     icon: mdi:chart-bell-curve-cumulative
 
-  vmc_master_opzioni_vmc:                                                       # [CONFIGURAZIONE, 3 RICHIAMI] [INTERFACCIA, 27 RICHIAMI] [AUTOMAZIONE, 9 RICHIAMI]
+  vmc_master_opzioni_vmc:                                                       # [CONFIGURAZIONE, 3 RICHIAMI] [INTERFACCIA, 28 RICHIAMI] [AUTOMAZIONE, 9 RICHIAMI]
     name: "Telecomando"
     initial: false
     icon: mdi:remote-tv
 
-  vmc_master_opzioni_offset_sensori:                                            # [CONFIGURAZIONE, 4 RICHIAMI] [INTERFACCIA, 28 RICHIAMI] [AUTOMAZIONE, 9 RICHIAMI]
+  vmc_master_opzioni_offset_sensori:                                            # [CONFIGURAZIONE, 4 RICHIAMI] [INTERFACCIA, 29 RICHIAMI] [AUTOMAZIONE, 9 RICHIAMI]
     name: "Opzioni"
     initial: false
     icon: mdi:format-list-checkbox
@@ -4148,7 +4150,7 @@ input_boolean:
     initial: false
     icon: mdi:format-list-checkbox
 
-  vmc_master_opzioni_monitoraggio_sensori:                                      # [CONFIGURAZIONE, 3 RICHIAMI] [INTERFACCIA, 27 RICHIAMI] [AUTOMAZIONE, 9 RICHIAMI]
+  vmc_master_opzioni_monitoraggio_sensori:                                      # [CONFIGURAZIONE, 3 RICHIAMI] [INTERFACCIA, 28 RICHIAMI] [AUTOMAZIONE, 9 RICHIAMI]
     name: "Sensori"
     initial: false
     icon: mdi:memory
@@ -4178,12 +4180,12 @@ input_boolean:
     initial: false
     icon: mdi:sun-snowflake-variant
 
-  vmc_master_opzioni_interruttore_calendario:                                   # [CONFIGURAZIONE, 3 RICHIAMI] [INTERFACCIA, 27 RICHIAMI] [AUTOMAZIONE, 9 RICHIAMI]
+  vmc_master_opzioni_interruttore_calendario:                                   # [CONFIGURAZIONE, 3 RICHIAMI] [INTERFACCIA, 28 RICHIAMI] [AUTOMAZIONE, 9 RICHIAMI]
     name: "Status Programmazione Giornaliera"
     initial: false
     icon: mdi:calendar-today
 
-  vmc_master_opzioni_lettura_sensori:                                           # [CONFIGURAZIONE, 3 RICHIAMI] [INTERFACCIA, 27 RICHIAMI] [AUTOMAZIONE, 9 RICHIAMI]
+  vmc_master_opzioni_lettura_sensori:                                           # [CONFIGURAZIONE, 3 RICHIAMI] [INTERFACCIA, 28 RICHIAMI] [AUTOMAZIONE, 9 RICHIAMI]
     name: "Informazioni"
     initial: false
     icon: mdi:information-slab-box-outline
@@ -4214,7 +4216,7 @@ input_boolean:
     name: "VMC ON/OFF, in Funzione della Vel. Free Cooling"
     icon: mdi:light-switch-off
 
-  vmc_master_opzioni_accendi_spegni_avvisi:                                     # [CONFIGURAZIONE, 6 RICHIAMI] [INTERFACCIA, 59 RICHIAMI] [AUTOMAZIONE, 0 RICHIAMI]
+  vmc_master_opzioni_accendi_spegni_avvisi:                                     # [CONFIGURAZIONE, 6 RICHIAMI] [INTERFACCIA, 61 RICHIAMI] [AUTOMAZIONE, 0 RICHIAMI]
     name: "Mostra o Nascondi gli Avvisi"
     icon: mdi:light-switch-off
 
