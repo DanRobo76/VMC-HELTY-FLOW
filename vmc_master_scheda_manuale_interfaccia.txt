@@ -8613,6 +8613,7 @@ cards:
               ['Congelamento', 'input_boolean.vmc_master_spia_velocita_{}_congelamento', nomi.keys() | list],
               ['Δ Temp.', 'input_boolean.vmc_master_spia_velocita_{}_delta_temp_verifica_soglia_valore', nomi.keys() | list],
               ['Inquinanti', 'input_boolean.vmc_master_spia_velocita_{}_co2_o_voc', ['0']],
+              ['Inquinanti', 'input_boolean.vmc_master_spia_co2_o_voc_partenza_ritorno_velocita_0', ['0']],
               ['Lim. Δ Punto di Rugiada', 'input_boolean.vmc_master_spia_velocita_{}_un_solo_avvio', nomi.keys() | list],
               ['Avviso Free', 'input_boolean.vmc_master_spia_velocita_{}_un_solo_avvio_per_programmazione_freecooling', ['freecooling']],
               ['Avviso Free', 'input_boolean.vmc_master_spia_velocita_{}_un_solo_avvio_per_programmazione_freeheating', ['freecooling']],
