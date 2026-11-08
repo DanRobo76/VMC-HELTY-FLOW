@@ -12936,16 +12936,10 @@ cards:
                   </details>
                   <!-- >>> FINE SEZIONE CLONA VMC (SOLO MASTER, RIMOSSA DA VMC_SCRIPT_CLONA.SH) <<< -->
               - type: entities
+                title: "Prossime Letture dalla VMC"
                 show_header_toggle: false
                 state_color: true
                 entities:
-                  - type: conditional
-                    conditions:
-                      - entity: input_boolean.vmc_master_opzione_finestra_prossime_letture
-                        state: 'on'
-                    row:
-                      type: section
-                      label: "Prossime Letture dalla VMC"
                   - type: conditional
                     conditions:
                       - entity: input_boolean.vmc_master_opzione_finestra_prossime_letture

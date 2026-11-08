@@ -4655,7 +4655,7 @@ input_boolean:
     name: "Tempi di Attesa Inizializzati"
     icon: mdi:timer-check-outline
 
-  vmc_master_opzione_finestra_prossime_letture:                                 # [CONFIGURAZIONE, 2 RICHIAMI] [INTERFACCIA, 7 RICHIAMI] [AUTOMAZIONE, 0 RICHIAMI] FINESTRA «PROSSIME LETTURE DALLA VMC» IN FONDO ALL'INDICE DELLA FINESTRA INFORMAZIONI
+  vmc_master_opzione_finestra_prossime_letture:                                 # [CONFIGURAZIONE, 2 RICHIAMI] [INTERFACCIA, 6 RICHIAMI] [AUTOMAZIONE, 0 RICHIAMI] FINESTRA «PROSSIME LETTURE DALLA VMC» IN FONDO ALL'INDICE DELLA FINESTRA INFORMAZIONI
     name: "Prossime Letture dalla VMC"
     icon: mdi:timer-outline
 ################### Fine Creazione Switch Booleani per i Tempi di Attesa dei Trigger dell'Automazione ###################
