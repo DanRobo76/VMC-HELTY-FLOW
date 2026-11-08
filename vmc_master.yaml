@@ -122,9 +122,9 @@ homeassistant:
       icon: mdi:hvac
     automation.vmc_master_countdown_attese_automazione:
       icon: mdi:hvac
-    automation.vmc_master_inizializza_tempi_attesa:
+    automation.vmc_master_inizializza_tempi_di_attesa:
       icon: mdi:hvac
-    automation.vmc_master_letture_vmc_countdown:
+    automation.vmc_master_letture_vmc_con_countdown:
       icon: mdi:hvac
     automation.automazione_vmc_master:
       icon: mdi:hvac
@@ -3092,8 +3092,8 @@ recorder:
       - automation.vmc_master_audio_allerte_e_stato
       - automation.vmc_master_riallineamento_allerte_al_riavvio
       - automation.vmc_master_countdown_attese_automazione
-      - automation.vmc_master_inizializza_tempi_attesa
-      - automation.vmc_master_letture_vmc_countdown
+      - automation.vmc_master_inizializza_tempi_di_attesa
+      - automation.vmc_master_letture_vmc_con_countdown
       - timer.vmc_master_lettura_ping
       - timer.vmc_master_lettura_ventilazione
       - timer.vmc_master_lettura_ambientali
@@ -5971,8 +5971,8 @@ script:
             - automation.vmc_master_audio_allerte_e_stato
             - automation.vmc_master_riallineamento_allerte_al_riavvio
             - automation.vmc_master_countdown_attese_automazione
-            - automation.vmc_master_inizializza_tempi_attesa
-            - automation.vmc_master_letture_vmc_countdown
+            - automation.vmc_master_inizializza_tempi_di_attesa
+            - automation.vmc_master_letture_vmc_con_countdown
             - timer.vmc_master_lettura_ping
             - timer.vmc_master_lettura_ventilazione
             - timer.vmc_master_lettura_ambientali
