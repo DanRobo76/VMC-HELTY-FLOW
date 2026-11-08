@@ -9661,7 +9661,7 @@ cards:
                     state: 'on'
                 card:
                   type: entities
-                  title: "Tempi di Attesa e Intervalli di Lettura"
+                  title: "Tempi di Attesa dell'Automazione"
                   show_header_toggle: false
                   state_color: false
                   entities:
@@ -9730,21 +9730,9 @@ cards:
                     - entity: input_number.vmc_master_attesa_avvisi
                       name: "Aggiornamento Avvisi"
                     - type: section
-                      label: "Intervalli di Lettura della VMC"
-                    - entity: input_number.vmc_master_intervallo_ping
-                      name: "Verifica On-Line (Ping)"
-                    - entity: input_number.vmc_master_intervallo_ventilazione
-                      name: "Sensori Ventilazione"
-                    - entity: input_number.vmc_master_intervallo_ambientali
-                      name: "Sensori Ambientali"
-                    - entity: input_number.vmc_master_intervallo_lan
-                      name: "Lan"
-                    - entity: input_number.vmc_master_intervallo_nome
-                      name: "Nome"
-                    - type: section
                     - type: button
                       entity: script.vmc_master_ripristina_tempi_attesa
-                      name: "Ripristina Tempi Originali"
+                      name: "Ripristina Tempi di Attesa Originali"
                       action_name: Esegui
                       tap_action:
                         action: perform-action
@@ -9752,7 +9740,7 @@ cards:
                         target:
                           entity_id: script.vmc_master_ripristina_tempi_attesa
                         confirmation:
-                          text: "Vuoi riportare tutti i tempi di attesa e gli intervalli di lettura ai valori originali?"
+                          text: "Vuoi riportare tutti i tempi di attesa ai valori originali?"
               - type: conditional
                 conditions:
                   - condition: state

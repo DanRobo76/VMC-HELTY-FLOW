@@ -124,7 +124,7 @@ homeassistant:
       icon: mdi:hvac
     automation.vmc_master_inizializza_tempi_di_attesa:
       icon: mdi:hvac
-    automation.vmc_master_letture_vmc_con_countdown:
+    automation.vmc_master_countdown_letture_vmc:
       icon: mdi:hvac
     automation.vmc_master_esclusivita_finestre_opzioni:
       icon: mdi:hvac
@@ -140,8 +140,8 @@ command_line:
         ping -c 3 -W 1 -w 4 192.168.1.160 2>/dev/null | grep -q 'bytes from'
         && echo 'ON-Line' || echo 'OFF-Line'
       command_timeout: 10
-      scan_interval:                             # RISERVA: IL PING REGOLARE LO FA vmc_master_letture_vmc_countdown (input_number.vmc_master_intervallo_ping)
-        seconds: 60
+      scan_interval:
+        seconds: 10
       # opzione: se vuoi ignorare ogni output che non sia ON-Line/OFF-Line
       value_template: "{{ value }}"
 
@@ -153,8 +153,8 @@ sensor:
     port: 5001                                 # PORTA 5001 DELLA VMC IMPOSTAZIONE DI DEFAULT
     timeout: 3
     payload: "VMGH?"                           # INVIO COMANDO VMGH? ALLA VMC MASTER, PER OTTENERE INFORMAZIONI SULLO STATO DI VENTILAZIONE DELLA VMC]
-    scan_interval:                             # RISERVA: LA LETTURA REGOLARE LA FA vmc_master_letture_vmc_countdown (input_number.vmc_master_intervallo_ventilazione, ORIGINALE 5 s)
-      seconds: 60
+    scan_interval:                             # OGNI n SECONDI RIPETE LA SCANSIONE [SE SI COMANDA LA VMC CON IL TELECOMANDO L'AUTOMAZIONE LO RILEVERA' AD OGNI scan_interval -> seconds]
+      seconds: 5                               # OGNI N° SECONDI RIPETE LA SCANSIONE
 
   - platform: tcp
     name: vmc_master_sensori                                                    # [CONFIGURAZIONE, 59 RICHIAMI] [INTERFACCIA, 2 RICHIAMI] [AUTOMAZIONE, 0 RICHIAMI] CREAZIONE DEL SENSORE LETTURA SENSORI; N.b non tutti i valori sono identificabili
@@ -162,8 +162,8 @@ sensor:
     port: 5001                                 # PORTA 5001 DELLA VMC IMPOSTAZIONE DI DEFAULT
     timeout: 3
     payload: "VMGI?"                           # INVIO COMANDO VMGI? ALLA VMC MASTER, PER OTTENERE INFORMAZIONI SUI SENSORI DELLA VMC]
-    scan_interval:                             # RISERVA: LA LETTURA REGOLARE LA FA vmc_master_letture_vmc_countdown (input_number.vmc_master_intervallo_ambientali, ORIGINALE 1227 s)
-      seconds: 3600
+    scan_interval:
+      seconds: 1227                            # OGNI N° SECONDI RIPETE LA SCANSIONE [20 MINUTI + 27 secondi di margine]
 
   - platform: tcp
     name: vmc_master_nome                                                       # [CONFIGURAZIONE, 6 RICHIAMI] [INTERFACCIA, 2 RICHIAMI] [AUTOMAZIONE, 1 RICHIAMO] CREAZIONE DEL SENSORE LETTURA NOME DELLA VMC
@@ -171,8 +171,8 @@ sensor:
     port: 5001                                 # PORTA 5001 DELLA VMC IMPOSTAZIONE DI DEFAULT
     timeout: 3
     payload: "VMNM?"                           # INVIO COMANDO VMNM? ALLA VMC MASTER, PER OTTENERE INFORMAZIONI SUL NOME DELLA VMC]
-    scan_interval:                             # RISERVA: LA LETTURA REGOLARE LA FA vmc_master_letture_vmc_countdown (input_number.vmc_master_intervallo_nome, ORIGINALE 43227 s)
-      seconds: 86400
+    scan_interval:
+      seconds: 43227                           # OGNI N° SECONDI RIPETE LA SCANSIONE [12 ORE + 27 secondi di margine]
 
   - platform: tcp
     name: vmc_master_lan                                                        # [CONFIGURAZIONE, 5 RICHIAMI] [INTERFACCIA, 2 RICHIAMI] [AUTOMAZIONE, 0 RICHIAMI] CREAZIONE DEL SENSORE LETTURA DATI LAN DELLA VMC; N.b non tutti i valori sono identificabili
@@ -180,8 +180,8 @@ sensor:
     port: 5001                                 # PORTA 5001 DELLA VMC IMPOSTAZIONE DI DEFAULT
     timeout: 3
     payload: "VMSL?"                           # INVIO COMANDO VMSL? ALLA VMC MASTER, PER OTTENERE INFORMAZIONI SUI DATI LAN DELLA VMC]
-    scan_interval:                             # RISERVA: LA LETTURA REGOLARE LA FA vmc_master_letture_vmc_countdown (input_number.vmc_master_intervallo_lan, ORIGINALE 57641 s)
-      seconds: 86400
+    scan_interval:
+      seconds: 57641                           # OGNI N° SECONDI RIPETE LA SCANSIONE [16 ORE + 41 secondi di margine]
 
   - platform: rest
     name: vmc_master_versione_repository                                        # [CONFIGURAZIONE, 7 RICHIAMI] [INTERFACCIA, 3 RICHIAMI] [AUTOMAZIONE, 4 RICHIAMI] SENSORE PER VISUALIZZARE LA VERSIONE CORRENTE NEL REPOSITORY DI GITHUB: https://github.com/DanRobo76/VMC-HELTY-FLOW DA CONFRONTARE CON LA VERSIONE CORRENTE INSTALLATA IN HOME ASSISTANT TRAMITE AUTOMAZIONE
@@ -3167,7 +3167,7 @@ recorder:
       - automation.vmc_master_riallineamento_allerte_al_riavvio
       - automation.vmc_master_countdown_attese_automazione
       - automation.vmc_master_inizializza_tempi_di_attesa
-      - automation.vmc_master_letture_vmc_con_countdown
+      - automation.vmc_master_countdown_letture_vmc
       - automation.vmc_master_esclusivita_finestre_opzioni
       - input_boolean.vmc_master_opzione_finestra_prossime_letture
       - timer.vmc_master_lettura_ping
@@ -3175,11 +3175,6 @@ recorder:
       - timer.vmc_master_lettura_ambientali
       - timer.vmc_master_lettura_lan
       - timer.vmc_master_lettura_nome
-      - input_number.vmc_master_intervallo_ping
-      - input_number.vmc_master_intervallo_ventilazione
-      - input_number.vmc_master_intervallo_ambientali
-      - input_number.vmc_master_intervallo_lan
-      - input_number.vmc_master_intervallo_nome
       - script.vmc_master_ripristina_tempi_attesa
       - sensor.vmc_master_velocita_registrata
       - binary_sensor.vmc_master_tasto_velocita_0
@@ -4108,49 +4103,6 @@ input_number:
     icon: mdi:timer-cog-outline
 ################### Fine Creazione Costanti dei Tempi di Attesa dei Trigger dell'Automazione ###################
 
-################### Inizio Creazione Costanti degli Intervalli di Lettura della VMC (modificabili dalla scheda) ###################
-  vmc_master_intervallo_ping:                                                  # [CONFIGURAZIONE, 5 RICHIAMI] [INTERFACCIA, 1 RICHIAMO] [AUTOMAZIONE, 0 RICHIAMI] OGNI QUANTI SECONDI SI LEGGE «VERIFICA ON-LINE (PING)» (sensor.vmc_master_status_ip), VALORE ORIGINALE 10 s
-    name: "Intervallo Lettura Verifica On-Line (Ping)"
-    min: 5
-    max: 3600
-    step: 1
-    mode: box
-    unit_of_measurement: s
-    icon: mdi:timer-sync-outline
-  vmc_master_intervallo_ventilazione:                                          # [CONFIGURAZIONE, 5 RICHIAMI] [INTERFACCIA, 1 RICHIAMO] [AUTOMAZIONE, 0 RICHIAMI] OGNI QUANTI SECONDI SI LEGGE «SENSORI VENTILAZIONE» (sensor.vmc_master_status_ventola), VALORE ORIGINALE 5 s
-    name: "Intervallo Lettura Sensori Ventilazione"
-    min: 2
-    max: 3600
-    step: 1
-    mode: box
-    unit_of_measurement: s
-    icon: mdi:timer-sync-outline
-  vmc_master_intervallo_ambientali:                                            # [CONFIGURAZIONE, 5 RICHIAMI] [INTERFACCIA, 1 RICHIAMO] [AUTOMAZIONE, 0 RICHIAMI] OGNI QUANTI SECONDI SI LEGGE «SENSORI AMBIENTALI» (sensor.vmc_master_sensori), VALORE ORIGINALE 1227 s
-    name: "Intervallo Lettura Sensori Ambientali"
-    min: 60
-    max: 86400
-    step: 1
-    mode: box
-    unit_of_measurement: s
-    icon: mdi:timer-sync-outline
-  vmc_master_intervallo_lan:                                                   # [CONFIGURAZIONE, 5 RICHIAMI] [INTERFACCIA, 1 RICHIAMO] [AUTOMAZIONE, 0 RICHIAMI] OGNI QUANTI SECONDI SI LEGGE «LAN» (sensor.vmc_master_lan), VALORE ORIGINALE 57641 s
-    name: "Intervallo Lettura Lan"
-    min: 600
-    max: 172800
-    step: 1
-    mode: box
-    unit_of_measurement: s
-    icon: mdi:timer-sync-outline
-  vmc_master_intervallo_nome:                                                  # [CONFIGURAZIONE, 5 RICHIAMI] [INTERFACCIA, 1 RICHIAMO] [AUTOMAZIONE, 0 RICHIAMI] OGNI QUANTI SECONDI SI LEGGE «NOME» (sensor.vmc_master_nome), VALORE ORIGINALE 43227 s
-    name: "Intervallo Lettura Nome"
-    min: 600
-    max: 172800
-    step: 1
-    mode: box
-    unit_of_measurement: s
-    icon: mdi:timer-sync-outline
-################### Fine Creazione Costanti degli Intervalli di Lettura della VMC ###################
-
 ################### Fine Creazione Etichette Interfaccia Lovelace  ############################################################################################################################################################################
 
 ################### Inizio Creazione Switch Booleani impiegati nell'Interfaccia Lovelace per mostrare o meno le Opzioni ####################################################################################
@@ -4912,19 +4864,19 @@ timer:
   vmc_master_countdown_avvisi:                                   # [CONFIGURAZIONE, 2 RICHIAMI] [INTERFACCIA, 3 RICHIAMI] [AUTOMAZIONE, 0 RICHIAMI] COUNTDOWN DELL'ATTESA IN CORSO DI UNO DEI 3 TRIGGER «AGGIORNAMENTO AVVISI» DELL'AUTOMAZIONE (AVVIATO DA vmc_master_countdown_attese_automazione)
     name: "Aggiornamento Avvisi"
     icon: mdi:timer-sand
-  vmc_master_lettura_ping:                                       # [CONFIGURAZIONE, 2 RICHIAMI] [INTERFACCIA, 1 RICHIAMO] [AUTOMAZIONE, 0 RICHIAMI] COUNTDOWN ALLA PROSSIMA LETTURA «VERIFICA ON-LINE (PING)» (GESTITO DA vmc_master_letture_vmc_countdown)
+  vmc_master_lettura_ping:                                       # [CONFIGURAZIONE, 2 RICHIAMI] [INTERFACCIA, 1 RICHIAMO] [AUTOMAZIONE, 0 RICHIAMI] COUNTDOWN ALLA PROSSIMA LETTURA «VERIFICA ON-LINE (PING)» DI HOME ASSISTANT (OGNI 10 s, scan_interval DI sensor.vmc_master_status_ip)
     name: "Prossima Lettura Verifica On-Line (Ping)"
     icon: mdi:timer-sync-outline
-  vmc_master_lettura_ventilazione:                               # [CONFIGURAZIONE, 2 RICHIAMI] [INTERFACCIA, 1 RICHIAMO] [AUTOMAZIONE, 0 RICHIAMI] COUNTDOWN ALLA PROSSIMA LETTURA «SENSORI VENTILAZIONE» (GESTITO DA vmc_master_letture_vmc_countdown)
+  vmc_master_lettura_ventilazione:                               # [CONFIGURAZIONE, 2 RICHIAMI] [INTERFACCIA, 1 RICHIAMO] [AUTOMAZIONE, 0 RICHIAMI] COUNTDOWN ALLA PROSSIMA LETTURA «SENSORI VENTILAZIONE» DI HOME ASSISTANT (OGNI 5 s, scan_interval DI sensor.vmc_master_status_ventola)
     name: "Prossima Lettura Sensori Ventilazione"
     icon: mdi:timer-sync-outline
-  vmc_master_lettura_ambientali:                                 # [CONFIGURAZIONE, 2 RICHIAMI] [INTERFACCIA, 1 RICHIAMO] [AUTOMAZIONE, 0 RICHIAMI] COUNTDOWN ALLA PROSSIMA LETTURA «SENSORI AMBIENTALI» (GESTITO DA vmc_master_letture_vmc_countdown)
+  vmc_master_lettura_ambientali:                                 # [CONFIGURAZIONE, 2 RICHIAMI] [INTERFACCIA, 1 RICHIAMO] [AUTOMAZIONE, 0 RICHIAMI] COUNTDOWN ALLA PROSSIMA LETTURA «SENSORI AMBIENTALI» DI HOME ASSISTANT (OGNI 1227 s, scan_interval DI sensor.vmc_master_sensori)
     name: "Prossima Lettura Sensori Ambientali"
     icon: mdi:timer-sync-outline
-  vmc_master_lettura_lan:                                        # [CONFIGURAZIONE, 2 RICHIAMI] [INTERFACCIA, 1 RICHIAMO] [AUTOMAZIONE, 0 RICHIAMI] COUNTDOWN ALLA PROSSIMA LETTURA «LAN» (GESTITO DA vmc_master_letture_vmc_countdown)
+  vmc_master_lettura_lan:                                        # [CONFIGURAZIONE, 2 RICHIAMI] [INTERFACCIA, 1 RICHIAMO] [AUTOMAZIONE, 0 RICHIAMI] COUNTDOWN ALLA PROSSIMA LETTURA «LAN» DI HOME ASSISTANT (OGNI 57641 s, scan_interval DI sensor.vmc_master_lan)
     name: "Prossima Lettura Lan"
     icon: mdi:timer-sync-outline
-  vmc_master_lettura_nome:                                       # [CONFIGURAZIONE, 2 RICHIAMI] [INTERFACCIA, 1 RICHIAMO] [AUTOMAZIONE, 0 RICHIAMI] COUNTDOWN ALLA PROSSIMA LETTURA «NOME» (GESTITO DA vmc_master_letture_vmc_countdown)
+  vmc_master_lettura_nome:                                       # [CONFIGURAZIONE, 2 RICHIAMI] [INTERFACCIA, 1 RICHIAMO] [AUTOMAZIONE, 0 RICHIAMI] COUNTDOWN ALLA PROSSIMA LETTURA «NOME» DI HOME ASSISTANT (OGNI 43227 s, scan_interval DI sensor.vmc_master_nome)
     name: "Prossima Lettura Nome"
     icon: mdi:timer-sync-outline
 ################### Fine Creazione Timer per il Countdown in Scheda delle Attese dell'Automazione ###################
@@ -6062,7 +6014,7 @@ script:
             - automation.vmc_master_riallineamento_allerte_al_riavvio
             - automation.vmc_master_countdown_attese_automazione
             - automation.vmc_master_inizializza_tempi_di_attesa
-            - automation.vmc_master_letture_vmc_con_countdown
+            - automation.vmc_master_countdown_letture_vmc
             - automation.vmc_master_esclusivita_finestre_opzioni
             - input_boolean.vmc_master_opzione_finestra_prossime_letture
             - timer.vmc_master_lettura_ping
@@ -6070,11 +6022,6 @@ script:
             - timer.vmc_master_lettura_ambientali
             - timer.vmc_master_lettura_lan
             - timer.vmc_master_lettura_nome
-            - input_number.vmc_master_intervallo_ping
-            - input_number.vmc_master_intervallo_ventilazione
-            - input_number.vmc_master_intervallo_ambientali
-            - input_number.vmc_master_intervallo_lan
-            - input_number.vmc_master_intervallo_nome
             - script.vmc_master_ripristina_tempi_attesa
             - sensor.vmc_master_velocita_registrata
             - binary_sensor.vmc_master_tasto_velocita_0
@@ -16731,7 +16678,7 @@ script:
       Imposta il volume dal sensore, attende n° secondi, verifica il range orario anche oltre la mezzanotte.
 ################### Inizio Creazione Script Ripristina Tempi di Attesa Originali ###################
   vmc_master_ripristina_tempi_attesa:                                          # [CONFIGURAZIONE, 3 RICHIAMI] [INTERFACCIA, 2 RICHIAMI] [AUTOMAZIONE, 0 RICHIAMI] RIPORTA I TEMPI DI ATTESA AI VALORI ORIGINALI
-    alias: "VMC Master - Ripristina Tempi Originali (Attese e Letture)"
+    alias: "VMC Master - Ripristina Tempi di Attesa Originali"
     mode: single
     icon: mdi:timer-refresh-outline
     description: Riporta tutte le costanti dei tempi di attesa dei trigger dell'automazione ai valori originali
@@ -16856,31 +16803,6 @@ script:
           entity_id: input_number.vmc_master_attesa_delta_memoria
         data:
           value: 4
-      - action: input_number.set_value
-        target:
-          entity_id: input_number.vmc_master_intervallo_ping
-        data:
-          value: 10
-      - action: input_number.set_value
-        target:
-          entity_id: input_number.vmc_master_intervallo_ventilazione
-        data:
-          value: 5
-      - action: input_number.set_value
-        target:
-          entity_id: input_number.vmc_master_intervallo_ambientali
-        data:
-          value: 1227
-      - action: input_number.set_value
-        target:
-          entity_id: input_number.vmc_master_intervallo_lan
-        data:
-          value: 57641
-      - action: input_number.set_value
-        target:
-          entity_id: input_number.vmc_master_intervallo_nome
-        data:
-          value: 43227
       - action: input_boolean.turn_on
         target:
           entity_id: input_boolean.vmc_master_attese_inizializzate
@@ -24858,60 +24780,56 @@ automation:
                         value: ""
 ################### Fine Creazione Automazione Countdown delle Attese dell'Automazione VMC Master ###################
 
-################### Inizio Creazione Automazione Letture della VMC con Countdown ###################
-  - id: "vmc_master_letture_vmc_countdown"                                      # [CONFIGURAZIONE, 3 RICHIAMI] [INTERFACCIA, 0 RICHIAMI] [AUTOMAZIONE, 0 RICHIAMI]
-    alias: "VMC Master - Letture VMC con Countdown"
+################### Inizio Creazione Automazione Countdown delle Letture della VMC ###################
+  - id: "vmc_master_countdown_letture_vmc"                                      # [CONFIGURAZIONE, 3 RICHIAMI] [INTERFACCIA, 0 RICHIAMI] [AUTOMAZIONE, 0 RICHIAMI]
+    alias: "VMC Master - Countdown Letture VMC"
     description: >
-      Legge la VMC (Ping, Sensori Ventilazione, Sensori Ambientali, Lan, Nome) ogni N secondi, con N preso dalle
-      costanti input_number.vmc_master_intervallo_*: allo scadere del timer di ogni lettura aggiorna il sensore e fa
-      ripartire il timer, cosi' in scheda si vede il countdown esatto alla prossima lettura. Gli scan_interval dei
-      sensori restano come riserva, nel caso questa automazione venga spenta.
-    mode: parallel
-    max: 20
+      Mostra in scheda quanto manca alla prossima lettura che Home Assistant fa da solo (Ping, Sensori Ventilazione,
+      Sensori Ambientali, Lan, Nome). Non legge la VMC e non cambia gli scan_interval: ricava il momento della
+      prossima lettura dall'ultima lettura registrata (last_reported) piu' lo scan_interval del sensore. Allo scadere
+      fa ripartire subito il timer e ogni minuto ricontrolla l'allineamento. Gli intervalli qui sotto devono essere
+      identici agli scan_interval dei sensori.
+    mode: queued
+    max: 10
     triggers:
       - trigger: homeassistant
         event: start
-        id: avvio
+        id: allinea
+      - trigger: time_pattern
+        minutes: "/1"
+        id: allinea
       - trigger: event
         event_type: timer.finished
         id: scaduto
-      - trigger: state
-        entity_id:
-          - input_number.vmc_master_intervallo_ping
-          - input_number.vmc_master_intervallo_ventilazione
-          - input_number.vmc_master_intervallo_ambientali
-          - input_number.vmc_master_intervallo_lan
-          - input_number.vmc_master_intervallo_nome
-        id: intervallo
     variables:
-      sensori: "{{ {'ping': 'sensor.vmc_master_status_ip', 'ventilazione': 'sensor.vmc_master_status_ventola', 'ambientali': 'sensor.vmc_master_sensori', 'lan': 'sensor.vmc_master_lan', 'nome': 'sensor.vmc_master_nome'} }}"
+      letture: "{{ {'ping': ['sensor.vmc_master_status_ip', 10], 'ventilazione': ['sensor.vmc_master_status_ventola', 5], 'ambientali': ['sensor.vmc_master_sensori', 1227], 'lan': ['sensor.vmc_master_lan', 57641], 'nome': ['sensor.vmc_master_nome', 43227]} }}"
     actions:
       - variables:
           chiavi: >-
-            {%- if trigger.id == 'avvio' -%}{{ sensori.keys() | list }}
-            {%- elif trigger.id == 'intervallo' -%}{{ [trigger.entity_id | replace('input_number.vmc_master_intervallo_', '')] }}
+            {%- if trigger.id == 'allinea' -%}{{ letture.keys() | list }}
             {%- elif trigger.event.data.entity_id | default('') is match('timer\.vmc_master_lettura_') -%}{{ [trigger.event.data.entity_id | replace('timer.vmc_master_lettura_', '')] }}
             {%- else -%}{{ [] }}{%- endif -%}
       - repeat:
           for_each: "{{ chiavi }}"
           sequence:
             - variables:
-                secondi: "{{ states('input_number.vmc_master_intervallo_' ~ repeat.item) | int(60) }}"
-            - alias: "Fa ripartire subito il countdown (prima della lettura, cosi' il timer non resta mai inattivo)"
-              action: timer.start
-              target:
-                entity_id: "timer.vmc_master_lettura_{{ repeat.item }}"
-              data:
-                duration: "{{ '%02d:%02d:%02d' % (secondi // 3600, (secondi % 3600) // 60, secondi % 60) }}"
+                intervallo: "{{ letture[repeat.item][1] }}"
+                timer_lettura: "timer.vmc_master_lettura_{{ repeat.item }}"
+                ultima: "{{ as_timestamp(states[letture[repeat.item][0]].last_reported, as_timestamp(now())) if states[letture[repeat.item][0]] is not none else as_timestamp(now()) }}"
+                trascorsi: "{{ (as_timestamp(now()) - ultima) % intervallo }}"
+                mancano: "{{ (intervallo - trascorsi) | round(0, 'ceil') | int if (intervallo - trascorsi) >= 1 else intervallo }}"
+                scarto: "{{ (as_timestamp(state_attr(timer_lettura, 'finishes_at'), 0) - (as_timestamp(now()) + mancano)) | abs if is_state(timer_lettura, 'active') else 9999 }}"
+                secondi: "{{ intervallo if trigger.id == 'scaduto' else mancano }}"
             - if:
                 - condition: template
-                  value_template: "{{ trigger.id == 'scaduto' }}"
+                  value_template: "{{ trigger.id == 'scaduto' or scarto > 2 }}"
               then:
-                - action: homeassistant.update_entity
-                  continue_on_error: true
+                - action: timer.start
                   target:
-                    entity_id: "{{ sensori[repeat.item] }}"
-################### Fine Creazione Automazione Letture della VMC con Countdown ###################
+                    entity_id: "{{ timer_lettura }}"
+                  data:
+                    duration: "{{ '%02d:%02d:%02d' % (secondi // 3600, (secondi % 3600) // 60, secondi % 60) }}"
+################### Fine Creazione Automazione Countdown delle Letture della VMC ###################
 
 ################### Inizio Creazione Automazione Esclusivita' delle Finestre Opzioni Prossime Letture e Tempi di Attesa ###################
   - id: "vmc_master_esclusivita_finestre_opzioni"                               # [CONFIGURAZIONE, 3 RICHIAMI] [INTERFACCIA, 0 RICHIAMI] [AUTOMAZIONE, 0 RICHIAMI]
