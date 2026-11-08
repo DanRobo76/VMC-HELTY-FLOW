@@ -11110,7 +11110,8 @@ cards:
                   <b>Come interviene.</b> Nei mesi programmati, se la condizione non è favorevole la VMC si
                   arresta (Velocità 0) dopo 24 secondi, mostrando un avviso, e riparte in Free Cool./Heat. non
                   appena la condizione torna favorevole. Se sono presenti Inquinanti (allerta CO₂ e/o VOC) la
-                  VMC passa invece a Velocità 1 dopo 20 secondi.
+                  VMC passa invece a Velocità 1 dopo 20 secondi. Anche con un'allerta Umidità in corso la VMC,
+                  invece di arrestarsi, passa a Velocità 1 (dopo 24 secondi).
                   <br><br>
                   <b>Cambio di velocità durante l'avviso.</b> Se, con la VMC arrestata dall'avviso, si sceglie
                   un'altra velocità (ad esempio Velocità 1), la ripresa automatica in Free Cool./Heat. viene
@@ -12048,14 +12049,14 @@ cards:
                     - se però c'è anche un'allerta Congelamento o Δ Temp., l'interruttore non si può spegnere finché quell'allerta non è finita. Esempio: il Punto di Rugiada ha fermato la VMC e poi arriva l'allerta Δ Temp.; finché dura il Δ Temp., l'interruttore del Punto di Rugiada non si può spegnere;<br>
                     - l'interruttore dell'Umidità, mentre è in corso un'allerta Umidità, non si può spegnere se c'è anche un'altra allerta qualsiasi (Congelamento, Δ Temp., Inquinanti, Punto di Rugiada, Free Cooling/Heating), finché quell'allerta non è finita. Esempio: l'Umidità ha avviato la VMC e poi sale la CO₂; finché dura l'allerta CO₂, l'interruttore dell'Umidità non si può spegnere;<br>
                     - se, con l'allerta Umidità in corso, inizia una fascia del Calendario, l'interruttore dell'Umidità non si può spegnere fino alla fine della fascia, anche se nel frattempo l'umidità è rientrata: durante la fascia la VMC funziona alla velocità della fascia; alla fine della fascia si arresta, le spie si azzerano e, se l'umidità è ancora fuori soglia, dopo 28 secondi l'allerta Umidità riparte con la [Set Velocità Umidità di Avvio], altrimenti la VMC resta a Velocità 0. Se invece si entra prima nel Calendario, oppure è già in corso un'altra allerta, e poi sale l'umidità, l'allerta Umidità non scatta e l'interruttore si spegne normalmente;<br>
-                    - l'interruttore del Calendario, spento durante una fascia, ferma la VMC; se però sono presenti Inquinanti e l'interruttore degli Inquinanti è acceso, la VMC non si ferma: passa a Velocità 1 e si ferma quando gli Inquinanti rientrano;<br>
+                    - gli interruttori del Calendario (spento durante una fascia), del Punto di Rugiada, del Free Cooling e del Free Heating fermano la VMC; se però sono presenti Inquinanti e l'interruttore degli Inquinanti è acceso, la VMC non si ferma: passa a Velocità 1 e si ferma quando gli Inquinanti rientrano;<br>
                     - se invece la sua funzione non sta comandando la VMC, spegnendo l'interruttore la VMC non cambia Velocità: la funzione semplicemente non interverrà più finché l'interruttore resta spento. Esempio: la VMC gira a Velocità 2 scelta dall'utente e il Punto di Rugiada non è intervenuto; spegnendo il suo interruttore la VMC resta a Velocità 2.<br>
                     </td></tr></table>
                     <a href="https://raw.githubusercontent.com/DanRobo76/VMC-HELTY-FLOW/main/immagini/Informazioni/18_priorita_allarmi.png?v=20261107" target="_blank"><img src="https://raw.githubusercontent.com/DanRobo76/VMC-HELTY-FLOW/main/immagini/Informazioni/18_priorita_allarmi.png?v=20261107" alt="Priorità degli allarmi" width="100%"></a>
                     <br>
                     <p>&nbsp;&nbsp;&nbsp;&nbsp;
-                      <a href="https://raw.githubusercontent.com/DanRobo76/VMC-HELTY-FLOW/main/immagini/Informazioni/Logiche%20di%20Funzionamento.png">
-                        <img src="https://raw.githubusercontent.com/DanRobo76/VMC-HELTY-FLOW/main/immagini/Informazioni/Logiche%20di%20Funzionamento.png" alt="Logiche di Funzionamento" width="80%">
+                      <a href="https://raw.githubusercontent.com/DanRobo76/VMC-HELTY-FLOW/main/immagini/Informazioni/Logiche%20di%20Funzionamento.png?v=20261108">
+                        <img src="https://raw.githubusercontent.com/DanRobo76/VMC-HELTY-FLOW/main/immagini/Informazioni/Logiche%20di%20Funzionamento.png?v=20261108" alt="Logiche di Funzionamento" width="80%">
                       </a> 
                     </p> 
                   </details>

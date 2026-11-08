@@ -232,10 +232,10 @@ description: >-
   un'altra allerta, e poi sale l'umidità, l'allerta Umidità non scatta e
   l'interruttore si spegne normalmente;
 
-  - l'interruttore del Calendario, spento durante una fascia, ferma la VMC; se
-  però sono presenti Inquinanti e l'interruttore degli Inquinanti è acceso, la
-  VMC non si ferma: passa a Velocità 1 e si ferma quando gli Inquinanti
-  rientrano;
+  - gli interruttori del Calendario (spento durante una fascia), del Punto di
+  Rugiada, del Free Cooling e del Free Heating fermano la VMC; se però sono
+  presenti Inquinanti e l'interruttore degli Inquinanti è acceso, la VMC non si
+  ferma: passa a Velocità 1 e si ferma quando gli Inquinanti rientrano;
 
   - se invece la sua funzione non sta comandando la VMC, spegnendo l'interruttore
   la VMC non cambia Velocità: la funzione semplicemente non interverrà più finché
@@ -243,26 +243,6 @@ description: >-
   dall'utente e il Punto di Rugiada non è intervenuto; spegnendo il suo
   interruttore la VMC resta a Velocità 2.
 triggers:
-  - alias: Trigger Attivazione Finestra Avvisi Grafici
-    entity_id:
-      - input_boolean.vmc_master_opzioni_avvisi_grafici
-    from: 'off'
-    to: 'on'
-    id: Opzioni Avvisi Grafici On
-    enabled: true
-    for:
-      hours: 0
-      minutes: 0
-      seconds: 0
-    trigger: state
-  - alias: Trigger Disattivazione Finestra Avvisi Grafici
-    entity_id:
-      - input_boolean.vmc_master_opzioni_avvisi_grafici
-    id: Opzioni Avvisi Grafici Off
-    from: 'on'
-    to: 'off'
-    enabled: true
-    trigger: state
   - entity_id:
       - input_boolean.vmc_master_opzioni_vmc
     from: 'off'
@@ -1632,33 +1612,6 @@ triggers:
       Congelamento Off e Spia Delta Temp Off e se Spia Inquinanti ON
     value_template: |2-
             {{ ( ( (states('sensor.vmc_master_punto_di_rugiada_verifica_confronto')!="Se ne sconsiglia l\'impiego" and
-            states('input_boolean.vmc_master_opzioni_accendi_spegni_vmc_vs_pdr') ==
-            'on' and
-            states('input_boolean.vmc_master_spia_velocita_freecooling_un_solo_avvio')==
-            'on' and
-            states('input_boolean.vmc_master_spia_velocita_1_co2_o_voc_pdr')== 'off'
-            and states('input_boolean.vmc_master_spia_co2_o_voc')=='on' and
-            (states('sensor.vmc_master_alert_monitoraggio_free_heating_o_free_cooling_allert_interfaccia_avvisi')
-            == 'Nessuna Allerta Free Heating Programmato' or
-            states('sensor.vmc_master_alert_monitoraggio_free_heating_o_free_cooling_allert_interfaccia_avvisi')
-            == 'Nessuna Allerta Free Heating Programmato, Presenza di Inquinanti' or
-            states('sensor.vmc_master_alert_monitoraggio_free_heating_o_free_cooling_allert_interfaccia_avvisi')
-            == 'Nessuna Allerta Free Cooling Programmato' or
-            states('sensor.vmc_master_alert_monitoraggio_free_heating_o_free_cooling_allert_interfaccia_avvisi')
-            == 'Nessuna Allerta Free Cooling Programmato, Presenza di Inquinanti' or
-            states('sensor.vmc_master_alert_monitoraggio_free_heating_o_free_cooling')
-            == 'Nessuna Allerta' or
-            states('sensor.vmc_master_alert_monitoraggio_free_heating_o_free_cooling_allert_interfaccia_avvisi')
-            == 'Nessuna Allerta, Presenza di Inquinanti' or
-            states('sensor.vmc_master_alert_monitoraggio_free_heating_o_free_cooling_allert_interfaccia_avvisi')
-            == 'Nessuna Allerta' or
-            states('sensor.vmc_master_alert_monitoraggio_free_heating_o_free_cooling_allert_interfaccia_avvisi')
-            == 'Nessuna Allerta, Presenza di Inquinanti') and
-            states('input_boolean.vmc_master_congelamento_verifica_soglia_valore_spia')==
-            'off' and
-            states('input_boolean.vmc_master_delta_temp_verifica_soglia_valore_spia')==
-            'off') or
-            (states('sensor.vmc_master_punto_di_rugiada_verifica_confronto')!="Se ne sconsiglia l\'impiego" and
             states('input_boolean.vmc_master_opzioni_accendi_spegni_vmc_vs_pdr') ==
             'on' and
             states('input_boolean.vmc_master_spia_velocita_freecooling_un_solo_avvio')==
@@ -6515,6 +6468,7 @@ triggers:
 
 
       (
+        states('input_boolean.vmc_master_spia_velocita_0') == 'off' and
         states('input_boolean.vmc_master_spia_velocita_1') == 'off' and
         states('input_boolean.vmc_master_spia_velocita_2') == 'off' and
         states('input_boolean.vmc_master_spia_velocita_3') == 'off' and
@@ -6569,6 +6523,7 @@ triggers:
 
 
       (
+        states('input_boolean.vmc_master_spia_velocita_0') == 'off' and
         states('input_boolean.vmc_master_spia_velocita_1') == 'off' and
         states('input_boolean.vmc_master_spia_velocita_2') == 'off' and
         states('input_boolean.vmc_master_spia_velocita_3') == 'off' and
@@ -6623,6 +6578,7 @@ triggers:
 
 
       (
+        states('input_boolean.vmc_master_spia_velocita_0') == 'off' and
         states('input_boolean.vmc_master_spia_velocita_1') == 'off' and
         states('input_boolean.vmc_master_spia_velocita_2') == 'off' and
         states('input_boolean.vmc_master_spia_velocita_3') == 'off' and
@@ -6677,6 +6633,7 @@ triggers:
 
 
       (
+        states('input_boolean.vmc_master_spia_velocita_0') == 'off' and
         states('input_boolean.vmc_master_spia_velocita_1') == 'off' and
         states('input_boolean.vmc_master_spia_velocita_2') == 'off' and
         states('input_boolean.vmc_master_spia_velocita_3') == 'off' and
@@ -6731,6 +6688,7 @@ triggers:
 
 
       (
+        states('input_boolean.vmc_master_spia_velocita_0') == 'off' and
         states('input_boolean.vmc_master_spia_velocita_1') == 'off' and
         states('input_boolean.vmc_master_spia_velocita_2') == 'off' and
         states('input_boolean.vmc_master_spia_velocita_3') == 'off' and
@@ -6785,6 +6743,7 @@ triggers:
 
 
       (
+        states('input_boolean.vmc_master_spia_velocita_0') == 'off' and
         states('input_boolean.vmc_master_spia_velocita_1') == 'off' and
         states('input_boolean.vmc_master_spia_velocita_2') == 'off' and
         states('input_boolean.vmc_master_spia_velocita_3') == 'off' and
@@ -6839,6 +6798,7 @@ triggers:
 
 
       (
+        states('input_boolean.vmc_master_spia_velocita_0') == 'off' and
         states('input_boolean.vmc_master_spia_velocita_1') == 'off' and
         states('input_boolean.vmc_master_spia_velocita_2') == 'off' and
         states('input_boolean.vmc_master_spia_velocita_3') == 'off' and
@@ -6893,6 +6853,7 @@ triggers:
 
 
       (
+        states('input_boolean.vmc_master_spia_velocita_0') == 'off' and
         states('input_boolean.vmc_master_spia_velocita_1') == 'off' and
         states('input_boolean.vmc_master_spia_velocita_2') == 'off' and
         states('input_boolean.vmc_master_spia_velocita_3') == 'off' and
@@ -14624,14 +14585,10 @@ actions:
                       or
                       states('input_boolean.vmc_master_spia_velocita_freecooling_co2_o_voc')=='on')
                       and (
-                      (states('input_boolean.vmc_master_spia_velocita_freecooling_un_solo_avvio_per_programmazione_freecooling')==
+                      states('input_boolean.vmc_master_spia_velocita_freecooling_un_solo_avvio_per_programmazione_freecooling')==
                       'off' and
                       states('input_boolean.vmc_master_spia_velocita_freecooling_un_solo_avvio_per_programmazione_freeheating')==
-                      'off') or
-                      (states('input_boolean.vmc_master_spia_velocita_freecooling_un_solo_avvio_per_programmazione_freecooling')==
-                      'off' and
-                      states('input_boolean.vmc_master_spia_velocita_freecooling_un_solo_avvio_per_programmazione_freeheating')==
-                      'off') ) }}
+                      'off' ) }}
                 sequence:
                   - variables:
                       vel_prima_del_comando: "{{ states('sensor.vmc_master_status_ventola_lettura_codice_interpretato') }}"
@@ -23412,176 +23369,6 @@ actions:
                   ON e
                   vmc_master_spia_velocita_freecooling_un_solo_avvio_per_programmazione_freeheating
                   OFF
-              - conditions:
-                  - condition: and
-                    conditions:
-                      - alias: >-
-                          vmc_master_punto_di_rugiada_verifica_confronto!= "Se
-                          ne sconsiglia l'impiego" e
-                          vmc_master_opzioni_accendi_spegni_vmc_vs_pdr') == 'on'
-                        condition: template
-                        value_template: >-
-                          {{states('sensor.vmc_master_punto_di_rugiada_verifica_confronto')
-                          == "Se ne sconsiglia l'impiego" and
-                          states('input_boolean.vmc_master_opzioni_accendi_spegni_vmc_vs_pdr')
-                          == 'on'}}
-                      - alias: >-
-                          vmc_master_spia_velocita_freecooling_un_solo_avvio_per_programmazione_freecooling
-                          OFF e
-                          vmc_master_spia_velocita_freecooling_un_solo_avvio_per_programmazione_freeheating
-                          ON
-                        condition: template
-                        value_template: >-
-                          {{states('input_boolean.vmc_master_spia_velocita_freecooling_un_solo_avvio_per_programmazione_freecooling')=='off'
-                          and
-                          states('input_boolean.vmc_master_spia_velocita_freecooling_un_solo_avvio_per_programmazione_freeheating')=='on'}}
-                      - alias: >-
-                          Inquinante Vel. 1 ON e
-                          vmc_master_spia_velocita_freecooling_un_solo_avvio ON
-                        condition: template
-                        value_template: >-
-                          {{states('input_boolean.vmc_master_spia_velocita_1_co2_o_voc')=='on'
-                          and
-                          states('input_boolean.vmc_master_spia_velocita_freecooling_un_solo_avvio')=='on'}}
-                sequence:
-                  - metadata: {}
-                    data: {}
-                    target:
-                      entity_id:
-                        - >-
-                          input_boolean.vmc_master_spia_velocita_freecooling_un_solo_avvio_per_programmazione_freecooling
-                        - >-
-                          input_boolean.vmc_master_spia_velocita_freecooling_un_solo_avvio_per_programmazione_freeheating
-                    action: input_boolean.turn_off
-                alias: >-
-                  vmc_master_spia_velocita_freecooling_un_solo_avvio_per_programmazione_freecooling
-                  OFF e
-                  vmc_master_spia_velocita_freecooling_un_solo_avvio_per_programmazione_freeheating
-                  ON con PdR OFF e vmc_master_spia_velocita_1_co2_o_voc=ON e
-                  vmc_master_spia_velocita_freecooling_un_solo_avvio='on'
-              - conditions:
-                  - condition: and
-                    conditions:
-                      - alias: >-
-                          vmc_master_punto_di_rugiada_verifica_confronto!= "Se
-                          ne sconsiglia l'impiego" e
-                          vmc_master_opzioni_accendi_spegni_vmc_vs_pdr') == 'on'
-                        condition: template
-                        value_template: >-
-                          {{states('sensor.vmc_master_punto_di_rugiada_verifica_confronto')
-                          == "Se ne sconsiglia l'impiego" and
-                          states('input_boolean.vmc_master_opzioni_accendi_spegni_vmc_vs_pdr')
-                          == 'on'}}
-                      - alias: >-
-                          vmc_master_spia_velocita_freecooling_un_solo_avvio_per_programmazione_freecooling
-                          ON e
-                          vmc_master_spia_velocita_freecooling_un_solo_avvio_per_programmazione_freeheating
-                          OFF
-                        condition: template
-                        value_template: >-
-                          {{states('input_boolean.vmc_master_spia_velocita_freecooling_un_solo_avvio_per_programmazione_freecooling')=='on'
-                          and
-                          states('input_boolean.vmc_master_spia_velocita_freecooling_un_solo_avvio_per_programmazione_freeheating')=='off'}}
-                      - alias: >-
-                          Inquinante Vel. 1 ON e
-                          vmc_master_spia_velocita_freecooling_un_solo_avvio ON
-                        condition: template
-                        value_template: >-
-                          {{states('input_boolean.vmc_master_spia_velocita_1_co2_o_voc')=='on'
-                          and
-                          states('input_boolean.vmc_master_spia_velocita_freecooling_un_solo_avvio')=='on'}}
-                sequence:
-                  - metadata: {}
-                    data: {}
-                    target:
-                      entity_id:
-                        - >-
-                          input_boolean.vmc_master_spia_velocita_freecooling_un_solo_avvio_per_programmazione_freecooling
-                        - >-
-                          input_boolean.vmc_master_spia_velocita_freecooling_un_solo_avvio_per_programmazione_freeheating
-                    action: input_boolean.turn_off
-                alias: >-
-                  vmc_master_spia_velocita_freecooling_un_solo_avvio_per_programmazione_freecooling
-                  ON e
-                  vmc_master_spia_velocita_freecooling_un_solo_avvio_per_programmazione_freeheating
-                  OFF con PdR OFF e vmc_master_spia_velocita_1_co2_o_voc=ON e
-                  vmc_master_spia_velocita_freecooling_un_solo_avvio='on'
-              - conditions:
-                  - condition: and
-                    conditions:
-                      - alias: >-
-                          vmc_master_punto_di_rugiada_verifica_confronto!= "Se
-                          ne sconsiglia l'impiego" e
-                          vmc_master_opzioni_accendi_spegni_vmc_vs_pdr') == 'on'
-                        condition: template
-                        value_template: >-
-                          {{states('sensor.vmc_master_punto_di_rugiada_verifica_confronto')
-                          != "Se ne sconsiglia l'impiego" and
-                          states('input_boolean.vmc_master_opzioni_accendi_spegni_vmc_vs_pdr')
-                          == 'on'}}
-                      - condition: template
-                        value_template: >-
-                          {{states('input_boolean.vmc_master_spia_velocita_freecooling_un_solo_avvio_per_programmazione_freecooling')=='on'
-                          and
-                          states('input_boolean.vmc_master_spia_velocita_freecooling_un_solo_avvio_per_programmazione_freeheating')=='off'}}
-                        alias: >-
-                          vmc_master_spia_velocita_freecooling_un_solo_avvio_per_programmazione_freecooling
-                          ON e
-                          vmc_master_spia_velocita_freecooling_un_solo_avvio_per_programmazione_freeheating
-                          OFF
-                sequence:
-                  - metadata: {}
-                    data: {}
-                    target:
-                      entity_id:
-                        - >-
-                          input_boolean.vmc_master_spia_velocita_freecooling_un_solo_avvio_per_programmazione_freecooling
-                        - >-
-                          input_boolean.vmc_master_spia_velocita_freecooling_un_solo_avvio_per_programmazione_freeheating
-                    action: input_boolean.turn_off
-                alias: >-
-                  vmc_master_spia_velocita_freecooling_un_solo_avvio_per_programmazione_freecooling
-                  ON e
-                  vmc_master_spia_velocita_freecooling_un_solo_avvio_per_programmazione_freeheating
-                  OFF con PdR OFF
-              - conditions:
-                  - condition: and
-                    conditions:
-                      - alias: >-
-                          vmc_master_punto_di_rugiada_verifica_confronto== "Se
-                          ne sconsiglia l'impiego" e
-                          vmc_master_opzioni_accendi_spegni_vmc_vs_pdr') == 'on'
-                        condition: template
-                        value_template: >-
-                          {{states('sensor.vmc_master_punto_di_rugiada_verifica_confronto')
-                          == "Se ne sconsiglia l'impiego" and
-                          states('input_boolean.vmc_master_opzioni_accendi_spegni_vmc_vs_pdr')
-                          == 'on'}}
-                      - alias: >-
-                          vmc_master_spia_velocita_freecooling_un_solo_avvio_per_programmazione_freecooling
-                          OFF e
-                          vmc_master_spia_velocita_freecooling_un_solo_avvio_per_programmazione_freeheating
-                          ON
-                        condition: template
-                        value_template: >-
-                          {{states('input_boolean.vmc_master_spia_velocita_freecooling_un_solo_avvio_per_programmazione_freecooling')=='off'
-                          and
-                          states('input_boolean.vmc_master_spia_velocita_freecooling_un_solo_avvio_per_programmazione_freeheating')=='on'}}
-                sequence:
-                  - metadata: {}
-                    data: {}
-                    target:
-                      entity_id:
-                        - >-
-                          input_boolean.vmc_master_spia_velocita_freecooling_un_solo_avvio_per_programmazione_freecooling
-                        - >-
-                          input_boolean.vmc_master_spia_velocita_freecooling_un_solo_avvio_per_programmazione_freeheating
-                    action: input_boolean.turn_off
-                alias: >-
-                  vmc_master_spia_velocita_freecooling_un_solo_avvio_per_programmazione_freecooling
-                  OFF e
-                  vmc_master_spia_velocita_freecooling_un_solo_avvio_per_programmazione_freeheating
-                  ON con PdR ON
         alias: >-
           Cambio Velocità quanto Spia FreeHeating o FreeCooling è ON e se Spia
           Inquinanti OFF e se Spia Congelamento Off e Spia Delta Temp Off
