@@ -9624,7 +9624,7 @@ cards:
                     state: 'on'
                 card:
                   type: entities
-                  title: "Tempi di Attesa dell'Automazione"
+                  title: "Tempi di Attesa e Intervalli di Lettura"
                   show_header_toggle: false
                   state_color: false
                   entities:
@@ -9693,9 +9693,21 @@ cards:
                     - entity: input_number.vmc_master_attesa_avvisi
                       name: "Aggiornamento Avvisi"
                     - type: section
+                      label: "Intervalli di Lettura della VMC"
+                    - entity: input_number.vmc_master_intervallo_ping
+                      name: "Verifica On-Line (Ping)"
+                    - entity: input_number.vmc_master_intervallo_ventilazione
+                      name: "Sensori Ventilazione"
+                    - entity: input_number.vmc_master_intervallo_ambientali
+                      name: "Sensori Ambientali"
+                    - entity: input_number.vmc_master_intervallo_lan
+                      name: "Lan"
+                    - entity: input_number.vmc_master_intervallo_nome
+                      name: "Nome"
+                    - type: section
                     - type: button
                       entity: script.vmc_master_ripristina_tempi_attesa
-                      name: "Ripristina Tempi di Attesa Originali"
+                      name: "Ripristina Tempi Originali"
                       action_name: Esegui
                       tap_action:
                         action: perform-action
@@ -9703,7 +9715,7 @@ cards:
                         target:
                           entity_id: script.vmc_master_ripristina_tempi_attesa
                         confirmation:
-                          text: "Vuoi riportare tutti i tempi di attesa ai valori originali?"
+                          text: "Vuoi riportare tutti i tempi di attesa e gli intervalli di lettura ai valori originali?"
               - type: conditional
                 conditions:
                   - condition: state
@@ -10779,6 +10791,26 @@ cards:
           card:
             type: vertical-stack
             cards:
+              - type: entities
+                title: "Prossime Letture dalla VMC"
+                show_header_toggle: false
+                state_color: false
+                entities:
+                  - entity: timer.vmc_master_lettura_ping
+                    name: "Verifica On-Line (Ping)"
+                    icon: mdi:timer-sync-outline
+                  - entity: timer.vmc_master_lettura_ventilazione
+                    name: "Sensori Ventilazione"
+                    icon: mdi:timer-sync-outline
+                  - entity: timer.vmc_master_lettura_ambientali
+                    name: "Sensori Ambientali"
+                    icon: mdi:timer-sync-outline
+                  - entity: timer.vmc_master_lettura_lan
+                    name: "Lan"
+                    icon: mdi:timer-sync-outline
+                  - entity: timer.vmc_master_lettura_nome
+                    name: "Nome"
+                    icon: mdi:timer-sync-outline
               - type: markdown
                 content: >-
                   <table align="center"><tr><td width="96"><img src="https://raw.githubusercontent.com/DanRobo76/VMC-HELTY-FLOW/main/immagini/Intestazione/icona_vmc.webp?v=20261107" width="96" alt="VMC"></td><td>
@@ -10836,24 +10868,26 @@ cards:
                   il dato grezzo inviato dalla VMC. Se la VMC è OFF-Line viene mostrato «Non disponibile».
                   </td></tr></table>
 
+                  <strong>- Verifica On-Line (Ping)</strong> <pre style="font-size:6px; background-color: #d9ffcc;">{{ states('sensor.vmc_master_status_ip') }}</pre> <small>⏳ Prossimo ping {% if is_state('timer.vmc_master_lettura_ping', 'active') %}alle {{ as_timestamp(state_attr('timer.vmc_master_lettura_ping', 'finishes_at')) | timestamp_custom('%H:%M:%S') }}{% else %}in attesa{% endif %} (ogni {{ states('input_number.vmc_master_intervallo_ping') | int(0) }} s)</small>
+
                   <strong>- Sensori Ventilazione</strong>
                   <pre style="font-size:6px; background-color: #d9ffcc;">{% if
                   states('sensor.vmc_master_status_ip_interfaccia')=='OFF-Line'%}Non
                   disponibile{% else %}{{
                   states('sensor.vmc_master_status_ventola') }} {% endif
-                  %}</pre> <strong>- Sensori Ambientali</strong> <pre
+                  %}</pre> <small>⏳ Prossima lettura {% if is_state('timer.vmc_master_lettura_ventilazione', 'active') %}alle {{ as_timestamp(state_attr('timer.vmc_master_lettura_ventilazione', 'finishes_at')) | timestamp_custom('%H:%M:%S') }}{% else %}in attesa{% endif %} (ogni {{ states('input_number.vmc_master_intervallo_ventilazione') | int(0) }} s)</small> <strong>- Sensori Ambientali</strong> <pre
                   style="font-size:6px; background-color: #d9ffcc;">{% if
                   states('sensor.vmc_master_status_ip_interfaccia')=='OFF-Line'%}Non
                   disponibile{% else %}{{ states('sensor.vmc_master_sensori') }}
-                  {% endif %}</pre> <strong>- Lan</strong> <pre
+                  {% endif %}</pre> <small>⏳ Prossima lettura {% if is_state('timer.vmc_master_lettura_ambientali', 'active') %}alle {{ as_timestamp(state_attr('timer.vmc_master_lettura_ambientali', 'finishes_at')) | timestamp_custom('%H:%M:%S') }}{% else %}in attesa{% endif %} (ogni {{ states('input_number.vmc_master_intervallo_ambientali') | int(0) }} s)</small> <strong>- Lan</strong> <pre
                   style="font-size:6px; background-color: #d9ffcc;">{% if
                   states('sensor.vmc_master_status_ip_interfaccia')=='OFF-Line'%}Non
                   disponibile{% else %}{{ states('sensor.vmc_master_lan') }} {%
-                  endif %}</pre> <strong>- Nome</strong> <pre
+                  endif %}</pre> <small>⏳ Prossima lettura {% if is_state('timer.vmc_master_lettura_lan', 'active') %}alle {{ as_timestamp(state_attr('timer.vmc_master_lettura_lan', 'finishes_at')) | timestamp_custom('%H:%M:%S') }}{% else %}in attesa{% endif %} (ogni {{ states('input_number.vmc_master_intervallo_lan') | int(0) }} s)</small> <strong>- Nome</strong> <pre
                   style="font-size:6px; background-color: #d9ffcc;">{% if
                   states('sensor.vmc_master_status_ip_interfaccia')=='OFF-Line'%}Non
                   disponibile{% else %}{{ states('sensor.vmc_master_nome') }} {%
-                  endif %}</pre>
+                  endif %}</pre> <small>⏳ Prossima lettura {% if is_state('timer.vmc_master_lettura_nome', 'active') %}alle {{ as_timestamp(state_attr('timer.vmc_master_lettura_nome', 'finishes_at')) | timestamp_custom('%H:%M:%S') }}{% else %}in attesa{% endif %} (ogni {{ states('input_number.vmc_master_intervallo_nome') | int(0) }} s)</small>
 
                   </details>
 
