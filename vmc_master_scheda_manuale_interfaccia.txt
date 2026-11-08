@@ -9625,8 +9625,35 @@ cards:
                         input_boolean.vmc_master_opzioni_free_heating_o_free_cooling
                     - entity: input_boolean.vmc_master_opzione_finestra_audio
                     - entity: input_boolean.vmc_master_opzione_finestra_clona
+                    - entity: input_boolean.vmc_master_opzione_finestra_prossime_letture
                     - entity: input_boolean.vmc_master_opzione_finestra_tempi_attesa
                 show_header_toggle: false
+              - type: conditional
+                conditions:
+                  - condition: state
+                    entity: input_boolean.vmc_master_opzione_finestra_prossime_letture
+                    state: 'on'
+                card:
+                  type: entities
+                  title: "Prossime Letture dalla VMC"
+                  show_header_toggle: false
+                  state_color: false
+                  entities:
+                    - entity: timer.vmc_master_lettura_ping
+                      name: "Verifica On-Line (Ping)"
+                      icon: mdi:timer-sync-outline
+                    - entity: timer.vmc_master_lettura_ventilazione
+                      name: "Sensori Ventilazione"
+                      icon: mdi:timer-sync-outline
+                    - entity: timer.vmc_master_lettura_ambientali
+                      name: "Sensori Ambientali"
+                      icon: mdi:timer-sync-outline
+                    - entity: timer.vmc_master_lettura_lan
+                      name: "Lan"
+                      icon: mdi:timer-sync-outline
+                    - entity: timer.vmc_master_lettura_nome
+                      name: "Nome"
+                      icon: mdi:timer-sync-outline
               - type: conditional
                 conditions:
                   - condition: state
@@ -12935,55 +12962,6 @@ cards:
                   </td></tr></table>
                   </details>
                   <!-- >>> FINE SEZIONE CLONA VMC (SOLO MASTER, RIMOSSA DA VMC_SCRIPT_CLONA.SH) <<< -->
-              - type: entities
-                title: "Prossime Letture dalla VMC"
-                show_header_toggle: false
-                state_color: true
-                entities:
-                  - type: conditional
-                    conditions:
-                      - entity: input_boolean.vmc_master_opzione_finestra_prossime_letture
-                        state: 'on'
-                    row:
-                      entity: timer.vmc_master_lettura_ping
-                      name: "Verifica On-Line (Ping)"
-                      icon: mdi:timer-sync-outline
-                  - type: conditional
-                    conditions:
-                      - entity: input_boolean.vmc_master_opzione_finestra_prossime_letture
-                        state: 'on'
-                    row:
-                      entity: timer.vmc_master_lettura_ventilazione
-                      name: "Sensori Ventilazione"
-                      icon: mdi:timer-sync-outline
-                  - type: conditional
-                    conditions:
-                      - entity: input_boolean.vmc_master_opzione_finestra_prossime_letture
-                        state: 'on'
-                    row:
-                      entity: timer.vmc_master_lettura_ambientali
-                      name: "Sensori Ambientali"
-                      icon: mdi:timer-sync-outline
-                  - type: conditional
-                    conditions:
-                      - entity: input_boolean.vmc_master_opzione_finestra_prossime_letture
-                        state: 'on'
-                    row:
-                      entity: timer.vmc_master_lettura_lan
-                      name: "Lan"
-                      icon: mdi:timer-sync-outline
-                  - type: conditional
-                    conditions:
-                      - entity: input_boolean.vmc_master_opzione_finestra_prossime_letture
-                        state: 'on'
-                    row:
-                      entity: timer.vmc_master_lettura_nome
-                      name: "Nome"
-                      icon: mdi:timer-sync-outline
-                footer:
-                  type: buttons
-                  entities:
-                    - entity: input_boolean.vmc_master_opzione_finestra_prossime_letture
         - type: conditional
           conditions:
             - condition: and
