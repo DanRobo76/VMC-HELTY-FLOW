@@ -12055,8 +12055,8 @@ cards:
                     <a href="https://raw.githubusercontent.com/DanRobo76/VMC-HELTY-FLOW/main/immagini/Informazioni/18_priorita_allarmi.png?v=20261107" target="_blank"><img src="https://raw.githubusercontent.com/DanRobo76/VMC-HELTY-FLOW/main/immagini/Informazioni/18_priorita_allarmi.png?v=20261107" alt="Priorità degli allarmi" width="100%"></a>
                     <br>
                     <p>&nbsp;&nbsp;&nbsp;&nbsp;
-                      <a href="https://raw.githubusercontent.com/DanRobo76/VMC-HELTY-FLOW/main/immagini/Informazioni/Logiche%20di%20Funzionamento.png?v=20261108">
-                        <img src="https://raw.githubusercontent.com/DanRobo76/VMC-HELTY-FLOW/main/immagini/Informazioni/Logiche%20di%20Funzionamento.png?v=20261108" alt="Logiche di Funzionamento" width="80%">
+                      <a href="https://raw.githubusercontent.com/DanRobo76/VMC-HELTY-FLOW/main/Logiche%20di%20Funzionamento.png">
+                        <img src="https://raw.githubusercontent.com/DanRobo76/VMC-HELTY-FLOW/main/Logiche%20di%20Funzionamento.png" alt="Logiche di Funzionamento" width="80%">
                       </a> 
                     </p> 
                   </details>
