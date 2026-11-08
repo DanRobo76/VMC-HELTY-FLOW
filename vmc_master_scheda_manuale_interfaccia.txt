@@ -8603,6 +8603,30 @@ cards:
                 service: input_boolean.toggle
                 service_data:
                   entity_id: input_boolean.vmc_master_opzioni_accendi_spegni_avvisi
+        - type: markdown
+          show_empty: false
+          content: >-
+            {%- set nomi = {'0': 'Velocità 0', '1': 'Velocità 1', '2': 'Velocità 2', '3': 'Velocità 3', '4': 'Velocità 4', 'notturna': 'Notturna', 'iperventilazione': 'Iperventilazione', 'freecooling': 'Free Cool./Heat.'} -%}
+            {%- set att = states('sensor.vmc_master_status_ventola_lettura_codice_interpretato_interfaccia') -%}
+            {%- set att_k = 'freecooling' if att.startswith('Free') else ('notturna' if att == 'Notturna' else ('iperventilazione' if att == 'Iperventilazione' else att | replace('Velocità ', ''))) -%}
+            {%- set allerte = [
+              ['Congelamento', 'input_boolean.vmc_master_spia_velocita_{}_congelamento', nomi.keys() | list],
+              ['Δ Temp.', 'input_boolean.vmc_master_spia_velocita_{}_delta_temp_verifica_soglia_valore', nomi.keys() | list],
+              ['Inquinanti', 'input_boolean.vmc_master_spia_velocita_{}_co2_o_voc', ['0']],
+              ['Lim. Δ Punto di Rugiada', 'input_boolean.vmc_master_spia_velocita_{}_un_solo_avvio', nomi.keys() | list],
+              ['Avviso Free', 'input_boolean.vmc_master_spia_velocita_{}_un_solo_avvio_per_programmazione_freecooling', ['freecooling']],
+              ['Avviso Free', 'input_boolean.vmc_master_spia_velocita_{}_un_solo_avvio_per_programmazione_freeheating', ['freecooling']],
+              ['Umidità', 'input_boolean.vmc_master_spia_umidita_velocita_{}', nomi.keys() | list]
+            ] -%}
+            {%- set ns = namespace(righe=[]) -%}
+            {%- for a in allerte -%}{%- for k in a[2] -%}
+              {%- if is_state(a[1] | replace('{}', k), 'on') and k != att_k and ('<b>' ~ nomi[k] ~ '</b> (' ~ a[0] ~ ')') not in ns.righe -%}
+                {%- set ns.righe = ns.righe + ['<b>' ~ nomi[k] ~ '</b> (' ~ a[0] ~ ')'] -%}
+              {%- endif -%}
+            {%- endfor -%}{%- endfor -%}
+            {%- if ns.righe | count > 0 and att != 'Non disponibile' -%}
+            <small><ha-icon icon="mdi:restore"></ha-icon> Velocità registrata: {{ ns.righe | join(' · ') }}{{ ', ripristinata a fine allerta' if ns.righe | count == 1 else '' }}</small>
+            {%- endif -%}
         - type: conditional
           conditions:
             - condition: and
