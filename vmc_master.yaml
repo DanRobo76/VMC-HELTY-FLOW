@@ -27,7 +27,7 @@
 #                                                                                                                                                                                                                         #
 # PER LICENZE COMMERCIALI O USI PARTICOLARI CONTATTARE L'AUTORE: danilo.robotti@gmail.com                                                                                                                                 #
 #                                                                                                                                                                                                                         #
-# DATA: 1 NOVEMBRE 2026                                                                                                                                                                                                   #
+# DATA: 8 NOVEMBRE 2026                                                                                                                                                                                                   #
 #                                                                                                                                                                                                                         #
 # Impiego dell'Intelligenza Artificiale                                                                                                                                                                                   #
 # Nello sviluppo del presente software l'autore si è avvalso anche di strumenti di intelligenza artificiale.                                                                                                              #
@@ -419,7 +419,7 @@ template:
       - default_entity_id: sensor.vmc_master_versione_corrente                  # [CONFIGURAZIONE, 2 RICHIAMI] [INTERFACCIA, 3 RICHIAMI] [AUTOMAZIONE, 2 RICHIAMI] SENSORE PER VISUALIZZARE LA VERSIONE CORRENTE INSTALLATA IN HOME ASSISTANT DA CONFRONTARE NEL REPOSITORY DI GITHUB: https://github.com/DanRobo76/VMC-HELTY-FLOW IN Releases TRAMITE AUTOMAZIONE
         name: "Package Ver."
         unique_id: vmc_master_versione_corrente
-        state: "v.8.5.0"
+        state: "v.8.5.1"
         icon: mdi:check-decagram-outline
 
   - sensor:

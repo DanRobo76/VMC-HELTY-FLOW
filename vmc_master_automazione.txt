@@ -1,6 +1,6 @@
 ###########################################################################################################################################################################################################################
 #                                                                                                                                                                                                                         #
-#                                                          AUTOMAZIONE VMC HELTY FLOW PLUS RELEASE [VER. 8.5.0]                                                                                                           #
+#                                                          AUTOMAZIONE VMC HELTY FLOW PLUS RELEASE [VER. 8.5.1]                                                                                                           #
 #                                                                                                                                                                                                                         #
 # SVILUPPATO DA ING. DANILO ROBOTTI, ALLE PRIME ARMI CON HOME ASSISTANT :)                                                                                                                                                #
 #                                                                                                                                                                                                                         #
@@ -27,7 +27,7 @@
 #                                                                                                                                                                                                                         #
 # PER LICENZE COMMERCIALI O USI PARTICOLARI CONTATTARE L'AUTORE: danilo.robotti@gmail.com                                                                                                                                 #
 #                                                                                                                                                                                                                         #
-# DATA: 1 NOVEMBRE 2026                                                                                                                                                                                                   #
+# DATA: 8 NOVEMBRE 2026                                                                                                                                                                                                   #
 #                                                                                                                                                                                                                         #
 # Impiego dell'Intelligenza Artificiale                                                                                                                                                                                   #
 # Nello sviluppo del presente software l'autore si è avvalso anche di strumenti di intelligenza artificiale.                                                                                                              #
@@ -39,7 +39,7 @@
 ###########################################################################################################################################################################################################################
 alias: Automazione VMC Master
 description: >-
-  Automazione VMC Master Release v.8.5.0:
+  Automazione VMC Master Release v.8.5.1:
 
   - Invia Comandi alla VMC leggendone i valori Contenuti;
 
