@@ -3256,7 +3256,7 @@ input_boolean:
     initial: false
     icon: mdi:alert-rhombus-outline
 
-  vmc_master_opzioni_avvisi_grafici:                                            # [CONFIGURAZIONE, 3 RICHIAMI] [INTERFACCIA, 5 RICHIAMI] [AUTOMAZIONE, 9 RICHIAMI]
+  vmc_master_opzioni_avvisi_grafici:                                            # [CONFIGURAZIONE, 3 RICHIAMI] [INTERFACCIA, 5 RICHIAMI] [AUTOMAZIONE, 7 RICHIAMI]
     name: "Grafici"
     initial: false
     icon: mdi:chart-bell-curve-cumulative
