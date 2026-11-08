@@ -8614,28 +8614,67 @@ cards:
                   entity: sensor.vmc_master_velocita_registrata
                   state_not: ["Nessuna", "unknown", "unavailable"]
                 - condition: state
-                  entity: timer.vmc_master_countdown_pdr
+                  entity: timer.vmc_master_countdown_pdr_cambio
                   state: active
                 - condition: state
-                  entity: timer.vmc_master_countdown_free_heating
+                  entity: timer.vmc_master_countdown_pdr_ripristino
                   state: active
                 - condition: state
-                  entity: timer.vmc_master_countdown_free_cooling
+                  entity: timer.vmc_master_countdown_free_heating_annullamento
                   state: active
                 - condition: state
-                  entity: timer.vmc_master_countdown_inquinanti
+                  entity: timer.vmc_master_countdown_free_heating_sospensione
                   state: active
                 - condition: state
-                  entity: timer.vmc_master_countdown_umidita
+                  entity: timer.vmc_master_countdown_free_heating_ripristino
                   state: active
                 - condition: state
-                  entity: timer.vmc_master_countdown_delta
+                  entity: timer.vmc_master_countdown_free_cooling_annullamento
                   state: active
                 - condition: state
-                  entity: timer.vmc_master_countdown_blackout
+                  entity: timer.vmc_master_countdown_free_cooling_sospensione
                   state: active
                 - condition: state
-                  entity: timer.vmc_master_countdown_calendario
+                  entity: timer.vmc_master_countdown_free_cooling_ripristino
+                  state: active
+                - condition: state
+                  entity: timer.vmc_master_countdown_inquinanti_avvio
+                  state: active
+                - condition: state
+                  entity: timer.vmc_master_countdown_inquinanti_fine
+                  state: active
+                - condition: state
+                  entity: timer.vmc_master_countdown_inquinanti_memoria
+                  state: active
+                - condition: state
+                  entity: timer.vmc_master_countdown_umidita_avvio
+                  state: active
+                - condition: state
+                  entity: timer.vmc_master_countdown_umidita_fine
+                  state: active
+                - condition: state
+                  entity: timer.vmc_master_countdown_umidita_memoria
+                  state: active
+                - condition: state
+                  entity: timer.vmc_master_countdown_delta_avvio
+                  state: active
+                - condition: state
+                  entity: timer.vmc_master_countdown_delta_fine
+                  state: active
+                - condition: state
+                  entity: timer.vmc_master_countdown_delta_memoria
+                  state: active
+                - condition: state
+                  entity: timer.vmc_master_countdown_blackout_rilevazione
+                  state: active
+                - condition: state
+                  entity: timer.vmc_master_countdown_blackout_ripristino
+                  state: active
+                - condition: state
+                  entity: timer.vmc_master_countdown_calendario_inizio
+                  state: active
+                - condition: state
+                  entity: timer.vmc_master_countdown_calendario_fine
                   state: active
                 - condition: state
                   entity: timer.vmc_master_countdown_avvisi
@@ -8653,67 +8692,171 @@ cards:
                   icon: mdi:restore
               - type: conditional
                 conditions:
-                  - entity: timer.vmc_master_countdown_pdr
+                  - entity: timer.vmc_master_countdown_pdr_cambio
                     state: active
                 row:
-                  entity: timer.vmc_master_countdown_pdr
-                  name: "Tempo Mancante (PdR)"
+                  entity: timer.vmc_master_countdown_pdr_cambio
+                  name: "Cambio Velocità per Lim. Δ PdR"
                   icon: mdi:timer-sand
               - type: conditional
                 conditions:
-                  - entity: timer.vmc_master_countdown_free_heating
+                  - entity: timer.vmc_master_countdown_pdr_ripristino
                     state: active
                 row:
-                  entity: timer.vmc_master_countdown_free_heating
-                  name: "Tempo Mancante (Free Heating)"
+                  entity: timer.vmc_master_countdown_pdr_ripristino
+                  name: "Ripristino dopo Lim. Δ PdR"
                   icon: mdi:timer-sand
               - type: conditional
                 conditions:
-                  - entity: timer.vmc_master_countdown_free_cooling
+                  - entity: timer.vmc_master_countdown_free_heating_annullamento
                     state: active
                 row:
-                  entity: timer.vmc_master_countdown_free_cooling
-                  name: "Tempo Mancante (Free Cooling)"
+                  entity: timer.vmc_master_countdown_free_heating_annullamento
+                  name: "Annullamento Memoria Free Heating"
                   icon: mdi:timer-sand
               - type: conditional
                 conditions:
-                  - entity: timer.vmc_master_countdown_inquinanti
+                  - entity: timer.vmc_master_countdown_free_heating_sospensione
                     state: active
                 row:
-                  entity: timer.vmc_master_countdown_inquinanti
-                  name: "Tempo Mancante (Inquinanti)"
+                  entity: timer.vmc_master_countdown_free_heating_sospensione
+                  name: "Sospensione Free Heating"
                   icon: mdi:timer-sand
               - type: conditional
                 conditions:
-                  - entity: timer.vmc_master_countdown_umidita
+                  - entity: timer.vmc_master_countdown_free_heating_ripristino
                     state: active
                 row:
-                  entity: timer.vmc_master_countdown_umidita
-                  name: "Tempo Mancante (Umidità)"
+                  entity: timer.vmc_master_countdown_free_heating_ripristino
+                  name: "Ripristino Free Heating"
                   icon: mdi:timer-sand
               - type: conditional
                 conditions:
-                  - entity: timer.vmc_master_countdown_delta
+                  - entity: timer.vmc_master_countdown_free_cooling_annullamento
                     state: active
                 row:
-                  entity: timer.vmc_master_countdown_delta
-                  name: "Tempo Mancante (Δ Temp.)"
+                  entity: timer.vmc_master_countdown_free_cooling_annullamento
+                  name: "Annullamento Memoria Free Cooling"
                   icon: mdi:timer-sand
               - type: conditional
                 conditions:
-                  - entity: timer.vmc_master_countdown_blackout
+                  - entity: timer.vmc_master_countdown_free_cooling_sospensione
                     state: active
                 row:
-                  entity: timer.vmc_master_countdown_blackout
-                  name: "Tempo Mancante (Black-Out)"
+                  entity: timer.vmc_master_countdown_free_cooling_sospensione
+                  name: "Sospensione Free Cooling"
                   icon: mdi:timer-sand
               - type: conditional
                 conditions:
-                  - entity: timer.vmc_master_countdown_calendario
+                  - entity: timer.vmc_master_countdown_free_cooling_ripristino
                     state: active
                 row:
-                  entity: timer.vmc_master_countdown_calendario
-                  name: "Tempo Mancante (Programmazione)"
+                  entity: timer.vmc_master_countdown_free_cooling_ripristino
+                  name: "Ripristino Free Cooling"
+                  icon: mdi:timer-sand
+              - type: conditional
+                conditions:
+                  - entity: timer.vmc_master_countdown_inquinanti_avvio
+                    state: active
+                row:
+                  entity: timer.vmc_master_countdown_inquinanti_avvio
+                  name: "Avvio Allerta Inquinanti"
+                  icon: mdi:timer-sand
+              - type: conditional
+                conditions:
+                  - entity: timer.vmc_master_countdown_inquinanti_fine
+                    state: active
+                row:
+                  entity: timer.vmc_master_countdown_inquinanti_fine
+                  name: "Fine Allerta Inquinanti"
+                  icon: mdi:timer-sand
+              - type: conditional
+                conditions:
+                  - entity: timer.vmc_master_countdown_inquinanti_memoria
+                    state: active
+                row:
+                  entity: timer.vmc_master_countdown_inquinanti_memoria
+                  name: "Memorizzazione Velocità (Inquinanti)"
+                  icon: mdi:timer-sand
+              - type: conditional
+                conditions:
+                  - entity: timer.vmc_master_countdown_umidita_avvio
+                    state: active
+                row:
+                  entity: timer.vmc_master_countdown_umidita_avvio
+                  name: "Avvio Allerta Umidità"
+                  icon: mdi:timer-sand
+              - type: conditional
+                conditions:
+                  - entity: timer.vmc_master_countdown_umidita_fine
+                    state: active
+                row:
+                  entity: timer.vmc_master_countdown_umidita_fine
+                  name: "Fine Allerta Umidità"
+                  icon: mdi:timer-sand
+              - type: conditional
+                conditions:
+                  - entity: timer.vmc_master_countdown_umidita_memoria
+                    state: active
+                row:
+                  entity: timer.vmc_master_countdown_umidita_memoria
+                  name: "Memorizzazione Velocità (Umidità)"
+                  icon: mdi:timer-sand
+              - type: conditional
+                conditions:
+                  - entity: timer.vmc_master_countdown_delta_avvio
+                    state: active
+                row:
+                  entity: timer.vmc_master_countdown_delta_avvio
+                  name: "Avvio Allerta Δ Temp."
+                  icon: mdi:timer-sand
+              - type: conditional
+                conditions:
+                  - entity: timer.vmc_master_countdown_delta_fine
+                    state: active
+                row:
+                  entity: timer.vmc_master_countdown_delta_fine
+                  name: "Fine Allerta Δ Temp."
+                  icon: mdi:timer-sand
+              - type: conditional
+                conditions:
+                  - entity: timer.vmc_master_countdown_delta_memoria
+                    state: active
+                row:
+                  entity: timer.vmc_master_countdown_delta_memoria
+                  name: "Memorizzazione Velocità (Δ Temp.)"
+                  icon: mdi:timer-sand
+              - type: conditional
+                conditions:
+                  - entity: timer.vmc_master_countdown_blackout_rilevazione
+                    state: active
+                row:
+                  entity: timer.vmc_master_countdown_blackout_rilevazione
+                  name: "Rilevazione Black-Out"
+                  icon: mdi:timer-sand
+              - type: conditional
+                conditions:
+                  - entity: timer.vmc_master_countdown_blackout_ripristino
+                    state: active
+                row:
+                  entity: timer.vmc_master_countdown_blackout_ripristino
+                  name: "Ripristino dopo Black-Out"
+                  icon: mdi:timer-sand
+              - type: conditional
+                conditions:
+                  - entity: timer.vmc_master_countdown_calendario_inizio
+                    state: active
+                row:
+                  entity: timer.vmc_master_countdown_calendario_inizio
+                  name: "Inizio Fascia"
+                  icon: mdi:timer-sand
+              - type: conditional
+                conditions:
+                  - entity: timer.vmc_master_countdown_calendario_fine
+                    state: active
+                row:
+                  entity: timer.vmc_master_countdown_calendario_fine
+                  name: "Fine Fascia"
                   icon: mdi:timer-sand
               - type: conditional
                 conditions:
@@ -8721,7 +8864,7 @@ cards:
                     state: active
                 row:
                   entity: timer.vmc_master_countdown_avvisi
-                  name: "Tempo Mancante (Avvisi)"
+                  name: "Aggiornamento Avvisi"
                   icon: mdi:timer-sand
         - type: conditional
           conditions:
