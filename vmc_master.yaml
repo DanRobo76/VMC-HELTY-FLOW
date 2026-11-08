@@ -126,6 +126,8 @@ homeassistant:
       icon: mdi:hvac
     automation.vmc_master_letture_vmc_con_countdown:
       icon: mdi:hvac
+    automation.vmc_master_esclusivita_finestre_opzioni:
+      icon: mdi:hvac
     automation.automazione_vmc_master:
       icon: mdi:hvac
 ################### Fine Icone delle Automazioni ###################
@@ -3166,6 +3168,7 @@ recorder:
       - automation.vmc_master_countdown_attese_automazione
       - automation.vmc_master_inizializza_tempi_di_attesa
       - automation.vmc_master_letture_vmc_con_countdown
+      - automation.vmc_master_esclusivita_finestre_opzioni
       - input_boolean.vmc_master_opzione_finestra_prossime_letture
       - timer.vmc_master_lettura_ping
       - timer.vmc_master_lettura_ventilazione
@@ -4153,7 +4156,7 @@ input_number:
 ################### Inizio Creazione Switch Booleani impiegati nell'Interfaccia Lovelace per mostrare o meno le Opzioni ####################################################################################
 input_boolean:
 # >>> INIZIO SEZIONE CLONA VMC (SOLO MASTER, RIMOSSA DA VMC_SCRIPT_CLONA.SH) <<<
-  vmc_master_opzione_finestra_clona:                                            # [CONFIGURAZIONE, 3 RICHIAMI] [INTERFACCIA, 5 RICHIAMI] [AUTOMAZIONE, 18 RICHIAMI] FINESTRA CLONA VMC NEL PANNELLO IMPOSTAZIONI
+  vmc_master_opzione_finestra_clona:                                            # [CONFIGURAZIONE, 5 RICHIAMI] [INTERFACCIA, 5 RICHIAMI] [AUTOMAZIONE, 18 RICHIAMI] FINESTRA CLONA VMC NEL PANNELLO IMPOSTAZIONI
     name: "Finestra Clona"
     icon: mdi:content-copy
 
@@ -4183,7 +4186,7 @@ input_boolean:
     initial: false
     icon: mdi:remote-tv
 
-  vmc_master_opzioni_offset_sensori:                                            # [CONFIGURAZIONE, 3 RICHIAMI] [INTERFACCIA, 28 RICHIAMI] [AUTOMAZIONE, 9 RICHIAMI]
+  vmc_master_opzioni_offset_sensori:                                            # [CONFIGURAZIONE, 4 RICHIAMI] [INTERFACCIA, 28 RICHIAMI] [AUTOMAZIONE, 9 RICHIAMI]
     name: "Opzioni"
     initial: false
     icon: mdi:format-list-checkbox
@@ -4203,22 +4206,22 @@ input_boolean:
     initial: false
     icon: mdi:memory
 
-  vmc_master_opzioni_calendario_main:                                           # [CONFIGURAZIONE, 3 RICHIAMI] [INTERFACCIA, 5 RICHIAMI] [AUTOMAZIONE, 18 RICHIAMI]
+  vmc_master_opzioni_calendario_main:                                           # [CONFIGURAZIONE, 5 RICHIAMI] [INTERFACCIA, 5 RICHIAMI] [AUTOMAZIONE, 18 RICHIAMI]
     name: "Calendario"
     initial: false
     icon: mdi:calendar-multiselect
 
-  vmc_master_opzioni_calendario:                                                # [CONFIGURAZIONE, 3 RICHIAMI] [INTERFACCIA, 5 RICHIAMI] [AUTOMAZIONE, 19 RICHIAMI]
+  vmc_master_opzioni_calendario:                                                # [CONFIGURAZIONE, 5 RICHIAMI] [INTERFACCIA, 5 RICHIAMI] [AUTOMAZIONE, 19 RICHIAMI]
     name: "Programmazione Calendario"
     initial: false
     icon: mdi:calendar-clock-outline
 
-  vmc_master_opzioni_punto_di_rugiada:                                          # [CONFIGURAZIONE, 3 RICHIAMI] [INTERFACCIA, 5 RICHIAMI] [AUTOMAZIONE, 19 RICHIAMI]
+  vmc_master_opzioni_punto_di_rugiada:                                          # [CONFIGURAZIONE, 5 RICHIAMI] [INTERFACCIA, 5 RICHIAMI] [AUTOMAZIONE, 19 RICHIAMI]
     name: "Lim. Δ P. di Rugiada"
     initial: false
     icon: mdi:thermometer-water
 
-  vmc_master_opzioni_free_heating_o_free_cooling:                               # [CONFIGURAZIONE, 3 RICHIAMI] [INTERFACCIA, 5 RICHIAMI] [AUTOMAZIONE, 23 RICHIAMI]
+  vmc_master_opzioni_free_heating_o_free_cooling:                               # [CONFIGURAZIONE, 5 RICHIAMI] [INTERFACCIA, 5 RICHIAMI] [AUTOMAZIONE, 23 RICHIAMI]
     name: "Calendario Free Heating / Free Cooling"
     initial: false
     icon: mdi:sun-snowflake-variant
@@ -4233,12 +4236,12 @@ input_boolean:
     initial: false
     icon: mdi:information-slab-box-outline
 
-  vmc_master_opzioni_scelta_sensori:                                            # [CONFIGURAZIONE, 3 RICHIAMI] [INTERFACCIA, 5 RICHIAMI] [AUTOMAZIONE, 19 RICHIAMI]
+  vmc_master_opzioni_scelta_sensori:                                            # [CONFIGURAZIONE, 5 RICHIAMI] [INTERFACCIA, 5 RICHIAMI] [AUTOMAZIONE, 19 RICHIAMI]
     name: "Sensori Opzionati"
     initial: false
     icon: mdi:memory
 
-  vmc_master_opzioni_elementi_chimici:                                          # [CONFIGURAZIONE, 3 RICHIAMI] [INTERFACCIA, 5 RICHIAMI] [AUTOMAZIONE, 19 RICHIAMI]
+  vmc_master_opzioni_elementi_chimici:                                          # [CONFIGURAZIONE, 5 RICHIAMI] [INTERFACCIA, 5 RICHIAMI] [AUTOMAZIONE, 19 RICHIAMI]
     name: "Elementi Chimici"
     initial: false
     icon: mdi:test-tube
@@ -4587,12 +4590,12 @@ input_boolean:
 
 ################### Inizio Creazione Switch Booleano impiegato nella riproduzione Audio, al Media Player Selezionato ############################
 
-  vmc_master_conferma_pulizia_cronologia:                                       # [CONFIGURAZIONE, 3 RICHIAMI] [INTERFACCIA, 6 RICHIAMI] [AUTOMAZIONE, 15 RICHIAMI] ON = MOSTRA IL RIQUADRO DI CONFERMA «Sì / No» CON L'ELENCO DELLE ENTITÀ PRIMA DI PULIRE LA CRONOLOGIA
+  vmc_master_conferma_pulizia_cronologia:                                       # [CONFIGURAZIONE, 5 RICHIAMI] [INTERFACCIA, 6 RICHIAMI] [AUTOMAZIONE, 15 RICHIAMI] ON = MOSTRA IL RIQUADRO DI CONFERMA «Sì / No» CON L'ELENCO DELLE ENTITÀ PRIMA DI PULIRE LA CRONOLOGIA
     name: Conferma Pulizia Cronologia Entità
     initial: false
     icon: mdi:delete-clock
 
-  vmc_master_opzione_finestra_audio:                                            # [CONFIGURAZIONE, 3 RICHIAMI] [INTERFACCIA, 5 RICHIAMI] [AUTOMAZIONE, 18 RICHIAMI] SENSORE TRACCIAMENTO AUDIO
+  vmc_master_opzione_finestra_audio:                                            # [CONFIGURAZIONE, 5 RICHIAMI] [INTERFACCIA, 5 RICHIAMI] [AUTOMAZIONE, 18 RICHIAMI] SENSORE TRACCIAMENTO AUDIO
     name: "Finestra Audio"
     icon: mdi:volume-high
 
@@ -4647,7 +4650,7 @@ input_boolean:
 ################### Fine Creazione Switch Booleano impiegato nell'Automazione, per l'Audio all'Avvio di Home Assistant ############################
 
 ################### Inizio Creazione Switch Booleani per i Tempi di Attesa dei Trigger dell'Automazione ###################
-  vmc_master_opzione_finestra_tempi_attesa:                                     # [CONFIGURAZIONE, 2 RICHIAMI] [INTERFACCIA, 2 RICHIAMI] [AUTOMAZIONE, 0 RICHIAMI] FINESTRA TEMPI DI ATTESA NEL PANNELLO OPZIONI
+  vmc_master_opzione_finestra_tempi_attesa:                                     # [CONFIGURAZIONE, 5 RICHIAMI] [INTERFACCIA, 2 RICHIAMI] [AUTOMAZIONE, 0 RICHIAMI] FINESTRA TEMPI DI ATTESA NEL PANNELLO OPZIONI
     name: "Finestra Tempi di Attesa"
     icon: mdi:timer-cog-outline
 
@@ -4655,7 +4658,7 @@ input_boolean:
     name: "Tempi di Attesa Inizializzati"
     icon: mdi:timer-check-outline
 
-  vmc_master_opzione_finestra_prossime_letture:                                 # [CONFIGURAZIONE, 2 RICHIAMI] [INTERFACCIA, 2 RICHIAMI] [AUTOMAZIONE, 0 RICHIAMI] FINESTRA «PROSSIME LETTURE DALLA VMC» NEL PANNELLO OPZIONI
+  vmc_master_opzione_finestra_prossime_letture:                                 # [CONFIGURAZIONE, 5 RICHIAMI] [INTERFACCIA, 2 RICHIAMI] [AUTOMAZIONE, 0 RICHIAMI] FINESTRA «PROSSIME LETTURE DALLA VMC» NEL PANNELLO OPZIONI
     name: "Prossime Letture dalla VMC"
     icon: mdi:timer-outline
 ################### Fine Creazione Switch Booleani per i Tempi di Attesa dei Trigger dell'Automazione ###################
@@ -6060,6 +6063,7 @@ script:
             - automation.vmc_master_countdown_attese_automazione
             - automation.vmc_master_inizializza_tempi_di_attesa
             - automation.vmc_master_letture_vmc_con_countdown
+            - automation.vmc_master_esclusivita_finestre_opzioni
             - input_boolean.vmc_master_opzione_finestra_prossime_letture
             - timer.vmc_master_lettura_ping
             - timer.vmc_master_lettura_ventilazione
@@ -24908,6 +24912,61 @@ automation:
                   target:
                     entity_id: "{{ sensori[repeat.item] }}"
 ################### Fine Creazione Automazione Letture della VMC con Countdown ###################
+
+################### Inizio Creazione Automazione Esclusivita' delle Finestre Opzioni Prossime Letture e Tempi di Attesa ###################
+  - id: "vmc_master_esclusivita_finestre_opzioni"                               # [CONFIGURAZIONE, 3 RICHIAMI] [INTERFACCIA, 0 RICHIAMI] [AUTOMAZIONE, 0 RICHIAMI]
+    alias: "VMC Master - Esclusività Finestre Opzioni"
+    description: >
+      Le finestre «Prossime Letture dalla VMC» e «Tempi di Attesa» del pannello Opzioni si comportano come le altre
+      (Audio, Clona, Calendario, ...): aprendone una si chiudono tutte le altre, aprendo un'altra finestra di Opzioni
+      si chiudono loro, e si chiudono anche quando si chiude o si riapre il pannello Opzioni. E' separata
+      dall'Automazione VMC Master per non farla ripartire (mode: restart) a ogni apertura di finestra.
+    mode: queued
+    max: 10
+    triggers:
+      - trigger: state
+        entity_id:
+          - input_boolean.vmc_master_opzione_finestra_prossime_letture
+          - input_boolean.vmc_master_opzione_finestra_tempi_attesa
+        to: 'on'
+        id: nuova
+      - trigger: state
+        entity_id:
+          - input_boolean.vmc_master_opzioni_calendario_main
+          - input_boolean.vmc_master_opzioni_free_heating_o_free_cooling
+          - input_boolean.vmc_master_opzioni_calendario
+          - input_boolean.vmc_master_opzioni_punto_di_rugiada
+          - input_boolean.vmc_master_opzioni_scelta_sensori
+          - input_boolean.vmc_master_opzioni_elementi_chimici
+          - input_boolean.vmc_master_opzione_finestra_audio
+          - input_boolean.vmc_master_opzione_finestra_clona
+          - input_boolean.vmc_master_conferma_pulizia_cronologia
+        to: 'on'
+        id: esistente
+      - trigger: state
+        entity_id: input_boolean.vmc_master_opzioni_offset_sensori
+        id: pannello
+    actions:
+      - choose:
+          - conditions:
+              - condition: trigger
+                id: nuova
+            sequence:
+              - action: input_boolean.turn_off
+                target:
+                  entity_id: "{{ ['input_boolean.vmc_master_opzioni_calendario_main', 'input_boolean.vmc_master_opzioni_free_heating_o_free_cooling', 'input_boolean.vmc_master_opzioni_calendario', 'input_boolean.vmc_master_opzioni_punto_di_rugiada', 'input_boolean.vmc_master_opzioni_scelta_sensori', 'input_boolean.vmc_master_opzioni_elementi_chimici', 'input_boolean.vmc_master_opzione_finestra_audio', 'input_boolean.vmc_master_opzione_finestra_clona', 'input_boolean.vmc_master_conferma_pulizia_cronologia', 'input_boolean.vmc_master_opzione_finestra_prossime_letture', 'input_boolean.vmc_master_opzione_finestra_tempi_attesa'] | reject('eq', trigger.entity_id) | list }}"
+          - conditions:
+              - condition: trigger
+                id:
+                  - esistente
+                  - pannello
+            sequence:
+              - action: input_boolean.turn_off
+                target:
+                  entity_id:
+                    - input_boolean.vmc_master_opzione_finestra_prossime_letture
+                    - input_boolean.vmc_master_opzione_finestra_tempi_attesa
+################### Fine Creazione Automazione Esclusivita' delle Finestre Opzioni Prossime Letture e Tempi di Attesa ###################
 
 ################### Inizio Creazione Automazione Inizializzazione dei Tempi di Attesa ###################
   - id: "vmc_master_inizializza_tempi_attesa"                                    # [CONFIGURAZIONE, 3 RICHIAMI] [INTERFACCIA, 0 RICHIAMI] [AUTOMAZIONE, 0 RICHIAMI]
