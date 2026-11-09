@@ -47,6 +47,10 @@ description: >-
   queued): nessun evento interrompe un comando già avviato; un evento si
   esegue solo se la sua condizione è ancora vera quando arriva il suo turno;
 
+  - Se un Black-Out arriva mentre un'allerta sta finendo, al ripristino la VMC
+  torna alla velocità di fine allerta (Priorità 7); ogni ciclo di conferma si
+  ferma se l'utente sceglie un'altra velocità;
+
   - Avvisa l'utente tramite notifica sul Dispositivo Mobile selezionato tra i
   disponibili nel sistema di Home Assistant (H.A.), in caso di Avvio, Arresto,
   Errori o cambio filtro della VMC;
@@ -8771,9 +8775,9 @@ actions:
           states('input_boolean.vmc_master_spia_velocita_iperventilazione') == 'off'
         ) ) and (states('input_number.vmc_master_fase_riallineamento_al_riavvio') | float(0) == 0 or states('input_number.vmc_master_fase_riallineamento_al_riavvio') | float(0) >= 2) }}
       {%- elif trigger.id == 'spia_velocita_0_congelamento' -%}
-      {#- MEMORIZZAZIONE DELLA VELOCITA' SCELTA DURANTE L'ALLERTA: LA LETTURA DELLA VELOCITA' NON SI RICONTROLLA (ERA VERA QUANDO IL TRIGGER E' SCATTATO) -#}
       {{
-
+        states('sensor.vmc_master_status_ventola_lettura_codice_interpretato') == 'Velocità 0'
+        and
         (
           states('sensor.vmc_master_temp_esterna_status')|float(0) <= -18
           or
@@ -8801,9 +8805,9 @@ actions:
         and states('input_boolean.vmc_master_spia_velocita_freecooling_congelamento') == 'off'
       }}
       {%- elif trigger.id == 'spia_velocita_1_congelamento' -%}
-      {#- MEMORIZZAZIONE DELLA VELOCITA' SCELTA DURANTE L'ALLERTA: LA LETTURA DELLA VELOCITA' NON SI RICONTROLLA (ERA VERA QUANDO IL TRIGGER E' SCATTATO) -#}
       {{
-
+        states('sensor.vmc_master_status_ventola_lettura_codice_interpretato') == 'Velocità 1'
+        and
         (
           states('sensor.vmc_master_temp_esterna_status')|float(0) <= -18
           or
@@ -8824,9 +8828,9 @@ actions:
         and states('input_boolean.vmc_master_spia_velocita_iperventilazione') == 'off'
       }}
       {%- elif trigger.id == 'spia_velocita_2_congelamento' -%}
-      {#- MEMORIZZAZIONE DELLA VELOCITA' SCELTA DURANTE L'ALLERTA: LA LETTURA DELLA VELOCITA' NON SI RICONTROLLA (ERA VERA QUANDO IL TRIGGER E' SCATTATO) -#}
       {{
-
+        states('sensor.vmc_master_status_ventola_lettura_codice_interpretato') == 'Velocità 2'
+        and
         (
           states('sensor.vmc_master_temp_esterna_status')|float(0) <= -18
           or
@@ -8847,9 +8851,9 @@ actions:
         and states('input_boolean.vmc_master_spia_velocita_iperventilazione') == 'off'
       }}
       {%- elif trigger.id == 'spia_velocita_3_congelamento' -%}
-      {#- MEMORIZZAZIONE DELLA VELOCITA' SCELTA DURANTE L'ALLERTA: LA LETTURA DELLA VELOCITA' NON SI RICONTROLLA (ERA VERA QUANDO IL TRIGGER E' SCATTATO) -#}
       {{
-
+        states('sensor.vmc_master_status_ventola_lettura_codice_interpretato') == 'Velocità 3'
+        and
         (
           states('sensor.vmc_master_temp_esterna_status')|float(0) <= -18
           or
@@ -8870,9 +8874,9 @@ actions:
         and states('input_boolean.vmc_master_spia_velocita_iperventilazione') == 'off'
       }}
       {%- elif trigger.id == 'spia_velocita_4_congelamento' -%}
-      {#- MEMORIZZAZIONE DELLA VELOCITA' SCELTA DURANTE L'ALLERTA: LA LETTURA DELLA VELOCITA' NON SI RICONTROLLA (ERA VERA QUANDO IL TRIGGER E' SCATTATO) -#}
       {{
-
+        states('sensor.vmc_master_status_ventola_lettura_codice_interpretato') == 'Velocità 4'
+        and
         (
           states('sensor.vmc_master_temp_esterna_status')|float(0) <= -18
           or
@@ -8893,9 +8897,9 @@ actions:
         and states('input_boolean.vmc_master_spia_velocita_iperventilazione') == 'off'
       }}
       {%- elif trigger.id == 'spia_velocita_iperventilazione_congelamento' -%}
-      {#- MEMORIZZAZIONE DELLA VELOCITA' SCELTA DURANTE L'ALLERTA: LA LETTURA DELLA VELOCITA' NON SI RICONTROLLA (ERA VERA QUANDO IL TRIGGER E' SCATTATO) -#}
       {{
-
+        states('sensor.vmc_master_status_ventola_lettura_codice_interpretato') == 'Iperventilazione'
+        and
         (
           states('sensor.vmc_master_temp_esterna_status')|float(0) <= -18
           or
@@ -8916,9 +8920,9 @@ actions:
         and states('input_boolean.vmc_master_spia_velocita_iperventilazione') == 'off'
       }}
       {%- elif trigger.id == 'spia_velocita_notturna_congelamento' -%}
-      {#- MEMORIZZAZIONE DELLA VELOCITA' SCELTA DURANTE L'ALLERTA: LA LETTURA DELLA VELOCITA' NON SI RICONTROLLA (ERA VERA QUANDO IL TRIGGER E' SCATTATO) -#}
       {{
-
+        states('sensor.vmc_master_status_ventola_lettura_codice_interpretato') == 'Notturna'
+        and
         (
           states('sensor.vmc_master_temp_esterna_status')|float(0) <= -18
           or
@@ -8939,9 +8943,9 @@ actions:
         and states('input_boolean.vmc_master_spia_velocita_iperventilazione') == 'off'
       }}
       {%- elif trigger.id == 'spia_velocita_Free Cooling_congelamento' -%}
-      {#- MEMORIZZAZIONE DELLA VELOCITA' SCELTA DURANTE L'ALLERTA: LA LETTURA DELLA VELOCITA' NON SI RICONTROLLA (ERA VERA QUANDO IL TRIGGER E' SCATTATO) -#}
       {{
-
+        states('sensor.vmc_master_status_ventola_lettura_codice_interpretato') == 'Free Cooling'
+        and
         (
           states('sensor.vmc_master_temp_esterna_status')|float(0) <= -18
           or
@@ -10237,10 +10241,9 @@ actions:
       states('input_boolean.vmc_master_spia_velocita_notturna_congelamento') == 'off' and
       states('input_boolean.vmc_master_spia_velocita_freecooling_congelamento') == 'off' ) and (states('input_number.vmc_master_fase_riallineamento_al_riavvio') | float(0) == 0 or states('input_number.vmc_master_fase_riallineamento_al_riavvio') | float(0) >= 2) }}
       {%- elif trigger.id == 'spia_velocita_0_delta_temp' -%}
-      {#- MEMORIZZAZIONE DELLA VELOCITA' SCELTA DURANTE L'ALLERTA: LA LETTURA DELLA VELOCITA' NON SI RICONTROLLA (ERA VERA QUANDO IL TRIGGER E' SCATTATO) -#}
       {{
       states('sensor.vmc_master_delta_temp_verifica_soglia') == 'Si' and
-
+      states('sensor.vmc_master_status_ventola_lettura_codice_interpretato') == 'Velocità 0' and
       (states('sensor.vmc_master_temp_esterna_status') | float(0) > -18 and states('sensor.vmc_master_temp_esterna_status_senza_offset') | float(0) > -18) and
       states('input_boolean.vmc_master_delta_temp_verifica_soglia_valore_spia') == 'on' and
       states('sensor.vmc_master_status_ip_interfaccia') == 'ON-Line' and
@@ -10269,10 +10272,9 @@ actions:
       )
       }}
       {%- elif trigger.id == 'spia_velocita_1_delta_temp' -%}
-      {#- MEMORIZZAZIONE DELLA VELOCITA' SCELTA DURANTE L'ALLERTA: LA LETTURA DELLA VELOCITA' NON SI RICONTROLLA (ERA VERA QUANDO IL TRIGGER E' SCATTATO) -#}
       {{
       states('sensor.vmc_master_delta_temp_verifica_soglia') == 'Si' and
-
+      states('sensor.vmc_master_status_ventola_lettura_codice_interpretato') == 'Velocità 1' and
       (states('sensor.vmc_master_temp_esterna_status') | float(0) > -18 and states('sensor.vmc_master_temp_esterna_status_senza_offset') | float(0) > -18) and
       states('input_boolean.vmc_master_delta_temp_verifica_soglia_valore_spia') == 'on' and
       states('sensor.vmc_master_status_ip_interfaccia') == 'ON-Line' and
@@ -10301,10 +10303,9 @@ actions:
       )
       }}
       {%- elif trigger.id == 'spia_velocita_2_delta_temp' -%}
-      {#- MEMORIZZAZIONE DELLA VELOCITA' SCELTA DURANTE L'ALLERTA: LA LETTURA DELLA VELOCITA' NON SI RICONTROLLA (ERA VERA QUANDO IL TRIGGER E' SCATTATO) -#}
       {{
       states('sensor.vmc_master_delta_temp_verifica_soglia') == 'Si' and
-
+      states('sensor.vmc_master_status_ventola_lettura_codice_interpretato') == 'Velocità 2' and
       (states('sensor.vmc_master_temp_esterna_status') | float(0) > -18 and states('sensor.vmc_master_temp_esterna_status_senza_offset') | float(0) > -18) and
       states('input_boolean.vmc_master_delta_temp_verifica_soglia_valore_spia') == 'on' and
       states('sensor.vmc_master_status_ip_interfaccia') == 'ON-Line' and
@@ -10333,10 +10334,9 @@ actions:
       )
       }}
       {%- elif trigger.id == 'spia_velocita_3_delta_temp' -%}
-      {#- MEMORIZZAZIONE DELLA VELOCITA' SCELTA DURANTE L'ALLERTA: LA LETTURA DELLA VELOCITA' NON SI RICONTROLLA (ERA VERA QUANDO IL TRIGGER E' SCATTATO) -#}
       {{
       states('sensor.vmc_master_delta_temp_verifica_soglia') == 'Si' and
-
+      states('sensor.vmc_master_status_ventola_lettura_codice_interpretato') == 'Velocità 3' and
       (states('sensor.vmc_master_temp_esterna_status') | float(0) > -18 and states('sensor.vmc_master_temp_esterna_status_senza_offset') | float(0) > -18) and
       states('input_boolean.vmc_master_delta_temp_verifica_soglia_valore_spia') == 'on' and
       states('sensor.vmc_master_status_ip_interfaccia') == 'ON-Line' and
@@ -10365,10 +10365,9 @@ actions:
       )
       }}
       {%- elif trigger.id == 'spia_velocita_4_delta_temp' -%}
-      {#- MEMORIZZAZIONE DELLA VELOCITA' SCELTA DURANTE L'ALLERTA: LA LETTURA DELLA VELOCITA' NON SI RICONTROLLA (ERA VERA QUANDO IL TRIGGER E' SCATTATO) -#}
       {{
       states('sensor.vmc_master_delta_temp_verifica_soglia') == 'Si' and
-
+      states('sensor.vmc_master_status_ventola_lettura_codice_interpretato') == 'Velocità 4' and
       (states('sensor.vmc_master_temp_esterna_status') | float(0) > -18 and states('sensor.vmc_master_temp_esterna_status_senza_offset') | float(0) > -18) and
       states('input_boolean.vmc_master_delta_temp_verifica_soglia_valore_spia') == 'on' and
       states('sensor.vmc_master_status_ip_interfaccia') == 'ON-Line' and
@@ -10397,10 +10396,9 @@ actions:
       )
       }}
       {%- elif trigger.id == 'spia_velocita_notturna_delta_temp' -%}
-      {#- MEMORIZZAZIONE DELLA VELOCITA' SCELTA DURANTE L'ALLERTA: LA LETTURA DELLA VELOCITA' NON SI RICONTROLLA (ERA VERA QUANDO IL TRIGGER E' SCATTATO) -#}
       {{
       states('sensor.vmc_master_delta_temp_verifica_soglia') == 'Si' and
-
+      states('sensor.vmc_master_status_ventola_lettura_codice_interpretato') == 'Notturna' and
       (states('sensor.vmc_master_temp_esterna_status') | float(0) > -18 and states('sensor.vmc_master_temp_esterna_status_senza_offset') | float(0) > -18) and
       states('input_boolean.vmc_master_delta_temp_verifica_soglia_valore_spia') == 'on' and
       states('sensor.vmc_master_status_ip_interfaccia') == 'ON-Line' and
@@ -10429,10 +10427,9 @@ actions:
       )
       }}
       {%- elif trigger.id == 'spia_velocita_iperventilazione_delta_temp' -%}
-      {#- MEMORIZZAZIONE DELLA VELOCITA' SCELTA DURANTE L'ALLERTA: LA LETTURA DELLA VELOCITA' NON SI RICONTROLLA (ERA VERA QUANDO IL TRIGGER E' SCATTATO) -#}
       {{
       states('sensor.vmc_master_delta_temp_verifica_soglia') == 'Si' and
-
+      states('sensor.vmc_master_status_ventola_lettura_codice_interpretato') == 'Iperventilazione' and
       (states('sensor.vmc_master_temp_esterna_status') | float(0) > -18 and states('sensor.vmc_master_temp_esterna_status_senza_offset') | float(0) > -18) and
       states('input_boolean.vmc_master_delta_temp_verifica_soglia_valore_spia') == 'on' and
       states('sensor.vmc_master_status_ip_interfaccia') == 'ON-Line' and
@@ -10461,10 +10458,9 @@ actions:
       )
       }}
       {%- elif trigger.id == 'spia_velocita_Free Cooling_delta_temp' -%}
-      {#- MEMORIZZAZIONE DELLA VELOCITA' SCELTA DURANTE L'ALLERTA: LA LETTURA DELLA VELOCITA' NON SI RICONTROLLA (ERA VERA QUANDO IL TRIGGER E' SCATTATO) -#}
       {{
       states('sensor.vmc_master_delta_temp_verifica_soglia') == 'Si' and
-
+      states('sensor.vmc_master_status_ventola_lettura_codice_interpretato') == 'Free Cooling' and
       (states('sensor.vmc_master_temp_esterna_status') | float(0) > -18 and states('sensor.vmc_master_temp_esterna_status_senza_offset') | float(0) > -18) and
       states('input_boolean.vmc_master_delta_temp_verifica_soglia_valore_spia') == 'on' and
       states('sensor.vmc_master_status_ip_interfaccia') == 'ON-Line' and
@@ -12660,6 +12656,26 @@ actions:
               until:
                 - condition: template
                   value_template: "{{ states('sensor.vmc_master_status_ventola_lettura_codice_interpretato') == 'Velocità 0' or (vel_prima_del_comando not in ['Non disponibile', 'unknown', 'unavailable', ''] and states('sensor.vmc_master_status_ventola_lettura_codice_interpretato') not in [vel_prima_del_comando, 'Non disponibile', 'unknown', 'unavailable', '']) or is_state('binary_sensor.vmc_master_black_out_rilevato', 'on') }}"
+          - alias: Black-Out prima della conferma -> memorizza questa velocità per il ripristino dopo il Black-Out (Priorità 7)
+            if:
+              - condition: template
+                value_template: "{{ is_state('binary_sensor.vmc_master_black_out_rilevato', 'on') and states('sensor.vmc_master_status_ventola_lettura_codice_interpretato') != 'Velocità 0' }}"
+            then:
+              - data: {}
+                target:
+                  entity_id: input_boolean.vmc_master_spia_velocita_0
+                action: input_boolean.turn_on
+              - data: {}
+                target:
+                  entity_id:
+                    - input_boolean.vmc_master_spia_velocita_1
+                    - input_boolean.vmc_master_spia_velocita_2
+                    - input_boolean.vmc_master_spia_velocita_3
+                    - input_boolean.vmc_master_spia_velocita_4
+                    - input_boolean.vmc_master_spia_velocita_notturna
+                    - input_boolean.vmc_master_spia_velocita_iperventilazione
+                    - input_boolean.vmc_master_spia_velocita_freecooling
+                action: input_boolean.turn_off
           - action: input_boolean.turn_off
             metadata: {}
             data: {}
@@ -12727,6 +12743,26 @@ actions:
               until:
                 - condition: template
                   value_template: "{{ states('sensor.vmc_master_status_ventola_lettura_codice_interpretato') == 'Velocità 0' or (vel_prima_del_comando not in ['Non disponibile', 'unknown', 'unavailable', ''] and states('sensor.vmc_master_status_ventola_lettura_codice_interpretato') not in [vel_prima_del_comando, 'Non disponibile', 'unknown', 'unavailable', '']) or is_state('binary_sensor.vmc_master_black_out_rilevato', 'on') }}"
+          - alias: Black-Out prima della conferma -> memorizza questa velocità per il ripristino dopo il Black-Out (Priorità 7)
+            if:
+              - condition: template
+                value_template: "{{ is_state('binary_sensor.vmc_master_black_out_rilevato', 'on') and states('sensor.vmc_master_status_ventola_lettura_codice_interpretato') != 'Velocità 0' }}"
+            then:
+              - data: {}
+                target:
+                  entity_id: input_boolean.vmc_master_spia_velocita_0
+                action: input_boolean.turn_on
+              - data: {}
+                target:
+                  entity_id:
+                    - input_boolean.vmc_master_spia_velocita_1
+                    - input_boolean.vmc_master_spia_velocita_2
+                    - input_boolean.vmc_master_spia_velocita_3
+                    - input_boolean.vmc_master_spia_velocita_4
+                    - input_boolean.vmc_master_spia_velocita_notturna
+                    - input_boolean.vmc_master_spia_velocita_iperventilazione
+                    - input_boolean.vmc_master_spia_velocita_freecooling
+                action: input_boolean.turn_off
         alias: >-
           Condizioni Favorevoli Ripristinate su Velocità 0 se Spia Congelamento
           Off e Spia Delta Temp Off e se se Spia Inquinanti OFF
@@ -12773,6 +12809,26 @@ actions:
               until:
                 - condition: template
                   value_template: "{{ states('sensor.vmc_master_status_ventola_lettura_codice_interpretato') == 'Velocità 1' or (vel_prima_del_comando not in ['Non disponibile', 'unknown', 'unavailable', ''] and states('sensor.vmc_master_status_ventola_lettura_codice_interpretato') not in [vel_prima_del_comando, 'Non disponibile', 'unknown', 'unavailable', '']) or is_state('binary_sensor.vmc_master_black_out_rilevato', 'on') }}"
+          - alias: Black-Out prima della conferma -> memorizza questa velocità per il ripristino dopo il Black-Out (Priorità 7)
+            if:
+              - condition: template
+                value_template: "{{ is_state('binary_sensor.vmc_master_black_out_rilevato', 'on') and states('sensor.vmc_master_status_ventola_lettura_codice_interpretato') != 'Velocità 1' }}"
+            then:
+              - data: {}
+                target:
+                  entity_id: input_boolean.vmc_master_spia_velocita_1
+                action: input_boolean.turn_on
+              - data: {}
+                target:
+                  entity_id:
+                    - input_boolean.vmc_master_spia_velocita_0
+                    - input_boolean.vmc_master_spia_velocita_2
+                    - input_boolean.vmc_master_spia_velocita_3
+                    - input_boolean.vmc_master_spia_velocita_4
+                    - input_boolean.vmc_master_spia_velocita_notturna
+                    - input_boolean.vmc_master_spia_velocita_iperventilazione
+                    - input_boolean.vmc_master_spia_velocita_freecooling
+                action: input_boolean.turn_off
         alias: >-
           Condizioni Favorevoli Ripristinate su Velocità 1 se Spia Congelamento
           Off e Spia Delta Temp Off e se se Spia Inquinanti OFF
@@ -12865,6 +12921,26 @@ actions:
               until:
                 - condition: template
                   value_template: "{{ states('sensor.vmc_master_status_ventola_lettura_codice_interpretato') == 'Velocità 2' or (vel_prima_del_comando not in ['Non disponibile', 'unknown', 'unavailable', ''] and states('sensor.vmc_master_status_ventola_lettura_codice_interpretato') not in [vel_prima_del_comando, 'Non disponibile', 'unknown', 'unavailable', '']) or is_state('binary_sensor.vmc_master_black_out_rilevato', 'on') }}"
+          - alias: Black-Out prima della conferma -> memorizza questa velocità per il ripristino dopo il Black-Out (Priorità 7)
+            if:
+              - condition: template
+                value_template: "{{ is_state('binary_sensor.vmc_master_black_out_rilevato', 'on') and states('sensor.vmc_master_status_ventola_lettura_codice_interpretato') != 'Velocità 2' }}"
+            then:
+              - data: {}
+                target:
+                  entity_id: input_boolean.vmc_master_spia_velocita_2
+                action: input_boolean.turn_on
+              - data: {}
+                target:
+                  entity_id:
+                    - input_boolean.vmc_master_spia_velocita_0
+                    - input_boolean.vmc_master_spia_velocita_1
+                    - input_boolean.vmc_master_spia_velocita_3
+                    - input_boolean.vmc_master_spia_velocita_4
+                    - input_boolean.vmc_master_spia_velocita_notturna
+                    - input_boolean.vmc_master_spia_velocita_iperventilazione
+                    - input_boolean.vmc_master_spia_velocita_freecooling
+                action: input_boolean.turn_off
         alias: >-
           Condizioni Favorevoli Ripristinate su Velocità 2 se Spia Congelamento
           Off e Spia Delta Temp Off e se se Spia Inquinanti OFF
@@ -12957,6 +13033,26 @@ actions:
               until:
                 - condition: template
                   value_template: "{{ states('sensor.vmc_master_status_ventola_lettura_codice_interpretato') == 'Velocità 3' or (vel_prima_del_comando not in ['Non disponibile', 'unknown', 'unavailable', ''] and states('sensor.vmc_master_status_ventola_lettura_codice_interpretato') not in [vel_prima_del_comando, 'Non disponibile', 'unknown', 'unavailable', '']) or is_state('binary_sensor.vmc_master_black_out_rilevato', 'on') }}"
+          - alias: Black-Out prima della conferma -> memorizza questa velocità per il ripristino dopo il Black-Out (Priorità 7)
+            if:
+              - condition: template
+                value_template: "{{ is_state('binary_sensor.vmc_master_black_out_rilevato', 'on') and states('sensor.vmc_master_status_ventola_lettura_codice_interpretato') != 'Velocità 3' }}"
+            then:
+              - data: {}
+                target:
+                  entity_id: input_boolean.vmc_master_spia_velocita_3
+                action: input_boolean.turn_on
+              - data: {}
+                target:
+                  entity_id:
+                    - input_boolean.vmc_master_spia_velocita_0
+                    - input_boolean.vmc_master_spia_velocita_1
+                    - input_boolean.vmc_master_spia_velocita_2
+                    - input_boolean.vmc_master_spia_velocita_4
+                    - input_boolean.vmc_master_spia_velocita_notturna
+                    - input_boolean.vmc_master_spia_velocita_iperventilazione
+                    - input_boolean.vmc_master_spia_velocita_freecooling
+                action: input_boolean.turn_off
         alias: >-
           Condizioni Favorevoli Ripristinate su Velocità 3 se Spia Congelamento
           Off e Spia Delta Temp Off e se se Spia Inquinanti OFF
@@ -13049,6 +13145,26 @@ actions:
               until:
                 - condition: template
                   value_template: "{{ states('sensor.vmc_master_status_ventola_lettura_codice_interpretato') == 'Velocità 4' or (vel_prima_del_comando not in ['Non disponibile', 'unknown', 'unavailable', ''] and states('sensor.vmc_master_status_ventola_lettura_codice_interpretato') not in [vel_prima_del_comando, 'Non disponibile', 'unknown', 'unavailable', '']) or is_state('binary_sensor.vmc_master_black_out_rilevato', 'on') }}"
+          - alias: Black-Out prima della conferma -> memorizza questa velocità per il ripristino dopo il Black-Out (Priorità 7)
+            if:
+              - condition: template
+                value_template: "{{ is_state('binary_sensor.vmc_master_black_out_rilevato', 'on') and states('sensor.vmc_master_status_ventola_lettura_codice_interpretato') != 'Velocità 4' }}"
+            then:
+              - data: {}
+                target:
+                  entity_id: input_boolean.vmc_master_spia_velocita_4
+                action: input_boolean.turn_on
+              - data: {}
+                target:
+                  entity_id:
+                    - input_boolean.vmc_master_spia_velocita_0
+                    - input_boolean.vmc_master_spia_velocita_1
+                    - input_boolean.vmc_master_spia_velocita_2
+                    - input_boolean.vmc_master_spia_velocita_3
+                    - input_boolean.vmc_master_spia_velocita_notturna
+                    - input_boolean.vmc_master_spia_velocita_iperventilazione
+                    - input_boolean.vmc_master_spia_velocita_freecooling
+                action: input_boolean.turn_off
         alias: >-
           Condizioni Favorevoli Ripristinate su Velocità 4 se Spia Congelamento
           Off e Spia Delta Temp Off e se se Spia Inquinanti OFFF
@@ -13141,6 +13257,26 @@ actions:
               until:
                 - condition: template
                   value_template: "{{ states('sensor.vmc_master_status_ventola_lettura_codice_interpretato') == 'Notturna' or (vel_prima_del_comando not in ['Non disponibile', 'unknown', 'unavailable', ''] and states('sensor.vmc_master_status_ventola_lettura_codice_interpretato') not in [vel_prima_del_comando, 'Non disponibile', 'unknown', 'unavailable', '']) or is_state('binary_sensor.vmc_master_black_out_rilevato', 'on') }}"
+          - alias: Black-Out prima della conferma -> memorizza questa velocità per il ripristino dopo il Black-Out (Priorità 7)
+            if:
+              - condition: template
+                value_template: "{{ is_state('binary_sensor.vmc_master_black_out_rilevato', 'on') and states('sensor.vmc_master_status_ventola_lettura_codice_interpretato') != 'Notturna' }}"
+            then:
+              - data: {}
+                target:
+                  entity_id: input_boolean.vmc_master_spia_velocita_notturna
+                action: input_boolean.turn_on
+              - data: {}
+                target:
+                  entity_id:
+                    - input_boolean.vmc_master_spia_velocita_0
+                    - input_boolean.vmc_master_spia_velocita_1
+                    - input_boolean.vmc_master_spia_velocita_2
+                    - input_boolean.vmc_master_spia_velocita_3
+                    - input_boolean.vmc_master_spia_velocita_4
+                    - input_boolean.vmc_master_spia_velocita_iperventilazione
+                    - input_boolean.vmc_master_spia_velocita_freecooling
+                action: input_boolean.turn_off
         alias: >-
           Condizioni Favorevoli Ripristinate su Velocità Notturna se Spia
           Congelamento Off e Spia Delta Temp Off e se se Spia Inquinanti OFF
@@ -13200,6 +13336,9 @@ actions:
 
                     states('input_boolean.vmc_master_spia_velocita_freecooling_un_solo_avvio')==
                     'off' }}
+          - variables:
+              vel_prima_del_comando: "{{ states('sensor.vmc_master_status_ventola_lettura_codice_interpretato') }}"
+            alias: Memorizza la velocità prima del comando (un cambio fatto dall'utente ferma il ciclo di conferma)
           - repeat:
               sequence:
                 - if:
@@ -13222,7 +13361,23 @@ actions:
                   value_template: >-
                     {{
                     states('sensor.vmc_master_status_ventola_lettura_codice_interpretato')
-                    == ('Velocità 0' if (states('input_boolean.vmc_master_spia_velocita_freecooling_un_solo_avvio_per_programmazione_freecooling') == 'on' or states('input_boolean.vmc_master_spia_velocita_freecooling_un_solo_avvio_per_programmazione_freeheating') == 'on') else 'Free Cooling') or is_state('binary_sensor.vmc_master_black_out_rilevato', 'on') }}
+                    == ('Velocità 0' if (states('input_boolean.vmc_master_spia_velocita_freecooling_un_solo_avvio_per_programmazione_freecooling') == 'on' or states('input_boolean.vmc_master_spia_velocita_freecooling_un_solo_avvio_per_programmazione_freeheating') == 'on') else 'Free Cooling') or (vel_prima_del_comando not in ['Non disponibile', 'unknown', 'unavailable', ''] and states('sensor.vmc_master_status_ventola_lettura_codice_interpretato') not in [vel_prima_del_comando, 'Non disponibile', 'unknown', 'unavailable', '']) or is_state('binary_sensor.vmc_master_black_out_rilevato', 'on') }}
+          - variables:
+              velocita_fine_allerta: "{{ ('Velocità 0' if (states('input_boolean.vmc_master_spia_velocita_freecooling_un_solo_avvio_per_programmazione_freecooling') == 'on' or states('input_boolean.vmc_master_spia_velocita_freecooling_un_solo_avvio_per_programmazione_freeheating') == 'on') else 'Free Cooling') }}"
+            alias: Velocità di fine allerta (per il ripristino dopo un Black-Out)
+          - alias: Black-Out prima della conferma -> memorizza questa velocità per il ripristino dopo il Black-Out (Priorità 7)
+            if:
+              - condition: template
+                value_template: "{{ is_state('binary_sensor.vmc_master_black_out_rilevato', 'on') and states('sensor.vmc_master_status_ventola_lettura_codice_interpretato') != velocita_fine_allerta }}"
+            then:
+              - data: {}
+                target:
+                  entity_id: "input_boolean.vmc_master_spia_{{ {'Velocità 0': 'velocita_0', 'Velocità 1': 'velocita_1', 'Velocità 2': 'velocita_2', 'Velocità 3': 'velocita_3', 'Velocità 4': 'velocita_4', 'Notturna': 'velocita_notturna', 'Iperventilazione': 'velocita_iperventilazione', 'Free Cooling': 'velocita_freecooling'}[velocita_fine_allerta] }}"
+                action: input_boolean.turn_on
+              - data: {}
+                target:
+                  entity_id: "{{ ['input_boolean.vmc_master_spia_velocita_0', 'input_boolean.vmc_master_spia_velocita_1', 'input_boolean.vmc_master_spia_velocita_2', 'input_boolean.vmc_master_spia_velocita_3', 'input_boolean.vmc_master_spia_velocita_4', 'input_boolean.vmc_master_spia_velocita_notturna', 'input_boolean.vmc_master_spia_velocita_iperventilazione', 'input_boolean.vmc_master_spia_velocita_freecooling'] | reject('eq', 'input_boolean.vmc_master_spia_' ~ {'Velocità 0': 'velocita_0', 'Velocità 1': 'velocita_1', 'Velocità 2': 'velocita_2', 'Velocità 3': 'velocita_3', 'Velocità 4': 'velocita_4', 'Notturna': 'velocita_notturna', 'Iperventilazione': 'velocita_iperventilazione', 'Free Cooling': 'velocita_freecooling'}[velocita_fine_allerta]) | join(',') }}"
+                action: input_boolean.turn_off
         alias: >-
           Condizioni Favorevoli Ripristinate su Velocità Free Cool./Heat. se
           Spia Congelamento Off e Spia Delta Temp Off e se se Spia Inquinanti
@@ -13316,6 +13471,26 @@ actions:
               until:
                 - condition: template
                   value_template: "{{ states('sensor.vmc_master_status_ventola_lettura_codice_interpretato') == 'Iperventilazione' or (vel_prima_del_comando not in ['Non disponibile', 'unknown', 'unavailable', ''] and states('sensor.vmc_master_status_ventola_lettura_codice_interpretato') not in [vel_prima_del_comando, 'Non disponibile', 'unknown', 'unavailable', '']) or is_state('binary_sensor.vmc_master_black_out_rilevato', 'on') }}"
+          - alias: Black-Out prima della conferma -> memorizza questa velocità per il ripristino dopo il Black-Out (Priorità 7)
+            if:
+              - condition: template
+                value_template: "{{ is_state('binary_sensor.vmc_master_black_out_rilevato', 'on') and states('sensor.vmc_master_status_ventola_lettura_codice_interpretato') != 'Iperventilazione' }}"
+            then:
+              - data: {}
+                target:
+                  entity_id: input_boolean.vmc_master_spia_velocita_iperventilazione
+                action: input_boolean.turn_on
+              - data: {}
+                target:
+                  entity_id:
+                    - input_boolean.vmc_master_spia_velocita_0
+                    - input_boolean.vmc_master_spia_velocita_1
+                    - input_boolean.vmc_master_spia_velocita_2
+                    - input_boolean.vmc_master_spia_velocita_3
+                    - input_boolean.vmc_master_spia_velocita_4
+                    - input_boolean.vmc_master_spia_velocita_notturna
+                    - input_boolean.vmc_master_spia_velocita_freecooling
+                action: input_boolean.turn_off
         alias: >-
           Condizioni Favorevoli Ripristinate su Velocità Iperventilazione se
           Spia Congelamento Off e Spia Delta Temp Off e se se Spia Inquinanti
@@ -13455,6 +13630,26 @@ actions:
               until:
                 - condition: template
                   value_template: "{{ states('sensor.vmc_master_status_ventola_lettura_codice_interpretato') == 'Velocità 2' or (vel_prima_del_comando not in ['Non disponibile', 'unknown', 'unavailable', ''] and states('sensor.vmc_master_status_ventola_lettura_codice_interpretato') not in [vel_prima_del_comando, 'Non disponibile', 'unknown', 'unavailable', '']) or is_state('binary_sensor.vmc_master_black_out_rilevato', 'on') }}"
+          - alias: Black-Out prima della conferma -> memorizza questa velocità per il ripristino dopo il Black-Out (Priorità 7)
+            if:
+              - condition: template
+                value_template: "{{ is_state('binary_sensor.vmc_master_black_out_rilevato', 'on') and states('sensor.vmc_master_status_ventola_lettura_codice_interpretato') != 'Velocità 2' }}"
+            then:
+              - data: {}
+                target:
+                  entity_id: input_boolean.vmc_master_spia_velocita_2
+                action: input_boolean.turn_on
+              - data: {}
+                target:
+                  entity_id:
+                    - input_boolean.vmc_master_spia_velocita_0
+                    - input_boolean.vmc_master_spia_velocita_1
+                    - input_boolean.vmc_master_spia_velocita_3
+                    - input_boolean.vmc_master_spia_velocita_4
+                    - input_boolean.vmc_master_spia_velocita_notturna
+                    - input_boolean.vmc_master_spia_velocita_iperventilazione
+                    - input_boolean.vmc_master_spia_velocita_freecooling
+                action: input_boolean.turn_off
         alias: >-
           Condizioni Favorevoli Ripristinate su Velocità 2 se Spia Congelamento
           Off e Spia Delta Temp Off e se  se Spia Inquinanti ON
@@ -13548,6 +13743,26 @@ actions:
               until:
                 - condition: template
                   value_template: "{{ states('sensor.vmc_master_status_ventola_lettura_codice_interpretato') == 'Velocità 3' or (vel_prima_del_comando not in ['Non disponibile', 'unknown', 'unavailable', ''] and states('sensor.vmc_master_status_ventola_lettura_codice_interpretato') not in [vel_prima_del_comando, 'Non disponibile', 'unknown', 'unavailable', '']) or is_state('binary_sensor.vmc_master_black_out_rilevato', 'on') }}"
+          - alias: Black-Out prima della conferma -> memorizza questa velocità per il ripristino dopo il Black-Out (Priorità 7)
+            if:
+              - condition: template
+                value_template: "{{ is_state('binary_sensor.vmc_master_black_out_rilevato', 'on') and states('sensor.vmc_master_status_ventola_lettura_codice_interpretato') != 'Velocità 3' }}"
+            then:
+              - data: {}
+                target:
+                  entity_id: input_boolean.vmc_master_spia_velocita_3
+                action: input_boolean.turn_on
+              - data: {}
+                target:
+                  entity_id:
+                    - input_boolean.vmc_master_spia_velocita_0
+                    - input_boolean.vmc_master_spia_velocita_1
+                    - input_boolean.vmc_master_spia_velocita_2
+                    - input_boolean.vmc_master_spia_velocita_4
+                    - input_boolean.vmc_master_spia_velocita_notturna
+                    - input_boolean.vmc_master_spia_velocita_iperventilazione
+                    - input_boolean.vmc_master_spia_velocita_freecooling
+                action: input_boolean.turn_off
         alias: >-
           Condizioni Favorevoli Ripristinate su Velocità 3 se Spia Congelamento
           Off e Spia Delta Temp Off e se se Spia Inquinanti ON
@@ -13641,6 +13856,26 @@ actions:
               until:
                 - condition: template
                   value_template: "{{ states('sensor.vmc_master_status_ventola_lettura_codice_interpretato') == 'Velocità 4' or (vel_prima_del_comando not in ['Non disponibile', 'unknown', 'unavailable', ''] and states('sensor.vmc_master_status_ventola_lettura_codice_interpretato') not in [vel_prima_del_comando, 'Non disponibile', 'unknown', 'unavailable', '']) or is_state('binary_sensor.vmc_master_black_out_rilevato', 'on') }}"
+          - alias: Black-Out prima della conferma -> memorizza questa velocità per il ripristino dopo il Black-Out (Priorità 7)
+            if:
+              - condition: template
+                value_template: "{{ is_state('binary_sensor.vmc_master_black_out_rilevato', 'on') and states('sensor.vmc_master_status_ventola_lettura_codice_interpretato') != 'Velocità 4' }}"
+            then:
+              - data: {}
+                target:
+                  entity_id: input_boolean.vmc_master_spia_velocita_4
+                action: input_boolean.turn_on
+              - data: {}
+                target:
+                  entity_id:
+                    - input_boolean.vmc_master_spia_velocita_0
+                    - input_boolean.vmc_master_spia_velocita_1
+                    - input_boolean.vmc_master_spia_velocita_2
+                    - input_boolean.vmc_master_spia_velocita_3
+                    - input_boolean.vmc_master_spia_velocita_notturna
+                    - input_boolean.vmc_master_spia_velocita_iperventilazione
+                    - input_boolean.vmc_master_spia_velocita_freecooling
+                action: input_boolean.turn_off
         alias: >-
           Condizioni Favorevoli Ripristinate su Velocità 4 se Spia Congelamento
           Off e Spia Delta Temp Off e se se Spia Inquinanti ON
@@ -13734,6 +13969,26 @@ actions:
               until:
                 - condition: template
                   value_template: "{{ states('sensor.vmc_master_status_ventola_lettura_codice_interpretato') == 'Notturna' or (vel_prima_del_comando not in ['Non disponibile', 'unknown', 'unavailable', ''] and states('sensor.vmc_master_status_ventola_lettura_codice_interpretato') not in [vel_prima_del_comando, 'Non disponibile', 'unknown', 'unavailable', '']) or is_state('binary_sensor.vmc_master_black_out_rilevato', 'on') }}"
+          - alias: Black-Out prima della conferma -> memorizza questa velocità per il ripristino dopo il Black-Out (Priorità 7)
+            if:
+              - condition: template
+                value_template: "{{ is_state('binary_sensor.vmc_master_black_out_rilevato', 'on') and states('sensor.vmc_master_status_ventola_lettura_codice_interpretato') != 'Notturna' }}"
+            then:
+              - data: {}
+                target:
+                  entity_id: input_boolean.vmc_master_spia_velocita_notturna
+                action: input_boolean.turn_on
+              - data: {}
+                target:
+                  entity_id:
+                    - input_boolean.vmc_master_spia_velocita_0
+                    - input_boolean.vmc_master_spia_velocita_1
+                    - input_boolean.vmc_master_spia_velocita_2
+                    - input_boolean.vmc_master_spia_velocita_3
+                    - input_boolean.vmc_master_spia_velocita_4
+                    - input_boolean.vmc_master_spia_velocita_iperventilazione
+                    - input_boolean.vmc_master_spia_velocita_freecooling
+                action: input_boolean.turn_off
         alias: >-
           Condizioni Favorevoli Ripristinate su Velocità Notturna se Spia
           Congelamento Off e Spia Delta Temp Off e se se Spia Inquinanti ON
@@ -13837,6 +14092,26 @@ actions:
                       until:
                         - condition: template
                           value_template: "{{ states('sensor.vmc_master_status_ventola_lettura_codice_interpretato') == 'Free Cooling' or (vel_prima_del_comando not in ['Non disponibile', 'unknown', 'unavailable', ''] and states('sensor.vmc_master_status_ventola_lettura_codice_interpretato') not in [vel_prima_del_comando, 'Non disponibile', 'unknown', 'unavailable', '']) or is_state('binary_sensor.vmc_master_black_out_rilevato', 'on') }}"
+                  - alias: Black-Out prima della conferma -> memorizza questa velocità per il ripristino dopo il Black-Out (Priorità 7)
+                    if:
+                      - condition: template
+                        value_template: "{{ is_state('binary_sensor.vmc_master_black_out_rilevato', 'on') and states('sensor.vmc_master_status_ventola_lettura_codice_interpretato') != 'Free Cooling' }}"
+                    then:
+                      - data: {}
+                        target:
+                          entity_id: input_boolean.vmc_master_spia_velocita_freecooling
+                        action: input_boolean.turn_on
+                      - data: {}
+                        target:
+                          entity_id:
+                            - input_boolean.vmc_master_spia_velocita_0
+                            - input_boolean.vmc_master_spia_velocita_1
+                            - input_boolean.vmc_master_spia_velocita_2
+                            - input_boolean.vmc_master_spia_velocita_3
+                            - input_boolean.vmc_master_spia_velocita_4
+                            - input_boolean.vmc_master_spia_velocita_notturna
+                            - input_boolean.vmc_master_spia_velocita_iperventilazione
+                        action: input_boolean.turn_off
                 alias: >-
                   Se la Spia 1° Avvio Free Heating è OFF e la Spia1° Avvio Free
                   Cooling è OFF
@@ -13930,6 +14205,26 @@ actions:
                       until:
                         - condition: template
                           value_template: "{{ states('sensor.vmc_master_status_ventola_lettura_codice_interpretato') == 'Free Cooling' or (vel_prima_del_comando not in ['Non disponibile', 'unknown', 'unavailable', ''] and states('sensor.vmc_master_status_ventola_lettura_codice_interpretato') not in [vel_prima_del_comando, 'Non disponibile', 'unknown', 'unavailable', '']) or is_state('binary_sensor.vmc_master_black_out_rilevato', 'on') }}"
+                  - alias: Black-Out prima della conferma -> memorizza questa velocità per il ripristino dopo il Black-Out (Priorità 7)
+                    if:
+                      - condition: template
+                        value_template: "{{ is_state('binary_sensor.vmc_master_black_out_rilevato', 'on') and states('sensor.vmc_master_status_ventola_lettura_codice_interpretato') != 'Free Cooling' }}"
+                    then:
+                      - data: {}
+                        target:
+                          entity_id: input_boolean.vmc_master_spia_velocita_freecooling
+                        action: input_boolean.turn_on
+                      - data: {}
+                        target:
+                          entity_id:
+                            - input_boolean.vmc_master_spia_velocita_0
+                            - input_boolean.vmc_master_spia_velocita_1
+                            - input_boolean.vmc_master_spia_velocita_2
+                            - input_boolean.vmc_master_spia_velocita_3
+                            - input_boolean.vmc_master_spia_velocita_4
+                            - input_boolean.vmc_master_spia_velocita_notturna
+                            - input_boolean.vmc_master_spia_velocita_iperventilazione
+                        action: input_boolean.turn_off
                 alias: Nessuna Allerta Free Cooling -> Vel. Free Cooling
               - conditions:
                   - condition: template
@@ -14021,6 +14316,26 @@ actions:
                       until:
                         - condition: template
                           value_template: "{{ states('sensor.vmc_master_status_ventola_lettura_codice_interpretato') == 'Free Cooling' or (vel_prima_del_comando not in ['Non disponibile', 'unknown', 'unavailable', ''] and states('sensor.vmc_master_status_ventola_lettura_codice_interpretato') not in [vel_prima_del_comando, 'Non disponibile', 'unknown', 'unavailable', '']) or is_state('binary_sensor.vmc_master_black_out_rilevato', 'on') }}"
+                  - alias: Black-Out prima della conferma -> memorizza questa velocità per il ripristino dopo il Black-Out (Priorità 7)
+                    if:
+                      - condition: template
+                        value_template: "{{ is_state('binary_sensor.vmc_master_black_out_rilevato', 'on') and states('sensor.vmc_master_status_ventola_lettura_codice_interpretato') != 'Free Cooling' }}"
+                    then:
+                      - data: {}
+                        target:
+                          entity_id: input_boolean.vmc_master_spia_velocita_freecooling
+                        action: input_boolean.turn_on
+                      - data: {}
+                        target:
+                          entity_id:
+                            - input_boolean.vmc_master_spia_velocita_0
+                            - input_boolean.vmc_master_spia_velocita_1
+                            - input_boolean.vmc_master_spia_velocita_2
+                            - input_boolean.vmc_master_spia_velocita_3
+                            - input_boolean.vmc_master_spia_velocita_4
+                            - input_boolean.vmc_master_spia_velocita_notturna
+                            - input_boolean.vmc_master_spia_velocita_iperventilazione
+                        action: input_boolean.turn_off
                 alias: Nessuna Allerta Free Heating -> Vel. Free Cooling
               - conditions:
                   - alias: >-
@@ -14258,6 +14573,26 @@ actions:
               until:
                 - condition: template
                   value_template: "{{ states('sensor.vmc_master_status_ventola_lettura_codice_interpretato') == 'Iperventilazione' or (vel_prima_del_comando not in ['Non disponibile', 'unknown', 'unavailable', ''] and states('sensor.vmc_master_status_ventola_lettura_codice_interpretato') not in [vel_prima_del_comando, 'Non disponibile', 'unknown', 'unavailable', '']) or is_state('binary_sensor.vmc_master_black_out_rilevato', 'on') }}"
+          - alias: Black-Out prima della conferma -> memorizza questa velocità per il ripristino dopo il Black-Out (Priorità 7)
+            if:
+              - condition: template
+                value_template: "{{ is_state('binary_sensor.vmc_master_black_out_rilevato', 'on') and states('sensor.vmc_master_status_ventola_lettura_codice_interpretato') != 'Iperventilazione' }}"
+            then:
+              - data: {}
+                target:
+                  entity_id: input_boolean.vmc_master_spia_velocita_iperventilazione
+                action: input_boolean.turn_on
+              - data: {}
+                target:
+                  entity_id:
+                    - input_boolean.vmc_master_spia_velocita_0
+                    - input_boolean.vmc_master_spia_velocita_1
+                    - input_boolean.vmc_master_spia_velocita_2
+                    - input_boolean.vmc_master_spia_velocita_3
+                    - input_boolean.vmc_master_spia_velocita_4
+                    - input_boolean.vmc_master_spia_velocita_notturna
+                    - input_boolean.vmc_master_spia_velocita_freecooling
+                action: input_boolean.turn_off
         alias: >-
           Condizioni Favorevoli Ripristinate su Velocità Iperventilazione se
           Spia Congelamento Off e Spia Delta Temp Off e se se Spia Inquinanti ON
@@ -14365,6 +14700,26 @@ actions:
                       until:
                         - condition: template
                           value_template: "{{ states('sensor.vmc_master_status_ventola_lettura_codice_interpretato') == 'Velocità 0' or (vel_prima_del_comando not in ['Non disponibile', 'unknown', 'unavailable', ''] and states('sensor.vmc_master_status_ventola_lettura_codice_interpretato') not in [vel_prima_del_comando, 'Non disponibile', 'unknown', 'unavailable', '']) or is_state('binary_sensor.vmc_master_black_out_rilevato', 'on') }}"
+                  - alias: Black-Out prima della conferma -> memorizza questa velocità per il ripristino dopo il Black-Out (Priorità 7)
+                    if:
+                      - condition: template
+                        value_template: "{{ is_state('binary_sensor.vmc_master_black_out_rilevato', 'on') and states('sensor.vmc_master_status_ventola_lettura_codice_interpretato') != 'Velocità 0' }}"
+                    then:
+                      - data: {}
+                        target:
+                          entity_id: input_boolean.vmc_master_spia_velocita_0
+                        action: input_boolean.turn_on
+                      - data: {}
+                        target:
+                          entity_id:
+                            - input_boolean.vmc_master_spia_velocita_1
+                            - input_boolean.vmc_master_spia_velocita_2
+                            - input_boolean.vmc_master_spia_velocita_3
+                            - input_boolean.vmc_master_spia_velocita_4
+                            - input_boolean.vmc_master_spia_velocita_notturna
+                            - input_boolean.vmc_master_spia_velocita_iperventilazione
+                            - input_boolean.vmc_master_spia_velocita_freecooling
+                        action: input_boolean.turn_off
                 alias: se Spia Congelamento Off e Spia Delta Temp Off
               - conditions:
                   - alias: se Spia Congelamento ON o Spia Delta Temp ON
@@ -14522,6 +14877,26 @@ actions:
                       until:
                         - condition: template
                           value_template: "{{ states('sensor.vmc_master_status_ventola_lettura_codice_interpretato') == 'Velocità 1' or (vel_prima_del_comando not in ['Non disponibile', 'unknown', 'unavailable', ''] and states('sensor.vmc_master_status_ventola_lettura_codice_interpretato') not in [vel_prima_del_comando, 'Non disponibile', 'unknown', 'unavailable', '']) or is_state('binary_sensor.vmc_master_black_out_rilevato', 'on') }}"
+                  - alias: Black-Out prima della conferma -> memorizza questa velocità per il ripristino dopo il Black-Out (Priorità 7)
+                    if:
+                      - condition: template
+                        value_template: "{{ is_state('binary_sensor.vmc_master_black_out_rilevato', 'on') and states('sensor.vmc_master_status_ventola_lettura_codice_interpretato') != 'Velocità 1' }}"
+                    then:
+                      - data: {}
+                        target:
+                          entity_id: input_boolean.vmc_master_spia_velocita_1
+                        action: input_boolean.turn_on
+                      - data: {}
+                        target:
+                          entity_id:
+                            - input_boolean.vmc_master_spia_velocita_0
+                            - input_boolean.vmc_master_spia_velocita_2
+                            - input_boolean.vmc_master_spia_velocita_3
+                            - input_boolean.vmc_master_spia_velocita_4
+                            - input_boolean.vmc_master_spia_velocita_notturna
+                            - input_boolean.vmc_master_spia_velocita_iperventilazione
+                            - input_boolean.vmc_master_spia_velocita_freecooling
+                        action: input_boolean.turn_off
                 alias: se Spia Congelamento Off e Spia Delta Temp Off
               - conditions:
                   - alias: se Spia Congelamento ON o Spia Delta Temp ON
@@ -14546,6 +14921,9 @@ actions:
           - condition: trigger
             id: TeVsTi Free-Heating -> Imposta Velocità 0
         sequence:
+          - variables:
+              vel_prima_del_comando: "{{ states('sensor.vmc_master_status_ventola_lettura_codice_interpretato') }}"
+            alias: Memorizza la velocità prima del comando (un cambio fatto dall'utente ferma il ciclo di conferma)
           - alias: Lancia il Comando Velocità 0 Finchè la Velocità diventa Velocità 0
             repeat:
               sequence:
@@ -14580,7 +14958,7 @@ actions:
                   value_template: >-
                     {{
                     states('sensor.vmc_master_status_ventola_lettura_codice_interpretato')
-                    == ('Velocità 1' if states('input_boolean.vmc_master_umidita_verifica_soglia_valore_spia') == 'on' else 'Velocità 0') or is_state('binary_sensor.vmc_master_black_out_rilevato', 'on') }}
+                    == ('Velocità 1' if states('input_boolean.vmc_master_umidita_verifica_soglia_valore_spia') == 'on' else 'Velocità 0') or (vel_prima_del_comando not in ['Non disponibile', 'unknown', 'unavailable', ''] and states('sensor.vmc_master_status_ventola_lettura_codice_interpretato') not in [vel_prima_del_comando, 'Non disponibile', 'unknown', 'unavailable', '']) or is_state('binary_sensor.vmc_master_black_out_rilevato', 'on') }}
         alias: >-
           Condizioni Sfavorevoli Temp. Ext Vs Temp. Int. a Velocità Free Heating
           -> Vel. 0 se Spia Congelamento Off e Spia Delta Temp Off e se se Spia
@@ -14655,6 +15033,9 @@ actions:
           - condition: trigger
             id: TeVsTi Free-Cooling -> Imposta Velocità 0
         sequence:
+          - variables:
+              vel_prima_del_comando: "{{ states('sensor.vmc_master_status_ventola_lettura_codice_interpretato') }}"
+            alias: Memorizza la velocità prima del comando (un cambio fatto dall'utente ferma il ciclo di conferma)
           - alias: Lancia il Comando Velocità 0 Finchè la Velocità diventa Velocità 0
             repeat:
               sequence:
@@ -14689,7 +15070,7 @@ actions:
                   value_template: >-
                     {{
                     states('sensor.vmc_master_status_ventola_lettura_codice_interpretato')
-                    == ('Velocità 1' if states('input_boolean.vmc_master_umidita_verifica_soglia_valore_spia') == 'on' else 'Velocità 0') or is_state('binary_sensor.vmc_master_black_out_rilevato', 'on') }}
+                    == ('Velocità 1' if states('input_boolean.vmc_master_umidita_verifica_soglia_valore_spia') == 'on' else 'Velocità 0') or (vel_prima_del_comando not in ['Non disponibile', 'unknown', 'unavailable', ''] and states('sensor.vmc_master_status_ventola_lettura_codice_interpretato') not in [vel_prima_del_comando, 'Non disponibile', 'unknown', 'unavailable', '']) or is_state('binary_sensor.vmc_master_black_out_rilevato', 'on') }}
         alias: >-
           Condizioni Sfavorevoli Temp. Ext Vs Temp. Int. a Velocità Free Cooling
           -> Vel. 0  se Spia Congelamento Off e Spia Delta Temp Off e se se Spia
@@ -14699,6 +15080,9 @@ actions:
             id:
               - TeVsTi Free-Cooling e Spia Inquinanti ON
         sequence:
+          - variables:
+              vel_prima_del_comando: "{{ states('sensor.vmc_master_status_ventola_lettura_codice_interpretato') }}"
+            alias: Memorizza la velocità prima del comando (un cambio fatto dall'utente ferma il ciclo di conferma)
           - alias: Lancia il Comando Velocità 1 Finchè la Velocità diventa Velocità 1
             repeat:
               sequence:
@@ -14757,7 +15141,7 @@ actions:
                     {{
                     states('sensor.vmc_master_status_ventola_lettura_codice_interpretato')=='Velocità
                     1' and
-                    states('input_boolean.vmc_master_spia_velocita_freecooling_un_solo_avvio_per_programmazione_freecooling')=='on' or is_state('binary_sensor.vmc_master_black_out_rilevato', 'on') }}
+                    states('input_boolean.vmc_master_spia_velocita_freecooling_un_solo_avvio_per_programmazione_freecooling')=='on' or (vel_prima_del_comando not in ['Non disponibile', 'unknown', 'unavailable', ''] and states('sensor.vmc_master_status_ventola_lettura_codice_interpretato') not in [vel_prima_del_comando, 'Non disponibile', 'unknown', 'unavailable', '']) or is_state('binary_sensor.vmc_master_black_out_rilevato', 'on') }}
         alias: >-
           Condizioni Sfavorevoli Temp. Ext Vs Temp. Int. a Velocità Free Cooling
           se Spia Congelamento Off e Spia Delta Temp Off e se Spia Inquinanti ON
@@ -14845,6 +15229,26 @@ actions:
               until:
                 - condition: template
                   value_template: "{{ states('sensor.vmc_master_status_ventola_lettura_codice_interpretato') == 'Free Cooling' or (vel_prima_del_comando not in ['Non disponibile', 'unknown', 'unavailable', ''] and states('sensor.vmc_master_status_ventola_lettura_codice_interpretato') not in [vel_prima_del_comando, 'Non disponibile', 'unknown', 'unavailable', '']) or is_state('binary_sensor.vmc_master_black_out_rilevato', 'on') }}"
+          - alias: Black-Out prima della conferma -> memorizza questa velocità per il ripristino dopo il Black-Out (Priorità 7)
+            if:
+              - condition: template
+                value_template: "{{ is_state('binary_sensor.vmc_master_black_out_rilevato', 'on') and states('sensor.vmc_master_status_ventola_lettura_codice_interpretato') != 'Free Cooling' }}"
+            then:
+              - data: {}
+                target:
+                  entity_id: input_boolean.vmc_master_spia_velocita_freecooling
+                action: input_boolean.turn_on
+              - data: {}
+                target:
+                  entity_id:
+                    - input_boolean.vmc_master_spia_velocita_0
+                    - input_boolean.vmc_master_spia_velocita_1
+                    - input_boolean.vmc_master_spia_velocita_2
+                    - input_boolean.vmc_master_spia_velocita_3
+                    - input_boolean.vmc_master_spia_velocita_4
+                    - input_boolean.vmc_master_spia_velocita_notturna
+                    - input_boolean.vmc_master_spia_velocita_iperventilazione
+                action: input_boolean.turn_off
         alias: >-
           Condizioni Favorevoli Temp. Ext Vs Temp. Int. Ripristinate su Velocità
           Free Cooling se Spia Congelamento Off e Spia Delta Temp Off e se Spia
@@ -14937,6 +15341,26 @@ actions:
                 - alias: Controlla se la Velocità è diversa da Velocità 0
                   condition: template
                   value_template: "{{ states('sensor.vmc_master_status_ventola_lettura_codice_interpretato') == 'Free Cooling' or (vel_prima_del_comando not in ['Non disponibile', 'unknown', 'unavailable', ''] and states('sensor.vmc_master_status_ventola_lettura_codice_interpretato') not in [vel_prima_del_comando, 'Non disponibile', 'unknown', 'unavailable', '']) or is_state('binary_sensor.vmc_master_black_out_rilevato', 'on') }}"
+          - alias: Black-Out prima della conferma -> memorizza questa velocità per il ripristino dopo il Black-Out (Priorità 7)
+            if:
+              - condition: template
+                value_template: "{{ is_state('binary_sensor.vmc_master_black_out_rilevato', 'on') and states('sensor.vmc_master_status_ventola_lettura_codice_interpretato') != 'Free Cooling' }}"
+            then:
+              - data: {}
+                target:
+                  entity_id: input_boolean.vmc_master_spia_velocita_freecooling
+                action: input_boolean.turn_on
+              - data: {}
+                target:
+                  entity_id:
+                    - input_boolean.vmc_master_spia_velocita_0
+                    - input_boolean.vmc_master_spia_velocita_1
+                    - input_boolean.vmc_master_spia_velocita_2
+                    - input_boolean.vmc_master_spia_velocita_3
+                    - input_boolean.vmc_master_spia_velocita_4
+                    - input_boolean.vmc_master_spia_velocita_notturna
+                    - input_boolean.vmc_master_spia_velocita_iperventilazione
+                action: input_boolean.turn_off
         alias: >-
           Condizioni Favorevoli Temp. Ext Vs Temp. Int. Ripristinate su Velocità
           Free Heating se Spia Congelamento Off e Spia Delta Temp Off e se se
@@ -15002,6 +15426,26 @@ actions:
                 - alias: Controlla se la Velocità è uguale a Velocità Free Heating
                   condition: template
                   value_template: "{{ states('sensor.vmc_master_status_ventola_lettura_codice_interpretato') == 'Free Cooling' or (vel_prima_del_comando not in ['Non disponibile', 'unknown', 'unavailable', ''] and states('sensor.vmc_master_status_ventola_lettura_codice_interpretato') not in [vel_prima_del_comando, 'Non disponibile', 'unknown', 'unavailable', '']) or is_state('binary_sensor.vmc_master_black_out_rilevato', 'on') }}"
+          - alias: Black-Out prima della conferma -> memorizza questa velocità per il ripristino dopo il Black-Out (Priorità 7)
+            if:
+              - condition: template
+                value_template: "{{ is_state('binary_sensor.vmc_master_black_out_rilevato', 'on') and states('sensor.vmc_master_status_ventola_lettura_codice_interpretato') != 'Free Cooling' }}"
+            then:
+              - data: {}
+                target:
+                  entity_id: input_boolean.vmc_master_spia_velocita_freecooling
+                action: input_boolean.turn_on
+              - data: {}
+                target:
+                  entity_id:
+                    - input_boolean.vmc_master_spia_velocita_0
+                    - input_boolean.vmc_master_spia_velocita_1
+                    - input_boolean.vmc_master_spia_velocita_2
+                    - input_boolean.vmc_master_spia_velocita_3
+                    - input_boolean.vmc_master_spia_velocita_4
+                    - input_boolean.vmc_master_spia_velocita_notturna
+                    - input_boolean.vmc_master_spia_velocita_iperventilazione
+                action: input_boolean.turn_off
         alias: >-
           Condizioni Favorevoli Temp. Ext Vs Temp. Int. Ripristinate su Velocità
           Free Heating se Spia Congelamento Off e Spia Delta Temp Off e se Spia
@@ -15067,6 +15511,26 @@ actions:
                 - alias: Controlla se la Velocità è uguale a Velocità Free Cooling
                   condition: template
                   value_template: "{{ states('sensor.vmc_master_status_ventola_lettura_codice_interpretato') == 'Free Cooling' or (vel_prima_del_comando not in ['Non disponibile', 'unknown', 'unavailable', ''] and states('sensor.vmc_master_status_ventola_lettura_codice_interpretato') not in [vel_prima_del_comando, 'Non disponibile', 'unknown', 'unavailable', '']) or is_state('binary_sensor.vmc_master_black_out_rilevato', 'on') }}"
+          - alias: Black-Out prima della conferma -> memorizza questa velocità per il ripristino dopo il Black-Out (Priorità 7)
+            if:
+              - condition: template
+                value_template: "{{ is_state('binary_sensor.vmc_master_black_out_rilevato', 'on') and states('sensor.vmc_master_status_ventola_lettura_codice_interpretato') != 'Free Cooling' }}"
+            then:
+              - data: {}
+                target:
+                  entity_id: input_boolean.vmc_master_spia_velocita_freecooling
+                action: input_boolean.turn_on
+              - data: {}
+                target:
+                  entity_id:
+                    - input_boolean.vmc_master_spia_velocita_0
+                    - input_boolean.vmc_master_spia_velocita_1
+                    - input_boolean.vmc_master_spia_velocita_2
+                    - input_boolean.vmc_master_spia_velocita_3
+                    - input_boolean.vmc_master_spia_velocita_4
+                    - input_boolean.vmc_master_spia_velocita_notturna
+                    - input_boolean.vmc_master_spia_velocita_iperventilazione
+                action: input_boolean.turn_off
         alias: >-
           Condizioni Favorevoli Temp. Ext Vs Temp. Int. Ripristinate su Velocità
           Free Cooling se Spia Congelamento Off e Spia Delta Temp Off e se Spia
@@ -15215,6 +15679,26 @@ actions:
                             and
                             states('sensor.vmc_master_status_ventola_lettura_codice_interpretato')=='Velocità
                             0' or is_state('binary_sensor.vmc_master_black_out_rilevato', 'on') }}
+                  - alias: Black-Out prima della conferma -> memorizza questa velocità per il ripristino dopo il Black-Out (Priorità 7)
+                    if:
+                      - condition: template
+                        value_template: "{{ is_state('binary_sensor.vmc_master_black_out_rilevato', 'on') and states('sensor.vmc_master_status_ventola_lettura_codice_interpretato') != 'Velocità 0' }}"
+                    then:
+                      - data: {}
+                        target:
+                          entity_id: input_boolean.vmc_master_spia_velocita_0
+                        action: input_boolean.turn_on
+                      - data: {}
+                        target:
+                          entity_id:
+                            - input_boolean.vmc_master_spia_velocita_1
+                            - input_boolean.vmc_master_spia_velocita_2
+                            - input_boolean.vmc_master_spia_velocita_3
+                            - input_boolean.vmc_master_spia_velocita_4
+                            - input_boolean.vmc_master_spia_velocita_notturna
+                            - input_boolean.vmc_master_spia_velocita_iperventilazione
+                            - input_boolean.vmc_master_spia_velocita_freecooling
+                        action: input_boolean.turn_off
                 alias: se Spia Congelamento Off e Spia Delta Temp Off
               - conditions:
                   - alias: se Spia Congelamento ON o Spia Delta Temp ON
@@ -15356,6 +15840,26 @@ actions:
                         - alias: Controlla se la Velocità è uguale a Velocità 1
                           condition: template
                           value_template: "{{ states('sensor.vmc_master_status_ventola_lettura_codice_interpretato') == 'Velocità 1' or (vel_prima_del_comando not in ['Non disponibile', 'unknown', 'unavailable', ''] and states('sensor.vmc_master_status_ventola_lettura_codice_interpretato') not in [vel_prima_del_comando, 'Non disponibile', 'unknown', 'unavailable', '']) or is_state('binary_sensor.vmc_master_black_out_rilevato', 'on') }}"
+                  - alias: Black-Out prima della conferma -> memorizza questa velocità per il ripristino dopo il Black-Out (Priorità 7)
+                    if:
+                      - condition: template
+                        value_template: "{{ is_state('binary_sensor.vmc_master_black_out_rilevato', 'on') and states('sensor.vmc_master_status_ventola_lettura_codice_interpretato') != 'Velocità 1' }}"
+                    then:
+                      - data: {}
+                        target:
+                          entity_id: input_boolean.vmc_master_spia_velocita_1
+                        action: input_boolean.turn_on
+                      - data: {}
+                        target:
+                          entity_id:
+                            - input_boolean.vmc_master_spia_velocita_0
+                            - input_boolean.vmc_master_spia_velocita_2
+                            - input_boolean.vmc_master_spia_velocita_3
+                            - input_boolean.vmc_master_spia_velocita_4
+                            - input_boolean.vmc_master_spia_velocita_notturna
+                            - input_boolean.vmc_master_spia_velocita_iperventilazione
+                            - input_boolean.vmc_master_spia_velocita_freecooling
+                        action: input_boolean.turn_off
                 alias: se Spia Congelamento Off e Spia Delta Temp Off
               - conditions:
                   - alias: se Spia Congelamento ON o Spia Delta Temp ON
@@ -15520,6 +16024,26 @@ actions:
                             and
                             states('sensor.vmc_master_status_ventola_lettura_codice_interpretato')=='Velocità
                             0' or is_state('binary_sensor.vmc_master_black_out_rilevato', 'on') }}
+                  - alias: Black-Out prima della conferma -> memorizza questa velocità per il ripristino dopo il Black-Out (Priorità 7)
+                    if:
+                      - condition: template
+                        value_template: "{{ is_state('binary_sensor.vmc_master_black_out_rilevato', 'on') and states('sensor.vmc_master_status_ventola_lettura_codice_interpretato') != 'Velocità 0' }}"
+                    then:
+                      - data: {}
+                        target:
+                          entity_id: input_boolean.vmc_master_spia_velocita_0
+                        action: input_boolean.turn_on
+                      - data: {}
+                        target:
+                          entity_id:
+                            - input_boolean.vmc_master_spia_velocita_1
+                            - input_boolean.vmc_master_spia_velocita_2
+                            - input_boolean.vmc_master_spia_velocita_3
+                            - input_boolean.vmc_master_spia_velocita_4
+                            - input_boolean.vmc_master_spia_velocita_notturna
+                            - input_boolean.vmc_master_spia_velocita_iperventilazione
+                            - input_boolean.vmc_master_spia_velocita_freecooling
+                        action: input_boolean.turn_off
                 alias: se Spia Congelamento Off e Spia Delta Temp Off
               - conditions:
                   - alias: se Spia Congelamento ON o Spia Delta Temp ON
@@ -15661,6 +16185,26 @@ actions:
                         - alias: Controlla se la Velocità è uguale a Velocità 1
                           condition: template
                           value_template: "{{ states('sensor.vmc_master_status_ventola_lettura_codice_interpretato') == 'Velocità 1' or (vel_prima_del_comando not in ['Non disponibile', 'unknown', 'unavailable', ''] and states('sensor.vmc_master_status_ventola_lettura_codice_interpretato') not in [vel_prima_del_comando, 'Non disponibile', 'unknown', 'unavailable', '']) or is_state('binary_sensor.vmc_master_black_out_rilevato', 'on') }}"
+                  - alias: Black-Out prima della conferma -> memorizza questa velocità per il ripristino dopo il Black-Out (Priorità 7)
+                    if:
+                      - condition: template
+                        value_template: "{{ is_state('binary_sensor.vmc_master_black_out_rilevato', 'on') and states('sensor.vmc_master_status_ventola_lettura_codice_interpretato') != 'Velocità 1' }}"
+                    then:
+                      - data: {}
+                        target:
+                          entity_id: input_boolean.vmc_master_spia_velocita_1
+                        action: input_boolean.turn_on
+                      - data: {}
+                        target:
+                          entity_id:
+                            - input_boolean.vmc_master_spia_velocita_0
+                            - input_boolean.vmc_master_spia_velocita_2
+                            - input_boolean.vmc_master_spia_velocita_3
+                            - input_boolean.vmc_master_spia_velocita_4
+                            - input_boolean.vmc_master_spia_velocita_notturna
+                            - input_boolean.vmc_master_spia_velocita_iperventilazione
+                            - input_boolean.vmc_master_spia_velocita_freecooling
+                        action: input_boolean.turn_off
                 alias: se Spia Congelamento Off e Spia Delta Temp Off
               - conditions:
                   - alias: se Spia Congelamento ON o Spia Delta Temp ON
@@ -15769,6 +16313,26 @@ actions:
                         - alias: Controlla se la Velocità è diversa da Velocità 0
                           condition: template
                           value_template: "{{ states('sensor.vmc_master_status_ventola_lettura_codice_interpretato') == 'Velocità 0' or (vel_prima_del_comando not in ['Non disponibile', 'unknown', 'unavailable', ''] and states('sensor.vmc_master_status_ventola_lettura_codice_interpretato') not in [vel_prima_del_comando, 'Non disponibile', 'unknown', 'unavailable', '']) or is_state('binary_sensor.vmc_master_black_out_rilevato', 'on') }}"
+                  - alias: Black-Out prima della conferma -> memorizza questa velocità per il ripristino dopo il Black-Out (Priorità 7)
+                    if:
+                      - condition: template
+                        value_template: "{{ is_state('binary_sensor.vmc_master_black_out_rilevato', 'on') and states('sensor.vmc_master_status_ventola_lettura_codice_interpretato') != 'Velocità 0' }}"
+                    then:
+                      - data: {}
+                        target:
+                          entity_id: input_boolean.vmc_master_spia_velocita_0
+                        action: input_boolean.turn_on
+                      - data: {}
+                        target:
+                          entity_id:
+                            - input_boolean.vmc_master_spia_velocita_1
+                            - input_boolean.vmc_master_spia_velocita_2
+                            - input_boolean.vmc_master_spia_velocita_3
+                            - input_boolean.vmc_master_spia_velocita_4
+                            - input_boolean.vmc_master_spia_velocita_notturna
+                            - input_boolean.vmc_master_spia_velocita_iperventilazione
+                            - input_boolean.vmc_master_spia_velocita_freecooling
+                        action: input_boolean.turn_off
                 alias: se Spia Congelamento Off e Spia Delta Temp Off
               - conditions:
                   - alias: se Spia Congelamento ON o Spia Delta Temp ON
@@ -16173,6 +16737,26 @@ actions:
                       until:
                         - condition: template
                           value_template: "{{ states('sensor.vmc_master_status_ventola_lettura_codice_interpretato') == 'Velocità 0' or (vel_prima_del_comando not in ['Non disponibile', 'unknown', 'unavailable', ''] and states('sensor.vmc_master_status_ventola_lettura_codice_interpretato') not in [vel_prima_del_comando, 'Non disponibile', 'unknown', 'unavailable', '']) or is_state('binary_sensor.vmc_master_black_out_rilevato', 'on') }}"
+                  - alias: Black-Out prima della conferma -> memorizza questa velocità per il ripristino dopo il Black-Out (Priorità 7)
+                    if:
+                      - condition: template
+                        value_template: "{{ is_state('binary_sensor.vmc_master_black_out_rilevato', 'on') and states('sensor.vmc_master_status_ventola_lettura_codice_interpretato') != 'Velocità 0' }}"
+                    then:
+                      - data: {}
+                        target:
+                          entity_id: input_boolean.vmc_master_spia_velocita_0
+                        action: input_boolean.turn_on
+                      - data: {}
+                        target:
+                          entity_id:
+                            - input_boolean.vmc_master_spia_velocita_1
+                            - input_boolean.vmc_master_spia_velocita_2
+                            - input_boolean.vmc_master_spia_velocita_3
+                            - input_boolean.vmc_master_spia_velocita_4
+                            - input_boolean.vmc_master_spia_velocita_notturna
+                            - input_boolean.vmc_master_spia_velocita_iperventilazione
+                            - input_boolean.vmc_master_spia_velocita_freecooling
+                        action: input_boolean.turn_off
                 else:
                   - action: input_boolean.turn_on
                     metadata: {}
@@ -18725,6 +19309,26 @@ actions:
                               until:
                                 - condition: template
                                   value_template: "{{ states('sensor.vmc_master_status_ventola_lettura_codice_interpretato') == 'Velocità 0' or (vel_prima_del_comando not in ['Non disponibile', 'unknown', 'unavailable', ''] and states('sensor.vmc_master_status_ventola_lettura_codice_interpretato') not in [vel_prima_del_comando, 'Non disponibile', 'unknown', 'unavailable', '']) or is_state('binary_sensor.vmc_master_black_out_rilevato', 'on') }}"
+                          - alias: Black-Out prima della conferma -> memorizza questa velocità per il ripristino dopo il Black-Out (Priorità 7)
+                            if:
+                              - condition: template
+                                value_template: "{{ is_state('binary_sensor.vmc_master_black_out_rilevato', 'on') and states('sensor.vmc_master_status_ventola_lettura_codice_interpretato') != 'Velocità 0' }}"
+                            then:
+                              - data: {}
+                                target:
+                                  entity_id: input_boolean.vmc_master_spia_velocita_0
+                                action: input_boolean.turn_on
+                              - data: {}
+                                target:
+                                  entity_id:
+                                    - input_boolean.vmc_master_spia_velocita_1
+                                    - input_boolean.vmc_master_spia_velocita_2
+                                    - input_boolean.vmc_master_spia_velocita_3
+                                    - input_boolean.vmc_master_spia_velocita_4
+                                    - input_boolean.vmc_master_spia_velocita_notturna
+                                    - input_boolean.vmc_master_spia_velocita_iperventilazione
+                                    - input_boolean.vmc_master_spia_velocita_freecooling
+                                action: input_boolean.turn_off
                         alias: se Spia Congelamento Off e Spia Delta Temp Off
                       - conditions:
                           - alias: se Spia Congelamento ON o Spia Delta Temp ON
@@ -18866,6 +19470,26 @@ actions:
                               until:
                                 - condition: template
                                   value_template: "{{ states('sensor.vmc_master_status_ventola_lettura_codice_interpretato') == 'Velocità 1' or (vel_prima_del_comando not in ['Non disponibile', 'unknown', 'unavailable', ''] and states('sensor.vmc_master_status_ventola_lettura_codice_interpretato') not in [vel_prima_del_comando, 'Non disponibile', 'unknown', 'unavailable', '']) or is_state('binary_sensor.vmc_master_black_out_rilevato', 'on') }}"
+                          - alias: Black-Out prima della conferma -> memorizza questa velocità per il ripristino dopo il Black-Out (Priorità 7)
+                            if:
+                              - condition: template
+                                value_template: "{{ is_state('binary_sensor.vmc_master_black_out_rilevato', 'on') and states('sensor.vmc_master_status_ventola_lettura_codice_interpretato') != 'Velocità 1' }}"
+                            then:
+                              - data: {}
+                                target:
+                                  entity_id: input_boolean.vmc_master_spia_velocita_1
+                                action: input_boolean.turn_on
+                              - data: {}
+                                target:
+                                  entity_id:
+                                    - input_boolean.vmc_master_spia_velocita_0
+                                    - input_boolean.vmc_master_spia_velocita_2
+                                    - input_boolean.vmc_master_spia_velocita_3
+                                    - input_boolean.vmc_master_spia_velocita_4
+                                    - input_boolean.vmc_master_spia_velocita_notturna
+                                    - input_boolean.vmc_master_spia_velocita_iperventilazione
+                                    - input_boolean.vmc_master_spia_velocita_freecooling
+                                action: input_boolean.turn_off
                         alias: se Spia Congelamento Off e Spia Delta Temp Off
                       - conditions:
                           - alias: se Spia Congelamento ON o Spia Delta Temp ON
@@ -18927,6 +19551,26 @@ actions:
                               until:
                                 - condition: template
                                   value_template: "{{ states('sensor.vmc_master_status_ventola_lettura_codice_interpretato') == 'Velocità 2' or (vel_prima_del_comando not in ['Non disponibile', 'unknown', 'unavailable', ''] and states('sensor.vmc_master_status_ventola_lettura_codice_interpretato') not in [vel_prima_del_comando, 'Non disponibile', 'unknown', 'unavailable', '']) or is_state('binary_sensor.vmc_master_black_out_rilevato', 'on') }}"
+                          - alias: Black-Out prima della conferma -> memorizza questa velocità per il ripristino dopo il Black-Out (Priorità 7)
+                            if:
+                              - condition: template
+                                value_template: "{{ is_state('binary_sensor.vmc_master_black_out_rilevato', 'on') and states('sensor.vmc_master_status_ventola_lettura_codice_interpretato') != 'Velocità 2' }}"
+                            then:
+                              - data: {}
+                                target:
+                                  entity_id: input_boolean.vmc_master_spia_velocita_2
+                                action: input_boolean.turn_on
+                              - data: {}
+                                target:
+                                  entity_id:
+                                    - input_boolean.vmc_master_spia_velocita_0
+                                    - input_boolean.vmc_master_spia_velocita_1
+                                    - input_boolean.vmc_master_spia_velocita_3
+                                    - input_boolean.vmc_master_spia_velocita_4
+                                    - input_boolean.vmc_master_spia_velocita_notturna
+                                    - input_boolean.vmc_master_spia_velocita_iperventilazione
+                                    - input_boolean.vmc_master_spia_velocita_freecooling
+                                action: input_boolean.turn_off
                         alias: se Spia Congelamento Off e Spia Delta Temp Off
                       - conditions:
                           - alias: se Spia Congelamento ON o Spia Delta Temp ON
@@ -18987,6 +19631,26 @@ actions:
                               until:
                                 - condition: template
                                   value_template: "{{ states('sensor.vmc_master_status_ventola_lettura_codice_interpretato') == 'Velocità 3' or (vel_prima_del_comando not in ['Non disponibile', 'unknown', 'unavailable', ''] and states('sensor.vmc_master_status_ventola_lettura_codice_interpretato') not in [vel_prima_del_comando, 'Non disponibile', 'unknown', 'unavailable', '']) or is_state('binary_sensor.vmc_master_black_out_rilevato', 'on') }}"
+                          - alias: Black-Out prima della conferma -> memorizza questa velocità per il ripristino dopo il Black-Out (Priorità 7)
+                            if:
+                              - condition: template
+                                value_template: "{{ is_state('binary_sensor.vmc_master_black_out_rilevato', 'on') and states('sensor.vmc_master_status_ventola_lettura_codice_interpretato') != 'Velocità 3' }}"
+                            then:
+                              - data: {}
+                                target:
+                                  entity_id: input_boolean.vmc_master_spia_velocita_3
+                                action: input_boolean.turn_on
+                              - data: {}
+                                target:
+                                  entity_id:
+                                    - input_boolean.vmc_master_spia_velocita_0
+                                    - input_boolean.vmc_master_spia_velocita_1
+                                    - input_boolean.vmc_master_spia_velocita_2
+                                    - input_boolean.vmc_master_spia_velocita_4
+                                    - input_boolean.vmc_master_spia_velocita_notturna
+                                    - input_boolean.vmc_master_spia_velocita_iperventilazione
+                                    - input_boolean.vmc_master_spia_velocita_freecooling
+                                action: input_boolean.turn_off
                         alias: se Spia Congelamento Off e Spia Delta Temp Off
                       - conditions:
                           - alias: se Spia Congelamento ON o Spia Delta Temp ON
@@ -19047,6 +19711,26 @@ actions:
                               until:
                                 - condition: template
                                   value_template: "{{ states('sensor.vmc_master_status_ventola_lettura_codice_interpretato') == 'Velocità 4' or (vel_prima_del_comando not in ['Non disponibile', 'unknown', 'unavailable', ''] and states('sensor.vmc_master_status_ventola_lettura_codice_interpretato') not in [vel_prima_del_comando, 'Non disponibile', 'unknown', 'unavailable', '']) or is_state('binary_sensor.vmc_master_black_out_rilevato', 'on') }}"
+                          - alias: Black-Out prima della conferma -> memorizza questa velocità per il ripristino dopo il Black-Out (Priorità 7)
+                            if:
+                              - condition: template
+                                value_template: "{{ is_state('binary_sensor.vmc_master_black_out_rilevato', 'on') and states('sensor.vmc_master_status_ventola_lettura_codice_interpretato') != 'Velocità 4' }}"
+                            then:
+                              - data: {}
+                                target:
+                                  entity_id: input_boolean.vmc_master_spia_velocita_4
+                                action: input_boolean.turn_on
+                              - data: {}
+                                target:
+                                  entity_id:
+                                    - input_boolean.vmc_master_spia_velocita_0
+                                    - input_boolean.vmc_master_spia_velocita_1
+                                    - input_boolean.vmc_master_spia_velocita_2
+                                    - input_boolean.vmc_master_spia_velocita_3
+                                    - input_boolean.vmc_master_spia_velocita_notturna
+                                    - input_boolean.vmc_master_spia_velocita_iperventilazione
+                                    - input_boolean.vmc_master_spia_velocita_freecooling
+                                action: input_boolean.turn_off
                         alias: se Spia Congelamento Off e Spia Delta Temp Off
                       - conditions:
                           - alias: se Spia Congelamento ON o Spia Delta Temp ON
@@ -19107,6 +19791,26 @@ actions:
                               until:
                                 - condition: template
                                   value_template: "{{ states('sensor.vmc_master_status_ventola_lettura_codice_interpretato') == 'Notturna' or (vel_prima_del_comando not in ['Non disponibile', 'unknown', 'unavailable', ''] and states('sensor.vmc_master_status_ventola_lettura_codice_interpretato') not in [vel_prima_del_comando, 'Non disponibile', 'unknown', 'unavailable', '']) or is_state('binary_sensor.vmc_master_black_out_rilevato', 'on') }}"
+                          - alias: Black-Out prima della conferma -> memorizza questa velocità per il ripristino dopo il Black-Out (Priorità 7)
+                            if:
+                              - condition: template
+                                value_template: "{{ is_state('binary_sensor.vmc_master_black_out_rilevato', 'on') and states('sensor.vmc_master_status_ventola_lettura_codice_interpretato') != 'Notturna' }}"
+                            then:
+                              - data: {}
+                                target:
+                                  entity_id: input_boolean.vmc_master_spia_velocita_notturna
+                                action: input_boolean.turn_on
+                              - data: {}
+                                target:
+                                  entity_id:
+                                    - input_boolean.vmc_master_spia_velocita_0
+                                    - input_boolean.vmc_master_spia_velocita_1
+                                    - input_boolean.vmc_master_spia_velocita_2
+                                    - input_boolean.vmc_master_spia_velocita_3
+                                    - input_boolean.vmc_master_spia_velocita_4
+                                    - input_boolean.vmc_master_spia_velocita_iperventilazione
+                                    - input_boolean.vmc_master_spia_velocita_freecooling
+                                action: input_boolean.turn_off
                         alias: se Spia Congelamento Off e Spia Delta Temp Off
                       - conditions:
                           - alias: se Spia Congelamento ON o Spia Delta Temp ON
@@ -19167,6 +19871,26 @@ actions:
                               until:
                                 - condition: template
                                   value_template: "{{ states('sensor.vmc_master_status_ventola_lettura_codice_interpretato') == 'Iperventilazione' or (vel_prima_del_comando not in ['Non disponibile', 'unknown', 'unavailable', ''] and states('sensor.vmc_master_status_ventola_lettura_codice_interpretato') not in [vel_prima_del_comando, 'Non disponibile', 'unknown', 'unavailable', '']) or is_state('binary_sensor.vmc_master_black_out_rilevato', 'on') }}"
+                          - alias: Black-Out prima della conferma -> memorizza questa velocità per il ripristino dopo il Black-Out (Priorità 7)
+                            if:
+                              - condition: template
+                                value_template: "{{ is_state('binary_sensor.vmc_master_black_out_rilevato', 'on') and states('sensor.vmc_master_status_ventola_lettura_codice_interpretato') != 'Iperventilazione' }}"
+                            then:
+                              - data: {}
+                                target:
+                                  entity_id: input_boolean.vmc_master_spia_velocita_iperventilazione
+                                action: input_boolean.turn_on
+                              - data: {}
+                                target:
+                                  entity_id:
+                                    - input_boolean.vmc_master_spia_velocita_0
+                                    - input_boolean.vmc_master_spia_velocita_1
+                                    - input_boolean.vmc_master_spia_velocita_2
+                                    - input_boolean.vmc_master_spia_velocita_3
+                                    - input_boolean.vmc_master_spia_velocita_4
+                                    - input_boolean.vmc_master_spia_velocita_notturna
+                                    - input_boolean.vmc_master_spia_velocita_freecooling
+                                action: input_boolean.turn_off
                         alias: se Spia Congelamento Off e Spia Delta Temp Off
                       - conditions:
                           - alias: se Spia Congelamento ON o Spia Delta Temp ON
@@ -19204,6 +19928,9 @@ actions:
                               }}
                             alias: se Spia Congelamento Off e Spia Delta Temp Off
                         sequence:
+                          - variables:
+                              vel_prima_del_comando: "{{ states('sensor.vmc_master_status_ventola_lettura_codice_interpretato') }}"
+                            alias: Memorizza la velocità prima del comando (un cambio fatto dall'utente ferma il ciclo di conferma)
                           - repeat:
                               sequence:
                                 - data: {}
@@ -19243,7 +19970,23 @@ actions:
                                   value_template: >-
                                     {{
                                     states('sensor.vmc_master_status_ventola_lettura_codice_interpretato')
-                                    == (('Velocità 1' if states('input_boolean.vmc_master_umidita_verifica_soglia_valore_spia') == 'on' else 'Velocità 0') if (states('input_boolean.vmc_master_spia_velocita_freecooling_un_solo_avvio_per_programmazione_freecooling') == 'on' or states('input_boolean.vmc_master_spia_velocita_freecooling_un_solo_avvio_per_programmazione_freeheating') == 'on') else 'Free Cooling') or is_state('binary_sensor.vmc_master_black_out_rilevato', 'on') }}
+                                    == (('Velocità 1' if states('input_boolean.vmc_master_umidita_verifica_soglia_valore_spia') == 'on' else 'Velocità 0') if (states('input_boolean.vmc_master_spia_velocita_freecooling_un_solo_avvio_per_programmazione_freecooling') == 'on' or states('input_boolean.vmc_master_spia_velocita_freecooling_un_solo_avvio_per_programmazione_freeheating') == 'on') else 'Free Cooling') or (vel_prima_del_comando not in ['Non disponibile', 'unknown', 'unavailable', ''] and states('sensor.vmc_master_status_ventola_lettura_codice_interpretato') not in [vel_prima_del_comando, 'Non disponibile', 'unknown', 'unavailable', '']) or is_state('binary_sensor.vmc_master_black_out_rilevato', 'on') }}
+                          - variables:
+                              velocita_fine_allerta: "{{ (('Velocità 1' if states('input_boolean.vmc_master_umidita_verifica_soglia_valore_spia') == 'on' else 'Velocità 0') if (states('input_boolean.vmc_master_spia_velocita_freecooling_un_solo_avvio_per_programmazione_freecooling') == 'on' or states('input_boolean.vmc_master_spia_velocita_freecooling_un_solo_avvio_per_programmazione_freeheating') == 'on') else 'Free Cooling') }}"
+                            alias: Velocità di fine allerta (per il ripristino dopo un Black-Out)
+                          - alias: Black-Out prima della conferma -> memorizza questa velocità per il ripristino dopo il Black-Out (Priorità 7)
+                            if:
+                              - condition: template
+                                value_template: "{{ is_state('binary_sensor.vmc_master_black_out_rilevato', 'on') and states('sensor.vmc_master_status_ventola_lettura_codice_interpretato') != velocita_fine_allerta }}"
+                            then:
+                              - data: {}
+                                target:
+                                  entity_id: "input_boolean.vmc_master_spia_{{ {'Velocità 0': 'velocita_0', 'Velocità 1': 'velocita_1', 'Velocità 2': 'velocita_2', 'Velocità 3': 'velocita_3', 'Velocità 4': 'velocita_4', 'Notturna': 'velocita_notturna', 'Iperventilazione': 'velocita_iperventilazione', 'Free Cooling': 'velocita_freecooling'}[velocita_fine_allerta] }}"
+                                action: input_boolean.turn_on
+                              - data: {}
+                                target:
+                                  entity_id: "{{ ['input_boolean.vmc_master_spia_velocita_0', 'input_boolean.vmc_master_spia_velocita_1', 'input_boolean.vmc_master_spia_velocita_2', 'input_boolean.vmc_master_spia_velocita_3', 'input_boolean.vmc_master_spia_velocita_4', 'input_boolean.vmc_master_spia_velocita_notturna', 'input_boolean.vmc_master_spia_velocita_iperventilazione', 'input_boolean.vmc_master_spia_velocita_freecooling'] | reject('eq', 'input_boolean.vmc_master_spia_' ~ {'Velocità 0': 'velocita_0', 'Velocità 1': 'velocita_1', 'Velocità 2': 'velocita_2', 'Velocità 3': 'velocita_3', 'Velocità 4': 'velocita_4', 'Notturna': 'velocita_notturna', 'Iperventilazione': 'velocita_iperventilazione', 'Free Cooling': 'velocita_freecooling'}[velocita_fine_allerta]) | join(',') }}"
+                                action: input_boolean.turn_off
                         alias: se Spia Congelamento Off e Spia Delta Temp Off
                       - conditions:
                           - alias: se Spia Congelamento ON o Spia Delta Temp ON
@@ -26164,6 +26907,26 @@ actions:
                       until:
                         - condition: template
                           value_template: "{{ states('sensor.vmc_master_status_ventola_lettura_codice_interpretato') == 'Velocità 0' or (vel_prima_del_comando not in ['Non disponibile', 'unknown', 'unavailable', ''] and states('sensor.vmc_master_status_ventola_lettura_codice_interpretato') not in [vel_prima_del_comando, 'Non disponibile', 'unknown', 'unavailable', '']) or is_state('binary_sensor.vmc_master_black_out_rilevato', 'on') }}"
+                  - alias: Black-Out prima della conferma -> memorizza questa velocità per il ripristino dopo il Black-Out (Priorità 7)
+                    if:
+                      - condition: template
+                        value_template: "{{ is_state('binary_sensor.vmc_master_black_out_rilevato', 'on') and states('sensor.vmc_master_status_ventola_lettura_codice_interpretato') != 'Velocità 0' }}"
+                    then:
+                      - data: {}
+                        target:
+                          entity_id: input_boolean.vmc_master_spia_velocita_0
+                        action: input_boolean.turn_on
+                      - data: {}
+                        target:
+                          entity_id:
+                            - input_boolean.vmc_master_spia_velocita_1
+                            - input_boolean.vmc_master_spia_velocita_2
+                            - input_boolean.vmc_master_spia_velocita_3
+                            - input_boolean.vmc_master_spia_velocita_4
+                            - input_boolean.vmc_master_spia_velocita_notturna
+                            - input_boolean.vmc_master_spia_velocita_iperventilazione
+                            - input_boolean.vmc_master_spia_velocita_freecooling
+                        action: input_boolean.turn_off
                 alias: Spia Velocità 0 per Congelamento
               - conditions:
                   - alias: Se Spia Velocità 1 per Congelamento ON
@@ -26271,6 +27034,26 @@ actions:
                       until:
                         - condition: template
                           value_template: "{{ states('sensor.vmc_master_status_ventola_lettura_codice_interpretato') == 'Velocità 1' or (vel_prima_del_comando not in ['Non disponibile', 'unknown', 'unavailable', ''] and states('sensor.vmc_master_status_ventola_lettura_codice_interpretato') not in [vel_prima_del_comando, 'Non disponibile', 'unknown', 'unavailable', '']) or is_state('binary_sensor.vmc_master_black_out_rilevato', 'on') }}"
+                  - alias: Black-Out prima della conferma -> memorizza questa velocità per il ripristino dopo il Black-Out (Priorità 7)
+                    if:
+                      - condition: template
+                        value_template: "{{ is_state('binary_sensor.vmc_master_black_out_rilevato', 'on') and states('sensor.vmc_master_status_ventola_lettura_codice_interpretato') != 'Velocità 1' }}"
+                    then:
+                      - data: {}
+                        target:
+                          entity_id: input_boolean.vmc_master_spia_velocita_1
+                        action: input_boolean.turn_on
+                      - data: {}
+                        target:
+                          entity_id:
+                            - input_boolean.vmc_master_spia_velocita_0
+                            - input_boolean.vmc_master_spia_velocita_2
+                            - input_boolean.vmc_master_spia_velocita_3
+                            - input_boolean.vmc_master_spia_velocita_4
+                            - input_boolean.vmc_master_spia_velocita_notturna
+                            - input_boolean.vmc_master_spia_velocita_iperventilazione
+                            - input_boolean.vmc_master_spia_velocita_freecooling
+                        action: input_boolean.turn_off
                 alias: Spia Velocità 1 per Congelamento
               - conditions:
                   - alias: Se Spia Velocità 2 per Congelamento ON
@@ -26378,6 +27161,26 @@ actions:
                       until:
                         - condition: template
                           value_template: "{{ states('sensor.vmc_master_status_ventola_lettura_codice_interpretato') == 'Velocità 2' or (vel_prima_del_comando not in ['Non disponibile', 'unknown', 'unavailable', ''] and states('sensor.vmc_master_status_ventola_lettura_codice_interpretato') not in [vel_prima_del_comando, 'Non disponibile', 'unknown', 'unavailable', '']) or is_state('binary_sensor.vmc_master_black_out_rilevato', 'on') }}"
+                  - alias: Black-Out prima della conferma -> memorizza questa velocità per il ripristino dopo il Black-Out (Priorità 7)
+                    if:
+                      - condition: template
+                        value_template: "{{ is_state('binary_sensor.vmc_master_black_out_rilevato', 'on') and states('sensor.vmc_master_status_ventola_lettura_codice_interpretato') != 'Velocità 2' }}"
+                    then:
+                      - data: {}
+                        target:
+                          entity_id: input_boolean.vmc_master_spia_velocita_2
+                        action: input_boolean.turn_on
+                      - data: {}
+                        target:
+                          entity_id:
+                            - input_boolean.vmc_master_spia_velocita_0
+                            - input_boolean.vmc_master_spia_velocita_1
+                            - input_boolean.vmc_master_spia_velocita_3
+                            - input_boolean.vmc_master_spia_velocita_4
+                            - input_boolean.vmc_master_spia_velocita_notturna
+                            - input_boolean.vmc_master_spia_velocita_iperventilazione
+                            - input_boolean.vmc_master_spia_velocita_freecooling
+                        action: input_boolean.turn_off
                 alias: Spia Velocità 2 per Congelamento
               - conditions:
                   - alias: Se Spia Velocità 3 per Congelamento ON
@@ -26485,6 +27288,26 @@ actions:
                       until:
                         - condition: template
                           value_template: "{{ states('sensor.vmc_master_status_ventola_lettura_codice_interpretato') == 'Velocità 3' or (vel_prima_del_comando not in ['Non disponibile', 'unknown', 'unavailable', ''] and states('sensor.vmc_master_status_ventola_lettura_codice_interpretato') not in [vel_prima_del_comando, 'Non disponibile', 'unknown', 'unavailable', '']) or is_state('binary_sensor.vmc_master_black_out_rilevato', 'on') }}"
+                  - alias: Black-Out prima della conferma -> memorizza questa velocità per il ripristino dopo il Black-Out (Priorità 7)
+                    if:
+                      - condition: template
+                        value_template: "{{ is_state('binary_sensor.vmc_master_black_out_rilevato', 'on') and states('sensor.vmc_master_status_ventola_lettura_codice_interpretato') != 'Velocità 3' }}"
+                    then:
+                      - data: {}
+                        target:
+                          entity_id: input_boolean.vmc_master_spia_velocita_3
+                        action: input_boolean.turn_on
+                      - data: {}
+                        target:
+                          entity_id:
+                            - input_boolean.vmc_master_spia_velocita_0
+                            - input_boolean.vmc_master_spia_velocita_1
+                            - input_boolean.vmc_master_spia_velocita_2
+                            - input_boolean.vmc_master_spia_velocita_4
+                            - input_boolean.vmc_master_spia_velocita_notturna
+                            - input_boolean.vmc_master_spia_velocita_iperventilazione
+                            - input_boolean.vmc_master_spia_velocita_freecooling
+                        action: input_boolean.turn_off
                 alias: Spia Velocità 3 per Congelamento
               - conditions:
                   - alias: Se Spia Velocità 4 per Congelamento ON
@@ -26592,6 +27415,26 @@ actions:
                       until:
                         - condition: template
                           value_template: "{{ states('sensor.vmc_master_status_ventola_lettura_codice_interpretato') == 'Velocità 4' or (vel_prima_del_comando not in ['Non disponibile', 'unknown', 'unavailable', ''] and states('sensor.vmc_master_status_ventola_lettura_codice_interpretato') not in [vel_prima_del_comando, 'Non disponibile', 'unknown', 'unavailable', '']) or is_state('binary_sensor.vmc_master_black_out_rilevato', 'on') }}"
+                  - alias: Black-Out prima della conferma -> memorizza questa velocità per il ripristino dopo il Black-Out (Priorità 7)
+                    if:
+                      - condition: template
+                        value_template: "{{ is_state('binary_sensor.vmc_master_black_out_rilevato', 'on') and states('sensor.vmc_master_status_ventola_lettura_codice_interpretato') != 'Velocità 4' }}"
+                    then:
+                      - data: {}
+                        target:
+                          entity_id: input_boolean.vmc_master_spia_velocita_4
+                        action: input_boolean.turn_on
+                      - data: {}
+                        target:
+                          entity_id:
+                            - input_boolean.vmc_master_spia_velocita_0
+                            - input_boolean.vmc_master_spia_velocita_1
+                            - input_boolean.vmc_master_spia_velocita_2
+                            - input_boolean.vmc_master_spia_velocita_3
+                            - input_boolean.vmc_master_spia_velocita_notturna
+                            - input_boolean.vmc_master_spia_velocita_iperventilazione
+                            - input_boolean.vmc_master_spia_velocita_freecooling
+                        action: input_boolean.turn_off
                 alias: Spia Velocità 4 per Congelamento
               - conditions:
                   - alias: Se Spia Velocità Iperventilazione per Congelamento ON
@@ -26699,6 +27542,26 @@ actions:
                       until:
                         - condition: template
                           value_template: "{{ states('sensor.vmc_master_status_ventola_lettura_codice_interpretato') == 'Iperventilazione' or (vel_prima_del_comando not in ['Non disponibile', 'unknown', 'unavailable', ''] and states('sensor.vmc_master_status_ventola_lettura_codice_interpretato') not in [vel_prima_del_comando, 'Non disponibile', 'unknown', 'unavailable', '']) or is_state('binary_sensor.vmc_master_black_out_rilevato', 'on') }}"
+                  - alias: Black-Out prima della conferma -> memorizza questa velocità per il ripristino dopo il Black-Out (Priorità 7)
+                    if:
+                      - condition: template
+                        value_template: "{{ is_state('binary_sensor.vmc_master_black_out_rilevato', 'on') and states('sensor.vmc_master_status_ventola_lettura_codice_interpretato') != 'Iperventilazione' }}"
+                    then:
+                      - data: {}
+                        target:
+                          entity_id: input_boolean.vmc_master_spia_velocita_iperventilazione
+                        action: input_boolean.turn_on
+                      - data: {}
+                        target:
+                          entity_id:
+                            - input_boolean.vmc_master_spia_velocita_0
+                            - input_boolean.vmc_master_spia_velocita_1
+                            - input_boolean.vmc_master_spia_velocita_2
+                            - input_boolean.vmc_master_spia_velocita_3
+                            - input_boolean.vmc_master_spia_velocita_4
+                            - input_boolean.vmc_master_spia_velocita_notturna
+                            - input_boolean.vmc_master_spia_velocita_freecooling
+                        action: input_boolean.turn_off
                 alias: Spia Velocità Iperventilazione per Congelamento
               - conditions:
                   - alias: Se Spia Velocità Notturna per Congelamento ON
@@ -26806,6 +27669,26 @@ actions:
                       until:
                         - condition: template
                           value_template: "{{ states('sensor.vmc_master_status_ventola_lettura_codice_interpretato') == 'Notturna' or (vel_prima_del_comando not in ['Non disponibile', 'unknown', 'unavailable', ''] and states('sensor.vmc_master_status_ventola_lettura_codice_interpretato') not in [vel_prima_del_comando, 'Non disponibile', 'unknown', 'unavailable', '']) or is_state('binary_sensor.vmc_master_black_out_rilevato', 'on') }}"
+                  - alias: Black-Out prima della conferma -> memorizza questa velocità per il ripristino dopo il Black-Out (Priorità 7)
+                    if:
+                      - condition: template
+                        value_template: "{{ is_state('binary_sensor.vmc_master_black_out_rilevato', 'on') and states('sensor.vmc_master_status_ventola_lettura_codice_interpretato') != 'Notturna' }}"
+                    then:
+                      - data: {}
+                        target:
+                          entity_id: input_boolean.vmc_master_spia_velocita_notturna
+                        action: input_boolean.turn_on
+                      - data: {}
+                        target:
+                          entity_id:
+                            - input_boolean.vmc_master_spia_velocita_0
+                            - input_boolean.vmc_master_spia_velocita_1
+                            - input_boolean.vmc_master_spia_velocita_2
+                            - input_boolean.vmc_master_spia_velocita_3
+                            - input_boolean.vmc_master_spia_velocita_4
+                            - input_boolean.vmc_master_spia_velocita_iperventilazione
+                            - input_boolean.vmc_master_spia_velocita_freecooling
+                        action: input_boolean.turn_off
                 alias: Spia Velocità Notturna per Congelamento
               - conditions:
                   - alias: >-
@@ -26915,6 +27798,26 @@ actions:
                       until:
                         - condition: template
                           value_template: "{{ states('sensor.vmc_master_status_ventola_lettura_codice_interpretato') == 'Free Cooling' or (vel_prima_del_comando not in ['Non disponibile', 'unknown', 'unavailable', ''] and states('sensor.vmc_master_status_ventola_lettura_codice_interpretato') not in [vel_prima_del_comando, 'Non disponibile', 'unknown', 'unavailable', '']) or is_state('binary_sensor.vmc_master_black_out_rilevato', 'on') }}"
+                  - alias: Black-Out prima della conferma -> memorizza questa velocità per il ripristino dopo il Black-Out (Priorità 7)
+                    if:
+                      - condition: template
+                        value_template: "{{ is_state('binary_sensor.vmc_master_black_out_rilevato', 'on') and states('sensor.vmc_master_status_ventola_lettura_codice_interpretato') != 'Free Cooling' }}"
+                    then:
+                      - data: {}
+                        target:
+                          entity_id: input_boolean.vmc_master_spia_velocita_freecooling
+                        action: input_boolean.turn_on
+                      - data: {}
+                        target:
+                          entity_id:
+                            - input_boolean.vmc_master_spia_velocita_0
+                            - input_boolean.vmc_master_spia_velocita_1
+                            - input_boolean.vmc_master_spia_velocita_2
+                            - input_boolean.vmc_master_spia_velocita_3
+                            - input_boolean.vmc_master_spia_velocita_4
+                            - input_boolean.vmc_master_spia_velocita_notturna
+                            - input_boolean.vmc_master_spia_velocita_iperventilazione
+                        action: input_boolean.turn_off
                 alias: Spia Velocità FreeCooling/FreeHeating per Congelamento
         alias: Congelamento OFF
       - conditions:
@@ -28896,6 +29799,26 @@ actions:
                       until:
                         - condition: template
                           value_template: "{{ states('sensor.vmc_master_status_ventola_lettura_codice_interpretato') == 'Velocità 0' or (vel_prima_del_comando not in ['Non disponibile', 'unknown', 'unavailable', ''] and states('sensor.vmc_master_status_ventola_lettura_codice_interpretato') not in [vel_prima_del_comando, 'Non disponibile', 'unknown', 'unavailable', '']) or is_state('binary_sensor.vmc_master_black_out_rilevato', 'on') }}"
+                  - alias: Black-Out prima della conferma -> memorizza questa velocità per il ripristino dopo il Black-Out (Priorità 7)
+                    if:
+                      - condition: template
+                        value_template: "{{ is_state('binary_sensor.vmc_master_black_out_rilevato', 'on') and states('sensor.vmc_master_status_ventola_lettura_codice_interpretato') != 'Velocità 0' }}"
+                    then:
+                      - data: {}
+                        target:
+                          entity_id: input_boolean.vmc_master_spia_velocita_0
+                        action: input_boolean.turn_on
+                      - data: {}
+                        target:
+                          entity_id:
+                            - input_boolean.vmc_master_spia_velocita_1
+                            - input_boolean.vmc_master_spia_velocita_2
+                            - input_boolean.vmc_master_spia_velocita_3
+                            - input_boolean.vmc_master_spia_velocita_4
+                            - input_boolean.vmc_master_spia_velocita_notturna
+                            - input_boolean.vmc_master_spia_velocita_iperventilazione
+                            - input_boolean.vmc_master_spia_velocita_freecooling
+                        action: input_boolean.turn_off
                 alias: Velocità 0
               - conditions:
                   - condition: template
@@ -28945,6 +29868,26 @@ actions:
                       until:
                         - condition: template
                           value_template: "{{ states('sensor.vmc_master_status_ventola_lettura_codice_interpretato') == 'Velocità 1' or (vel_prima_del_comando not in ['Non disponibile', 'unknown', 'unavailable', ''] and states('sensor.vmc_master_status_ventola_lettura_codice_interpretato') not in [vel_prima_del_comando, 'Non disponibile', 'unknown', 'unavailable', '']) or is_state('binary_sensor.vmc_master_black_out_rilevato', 'on') }}"
+                  - alias: Black-Out prima della conferma -> memorizza questa velocità per il ripristino dopo il Black-Out (Priorità 7)
+                    if:
+                      - condition: template
+                        value_template: "{{ is_state('binary_sensor.vmc_master_black_out_rilevato', 'on') and states('sensor.vmc_master_status_ventola_lettura_codice_interpretato') != 'Velocità 1' }}"
+                    then:
+                      - data: {}
+                        target:
+                          entity_id: input_boolean.vmc_master_spia_velocita_1
+                        action: input_boolean.turn_on
+                      - data: {}
+                        target:
+                          entity_id:
+                            - input_boolean.vmc_master_spia_velocita_0
+                            - input_boolean.vmc_master_spia_velocita_2
+                            - input_boolean.vmc_master_spia_velocita_3
+                            - input_boolean.vmc_master_spia_velocita_4
+                            - input_boolean.vmc_master_spia_velocita_notturna
+                            - input_boolean.vmc_master_spia_velocita_iperventilazione
+                            - input_boolean.vmc_master_spia_velocita_freecooling
+                        action: input_boolean.turn_off
                 alias: Velocità 1
               - conditions:
                   - condition: template
@@ -28994,6 +29937,26 @@ actions:
                       until:
                         - condition: template
                           value_template: "{{ states('sensor.vmc_master_status_ventola_lettura_codice_interpretato') == 'Velocità 2' or (vel_prima_del_comando not in ['Non disponibile', 'unknown', 'unavailable', ''] and states('sensor.vmc_master_status_ventola_lettura_codice_interpretato') not in [vel_prima_del_comando, 'Non disponibile', 'unknown', 'unavailable', '']) or is_state('binary_sensor.vmc_master_black_out_rilevato', 'on') }}"
+                  - alias: Black-Out prima della conferma -> memorizza questa velocità per il ripristino dopo il Black-Out (Priorità 7)
+                    if:
+                      - condition: template
+                        value_template: "{{ is_state('binary_sensor.vmc_master_black_out_rilevato', 'on') and states('sensor.vmc_master_status_ventola_lettura_codice_interpretato') != 'Velocità 2' }}"
+                    then:
+                      - data: {}
+                        target:
+                          entity_id: input_boolean.vmc_master_spia_velocita_2
+                        action: input_boolean.turn_on
+                      - data: {}
+                        target:
+                          entity_id:
+                            - input_boolean.vmc_master_spia_velocita_0
+                            - input_boolean.vmc_master_spia_velocita_1
+                            - input_boolean.vmc_master_spia_velocita_3
+                            - input_boolean.vmc_master_spia_velocita_4
+                            - input_boolean.vmc_master_spia_velocita_notturna
+                            - input_boolean.vmc_master_spia_velocita_iperventilazione
+                            - input_boolean.vmc_master_spia_velocita_freecooling
+                        action: input_boolean.turn_off
                 alias: Velocità 2
               - conditions:
                   - condition: template
@@ -29043,6 +30006,26 @@ actions:
                       until:
                         - condition: template
                           value_template: "{{ states('sensor.vmc_master_status_ventola_lettura_codice_interpretato') == 'Velocità 3' or (vel_prima_del_comando not in ['Non disponibile', 'unknown', 'unavailable', ''] and states('sensor.vmc_master_status_ventola_lettura_codice_interpretato') not in [vel_prima_del_comando, 'Non disponibile', 'unknown', 'unavailable', '']) or is_state('binary_sensor.vmc_master_black_out_rilevato', 'on') }}"
+                  - alias: Black-Out prima della conferma -> memorizza questa velocità per il ripristino dopo il Black-Out (Priorità 7)
+                    if:
+                      - condition: template
+                        value_template: "{{ is_state('binary_sensor.vmc_master_black_out_rilevato', 'on') and states('sensor.vmc_master_status_ventola_lettura_codice_interpretato') != 'Velocità 3' }}"
+                    then:
+                      - data: {}
+                        target:
+                          entity_id: input_boolean.vmc_master_spia_velocita_3
+                        action: input_boolean.turn_on
+                      - data: {}
+                        target:
+                          entity_id:
+                            - input_boolean.vmc_master_spia_velocita_0
+                            - input_boolean.vmc_master_spia_velocita_1
+                            - input_boolean.vmc_master_spia_velocita_2
+                            - input_boolean.vmc_master_spia_velocita_4
+                            - input_boolean.vmc_master_spia_velocita_notturna
+                            - input_boolean.vmc_master_spia_velocita_iperventilazione
+                            - input_boolean.vmc_master_spia_velocita_freecooling
+                        action: input_boolean.turn_off
                 alias: Velocità 3
               - conditions:
                   - condition: template
@@ -29092,6 +30075,26 @@ actions:
                       until:
                         - condition: template
                           value_template: "{{ states('sensor.vmc_master_status_ventola_lettura_codice_interpretato') == 'Velocità 4' or (vel_prima_del_comando not in ['Non disponibile', 'unknown', 'unavailable', ''] and states('sensor.vmc_master_status_ventola_lettura_codice_interpretato') not in [vel_prima_del_comando, 'Non disponibile', 'unknown', 'unavailable', '']) or is_state('binary_sensor.vmc_master_black_out_rilevato', 'on') }}"
+                  - alias: Black-Out prima della conferma -> memorizza questa velocità per il ripristino dopo il Black-Out (Priorità 7)
+                    if:
+                      - condition: template
+                        value_template: "{{ is_state('binary_sensor.vmc_master_black_out_rilevato', 'on') and states('sensor.vmc_master_status_ventola_lettura_codice_interpretato') != 'Velocità 4' }}"
+                    then:
+                      - data: {}
+                        target:
+                          entity_id: input_boolean.vmc_master_spia_velocita_4
+                        action: input_boolean.turn_on
+                      - data: {}
+                        target:
+                          entity_id:
+                            - input_boolean.vmc_master_spia_velocita_0
+                            - input_boolean.vmc_master_spia_velocita_1
+                            - input_boolean.vmc_master_spia_velocita_2
+                            - input_boolean.vmc_master_spia_velocita_3
+                            - input_boolean.vmc_master_spia_velocita_notturna
+                            - input_boolean.vmc_master_spia_velocita_iperventilazione
+                            - input_boolean.vmc_master_spia_velocita_freecooling
+                        action: input_boolean.turn_off
                 alias: Velocità 4
               - conditions:
                   - condition: template
@@ -29141,6 +30144,26 @@ actions:
                       until:
                         - condition: template
                           value_template: "{{ states('sensor.vmc_master_status_ventola_lettura_codice_interpretato') == 'Notturna' or (vel_prima_del_comando not in ['Non disponibile', 'unknown', 'unavailable', ''] and states('sensor.vmc_master_status_ventola_lettura_codice_interpretato') not in [vel_prima_del_comando, 'Non disponibile', 'unknown', 'unavailable', '']) or is_state('binary_sensor.vmc_master_black_out_rilevato', 'on') }}"
+                  - alias: Black-Out prima della conferma -> memorizza questa velocità per il ripristino dopo il Black-Out (Priorità 7)
+                    if:
+                      - condition: template
+                        value_template: "{{ is_state('binary_sensor.vmc_master_black_out_rilevato', 'on') and states('sensor.vmc_master_status_ventola_lettura_codice_interpretato') != 'Notturna' }}"
+                    then:
+                      - data: {}
+                        target:
+                          entity_id: input_boolean.vmc_master_spia_velocita_notturna
+                        action: input_boolean.turn_on
+                      - data: {}
+                        target:
+                          entity_id:
+                            - input_boolean.vmc_master_spia_velocita_0
+                            - input_boolean.vmc_master_spia_velocita_1
+                            - input_boolean.vmc_master_spia_velocita_2
+                            - input_boolean.vmc_master_spia_velocita_3
+                            - input_boolean.vmc_master_spia_velocita_4
+                            - input_boolean.vmc_master_spia_velocita_iperventilazione
+                            - input_boolean.vmc_master_spia_velocita_freecooling
+                        action: input_boolean.turn_off
                 alias: Velocità Notturna
               - conditions:
                   - condition: template
@@ -29165,6 +30188,9 @@ actions:
                           input_boolean.vmc_master_spia_umidita_velocita_freecooling
                         - >-
                           input_boolean.vmc_master_spia_umidita_velocita_notturna
+                  - variables:
+                      vel_prima_del_comando: "{{ states('sensor.vmc_master_status_ventola_lettura_codice_interpretato') }}"
+                    alias: Memorizza la velocità prima del comando (un cambio fatto dall'utente ferma il ciclo di conferma)
                   - repeat:
                       sequence:
                         - if:
@@ -29189,7 +30215,23 @@ actions:
                           value_template: >-
                             {{
                             states('sensor.vmc_master_status_ventola_lettura_codice_interpretato')
-                            == ('Velocità 0' if (states('input_boolean.vmc_master_spia_velocita_freecooling_un_solo_avvio_per_programmazione_freecooling') == 'on' or states('input_boolean.vmc_master_spia_velocita_freecooling_un_solo_avvio_per_programmazione_freeheating') == 'on') else 'Free Cooling') or is_state('binary_sensor.vmc_master_black_out_rilevato', 'on') }}
+                            == ('Velocità 0' if (states('input_boolean.vmc_master_spia_velocita_freecooling_un_solo_avvio_per_programmazione_freecooling') == 'on' or states('input_boolean.vmc_master_spia_velocita_freecooling_un_solo_avvio_per_programmazione_freeheating') == 'on') else 'Free Cooling') or (vel_prima_del_comando not in ['Non disponibile', 'unknown', 'unavailable', ''] and states('sensor.vmc_master_status_ventola_lettura_codice_interpretato') not in [vel_prima_del_comando, 'Non disponibile', 'unknown', 'unavailable', '']) or is_state('binary_sensor.vmc_master_black_out_rilevato', 'on') }}
+                  - variables:
+                      velocita_fine_allerta: "{{ ('Velocità 0' if (states('input_boolean.vmc_master_spia_velocita_freecooling_un_solo_avvio_per_programmazione_freecooling') == 'on' or states('input_boolean.vmc_master_spia_velocita_freecooling_un_solo_avvio_per_programmazione_freeheating') == 'on') else 'Free Cooling') }}"
+                    alias: Velocità di fine allerta (per il ripristino dopo un Black-Out)
+                  - alias: Black-Out prima della conferma -> memorizza questa velocità per il ripristino dopo il Black-Out (Priorità 7)
+                    if:
+                      - condition: template
+                        value_template: "{{ is_state('binary_sensor.vmc_master_black_out_rilevato', 'on') and states('sensor.vmc_master_status_ventola_lettura_codice_interpretato') != velocita_fine_allerta }}"
+                    then:
+                      - data: {}
+                        target:
+                          entity_id: "input_boolean.vmc_master_spia_{{ {'Velocità 0': 'velocita_0', 'Velocità 1': 'velocita_1', 'Velocità 2': 'velocita_2', 'Velocità 3': 'velocita_3', 'Velocità 4': 'velocita_4', 'Notturna': 'velocita_notturna', 'Iperventilazione': 'velocita_iperventilazione', 'Free Cooling': 'velocita_freecooling'}[velocita_fine_allerta] }}"
+                        action: input_boolean.turn_on
+                      - data: {}
+                        target:
+                          entity_id: "{{ ['input_boolean.vmc_master_spia_velocita_0', 'input_boolean.vmc_master_spia_velocita_1', 'input_boolean.vmc_master_spia_velocita_2', 'input_boolean.vmc_master_spia_velocita_3', 'input_boolean.vmc_master_spia_velocita_4', 'input_boolean.vmc_master_spia_velocita_notturna', 'input_boolean.vmc_master_spia_velocita_iperventilazione', 'input_boolean.vmc_master_spia_velocita_freecooling'] | reject('eq', 'input_boolean.vmc_master_spia_' ~ {'Velocità 0': 'velocita_0', 'Velocità 1': 'velocita_1', 'Velocità 2': 'velocita_2', 'Velocità 3': 'velocita_3', 'Velocità 4': 'velocita_4', 'Notturna': 'velocita_notturna', 'Iperventilazione': 'velocita_iperventilazione', 'Free Cooling': 'velocita_freecooling'}[velocita_fine_allerta]) | join(',') }}"
+                        action: input_boolean.turn_off
                 alias: Velocità Free Cooling
               - conditions:
                   - condition: template
@@ -29239,6 +30281,26 @@ actions:
                       until:
                         - condition: template
                           value_template: "{{ states('sensor.vmc_master_status_ventola_lettura_codice_interpretato') == 'Iperventilazione' or (vel_prima_del_comando not in ['Non disponibile', 'unknown', 'unavailable', ''] and states('sensor.vmc_master_status_ventola_lettura_codice_interpretato') not in [vel_prima_del_comando, 'Non disponibile', 'unknown', 'unavailable', '']) or is_state('binary_sensor.vmc_master_black_out_rilevato', 'on') }}"
+                  - alias: Black-Out prima della conferma -> memorizza questa velocità per il ripristino dopo il Black-Out (Priorità 7)
+                    if:
+                      - condition: template
+                        value_template: "{{ is_state('binary_sensor.vmc_master_black_out_rilevato', 'on') and states('sensor.vmc_master_status_ventola_lettura_codice_interpretato') != 'Iperventilazione' }}"
+                    then:
+                      - data: {}
+                        target:
+                          entity_id: input_boolean.vmc_master_spia_velocita_iperventilazione
+                        action: input_boolean.turn_on
+                      - data: {}
+                        target:
+                          entity_id:
+                            - input_boolean.vmc_master_spia_velocita_0
+                            - input_boolean.vmc_master_spia_velocita_1
+                            - input_boolean.vmc_master_spia_velocita_2
+                            - input_boolean.vmc_master_spia_velocita_3
+                            - input_boolean.vmc_master_spia_velocita_4
+                            - input_boolean.vmc_master_spia_velocita_notturna
+                            - input_boolean.vmc_master_spia_velocita_freecooling
+                        action: input_boolean.turn_off
                 alias: Velocità Iperventilazione
         alias: ' Spia Umidità OFF  [SOLO SE NON CI SONO ALTRE ALLERTE E FUORI DAL CALENDARIO]'
       - conditions:
@@ -30586,6 +31648,26 @@ actions:
                       until:
                         - condition: template
                           value_template: "{{ states('sensor.vmc_master_status_ventola_lettura_codice_interpretato') == 'Velocità 0' or (vel_prima_del_comando not in ['Non disponibile', 'unknown', 'unavailable', ''] and states('sensor.vmc_master_status_ventola_lettura_codice_interpretato') not in [vel_prima_del_comando, 'Non disponibile', 'unknown', 'unavailable', '']) or is_state('binary_sensor.vmc_master_black_out_rilevato', 'on') }}"
+                  - alias: Black-Out prima della conferma -> memorizza questa velocità per il ripristino dopo il Black-Out (Priorità 7)
+                    if:
+                      - condition: template
+                        value_template: "{{ is_state('binary_sensor.vmc_master_black_out_rilevato', 'on') and states('sensor.vmc_master_status_ventola_lettura_codice_interpretato') != 'Velocità 0' }}"
+                    then:
+                      - data: {}
+                        target:
+                          entity_id: input_boolean.vmc_master_spia_velocita_0
+                        action: input_boolean.turn_on
+                      - data: {}
+                        target:
+                          entity_id:
+                            - input_boolean.vmc_master_spia_velocita_1
+                            - input_boolean.vmc_master_spia_velocita_2
+                            - input_boolean.vmc_master_spia_velocita_3
+                            - input_boolean.vmc_master_spia_velocita_4
+                            - input_boolean.vmc_master_spia_velocita_notturna
+                            - input_boolean.vmc_master_spia_velocita_iperventilazione
+                            - input_boolean.vmc_master_spia_velocita_freecooling
+                        action: input_boolean.turn_off
                 alias: Spia Velocità 0 per Δ Temp. > 23 [°C]
               - conditions:
                   - alias: Se Spia Velocità 1 per Δ Temp. > 23 [°C] ON
@@ -30660,6 +31742,26 @@ actions:
                       until:
                         - condition: template
                           value_template: "{{ states('sensor.vmc_master_status_ventola_lettura_codice_interpretato') == 'Velocità 1' or (vel_prima_del_comando not in ['Non disponibile', 'unknown', 'unavailable', ''] and states('sensor.vmc_master_status_ventola_lettura_codice_interpretato') not in [vel_prima_del_comando, 'Non disponibile', 'unknown', 'unavailable', '']) or is_state('binary_sensor.vmc_master_black_out_rilevato', 'on') }}"
+                  - alias: Black-Out prima della conferma -> memorizza questa velocità per il ripristino dopo il Black-Out (Priorità 7)
+                    if:
+                      - condition: template
+                        value_template: "{{ is_state('binary_sensor.vmc_master_black_out_rilevato', 'on') and states('sensor.vmc_master_status_ventola_lettura_codice_interpretato') != 'Velocità 1' }}"
+                    then:
+                      - data: {}
+                        target:
+                          entity_id: input_boolean.vmc_master_spia_velocita_1
+                        action: input_boolean.turn_on
+                      - data: {}
+                        target:
+                          entity_id:
+                            - input_boolean.vmc_master_spia_velocita_0
+                            - input_boolean.vmc_master_spia_velocita_2
+                            - input_boolean.vmc_master_spia_velocita_3
+                            - input_boolean.vmc_master_spia_velocita_4
+                            - input_boolean.vmc_master_spia_velocita_notturna
+                            - input_boolean.vmc_master_spia_velocita_iperventilazione
+                            - input_boolean.vmc_master_spia_velocita_freecooling
+                        action: input_boolean.turn_off
                 alias: Spia Velocità 1 per Δ Temp. > 23 [°C]
               - conditions:
                   - alias: Se Spia Velocità 2 per Δ Temp. > 23 [°C] ON
@@ -30734,6 +31836,26 @@ actions:
                       until:
                         - condition: template
                           value_template: "{{ states('sensor.vmc_master_status_ventola_lettura_codice_interpretato') == 'Velocità 2' or (vel_prima_del_comando not in ['Non disponibile', 'unknown', 'unavailable', ''] and states('sensor.vmc_master_status_ventola_lettura_codice_interpretato') not in [vel_prima_del_comando, 'Non disponibile', 'unknown', 'unavailable', '']) or is_state('binary_sensor.vmc_master_black_out_rilevato', 'on') }}"
+                  - alias: Black-Out prima della conferma -> memorizza questa velocità per il ripristino dopo il Black-Out (Priorità 7)
+                    if:
+                      - condition: template
+                        value_template: "{{ is_state('binary_sensor.vmc_master_black_out_rilevato', 'on') and states('sensor.vmc_master_status_ventola_lettura_codice_interpretato') != 'Velocità 2' }}"
+                    then:
+                      - data: {}
+                        target:
+                          entity_id: input_boolean.vmc_master_spia_velocita_2
+                        action: input_boolean.turn_on
+                      - data: {}
+                        target:
+                          entity_id:
+                            - input_boolean.vmc_master_spia_velocita_0
+                            - input_boolean.vmc_master_spia_velocita_1
+                            - input_boolean.vmc_master_spia_velocita_3
+                            - input_boolean.vmc_master_spia_velocita_4
+                            - input_boolean.vmc_master_spia_velocita_notturna
+                            - input_boolean.vmc_master_spia_velocita_iperventilazione
+                            - input_boolean.vmc_master_spia_velocita_freecooling
+                        action: input_boolean.turn_off
                 alias: Spia Velocità 2 per Δ Temp. > 23 [°C]
               - conditions:
                   - alias: Se Spia Velocità 3 per Δ Temp. > 23 [°C] ON
@@ -30809,6 +31931,26 @@ actions:
                         - condition: template
                           value_template: "{{ states('sensor.vmc_master_status_ventola_lettura_codice_interpretato') == 'Velocità 3' or (vel_prima_del_comando not in ['Non disponibile', 'unknown', 'unavailable', ''] and states('sensor.vmc_master_status_ventola_lettura_codice_interpretato') not in [vel_prima_del_comando, 'Non disponibile', 'unknown', 'unavailable', '']) or is_state('binary_sensor.vmc_master_black_out_rilevato', 'on') }}"
                     enabled: true
+                  - alias: Black-Out prima della conferma -> memorizza questa velocità per il ripristino dopo il Black-Out (Priorità 7)
+                    if:
+                      - condition: template
+                        value_template: "{{ is_state('binary_sensor.vmc_master_black_out_rilevato', 'on') and states('sensor.vmc_master_status_ventola_lettura_codice_interpretato') != 'Velocità 3' }}"
+                    then:
+                      - data: {}
+                        target:
+                          entity_id: input_boolean.vmc_master_spia_velocita_3
+                        action: input_boolean.turn_on
+                      - data: {}
+                        target:
+                          entity_id:
+                            - input_boolean.vmc_master_spia_velocita_0
+                            - input_boolean.vmc_master_spia_velocita_1
+                            - input_boolean.vmc_master_spia_velocita_2
+                            - input_boolean.vmc_master_spia_velocita_4
+                            - input_boolean.vmc_master_spia_velocita_notturna
+                            - input_boolean.vmc_master_spia_velocita_iperventilazione
+                            - input_boolean.vmc_master_spia_velocita_freecooling
+                        action: input_boolean.turn_off
                 alias: Spia Velocità 3 per Δ Temp. > 23 [°C]
               - conditions:
                   - alias: Se Spia Velocità 4 per Δ Temp. > 23 [°C] ON
@@ -30883,6 +32025,26 @@ actions:
                       until:
                         - condition: template
                           value_template: "{{ states('sensor.vmc_master_status_ventola_lettura_codice_interpretato') == 'Velocità 4' or (vel_prima_del_comando not in ['Non disponibile', 'unknown', 'unavailable', ''] and states('sensor.vmc_master_status_ventola_lettura_codice_interpretato') not in [vel_prima_del_comando, 'Non disponibile', 'unknown', 'unavailable', '']) or is_state('binary_sensor.vmc_master_black_out_rilevato', 'on') }}"
+                  - alias: Black-Out prima della conferma -> memorizza questa velocità per il ripristino dopo il Black-Out (Priorità 7)
+                    if:
+                      - condition: template
+                        value_template: "{{ is_state('binary_sensor.vmc_master_black_out_rilevato', 'on') and states('sensor.vmc_master_status_ventola_lettura_codice_interpretato') != 'Velocità 4' }}"
+                    then:
+                      - data: {}
+                        target:
+                          entity_id: input_boolean.vmc_master_spia_velocita_4
+                        action: input_boolean.turn_on
+                      - data: {}
+                        target:
+                          entity_id:
+                            - input_boolean.vmc_master_spia_velocita_0
+                            - input_boolean.vmc_master_spia_velocita_1
+                            - input_boolean.vmc_master_spia_velocita_2
+                            - input_boolean.vmc_master_spia_velocita_3
+                            - input_boolean.vmc_master_spia_velocita_notturna
+                            - input_boolean.vmc_master_spia_velocita_iperventilazione
+                            - input_boolean.vmc_master_spia_velocita_freecooling
+                        action: input_boolean.turn_off
                 alias: Spia Velocità 4 per Δ Temp. > 23 [°C]
               - conditions:
                   - alias: Se Spia Velocità Iperventilazione per Δ Temp. > 23 [°C] ON
@@ -30957,6 +32119,26 @@ actions:
                       until:
                         - condition: template
                           value_template: "{{ states('sensor.vmc_master_status_ventola_lettura_codice_interpretato') == 'Iperventilazione' or (vel_prima_del_comando not in ['Non disponibile', 'unknown', 'unavailable', ''] and states('sensor.vmc_master_status_ventola_lettura_codice_interpretato') not in [vel_prima_del_comando, 'Non disponibile', 'unknown', 'unavailable', '']) or is_state('binary_sensor.vmc_master_black_out_rilevato', 'on') }}"
+                  - alias: Black-Out prima della conferma -> memorizza questa velocità per il ripristino dopo il Black-Out (Priorità 7)
+                    if:
+                      - condition: template
+                        value_template: "{{ is_state('binary_sensor.vmc_master_black_out_rilevato', 'on') and states('sensor.vmc_master_status_ventola_lettura_codice_interpretato') != 'Iperventilazione' }}"
+                    then:
+                      - data: {}
+                        target:
+                          entity_id: input_boolean.vmc_master_spia_velocita_iperventilazione
+                        action: input_boolean.turn_on
+                      - data: {}
+                        target:
+                          entity_id:
+                            - input_boolean.vmc_master_spia_velocita_0
+                            - input_boolean.vmc_master_spia_velocita_1
+                            - input_boolean.vmc_master_spia_velocita_2
+                            - input_boolean.vmc_master_spia_velocita_3
+                            - input_boolean.vmc_master_spia_velocita_4
+                            - input_boolean.vmc_master_spia_velocita_notturna
+                            - input_boolean.vmc_master_spia_velocita_freecooling
+                        action: input_boolean.turn_off
                 alias: Spia Velocità Iperventilazione per Δ Temp. > 23 [°C]
               - conditions:
                   - alias: Se Spia Velocità Notturna per Δ Temp. > 23 [°C] ON
@@ -31031,6 +32213,26 @@ actions:
                       until:
                         - condition: template
                           value_template: "{{ states('sensor.vmc_master_status_ventola_lettura_codice_interpretato') == 'Notturna' or (vel_prima_del_comando not in ['Non disponibile', 'unknown', 'unavailable', ''] and states('sensor.vmc_master_status_ventola_lettura_codice_interpretato') not in [vel_prima_del_comando, 'Non disponibile', 'unknown', 'unavailable', '']) or is_state('binary_sensor.vmc_master_black_out_rilevato', 'on') }}"
+                  - alias: Black-Out prima della conferma -> memorizza questa velocità per il ripristino dopo il Black-Out (Priorità 7)
+                    if:
+                      - condition: template
+                        value_template: "{{ is_state('binary_sensor.vmc_master_black_out_rilevato', 'on') and states('sensor.vmc_master_status_ventola_lettura_codice_interpretato') != 'Notturna' }}"
+                    then:
+                      - data: {}
+                        target:
+                          entity_id: input_boolean.vmc_master_spia_velocita_notturna
+                        action: input_boolean.turn_on
+                      - data: {}
+                        target:
+                          entity_id:
+                            - input_boolean.vmc_master_spia_velocita_0
+                            - input_boolean.vmc_master_spia_velocita_1
+                            - input_boolean.vmc_master_spia_velocita_2
+                            - input_boolean.vmc_master_spia_velocita_3
+                            - input_boolean.vmc_master_spia_velocita_4
+                            - input_boolean.vmc_master_spia_velocita_iperventilazione
+                            - input_boolean.vmc_master_spia_velocita_freecooling
+                        action: input_boolean.turn_off
                 alias: Spia Velocità Notturna per Δ Temp. > 23 [°C]
               - conditions:
                   - alias: >-
@@ -31107,6 +32309,26 @@ actions:
                       until:
                         - condition: template
                           value_template: "{{ states('sensor.vmc_master_status_ventola_lettura_codice_interpretato') == 'Free Cooling' or (vel_prima_del_comando not in ['Non disponibile', 'unknown', 'unavailable', ''] and states('sensor.vmc_master_status_ventola_lettura_codice_interpretato') not in [vel_prima_del_comando, 'Non disponibile', 'unknown', 'unavailable', '']) or is_state('binary_sensor.vmc_master_black_out_rilevato', 'on') }}"
+                  - alias: Black-Out prima della conferma -> memorizza questa velocità per il ripristino dopo il Black-Out (Priorità 7)
+                    if:
+                      - condition: template
+                        value_template: "{{ is_state('binary_sensor.vmc_master_black_out_rilevato', 'on') and states('sensor.vmc_master_status_ventola_lettura_codice_interpretato') != 'Free Cooling' }}"
+                    then:
+                      - data: {}
+                        target:
+                          entity_id: input_boolean.vmc_master_spia_velocita_freecooling
+                        action: input_boolean.turn_on
+                      - data: {}
+                        target:
+                          entity_id:
+                            - input_boolean.vmc_master_spia_velocita_0
+                            - input_boolean.vmc_master_spia_velocita_1
+                            - input_boolean.vmc_master_spia_velocita_2
+                            - input_boolean.vmc_master_spia_velocita_3
+                            - input_boolean.vmc_master_spia_velocita_4
+                            - input_boolean.vmc_master_spia_velocita_notturna
+                            - input_boolean.vmc_master_spia_velocita_iperventilazione
+                        action: input_boolean.turn_off
                 alias: Spia Velocità FreeCooling/FreeHeating per Δ Temp. > 23 [°C]
             enabled: true
         alias: Δ Temp. > 23 [°C]  OFF
