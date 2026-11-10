@@ -906,6 +906,31 @@ template:
           {{ states('sensor.vmc_master_status_ventola_lettura_codice_interpretato_interfaccia').startswith('Free') or states('sensor.vmc_master_velocita_registrata').split(' · ') | select('match', 'Free') | list | count > 0 }}
         icon: >
           {{ 'mdi:sun-snowflake-variant' if states('sensor.vmc_master_status_ventola_lettura_codice_interpretato_interfaccia').startswith('Free') or not (states('sensor.vmc_master_velocita_registrata').split(' · ') | select('match', 'Free') | list | count > 0) else 'mdi:restore' }}
+      - default_entity_id: binary_sensor.vmc_master_tasto_sensori_on                    # [CONFIGURAZIONE, 2 RICHIAMI] [INTERFACCIA, 2 RICHIAMI] [AUTOMAZIONE, 0 RICHIAMI] TASTO «SENSORI ON» DEL TELECOMANDO: ON = SENSORI DELLA VMC ACCESI
+        name: "Tasto Telecomando Sensori On"
+        unique_id: vmc_master_tasto_sensori_on
+        state: >
+          {{ states('sensor.vmc_master_status_sensori_lettura_codice_interpretato') == 'Accesi' }}
+        icon: mdi:chip
+      - default_entity_id: binary_sensor.vmc_master_tasto_sensori_off                   # [CONFIGURAZIONE, 2 RICHIAMI] [INTERFACCIA, 2 RICHIAMI] [AUTOMAZIONE, 0 RICHIAMI] TASTO «SENSORI OFF» DEL TELECOMANDO: ON = SENSORI DELLA VMC SPENTI
+        name: "Tasto Telecomando Sensori Off"
+        unique_id: vmc_master_tasto_sensori_off
+        state: >
+          {{ states('sensor.vmc_master_status_sensori_lettura_codice_interpretato') == 'Spenti' }}
+        icon: mdi:chip
+      - default_entity_id: binary_sensor.vmc_master_tasto_led_pannello_on               # [CONFIGURAZIONE, 2 RICHIAMI] [INTERFACCIA, 2 RICHIAMI] [AUTOMAZIONE, 0 RICHIAMI] TASTO «LED PANNELLO ON» DEL TELECOMANDO: ON = LED PANNELLO ACCESO (ICONA mdi:led-on) O «VERIFICARE FILTRO» (ICONA mdi:air-filter)
+        name: "Tasto Telecomando Led Pannello On"
+        unique_id: vmc_master_tasto_led_pannello_on
+        state: >
+          {{ states('sensor.vmc_master_status_led_pannello_lettura_codice_interpretato') in ['Acceso', 'Verificare Filtro'] }}
+        icon: >
+          {{ 'mdi:air-filter' if states('sensor.vmc_master_status_led_pannello_lettura_codice_interpretato') == 'Verificare Filtro' else 'mdi:led-on' }}
+      - default_entity_id: binary_sensor.vmc_master_tasto_led_pannello_off              # [CONFIGURAZIONE, 2 RICHIAMI] [INTERFACCIA, 2 RICHIAMI] [AUTOMAZIONE, 0 RICHIAMI] TASTO «LED PANNELLO OFF» DEL TELECOMANDO: ON = LED PANNELLO SPENTO
+        name: "Tasto Telecomando Led Pannello Off"
+        unique_id: vmc_master_tasto_led_pannello_off
+        state: >
+          {{ states('sensor.vmc_master_status_led_pannello_lettura_codice_interpretato') == 'Spento' }}
+        icon: mdi:led-off
 
   - sensor:
       - default_entity_id: sensor.vmc_master_velocita_registrata                 # [CONFIGURAZIONE, 22 RICHIAMI] [INTERFACCIA, 4 RICHIAMI] [AUTOMAZIONE, 0 RICHIAMI] VELOCITA' MEMORIZZATA DALLE ALLERTE E RIPRISTINATA A FINE ALLERTA (DIVERSA DALLA VELOCITA' ATTUALE), «Nessuna» SE NON C'E'
@@ -973,7 +998,7 @@ template:
         icon: mdi:fan
 
   - sensor:
-      - default_entity_id: sensor.vmc_master_status_sensori_lettura_codice_interpretato # [CONFIGURAZIONE, 3 RICHIAMI] [INTERFACCIA, 2 RICHIAMI] [AUTOMAZIONE, 0 RICHIAMI] SENSORE DI INTERPRETAZIONE DELL'ATTIVAZIONE O MENO DELLE ROUTINE MEMORIZZATE NELLA VMC (ES. SE PRESENTE ALLARME UMIDITA' -> MASSIMA VELOCITA'), CORRELATE AI SENSORI DELLA VMC CONVERITA IN "STRINGA", PREVIA VERIFICA DI AVVENUTA LETTURA DEI DATI "VELOCITA'" MEMORIZZATI NELLA VMC
+      - default_entity_id: sensor.vmc_master_status_sensori_lettura_codice_interpretato # [CONFIGURAZIONE, 5 RICHIAMI] [INTERFACCIA, 2 RICHIAMI] [AUTOMAZIONE, 0 RICHIAMI] SENSORE DI INTERPRETAZIONE DELL'ATTIVAZIONE O MENO DELLE ROUTINE MEMORIZZATE NELLA VMC (ES. SE PRESENTE ALLARME UMIDITA' -> MASSIMA VELOCITA'), CORRELATE AI SENSORI DELLA VMC CONVERITA IN "STRINGA", PREVIA VERIFICA DI AVVENUTA LETTURA DEI DATI "VELOCITA'" MEMORIZZATI NELLA VMC
         name: "Status Routine Sensori"
         unique_id: vmc_master_status_sensori_lettura_codice_interpretato
         state: >
@@ -993,7 +1018,7 @@ template:
         icon: mdi:chip
 
   - sensor:
-      - default_entity_id: sensor.vmc_master_status_led_pannello_lettura_codice_interpretato # [CONFIGURAZIONE, 3 RICHIAMI] [INTERFACCIA, 2 RICHIAMI] [AUTOMAZIONE, 2 RICHIAMI] SENSORE DI INTERPRETAZIONE DELLA LETTURA DELL'ATTIVAZIONE O MENO DEL PANNELLO LED MEMORIZZATI NELLA VMC, PREVIA VERIFICA DI AVVENUTA LETTURA DEI DATI "VELOCITA'" MEMORIZZATI NELLA VMC
+      - default_entity_id: sensor.vmc_master_status_led_pannello_lettura_codice_interpretato # [CONFIGURAZIONE, 6 RICHIAMI] [INTERFACCIA, 2 RICHIAMI] [AUTOMAZIONE, 2 RICHIAMI] SENSORE DI INTERPRETAZIONE DELLA LETTURA DELL'ATTIVAZIONE O MENO DEL PANNELLO LED MEMORIZZATI NELLA VMC, PREVIA VERIFICA DI AVVENUTA LETTURA DEI DATI "VELOCITA'" MEMORIZZATI NELLA VMC
         name: "Status Led Pannello"
         unique_id: vmc_master_status_led_pannello_lettura_codice_interpretato
         state: >
@@ -3501,6 +3526,10 @@ recorder:
       - binary_sensor.vmc_master_tasto_free_heating
       - binary_sensor.vmc_master_tasto_free_cooling
       - binary_sensor.vmc_master_tasto_free_cool_heat
+      - binary_sensor.vmc_master_tasto_sensori_on
+      - binary_sensor.vmc_master_tasto_sensori_off
+      - binary_sensor.vmc_master_tasto_led_pannello_on
+      - binary_sensor.vmc_master_tasto_led_pannello_off
       - input_boolean.vmc_master_attese_inizializzate
       - input_boolean.vmc_master_opzione_finestra_tempi_attesa
       - timer.vmc_master_countdown_pdr_cambio
@@ -6348,6 +6377,10 @@ script:
             - binary_sensor.vmc_master_tasto_free_heating
             - binary_sensor.vmc_master_tasto_free_cooling
             - binary_sensor.vmc_master_tasto_free_cool_heat
+            - binary_sensor.vmc_master_tasto_sensori_on
+            - binary_sensor.vmc_master_tasto_sensori_off
+            - binary_sensor.vmc_master_tasto_led_pannello_on
+            - binary_sensor.vmc_master_tasto_led_pannello_off
             - input_boolean.vmc_master_attese_inizializzate
             - input_boolean.vmc_master_opzione_finestra_tempi_attesa
             - timer.vmc_master_countdown_pdr_cambio
