@@ -11841,8 +11841,11 @@ cards:
                   Da impiegare se il comportamento della VMC non risponde
                   correttamente alle automazioni e/o comandi.
 
-                  Disattiva i 6 Profili sopra Esposti, Arresta la VMC e
-                  Inizializza tutte le Variabili Booleane su [False].
+                  Disattiva i 6 Profili sopra Esposti, Arresta subito la VMC,
+                  attende che l'automazione termini l'azione in corso (al massimo
+                  1 minuto), ripete l'arresto e Inizializza tutte le Variabili
+                  Booleane su [False]. Se è in corso un'allerta Δ Temp. o
+                  Congelamento, a fine allerta la VMC resta a Velocità 0.
 
                   <br>
 
@@ -11850,7 +11853,8 @@ cards:
 
                   Da impiegare solo la prima volta appena installato il Package.
 
-                  Attiva i 6 Profili sopra Esposti, Azzera gli Offset dei Sensori, Attiva gli Avvisi e la
+                  Attiva i 6 Profili sopra Esposti, Riporta i Tempi di Attesa ai Valori Originali,
+                  Azzera gli Offset dei Sensori, Attiva gli Avvisi e la
                   Notifica Status VMC, Attiva lo Status Pannello
                   Led, Disattiva lo Status Routine Sensori, Arresta la VMC,
                   Inizializza tutte le Variabili Booleane su [False] e Riavvia

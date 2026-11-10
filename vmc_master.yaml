@@ -7311,6 +7311,8 @@ script:
         data: {}
       - service: script.vmc_master_audio_profilo
         data: {}      
+      - service: script.vmc_master_ripristina_tempi_attesa                    # TEMPI DI ATTESA AI VALORI ORIGINALI
+        data: {}
       - service: shell_command.vmc_master_velocita_0
       - delay:
           hours: 0
@@ -17054,7 +17056,7 @@ script:
       Invia un messaggio audio al media player selezionato con il nome della VMC e l'avviso correlato in italiano.
       Imposta il volume dal sensore, attende n° secondi, verifica il range orario anche oltre la mezzanotte.
 ################### Inizio Creazione Script Ripristina Tempi di Attesa Originali ###################
-  vmc_master_ripristina_tempi_attesa:                                          # [CONFIGURAZIONE, 3 RICHIAMI] [INTERFACCIA, 3 RICHIAMI] [AUTOMAZIONE, 0 RICHIAMI] RIPORTA I TEMPI DI ATTESA AI VALORI ORIGINALI
+  vmc_master_ripristina_tempi_attesa:                                          # [CONFIGURAZIONE, 4 RICHIAMI] [INTERFACCIA, 3 RICHIAMI] [AUTOMAZIONE, 0 RICHIAMI] RIPORTA I TEMPI DI ATTESA AI VALORI ORIGINALI
     alias: "VMC Master - Ripristina Tempi di Attesa Originali"
     mode: single
     icon: mdi:timer-refresh-outline
