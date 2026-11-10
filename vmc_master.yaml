@@ -1091,7 +1091,7 @@ template:
         icon: mdi:home-thermometer
 
   - sensor:
-      - default_entity_id: sensor.vmc_master_temp_esterna_status                # [CONFIGURAZIONE, 30 RICHIAMI] [INTERFACCIA, 78 RICHIAMI] [AUTOMAZIONE, 39 RICHIAMI] SENSORE DI LETTURA TEMPERATUIRA ESTERNA MEMORIZZATA NEL SENSORE vmc_master_temperatura_esterna_selezionata + OFFSET MANUALE, PREVIA VERIFICA DI AVVENUTA LETTURA DEI DATI "SENSORI" MEMORIZZATI NELLA VMC
+      - default_entity_id: sensor.vmc_master_temp_esterna_status                # [CONFIGURAZIONE, 32 RICHIAMI] [INTERFACCIA, 78 RICHIAMI] [AUTOMAZIONE, 39 RICHIAMI] SENSORE DI LETTURA TEMPERATUIRA ESTERNA MEMORIZZATA NEL SENSORE vmc_master_temperatura_esterna_selezionata + OFFSET MANUALE, PREVIA VERIFICA DI AVVENUTA LETTURA DEI DATI "SENSORI" MEMORIZZATI NELLA VMC
         name: "Temperatura Ext. [°C]"
         unique_id: vmc_master_temp_esterna_status
         state: >
@@ -1110,7 +1110,7 @@ template:
         icon: mdi:home-thermometer-outline
 
   - sensor:
-      - default_entity_id: sensor.vmc_master_temp_esterna_status_senza_offset   # [CONFIGURAZIONE, 24 RICHIAMI] [INTERFACCIA, 4 RICHIAMI] [AUTOMAZIONE, 34 RICHIAMI] SENSORE DI LETTURA TEMPERATUIRA ESTERNA MEMORIZZATA NEL SENSORE DELLA VMC, PREVIA VERIFICA DI AVVENUTA LETTURA DEI DATI "SENSORI" MEMORIZZATI NELLA VMC; ATTENZIONE NELLA PRESUNZIONE NEL CALCOLO DI VERIFICA SE LA TEMPERATURA E' POSITIVA O NEGATIVA; SE IL PRIMO VALORE DEL SECONDO CAMPO [2] DELL'ARRAY E' 1 IL CALCOLO VERRA' ESEGUITO ESCLUDENDO IL PRIMO VALORE [2][1:] ES. 10200 -> 0200 -> -20,0 °C
+      - default_entity_id: sensor.vmc_master_temp_esterna_status_senza_offset   # [CONFIGURAZIONE, 26 RICHIAMI] [INTERFACCIA, 4 RICHIAMI] [AUTOMAZIONE, 34 RICHIAMI] SENSORE DI LETTURA TEMPERATUIRA ESTERNA MEMORIZZATA NEL SENSORE DELLA VMC, PREVIA VERIFICA DI AVVENUTA LETTURA DEI DATI "SENSORI" MEMORIZZATI NELLA VMC; ATTENZIONE NELLA PRESUNZIONE NEL CALCOLO DI VERIFICA SE LA TEMPERATURA E' POSITIVA O NEGATIVA; SE IL PRIMO VALORE DEL SECONDO CAMPO [2] DELL'ARRAY E' 1 IL CALCOLO VERRA' ESEGUITO ESCLUDENDO IL PRIMO VALORE [2][1:] ES. 10200 -> 0200 -> -20,0 °C
         name: "Temperatura Ext. [°C]"
         unique_id: vmc_master_temp_esterna_status_senza_offset
         state: >
@@ -1140,7 +1140,7 @@ template:
         icon: mdi:home-thermometer-outline
 
   - sensor:
-      - default_entity_id: sensor.vmc_master_temp_interna_status                # [CONFIGURAZIONE, 11 RICHIAMI] [INTERFACCIA, 77 RICHIAMI] [AUTOMAZIONE, 5 RICHIAMI] SENSORE DI LETTURA TEMPERATURA INTERNA MEMORIZZATA NEL SENSORE vmc_master_temperatura_interna_selezionata + OFFSET MANUALE
+      - default_entity_id: sensor.vmc_master_temp_interna_status                # [CONFIGURAZIONE, 13 RICHIAMI] [INTERFACCIA, 77 RICHIAMI] [AUTOMAZIONE, 5 RICHIAMI] SENSORE DI LETTURA TEMPERATURA INTERNA MEMORIZZATA NEL SENSORE vmc_master_temperatura_interna_selezionata + OFFSET MANUALE
         name: "Temperatura Int. [°C]"
         unique_id: vmc_master_temp_interna_status
         state: >
@@ -1159,7 +1159,7 @@ template:
         icon: mdi:home-thermometer
 
   - sensor:
-      - default_entity_id: sensor.vmc_master_temp_interna_status_senza_offset   # [CONFIGURAZIONE, 4 RICHIAMI] [INTERFACCIA, 5 RICHIAMI] [AUTOMAZIONE, 0 RICHIAMI] SENSORE DI LETTURA TEMPERATURA INTERNA MEMORIZZATA NELLA VMC SENZA OFFSET MANUALE, PREVIA VERIFICA DI AVVENUTA LETTURA DEI DATI "SENSORI" MEMORIZZATI NELLA VMC; ATTENZIONE NELLA PRESUNZIONE NEL CALCOLO DI VERIFICA SE LA TEMPERATURA E' POSITIVA O NEGATIVA; SE IL PRIMO VALORE DEL PRIMO CAMPO [1] DELL'ARRAY E' 1 IL CALCOLO VERRA' ESEGUITO ESCLUDENDO IL PRIMO VALORE [1][1:] ES. 10200 -> 0200 -> -20,0 °C
+      - default_entity_id: sensor.vmc_master_temp_interna_status_senza_offset   # [CONFIGURAZIONE, 6 RICHIAMI] [INTERFACCIA, 5 RICHIAMI] [AUTOMAZIONE, 0 RICHIAMI] SENSORE DI LETTURA TEMPERATURA INTERNA MEMORIZZATA NELLA VMC SENZA OFFSET MANUALE, PREVIA VERIFICA DI AVVENUTA LETTURA DEI DATI "SENSORI" MEMORIZZATI NELLA VMC; ATTENZIONE NELLA PRESUNZIONE NEL CALCOLO DI VERIFICA SE LA TEMPERATURA E' POSITIVA O NEGATIVA; SE IL PRIMO VALORE DEL PRIMO CAMPO [1] DELL'ARRAY E' 1 IL CALCOLO VERRA' ESEGUITO ESCLUDENDO IL PRIMO VALORE [1][1:] ES. 10200 -> 0200 -> -20,0 °C
         name: "Temperatura Int. [°C]"
         unique_id: vmc_master_temp_interna_status_senza_offset
         state: >
@@ -1189,7 +1189,7 @@ template:
         icon: mdi:home-thermometer
 
   - sensor:
-      - default_entity_id: sensor.vmc_master_umidita_esterna_status             # [CONFIGURAZIONE, 8 RICHIAMI] [INTERFACCIA, 6 RICHIAMI] [AUTOMAZIONE, 5 RICHIAMI] SENSORE DI LETTURA UMIDITA' ESTERNA MEMORIZZATA NEL SENSORE vmc_master_umidita_esterna_selezionata + OFFSET MANUALE, PREVIA VERIFICA DI AVVENUTA LETTURA DEI DATI "SENSORI" MEMORIZZATI NELLA VMC
+      - default_entity_id: sensor.vmc_master_umidita_esterna_status             # [CONFIGURAZIONE, 10 RICHIAMI] [INTERFACCIA, 6 RICHIAMI] [AUTOMAZIONE, 5 RICHIAMI] SENSORE DI LETTURA UMIDITA' ESTERNA MEMORIZZATA NEL SENSORE vmc_master_umidita_esterna_selezionata + OFFSET MANUALE, PREVIA VERIFICA DI AVVENUTA LETTURA DEI DATI "SENSORI" MEMORIZZATI NELLA VMC
         name: "Umidità Ext. [%]"
         unique_id: vmc_master_umidita_esterna_status
         state: >
@@ -1214,7 +1214,7 @@ template:
         icon: mdi:cloud-percent-outline
 
   - sensor:
-      - default_entity_id: sensor.vmc_master_umidita_interna_status             # [CONFIGURAZIONE, 11 RICHIAMI] [INTERFACCIA, 6 RICHIAMI] [AUTOMAZIONE, 5 RICHIAMI] SENSORE DI LETTURA UMIDITA' INTERNA MEMORIZZATA NEL SENSORE vmc_master_umidita_interna_selezionata + OFFSET MANUALE, PREVIA VERIFICA DI AVVENUTA LETTURA DEI DATI "SENSORI" MEMORIZZATI NELLA VMC
+      - default_entity_id: sensor.vmc_master_umidita_interna_status             # [CONFIGURAZIONE, 13 RICHIAMI] [INTERFACCIA, 6 RICHIAMI] [AUTOMAZIONE, 5 RICHIAMI] SENSORE DI LETTURA UMIDITA' INTERNA MEMORIZZATA NEL SENSORE vmc_master_umidita_interna_selezionata + OFFSET MANUALE, PREVIA VERIFICA DI AVVENUTA LETTURA DEI DATI "SENSORI" MEMORIZZATI NELLA VMC
         name: "Umidità Int. [%]"
         unique_id: vmc_master_umidita_interna_status
         state: >
@@ -1241,7 +1241,7 @@ template:
         icon: mdi:cloud-percent
 
   - sensor:
-      - default_entity_id: sensor.vmc_master_umidita_interna_status_senza_offset # [CONFIGURAZIONE, 3 RICHIAMI] [INTERFACCIA, 2 RICHIAMI] [AUTOMAZIONE, 0 RICHIAMI] SENSORE DI LETTURA UMIDITA' INTERNA MEMORIZZATA NELLA VMC SENZA OFFSET MANUALE, PREVIA VERIFICA DI AVVENUTA LETTURA DEI DATI "SENSORI" MEMORIZZATI NELLA VMC
+      - default_entity_id: sensor.vmc_master_umidita_interna_status_senza_offset # [CONFIGURAZIONE, 5 RICHIAMI] [INTERFACCIA, 2 RICHIAMI] [AUTOMAZIONE, 0 RICHIAMI] SENSORE DI LETTURA UMIDITA' INTERNA MEMORIZZATA NELLA VMC SENZA OFFSET MANUALE, PREVIA VERIFICA DI AVVENUTA LETTURA DEI DATI "SENSORI" MEMORIZZATI NELLA VMC
         name: "Umidità Int. [%]"
         unique_id: vmc_master_umidita_interna_status_senza_offset
         state: >
@@ -1267,7 +1267,7 @@ template:
         icon: mdi:cloud-percent
 
   - sensor:
-      - default_entity_id: sensor.vmc_master_co2_status                         # [CONFIGURAZIONE, 9 RICHIAMI] [INTERFACCIA, 15 RICHIAMI] [AUTOMAZIONE, 3 RICHIAMI] SENSORE DI LETTURA ANIDIRDE CARBONICA INTERNA MEMORIZZATA NEL SENSORE vmc_master_co2_interna_selezionata + OFFSET MANUALE, PREVIA VERIFICA DI AVVENUTA LETTURA DEI DATI "SENSORI" MEMORIZZATI NELLA VMC
+      - default_entity_id: sensor.vmc_master_co2_status                         # [CONFIGURAZIONE, 11 RICHIAMI] [INTERFACCIA, 15 RICHIAMI] [AUTOMAZIONE, 3 RICHIAMI] SENSORE DI LETTURA ANIDIRDE CARBONICA INTERNA MEMORIZZATA NEL SENSORE vmc_master_co2_interna_selezionata + OFFSET MANUALE, PREVIA VERIFICA DI AVVENUTA LETTURA DEI DATI "SENSORI" MEMORIZZATI NELLA VMC
         name: "CO₂ Int. [ppm]"
         unique_id: vmc_master_co2_status
         state: >
@@ -1293,7 +1293,7 @@ template:
         icon: mdi:molecule-co2
 
   - sensor:
-      - default_entity_id: sensor.vmc_master_co2_status_senza_offset            # [CONFIGURAZIONE, 3 RICHIAMI] [INTERFACCIA, 2 RICHIAMI] [AUTOMAZIONE, 0 RICHIAMI] SENSORE DI LETTURA ANIDRIDE CARBONICA INTERNA MEMORIZZATA NELLA VMC SENZA OFFSET MANUALE, PREVIA VERIFICA DI AVVENUTA LETTURA DEI DATI "SENSORI" MEMORIZZATI NELLA VMC
+      - default_entity_id: sensor.vmc_master_co2_status_senza_offset            # [CONFIGURAZIONE, 5 RICHIAMI] [INTERFACCIA, 2 RICHIAMI] [AUTOMAZIONE, 0 RICHIAMI] SENSORE DI LETTURA ANIDRIDE CARBONICA INTERNA MEMORIZZATA NELLA VMC SENZA OFFSET MANUALE, PREVIA VERIFICA DI AVVENUTA LETTURA DEI DATI "SENSORI" MEMORIZZATI NELLA VMC
         name: "Anidride Carbonica, CO₂ Int. [ppm]"
         unique_id: vmc_master_co2_status_senza_offset
         state: >
@@ -1317,7 +1317,7 @@ template:
         icon: mdi:molecule-co2
 
   - sensor:
-      - default_entity_id: sensor.vmc_master_voc_status                         # [CONFIGURAZIONE, 4 RICHIAMI] [INTERFACCIA, 15 RICHIAMI] [AUTOMAZIONE, 0 RICHIAMI] SENSORE DI LETTURA COMPOSTI ORGANICI VOLATICI INTERNI MEMORIZZATI NELLA VMC + OFFSET MANUALE ESPRESSI IN PPB [DEFAULT VMC], PREVIA VERIFICA DI AVVENUTA LETTURA DEI DATI "SENSORI" MEMORIZZATI NELLA VMC
+      - default_entity_id: sensor.vmc_master_voc_status                         # [CONFIGURAZIONE, 6 RICHIAMI] [INTERFACCIA, 15 RICHIAMI] [AUTOMAZIONE, 0 RICHIAMI] SENSORE DI LETTURA COMPOSTI ORGANICI VOLATICI INTERNI MEMORIZZATI NELLA VMC + OFFSET MANUALE ESPRESSI IN PPB [DEFAULT VMC], PREVIA VERIFICA DI AVVENUTA LETTURA DEI DATI "SENSORI" MEMORIZZATI NELLA VMC
         name: "VOC Int. [ppb]"
         unique_id: vmc_master_voc_status
         state: >
@@ -1341,7 +1341,7 @@ template:
         icon: mdi:weather-dust
 
   - sensor:
-      - default_entity_id: sensor.vmc_master_voc_status_senza_offset            # [CONFIGURAZIONE, 2 RICHIAMI] [INTERFACCIA, 2 RICHIAMI] [AUTOMAZIONE, 0 RICHIAMI] SENSORE DI LETTURA COMPOSTI ORGANICI VOLATICI INTERNI MEMORIZZATI NELLA VMC SENZA OFFSET MANUALE ESPRESSI IN PPB [DEFAULT VMC], PREVIA VERIFICA DI AVVENUTA LETTURA DEI DATI "SENSORI" MEMORIZZATI NELLA VMC
+      - default_entity_id: sensor.vmc_master_voc_status_senza_offset            # [CONFIGURAZIONE, 4 RICHIAMI] [INTERFACCIA, 2 RICHIAMI] [AUTOMAZIONE, 0 RICHIAMI] SENSORE DI LETTURA COMPOSTI ORGANICI VOLATICI INTERNI MEMORIZZATI NELLA VMC SENZA OFFSET MANUALE ESPRESSI IN PPB [DEFAULT VMC], PREVIA VERIFICA DI AVVENUTA LETTURA DEI DATI "SENSORI" MEMORIZZATI NELLA VMC
         name: "Composti Organici Volatili, VOC Int. [ppb]"
         unique_id: vmc_master_voc_status_senza_offset
         state: >
@@ -1364,6 +1364,154 @@ template:
           {% endif %}
         icon: mdi:weather-dust
 ################### Fine Creazione Sensori di Lettura Temp. Interna, Esterna, Umidità, CO₂ e VOC della VMC E SENSORI SELEZIONATI  ################################################################################################################################################
+
+################### Inizio Creazione Sensori Numerici per i Grafici della Cronologia (Tocco sulle Righe delle Schede Sensori - Selezionati, Sensori - Extra e Sensori VMC Interni) ###################
+  - sensor:
+      - default_entity_id: sensor.vmc_master_temp_esterna_status_grafico            # [CONFIGURAZIONE, 2 RICHIAMI] [INTERFACCIA, 2 RICHIAMI] [AUTOMAZIONE, 0 RICHIAMI] SENSORE NUMERICO PER IL GRAFICO DELLA CRONOLOGIA DI sensor.vmc_master_temp_esterna_status (TOCCO SULLA RIGA DELLA SCHEDA): NON DISPONIBILE QUANDO IL SENSORE NON CONTIENE UN NUMERO, COSI' IL GRAFICO MOSTRA UN BUCO E NON 0
+        name: "Grafico Temperatura Ext. [°C]"
+        unique_id: vmc_master_temp_esterna_status_grafico
+        unit_of_measurement: "°C"
+        availability: >
+          {{ is_number(states('sensor.vmc_master_temp_esterna_status')) }}
+        state: >
+          {{ states('sensor.vmc_master_temp_esterna_status') }}
+        icon: mdi:home-thermometer-outline
+      - default_entity_id: sensor.vmc_master_temp_interna_status_grafico            # [CONFIGURAZIONE, 2 RICHIAMI] [INTERFACCIA, 2 RICHIAMI] [AUTOMAZIONE, 0 RICHIAMI] SENSORE NUMERICO PER IL GRAFICO DELLA CRONOLOGIA DI sensor.vmc_master_temp_interna_status (TOCCO SULLA RIGA DELLA SCHEDA): NON DISPONIBILE QUANDO IL SENSORE NON CONTIENE UN NUMERO, COSI' IL GRAFICO MOSTRA UN BUCO E NON 0
+        name: "Grafico Temperatura Int. [°C]"
+        unique_id: vmc_master_temp_interna_status_grafico
+        unit_of_measurement: "°C"
+        availability: >
+          {{ is_number(states('sensor.vmc_master_temp_interna_status')) }}
+        state: >
+          {{ states('sensor.vmc_master_temp_interna_status') }}
+        icon: mdi:home-thermometer
+      - default_entity_id: sensor.vmc_master_umidita_esterna_status_grafico         # [CONFIGURAZIONE, 2 RICHIAMI] [INTERFACCIA, 2 RICHIAMI] [AUTOMAZIONE, 0 RICHIAMI] SENSORE NUMERICO PER IL GRAFICO DELLA CRONOLOGIA DI sensor.vmc_master_umidita_esterna_status (TOCCO SULLA RIGA DELLA SCHEDA): NON DISPONIBILE QUANDO IL SENSORE NON CONTIENE UN NUMERO, COSI' IL GRAFICO MOSTRA UN BUCO E NON 0
+        name: "Grafico Umidità Ext. [%]"
+        unique_id: vmc_master_umidita_esterna_status_grafico
+        unit_of_measurement: "%"
+        availability: >
+          {{ is_number(states('sensor.vmc_master_umidita_esterna_status')) }}
+        state: >
+          {{ states('sensor.vmc_master_umidita_esterna_status') }}
+        icon: mdi:cloud-percent-outline
+      - default_entity_id: sensor.vmc_master_umidita_interna_status_grafico         # [CONFIGURAZIONE, 2 RICHIAMI] [INTERFACCIA, 2 RICHIAMI] [AUTOMAZIONE, 0 RICHIAMI] SENSORE NUMERICO PER IL GRAFICO DELLA CRONOLOGIA DI sensor.vmc_master_umidita_interna_status (TOCCO SULLA RIGA DELLA SCHEDA): NON DISPONIBILE QUANDO IL SENSORE NON CONTIENE UN NUMERO, COSI' IL GRAFICO MOSTRA UN BUCO E NON 0
+        name: "Grafico Umidità Int. [%]"
+        unique_id: vmc_master_umidita_interna_status_grafico
+        unit_of_measurement: "%"
+        availability: >
+          {{ is_number(states('sensor.vmc_master_umidita_interna_status')) }}
+        state: >
+          {{ states('sensor.vmc_master_umidita_interna_status') }}
+        icon: mdi:cloud-percent
+      - default_entity_id: sensor.vmc_master_co2_status_grafico                     # [CONFIGURAZIONE, 2 RICHIAMI] [INTERFACCIA, 2 RICHIAMI] [AUTOMAZIONE, 0 RICHIAMI] SENSORE NUMERICO PER IL GRAFICO DELLA CRONOLOGIA DI sensor.vmc_master_co2_status (TOCCO SULLA RIGA DELLA SCHEDA): NON DISPONIBILE QUANDO IL SENSORE NON CONTIENE UN NUMERO, COSI' IL GRAFICO MOSTRA UN BUCO E NON 0
+        name: "Grafico CO₂ Int. [ppm]"
+        unique_id: vmc_master_co2_status_grafico
+        unit_of_measurement: "ppm"
+        availability: >
+          {{ is_number(states('sensor.vmc_master_co2_status')) }}
+        state: >
+          {{ states('sensor.vmc_master_co2_status') }}
+        icon: mdi:molecule-co2
+      - default_entity_id: sensor.vmc_master_voc_status_grafico                     # [CONFIGURAZIONE, 2 RICHIAMI] [INTERFACCIA, 2 RICHIAMI] [AUTOMAZIONE, 0 RICHIAMI] SENSORE NUMERICO PER IL GRAFICO DELLA CRONOLOGIA DI sensor.vmc_master_voc_status (TOCCO SULLA RIGA DELLA SCHEDA): NON DISPONIBILE QUANDO IL SENSORE NON CONTIENE UN NUMERO, COSI' IL GRAFICO MOSTRA UN BUCO E NON 0
+        name: "Grafico VOC Int. [ppb]"
+        unique_id: vmc_master_voc_status_grafico
+        unit_of_measurement: "ppb"
+        availability: >
+          {{ is_number(states('sensor.vmc_master_voc_status')) }}
+        state: >
+          {{ states('sensor.vmc_master_voc_status') }}
+        icon: mdi:weather-dust
+      - default_entity_id: sensor.vmc_master_punto_di_rugiada_esterno_grafico       # [CONFIGURAZIONE, 2 RICHIAMI] [INTERFACCIA, 2 RICHIAMI] [AUTOMAZIONE, 0 RICHIAMI] SENSORE NUMERICO PER IL GRAFICO DELLA CRONOLOGIA DI sensor.vmc_master_punto_di_rugiada_esterno (TOCCO SULLA RIGA DELLA SCHEDA): NON DISPONIBILE QUANDO IL SENSORE NON CONTIENE UN NUMERO, COSI' IL GRAFICO MOSTRA UN BUCO E NON 0
+        name: "Grafico Punto di Rugiada Ext. [°C]"
+        unique_id: vmc_master_punto_di_rugiada_esterno_grafico
+        unit_of_measurement: "°C"
+        availability: >
+          {{ is_number(states('sensor.vmc_master_punto_di_rugiada_esterno')) }}
+        state: >
+          {{ states('sensor.vmc_master_punto_di_rugiada_esterno') }}
+        icon: mdi:water-thermometer-outline
+      - default_entity_id: sensor.vmc_master_punto_di_rugiada_interno_grafico       # [CONFIGURAZIONE, 2 RICHIAMI] [INTERFACCIA, 2 RICHIAMI] [AUTOMAZIONE, 0 RICHIAMI] SENSORE NUMERICO PER IL GRAFICO DELLA CRONOLOGIA DI sensor.vmc_master_punto_di_rugiada_interno (TOCCO SULLA RIGA DELLA SCHEDA): NON DISPONIBILE QUANDO IL SENSORE NON CONTIENE UN NUMERO, COSI' IL GRAFICO MOSTRA UN BUCO E NON 0
+        name: "Grafico Punto di Rugiada Int. [°C]"
+        unique_id: vmc_master_punto_di_rugiada_interno_grafico
+        unit_of_measurement: "°C"
+        availability: >
+          {{ is_number(states('sensor.vmc_master_punto_di_rugiada_interno')) }}
+        state: >
+          {{ states('sensor.vmc_master_punto_di_rugiada_interno') }}
+        icon: mdi:thermometer-water
+      - default_entity_id: sensor.vmc_master_punto_di_rugiada_valore_grafico        # [CONFIGURAZIONE, 2 RICHIAMI] [INTERFACCIA, 2 RICHIAMI] [AUTOMAZIONE, 0 RICHIAMI] SENSORE NUMERICO PER IL GRAFICO DELLA CRONOLOGIA DI sensor.vmc_master_punto_di_rugiada_valore (TOCCO SULLA RIGA DELLA SCHEDA): NON DISPONIBILE QUANDO IL SENSORE NON CONTIENE UN NUMERO, COSI' IL GRAFICO MOSTRA UN BUCO E NON 0
+        name: "Grafico Δ Punto di Rugiada [Ext-Int] [°C]"
+        unique_id: vmc_master_punto_di_rugiada_valore_grafico
+        unit_of_measurement: "°C"
+        availability: >
+          {{ is_number(states('sensor.vmc_master_punto_di_rugiada_valore')) }}
+        state: >
+          {{ states('sensor.vmc_master_punto_di_rugiada_valore') }}
+        icon: mdi:hvac
+      - default_entity_id: sensor.vmc_master_umidita_assoluta_esterna_grafico       # [CONFIGURAZIONE, 2 RICHIAMI] [INTERFACCIA, 2 RICHIAMI] [AUTOMAZIONE, 0 RICHIAMI] SENSORE NUMERICO PER IL GRAFICO DELLA CRONOLOGIA DI sensor.vmc_master_umidita_assoluta_esterna (TOCCO SULLA RIGA DELLA SCHEDA): NON DISPONIBILE QUANDO IL SENSORE NON CONTIENE UN NUMERO, COSI' IL GRAFICO MOSTRA UN BUCO E NON 0
+        name: "Grafico Umidità Assoluta Ext. [g/m³]"
+        unique_id: vmc_master_umidita_assoluta_esterna_grafico
+        unit_of_measurement: "g/m³"
+        availability: >
+          {{ is_number(states('sensor.vmc_master_umidita_assoluta_esterna')) }}
+        state: >
+          {{ states('sensor.vmc_master_umidita_assoluta_esterna') }}
+        icon: mdi:cloud-percent-outline
+      - default_entity_id: sensor.vmc_master_umidita_assoluta_interna_grafico       # [CONFIGURAZIONE, 2 RICHIAMI] [INTERFACCIA, 2 RICHIAMI] [AUTOMAZIONE, 0 RICHIAMI] SENSORE NUMERICO PER IL GRAFICO DELLA CRONOLOGIA DI sensor.vmc_master_umidita_assoluta_interna (TOCCO SULLA RIGA DELLA SCHEDA): NON DISPONIBILE QUANDO IL SENSORE NON CONTIENE UN NUMERO, COSI' IL GRAFICO MOSTRA UN BUCO E NON 0
+        name: "Grafico Umidità Assoluta Int. [g/m³]"
+        unique_id: vmc_master_umidita_assoluta_interna_grafico
+        unit_of_measurement: "g/m³"
+        availability: >
+          {{ is_number(states('sensor.vmc_master_umidita_assoluta_interna')) }}
+        state: >
+          {{ states('sensor.vmc_master_umidita_assoluta_interna') }}
+        icon: mdi:cloud-percent
+      - default_entity_id: sensor.vmc_master_temp_esterna_status_senza_offset_grafico # [CONFIGURAZIONE, 2 RICHIAMI] [INTERFACCIA, 2 RICHIAMI] [AUTOMAZIONE, 0 RICHIAMI] SENSORE NUMERICO PER IL GRAFICO DELLA CRONOLOGIA DI sensor.vmc_master_temp_esterna_status_senza_offset (TOCCO SULLA RIGA DELLA SCHEDA): NON DISPONIBILE QUANDO IL SENSORE NON CONTIENE UN NUMERO, COSI' IL GRAFICO MOSTRA UN BUCO E NON 0
+        name: "Grafico Temperatura Ext. [°C] (Senza Offset)"
+        unique_id: vmc_master_temp_esterna_status_senza_offset_grafico
+        unit_of_measurement: "°C"
+        availability: >
+          {{ is_number(states('sensor.vmc_master_temp_esterna_status_senza_offset')) }}
+        state: >
+          {{ states('sensor.vmc_master_temp_esterna_status_senza_offset') }}
+        icon: mdi:home-thermometer-outline
+      - default_entity_id: sensor.vmc_master_temp_interna_status_senza_offset_grafico # [CONFIGURAZIONE, 2 RICHIAMI] [INTERFACCIA, 2 RICHIAMI] [AUTOMAZIONE, 0 RICHIAMI] SENSORE NUMERICO PER IL GRAFICO DELLA CRONOLOGIA DI sensor.vmc_master_temp_interna_status_senza_offset (TOCCO SULLA RIGA DELLA SCHEDA): NON DISPONIBILE QUANDO IL SENSORE NON CONTIENE UN NUMERO, COSI' IL GRAFICO MOSTRA UN BUCO E NON 0
+        name: "Grafico Temperatura Int. [°C] (Senza Offset)"
+        unique_id: vmc_master_temp_interna_status_senza_offset_grafico
+        unit_of_measurement: "°C"
+        availability: >
+          {{ is_number(states('sensor.vmc_master_temp_interna_status_senza_offset')) }}
+        state: >
+          {{ states('sensor.vmc_master_temp_interna_status_senza_offset') }}
+        icon: mdi:home-thermometer
+      - default_entity_id: sensor.vmc_master_umidita_interna_status_senza_offset_grafico # [CONFIGURAZIONE, 2 RICHIAMI] [INTERFACCIA, 2 RICHIAMI] [AUTOMAZIONE, 0 RICHIAMI] SENSORE NUMERICO PER IL GRAFICO DELLA CRONOLOGIA DI sensor.vmc_master_umidita_interna_status_senza_offset (TOCCO SULLA RIGA DELLA SCHEDA): NON DISPONIBILE QUANDO IL SENSORE NON CONTIENE UN NUMERO, COSI' IL GRAFICO MOSTRA UN BUCO E NON 0
+        name: "Grafico Umidità Int. [%] (Senza Offset)"
+        unique_id: vmc_master_umidita_interna_status_senza_offset_grafico
+        unit_of_measurement: "%"
+        availability: >
+          {{ is_number(states('sensor.vmc_master_umidita_interna_status_senza_offset')) }}
+        state: >
+          {{ states('sensor.vmc_master_umidita_interna_status_senza_offset') }}
+        icon: mdi:cloud-percent
+      - default_entity_id: sensor.vmc_master_co2_status_senza_offset_grafico        # [CONFIGURAZIONE, 2 RICHIAMI] [INTERFACCIA, 2 RICHIAMI] [AUTOMAZIONE, 0 RICHIAMI] SENSORE NUMERICO PER IL GRAFICO DELLA CRONOLOGIA DI sensor.vmc_master_co2_status_senza_offset (TOCCO SULLA RIGA DELLA SCHEDA): NON DISPONIBILE QUANDO IL SENSORE NON CONTIENE UN NUMERO, COSI' IL GRAFICO MOSTRA UN BUCO E NON 0
+        name: "Grafico Anidride Carbonica, CO₂ Int. [ppm] (Senza Offset)"
+        unique_id: vmc_master_co2_status_senza_offset_grafico
+        unit_of_measurement: "ppm"
+        availability: >
+          {{ is_number(states('sensor.vmc_master_co2_status_senza_offset')) }}
+        state: >
+          {{ states('sensor.vmc_master_co2_status_senza_offset') }}
+        icon: mdi:molecule-co2
+      - default_entity_id: sensor.vmc_master_voc_status_senza_offset_grafico        # [CONFIGURAZIONE, 2 RICHIAMI] [INTERFACCIA, 2 RICHIAMI] [AUTOMAZIONE, 0 RICHIAMI] SENSORE NUMERICO PER IL GRAFICO DELLA CRONOLOGIA DI sensor.vmc_master_voc_status_senza_offset (TOCCO SULLA RIGA DELLA SCHEDA): NON DISPONIBILE QUANDO IL SENSORE NON CONTIENE UN NUMERO, COSI' IL GRAFICO MOSTRA UN BUCO E NON 0
+        name: "Grafico Composti Organici Volatili, VOC Int. [ppb] (Senza Offset)"
+        unique_id: vmc_master_voc_status_senza_offset_grafico
+        unit_of_measurement: "ppb"
+        availability: >
+          {{ is_number(states('sensor.vmc_master_voc_status_senza_offset')) }}
+        state: >
+          {{ states('sensor.vmc_master_voc_status_senza_offset') }}
+        icon: mdi:weather-dust
+################### Fine Creazione Sensori Numerici per i Grafici della Cronologia ###################
 
 ################### Inizio Creazione Sensori per l'INTERFACCIA per la Lettura Umidità Verifica Superamento Lim. Δ P. di Rugiada, VMC Congelamento ≤ -18 [°C] Temp. Esterna ?, VMC Sensori Int. Δ Temp. > 23 [°C] ? della VMC ATTRAVERSO I SENSORI SELEZIONATI TRAMITE INTERFACCIA ###################
   - sensor:
@@ -1449,7 +1597,7 @@ template:
         icon: mdi:hvac
 
   - sensor:
-      - default_entity_id: sensor.vmc_master_punto_di_rugiada_valore            # [CONFIGURAZIONE, 2 RICHIAMI] [INTERFACCIA, 2 RICHIAMI] [AUTOMAZIONE, 0 RICHIAMI] SENSORE DI MONITORAGGIO DEL PUNTO DI RUGIADA ESTERNO - PUNTO DI RUGIADA INTERNO
+      - default_entity_id: sensor.vmc_master_punto_di_rugiada_valore            # [CONFIGURAZIONE, 4 RICHIAMI] [INTERFACCIA, 2 RICHIAMI] [AUTOMAZIONE, 0 RICHIAMI] SENSORE DI MONITORAGGIO DEL PUNTO DI RUGIADA ESTERNO - PUNTO DI RUGIADA INTERNO
         name: "Δ Punto di Rugiada [Ext-Int] [°C]"
         unique_id: vmc_master_punto_di_rugiada_valore
         state: >
@@ -1640,7 +1788,7 @@ template:
         icon: mdi:alarm-light-outline
 
   - sensor:
-      - default_entity_id: sensor.vmc_master_punto_di_rugiada_interno           # [CONFIGURAZIONE, 7 RICHIAMI] [INTERFACCIA, 11 RICHIAMI] [AUTOMAZIONE, 0 RICHIAMI] SENSORE DI MONITORAGIO DEL PUNTO DI RUGIADA INTERNO, IN FUNZIONE DELLA TEMEPRATURA INTERNA ED UMIDITA' INTERNA LETTA DALLA VMC
+      - default_entity_id: sensor.vmc_master_punto_di_rugiada_interno           # [CONFIGURAZIONE, 9 RICHIAMI] [INTERFACCIA, 11 RICHIAMI] [AUTOMAZIONE, 0 RICHIAMI] SENSORE DI MONITORAGIO DEL PUNTO DI RUGIADA INTERNO, IN FUNZIONE DELLA TEMEPRATURA INTERNA ED UMIDITA' INTERNA LETTA DALLA VMC
         name: "Punto di Rugiada Int. [°C]"
         unique_id: vmc_master_punto_di_rugiada_interno
         state: >
@@ -1666,7 +1814,7 @@ template:
         icon: mdi:thermometer-water
 
   - sensor:
-      - default_entity_id: sensor.vmc_master_punto_di_rugiada_esterno           # [CONFIGURAZIONE, 6 RICHIAMI] [INTERFACCIA, 11 RICHIAMI] [AUTOMAZIONE, 0 RICHIAMI] SENSORE DI MONITORAGIO DEL PUNTO DI RUGIADA ESTERNO, IN FUNZIONE DELLA TEMEPRATURA ESTERNA LETTA DALLA VMC E DALL'UMNIDITA' ESTERNA LETTA DAL SENSORE vmc_master_selected_weather_entity
+      - default_entity_id: sensor.vmc_master_punto_di_rugiada_esterno           # [CONFIGURAZIONE, 8 RICHIAMI] [INTERFACCIA, 11 RICHIAMI] [AUTOMAZIONE, 0 RICHIAMI] SENSORE DI MONITORAGIO DEL PUNTO DI RUGIADA ESTERNO, IN FUNZIONE DELLA TEMEPRATURA ESTERNA LETTA DALLA VMC E DALL'UMNIDITA' ESTERNA LETTA DAL SENSORE vmc_master_selected_weather_entity
         name: "Punto di Rugiada Ext. [°C]"
         unique_id: vmc_master_punto_di_rugiada_esterno
         state: >
@@ -1747,7 +1895,7 @@ template:
         icon: mdi:alarm-light-outline
 
   - sensor:
-      - default_entity_id: sensor.vmc_master_umidita_assoluta_interna           # [CONFIGURAZIONE, 2 RICHIAMI] [INTERFACCIA, 3 RICHIAMI] [AUTOMAZIONE, 0 RICHIAMI] SENSORE DI MONITORAGGIO DELL' UMIDITA' ASSOLUTA INTERNA
+      - default_entity_id: sensor.vmc_master_umidita_assoluta_interna           # [CONFIGURAZIONE, 4 RICHIAMI] [INTERFACCIA, 3 RICHIAMI] [AUTOMAZIONE, 0 RICHIAMI] SENSORE DI MONITORAGGIO DELL' UMIDITA' ASSOLUTA INTERNA
         name: "Umidità Assoluta Int. [g/m³]"
         unique_id: vmc_master_umidita_assoluta_interna
         state: >
@@ -1783,7 +1931,7 @@ template:
         icon: mdi:cloud-percent
 
   - sensor:
-      - default_entity_id: sensor.vmc_master_umidita_assoluta_esterna           # [CONFIGURAZIONE, 2 RICHIAMI] [INTERFACCIA, 3 RICHIAMI] [AUTOMAZIONE, 0 RICHIAMI] SENSORE DI MONITORAGGIO DELL' UMIDITA' ASSOLUTA INTERNA
+      - default_entity_id: sensor.vmc_master_umidita_assoluta_esterna           # [CONFIGURAZIONE, 4 RICHIAMI] [INTERFACCIA, 3 RICHIAMI] [AUTOMAZIONE, 0 RICHIAMI] SENSORE DI MONITORAGGIO DELL' UMIDITA' ASSOLUTA INTERNA
         name: "Umidità Assoluta Ext. [g/m³]"
         unique_id: vmc_master_umidita_assoluta_esterna
         state: >
@@ -3648,6 +3796,22 @@ recorder:
       - sensor.vmc_master_punto_di_rugiada_verifica_confronto
 #      - sensor.vmc_master_umidita_assoluta_interna
 #      - sensor.vmc_master_umidita_assoluta_esterna
+#      - sensor.vmc_master_temp_esterna_status_grafico
+#      - sensor.vmc_master_temp_interna_status_grafico
+#      - sensor.vmc_master_umidita_esterna_status_grafico
+#      - sensor.vmc_master_umidita_interna_status_grafico
+#      - sensor.vmc_master_co2_status_grafico
+#      - sensor.vmc_master_voc_status_grafico
+#      - sensor.vmc_master_punto_di_rugiada_esterno_grafico
+#      - sensor.vmc_master_punto_di_rugiada_interno_grafico
+#      - sensor.vmc_master_punto_di_rugiada_valore_grafico
+#      - sensor.vmc_master_umidita_assoluta_esterna_grafico
+#      - sensor.vmc_master_umidita_assoluta_interna_grafico
+#      - sensor.vmc_master_temp_esterna_status_senza_offset_grafico
+#      - sensor.vmc_master_temp_interna_status_senza_offset_grafico
+#      - sensor.vmc_master_umidita_interna_status_senza_offset_grafico
+#      - sensor.vmc_master_co2_status_senza_offset_grafico
+#      - sensor.vmc_master_voc_status_senza_offset_grafico
 #      - sensor.vmc_master_calcolo_confort_interno
       - sensor.vmc_master_status_portata_ventola_lettura_codice_interpretato
       - sensor.vmc_master_status_calcolo_portata_ventola
@@ -6499,6 +6663,22 @@ script:
             - sensor.vmc_master_punto_di_rugiada_verifica_confronto
             - sensor.vmc_master_umidita_assoluta_interna
             - sensor.vmc_master_umidita_assoluta_esterna
+            - sensor.vmc_master_temp_esterna_status_grafico
+            - sensor.vmc_master_temp_interna_status_grafico
+            - sensor.vmc_master_umidita_esterna_status_grafico
+            - sensor.vmc_master_umidita_interna_status_grafico
+            - sensor.vmc_master_co2_status_grafico
+            - sensor.vmc_master_voc_status_grafico
+            - sensor.vmc_master_punto_di_rugiada_esterno_grafico
+            - sensor.vmc_master_punto_di_rugiada_interno_grafico
+            - sensor.vmc_master_punto_di_rugiada_valore_grafico
+            - sensor.vmc_master_umidita_assoluta_esterna_grafico
+            - sensor.vmc_master_umidita_assoluta_interna_grafico
+            - sensor.vmc_master_temp_esterna_status_senza_offset_grafico
+            - sensor.vmc_master_temp_interna_status_senza_offset_grafico
+            - sensor.vmc_master_umidita_interna_status_senza_offset_grafico
+            - sensor.vmc_master_co2_status_senza_offset_grafico
+            - sensor.vmc_master_voc_status_senza_offset_grafico
             - sensor.vmc_master_calcolo_confort_interno
             - sensor.vmc_master_status_portata_ventola_lettura_codice_interpretato
             - sensor.vmc_master_status_calcolo_portata_ventola
