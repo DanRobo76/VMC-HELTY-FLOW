@@ -148,7 +148,7 @@ command_line:
 ################### Inizio Creazione Sensori Principali della VMC  ########################################################################################################################################################
 sensor:
   - platform: tcp
-    name: vmc_master_status_ventola                                             # [CONFIGURAZIONE, 17 RICHIAMI] [INTERFACCIA, 2 RICHIAMI] [AUTOMAZIONE, 163 RICHIAMI] CREAZIONE DEL SENSORE LETTURA STATI DI VENTILAZIONE; N.b non tutti i valori sono identificabili
+    name: vmc_master_status_ventola                                             # [CONFIGURAZIONE, 18 RICHIAMI] [INTERFACCIA, 2 RICHIAMI] [AUTOMAZIONE, 163 RICHIAMI] CREAZIONE DEL SENSORE LETTURA STATI DI VENTILAZIONE; N.b non tutti i valori sono identificabili
     host: 192.168.1.160                        # INDIRIZZO IP DELLA VMC MASTER
     port: 5001                                 # PORTA 5001 DELLA VMC IMPOSTAZIONE DI DEFAULT
     timeout: 3
@@ -4760,11 +4760,11 @@ input_boolean:
 
 ################### Inizio Creazione Switch Booleani impiegati nell'Automazione, per valutare CONGELAMENTO ############################
 
-  vmc_master_congelamento_verifica_soglia_valore_spia:                          # [CONFIGURAZIONE, 193 RICHIAMI] [INTERFACCIA, 13 RICHIAMI] [AUTOMAZIONE, 226 RICHIAMI] SENSORE TRACCIAMENTO CONGELAMENTO
+  vmc_master_congelamento_verifica_soglia_valore_spia:                          # [CONFIGURAZIONE, 195 RICHIAMI] [INTERFACCIA, 13 RICHIAMI] [AUTOMAZIONE, 226 RICHIAMI] SENSORE TRACCIAMENTO CONGELAMENTO
     name: "Spia VMC Congelamento ≤ -18 [°C] Temp. Esterna ?"
     icon: mdi:memory
 
-  vmc_master_spia_velocita_0_congelamento:                                      # [CONFIGURAZIONE, 43 RICHIAMI] [INTERFACCIA, 12 RICHIAMI] [AUTOMAZIONE, 81 RICHIAMI] SENSORE TRACCIAMENTO VELOCITA' 0, IN CASO DI CONGELAMENTO
+  vmc_master_spia_velocita_0_congelamento:                                      # [CONFIGURAZIONE, 44 RICHIAMI] [INTERFACCIA, 12 RICHIAMI] [AUTOMAZIONE, 81 RICHIAMI] SENSORE TRACCIAMENTO VELOCITA' 0, IN CASO DI CONGELAMENTO
     name: "Spia Velocità 0 Congelamento"
     icon: mdi:memory
 
@@ -4808,11 +4808,11 @@ input_boolean:
 
 ################### Inizio Creazione Switch Booleani impiegati nell'Automazione, per valutare DIFFERENZA DI TEMPERATURA ############################
 
-  vmc_master_delta_temp_verifica_soglia_valore_spia:                            # [CONFIGURAZIONE, 211 RICHIAMI] [INTERFACCIA, 12 RICHIAMI] [AUTOMAZIONE, 234 RICHIAMI] SENSORE TRACCIAMENTO DIFFERENZA DI TEMPERATURA > 23 °C
+  vmc_master_delta_temp_verifica_soglia_valore_spia:                            # [CONFIGURAZIONE, 213 RICHIAMI] [INTERFACCIA, 12 RICHIAMI] [AUTOMAZIONE, 234 RICHIAMI] SENSORE TRACCIAMENTO DIFFERENZA DI TEMPERATURA > 23 °C
     name: "Spia VMC Sensori Int. Δ Temp. > 23 [°C] ?"
     icon: mdi:memory
 
-  vmc_master_spia_velocita_0_delta_temp_verifica_soglia_valore:                 # [CONFIGURAZIONE, 27 RICHIAMI] [INTERFACCIA, 12 RICHIAMI] [AUTOMAZIONE, 45 RICHIAMI] SENSORE TRACCIAMENTO VELOCITA' 0, IN CASO DI DIFFERENZA DI TEMPERATURA > 23 °C
+  vmc_master_spia_velocita_0_delta_temp_verifica_soglia_valore:                 # [CONFIGURAZIONE, 28 RICHIAMI] [INTERFACCIA, 12 RICHIAMI] [AUTOMAZIONE, 45 RICHIAMI] SENSORE TRACCIAMENTO VELOCITA' 0, IN CASO DI DIFFERENZA DI TEMPERATURA > 23 °C
     name: "Spia Velocità 0 Diff. Temp. Int-Est > 23 [°C]"
     icon: mdi:memory
 
@@ -7311,8 +7311,7 @@ script:
   vmc_master_bottone_panico:                                                    # [CONFIGURAZIONE, 2 RICHIAMI] [INTERFACCIA, 5 RICHIAMI] [AUTOMAZIONE, 0 RICHIAMI]
     alias: VMC Master - Panic Button
     sequence:
-      - service: script.vmc_master_azzera_booleans
-        data: {}
+      - service: shell_command.vmc_master_velocita_0                          # SUBITO VELOCITA' 0 E INTERRUTTORI SPENTI
       - service: input_boolean.turn_off
         data: {}
         target:
@@ -7327,7 +7326,38 @@ script:
             - input_boolean.vmc_master_opzioni_accendi_spegni_vmc_vs_freecooling
             - input_boolean.vmc_master_opzioni_accendi_spegni_vmc_vs_co2_e_voc
             - input_boolean.vmc_master_avvio_home_assistant_in_corso_per_audio
-      - service: shell_command.vmc_master_velocita_0
+      - wait_template: "{{ state_attr('automation.automazione_vmc_master', 'current') | int(0) == 0 }}"   # ATTENDE CHE L'AUTOMAZIONE FINISCA GLI EVENTI GIA' IN CODA (MAX 60 S)
+        timeout: "00:01:00"
+        continue_on_timeout: true
+      - service: shell_command.vmc_master_velocita_0                          # POI DI NUOVO VELOCITA' 0 CON LA SUA RILETTURA E SOLO DOPO L'AZZERAMENTO DELLE MEMORIE: UN'ALLERTA Δ TEMP./CONGELAMENTO ANCORA IN CORSO MEMORIZZA COSI' VELOCITA' 0 E NON LA PROPRIA VELOCITA'
+      - delay:
+          seconds: 1
+      - service: homeassistant.update_entity
+        target:
+          entity_id: sensor.vmc_master_status_ventola
+      - variables:                                                            # Δ TEMP. E CONGELAMENTO SONO ALLERTE DEL FIRMWARE: SE SONO IN CORSO RESTANO ATTIVE, MA A FINE ALLERTA LA VELOCITA' DA RIPRISTINARE E' LA VELOCITA' 0 DEL BOTTONE PANICO
+          delta_in_corso: "{{ is_state('input_boolean.vmc_master_delta_temp_verifica_soglia_valore_spia', 'on') }}"
+          congelamento_in_corso: "{{ is_state('input_boolean.vmc_master_congelamento_verifica_soglia_valore_spia', 'on') }}"
+      - service: script.vmc_master_azzera_booleans
+        data: {}
+      - if:
+          - condition: template
+            value_template: "{{ delta_in_corso }}"
+        then:
+          - service: input_boolean.turn_on
+            target:
+              entity_id:
+                - input_boolean.vmc_master_delta_temp_verifica_soglia_valore_spia
+                - input_boolean.vmc_master_spia_velocita_0_delta_temp_verifica_soglia_valore
+      - if:
+          - condition: template
+            value_template: "{{ congelamento_in_corso }}"
+        then:
+          - service: input_boolean.turn_on
+            target:
+              entity_id:
+                - input_boolean.vmc_master_congelamento_verifica_soglia_valore_spia
+                - input_boolean.vmc_master_spia_velocita_0_congelamento
     mode: restart
     icon: mdi:cursor-pointer
 #-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -25242,7 +25272,7 @@ shell_command:
   vmc_master_velocita_3:                   printf 'VMWH0000003\n' | timeout 5 nc -w 3 192.168.1.160 5001 # [CONFIGURAZIONE, 26 RICHIAMI] [INTERFACCIA, 2 RICHIAMI] [AUTOMAZIONE, 14 RICHIAMI] INVIO COMANDO VELOCITA' 3 ALLA VMC
   vmc_master_velocita_2:                   printf 'VMWH0000002\n' | timeout 5 nc -w 3 192.168.1.160 5001 # [CONFIGURAZIONE, 26 RICHIAMI] [INTERFACCIA, 2 RICHIAMI] [AUTOMAZIONE, 14 RICHIAMI] INVIO COMANDO VELOCITA' 2 ALLA VMC
   vmc_master_velocita_1:                   printf 'VMWH0000001\n' | timeout 5 nc -w 3 192.168.1.160 5001 # [CONFIGURAZIONE, 46 RICHIAMI] [INTERFACCIA, 2 RICHIAMI] [AUTOMAZIONE, 64 RICHIAMI] INVIO COMANDO VELOCITA' 1 ALLA VMC
-  vmc_master_velocita_0:                   printf 'VMWH0000000\n' | timeout 5 nc -w 3 192.168.1.160 5001 # [CONFIGURAZIONE, 108 RICHIAMI] [INTERFACCIA, 1 RICHIAMO] [AUTOMAZIONE, 52 RICHIAMI] INVIO COMANDO VELOCITA' 0 ALLA VMC
+  vmc_master_velocita_0:                   printf 'VMWH0000000\n' | timeout 5 nc -w 3 192.168.1.160 5001 # [CONFIGURAZIONE, 109 RICHIAMI] [INTERFACCIA, 1 RICHIAMO] [AUTOMAZIONE, 52 RICHIAMI] INVIO COMANDO VELOCITA' 0 ALLA VMC
   vmc_master_sensori_on:                   printf 'VMWH0300000\n' | timeout 5 nc -w 3 192.168.1.160 5001 # [CONFIGURAZIONE, 0 RICHIAMI] [INTERFACCIA, 1 RICHIAMO] [AUTOMAZIONE, 0 RICHIAMI] INVIO COMANDO SENSORI ON ALLA VMC PER ACCENDERE I SENSORI DELLA VMC; I valori rilevati dai sensori nella schermata INFO dell'App Mobile saranno disponibili e i relativi allarmi verrano segnalati
   vmc_master_sensori_off:                  printf 'VMWH0300002\n' | timeout 5 nc -w 3 192.168.1.160 5001 # [CONFIGURAZIONE, 1 RICHIAMO] [INTERFACCIA, 1 RICHIAMO] [AUTOMAZIONE, 0 RICHIAMI] INVIO COMANDO SENSORI OFF ALLA VMC PER DISATTIVARE I SENSORI DELLA VMC; I valori rilevati dai sensori nella schermata INFO dell'App Mobile NON saranno disponibili e i relativi allarmi NON verrano segnalati
   vmc_master_pannello_led_on:              printf 'VMWH0100010\n' | timeout 5 nc -w 3 192.168.1.160 5001 # [CONFIGURAZIONE, 1 RICHIAMO] [INTERFACCIA, 1 RICHIAMO] [AUTOMAZIONE, 0 RICHIAMI] INVIO COMANDO PANNELLO LED ON ALLA VMC PER ATTIVARE IL LED PANNELLO DEI COMANDI
