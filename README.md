@@ -94,7 +94,7 @@
 - <sub>Permette l'accensione e lo spegnimento automatico in funzione degli inquinanti (CO₂ e/o VOC) [sensori della VMC presenti solo nella VMC HELTY FLOW ELITE; per la CO₂ si può selezionare anche un'entità di Home Assistant].</sub>
 - <sub>Permette l'accensione e lo spegnimento automatico in funzione dell'Umidità Interna Settata (sopra il valore impostato, oppure con aria secca ≤ 35% per far entrare aria dall'esterno).</sub>
 - <sub>Se si dispone di più VMC, permette di clonarle e cancellarle dalla Finestra Clona del pannello Impostazioni, presente solo nella VMC Master: controllo del nome e dell'IP, più clonazioni senza riavvio, cancellazione con conferma «Sì / No» (vedi Installazione, punto 11).</sub>
-- <sub>Al primo avvio dopo l'aggiornamento dalla release 8.4.1 o precedenti cancella da solo i file della vecchia Clona VMC (vmc_clona.yaml e vmc_clona_scheda_manuale_interfaccia.txt).</sub>
+- <sub>Al primo avvio dopo l'aggiornamento dalla release 8.4.0 o precedenti cancella da solo i file della vecchia Clona VMC (vmc_clona.yaml e vmc_clona_scheda_manuale_interfaccia.txt).</sub>
 - <sub>Permette lo spegnimento automatico in funzione della Temperatura Esterna ≤ -18 °C e successiva ripresa in funzione degli offset impostati.</sub>
   > <sub>**Nota:** per impostazione firmware, la priorità è assegnata al sensore interno della VMC rispetto al valore rilevato dal sensore esterno dell'entità selezionata.</sub>
 - <sub>Permette l'avvio automatico a Velocità 1 in funzione della Differenza Temperatura Interna - Temperatura Esterna se > 23 °C e successiva ripresa.</sub>
@@ -164,7 +164,7 @@
 <br>
 
 ### Se è già installata una versione precedente
-<sub><strong>Dalla release 8.4.1 o precedenti:</strong></sub><br>
+<sub><strong>Dalla release 8.4.0 o precedenti:</strong></sub><br>
 <sub><strong>a)</strong> nella cartella `\\192.168.1.xxx\config\packages\vmc_helty_flow\master\` sostituire i file con quelli nuovi del punto <strong>4</strong>; i file `vmc_clona.yaml` e `vmc_clona_scheda_manuale_interfaccia.txt` non servono più: al primo avvio l'automazione «VMC Master - Clona Rimuovi File Obsoleti» li cancella da sola e chiede, con una notifica, di riavviare Home Assistant;</sub><br>
 <sub><strong>b)</strong> sostituire l'automazione (punto <strong>5</strong>) e la scheda (punto <strong>6</strong>) con le nuove; cancellare dall'interfaccia la vecchia scheda «Clona VMC», ora sostituita dalla Finestra Clona del pannello Impostazioni;</sub><br>
 <sub><strong>c)</strong> riavviare Home Assistant;</sub><br>
@@ -456,7 +456,7 @@
 - <sub>Automatic start and stop based on pollutants (CO₂ and/or VOC) [unit sensors only on the HELTY FLOW ELITE; for CO₂ a Home Assistant entity can also be selected].</sub>
 - <sub>Automatic start and stop based on the set Indoor Humidity (above the set value, or with dry air ≤ 35% to bring in outdoor air).</sub>
 - <sub>With more than one unit, clone and delete units from the Clone window of the Settings panel, available only on the Master unit: name and IP checks, several clones without restarting, deletion with «Yes / No» confirmation (see Installation, step 11).</sub>
-- <sub>At the first start after updating from release 8.4.1 or earlier, it deletes by itself the files of the old Clone VMC (vmc_clona.yaml and vmc_clona_scheda_manuale_interfaccia.txt).</sub>
+- <sub>At the first start after updating from release 8.4.0 or earlier, it deletes by itself the files of the old Clone VMC (vmc_clona.yaml and vmc_clona_scheda_manuale_interfaccia.txt).</sub>
 - <sub>Automatic stop when the Outdoor Temperature is ≤ -18 °C and restart according to the set offsets.</sub>
   > <sub>**Note:** by firmware design, the unit's internal sensor takes priority over the value of the selected outdoor sensor entity.</sub>
 - <sub>Automatic start at Speed 1 when the Indoor - Outdoor Temperature Difference is > 23 °C, and restart afterwards.</sub>
@@ -526,7 +526,7 @@
 <br>
 
 ### If a previous version is already installed
-<sub><strong>From release 8.4.1 or earlier:</strong></sub><br>
+<sub><strong>From release 8.4.0 or earlier:</strong></sub><br>
 <sub><strong>a)</strong> in the folder `\\192.168.1.xxx\config\packages\vmc_helty_flow\master\` replace the files with the new ones of step <strong>4</strong>; the files `vmc_clona.yaml` and `vmc_clona_scheda_manuale_interfaccia.txt` are no longer needed: at the first start the automation «VMC Master - Clona Rimuovi File Obsoleti» deletes them by itself and asks, with a notification, to restart Home Assistant;</sub><br>
 <sub><strong>b)</strong> replace the automation (step <strong>5</strong>) and the card (step <strong>6</strong>) with the new ones; delete the old «Clona VMC» card from the interface, now replaced by the Clone window of the Settings panel;</sub><br>
 <sub><strong>c)</strong> restart Home Assistant;</sub><br>
