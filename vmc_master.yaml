@@ -464,7 +464,7 @@ template:
           {% endif %}
 
   - binary_sensor:
-      - default_entity_id: binary_sensor.vmc_master_black_out_rilevato          # [CONFIGURAZIONE, 1 RICHIAMO] [INTERFACCIA, 0 RICHIAMI] [AUTOMAZIONE, 229 RICHIAMI] BLACK-OUT RILEVATO: ON QUANDO UNA DELLE CONDIZIONI DEI TRIGGER «BLACK-OUT» DELL'AUTOMAZIONE (STESSO TESTO, 1:1) E' VERA DA ALMENO «ATTESA BLACK-OUT RILEVAZIONE» SECONDI; CON L'AUTOMAZIONE IN MODALITA' QUEUED FA USCIRE I CICLI DI CONFERMA DELLA VELOCITA', COME FACEVA IL RIAVVIO DELLA MODALITA' RESTART
+      - default_entity_id: binary_sensor.vmc_master_black_out_rilevato          # [CONFIGURAZIONE, 2 RICHIAMI] [INTERFACCIA, 0 RICHIAMI] [AUTOMAZIONE, 229 RICHIAMI] BLACK-OUT RILEVATO: ON QUANDO UNA DELLE CONDIZIONI DEI TRIGGER «BLACK-OUT» DELL'AUTOMAZIONE (STESSO TESTO, 1:1) E' VERA DA ALMENO «ATTESA BLACK-OUT RILEVAZIONE» SECONDI; CON L'AUTOMAZIONE IN MODALITA' QUEUED FA USCIRE I CICLI DI CONFERMA DELLA VELOCITA', COME FACEVA IL RIAVVIO DELLA MODALITA' RESTART
         name: "Black-Out Rilevato"
         unique_id: vmc_master_black_out_rilevato
         state: >
@@ -965,7 +965,7 @@ template:
           {{ (ns.righe | join(' · '))[:255] if ns.righe | count > 0 and att != 'Non disponibile' else 'Nessuna' }}
 
   - sensor:
-      - default_entity_id: sensor.vmc_master_status_ventola_lettura_codice_interpretato_interfaccia # [CONFIGURAZIONE, 254 RICHIAMI] [INTERFACCIA, 99 RICHIAMI] [AUTOMAZIONE, 265 RICHIAMI] SENSORE DI INTERPRETAZIONE DELLA LETTURA DEI DATI "VELOCITA'" MEMORIZZATI NELLA VMC CONVERITA IN "STRINGA" CON LA POSSIBILITA' DI VISUALIZZARE FREE COOLING O FREE HEATING O FREE C./H. (IN FUNZIONE DEL VALORE LETTO DEL SENSORE vmc_master_status_mese_corrente_freeheating_o_freecooling), PREVIA VERIFICA DI AVVENUTA LETTURA DEI DATI "VELOCITA'"" MEMORIZZATI NELLA VMC
+      - default_entity_id: sensor.vmc_master_status_ventola_lettura_codice_interpretato_interfaccia # [CONFIGURAZIONE, 253 RICHIAMI] [INTERFACCIA, 99 RICHIAMI] [AUTOMAZIONE, 265 RICHIAMI] SENSORE DI INTERPRETAZIONE DELLA LETTURA DEI DATI "VELOCITA'" MEMORIZZATI NELLA VMC CONVERITA IN "STRINGA" CON LA POSSIBILITA' DI VISUALIZZARE FREE COOLING O FREE HEATING O FREE C./H. (IN FUNZIONE DEL VALORE LETTO DEL SENSORE vmc_master_status_mese_corrente_freeheating_o_freecooling), PREVIA VERIFICA DI AVVENUTA LETTURA DEI DATI "VELOCITA'"" MEMORIZZATI NELLA VMC
         name: "Status Ventilazione"
         unique_id: vmc_master_status_ventola_lettura_codice_interpretato_interfaccia
         state: >
@@ -1769,7 +1769,7 @@ template:
             {% set temperatura_interna_vmc = states('sensor.vmc_master_temp_interna_status_senza_offset') | float(default=none) %}
             {% set congelamento = temperatura_esterna %}
             {% set congelamento_vmc = temperatura_esterna_vmc %}
-            {% if temperatura_esterna is none or temperatura_interna is none or congelamento is none or congelamento_vmc is none %}
+            {% if temperatura_esterna is none or temperatura_interna is none or temperatura_esterna_vmc is none or temperatura_interna_vmc is none or congelamento is none or congelamento_vmc is none %}
               [Non Disponibile]
             {% elif (congelamento <= -18 or congelamento_vmc <= -18) %}
               -                                                               
@@ -4113,7 +4113,7 @@ recorder:
 ################### Fine Esclusione Entita' da Recorder ###################
 
 input_select:
-  vmc_master_entita_escluse_recorder:                                           # [CONFIGURAZIONE, 2 RICHIAMI] [INTERFACCIA, 1 RICHIAMO] [AUTOMAZIONE, 0 RICHIAMI] ELENCO DELLE ENTITA' ESCLUSE DAL RECORDER: NON MODIFICARE QUI, LE OPZIONI SONO L'ELENCO DELLA SEZIONE recorder (VEDI SOPRA); SERVE AL PANNELLO «PULISCI CRONOLOGIA» PER CONTARE LE ENTITA' REGISTRATE
+  vmc_master_entita_escluse_recorder:                                           # [CONFIGURAZIONE, 1 RICHIAMO] [INTERFACCIA, 1 RICHIAMO] [AUTOMAZIONE, 0 RICHIAMI] ELENCO DELLE ENTITA' ESCLUSE DAL RECORDER: NON MODIFICARE QUI, LE OPZIONI SONO L'ELENCO DELLA SEZIONE recorder (VEDI SOPRA); SERVE AL PANNELLO «PULISCI CRONOLOGIA» PER CONTARE LE ENTITA' REGISTRATE
     name: "Entità escluse dal Recorder"
     icon: mdi:database-off
     options: *vmc_master_entita_escluse_recorder
@@ -5109,15 +5109,15 @@ input_boolean:
 ################### Fine Creazione Switch Booleano impiegato nell'Automazione, per l'Audio all'Avvio di Home Assistant ############################
 
 ################### Inizio Creazione Switch Booleani per i Tempi di Attesa dei Trigger dell'Automazione ###################
-  vmc_master_opzione_finestra_tempi_attesa:                                     # [CONFIGURAZIONE, 5 RICHIAMI] [INTERFACCIA, 4 RICHIAMI] [AUTOMAZIONE, 0 RICHIAMI] FINESTRA TEMPI DI ATTESA NEL PANNELLO OPZIONI
+  vmc_master_opzione_finestra_tempi_attesa:                                     # [CONFIGURAZIONE, 5 RICHIAMI] [INTERFACCIA, 5 RICHIAMI] [AUTOMAZIONE, 0 RICHIAMI] FINESTRA TEMPI DI ATTESA NEL PANNELLO OPZIONI
     name: "Finestra Tempi di Attesa"
     icon: mdi:timer-cog-outline
 
-  vmc_master_attese_inizializzate:                                              # [CONFIGURAZIONE, 5 RICHIAMI] [INTERFACCIA, 2 RICHIAMI] [AUTOMAZIONE, 0 RICHIAMI] ON = COSTANTI DEI TEMPI DI ATTESA GIA' IMPOSTATE AI VALORI ORIGINALI (AL PRIMO AVVIO LE IMPOSTA vmc_master_inizializza_tempi_attesa)
+  vmc_master_attese_inizializzate:                                              # [CONFIGURAZIONE, 5 RICHIAMI] [INTERFACCIA, 3 RICHIAMI] [AUTOMAZIONE, 0 RICHIAMI] ON = COSTANTI DEI TEMPI DI ATTESA GIA' IMPOSTATE AI VALORI ORIGINALI (AL PRIMO AVVIO LE IMPOSTA vmc_master_inizializza_tempi_attesa)
     name: "Tempi di Attesa Inizializzati"
     icon: mdi:timer-check-outline
 
-  vmc_master_opzione_finestra_prossime_letture:                                 # [CONFIGURAZIONE, 5 RICHIAMI] [INTERFACCIA, 4 RICHIAMI] [AUTOMAZIONE, 0 RICHIAMI] FINESTRA «PROSSIME LETTURE DALLA VMC» NEL PANNELLO OPZIONI
+  vmc_master_opzione_finestra_prossime_letture:                                 # [CONFIGURAZIONE, 5 RICHIAMI] [INTERFACCIA, 5 RICHIAMI] [AUTOMAZIONE, 0 RICHIAMI] FINESTRA «PROSSIME LETTURE DALLA VMC» NEL PANNELLO OPZIONI
     name: "Prossime Letture dalla VMC"
     icon: mdi:timer-outline
 ################### Fine Creazione Switch Booleani per i Tempi di Attesa dei Trigger dell'Automazione ###################
@@ -25397,7 +25397,7 @@ automation:
       Le finestre «Prossime Letture dalla VMC» e «Tempi di Attesa» del pannello Opzioni si comportano come le altre
       (Audio, Clona, Calendario, ...): aprendone una si chiudono tutte le altre, aprendo un'altra finestra di Opzioni
       si chiudono loro, e si chiudono anche quando si chiude o si riapre il pannello Opzioni. E' separata
-      dall'Automazione VMC Master per non farla ripartire (mode: restart) a ogni apertura di finestra.
+      dall'Automazione VMC Master per non accodarle un evento (mode: queued) a ogni apertura di finestra.
     mode: queued
     max: 10
     triggers:
@@ -25473,12 +25473,12 @@ shell_command:
 # >>> INIZIO SEZIONE CLONA VMC (SOLO MASTER, RIMOSSA DA VMC_SCRIPT_CLONA.SH) <<<
   vmc_master_clona_rimuovi_caratteri_di_ritorno: find /config/packages/vmc_helty_flow/master -type f -name "*.sh" -exec sed -i 's/\r$//' {} \; # [CONFIGURAZIONE, 1 RICHIAMO] [INTERFACCIA, 0 RICHIAMI] [AUTOMAZIONE, 0 RICHIAMI] TROVA E RIMUOVE CARATTERI DI RITORNO IN TUTTI I FILES *.sh CONTENUTI NELLA CARTELLA
   vmc_master_clona_crea_cartella: bash /config/packages/vmc_helty_flow/master/vmc_script_clona.sh {{ states('input_text.vmc_master_clona_nome') }} {{ states('input_text.vmc_master_clona_ip') }} # [CONFIGURAZIONE, 1 RICHIAMO] [INTERFACCIA, 0 RICHIAMI] [AUTOMAZIONE, 0 RICHIAMI]
-  vmc_master_clona_cancella_cartella: bash -c 'rm -rf /config/packages/vmc_helty_flow/{{ states("input_text.vmc_master_clona_nome") }}' # [CONFIGURAZIONE, 1 RICHIAMO] [INTERFACCIA, 0 RICHIAMI] [AUTOMAZIONE, 0 RICHIAMI]
+  vmc_master_clona_cancella_cartella: bash -c 'n="{{ states("input_text.vmc_master_clona_nome") | trim }}"; [ -n "$n" ] && [ "$n" != master ] && rm -rf "/config/packages/vmc_helty_flow/$n"' # [CONFIGURAZIONE, 1 RICHIAMO] [INTERFACCIA, 0 RICHIAMI] [AUTOMAZIONE, 0 RICHIAMI]
   vmc_master_clona_rimuovi_file_obsoleti: find /config/packages -type f \( -name vmc_clona.yaml -o -name vmc_clona_scheda_manuale_interfaccia.txt \) -print -delete 2>/dev/null; true # [CONFIGURAZIONE, 1 RICHIAMO] [INTERFACCIA, 0 RICHIAMI] [AUTOMAZIONE, 0 RICHIAMI] CANCELLA I FILE DELLA VECCHIA CLONA VMC (RELEASE 8.4.0 O PRECEDENTI) E NE STAMPA IL PERCORSO
 # >>> FINE SEZIONE CLONA VMC (SOLO MASTER, RIMOSSA DA VMC_SCRIPT_CLONA.SH) <<<
 
   vmc_master_rimuovi_caratteri_di_ritorno: find /config/packages/vmc_helty_flow/master -type f -name "*.sh" -exec sed -i 's/\r$//' {} \; # [CONFIGURAZIONE, 0 RICHIAMI] [INTERFACCIA, 0 RICHIAMI] [AUTOMAZIONE, 2 RICHIAMI] TROVA E RIMUOVE CARATTERI DI RITORNO IN TUTTI I FILES *.sh CONTENUTI NELLA CARTELLA
-  vmc_master_aggiorna_indirizzo_ip:        bash /config/packages/vmc_helty_flow/master/vmc_master_script_cambio_ip.sh   {{ states('input_text.vmc_master_ip_insert') }} # [CONFIGURAZIONE, 0 RICHIAMI] [INTERFACCIA, 0 RICHIAMI] [AUTOMAZIONE, 1 RICHIAMO] TROVA E SOSTITUISCE NEL FILE CORRENTE L'INDIRIZZO IP INSERITO NELL'INTERFACCIA, SE VIENE LANCIATO SENZA SPECIFICARE UN INDIRIZZO IP DI DEFAULT VERRA' INSERITO NEL FILE CORRENTE 192.168.1.160
+  vmc_master_aggiorna_indirizzo_ip:        bash /config/packages/vmc_helty_flow/master/vmc_master_script_cambio_ip.sh   {{ states('input_text.vmc_master_ip_insert') }} # [CONFIGURAZIONE, 0 RICHIAMI] [INTERFACCIA, 0 RICHIAMI] [AUTOMAZIONE, 1 RICHIAMO] TROVA E SOSTITUISCE NEL FILE CORRENTE L'INDIRIZZO IP INSERITO NELL'INTERFACCIA, VIENE LANCIATO SOLO SE IL SENSORE VERIFICA IP INSERITO CONFERMA UN INDIRIZZO VALIDO (LO SCRIPT NON HA UN INDIRIZZO DI DEFAULT)
   vmc_master_cambia_nome:                  bash /config/packages/vmc_helty_flow/master/vmc_master_script_cambio_nome.sh {{ states('input_text.vmc_master_nome_da_inserire') }} # [CONFIGURAZIONE, 0 RICHIAMI] [INTERFACCIA, 0 RICHIAMI] [AUTOMAZIONE, 1 RICHIAMO] INVIO COMANDO PER CAMBIARE NOME ALLA VMC
   vmc_master_freecooling:                  printf 'VMWH0000007\n' | timeout 5 nc -w 3 192.168.1.160 5001 # [CONFIGURAZIONE, 78 RICHIAMI] [INTERFACCIA, 6 RICHIAMI] [AUTOMAZIONE, 26 RICHIAMI] INVIO COMANDO Free Cool./Heat. ALLA VMC
   vmc_master_notturna:                     printf 'VMWH0000006\n' | timeout 5 nc -w 3 192.168.1.160 5001 # [CONFIGURAZIONE, 26 RICHIAMI] [INTERFACCIA, 2 RICHIAMI] [AUTOMAZIONE, 14 RICHIAMI] INVIO COMANDO NOTTURNA ALLA VMC

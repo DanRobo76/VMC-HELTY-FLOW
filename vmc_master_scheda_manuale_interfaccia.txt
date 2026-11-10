@@ -12022,6 +12022,9 @@ cards:
                   'on')
                   or is_state('input_boolean.vmc_master_opzione_finestra_clona', 'on')
                   or is_state('input_boolean.vmc_master_conferma_pulizia_cronologia', 'on')
+                  or is_state('input_boolean.vmc_master_opzione_finestra_prossime_letture', 'on')
+                  or is_state('input_boolean.vmc_master_opzione_finestra_tempi_attesa', 'on')
+                  or is_state('input_boolean.vmc_master_attese_inizializzate', 'on')
                   %}
 
 
