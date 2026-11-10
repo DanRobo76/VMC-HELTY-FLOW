@@ -9448,16 +9448,34 @@ cards:
                 entities:
                   - entity: sensor.vmc_master_temp_esterna_status
                     secondary_info: last-updated
+                    tap_action:
+                      action: more-info
+                      entity: sensor.vmc_master_temp_esterna_status_grafico
                   - entity: sensor.vmc_master_temp_interna_status
                     secondary_info: last-updated
+                    tap_action:
+                      action: more-info
+                      entity: sensor.vmc_master_temp_interna_status_grafico
                   - entity: sensor.vmc_master_umidita_esterna_status
                     secondary_info: last-updated
+                    tap_action:
+                      action: more-info
+                      entity: sensor.vmc_master_umidita_esterna_status_grafico
                   - entity: sensor.vmc_master_umidita_interna_status
                     secondary_info: last-updated
+                    tap_action:
+                      action: more-info
+                      entity: sensor.vmc_master_umidita_interna_status_grafico
                   - entity: sensor.vmc_master_co2_status
                     secondary_info: last-changed
+                    tap_action:
+                      action: more-info
+                      entity: sensor.vmc_master_co2_status_grafico
                   - entity: sensor.vmc_master_voc_status
                     secondary_info: last-changed
+                    tap_action:
+                      action: more-info
+                      entity: sensor.vmc_master_voc_status_grafico
                   - type: button
                     entity: script.vmc_master_upgrade_sensors
                     action_name: Esegui
@@ -9489,14 +9507,29 @@ cards:
                       entities:
                         - entity: sensor.vmc_master_punto_di_rugiada_esterno
                           secondary_info: last-updated
+                          tap_action:
+                            action: more-info
+                            entity: sensor.vmc_master_punto_di_rugiada_esterno_grafico
                         - entity: sensor.vmc_master_punto_di_rugiada_interno
                           secondary_info: last-updated
+                          tap_action:
+                            action: more-info
+                            entity: sensor.vmc_master_punto_di_rugiada_interno_grafico
                         - entity: sensor.vmc_master_punto_di_rugiada_valore
                           secondary_info: last-updated
+                          tap_action:
+                            action: more-info
+                            entity: sensor.vmc_master_punto_di_rugiada_valore_grafico
                         - entity: sensor.vmc_master_umidita_assoluta_esterna
                           secondary_info: last-updated
+                          tap_action:
+                            action: more-info
+                            entity: sensor.vmc_master_umidita_assoluta_esterna_grafico
                         - entity: sensor.vmc_master_umidita_assoluta_interna
                           secondary_info: last-updated
+                          tap_action:
+                            action: more-info
+                            entity: sensor.vmc_master_umidita_assoluta_interna_grafico
                         - entity: sensor.vmc_master_calcolo_confort_interno
                           secondary_info: last-changed
                         - entity: sensor.vmc_master_trend_muffa
@@ -9510,16 +9543,31 @@ cards:
                             - entity: >-
                                 sensor.vmc_master_temp_esterna_status_senza_offset
                               secondary_info: last-changed
+                              tap_action:
+                                action: more-info
+                                entity: sensor.vmc_master_temp_esterna_status_senza_offset_grafico
                             - entity: >-
                                 sensor.vmc_master_temp_interna_status_senza_offset
                               secondary_info: last-updated
+                              tap_action:
+                                action: more-info
+                                entity: sensor.vmc_master_temp_interna_status_senza_offset_grafico
                             - entity: >-
                                 sensor.vmc_master_umidita_interna_status_senza_offset
                               secondary_info: last-updated
+                              tap_action:
+                                action: more-info
+                                entity: sensor.vmc_master_umidita_interna_status_senza_offset_grafico
                             - entity: sensor.vmc_master_co2_status_senza_offset
                               secondary_info: last-updated
+                              tap_action:
+                                action: more-info
+                                entity: sensor.vmc_master_co2_status_senza_offset_grafico
                             - entity: sensor.vmc_master_voc_status_senza_offset
                               secondary_info: last-updated
+                              tap_action:
+                                action: more-info
+                                entity: sensor.vmc_master_voc_status_senza_offset_grafico
                           title: Sensori VMC Interni
                           state_color: true
               - type: conditional
@@ -9851,6 +9899,22 @@ cards:
                           'sensor.vmc_master_punto_di_rugiada_verifica_confronto',
                           'sensor.vmc_master_umidita_assoluta_interna',
                           'sensor.vmc_master_umidita_assoluta_esterna',
+                          'sensor.vmc_master_temp_esterna_status_grafico',
+                          'sensor.vmc_master_temp_interna_status_grafico',
+                          'sensor.vmc_master_umidita_esterna_status_grafico',
+                          'sensor.vmc_master_umidita_interna_status_grafico',
+                          'sensor.vmc_master_co2_status_grafico',
+                          'sensor.vmc_master_voc_status_grafico',
+                          'sensor.vmc_master_punto_di_rugiada_esterno_grafico',
+                          'sensor.vmc_master_punto_di_rugiada_interno_grafico',
+                          'sensor.vmc_master_punto_di_rugiada_valore_grafico',
+                          'sensor.vmc_master_umidita_assoluta_esterna_grafico',
+                          'sensor.vmc_master_umidita_assoluta_interna_grafico',
+                          'sensor.vmc_master_temp_esterna_status_senza_offset_grafico',
+                          'sensor.vmc_master_temp_interna_status_senza_offset_grafico',
+                          'sensor.vmc_master_umidita_interna_status_senza_offset_grafico',
+                          'sensor.vmc_master_co2_status_senza_offset_grafico',
+                          'sensor.vmc_master_voc_status_senza_offset_grafico',
                           'sensor.vmc_master_calcolo_confort_interno',
                           'sensor.vmc_master_status_portata_ventola_lettura_codice_interpretato',
                           'sensor.vmc_master_status_calcolo_portata_ventola',
@@ -11807,6 +11871,18 @@ cards:
 
                   Rilegge subito tutti i dati della VMC (stato, sensori, nome
                   e dati LAN): attendere il termine del processo, alcuni secondi.
+
+                  <br>
+
+                  <strong>Nota Grafici dei Sensori</strong>
+
+                  Toccando una riga delle schede «Sensori - Selezionati»,
+                  «Sensori - Extra» e «Sensori VMC Interni» si apre il grafico
+                  della cronologia del sensore. Quando il dato non è
+                  disponibile («Non disponibile», «[Non Calcolabile]» o «-»)
+                  il grafico mostra un buco e non 0. Lo storico del grafico
+                  parte dal primo avvio di Home Assistant con i sensori dei
+                  grafici (sensor.vmc_master_..._grafico).
 
                   <br>
 
