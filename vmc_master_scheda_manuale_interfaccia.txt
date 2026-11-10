@@ -10,7 +10,7 @@
 # TESTO UFFICIALE DELLA LICENZA (IN INGLESE, L'UNICO CHE FA FEDE): https://polyformproject.org/licenses/noncommercial/1.0.0                                                                                               #
 # Required Notice: Copyright © 2023-2026 Ing. Danilo Robotti (https://github.com/DanRobo76/VMC-HELTY-FLOW)                                                                                                                #
 #                                                                                                                                                                                                                         #
-# LA LICENZA SI APPLICA, A PARTIRE DALLA RELEASE 8.4.1, AI SEGUENTI FILES DEL PRESENTE SOFTWARE:                                                                                                                          #
+# LA LICENZA SI APPLICA, A PARTIRE DALLA RELEASE 8.5.0, AI SEGUENTI FILES DEL PRESENTE SOFTWARE:                                                                                                                          #
 #   - VMC_MASTER.YAML                                                                                                                                                                                                     #
 #   - VMC_MASTER_AUTOMAZIONE.TXT                                                                                                                                                                                          #
 #   - VMC_MASTER_SCHEDA_MANUALE_INTERFACCIA.TXT                                                                                                                                                                           #
@@ -11863,6 +11863,16 @@ cards:
 
                   <br>
 
+                  <strong>VMC Master - Ripristina Tempi di Attesa Originali</strong>
+
+                  Pulsante nel pannello Opzioni (pulsantino «Tempi di Attesa»).
+
+                  Riporta i 24 Tempi di Attesa dell'Automazione ai Valori
+                  Originali, dopo la conferma. E' compreso nel Profilo
+                  Inizializzazione.
+
+                  <br>
+
                   </pre>
 
                   <br>
@@ -13109,7 +13119,7 @@ cards:
                   alla release della Master: cancellarla (vedi sopra), riavviare Home Assistant, clonarla di nuovo con lo stesso
                   nome e lo stesso IP, riavviare e incollare di nuovo automazione e scheda.
                   <br><br>
-                  <b>Aggiornamento dalla release 8.4.1 o precedenti.</b> Dalla release 8.5.0 la clonazione è inclusa in
+                  <b>Aggiornamento dalla release 8.4.0 o precedenti.</b> Dalla release 8.5.0 la clonazione è inclusa in
                   vmc_master.yaml. Al primo avvio con la nuova release l'automazione «VMC Master - Clona Rimuovi File Obsoleti»
                   cancella da sola i vecchi file vmc_clona.yaml e vmc_clona_scheda_manuale_interfaccia.txt e lo segnala con una
                   notifica: a quel punto riavviare Home Assistant e cancellare dall'interfaccia la vecchia scheda «Clona VMC»,

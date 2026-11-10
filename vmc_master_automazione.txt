@@ -10,7 +10,7 @@
 # TESTO UFFICIALE DELLA LICENZA (IN INGLESE, L'UNICO CHE FA FEDE): https://polyformproject.org/licenses/noncommercial/1.0.0                                                                                               #
 # Required Notice: Copyright © 2023-2026 Ing. Danilo Robotti (https://github.com/DanRobo76/VMC-HELTY-FLOW)                                                                                                                #
 #                                                                                                                                                                                                                         #
-# LA LICENZA SI APPLICA, A PARTIRE DALLA RELEASE 8.4.1, AI SEGUENTI FILES DEL PRESENTE SOFTWARE:                                                                                                                          #
+# LA LICENZA SI APPLICA, A PARTIRE DALLA RELEASE 8.5.0, AI SEGUENTI FILES DEL PRESENTE SOFTWARE:                                                                                                                          #
 #   - VMC_MASTER.YAML                                                                                                                                                                                                     #
 #   - VMC_MASTER_AUTOMAZIONE.TXT                                                                                                                                                                                          #
 #   - VMC_MASTER_SCHEDA_MANUALE_INTERFACCIA.TXT                                                                                                                                                                           #

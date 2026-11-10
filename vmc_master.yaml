@@ -10,7 +10,7 @@
 # TESTO UFFICIALE DELLA LICENZA (IN INGLESE, L'UNICO CHE FA FEDE): https://polyformproject.org/licenses/noncommercial/1.0.0                                                                                               #
 # Required Notice: Copyright © 2023-2026 Ing. Danilo Robotti (https://github.com/DanRobo76/VMC-HELTY-FLOW)                                                                                                                #
 #                                                                                                                                                                                                                         #
-# LA LICENZA SI APPLICA, A PARTIRE DALLA RELEASE 8.4.1, AI SEGUENTI FILES DEL PRESENTE SOFTWARE:                                                                                                                          #
+# LA LICENZA SI APPLICA, A PARTIRE DALLA RELEASE 8.5.0, AI SEGUENTI FILES DEL PRESENTE SOFTWARE:                                                                                                                          #
 #   - VMC_MASTER.YAML                                                                                                                                                                                                     #
 #   - VMC_MASTER_AUTOMAZIONE.TXT                                                                                                                                                                                          #
 #   - VMC_MASTER_SCHEDA_MANUALE_INTERFACCIA.TXT                                                                                                                                                                           #
@@ -17197,7 +17197,7 @@ automation:
     alias: "VMC Master - Clona Rimuovi File Obsoleti"
     description: >
       All'avvio di Home Assistant cerca in /config/packages i file della vecchia Clona VMC (vmc_clona.yaml e
-      vmc_clona_scheda_manuale_interfaccia.txt, release 8.4.1 o precedenti), ora inclusa in vmc_master.yaml, e li
+      vmc_clona_scheda_manuale_interfaccia.txt, release 8.4.0 o precedenti), ora inclusa in vmc_master.yaml, e li
       cancella. Se ne ha cancellato almeno uno, invita con una notifica a riavviare Home Assistant e a cancellare
       la vecchia scheda «Clona VMC» dall'interfaccia.
     mode: single
@@ -25294,7 +25294,7 @@ shell_command:
   vmc_master_clona_rimuovi_caratteri_di_ritorno: find /config/packages/vmc_helty_flow/master -type f -name "*.sh" -exec sed -i 's/\r$//' {} \; # [CONFIGURAZIONE, 1 RICHIAMO] [INTERFACCIA, 0 RICHIAMI] [AUTOMAZIONE, 0 RICHIAMI] TROVA E RIMUOVE CARATTERI DI RITORNO IN TUTTI I FILES *.sh CONTENUTI NELLA CARTELLA
   vmc_master_clona_crea_cartella: bash /config/packages/vmc_helty_flow/master/vmc_script_clona.sh {{ states('input_text.vmc_master_clona_nome') }} {{ states('input_text.vmc_master_clona_ip') }} # [CONFIGURAZIONE, 1 RICHIAMO] [INTERFACCIA, 0 RICHIAMI] [AUTOMAZIONE, 0 RICHIAMI]
   vmc_master_clona_cancella_cartella: bash -c 'rm -rf /config/packages/vmc_helty_flow/{{ states("input_text.vmc_master_clona_nome") }}' # [CONFIGURAZIONE, 1 RICHIAMO] [INTERFACCIA, 0 RICHIAMI] [AUTOMAZIONE, 0 RICHIAMI]
-  vmc_master_clona_rimuovi_file_obsoleti: find /config/packages -type f \( -name vmc_clona.yaml -o -name vmc_clona_scheda_manuale_interfaccia.txt \) -print -delete 2>/dev/null; true # [CONFIGURAZIONE, 1 RICHIAMO] [INTERFACCIA, 0 RICHIAMI] [AUTOMAZIONE, 0 RICHIAMI] CANCELLA I FILE DELLA VECCHIA CLONA VMC (RELEASE 8.4.1 O PRECEDENTI) E NE STAMPA IL PERCORSO
+  vmc_master_clona_rimuovi_file_obsoleti: find /config/packages -type f \( -name vmc_clona.yaml -o -name vmc_clona_scheda_manuale_interfaccia.txt \) -print -delete 2>/dev/null; true # [CONFIGURAZIONE, 1 RICHIAMO] [INTERFACCIA, 0 RICHIAMI] [AUTOMAZIONE, 0 RICHIAMI] CANCELLA I FILE DELLA VECCHIA CLONA VMC (RELEASE 8.4.0 O PRECEDENTI) E NE STAMPA IL PERCORSO
 # >>> FINE SEZIONE CLONA VMC (SOLO MASTER, RIMOSSA DA VMC_SCRIPT_CLONA.SH) <<<
 
   vmc_master_rimuovi_caratteri_di_ritorno: find /config/packages/vmc_helty_flow/master -type f -name "*.sh" -exec sed -i 's/\r$//' {} \; # [CONFIGURAZIONE, 0 RICHIAMI] [INTERFACCIA, 0 RICHIAMI] [AUTOMAZIONE, 2 RICHIAMI] TROVA E RIMUOVE CARATTERI DI RITORNO IN TUTTI I FILES *.sh CONTENUTI NELLA CARTELLA
