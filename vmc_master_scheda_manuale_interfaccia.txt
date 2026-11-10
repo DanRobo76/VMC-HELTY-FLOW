@@ -8927,6 +8927,8 @@ cards:
                 type: grid
                 cards:
                 - show_name: true
+                  entity: binary_sensor.vmc_master_tasto_sensori_off
+                  state_color: true
                   show_icon: true
                   type: button
                   tap_action:
@@ -8934,11 +8936,12 @@ cards:
                     service: shell_command.vmc_master_sensori_off
                     target: {}
                   name: Sensori Off
-                  show_state: true
-                  icon: mdi:chip
+                  show_state: false
                   hold_action:
                     action: none
                 - show_name: true
+                  entity: binary_sensor.vmc_master_tasto_sensori_on
+                  state_color: true
                   show_icon: true
                   type: button
                   tap_action:
@@ -8946,11 +8949,12 @@ cards:
                     service: shell_command.vmc_master_sensori_on
                     target: {}
                   name: Sensori On
-                  show_state: true
-                  icon: mdi:chip
+                  show_state: false
                   hold_action:
                     action: none
                 - show_name: true
+                  entity: binary_sensor.vmc_master_tasto_led_pannello_off
+                  state_color: true
                   show_icon: true
                   type: button
                   tap_action:
@@ -8958,11 +8962,12 @@ cards:
                     service: shell_command.vmc_master_pannello_led_off
                     target: {}
                   name: Led Pannello Off
-                  show_state: true
-                  icon: mdi:led-off
+                  show_state: false
                   hold_action:
                     action: none
                 - show_name: true
+                  entity: binary_sensor.vmc_master_tasto_led_pannello_on
+                  state_color: true
                   show_icon: true
                   type: button
                   tap_action:
@@ -8970,8 +8975,7 @@ cards:
                     service: shell_command.vmc_master_pannello_led_on
                     target: {}
                   name: Led Pannello On
-                  show_state: true
-                  icon: mdi:led-on
+                  show_state: false
                   hold_action:
                     action: none
                 - show_name: true
@@ -10157,6 +10161,10 @@ cards:
                           'binary_sensor.vmc_master_tasto_free_heating',
                           'binary_sensor.vmc_master_tasto_free_cooling',
                           'binary_sensor.vmc_master_tasto_free_cool_heat',
+                          'binary_sensor.vmc_master_tasto_sensori_on',
+                          'binary_sensor.vmc_master_tasto_sensori_off',
+                          'binary_sensor.vmc_master_tasto_led_pannello_on',
+                          'binary_sensor.vmc_master_tasto_led_pannello_off',
                           'input_boolean.vmc_master_attese_inizializzate',
                           'input_boolean.vmc_master_opzione_finestra_prossime_letture',
                           'input_boolean.vmc_master_opzione_finestra_tempi_attesa',
@@ -11052,6 +11060,9 @@ cards:
                   non sono più disponibili e le funzioni e gli allarmi impostati nel Firmware della VMC
                   vengono disattivati.
                   <br><br>
+                  <b>Telecomando.</b> Si illumina il tasto «Sensori On» se le routine sono accese, il tasto
+                  «Sensori Off» se sono spente; se lo stato non è disponibile restano spenti entrambi.
+                  <br><br>
                   <b>N.b.</b> Il Profilo Inizializzazione la disattiva.
                   </td></tr></table>
 
@@ -11069,6 +11080,10 @@ cards:
                   <br><br>
                   <b>Effetto.</b> Riguarda solo la segnalazione luminosa: la ventilazione continua come
                   impostata. Il Profilo Inizializzazione lo attiva.
+                  <br><br>
+                  <b>Telecomando.</b> Si illumina il tasto «Led Pannello On» se il LED è acceso, il tasto
+                  «Led Pannello Off» se è spento; con «Verificare Filtro» il tasto «Led Pannello On» resta
+                  illuminato con l'icona del filtro; se lo stato non è disponibile restano spenti entrambi.
                   </td></tr></table>
 
                   </details>
@@ -12575,7 +12590,8 @@ cards:
                     aspetta, sotto il pannello VMC compare il riquadro con il «Tempo Mancante» dell'azione in attesa (es. «Annullamento
                     Memoria Free Heating», «Cambio Velocità per Lim. Δ PdR») e la «Velocità Registrata», cioè la velocità che verrà
                     ripristinata a fine allerta. Nella finestra Telecomando il tasto della velocità attiva è illuminato, quello della
-                    velocità da ripristinare è illuminato con l'icona ↺.</i><br><br>
+                    velocità da ripristinare è illuminato con l'icona ↺; i tasti Sensori e Led Pannello illuminano lo stato attuale
+                    (On oppure Off) e con «Verificare Filtro» il tasto «Led Pannello On» mostra l'icona del filtro.</i><br><br>
                     - Congelamento ≤ -18 [°C] Temp. Ext.: 0 Secondi. Durante il Congelamento la VMC resta ferma: se si prova a cambiarle Velocità viene riportata subito a Velocità 0 e, se non si ferma, il comando di arresto viene ripetuto finché non si ferma (circa ogni 4 Secondi);<br>
                     - VMC Sensori Int. Δ Temp. > 23 [°C]: 4 Secondi;<br>
                     - Inquinanti (CO₂ e VOC): 8 Secondi. Se la VMC è partita da Velocità 0 resta a Velocità 1 fino al rientro degli Inquinanti, poi torna a Velocità 0; se nel frattempo l'utente sceglie un'altra Velocità diversa da 0 (anche durante il Congelamento o il Δ Temp.) questa viene mantenuta, anche dopo il rientro; se invece sceglie Velocità 0 con gli Inquinanti ancora presenti, dopo circa 8 Secondi la VMC riparte a Velocità 1 e al rientro degli Inquinanti torna a Velocità 0, anche se prima dell'allerta era a un'altra Velocità;<br>
