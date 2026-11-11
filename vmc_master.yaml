@@ -980,7 +980,7 @@ template:
         icon: mdi:led-off
 
   - sensor:
-      - default_entity_id: sensor.vmc_master_velocita_registrata                 # [CONFIGURAZIONE, 22 RICHIAMI] [INTERFACCIA, 4 RICHIAMI] [AUTOMAZIONE, 0 RICHIAMI] VELOCITA' MEMORIZZATA DALLE ALLERTE E RIPRISTINATA A FINE ALLERTA (DIVERSA DALLA VELOCITA' ATTUALE), «Nessuna» SE NON C'E'
+      - default_entity_id: sensor.vmc_master_velocita_registrata                 # [CONFIGURAZIONE, 23 RICHIAMI] [INTERFACCIA, 4 RICHIAMI] [AUTOMAZIONE, 0 RICHIAMI] VELOCITA' MEMORIZZATA DALLE ALLERTE E RIPRISTINATA A FINE ALLERTA (DIVERSA DALLA VELOCITA' ATTUALE), «Nessuna» SE NON C'E'
         name: "Velocità Registrata"
         unique_id: vmc_master_velocita_registrata
         icon: mdi:restore
@@ -16836,6 +16836,8 @@ script:
                   message: >
                     Sulla VMC {{ states('sensor.vmc_master_nome_status') }} 
                     la Velocità Attuale è: {{states('sensor.vmc_master_status_ventola_lettura_codice_interpretato_interfaccia')}}
+                    {%- set registrata = states('sensor.vmc_master_velocita_registrata') -%}
+                    {%- if registrata not in ['Nessuna', 'unknown', 'unavailable', ''] %}, Velocità Memorizzata a fine allerta: {{ registrata | replace(' · ', ', ') }}{% endif %}
                   language: "it"
               - delay: "00:00:10"
     mode: queued
