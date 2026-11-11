@@ -5541,6 +5541,13 @@ script:
 # >>> INIZIO SEZIONE CLONA VMC (SOLO MASTER, RIMOSSA DA VMC_SCRIPT_CLONA.SH) <<<
   vmc_master_clona_vmc:                                                         # [CONFIGURAZIONE, 2 RICHIAMI] [INTERFACCIA, 0 RICHIAMI] [AUTOMAZIONE, 0 RICHIAMI] CLONA VMC: CREA LA CARTELLA DELLA NUOVA VMC
     alias: VMC Master - Clona VMC
+    description: >
+      Pulsante «Clona VMC <nome>» della Finestra Clona (pannello Impostazioni). Procede solo se il
+      Nome è valido («ok») e l'IP è valido e non già in uso: toglie i caratteri di ritorno (CR di Windows)
+      dagli script .sh della cartella Master, crea con vmc_script_clona.sh la cartella packages/vmc_helty_flow/<nome> con i file della nuova
+      VMC (automazione, scheda, yaml e script con nome e IP sostituiti, senza la sezione Clona), aggiunge
+      «nome:IP» all'elenco delle VMC clonate, segna la clonazione come eseguita e svuota i campi Nome e IP.
+      Per attivare la nuova VMC serve il riavvio di Home Assistant.
     sequence:
       - condition: template
         value_template: "{{ is_state('sensor.vmc_master_clona_verifica_nome', 'ok') and states('sensor.vmc_master_clona_verifica_ip') not in ['not ok', 'già in uso'] }}"
@@ -5568,6 +5575,10 @@ script:
 
   vmc_master_clona_nuova_clonazione:                                            # [CONFIGURAZIONE, 1 RICHIAMO] [INTERFACCIA, 1 RICHIAMO] [AUTOMAZIONE, 0 RICHIAMI] CLONA VMC: PREPARA UNA NUOVA CLONAZIONE
     alias: VMC Master - Ripeti Clona/Elimina VMC
+    description: >
+      Pulsante «Ripeti Clona/Elimina VMC» della Finestra Clona: svuota i campi Nome e IP e
+      riporta la finestra allo stato iniziale (clonazione eseguita e riquadro di conferma cancellazione su
+      OFF), per clonare o cancellare un'altra VMC prima del riavvio. Non crea né cancella file.
     sequence:
       - action: input_text.set_value
         target:
@@ -5585,6 +5596,11 @@ script:
 
   vmc_master_clona_riavvio_ha:                                                  # [CONFIGURAZIONE, 1 RICHIAMO] [INTERFACCIA, 1 RICHIAMO] [AUTOMAZIONE, 0 RICHIAMI] CLONA VMC: RIAVVIO FACOLTATIVO DI HOME ASSISTANT
     alias: VMC Master - Riavvia Home Assistant
+    description: >
+      Pulsante «Riavvia Home Assistant» della Finestra Clona, facoltativo dopo una clonazione o una
+      cancellazione: svuota i campi Nome e IP e gli elenchi delle VMC clonate e cancellate, riporta su OFF
+      clonazione eseguita e conferma cancellazione, poi riavvia Home Assistant per caricare (o scaricare)
+      i package delle VMC clonate.
     sequence:
       - action: input_text.set_value
         target:
@@ -5605,6 +5621,13 @@ script:
 
   vmc_master_clona_cancella_vmc:                                                # [CONFIGURAZIONE, 2 RICHIAMI] [INTERFACCIA, 0 RICHIAMI] [AUTOMAZIONE, 0 RICHIAMI] CLONA VMC: CANCELLA LA CARTELLA DI UNA VMC CLONATA
     alias: VMC Master - Cancella VMC
+    description: >
+      Pulsante «Sì, cancella <nome>» del riquadro di conferma della Finestra Clona. Procede solo se il
+      Nome indicato è quello di una VMC esistente («già in uso»): cancella la cartella
+      packages/vmc_helty_flow/<nome>, toglie la VMC dall'elenco delle clonate e la aggiunge a quello delle
+      cancellate, crea una notifica persistente che ricorda di cancellare a mano automazione e scheda della
+      VMC dall'interfaccia e di riavviare Home Assistant, infine svuota Nome e IP e chiude il riquadro.
+      La VMC Master non si può cancellare.
     sequence:
       - condition: template
         value_template: "{{ is_state('sensor.vmc_master_clona_verifica_nome', 'già in uso') }}"
@@ -6357,6 +6380,12 @@ script:
   # --- Errore Temperatura Esterna ---
   vmc_master_notifica_errore_temp_esterna:                                      # [CONFIGURAZIONE, 2 RICHIAMI] [INTERFACCIA, 1 RICHIAMO] [AUTOMAZIONE, 1 RICHIAMO]
     alias: VMC Master - Invia notifica Errore Temp. Esterna
+    description: >
+      Avviso [MOBILE] richiamato dall'Automazione VMC Master quando l'entità Temperatura Esterna scelta
+      in Opzioni diventa non disponibile (unknown, unavailable, -100, Non disponibile), con Invio Notifica
+      attivo e nessun ripristino da Black-Out in corso. Se è selezionato un dispositivo valido, invia la
+      notifica push «Non Disponibile» con l'entità persa, il sensore impiegato per il rilevamento e il
+      valore della sonda della VMC, senza Offset, usata in sostituzione; riporta data e ora.
     sequence:
       - choose:
           - conditions:
@@ -6385,6 +6414,12 @@ script:
   # --- Errore Temperatura Interna ---
   vmc_master_notifica_errore_temp_interna:                                      # [CONFIGURAZIONE, 2 RICHIAMI] [INTERFACCIA, 1 RICHIAMO] [AUTOMAZIONE, 1 RICHIAMO]
     alias: VMC Master - Invia notifica Errore Temp. Interna
+    description: >
+      Avviso [MOBILE] richiamato dall'Automazione VMC Master quando l'entità Temperatura Interna scelta
+      in Opzioni diventa non disponibile (unknown, unavailable, -100, Non disponibile), con Invio Notifica
+      attivo e nessun ripristino da Black-Out in corso. Se è selezionato un dispositivo valido, invia la
+      notifica push «Non Disponibile» con l'entità persa, il sensore impiegato per il rilevamento e il
+      valore della sonda della VMC, senza Offset, usata in sostituzione; riporta data e ora.
     sequence:
       - choose:
           - conditions:
@@ -6413,6 +6448,13 @@ script:
   # --- Errore Umidità Esterna ---
   vmc_master_notifica_errore_umidita_esterna:                                   # [CONFIGURAZIONE, 2 RICHIAMI] [INTERFACCIA, 1 RICHIAMO] [AUTOMAZIONE, 1 RICHIAMO]
     alias: VMC Master - Invia notifica Errore Umidità Esterna
+    description: >
+      Avviso [MOBILE] richiamato dall'Automazione VMC Master quando l'entità Umidità Esterna scelta in
+      Opzioni diventa non disponibile (unknown, unavailable, -100, Non disponibile), con Invio Notifica
+      attivo e nessun ripristino da Black-Out in corso. Se è selezionato un dispositivo valido, invia la
+      notifica push «Non Disponibile» con l'entità persa e il sensore impiegato; riporta data e ora.
+      La VMC non ha una sonda di umidità esterna: il valore resta «Non disponibile», come i calcoli che lo
+      usano (punto di rugiada e umidità assoluta esterni), fino al ripristino dell'entità.
     sequence:
       - choose:
           - conditions:
@@ -6439,6 +6481,12 @@ script:
   # --- Errore Umidità Interna ---
   vmc_master_notifica_errore_umidita_interna:                                   # [CONFIGURAZIONE, 2 RICHIAMI] [INTERFACCIA, 1 RICHIAMO] [AUTOMAZIONE, 1 RICHIAMO]
     alias: VMC Master - Invia notifica Errore Umidità Interna
+    description: >
+      Avviso [MOBILE] richiamato dall'Automazione VMC Master quando l'entità Umidità Interna scelta in
+      Opzioni diventa non disponibile (unknown, unavailable, -100, Non disponibile), con Invio Notifica
+      attivo e nessun ripristino da Black-Out in corso. Se è selezionato un dispositivo valido, invia la
+      notifica push «Non Disponibile» con l'entità persa, il sensore impiegato per il rilevamento e il
+      valore della sonda della VMC, senza Offset, usata in sostituzione; riporta data e ora.
     sequence:
       - choose:
           - conditions:
@@ -6467,6 +6515,13 @@ script:
   # --- Errore CO2 Interna ---
   vmc_master_notifica_errore_co2_interna:                                       # [CONFIGURAZIONE, 2 RICHIAMI] [INTERFACCIA, 1 RICHIAMO] [AUTOMAZIONE, 1 RICHIAMO]
     alias: VMC Master - Invia notifica Errore CO₂ Interna
+    description: >
+      Avviso [MOBILE] richiamato dall'Automazione VMC Master quando l'entità CO₂ Interna scelta in
+      Opzioni diventa non disponibile (unknown, unavailable, -100, Non disponibile), con Invio Notifica
+      attivo e nessun ripristino da Black-Out in corso. Se è selezionato un dispositivo valido, invia la
+      notifica push «Non Disponibile» con l'entità persa, il sensore impiegato per il rilevamento e il
+      valore della sonda CO₂ della VMC, senza Offset, usata in sostituzione (solo sui modelli con la
+      sonda; senza sonda il valore resta «-»); riporta data e ora.
     sequence:
       - choose:
           - conditions:
@@ -6495,6 +6550,11 @@ script:
   # --- Cambio Filtro ---
   vmc_master_notifica_cambio_filtro:                                            # [CONFIGURAZIONE, 2 RICHIAMI] [INTERFACCIA, 1 RICHIAMO] [AUTOMAZIONE, 1 RICHIAMO]
     alias: VMC Master - Invia notifica Cambio Filtro
+    description: >
+      Avviso [MOBILE] richiamato dall'Automazione VMC Master ogni giorno alle 08:00 se il pannello led
+      della VMC segnala «Verificare Filtro» e Invio Notifica è attivo. Se è selezionato un dispositivo
+      valido, invia la notifica push «Avviso ogni 24 ore: Verificare Filtro» con data e ora. Dopo la
+      sostituzione del filtro usare «VMC Master - Reset Filtro».
     sequence:
       - choose:
           - conditions:
@@ -6518,6 +6578,12 @@ script:
 
   vmc_master_notifica_velocita_0:                                               # [CONFIGURAZIONE, 2 RICHIAMI] [INTERFACCIA, 1 RICHIAMO] [AUTOMAZIONE, 1 RICHIAMO]
     alias: VMC Master - Invia notifica Velocità 0
+    description: >
+      Avviso [MOBILE] richiamato dall'Automazione VMC Master quando la VMC passa a Velocità 0, con Invio
+      Notifica attivo e nessun ripristino da Black-Out in corso. Se è selezionato un dispositivo valido,
+      invia la notifica push con lo stato della ventola, data e ora e il riepilogo delle verifiche:
+      CO₂ [ppm], VOC [ppb], superamento Lim. Δ Punto di Rugiada, Umidità Interna [%], impiego Free H./C.,
+      Δ Temp. Int-Est > 23 °C, Congelamento ≤ -18 °C Temp. Esterna e verifica Black-Out.
     sequence:
       - choose:
           - conditions:
@@ -6564,6 +6630,13 @@ script:
 
   vmc_master_notifica_velocita_diversa_da_0:                                    # [CONFIGURAZIONE, 2 RICHIAMI] [INTERFACCIA, 1 RICHIAMO] [AUTOMAZIONE, 1 RICHIAMO]
     alias: VMC Master - Invia notifica VMC in Funzione
+    description: >
+      Avviso [MOBILE] richiamato dall'Automazione VMC Master quando la VMC passa a una velocità diversa
+      da Velocità 0 (Velocità 1-4, Notturna, Iperventilazione, Free Cool./Heat.), con Invio Notifica attivo
+      e nessun ripristino da Black-Out in corso. Se è selezionato un dispositivo valido, invia la notifica
+      push con lo stato della ventola, data e ora e il riepilogo delle verifiche: CO₂ [ppm], VOC [ppb],
+      superamento Lim. Δ Punto di Rugiada, Umidità Interna [%], impiego Free H./C., Δ Temp. Int-Est
+      > 23 °C, Congelamento ≤ -18 °C Temp. Esterna e verifica Black-Out.
     sequence:
       - choose:
           - conditions:
@@ -7247,6 +7320,10 @@ script:
 
   vmc_master_azzera_offset_sensors:                                             # [CONFIGURAZIONE, 3 RICHIAMI] [INTERFACCIA, 3 RICHIAMI] [AUTOMAZIONE, 0 RICHIAMI]
     alias: VMC Master - Azzera gli Offset dei Sensori
+    description: >
+      Riporta a 0 gli Offset dei 6 sensori scelti in Opzioni: Temperatura Esterna, Temperatura Interna,
+      Umidità Esterna, Umidità Interna, CO₂ e VOC. Pulsante nel pannello Offset Sensori; è compreso nel
+      Profilo Inizializzazione.
     sequence:
       - action: input_number.set_value
         data:
@@ -7263,6 +7340,12 @@ script:
 
   vmc_master_audio_profilo:                                                     # [CONFIGURAZIONE, 3 RICHIAMI] [INTERFACCIA, 3 RICHIAMI] [AUTOMAZIONE, 0 RICHIAMI]
     alias: VMC Master - Profilo Audio
+    description: >
+      6° Profilo (Profilo Audio), compreso nel Profilo Inizializzazione: attiva l'Invio delle Notifiche
+      Audio, imposta il volume del Media Player a 0,30 (30 %), la fascia oraria degli avvisi audio dalle
+      08:00 alle 21:00 e attiva le notifiche audio di tutte le categorie di allerta: Congelamento,
+      Δ Temp. Int-Est, Inquinanti (CO₂/VOC), Punto di Rugiada, Free Cool./Heat., Umidità, Black-Out,
+      Status Velocità e Riepilogo.
     sequence:
       - action: input_datetime.set_datetime
         data:
@@ -7300,6 +7383,11 @@ script:
 
   vmc_master_azzera_aria_scambiata_puntuale:                                    # [CONFIGURAZIONE, 3 RICHIAMI] [INTERFACCIA, 1 RICHIAMO] [AUTOMAZIONE, 0 RICHIAMI]
     alias: VMC Master - Azzera Totale Aria Scambiata Puntuale
+    description: >
+      Richiamato dall'automazione «VMC Master - Aggiorna Aria Scambiata e Gestisci Countdown» quando
+      è stato chiesto il reset del countdown (cambio velocità, arresto e ripartenza della VMC o azzeramento
+      giornaliero): svuota il comando di reset, così il countdown del prossimo ricambio completo riparte
+      da zero e un nuovo reset può essere richiesto. Non tocca i totali dell'aria scambiata.
     sequence:
       - action: input_text.set_value
         data:
@@ -7310,6 +7398,12 @@ script:
 
   vmc_master_azzera_aria_scambiata:                                             # [CONFIGURAZIONE, 3 RICHIAMI] [INTERFACCIA, 3 RICHIAMI] [AUTOMAZIONE, 0 RICHIAMI]
     alias: VMC Master - Azzera Totale Aria Scambiata
+    description: >
+      Azzera i totali dell'aria scambiata: cancella dal database lo storico del totale, dei cicli di
+      ricambio e del tempo mancante al ricambio e dei contatori per velocità (Velocità 1-4,
+      Iperventilazione, Notturna, Free Cooling e ricomincio), riporta a 0 i contatori e chiede il reset del
+      countdown del prossimo ricambio. Richiamato a mezzanotte dall'automazione «VMC Master - Aggiorna
+      Aria Scambiata e Gestisci Countdown» e dal pulsante della scheda Aria Scambiata.
     sequence:
       - action: recorder.purge_entities
         data:
@@ -7494,6 +7588,11 @@ script:
 
   vmc_master_profilo_calendario:                                                # [CONFIGURAZIONE, 3 RICHIAMI] [INTERFACCIA, 3 RICHIAMI] [AUTOMAZIONE, 0 RICHIAMI]
     alias: VMC Master - Profilo Calendario
+    description: >
+      4° Profilo (Profilo Calendario), compreso nel Profilo Inizializzazione: programma per tutti i
+      giorni della settimana la 1° Fascia dalle 00:30 alle 06:00 e la 2° Fascia dalle 20:00 alle 23:30,
+      imposta Velocità 1 per entrambe le Fasce e attiva l'interruttore [VMC ON/OFF, in Funzione del
+      Calendario].
     sequence:
       - action: input_datetime.set_datetime
         data:
@@ -7564,6 +7663,11 @@ script:
     
   vmc_master_profilo_free_heating_cooling:                                      # [CONFIGURAZIONE, 3 RICHIAMI] [INTERFACCIA, 3 RICHIAMI] [AUTOMAZIONE, 0 RICHIAMI]
     alias: VMC Master - Profilo Free Heating/Cooling
+    description: >
+      5° Profilo (Profilo Free Heating/Cooling), compreso nel Profilo Inizializzazione: attiva gli
+      interruttori [VMC ON/OFF, in Funzione della Vel. Free Heating] e [VMC ON/OFF, in Funzione della
+      Vel. Free Cooling], programma il Free Heating da Ottobre a Giugno e il Free Cooling da Luglio a
+      Settembre, poi aggiorna le 4 selezioni dei mesi.
     sequence:
       - action: input_boolean.turn_on
         data: {}
@@ -7599,6 +7703,10 @@ script:
 
   vmc_master_profilo_pdr:                                                       # [CONFIGURAZIONE, 3 RICHIAMI] [INTERFACCIA, 3 RICHIAMI] [AUTOMAZIONE, 0 RICHIAMI]
     alias: VMC Master - Profilo Lim. Δ P. di Rugiada
+    description: >
+      3° Profilo (Profilo Lim. Δ P. di Rugiada), compreso nel Profilo Inizializzazione: imposta il
+      [Set Lim. Δ Punto di Rugiada] a 0 °C e attiva l'interruttore [VMC ON/OFF, in Funzione del Lim. Δ P.
+      di Rugiada].
     sequence:
       - action: input_number.set_value
         data:
@@ -7615,6 +7723,10 @@ script:
 
   vmc_master_profilo_umidita:                                                   # [CONFIGURAZIONE, 3 RICHIAMI] [INTERFACCIA, 3 RICHIAMI] [AUTOMAZIONE, 0 RICHIAMI]
     alias: VMC Master - Profilo Umidità Interna di Avvio
+    description: >
+      2° Profilo (Profilo Umidità Interna di Avvio), compreso nel Profilo Inizializzazione: imposta la
+      soglia di Umidità Interna di avvio al 75 % con Velocità Iperventilazione e attiva l'interruttore
+      [VMC ON/OFF, in Funzione dell'Umidità Interna].
     sequence:
       - action: input_number.set_value
         data:
@@ -7637,6 +7749,14 @@ script:
 
   vmc_master_profilo_inizializzazione:                                          # [CONFIGURAZIONE, 2 RICHIAMI] [INTERFACCIA, 3 RICHIAMI] [AUTOMAZIONE, 0 RICHIAMI]
     alias: VMC Master - Profilo Inizializzazione
+    description: >
+      Da eseguire solo la prima volta, appena installato il Package (e su ogni VMC clonata).
+      In sequenza: porta tutte le variabili booleane su OFF, azzera gli Offset dei sensori, esegue i
+      Profili Calendario, Free Heating/Cooling, Lim. Δ P. di Rugiada, Umidità e Audio, riporta i Tempi di
+      Attesa ai valori originali, arresta la VMC (Velocità 0), dopo 5 s disattiva lo Status Routine
+      Sensori, dopo altri 5 s attiva lo Status Pannello Led, attiva gli Avvisi, la Notifica Status VMC e
+      tutti gli interruttori VMC ON/OFF (PdR, Umidità, Calendario, Free Heating, Free Cooling, CO₂ e VOC)
+      e infine riavvia Home Assistant. Attendere il termine del processo.
     sequence:
       - action: script.vmc_master_azzera_booleans
         data: {}
@@ -7686,6 +7806,14 @@ script:
 
   vmc_master_bottone_panico:                                                    # [CONFIGURAZIONE, 2 RICHIAMI] [INTERFACCIA, 5 RICHIAMI] [AUTOMAZIONE, 0 RICHIAMI]
     alias: VMC Master - Panic Button
+    description: >
+      Panic Button, da impiegare se la VMC non risponde correttamente ad automazioni e comandi.
+      Arresta subito la VMC (Velocità 0), spegne Avvisi, Notifica Status VMC, Notifica Audio, tutti gli
+      interruttori VMC ON/OFF (PdR, Umidità, Calendario, Free Heating, Free Cooling, CO₂ e VOC) e la memoria
+      di avvio di Home Assistant per l'audio; attende che l'Automazione VMC Master finisca gli eventi già in
+      coda (al massimo 1 minuto), ripete l'arresto con la rilettura dello stato della ventola e porta tutte
+      le variabili booleane su OFF. Se è in corso un'allerta Δ Temp. o Congelamento (allerte del firmware
+      della VMC), ne ripristina le spie con la memoria Velocità 0: a fine allerta la VMC resta a Velocità 0.
     sequence:
       - action: shell_command.vmc_master_velocita_0                          # SUBITO VELOCITA' 0 E INTERRUTTORI SPENTI
       - action: input_boolean.turn_off
@@ -7740,6 +7868,10 @@ script:
 #------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
   vmc_master_calendario_fascia_1_o_2_off:                                       # [CONFIGURAZIONE, 2 RICHIAMI] [INTERFACCIA, 1 RICHIAMO] [AUTOMAZIONE, 14 RICHIAMI]
     alias: VMC Master - Calendario Fascia 1 o 2 Off
+    description: >
+      Richiamato dall'Automazione VMC Master alla fine della 1° o della 2° Fascia del Calendario di
+      ogni giorno: porta tutte le variabili booleane (spie e memorie) su OFF; gli interruttori VMC ON/OFF e
+      le impostazioni Audio restano invariati.
     sequence:
       - action: script.vmc_master_azzera_booleans
         data: {}
@@ -12164,7 +12296,19 @@ script:
                     alias: Mese Disabilitato
     mode: restart
     icon: mdi:fingerprint-off
-    description: ""
+    description: >
+      Richiamato dall'Automazione VMC Master all'inizio della 1° Fascia del Calendario. Dopo 5 s, solo
+      in assenza di allerta Congelamento e Δ Temp. (altrimenti non fa nulla), spegne le memorie di
+      Inquinanti e Punto di Rugiada e comanda la velocità scelta per la Fascia (Velocità 0-4, Notturna,
+      Iperventilazione o Free Cool./Heat.) secondo gli interruttori PdR e Inquinanti (CO₂/VOC):
+      - se il PdR è attivo e se ne sconsiglia l'impiego, la VMC va a Velocità 0 e memorizza la velocità da
+      avviare quando il Punto di Rugiada torna favorevole;
+      - se gli Inquinanti sono attivi e c'è un'allerta CO₂ o VOC, prevale la ventilazione: si comanda la
+      velocità della Fascia (Velocità 1 se la Fascia è a Velocità 0) con la memoria Inquinanti;
+      - altrimenti si comanda la velocità della Fascia.
+      Con Free Cool./Heat. si guarda anche il mese corrente: nei mesi programmati Free Heating o Free
+      Cooling, con un'allerta Free H./C. la VMC va a Velocità 0 (Velocità 1 con allerta Inquinanti),
+      senza allerta va in Free Cooling; nei mesi non programmati va in Free Cooling.
 #------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 #------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
   vmc_master_calendario_fascia_2_on:                                            # [CONFIGURAZIONE, 2 RICHIAMI] [INTERFACCIA, 1 RICHIAMO] [AUTOMAZIONE, 7 RICHIAMI]
@@ -16584,7 +16728,19 @@ script:
                     alias: Mese Disabilitato
     mode: restart
     icon: mdi:fingerprint-off
-    description: ""
+    description: >
+      Richiamato dall'Automazione VMC Master all'inizio della 2° Fascia del Calendario. Dopo 5 s, solo
+      in assenza di allerta Congelamento e Δ Temp. (altrimenti non fa nulla), spegne le memorie di
+      Inquinanti e Punto di Rugiada e comanda la velocità scelta per la Fascia (Velocità 0-4, Notturna,
+      Iperventilazione o Free Cool./Heat.) secondo gli interruttori PdR e Inquinanti (CO₂/VOC):
+      - se il PdR è attivo e se ne sconsiglia l'impiego, la VMC va a Velocità 0 e memorizza la velocità da
+      avviare quando il Punto di Rugiada torna favorevole;
+      - se gli Inquinanti sono attivi e c'è un'allerta CO₂ o VOC, prevale la ventilazione: si comanda la
+      velocità della Fascia (Velocità 1 se la Fascia è a Velocità 0) con la memoria Inquinanti;
+      - altrimenti si comanda la velocità della Fascia.
+      Con Free Cool./Heat. si guarda anche il mese corrente: nei mesi programmati Free Heating o Free
+      Cooling, con un'allerta Free H./C. la VMC va a Velocità 0 (Velocità 1 con allerta Inquinanti),
+      senza allerta va in Free Cooling; nei mesi non programmati va in Free Cooling.
 #------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 #------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 ################### Inizio Creazione Scripts Audio per Allertet ###################
