@@ -124,6 +124,14 @@ cards:
               entity_id: script.vmc_master_upgrade_sensors
             confirmation:
               text: "Vuoi Procedere? Attendi il termine del processo (alcuni secondi)."
+        - type: conditional
+          conditions:
+            - entity: timer.vmc_master_countdown_script_agg_sensori
+              state: active
+          row:
+            entity: timer.vmc_master_countdown_script_agg_sensori
+            name: "Agg. Sensori in corso"
+            icon: mdi:timer-sand
         - entity: sensor.vmc_master_nome_status
           secondary_info: last-changed
         - entity: sensor.vmc_master_status_ip_interfaccia
@@ -144,6 +152,14 @@ cards:
               entity_id: script.vmc_master_bottone_panico
             confirmation:
               text: "Vuoi Procedere? La VMC verrà arrestata e le variabili azzerate."
+        - type: conditional
+          conditions:
+            - entity: timer.vmc_master_countdown_script_panic_button
+              state: active
+          row:
+            entity: timer.vmc_master_countdown_script_panic_button
+            name: "Panic Button in corso"
+            icon: mdi:timer-sand
       state_color: true
       show_header_toggle: false
       title: Ventilazione Meccanica Controllata
@@ -9527,6 +9543,14 @@ cards:
                         entity_id: script.vmc_master_upgrade_sensors
                       confirmation:
                         text: "Vuoi Procedere? Attendi il termine del processo (alcuni secondi)."
+                  - type: conditional
+                    conditions:
+                      - entity: timer.vmc_master_countdown_script_agg_sensori
+                        state: active
+                    row:
+                      entity: timer.vmc_master_countdown_script_agg_sensori
+                      name: "Agg. Sensori in corso"
+                      icon: mdi:timer-sand
                 title: Sensori - Selezionati
                 footer:
                   type: buttons
@@ -9803,6 +9827,14 @@ cards:
                         entity_id: script.vmc_master_bottone_panico
                       confirmation:
                         text: "Vuoi Procedere? La VMC verrà arrestata e le variabili azzerate."
+                  - type: conditional
+                    conditions:
+                      - entity: timer.vmc_master_countdown_script_panic_button
+                        state: active
+                    row:
+                      entity: timer.vmc_master_countdown_script_panic_button
+                      name: "Panic Button in corso"
+                      icon: mdi:timer-sand
                   - type: button
                     entity: script.vmc_master_profilo_inizializzazione
                     action_name: Esegui
@@ -9813,6 +9845,14 @@ cards:
                         entity_id: script.vmc_master_profilo_inizializzazione
                       confirmation:
                         text: "Vuoi Procedere? Attendi il termine del processo: al termine Home Assistant verrà riavviato."
+                  - type: conditional
+                    conditions:
+                      - entity: timer.vmc_master_countdown_script_inizializzazione
+                        state: active
+                    row:
+                      entity: timer.vmc_master_countdown_script_inizializzazione
+                      name: "Profilo Inizializzazione in corso"
+                      icon: mdi:timer-sand
                   - type: button
                     entity: script.vmc_master_pulisci_cronologia_entita
                     action_name: Esegui
@@ -9831,6 +9871,14 @@ cards:
                         entity_id: script.vmc_master_reset_filtro_vmc
                       confirmation:
                         text: "Vuoi Procedere?"
+                  - type: conditional
+                    conditions:
+                      - entity: timer.vmc_master_countdown_script_reset_filtro
+                        state: active
+                    row:
+                      entity: timer.vmc_master_countdown_script_reset_filtro
+                      name: "Reset Filtro in corso"
+                      icon: mdi:timer-sand
                 state_color: false
                 title: Opzioni
                 footer:
@@ -10437,6 +10485,10 @@ cards:
                           'timer.vmc_master_lettura_ambientali',
                           'timer.vmc_master_lettura_lan',
                           'timer.vmc_master_lettura_nome',
+                          'timer.vmc_master_countdown_script_agg_sensori',
+                          'timer.vmc_master_countdown_script_panic_button',
+                          'timer.vmc_master_countdown_script_inizializzazione',
+                          'timer.vmc_master_countdown_script_reset_filtro',
                           'input_boolean.vmc_master_conferma_pulizia_cronologia'
                         ] -%}
                         {%- set tipi = {'automation': 'Automazioni', 'binary_sensor': 'Sensori binari', 'button': 'Pulsanti', 'input_boolean': 'Interruttori (input_boolean)', 'input_datetime': 'Orari (input_datetime)', 'input_number': 'Valori numerici (input_number)', 'input_select': 'Selettori (input_select)', 'input_text': 'Testi (input_text)', 'script': 'Script', 'sensor': 'Sensori', 'timer': 'Timer'} -%}
@@ -12029,7 +12081,8 @@ cards:
                   <strong>Nota VMC Master - Agg. Sensori</strong>
 
                   Rilegge subito tutti i dati della VMC (stato, sensori, nome
-                  e dati LAN): attendere il termine del processo, alcuni secondi.
+                  e dati LAN): attendere il termine del processo, circa 79
+                  secondi, indicato dal countdown sotto il pulsante.
 
                   <br>
 
@@ -12051,6 +12104,19 @@ cards:
                   Vuoi Procedere?»: «OK» lo esegue, «Annulla» no.
                   «Pulisci cronologia Entità» e «Cancella VMC» chiedono invece
                   conferma con un riquadro con «Sì» e «No».
+
+                  <br>
+
+                  <strong>Nota Countdown degli Script</strong>
+
+                  Mentre gira uno script che dura qualche secondo, sotto il suo
+                  pulsante compare una riga con il tempo che manca alla fine:
+                  Agg. Sensori 79 s, Panic Button al massimo 61 s (la riga si
+                  chiude prima se l'automazione finisce prima gli eventi in
+                  coda), Profilo Inizializzazione 10 s prima del riavvio di Home
+                  Assistant, Reset Filtro 5 s. Alla fine dello script la riga
+                  scompare. Gli altri script sono istantanei e non hanno
+                  countdown.
 
                   <br>
 
@@ -13419,6 +13485,14 @@ cards:
                         entity_id: script.vmc_master_upgrade_sensors
                       confirmation:
                         text: "Vuoi Procedere? Attendi il termine del processo (alcuni secondi)."
+                  - type: conditional
+                    conditions:
+                      - entity: timer.vmc_master_countdown_script_agg_sensori
+                        state: active
+                    row:
+                      entity: timer.vmc_master_countdown_script_agg_sensori
+                      name: "Agg. Sensori in corso"
+                      icon: mdi:timer-sand
                 state_color: false
                 title: Opzioni
                 show_header_toggle: false
