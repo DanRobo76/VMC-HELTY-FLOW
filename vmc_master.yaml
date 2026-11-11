@@ -4568,7 +4568,7 @@ input_number:
     mode: box
     icon: mdi:restart
 ################### Fine Creazione Fase di Riallineamento delle Allerte al Riavvio di Home Assistant ###################
-################### Inizio Creazione Costanti dei Tempi di Attesa dei Trigger dell'Automazione (modificabili dalla scheda) ###################
+################### Inizio Creazione Costanti dei Tempi di Attesa dei Trigger dell'Automazione (fissi, non compaiono nella scheda) ###################
   vmc_master_attesa_pdr_cambio:                                                # [CONFIGURAZIONE, 3 RICHIAMI] [INTERFACCIA, 1 RICHIAMO] [AUTOMAZIONE, 12 RICHIAMI] TEMPO DI ATTESA [s] DI 12 TRIGGER DELL'AUTOMAZIONE VMC MASTER (VALORE ORIGINALE 16 s), LETTO ANCHE DAL COUNTDOWN
     name: "Attesa Cambio Velocità per Lim. Δ PdR"
     min: 1
@@ -5267,7 +5267,7 @@ input_boolean:
 ################### Fine Creazione Switch Booleano impiegato nell'Automazione, per l'Audio all'Avvio di Home Assistant ############################
 
 ################### Inizio Creazione Switch Booleani per i Tempi di Attesa dei Trigger dell'Automazione ###################
-  vmc_master_opzione_finestra_tempi_attesa:                                     # [CONFIGURAZIONE, 5 RICHIAMI] [INTERFACCIA, 3 RICHIAMI] [AUTOMAZIONE, 0 RICHIAMI] FINESTRA TEMPI DI ATTESA NEL PANNELLO OPZIONI
+  vmc_master_opzione_finestra_tempi_attesa:                                     # [CONFIGURAZIONE, 5 RICHIAMI] [INTERFACCIA, 3 RICHIAMI] [AUTOMAZIONE, 0 RICHIAMI] FINESTRA TEMPI DI ATTESA, NON PIU' PRESENTE NEL PANNELLO OPZIONI (I TEMPI NON VANNO MODIFICATI)
     name: "Finestra Tempi di Attesa"
     icon: mdi:timer-cog-outline
 
@@ -25881,9 +25881,10 @@ automation:
   - id: "vmc_master_esclusivita_finestre_opzioni"                               # [CONFIGURAZIONE, 3 RICHIAMI] [INTERFACCIA, 1 RICHIAMO] [AUTOMAZIONE, 0 RICHIAMI]
     alias: "VMC Master - Esclusività Finestre Opzioni"
     description: >
-      Le finestre «Prossime Letture dalla VMC» e «Tempi di Attesa» del pannello Opzioni si comportano come le altre
-      (Audio, Clona, Calendario, ...): aprendone una si chiudono tutte le altre, aprendo un'altra finestra di Opzioni
-      si chiudono loro, e si chiudono anche quando si chiude o si riapre il pannello Opzioni. E' separata
+      Le finestre «Prossime Letture dalla VMC» e «Tempi di Attesa» (quest'ultima non piu' presente nella scheda) del
+      pannello Opzioni si comportano come le altre (Audio, Clona, Calendario, ...): aprendone una si chiudono tutte le
+      altre, aprendo un'altra finestra di Opzioni si chiudono loro, e si chiudono anche quando si chiude o si riapre il
+      pannello Opzioni. E' separata
       dall'Automazione VMC Master per non accodarle un evento (mode: queued) a ogni apertura di finestra.
     mode: queued
     max: 10

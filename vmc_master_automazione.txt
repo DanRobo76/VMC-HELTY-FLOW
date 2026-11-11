@@ -117,10 +117,10 @@ description: >-
   PRIORITA' DI ATTIVAZIONE DEGLI ALLARMI (Secondi per l'Attivazione e per la
   Ripresa):
 
-  I Secondi indicati sono i valori originali: ogni tempo di attesa e' una costante
-  (input_number.vmc_master_attesa_*) modificabile dalla scheda nella finestra
-  Opzioni > Tempi di Attesa e ripristinabile con il pulsante «Ripristina Tempi
-  di Attesa Originali». Il countdown della scheda legge le stesse costanti.
+  I Secondi indicati sono fissi e non vanno modificati: ogni tempo di attesa e'
+  una costante (input_number.vmc_master_attesa_*) che non compare nella scheda e
+  che il Profilo Inizializzazione riporta ai valori originali. Il countdown della
+  scheda legge le stesse costanti.
 
   - Congelamento ≤ -18 [°C] Temp. Ext.: 0 Secondi. Durante il Congelamento la VMC
   resta ferma: se si prova a cambiarle Velocità viene riportata subito a Velocità

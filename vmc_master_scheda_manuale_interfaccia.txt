@@ -12087,7 +12087,7 @@ cards:
 
                   <strong>VMC Master - Ripristina Tempi di Attesa Originali</strong>
 
-                  Non ha un pulsante nella scheda: si esegue da Impostazioni > Automazioni e Scene > Script.
+                  Non ha un pulsante nella scheda: i Tempi di Attesa sono fissi e non vanno modificati.
 
                   Riporta i 24 Tempi di Attesa dell'Automazione ai Valori
                   Originali. E' compreso nel Profilo
@@ -12834,8 +12834,8 @@ cards:
                     <summary><b>17 Logiche di Funzionamento</b></summary> 
                     <table><tr><td align="justify">
                     <b>PRIORITA' DI ATTIVAZIONE DEGLI ALLARMI (Secondi per l'Attivazione e per la Ripresa):</b><br>
-                    <i>I Secondi indicati sono i valori originali: ogni tempo di attesa si può modificare dall'entità «Attesa ...»
-                    (Impostazioni > Dispositivi e Servizi > Entità) e si riporta ai valori originali con lo script «VMC Master - Ripristina Tempi di Attesa Originali». Mentre l'automazione
+                    <i>I Secondi indicati sono fissi e non vanno modificati: il Profilo Inizializzazione li riporta comunque ai valori
+                    originali. Mentre l'automazione
                     aspetta, sotto il pannello VMC compare il riquadro con il «Tempo Mancante» dell'azione in attesa (es. «Annullamento
                     Memoria Free Heating», «Cambio Velocità per Lim. Δ PdR») e la «Velocità Registrata», cioè la velocità che verrà
                     ripristinata a fine allerta. Nella finestra Telecomando il tasto della velocità attiva è illuminato, quello della
