@@ -467,6 +467,11 @@ cards:
         states('sensor.vmc_master_temp_esterna_status_senza_offset') |
         float(default=none) %}
 
+        {#- Se un sensore non e' disponibile si confronta solo l'altro: il valore mancante vale 99 (nessun congelamento) e non viene mai mostrato -#}
+        {% set congelamento = congelamento if congelamento is not none else 99 %}
+
+        {% set congelamento_vmc = congelamento_vmc if congelamento_vmc is not none else 99 %}
+
 
         {% set spia_velocita_0 =
         states('input_boolean.vmc_master_spia_velocita_0_congelamento') %}
