@@ -980,7 +980,7 @@ template:
         icon: mdi:led-off
 
   - sensor:
-      - default_entity_id: sensor.vmc_master_velocita_registrata                 # [CONFIGURAZIONE, 22 RICHIAMI] [INTERFACCIA, 4 RICHIAMI] [AUTOMAZIONE, 0 RICHIAMI] VELOCITA' MEMORIZZATA DALLE ALLERTE E RIPRISTINATA A FINE ALLERTA (DIVERSA DALLA VELOCITA' ATTUALE), «Nessuna» SE NON C'E'
+      - default_entity_id: sensor.vmc_master_velocita_registrata                 # [CONFIGURAZIONE, 23 RICHIAMI] [INTERFACCIA, 4 RICHIAMI] [AUTOMAZIONE, 0 RICHIAMI] VELOCITA' MEMORIZZATA DALLE ALLERTE E RIPRISTINATA A FINE ALLERTA (DIVERSA DALLA VELOCITA' ATTUALE), «Nessuna» SE NON C'E'
         name: "Velocità Registrata"
         unique_id: vmc_master_velocita_registrata
         icon: mdi:restore
@@ -1265,7 +1265,7 @@ template:
         icon: mdi:cloud-percent-outline
 
   - sensor:
-      - default_entity_id: sensor.vmc_master_umidita_interna_status             # [CONFIGURAZIONE, 14 RICHIAMI] [INTERFACCIA, 8 RICHIAMI] [AUTOMAZIONE, 4 RICHIAMI] SENSORE DI LETTURA UMIDITA' INTERNA MEMORIZZATA NEL SENSORE vmc_master_umidita_interna_selezionata + OFFSET MANUALE, PREVIA VERIFICA DI AVVENUTA LETTURA DEI DATI "SENSORI" MEMORIZZATI NELLA VMC; SE L'ENTITA' SCELTA NON E' DISPONIBILE SI USA LA SONDA DELLA VMC SENZA OFFSET
+      - default_entity_id: sensor.vmc_master_umidita_interna_status             # [CONFIGURAZIONE, 16 RICHIAMI] [INTERFACCIA, 8 RICHIAMI] [AUTOMAZIONE, 4 RICHIAMI] SENSORE DI LETTURA UMIDITA' INTERNA MEMORIZZATA NEL SENSORE vmc_master_umidita_interna_selezionata + OFFSET MANUALE, PREVIA VERIFICA DI AVVENUTA LETTURA DEI DATI "SENSORI" MEMORIZZATI NELLA VMC; SE L'ENTITA' SCELTA NON E' DISPONIBILE SI USA LA SONDA DELLA VMC SENZA OFFSET
         name: "Umidità Int. [%]"
         unique_id: vmc_master_umidita_interna_status
         state: >
@@ -1320,7 +1320,7 @@ template:
         icon: mdi:cloud-percent
 
   - sensor:
-      - default_entity_id: sensor.vmc_master_co2_status                         # [CONFIGURAZIONE, 12 RICHIAMI] [INTERFACCIA, 17 RICHIAMI] [AUTOMAZIONE, 4 RICHIAMI] SENSORE DI LETTURA ANIDIRDE CARBONICA INTERNA MEMORIZZATA NEL SENSORE vmc_master_co2_interna_selezionata + OFFSET MANUALE, PREVIA VERIFICA DI AVVENUTA LETTURA DEI DATI "SENSORI" MEMORIZZATI NELLA VMC; SE L'ENTITA' SCELTA NON E' DISPONIBILE SI USA LA SONDA DELLA VMC SENZA OFFSET
+      - default_entity_id: sensor.vmc_master_co2_status                         # [CONFIGURAZIONE, 13 RICHIAMI] [INTERFACCIA, 17 RICHIAMI] [AUTOMAZIONE, 4 RICHIAMI] SENSORE DI LETTURA ANIDIRDE CARBONICA INTERNA MEMORIZZATA NEL SENSORE vmc_master_co2_interna_selezionata + OFFSET MANUALE, PREVIA VERIFICA DI AVVENUTA LETTURA DEI DATI "SENSORI" MEMORIZZATI NELLA VMC; SE L'ENTITA' SCELTA NON E' DISPONIBILE SI USA LA SONDA DELLA VMC SENZA OFFSET
         name: "CO₂ Int. [ppm]"
         unique_id: vmc_master_co2_status
         state: >
@@ -1376,7 +1376,7 @@ template:
         icon: mdi:molecule-co2
 
   - sensor:
-      - default_entity_id: sensor.vmc_master_voc_status                         # [CONFIGURAZIONE, 6 RICHIAMI] [INTERFACCIA, 15 RICHIAMI] [AUTOMAZIONE, 0 RICHIAMI] SENSORE DI LETTURA COMPOSTI ORGANICI VOLATICI INTERNI MEMORIZZATI NELLA VMC + OFFSET MANUALE ESPRESSI IN PPB [DEFAULT VMC], PREVIA VERIFICA DI AVVENUTA LETTURA DEI DATI "SENSORI" MEMORIZZATI NELLA VMC
+      - default_entity_id: sensor.vmc_master_voc_status                         # [CONFIGURAZIONE, 9 RICHIAMI] [INTERFACCIA, 15 RICHIAMI] [AUTOMAZIONE, 0 RICHIAMI] SENSORE DI LETTURA COMPOSTI ORGANICI VOLATICI INTERNI MEMORIZZATI NELLA VMC + OFFSET MANUALE ESPRESSI IN PPB [DEFAULT VMC], PREVIA VERIFICA DI AVVENUTA LETTURA DEI DATI "SENSORI" MEMORIZZATI NELLA VMC
         name: "VOC Int. [ppb]"
         unique_id: vmc_master_voc_status
         state: >
@@ -2576,7 +2576,7 @@ template:
         icon: mdi:alarm-light-outline
 
   - sensor:
-      - default_entity_id: sensor.vmc_master_alert_monitoraggio_co2             # [CONFIGURAZIONE, 384 RICHIAMI] [INTERFACCIA, 42 RICHIAMI] [AUTOMAZIONE, 14 RICHIAMI] SENSORE POP-UP MONITORAGGIO SUPERAMENTO DEL Livello di Concentrazione CO₂ [ppm]
+      - default_entity_id: sensor.vmc_master_alert_monitoraggio_co2             # [CONFIGURAZIONE, 385 RICHIAMI] [INTERFACCIA, 42 RICHIAMI] [AUTOMAZIONE, 14 RICHIAMI] SENSORE POP-UP MONITORAGGIO SUPERAMENTO DEL Livello di Concentrazione CO₂ [ppm]
         name: "Monitoraggio CO₂"
         unique_id: vmc_master_alert_monitoraggio_co2
         state: >
@@ -2594,7 +2594,7 @@ template:
         icon: mdi:alarm-light-outline
 
   - sensor:
-      - default_entity_id: sensor.vmc_master_alert_monitoraggio_voc             # [CONFIGURAZIONE, 384 RICHIAMI] [INTERFACCIA, 43 RICHIAMI] [AUTOMAZIONE, 14 RICHIAMI] SENSORE POP-UP MONITORAGGIO SUPERAMENTO DEL Livello di Concentrazione VOC [ppb]
+      - default_entity_id: sensor.vmc_master_alert_monitoraggio_voc             # [CONFIGURAZIONE, 385 RICHIAMI] [INTERFACCIA, 43 RICHIAMI] [AUTOMAZIONE, 14 RICHIAMI] SENSORE POP-UP MONITORAGGIO SUPERAMENTO DEL Livello di Concentrazione VOC [ppb]
         name: "Monitoraggio VOC"
         unique_id: vmc_master_alert_monitoraggio_voc
         state: >
@@ -4857,7 +4857,7 @@ input_boolean:
     initial: false
     icon: mdi:test-tube
 
-  vmc_master_opzioni_accendi_spegni_vmc_vs_pdr:                                 # [CONFIGURAZIONE, 165 RICHIAMI] [INTERFACCIA, 34 RICHIAMI] [AUTOMAZIONE, 91 RICHIAMI] VERIFICA IL VALORE DEL SENZORE vmc_master_punto_di_rugiada_verifica_confronto OVVERO SE IL VALORE DIVENTE "SE NE SCONSIGLIA L'IMPIEGO"; SOLAMENTE SE VIENE ACCESO (ON), LA VMC VERRA' SPENTA IN AUTOMATICO SE IL VALORE DIVENTA "SE NE SCONSIGLIA L'IMPIEGO"
+  vmc_master_opzioni_accendi_spegni_vmc_vs_pdr:                                 # [CONFIGURAZIONE, 166 RICHIAMI] [INTERFACCIA, 34 RICHIAMI] [AUTOMAZIONE, 91 RICHIAMI] VERIFICA IL VALORE DEL SENZORE vmc_master_punto_di_rugiada_verifica_confronto OVVERO SE IL VALORE DIVENTE "SE NE SCONSIGLIA L'IMPIEGO"; SOLAMENTE SE VIENE ACCESO (ON), LA VMC VERRA' SPENTA IN AUTOMATICO SE IL VALORE DIVENTA "SE NE SCONSIGLIA L'IMPIEGO"
     name: "VMC ON/OFF, in Funzione del Lim. Δ P. di Rugiada"
     icon: mdi:light-switch-off
 
@@ -4877,7 +4877,7 @@ input_boolean:
     name: "Mostra o Nascondi gli Avvisi"
     icon: mdi:light-switch-off
 
-  vmc_master_opzioni_accendi_spegni_vmc_vs_co2_e_voc:                           # [CONFIGURAZIONE, 114 RICHIAMI] [INTERFACCIA, 42 RICHIAMI] [AUTOMAZIONE, 17 RICHIAMI] VERIFICA IL VALORE DI PERICOLOSITA' DEI SENZORE CO2 E VOC; SOLAMENTE; LA VMC VERRA' SI AVVIERA' IN AUTOMATICO SE VIENE ACCESO (ON), QUALORA I VALORI RISULTINO PERICOLOSI
+  vmc_master_opzioni_accendi_spegni_vmc_vs_co2_e_voc:                           # [CONFIGURAZIONE, 115 RICHIAMI] [INTERFACCIA, 42 RICHIAMI] [AUTOMAZIONE, 17 RICHIAMI] VERIFICA IL VALORE DI PERICOLOSITA' DEI SENZORE CO2 E VOC; SOLAMENTE; LA VMC VERRA' SI AVVIERA' IN AUTOMATICO SE VIENE ACCESO (ON), QUALORA I VALORI RISULTINO PERICOLOSI
     name: "VMC ON/OFF, in Funzione del Lim. CO₂ e/o VOC"
     icon: mdi:light-switch-off
 
@@ -6622,17 +6622,17 @@ script:
                     }}: in data {{ now().strftime('%d-%m-%Y') }} alle {{
                     now().strftime('%H:%M:%S') }}
   
-                    Livello di Concentrazione CO₂ [ppm]: {{
-                    states('sensor.vmc_master_co2_status_verifica_soglia') }}
+                    Livello di Concentrazione CO₂: {{
+                    states('sensor.vmc_master_co2_status_verifica_soglia') }}, {{ states('sensor.vmc_master_co2_status') }} ppm
   
-                    Livello di Concentrazione VOC [ppb]: {{
-                    states('sensor.vmc_master_voc_status_verifica_soglia') }}
+                    Livello di Concentrazione VOC: {{
+                    states('sensor.vmc_master_voc_status_verifica_soglia') }}, {{ states('sensor.vmc_master_voc_status') }} ppb
                     
                     Superamento Lim. Δ Punto di Rugiada: {{
                     states('sensor.vmc_master_alert_monitoraggio_pdr') }}
                     
-                    Livello di Umidità Interna [%]: {{
-                    states('sensor.vmc_master_umidita_interna_status_verifica_soglia') }}
+                    Livello di Umidità Interna: {{
+                    states('sensor.vmc_master_umidita_interna_status_verifica_soglia') }}, {{ states('sensor.vmc_master_umidita_interna_status') }} %
   
                     Impiego Free H./C.: {{
                     states('sensor.vmc_master_alert_monitoraggio_free_heating_o_free_cooling_allert_interfaccia_avvisi') }}
@@ -6675,17 +6675,17 @@ script:
                     }}: in data {{ now().strftime('%d-%m-%Y') }} alle {{
                     now().strftime('%H:%M:%S') }}
   
-                    Livello di Concentrazione CO₂ [ppm]: {{
-                    states('sensor.vmc_master_co2_status_verifica_soglia') }}
+                    Livello di Concentrazione CO₂: {{
+                    states('sensor.vmc_master_co2_status_verifica_soglia') }}, {{ states('sensor.vmc_master_co2_status') }} ppm
   
-                    Livello di Concentrazione VOC [ppb]: {{
-                    states('sensor.vmc_master_voc_status_verifica_soglia') }}
+                    Livello di Concentrazione VOC: {{
+                    states('sensor.vmc_master_voc_status_verifica_soglia') }}, {{ states('sensor.vmc_master_voc_status') }} ppb
                     
                     Superamento Lim. Δ Punto di Rugiada: {{
                     states('sensor.vmc_master_alert_monitoraggio_pdr') }}
                     
-                    Livello di Umidità Interna [%]: {{
-                    states('sensor.vmc_master_umidita_interna_status_verifica_soglia') }}
+                    Livello di Umidità Interna: {{
+                    states('sensor.vmc_master_umidita_interna_status_verifica_soglia') }}, {{ states('sensor.vmc_master_umidita_interna_status') }} %
   
                     Impiego Free H./C.: {{
                     states('sensor.vmc_master_alert_monitoraggio_free_heating_o_free_cooling_allert_interfaccia_avvisi') }}
@@ -16836,6 +16836,8 @@ script:
                   message: >
                     Sulla VMC {{ states('sensor.vmc_master_nome_status') }} 
                     la Velocità Attuale è: {{states('sensor.vmc_master_status_ventola_lettura_codice_interpretato_interfaccia')}}
+                    {%- set registrata = states('sensor.vmc_master_velocita_registrata') -%}
+                    {%- if registrata not in ['Nessuna', 'unknown', 'unavailable', ''] %}, Velocità Memorizzata a fine allerta: {{ registrata | replace(' · ', ', ') }}{% endif %}
                   language: "it"
               - delay: "00:00:10"
     mode: queued
@@ -17041,7 +17043,7 @@ script:
                 data:
                   message: >
                     Sulla VMC {{ states('sensor.vmc_master_nome_status') }} 
-                    Nessuna Allerta Differenza tra temperatura interna ed esterna è inferiore ai 23 °C
+                    Nessuna Allerta Differenza tra temperatura interna ed esterna superiore ai 23 °C
                   language: "it"
               - delay: "00:00:10"
     mode: queued
@@ -17191,7 +17193,7 @@ script:
                 data:
                   message: >
                     Sulla VMC {{ states('sensor.vmc_master_nome_status') }} 
-                    Allerta Composti Organici Volatili,  {{states('sensor.vmc_master_voc_status_verifica_soglia')}}, {{states('sensor.vmc_master_co2_status')}} ppb
+                    Allerta Composti Organici Volatili,  {{states('sensor.vmc_master_voc_status_verifica_soglia')}}, {{states('sensor.vmc_master_voc_status')}} ppb
                   language: "it"
               - delay: "00:00:10"
     mode: queued
@@ -17293,6 +17295,10 @@ script:
                     Sulla VMC {{ states('sensor.vmc_master_nome_status') }} 
                     {% if is_state('sensor.vmc_master_status_ventola_lettura_codice_interpretato_interfaccia', 'Velocità 0') %}
                       Allerta Superamento del Punto di Rugiada, si consiglia di Non Avviare la VMC
+                    {% elif is_state('input_boolean.vmc_master_opzioni_accendi_spegni_vmc_vs_pdr', 'off') %}
+                      Allerta Superamento del Punto di Rugiada, si consiglia di Arrestare la VMC
+                    {% elif is_state('input_boolean.vmc_master_opzioni_accendi_spegni_vmc_vs_co2_e_voc', 'on') and (is_state('sensor.vmc_master_alert_monitoraggio_co2', 'Allerta') or is_state('sensor.vmc_master_alert_monitoraggio_voc', 'Allerta')) %}
+                      Allerta Superamento del Punto di Rugiada, la VMC resta in funzione per la presenza di Inquinanti
                     {% else %}
                       Allerta Superamento del Punto di Rugiada, Arresto della VMC
                     {% endif %}
