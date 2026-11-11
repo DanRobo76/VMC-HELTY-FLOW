@@ -239,7 +239,7 @@ template:
       - trigger: homeassistant
         event: start
     sensor:
-      - default_entity_id: sensor.vmc_master_sensori_memorizzata          # [CONFIGURAZIONE, 56 RICHIAMI] [INTERFACCIA, 1 RICHIAMO] [AUTOMAZIONE, 0 RICHIAMI] ULTIMA LETTURA VALIDA DEI SENSORI (VMGI?)
+      - default_entity_id: sensor.vmc_master_sensori_memorizzata          # [CONFIGURAZIONE, 51 RICHIAMI] [INTERFACCIA, 1 RICHIAMO] [AUTOMAZIONE, 0 RICHIAMI] ULTIMA LETTURA VALIDA DEI SENSORI (VMGI?)
         name: "Ultima Lettura Valida Sensori"
         unique_id: vmc_master_sensori_memorizzata
         state: >
@@ -459,7 +459,7 @@ template:
         icon: mdi:ip
 
   - sensor:
-      - default_entity_id: sensor.vmc_master_status_ip_interfaccia              # [CONFIGURAZIONE, 319 RICHIAMI] [INTERFACCIA, 111 RICHIAMI] [AUTOMAZIONE, 312 RICHIAMI] SENSORE IMPIEGATO PER LA VISUALIZZAZIONE NELL'INTERFACCIA SE LA VMC E' IN RETE O MENO
+      - default_entity_id: sensor.vmc_master_status_ip_interfaccia              # [CONFIGURAZIONE, 319 RICHIAMI] [INTERFACCIA, 112 RICHIAMI] [AUTOMAZIONE, 312 RICHIAMI] SENSORE IMPIEGATO PER LA VISUALIZZAZIONE NELL'INTERFACCIA SE LA VMC E' IN RETE O MENO
         name: "Status VMC"
         unique_id: vmc_master_status_ip_interfaccia
         state: >
@@ -2259,10 +2259,6 @@ template:
         unique_id: vmc_master_calcolo_rischio_muffa_4w
         state: >
           {%- set stati = ["sconosciuto", "unknown", "", none, "unavailable", "Non disponibile"] -%}
-          {# 1) Se la VMC segnala sensori non disponibili #}
-          {%- if states('sensor.vmc_master_sensori_memorizzata') in stati -%}
-            Non disponibile
-          {%- else -%}
             {% set temp = states('sensor.vmc_master_temp_interna_media_4w') | float(none) %}
             {% set hum  = states('sensor.vmc_master_hum_interna_media_4w')  | float(none) %}
             {% if temp is none or hum is none %}
@@ -2284,7 +2280,6 @@ template:
                 Liv. 3: crescita possibile in < 4 Settimane
               {% endif %}
             {% endif %}
-          {%- endif %}
         icon: mdi:virus
 
       # Rischio Muffa 8 Settimane
@@ -2294,9 +2289,6 @@ template:
         unique_id: vmc_master_calcolo_rischio_muffa_8w
         state: >
           {%- set stati = ["sconosciuto", "unknown", "", none, "unavailable", "Non disponibile"] -%}
-          {%- if states('sensor.vmc_master_sensori_memorizzata') in stati -%}
-            Non disponibile
-          {%- else -%}
             {% set temp = states('sensor.vmc_master_temp_interna_media_8w') | float(none) %}
             {% set hum  = states('sensor.vmc_master_hum_interna_media_8w')  | float(none) %}
             {% if temp is none or hum is none %}
@@ -2318,7 +2310,6 @@ template:
                 Liv. 3: crescita possibile in < 4 Settimane
               {% endif %}
             {% endif %}
-          {%- endif %}
         icon: mdi:virus
 
       # Rischio Muffa 12 Settimane
@@ -2328,9 +2319,6 @@ template:
         unique_id: vmc_master_calcolo_rischio_muffa_12w
         state: >
           {%- set stati = ["sconosciuto", "unknown", "", none, "unavailable", "Non disponibile"] -%}
-          {%- if states('sensor.vmc_master_sensori_memorizzata') in stati -%}
-            Non disponibile
-          {%- else -%}
             {% set temp = states('sensor.vmc_master_temp_interna_media_12w') | float(none) %}
             {% set hum  = states('sensor.vmc_master_hum_interna_media_12w')  | float(none) %}
             {% if temp is none or hum is none %}
@@ -2352,7 +2340,6 @@ template:
                 Liv. 3: crescita possibile in < 4 Settimane
               {% endif %}
             {% endif %}
-          {%- endif %}
         icon: mdi:virus
 
       # Andamento Rischio Muffa (Trend)
@@ -2362,10 +2349,6 @@ template:
         unique_id: vmc_master_trend_muffa
         state: >
           {%- set stati = ["sconosciuto", "unknown", "", none, "unavailable", "Non disponibile"] -%}
-          {# 1) Se la VMC segnala sensori non disponibili #}
-          {%- if states('sensor.vmc_master_sensori_memorizzata') in stati -%}
-            Non disponibile
-          {%- else -%}
             {% set map = {
               'Rischio assente (condizioni estreme)': 0,
               'Liv. 0: nessuna crescita di muffa':      0,
@@ -2388,19 +2371,14 @@ template:
             {% else %}
               Stabile a Liv. {{ s4 }}
             {% endif %}
-          {%- endif %}
         icon: mdi:virus
 
   - sensor:
-      - default_entity_id: sensor.vmc_master_trend_muffa_level                  # [CONFIGURAZIONE, 2 RICHIAMI] [INTERFACCIA, 2 RICHIAMI] [AUTOMAZIONE, 0 RICHIAMI]
+      - default_entity_id: sensor.vmc_master_trend_muffa_level                  # [CONFIGURAZIONE, 3 RICHIAMI] [INTERFACCIA, 1 RICHIAMO] [AUTOMAZIONE, 0 RICHIAMI]
         name: "Andamento Rischio Muffa (0 Assente–3 Max)"
         unique_id: vmc_master_trend_muffa_level
         state: >
           {%- set stati = ["sconosciuto","unknown","","unavailable",none,"Non disponibile", "[Non Calcolabile]"] -%}
-          {# 1) Se la VMC segnala sensori non disponibili #}
-          {%- if states('sensor.vmc_master_sensori_memorizzata') in stati -%}
-            Non disponibile
-          {%- else -%}
             {# 2) Prendo il testo del trend #}
             {%- set txt = states('sensor.vmc_master_trend_muffa') -%}
             {%- if txt in stati -%}
@@ -2425,7 +2403,16 @@ template:
               } -%}
               {{ m.get(txt, '[Non Calcolabile]') }}
             {%- endif %}
-          {%- endif %}
+        icon: mdi:virus
+
+  - sensor:
+      - default_entity_id: sensor.vmc_master_trend_muffa_level_numeric          # [CONFIGURAZIONE, 2 RICHIAMI] [INTERFACCIA, 2 RICHIAMI] [AUTOMAZIONE, 0 RICHIAMI]
+        name: "Andamento Rischio Muffa Numerico"
+        state_class: measurement                                                # REGISTRATO ANCHE NELLE STATISTICHE ORARIE A LUNGO TERMINE: IL GRAFICO «RISK MUFFA SU 12 SETT.» DELLA SCHEDA (HISTORY-GRAPH) LE UNISCE ALLO STORICO E COPRE COSI' TUTTE LE 12 SETTIMANE (LO STORICO NORMALE DURA 10 GIORNI); SENSORE A PARTE E SOLO NUMERICO PERCHE' HOME ASSISTANT 2026.x RIPRISTINA ALL'AVVIO L'ULTIMO VALORE E UN TESTO COME "[Non Calcolabile]" IMPEDIREBBE IL CARICAMENTO DI UN SENSORE CON state_class
+        unique_id: vmc_master_trend_muffa_level_numeric
+        state: >
+          {% set v = states('sensor.vmc_master_trend_muffa_level') | float(none) %}
+          {{ v if v is not none else none }}
         icon: mdi:virus
 ################### Inizio Creazione Sensori di Monitoraggio Muffa ####################################################################################################################################
 
@@ -4024,6 +4011,7 @@ recorder:
       - sensor.vmc_master_alert_avvio_interfaccia
 #      - sensor.vmc_master_trend_muffa
 #      - sensor.vmc_master_trend_muffa_level
+#      - sensor.vmc_master_trend_muffa_level_numeric
       - input_text.vmc_master_nome_da_inserire
       - input_text.vmc_master_ip_insert
       - input_text.vmc_master_last_temp_external_entity
@@ -4865,7 +4853,7 @@ input_boolean:
     initial: false
     icon: mdi:test-tube
 
-  vmc_master_opzioni_accendi_spegni_vmc_vs_pdr:                                 # [CONFIGURAZIONE, 165 RICHIAMI] [INTERFACCIA, 34 RICHIAMI] [AUTOMAZIONE, 89 RICHIAMI] VERIFICA IL VALORE DEL SENZORE vmc_master_punto_di_rugiada_verifica_confronto OVVERO SE IL VALORE DIVENTE "SE NE SCONSIGLIA L'IMPIEGO"; SOLAMENTE SE VIENE ACCESO (ON), LA VMC VERRA' SPENTA IN AUTOMATICO SE IL VALORE DIVENTA "SE NE SCONSIGLIA L'IMPIEGO"
+  vmc_master_opzioni_accendi_spegni_vmc_vs_pdr:                                 # [CONFIGURAZIONE, 165 RICHIAMI] [INTERFACCIA, 34 RICHIAMI] [AUTOMAZIONE, 91 RICHIAMI] VERIFICA IL VALORE DEL SENZORE vmc_master_punto_di_rugiada_verifica_confronto OVVERO SE IL VALORE DIVENTE "SE NE SCONSIGLIA L'IMPIEGO"; SOLAMENTE SE VIENE ACCESO (ON), LA VMC VERRA' SPENTA IN AUTOMATICO SE IL VALORE DIVENTA "SE NE SCONSIGLIA L'IMPIEGO"
     name: "VMC ON/OFF, in Funzione del Lim. Δ P. di Rugiada"
     icon: mdi:light-switch-off
 
@@ -4902,35 +4890,35 @@ input_boolean:
     initial: false
     icon: mdi:human-handsup
 ################### Inizio Creazione Switch Booleani impiegati nell'Automazione, per valutare la Velocità in caso di Black-Out e/o SUPERAMENTO DEL Set Lim. Δ Punto di Rugiada ##############################################################
-  vmc_master_spia_velocita_0:                                                   # [CONFIGURAZIONE, 214 RICHIAMI] [INTERFACCIA, 21 RICHIAMI] [AUTOMAZIONE, 349 RICHIAMI] SENSORE TRACCIAMENTO VELOCITA' 0, IN CASO DI BLACK-OUT
+  vmc_master_spia_velocita_0:                                                   # [CONFIGURAZIONE, 214 RICHIAMI] [INTERFACCIA, 22 RICHIAMI] [AUTOMAZIONE, 349 RICHIAMI] SENSORE TRACCIAMENTO VELOCITA' 0, IN CASO DI BLACK-OUT
     name: "Spia Velocità 0"
     icon: mdi:memory
 
-  vmc_master_spia_velocita_1:                                                   # [CONFIGURAZIONE, 205 RICHIAMI] [INTERFACCIA, 21 RICHIAMI] [AUTOMAZIONE, 343 RICHIAMI] SENSORE TRACCIAMENTO VELOCITA' 1, IN CASO DI BLACK-OUT
+  vmc_master_spia_velocita_1:                                                   # [CONFIGURAZIONE, 205 RICHIAMI] [INTERFACCIA, 22 RICHIAMI] [AUTOMAZIONE, 343 RICHIAMI] SENSORE TRACCIAMENTO VELOCITA' 1, IN CASO DI BLACK-OUT
     name: "Spia Velocità 1"
     icon: mdi:memory
 
-  vmc_master_spia_velocita_2:                                                   # [CONFIGURAZIONE, 214 RICHIAMI] [INTERFACCIA, 21 RICHIAMI] [AUTOMAZIONE, 349 RICHIAMI] SENSORE TRACCIAMENTO VELOCITA' 2, IN CASO DI BLACK-OUT
+  vmc_master_spia_velocita_2:                                                   # [CONFIGURAZIONE, 214 RICHIAMI] [INTERFACCIA, 22 RICHIAMI] [AUTOMAZIONE, 349 RICHIAMI] SENSORE TRACCIAMENTO VELOCITA' 2, IN CASO DI BLACK-OUT
     name: "Spia Velocità 2"
     icon: mdi:memory
 
-  vmc_master_spia_velocita_3:                                                   # [CONFIGURAZIONE, 214 RICHIAMI] [INTERFACCIA, 21 RICHIAMI] [AUTOMAZIONE, 349 RICHIAMI] SENSORE TRACCIAMENTO VELOCITA' 3, IN CASO DI BLACK-OUT
+  vmc_master_spia_velocita_3:                                                   # [CONFIGURAZIONE, 214 RICHIAMI] [INTERFACCIA, 22 RICHIAMI] [AUTOMAZIONE, 349 RICHIAMI] SENSORE TRACCIAMENTO VELOCITA' 3, IN CASO DI BLACK-OUT
     name: "Spia Velocità 3"
     icon: mdi:memory
     
-  vmc_master_spia_velocita_4:                                                   # [CONFIGURAZIONE, 214 RICHIAMI] [INTERFACCIA, 21 RICHIAMI] [AUTOMAZIONE, 349 RICHIAMI] SENSORE TRACCIAMENTO VELOCITA' 4, IN CASO DI BLACK-OUT
+  vmc_master_spia_velocita_4:                                                   # [CONFIGURAZIONE, 214 RICHIAMI] [INTERFACCIA, 22 RICHIAMI] [AUTOMAZIONE, 349 RICHIAMI] SENSORE TRACCIAMENTO VELOCITA' 4, IN CASO DI BLACK-OUT
     name: "Spia Velocità 4"
     icon: mdi:memory
 
-  vmc_master_spia_velocita_iperventilazione:                                    # [CONFIGURAZIONE, 214 RICHIAMI] [INTERFACCIA, 21 RICHIAMI] [AUTOMAZIONE, 349 RICHIAMI] SENSORE TRACCIAMENTO VELOCITA' IPERVENTILAZIONE, IN CASO DI BLACK-OUT
+  vmc_master_spia_velocita_iperventilazione:                                    # [CONFIGURAZIONE, 214 RICHIAMI] [INTERFACCIA, 22 RICHIAMI] [AUTOMAZIONE, 349 RICHIAMI] SENSORE TRACCIAMENTO VELOCITA' IPERVENTILAZIONE, IN CASO DI BLACK-OUT
     name: "Spia Velocità Iperventilazione"
     icon: mdi:memory
 
-  vmc_master_spia_velocita_notturna:                                            # [CONFIGURAZIONE, 214 RICHIAMI] [INTERFACCIA, 21 RICHIAMI] [AUTOMAZIONE, 349 RICHIAMI] SENSORE TRACCIAMENTO VELOCITA' NOTTURNA, IN CASO DI BLACK-OUT
+  vmc_master_spia_velocita_notturna:                                            # [CONFIGURAZIONE, 214 RICHIAMI] [INTERFACCIA, 22 RICHIAMI] [AUTOMAZIONE, 349 RICHIAMI] SENSORE TRACCIAMENTO VELOCITA' NOTTURNA, IN CASO DI BLACK-OUT
     name: "Spia Velocità Notturna"
     icon: mdi:memory
 
-  vmc_master_spia_velocita_freecooling:                                         # [CONFIGURAZIONE, 214 RICHIAMI] [INTERFACCIA, 21 RICHIAMI] [AUTOMAZIONE, 349 RICHIAMI] SENSORE TRACCIAMENTO VELOCITA' FREE-COOLING, IN CASO DI BLACK-OUT
+  vmc_master_spia_velocita_freecooling:                                         # [CONFIGURAZIONE, 214 RICHIAMI] [INTERFACCIA, 22 RICHIAMI] [AUTOMAZIONE, 349 RICHIAMI] SENSORE TRACCIAMENTO VELOCITA' FREE-COOLING, IN CASO DI BLACK-OUT
     name: "Spia Velocità Free Cool./Heat."
     icon: mdi:memory    
 
@@ -4990,35 +4978,35 @@ input_boolean:
     name: "Spia all'interno del Calendario Domenica 2°"
     icon: mdi:memory
 
-  vmc_master_spia_velocita_0_un_solo_avvio:                                     # [CONFIGURAZIONE, 45 RICHIAMI] [INTERFACCIA, 12 RICHIAMI] [AUTOMAZIONE, 217 RICHIAMI] SENSORE DI SUPPORTO NELL'AUTOMAZIONE PER IL RIPRISTINO DELLA VELOCITA' 0, IN CASO SUPERAMENTO del Lim. Δ P. di Rugiada
+  vmc_master_spia_velocita_0_un_solo_avvio:                                     # [CONFIGURAZIONE, 45 RICHIAMI] [INTERFACCIA, 12 RICHIAMI] [AUTOMAZIONE, 219 RICHIAMI] SENSORE DI SUPPORTO NELL'AUTOMAZIONE PER IL RIPRISTINO DELLA VELOCITA' 0, IN CASO SUPERAMENTO del Lim. Δ P. di Rugiada
     name: "Spia Velocità 0 1° Avvio"
     icon: mdi:memory
 
-  vmc_master_spia_velocita_1_un_solo_avvio:                                     # [CONFIGURAZIONE, 53 RICHIAMI] [INTERFACCIA, 28 RICHIAMI] [AUTOMAZIONE, 224 RICHIAMI] SENSORE DI SUPPORTO NELL'AUTOMAZIONE PER IL RIPRISTINO DELLA VELOCITA' 1, IN CASO SUPERAMENTO del Lim. Δ P. di Rugiada
+  vmc_master_spia_velocita_1_un_solo_avvio:                                     # [CONFIGURAZIONE, 53 RICHIAMI] [INTERFACCIA, 28 RICHIAMI] [AUTOMAZIONE, 226 RICHIAMI] SENSORE DI SUPPORTO NELL'AUTOMAZIONE PER IL RIPRISTINO DELLA VELOCITA' 1, IN CASO SUPERAMENTO del Lim. Δ P. di Rugiada
     name: "Spia Velocità 1 1° Avvio"
     icon: mdi:memory
 
-  vmc_master_spia_velocita_2_un_solo_avvio:                                     # [CONFIGURAZIONE, 53 RICHIAMI] [INTERFACCIA, 28 RICHIAMI] [AUTOMAZIONE, 220 RICHIAMI] SENSORE DI SUPPORTO NELL'AUTOMAZIONE PER IL RIPRISTINO DELLA VELOCITA' 2, IN CASO SUPERAMENTO del Lim. Δ P. di Rugiada
+  vmc_master_spia_velocita_2_un_solo_avvio:                                     # [CONFIGURAZIONE, 53 RICHIAMI] [INTERFACCIA, 28 RICHIAMI] [AUTOMAZIONE, 222 RICHIAMI] SENSORE DI SUPPORTO NELL'AUTOMAZIONE PER IL RIPRISTINO DELLA VELOCITA' 2, IN CASO SUPERAMENTO del Lim. Δ P. di Rugiada
     name: "Spia Velocità 2 1° Avvio"
     icon: mdi:memory
 
-  vmc_master_spia_velocita_3_un_solo_avvio:                                     # [CONFIGURAZIONE, 53 RICHIAMI] [INTERFACCIA, 28 RICHIAMI] [AUTOMAZIONE, 220 RICHIAMI] SENSORE DI SUPPORTO NELL'AUTOMAZIONE PER IL RIPRISTINO DELLA VELOCITA' 3, IN CASO SUPERAMENTO del Lim. Δ P. di Rugiada
+  vmc_master_spia_velocita_3_un_solo_avvio:                                     # [CONFIGURAZIONE, 53 RICHIAMI] [INTERFACCIA, 28 RICHIAMI] [AUTOMAZIONE, 222 RICHIAMI] SENSORE DI SUPPORTO NELL'AUTOMAZIONE PER IL RIPRISTINO DELLA VELOCITA' 3, IN CASO SUPERAMENTO del Lim. Δ P. di Rugiada
     name: "Spia Velocità 3 1° Avvio"
     icon: mdi:memory
 
-  vmc_master_spia_velocita_4_un_solo_avvio:                                     # [CONFIGURAZIONE, 53 RICHIAMI] [INTERFACCIA, 28 RICHIAMI] [AUTOMAZIONE, 220 RICHIAMI] SENSORE DI SUPPORTO NELL'AUTOMAZIONE PER IL RIPRISTINO DELLA VELOCITA' 4, IN CASO SUPERAMENTO del Lim. Δ P. di Rugiada
+  vmc_master_spia_velocita_4_un_solo_avvio:                                     # [CONFIGURAZIONE, 53 RICHIAMI] [INTERFACCIA, 28 RICHIAMI] [AUTOMAZIONE, 222 RICHIAMI] SENSORE DI SUPPORTO NELL'AUTOMAZIONE PER IL RIPRISTINO DELLA VELOCITA' 4, IN CASO SUPERAMENTO del Lim. Δ P. di Rugiada
     name: "Spia Velocità 4 1° Avvio"
     icon: mdi:memory
 
-  vmc_master_spia_velocita_iperventilazione_un_solo_avvio:                      # [CONFIGURAZIONE, 53 RICHIAMI] [INTERFACCIA, 28 RICHIAMI] [AUTOMAZIONE, 220 RICHIAMI] SENSORE DI SUPPORTO NELL'AUTOMAZIONE PER IL RIPRISTINO DELLA VELOCITA' IPERVENTILAZIONE, IN CASO SUPERAMENTO del Lim. Δ P. di Rugiada
+  vmc_master_spia_velocita_iperventilazione_un_solo_avvio:                      # [CONFIGURAZIONE, 53 RICHIAMI] [INTERFACCIA, 28 RICHIAMI] [AUTOMAZIONE, 222 RICHIAMI] SENSORE DI SUPPORTO NELL'AUTOMAZIONE PER IL RIPRISTINO DELLA VELOCITA' IPERVENTILAZIONE, IN CASO SUPERAMENTO del Lim. Δ P. di Rugiada
     name: "Spia Velocità Iperventilazione 1° Avvio"
     icon: mdi:memory
 
-  vmc_master_spia_velocita_notturna_un_solo_avvio:                              # [CONFIGURAZIONE, 53 RICHIAMI] [INTERFACCIA, 28 RICHIAMI] [AUTOMAZIONE, 220 RICHIAMI] SENSORE DI SUPPORTO NELL'AUTOMAZIONE PER IL RIPRISTINO DELLA VELOCITA' NOTTURNA, IN CASO SUPERAMENTO del Lim. Δ P. di Rugiada
+  vmc_master_spia_velocita_notturna_un_solo_avvio:                              # [CONFIGURAZIONE, 53 RICHIAMI] [INTERFACCIA, 28 RICHIAMI] [AUTOMAZIONE, 222 RICHIAMI] SENSORE DI SUPPORTO NELL'AUTOMAZIONE PER IL RIPRISTINO DELLA VELOCITA' NOTTURNA, IN CASO SUPERAMENTO del Lim. Δ P. di Rugiada
     name: "Spia Velocità notturna 1° Avvio"
     icon: mdi:memory
 
-  vmc_master_spia_velocita_freecooling_un_solo_avvio:                           # [CONFIGURAZIONE, 91 RICHIAMI] [INTERFACCIA, 28 RICHIAMI] [AUTOMAZIONE, 231 RICHIAMI] SENSORE DI SUPPORTO NELL'AUTOMAZIONE PER IL RIPRISTINO DELLA VELOCITA' FREE-COOLING, IN CASO SUPERAMENTO del Lim. Δ P. di Rugiada
+  vmc_master_spia_velocita_freecooling_un_solo_avvio:                           # [CONFIGURAZIONE, 91 RICHIAMI] [INTERFACCIA, 28 RICHIAMI] [AUTOMAZIONE, 233 RICHIAMI] SENSORE DI SUPPORTO NELL'AUTOMAZIONE PER IL RIPRISTINO DELLA VELOCITA' FREE-COOLING, IN CASO SUPERAMENTO del Lim. Δ P. di Rugiada
     name: "Spia Velocità freecooling 1° Avvio"
     icon: mdi:memory
 
@@ -5104,7 +5092,7 @@ input_boolean:
     name: "Spia Velocità Free Cool./Heat. CO₂ e/o VOC"
     icon: mdi:memory        
 
-  vmc_master_spia_velocita_1_co2_o_voc_pdr:                                     # [CONFIGURAZIONE, 92 RICHIAMI] [INTERFACCIA, 11 RICHIAMI] [AUTOMAZIONE, 247 RICHIAMI] SENSORE TRACCIAMENTO VELOCITA' 1, IN CASO DI AVVIO PUNTO DI RUGIADA A VELOCITA 1 E INQUINANTI CO2 E VOC ASSENTI MA PRECEDENTEMENTE PRESENTI A VELOCITA 0
+  vmc_master_spia_velocita_1_co2_o_voc_pdr:                                     # [CONFIGURAZIONE, 92 RICHIAMI] [INTERFACCIA, 11 RICHIAMI] [AUTOMAZIONE, 248 RICHIAMI] SENSORE TRACCIAMENTO VELOCITA' 1, IN CASO DI AVVIO PUNTO DI RUGIADA A VELOCITA 1 E INQUINANTI CO2 E VOC ASSENTI MA PRECEDENTEMENTE PRESENTI A VELOCITA 0
     name: "Spia Velocità 1 CO₂ e/o VOC Vs PdR"
     icon: mdi:memory
 
@@ -6903,6 +6891,7 @@ script:
             - sensor.vmc_master_alert_avvio_interfaccia
             - sensor.vmc_master_trend_muffa
             - sensor.vmc_master_trend_muffa_level
+            - sensor.vmc_master_trend_muffa_level_numeric
             - input_text.vmc_master_nome_da_inserire
             - input_text.vmc_master_ip_insert
             - input_text.vmc_master_last_temp_external_entity

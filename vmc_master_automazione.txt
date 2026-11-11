@@ -15020,6 +15020,50 @@ actions:
           precedentemente Armato ed Attivato -> Velocità 1 se Spia Inquinanti ON
       - conditions:
           - condition: trigger
+            id:
+              - ' Disattivazione Lim. Δ P. di Rugiada, precedentemente Armato ed Attivato'
+              - ' Disattivazione Lim. Δ P. di Rugiada, precedentemente Armato ed Attivato e Spia Inquinanti ON'
+          - condition: template
+            alias: >-
+              Interruttore PdR spento mentre la VMC era Non disponibile, OFF-Line o in ripristino dopo un
+              Black-Out: a cambiare non è l'interruttore PdR e tutte le memorie PdR accese sono precedenti
+              al suo spegnimento (le memorie accese dopo, ad esempio dal Free, non vengono toccate)
+            value_template: >-
+              {%- set pdr = states.input_boolean.vmc_master_opzioni_accendi_spegni_vmc_vs_pdr -%}
+              {%- set memorie = expand([
+                'input_boolean.vmc_master_spia_velocita_0_un_solo_avvio',
+                'input_boolean.vmc_master_spia_velocita_1_un_solo_avvio',
+                'input_boolean.vmc_master_spia_velocita_2_un_solo_avvio',
+                'input_boolean.vmc_master_spia_velocita_3_un_solo_avvio',
+                'input_boolean.vmc_master_spia_velocita_4_un_solo_avvio',
+                'input_boolean.vmc_master_spia_velocita_notturna_un_solo_avvio',
+                'input_boolean.vmc_master_spia_velocita_freecooling_un_solo_avvio',
+                'input_boolean.vmc_master_spia_velocita_iperventilazione_un_solo_avvio'
+              ]) | selectattr('state', 'eq', 'on') | list -%}
+              {{ trigger.entity_id != 'input_boolean.vmc_master_opzioni_accendi_spegni_vmc_vs_pdr'
+                 and pdr is not none and memorie | length > 0
+                 and (memorie | map(attribute='last_changed') | max) < pdr.last_changed }}
+        sequence:
+          - data: {}
+            target:
+              entity_id:
+                - input_boolean.vmc_master_spia_velocita_0_un_solo_avvio
+                - input_boolean.vmc_master_spia_velocita_1_un_solo_avvio
+                - input_boolean.vmc_master_spia_velocita_2_un_solo_avvio
+                - input_boolean.vmc_master_spia_velocita_3_un_solo_avvio
+                - input_boolean.vmc_master_spia_velocita_4_un_solo_avvio
+                - input_boolean.vmc_master_spia_velocita_notturna_un_solo_avvio
+                - input_boolean.vmc_master_spia_velocita_freecooling_un_solo_avvio
+                - input_boolean.vmc_master_spia_velocita_iperventilazione_un_solo_avvio
+                - input_boolean.vmc_master_spia_velocita_1_co2_o_voc_pdr
+            action: input_boolean.turn_off
+            alias: Azzera le memorie PdR, come allo spegnimento dell'interruttore con la VMC ON-Line
+        alias: >-
+          Disattivazione: Interruttore PdR spento mentre la VMC era Non disponibile, OFF-Line o in
+          ripristino dopo un Black-Out -> azzera solo le memorie PdR; nessun comando alla VMC, la
+          velocità resta quella ripristinata (nessuna collisione con il ripristino dopo il Black-Out)
+      - conditions:
+          - condition: trigger
             id: TeVsTi Free-Heating -> Imposta Velocità 0
         sequence:
           - variables:
