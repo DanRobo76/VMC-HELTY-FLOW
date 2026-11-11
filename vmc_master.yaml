@@ -1793,7 +1793,7 @@ template:
         icon: mdi:alarm-light-outline
 
   - sensor:
-      - default_entity_id: sensor.vmc_master_congelamento_verifica_soglia       # [CONFIGURAZIONE, 14 RICHIAMI] [INTERFACCIA, 34 RICHIAMI] [AUTOMAZIONE, 4 RICHIAMI] SENSORE MONITORAGGIO CONGELAMENTO - ATTENZIONE LEGGE IL SENSORE TEMPERATURA ESTERNA SELEZIONATA DALL'INTERFACCIA
+      - default_entity_id: sensor.vmc_master_congelamento_verifica_soglia       # [CONFIGURAZIONE, 16 RICHIAMI] [INTERFACCIA, 34 RICHIAMI] [AUTOMAZIONE, 4 RICHIAMI] SENSORE MONITORAGGIO CONGELAMENTO - ATTENZIONE LEGGE IL SENSORE TEMPERATURA ESTERNA SELEZIONATA DALL'INTERFACCIA
         name: "VMC Congelamento ≤ -18 [°C] Temp. Esterna ?"
         unique_id: vmc_master_congelamento_verifica_soglia
         state: >
@@ -1817,7 +1817,7 @@ template:
         icon: mdi:alarm-light-outline
 
   - sensor:
-      - default_entity_id: sensor.vmc_master_delta_temp_verifica_soglia         # [CONFIGURAZIONE, 34 RICHIAMI] [INTERFACCIA, 19 RICHIAMI] [AUTOMAZIONE, 20 RICHIAMI] SENSORE MONITORAGGIO DIFFERENZA DI TEMPERATURA (> 23 GRADI [°C]) NELLA VMC -> VELOCITA' 1 DELL'UNITA' PER DEFAULT, IMPARTITO DAL COSTRUTTORE - ATTENZIONE I SENSORI IMPIEGATI SONO CORRELATI ALLA VMC
+      - default_entity_id: sensor.vmc_master_delta_temp_verifica_soglia         # [CONFIGURAZIONE, 36 RICHIAMI] [INTERFACCIA, 19 RICHIAMI] [AUTOMAZIONE, 20 RICHIAMI] SENSORE MONITORAGGIO DIFFERENZA DI TEMPERATURA (> 23 GRADI [°C]) NELLA VMC -> VELOCITA' 1 DELL'UNITA' PER DEFAULT, IMPARTITO DAL COSTRUTTORE - ATTENZIONE I SENSORI IMPIEGATI SONO CORRELATI ALLA VMC
         name: "VMC Sensori Int. Δ Temp. > 23 [°C] ?"
         unique_id: vmc_master_delta_temp_verifica_soglia
         state: >
@@ -2632,7 +2632,7 @@ template:
         icon: mdi:alarm-light-outline
 
   - sensor:
-      - default_entity_id: sensor.vmc_master_alert_monitoraggio_congelamento    # [CONFIGURAZIONE, 6 RICHIAMI] [INTERFACCIA, 1 RICHIAMO] [AUTOMAZIONE, 0 RICHIAMI] SENSORE POP-UP MONITORAGGIO VMC Congelamento ≤ -18 [°C] Temp. Esterna ?; SENSORE MONITORAGGIO SCHEDA AVVISI - NOTA: Entrambi i sensori vmc_master_alert_monitoraggio_congelamento e vmc_master_alert_monitoraggio_delta risultano in stato "Allerta" quando: Temperatura esterna ≤ -18°C e Temperatura interna > 5°C PERTANTO VERRA' DATA TRAMITE AUTOMAZIONE PRIORITA' A: Temperatura esterna ≤ -18°C
+      - default_entity_id: sensor.vmc_master_alert_monitoraggio_congelamento    # [CONFIGURAZIONE, 4 RICHIAMI] [INTERFACCIA, 1 RICHIAMO] [AUTOMAZIONE, 0 RICHIAMI] SENSORE POP-UP MONITORAGGIO VMC Congelamento ≤ -18 [°C] Temp. Esterna ?; SENSORE MONITORAGGIO SCHEDA AVVISI - NOTA: Entrambi i sensori vmc_master_alert_monitoraggio_congelamento e vmc_master_alert_monitoraggio_delta risultano in stato "Allerta" quando: Temperatura esterna ≤ -18°C e Temperatura interna > 5°C PERTANTO VERRA' DATA TRAMITE AUTOMAZIONE PRIORITA' A: Temperatura esterna ≤ -18°C
         name: "Monitoraggio Congelamento"
         unique_id: vmc_master_alert_monitoraggio_congelamento
         state: >
@@ -2650,7 +2650,7 @@ template:
         icon: mdi:alarm-light-outline
 
   - sensor:
-      - default_entity_id: sensor.vmc_master_alert_monitoraggio_delta           # [CONFIGURAZIONE, 6 RICHIAMI] [INTERFACCIA, 2 RICHIAMI] [AUTOMAZIONE, 0 RICHIAMI] SENSORE POP-UP MONITORAGGIO VMC Sensori Int. Δ Temp. > 23 [°C] ?; SENSORE MONITORAGGIO SCHEDA AVVISI - NOTA: Entrambi i sensori vmc_master_alert_monitoraggio_congelamento e vmc_master_alert_monitoraggio_delta risultano in stato "Allerta" quando: Temperatura esterna ≤ -18°C e Temperatura interna > 5°C PERTANTO VERRA' DATA TRAMITE AUTOMAZIONE PRIORITA' A: Temperatura esterna ≤ -18°C
+      - default_entity_id: sensor.vmc_master_alert_monitoraggio_delta           # [CONFIGURAZIONE, 4 RICHIAMI] [INTERFACCIA, 2 RICHIAMI] [AUTOMAZIONE, 0 RICHIAMI] SENSORE POP-UP MONITORAGGIO VMC Sensori Int. Δ Temp. > 23 [°C] ?; SENSORE MONITORAGGIO SCHEDA AVVISI - NOTA: Entrambi i sensori vmc_master_alert_monitoraggio_congelamento e vmc_master_alert_monitoraggio_delta risultano in stato "Allerta" quando: Temperatura esterna ≤ -18°C e Temperatura interna > 5°C PERTANTO VERRA' DATA TRAMITE AUTOMAZIONE PRIORITA' A: Temperatura esterna ≤ -18°C
         name: "Monitoraggio Diff. Temp. Int-Est > 23 [°C]"
         unique_id: vmc_master_alert_monitoraggio_delta
         state: >
@@ -18122,9 +18122,10 @@ automation:
       - trigger: state
         entity_id: sensor.vmc_master_congelamento_verifica_soglia
         to: "[No ma Prossimo]"
-      - trigger: state
-        entity_id: sensor.vmc_master_alert_monitoraggio_congelamento
-        to: "Nessuna Allerta"
+      - trigger: state                                                   # NESSUNA ALLERTA SOLO A PERICOLO RIENTRATO (NON DA ALLERTA A PROSSIMA)
+        entity_id: sensor.vmc_master_congelamento_verifica_soglia
+        from: ["Si", "[No ma Prossimo]"]
+        to: "No"
 
       # Diff. Temp. Int-Est > 23 [°C]
       - trigger: state
@@ -18133,9 +18134,10 @@ automation:
       - trigger: state
         entity_id: sensor.vmc_master_delta_temp_verifica_soglia
         to: "[No ma Prossimo]"
-      - trigger: state
-        entity_id: sensor.vmc_master_alert_monitoraggio_delta
-        to: "Nessuna Allerta"
+      - trigger: state                                                   # NESSUNA ALLERTA SOLO A PERICOLO RIENTRATO (NON DA ALLERTA A PROSSIMA)
+        entity_id: sensor.vmc_master_delta_temp_verifica_soglia
+        from: ["Si", "[No ma Prossimo]"]
+        to: "No"
 
     conditions:
       - condition: state
@@ -18211,7 +18213,7 @@ automation:
             sequence:
               - action: script.vmc_master_audio_allerta_congelamento
 
-          - conditions: "{{ trigger.entity_id == 'sensor.vmc_master_alert_monitoraggio_congelamento' and trigger.to_state.state == 'Nessuna Allerta' }}"
+          - conditions: "{{ trigger.entity_id == 'sensor.vmc_master_congelamento_verifica_soglia' and trigger.to_state.state == 'No' }}"
             sequence:
               - action: script.vmc_master_audio_nessuna_allerta_congelamento
 
@@ -18224,7 +18226,7 @@ automation:
             sequence:
               - action: script.vmc_master_audio_allerta_diff_temp
 
-          - conditions: "{{ trigger.entity_id == 'sensor.vmc_master_alert_monitoraggio_delta' and trigger.to_state.state == 'Nessuna Allerta' }}"
+          - conditions: "{{ trigger.entity_id == 'sensor.vmc_master_delta_temp_verifica_soglia' and trigger.to_state.state == 'No' }}"
             sequence:
               - action: script.vmc_master_audio_nessuna_allerta_diff_temp
 
