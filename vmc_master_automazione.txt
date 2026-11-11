@@ -27,7 +27,7 @@
 #                                                                                                                                                                                                                         #
 # PER LICENZE COMMERCIALI O USI PARTICOLARI CONTATTARE L'AUTORE: danilo.robotti@gmail.com                                                                                                                                 #
 #                                                                                                                                                                                                                         #
-# DATA: 9 NOVEMBRE 2026                                                                                                                                                                                                   #
+# DATA: 11 NOVEMBRE 2026                                                                                                                                                                                                  #
 #                                                                                                                                                                                                                         #
 # Impiego dell'Intelligenza Artificiale                                                                                                                                                                                   #
 # Nello sviluppo del presente software l'autore si è avvalso anche di strumenti di intelligenza artificiale.                                                                                                              #
@@ -272,6 +272,7 @@ triggers:
     trigger: state
   - entity_id:
       - input_boolean.vmc_master_opzioni_monitoraggio_sensori
+    from: 'off'
     to: 'on'
     id: Opzioni Monitoraggio On
     alias: Trigger Attivazione Finestra Monitoraggio
@@ -10788,6 +10789,19 @@ actions:
                 - input_boolean.vmc_master_opzione_finestra_clona
             enabled: true
             action: input_boolean.turn_off
+          - alias: >-
+              Aggiorna gli elenchi delle Entità selezionabili (Temperatura,
+              Umidità, Anidride Carbonica, Dispositivo Mobile, Media Player)
+            action: script.turn_on
+            target:
+              entity_id:
+                - script.vmc_master_aggiorna_elenco_entita_temperatura_esterna
+                - script.vmc_master_aggiorna_elenco_entita_temperatura_interna
+                - script.vmc_master_aggiorna_elenco_entita_umidita_esterna
+                - script.vmc_master_aggiorna_elenco_entita_umidita_interna
+                - script.vmc_master_aggiorna_elenco_entita_co2_interna
+                - script.vmc_master_aggiorna_elenco_entita_notifica_dispositivo
+                - script.vmc_master_aggiorna_elenco_entita_media_player
         alias: Trigger Attivazione Finestra Opzioni
       - conditions:
           - condition: trigger
@@ -28381,7 +28395,6 @@ actions:
       - conditions:
           - condition: trigger
             id:
-              - ' Opzioni On'
               - VMC Master Save Selected Temperatura Esterna Entity
         sequence:
           - action: script.turn_on
@@ -28396,7 +28409,6 @@ actions:
           - condition: trigger
             id:
               - VMC Master Save Selected Temperatura Interna Entity
-              - ' Opzioni On'
         sequence:
           - action: script.turn_on
             metadata: {}
@@ -28409,7 +28421,6 @@ actions:
       - conditions:
           - condition: trigger
             id:
-              - ' Opzioni On'
               - VMC Master Save Selected Umidità Esterna Entity
         sequence:
           - action: script.turn_on
@@ -28423,7 +28434,6 @@ actions:
       - conditions:
           - condition: trigger
             id:
-              - ' Opzioni On'
               - VMC Master Save Selected Umidità Interna Entity
         sequence:
           - action: script.turn_on
@@ -28437,7 +28447,6 @@ actions:
       - conditions:
           - condition: trigger
             id:
-              - ' Opzioni On'
               - VMC Master Save Selected CO2 Interna Entity
         sequence:
           - action: script.turn_on
@@ -28451,7 +28460,6 @@ actions:
       - conditions:
           - condition: trigger
             id:
-              - ' Opzioni On'
               - VMC Master Save Selected Dispositivo Interna Entity
         sequence:
           - action: script.turn_on
@@ -28465,7 +28473,6 @@ actions:
       - conditions:
           - condition: trigger
             id:
-              - ' Opzioni On'
               - VMC Master Save Selected Media Player Interna Entity
         sequence:
           - action: script.turn_on
