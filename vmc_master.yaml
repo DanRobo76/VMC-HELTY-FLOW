@@ -211,53 +211,7 @@ sensor:
 ################### Fine Creazione Sensori Principali della VMC  ##########################################################################################################################################################
 
 ################### Inizio Creazione Sensori Statistici per la Valutazione Formazione Muffa [Vedere Sensori di Monitoraggio Muffa] ########################################################################################
-  - platform: statistics
-    name: vmc_master_temp_interna_4w                                            # [CONFIGURAZIONE, 3 RICHIAMI] [INTERFACCIA, 1 RICHIAMO] [AUTOMAZIONE, 0 RICHIAMI]
-    entity_id: sensor.vmc_master_temp_interna_numeric
-    unique_id: vmc_master_temp_interna_4w
-    state_characteristic: mean
-    max_age:
-      days: 28
-
-  - platform: statistics
-    name: vmc_master_hum_interna_4w                                             # [CONFIGURAZIONE, 3 RICHIAMI] [INTERFACCIA, 1 RICHIAMO] [AUTOMAZIONE, 0 RICHIAMI]
-    entity_id: sensor.vmc_master_hum_interna_numeric
-    unique_id: vmc_master_hum_interna_4w
-    state_characteristic: mean
-    max_age:
-      days: 28
-
-  - platform: statistics
-    name: vmc_master_temp_interna_8w                                            # [CONFIGURAZIONE, 3 RICHIAMI] [INTERFACCIA, 1 RICHIAMO] [AUTOMAZIONE, 0 RICHIAMI]
-    entity_id: sensor.vmc_master_temp_interna_numeric
-    unique_id: vmc_master_temp_interna_8w
-    state_characteristic: mean
-    max_age:
-      days: 56
-
-  - platform: statistics
-    name: vmc_master_hum_interna_8w                                             # [CONFIGURAZIONE, 3 RICHIAMI] [INTERFACCIA, 1 RICHIAMO] [AUTOMAZIONE, 0 RICHIAMI]
-    entity_id: sensor.vmc_master_hum_interna_numeric
-    unique_id: vmc_master_hum_interna_8w
-    state_characteristic: mean
-    max_age:
-      days: 56
-
-  - platform: statistics
-    name: vmc_master_temp_interna_12w                                           # [CONFIGURAZIONE, 3 RICHIAMI] [INTERFACCIA, 1 RICHIAMO] [AUTOMAZIONE, 0 RICHIAMI]
-    entity_id: sensor.vmc_master_temp_interna_numeric
-    unique_id: vmc_master_temp_interna_12w
-    state_characteristic: mean
-    max_age:
-      days: 84
-
-  - platform: statistics
-    name: vmc_master_hum_interna_12w                                            # [CONFIGURAZIONE, 3 RICHIAMI] [INTERFACCIA, 1 RICHIAMO] [AUTOMAZIONE, 0 RICHIAMI]
-    entity_id: sensor.vmc_master_hum_interna_numeric
-    unique_id: vmc_master_hum_interna_12w
-    state_characteristic: mean
-    max_age:
-      days: 84
+  # LE MEDIE DI 4, 8 E 12 SETTIMANE PER IL RISCHIO MUFFA SONO ORA CALCOLATE DALLE STATISTICHE A LUNGO TERMINE: VEDERE "Inizio Creazione Sensori di Monitoraggio Muffa" (PANNELLO INFORMAZIONI, PUNTO 19)
 ################### Fine Creazione Sensori Statistici per la Valutazione Formazione Muffa [Vedere Sensori di Monitoraggio Muffa] ##########################################################################################
 
 ################### Inizio Creazione Sensori di Lettura Collegamento tramite Status IP, Nome, Stato Ventola, Stato Sensoristico, Stato Led Pannello della VMC  ############################################################
@@ -338,7 +292,7 @@ template:
 
 ################### Inizio Creazione Sensori di Lettura TEMPERATURA ESTERNA, INTERNA E UMIDITA' ESTERNA, INTERNA INSTALLATE IN HOME ASSISTANT  ###########################################################################
   - sensor:
-      - default_entity_id: sensor.vmc_master_temperatura_esterna_selezionata    # [CONFIGURAZIONE, 4 RICHIAMI] [INTERFACCIA, 1 RICHIAMO] [AUTOMAZIONE, 2 RICHIAMI]
+      - default_entity_id: sensor.vmc_master_temperatura_esterna_selezionata    # [CONFIGURAZIONE, 4 RICHIAMI] [INTERFACCIA, 3 RICHIAMI] [AUTOMAZIONE, 2 RICHIAMI]
         name: "VMC Master Temp. Ext. Selezionata"
         unique_id: vmc_master_temperatura_esterna_selezionata
         state: >
@@ -363,7 +317,7 @@ template:
         device_class: temperature
 
   - sensor:
-      - default_entity_id: sensor.vmc_master_temperatura_interna_selezionata    # [CONFIGURAZIONE, 4 RICHIAMI] [INTERFACCIA, 1 RICHIAMO] [AUTOMAZIONE, 2 RICHIAMI]
+      - default_entity_id: sensor.vmc_master_temperatura_interna_selezionata    # [CONFIGURAZIONE, 4 RICHIAMI] [INTERFACCIA, 3 RICHIAMI] [AUTOMAZIONE, 2 RICHIAMI]
         name: "VMC Master Temp. Int. Selezionata"
         unique_id: vmc_master_temperatura_interna_selezionata
         state: >
@@ -402,7 +356,7 @@ template:
         device_class: humidity
 
   - sensor:
-      - default_entity_id: sensor.vmc_master_umidita_interna_selezionata        # [CONFIGURAZIONE, 5 RICHIAMI] [INTERFACCIA, 1 RICHIAMO] [AUTOMAZIONE, 2 RICHIAMI]
+      - default_entity_id: sensor.vmc_master_umidita_interna_selezionata        # [CONFIGURAZIONE, 5 RICHIAMI] [INTERFACCIA, 3 RICHIAMI] [AUTOMAZIONE, 2 RICHIAMI]
         name: "VMC Master Umidità Int. Selezionata"
         unique_id: vmc_master_umidita_interna_selezionata
         state: >
@@ -416,7 +370,7 @@ template:
         device_class: humidity
 
   - sensor:
-      - default_entity_id: sensor.vmc_master_co2_interna_selezionata            # [CONFIGURAZIONE, 4 RICHIAMI] [INTERFACCIA, 1 RICHIAMO] [AUTOMAZIONE, 4 RICHIAMI]
+      - default_entity_id: sensor.vmc_master_co2_interna_selezionata            # [CONFIGURAZIONE, 4 RICHIAMI] [INTERFACCIA, 3 RICHIAMI] [AUTOMAZIONE, 4 RICHIAMI]
         name: "VMC Master CO₂ Int. Selezionata"
         unique_id: vmc_master_co2_interna_selezionata
         state: >
@@ -1140,14 +1094,16 @@ template:
         icon: mdi:home-thermometer
 
   - sensor:
-      - default_entity_id: sensor.vmc_master_temp_esterna_status                # [CONFIGURAZIONE, 32 RICHIAMI] [INTERFACCIA, 78 RICHIAMI] [AUTOMAZIONE, 39 RICHIAMI] SENSORE DI LETTURA TEMPERATUIRA ESTERNA MEMORIZZATA NEL SENSORE vmc_master_temperatura_esterna_selezionata + OFFSET MANUALE, PREVIA VERIFICA DI AVVENUTA LETTURA DEI DATI "SENSORI" MEMORIZZATI NELLA VMC
+      - default_entity_id: sensor.vmc_master_temp_esterna_status                # [CONFIGURAZIONE, 33 RICHIAMI] [INTERFACCIA, 80 RICHIAMI] [AUTOMAZIONE, 40 RICHIAMI] SENSORE DI LETTURA TEMPERATUIRA ESTERNA MEMORIZZATA NEL SENSORE vmc_master_temperatura_esterna_selezionata + OFFSET MANUALE, PREVIA VERIFICA DI AVVENUTA LETTURA DEI DATI "SENSORI" MEMORIZZATI NELLA VMC; SE L'ENTITA' SCELTA NON E' DISPONIBILE SI USA LA SONDA DELLA VMC SENZA OFFSET
         name: "Temperatura Ext. [°C]"
         unique_id: vmc_master_temp_esterna_status
         state: >
           {% set stati = ['unknown', 'unavailable', '-100', 'Non disponibile'] %}
           {% set temp_ext = states('sensor.vmc_master_temperatura_esterna_selezionata') %}
           {% if temp_ext in stati %}
-            Non disponibile
+            {#- Sensore scelto non disponibile: si usa la sonda della VMC, senza Offset (vedere Pannello Informazioni, Nota Sensori Scelti non Disponibili) -#}
+            {% set vmc = states('sensor.vmc_master_temp_esterna_status_senza_offset') | float(default=none) %}
+            {{ vmc | round(1) if vmc is not none else 'Non disponibile' }}
           {% else %}
             {% set temp_float = temp_ext | float(default=none) %}
             {% if temp_float == none %}
@@ -1159,7 +1115,7 @@ template:
         icon: mdi:home-thermometer-outline
 
   - sensor:
-      - default_entity_id: sensor.vmc_master_temp_esterna_status_senza_offset   # [CONFIGURAZIONE, 26 RICHIAMI] [INTERFACCIA, 4 RICHIAMI] [AUTOMAZIONE, 34 RICHIAMI] SENSORE DI LETTURA TEMPERATUIRA ESTERNA MEMORIZZATA NEL SENSORE DELLA VMC, PREVIA VERIFICA DI AVVENUTA LETTURA DEI DATI "SENSORI" MEMORIZZATI NELLA VMC; ATTENZIONE NELLA PRESUNZIONE NEL CALCOLO DI VERIFICA SE LA TEMPERATURA E' POSITIVA O NEGATIVA; SE IL PRIMO VALORE DEL SECONDO CAMPO [2] DELL'ARRAY E' 1 IL CALCOLO VERRA' ESEGUITO ESCLUDENDO IL PRIMO VALORE [2][1:] ES. 10200 -> 0200 -> -20,0 °C
+      - default_entity_id: sensor.vmc_master_temp_esterna_status_senza_offset   # [CONFIGURAZIONE, 27 RICHIAMI] [INTERFACCIA, 4 RICHIAMI] [AUTOMAZIONE, 34 RICHIAMI] SENSORE DI LETTURA TEMPERATUIRA ESTERNA MEMORIZZATA NEL SENSORE DELLA VMC, PREVIA VERIFICA DI AVVENUTA LETTURA DEI DATI "SENSORI" MEMORIZZATI NELLA VMC; ATTENZIONE NELLA PRESUNZIONE NEL CALCOLO DI VERIFICA SE LA TEMPERATURA E' POSITIVA O NEGATIVA; SE IL PRIMO VALORE DEL SECONDO CAMPO [2] DELL'ARRAY E' 1 IL CALCOLO VERRA' ESEGUITO ESCLUDENDO IL PRIMO VALORE [2][1:] ES. 10200 -> 0200 -> -20,0 °C
         name: "Temperatura Ext. [°C]"
         unique_id: vmc_master_temp_esterna_status_senza_offset
         state: >
@@ -1189,14 +1145,16 @@ template:
         icon: mdi:home-thermometer-outline
 
   - sensor:
-      - default_entity_id: sensor.vmc_master_temp_interna_status                # [CONFIGURAZIONE, 13 RICHIAMI] [INTERFACCIA, 77 RICHIAMI] [AUTOMAZIONE, 5 RICHIAMI] SENSORE DI LETTURA TEMPERATURA INTERNA MEMORIZZATA NEL SENSORE vmc_master_temperatura_interna_selezionata + OFFSET MANUALE
+      - default_entity_id: sensor.vmc_master_temp_interna_status                # [CONFIGURAZIONE, 14 RICHIAMI] [INTERFACCIA, 79 RICHIAMI] [AUTOMAZIONE, 6 RICHIAMI] SENSORE DI LETTURA TEMPERATURA INTERNA MEMORIZZATA NEL SENSORE vmc_master_temperatura_interna_selezionata + OFFSET MANUALE; SE L'ENTITA' SCELTA NON E' DISPONIBILE SI USA LA SONDA DELLA VMC SENZA OFFSET
         name: "Temperatura Int. [°C]"
         unique_id: vmc_master_temp_interna_status
         state: >
           {% set stati = ['unknown', 'unavailable', '-100', 'Non disponibile'] %}
           {% set temp_int = states('sensor.vmc_master_temperatura_interna_selezionata') %}
           {% if temp_int in stati %}
-            Non disponibile
+            {#- Sensore scelto non disponibile: si usa la sonda della VMC, senza Offset (vedere Pannello Informazioni, Nota Sensori Scelti non Disponibili) -#}
+            {% set vmc = states('sensor.vmc_master_temp_interna_status_senza_offset') | float(default=none) %}
+            {{ vmc | round(1) if vmc is not none else 'Non disponibile' }}
           {% else %}
             {% set temp_float = temp_int | float(default=none) %}
             {% if temp_float == none %}
@@ -1208,7 +1166,7 @@ template:
         icon: mdi:home-thermometer
 
   - sensor:
-      - default_entity_id: sensor.vmc_master_temp_interna_status_senza_offset   # [CONFIGURAZIONE, 6 RICHIAMI] [INTERFACCIA, 5 RICHIAMI] [AUTOMAZIONE, 0 RICHIAMI] SENSORE DI LETTURA TEMPERATURA INTERNA MEMORIZZATA NELLA VMC SENZA OFFSET MANUALE, PREVIA VERIFICA DI AVVENUTA LETTURA DEI DATI "SENSORI" MEMORIZZATI NELLA VMC; ATTENZIONE NELLA PRESUNZIONE NEL CALCOLO DI VERIFICA SE LA TEMPERATURA E' POSITIVA O NEGATIVA; SE IL PRIMO VALORE DEL PRIMO CAMPO [1] DELL'ARRAY E' 1 IL CALCOLO VERRA' ESEGUITO ESCLUDENDO IL PRIMO VALORE [1][1:] ES. 10200 -> 0200 -> -20,0 °C
+      - default_entity_id: sensor.vmc_master_temp_interna_status_senza_offset   # [CONFIGURAZIONE, 7 RICHIAMI] [INTERFACCIA, 5 RICHIAMI] [AUTOMAZIONE, 0 RICHIAMI] SENSORE DI LETTURA TEMPERATURA INTERNA MEMORIZZATA NELLA VMC SENZA OFFSET MANUALE, PREVIA VERIFICA DI AVVENUTA LETTURA DEI DATI "SENSORI" MEMORIZZATI NELLA VMC; ATTENZIONE NELLA PRESUNZIONE NEL CALCOLO DI VERIFICA SE LA TEMPERATURA E' POSITIVA O NEGATIVA; SE IL PRIMO VALORE DEL PRIMO CAMPO [1] DELL'ARRAY E' 1 IL CALCOLO VERRA' ESEGUITO ESCLUDENDO IL PRIMO VALORE [1][1:] ES. 10200 -> 0200 -> -20,0 °C
         name: "Temperatura Int. [°C]"
         unique_id: vmc_master_temp_interna_status_senza_offset
         state: >
@@ -1263,7 +1221,7 @@ template:
         icon: mdi:cloud-percent-outline
 
   - sensor:
-      - default_entity_id: sensor.vmc_master_umidita_interna_status             # [CONFIGURAZIONE, 13 RICHIAMI] [INTERFACCIA, 6 RICHIAMI] [AUTOMAZIONE, 5 RICHIAMI] SENSORE DI LETTURA UMIDITA' INTERNA MEMORIZZATA NEL SENSORE vmc_master_umidita_interna_selezionata + OFFSET MANUALE, PREVIA VERIFICA DI AVVENUTA LETTURA DEI DATI "SENSORI" MEMORIZZATI NELLA VMC
+      - default_entity_id: sensor.vmc_master_umidita_interna_status             # [CONFIGURAZIONE, 14 RICHIAMI] [INTERFACCIA, 8 RICHIAMI] [AUTOMAZIONE, 6 RICHIAMI] SENSORE DI LETTURA UMIDITA' INTERNA MEMORIZZATA NEL SENSORE vmc_master_umidita_interna_selezionata + OFFSET MANUALE, PREVIA VERIFICA DI AVVENUTA LETTURA DEI DATI "SENSORI" MEMORIZZATI NELLA VMC; SE L'ENTITA' SCELTA NON E' DISPONIBILE SI USA LA SONDA DELLA VMC SENZA OFFSET
         name: "Umidità Int. [%]"
         unique_id: vmc_master_umidita_interna_status
         state: >
@@ -1271,7 +1229,9 @@ template:
           {% set umidita_int = states('sensor.vmc_master_umidita_interna_selezionata') %}
           {% set offset = float(states('input_number.vmc_master_offset_umidita_interna')) %}
           {% if states('sensor.vmc_master_umidita_interna_selezionata') in stati %}
-            Non disponibile
+            {#- Sensore scelto non disponibile: si usa la sonda della VMC, senza Offset (vedere Pannello Informazioni, Nota Sensori Scelti non Disponibili) -#}
+            {% set vmc = states('sensor.vmc_master_umidita_interna_status_senza_offset') | float(default=none) %}
+            {{ vmc | round(1) if vmc is not none else 'Non disponibile' }}
           {% else %}
             {% set umidita_float = umidita_int | float(default=none) %}
             {% if umidita_float is none %}
@@ -1290,7 +1250,7 @@ template:
         icon: mdi:cloud-percent
 
   - sensor:
-      - default_entity_id: sensor.vmc_master_umidita_interna_status_senza_offset # [CONFIGURAZIONE, 5 RICHIAMI] [INTERFACCIA, 2 RICHIAMI] [AUTOMAZIONE, 0 RICHIAMI] SENSORE DI LETTURA UMIDITA' INTERNA MEMORIZZATA NELLA VMC SENZA OFFSET MANUALE, PREVIA VERIFICA DI AVVENUTA LETTURA DEI DATI "SENSORI" MEMORIZZATI NELLA VMC
+      - default_entity_id: sensor.vmc_master_umidita_interna_status_senza_offset # [CONFIGURAZIONE, 6 RICHIAMI] [INTERFACCIA, 2 RICHIAMI] [AUTOMAZIONE, 0 RICHIAMI] SENSORE DI LETTURA UMIDITA' INTERNA MEMORIZZATA NELLA VMC SENZA OFFSET MANUALE, PREVIA VERIFICA DI AVVENUTA LETTURA DEI DATI "SENSORI" MEMORIZZATI NELLA VMC
         name: "Umidità Int. [%]"
         unique_id: vmc_master_umidita_interna_status_senza_offset
         state: >
@@ -1316,16 +1276,22 @@ template:
         icon: mdi:cloud-percent
 
   - sensor:
-      - default_entity_id: sensor.vmc_master_co2_status                         # [CONFIGURAZIONE, 11 RICHIAMI] [INTERFACCIA, 15 RICHIAMI] [AUTOMAZIONE, 3 RICHIAMI] SENSORE DI LETTURA ANIDIRDE CARBONICA INTERNA MEMORIZZATA NEL SENSORE vmc_master_co2_interna_selezionata + OFFSET MANUALE, PREVIA VERIFICA DI AVVENUTA LETTURA DEI DATI "SENSORI" MEMORIZZATI NELLA VMC
+      - default_entity_id: sensor.vmc_master_co2_status                         # [CONFIGURAZIONE, 12 RICHIAMI] [INTERFACCIA, 17 RICHIAMI] [AUTOMAZIONE, 4 RICHIAMI] SENSORE DI LETTURA ANIDIRDE CARBONICA INTERNA MEMORIZZATA NEL SENSORE vmc_master_co2_interna_selezionata + OFFSET MANUALE, PREVIA VERIFICA DI AVVENUTA LETTURA DEI DATI "SENSORI" MEMORIZZATI NELLA VMC; SE L'ENTITA' SCELTA NON E' DISPONIBILE SI USA LA SONDA DELLA VMC SENZA OFFSET
         name: "CO₂ Int. [ppm]"
         unique_id: vmc_master_co2_status
         state: >
           {% set stati = ['unknown', 'unavailable', '-100', 'Non disponibile'] %}
           {% set co2_int = states('sensor.vmc_master_co2_interna_selezionata') %}
-          {% if co2_int == '-100' %}
-            -
-          {% elif co2_int in stati %}
-            Non disponibile
+          {% if co2_int in stati %}
+            {#- Sensore scelto non disponibile: si usa la sonda della VMC, senza Offset (vedere Pannello Informazioni, Nota Sensori Scelti non Disponibili) -#}
+            {% set vmc = states('sensor.vmc_master_co2_status_senza_offset') | float(default=none) %}
+            {% if vmc is not none and vmc > 0 %}
+              {{ vmc | round(0) }}
+            {% elif co2_int == '-100' %}
+              -
+            {% else %}
+              Non disponibile
+            {% endif %}
           {% else %}
             {% set co2_float = co2_int | float(default=0) %}
             {% set co2_with_offset = (co2_float + states('input_number.vmc_master_offset_co2') | float(default=0)) | round(0) %}
@@ -1342,7 +1308,7 @@ template:
         icon: mdi:molecule-co2
 
   - sensor:
-      - default_entity_id: sensor.vmc_master_co2_status_senza_offset            # [CONFIGURAZIONE, 5 RICHIAMI] [INTERFACCIA, 2 RICHIAMI] [AUTOMAZIONE, 0 RICHIAMI] SENSORE DI LETTURA ANIDRIDE CARBONICA INTERNA MEMORIZZATA NELLA VMC SENZA OFFSET MANUALE, PREVIA VERIFICA DI AVVENUTA LETTURA DEI DATI "SENSORI" MEMORIZZATI NELLA VMC
+      - default_entity_id: sensor.vmc_master_co2_status_senza_offset            # [CONFIGURAZIONE, 6 RICHIAMI] [INTERFACCIA, 2 RICHIAMI] [AUTOMAZIONE, 0 RICHIAMI] SENSORE DI LETTURA ANIDRIDE CARBONICA INTERNA MEMORIZZATA NELLA VMC SENZA OFFSET MANUALE, PREVIA VERIFICA DI AVVENUTA LETTURA DEI DATI "SENSORI" MEMORIZZATI NELLA VMC
         name: "Anidride Carbonica, CO₂ Int. [ppm]"
         unique_id: vmc_master_co2_status_senza_offset
         state: >
@@ -2132,22 +2098,123 @@ template:
 
 ################### Inizio Creazione Sensori di Monitoraggio Muffa ####################################################################################################################################
   - sensor:
-      - default_entity_id: sensor.vmc_master_temp_interna_numeric               # [CONFIGURAZIONE, 5 RICHIAMI] [INTERFACCIA, 1 RICHIAMO] [AUTOMAZIONE, 0 RICHIAMI]
+      - default_entity_id: sensor.vmc_master_temp_interna_numeric               # [CONFIGURAZIONE, 6 RICHIAMI] [INTERFACCIA, 1 RICHIAMO] [AUTOMAZIONE, 0 RICHIAMI]
         name: "Temp Interna Numerica"
         unit_of_measurement: "°C"
+        device_class: temperature
+        state_class: measurement                                                # REGISTRATO NEL DATABASE: HOME ASSISTANT NE CONSERVA LE STATISTICHE ORARIE A LUNGO TERMINE (USATE PER LE MEDIE DEL RISCHIO MUFFA)
         unique_id: vmc_master_temp_interna_numeric
         state: >
           {% set v = states('sensor.vmc_master_temp_interna_status') | float(none) %}
           {{ v if v is not none else none }}
 
   - sensor:
-      - default_entity_id: sensor.vmc_master_hum_interna_numeric                # [CONFIGURAZIONE, 5 RICHIAMI] [INTERFACCIA, 1 RICHIAMO] [AUTOMAZIONE, 0 RICHIAMI]
+      - default_entity_id: sensor.vmc_master_hum_interna_numeric                # [CONFIGURAZIONE, 7 RICHIAMI] [INTERFACCIA, 1 RICHIAMO] [AUTOMAZIONE, 0 RICHIAMI]
         name: "Umidità Interna Numerica"
         unit_of_measurement: "%"
+        device_class: humidity
+        state_class: measurement                                                # REGISTRATO NEL DATABASE: HOME ASSISTANT NE CONSERVA LE STATISTICHE ORARIE A LUNGO TERMINE (USATE PER LE MEDIE DEL RISCHIO MUFFA)
         unique_id: vmc_master_hum_interna_numeric
         state: >
           {% set v = states('sensor.vmc_master_umidita_interna_status') | float(none) %}
           {{ v if v is not none else none }}
+
+  - triggers:                                                                  # MEDIE DI TEMPERATURA E UMIDITA' INTERNE DELLE ULTIME 4, 8 E 12 SETTIMANE (PANNELLO INFORMAZIONI, PUNTO 19)
+      - trigger: homeassistant
+        event: start
+      - trigger: time_pattern
+        minutes: 5
+    actions:
+      - action: recorder.get_statistics                                         # LEGGE LE STATISTICHE ORARIE A LUNGO TERMINE (MAI CANCELLATE DAL DATABASE) DEGLI ULTIMI 84 GIORNI
+        data:
+          statistic_ids:
+            - sensor.vmc_master_temp_interna_numeric
+            - sensor.vmc_master_hum_interna_numeric
+          start_time: "{{ (now() - timedelta(days=84)).replace(microsecond=0).isoformat() }}"
+          period: hour
+          types:
+            - mean
+        response_variable: stat
+        continue_on_error: true
+    sensor:
+      - default_entity_id: sensor.vmc_master_temp_interna_media_4w        # [CONFIGURAZIONE, 3 RICHIAMI] [INTERFACCIA, 1 RICHIAMO] [AUTOMAZIONE, 0 RICHIAMI] MEDIA DELLE ULTIME 4 SETTIMANE (28 GIORNI) DALLE STATISTICHE ORARIE
+        name: "Temp. Interna Media 4 Settimane"
+        unique_id: vmc_master_temp_interna_media_4w
+        unit_of_measurement: "°C"
+        device_class: temperature
+        state: >
+          {%- set righe = (stat.statistics.get('sensor.vmc_master_temp_interna_numeric', []) if stat is defined and stat is mapping and stat.statistics is defined else []) -%}
+          {%- set inizio = (utcnow() - timedelta(days=28)).replace(microsecond=0).isoformat() -%}
+          {%- set valori = righe | selectattr('start', 'ge', inizio) | selectattr('mean', 'defined') | map(attribute='mean') | list -%}
+          {{ ((valori | sum) / (valori | length)) | round(2) if valori | length > 0 else none }}
+        icon: mdi:chart-bell-curve-cumulative
+      - default_entity_id: sensor.vmc_master_hum_interna_media_4w        # [CONFIGURAZIONE, 3 RICHIAMI] [INTERFACCIA, 1 RICHIAMO] [AUTOMAZIONE, 0 RICHIAMI] MEDIA DELLE ULTIME 4 SETTIMANE (28 GIORNI) DALLE STATISTICHE ORARIE
+        name: "Umidità Interna Media 4 Settimane"
+        unique_id: vmc_master_hum_interna_media_4w
+        unit_of_measurement: "%"
+        device_class: humidity
+        state: >
+          {%- set righe = (stat.statistics.get('sensor.vmc_master_hum_interna_numeric', []) if stat is defined and stat is mapping and stat.statistics is defined else []) -%}
+          {%- set inizio = (utcnow() - timedelta(days=28)).replace(microsecond=0).isoformat() -%}
+          {%- set valori = righe | selectattr('start', 'ge', inizio) | selectattr('mean', 'defined') | map(attribute='mean') | list -%}
+          {{ ((valori | sum) / (valori | length)) | round(2) if valori | length > 0 else none }}
+        icon: mdi:chart-bell-curve-cumulative
+      - default_entity_id: sensor.vmc_master_temp_interna_media_8w        # [CONFIGURAZIONE, 3 RICHIAMI] [INTERFACCIA, 1 RICHIAMO] [AUTOMAZIONE, 0 RICHIAMI] MEDIA DELLE ULTIME 8 SETTIMANE (56 GIORNI) DALLE STATISTICHE ORARIE
+        name: "Temp. Interna Media 8 Settimane"
+        unique_id: vmc_master_temp_interna_media_8w
+        unit_of_measurement: "°C"
+        device_class: temperature
+        state: >
+          {%- set righe = (stat.statistics.get('sensor.vmc_master_temp_interna_numeric', []) if stat is defined and stat is mapping and stat.statistics is defined else []) -%}
+          {%- set inizio = (utcnow() - timedelta(days=56)).replace(microsecond=0).isoformat() -%}
+          {%- set valori = righe | selectattr('start', 'ge', inizio) | selectattr('mean', 'defined') | map(attribute='mean') | list -%}
+          {{ ((valori | sum) / (valori | length)) | round(2) if valori | length > 0 else none }}
+        icon: mdi:chart-bell-curve-cumulative
+      - default_entity_id: sensor.vmc_master_hum_interna_media_8w        # [CONFIGURAZIONE, 3 RICHIAMI] [INTERFACCIA, 1 RICHIAMO] [AUTOMAZIONE, 0 RICHIAMI] MEDIA DELLE ULTIME 8 SETTIMANE (56 GIORNI) DALLE STATISTICHE ORARIE
+        name: "Umidità Interna Media 8 Settimane"
+        unique_id: vmc_master_hum_interna_media_8w
+        unit_of_measurement: "%"
+        device_class: humidity
+        state: >
+          {%- set righe = (stat.statistics.get('sensor.vmc_master_hum_interna_numeric', []) if stat is defined and stat is mapping and stat.statistics is defined else []) -%}
+          {%- set inizio = (utcnow() - timedelta(days=56)).replace(microsecond=0).isoformat() -%}
+          {%- set valori = righe | selectattr('start', 'ge', inizio) | selectattr('mean', 'defined') | map(attribute='mean') | list -%}
+          {{ ((valori | sum) / (valori | length)) | round(2) if valori | length > 0 else none }}
+        icon: mdi:chart-bell-curve-cumulative
+      - default_entity_id: sensor.vmc_master_temp_interna_media_12w        # [CONFIGURAZIONE, 3 RICHIAMI] [INTERFACCIA, 1 RICHIAMO] [AUTOMAZIONE, 0 RICHIAMI] MEDIA DELLE ULTIME 12 SETTIMANE (84 GIORNI) DALLE STATISTICHE ORARIE
+        name: "Temp. Interna Media 12 Settimane"
+        unique_id: vmc_master_temp_interna_media_12w
+        unit_of_measurement: "°C"
+        device_class: temperature
+        state: >
+          {%- set righe = (stat.statistics.get('sensor.vmc_master_temp_interna_numeric', []) if stat is defined and stat is mapping and stat.statistics is defined else []) -%}
+          {%- set inizio = (utcnow() - timedelta(days=84)).replace(microsecond=0).isoformat() -%}
+          {%- set valori = righe | selectattr('start', 'ge', inizio) | selectattr('mean', 'defined') | map(attribute='mean') | list -%}
+          {{ ((valori | sum) / (valori | length)) | round(2) if valori | length > 0 else none }}
+        icon: mdi:chart-bell-curve-cumulative
+      - default_entity_id: sensor.vmc_master_hum_interna_media_12w        # [CONFIGURAZIONE, 3 RICHIAMI] [INTERFACCIA, 1 RICHIAMO] [AUTOMAZIONE, 0 RICHIAMI] MEDIA DELLE ULTIME 12 SETTIMANE (84 GIORNI) DALLE STATISTICHE ORARIE
+        name: "Umidità Interna Media 12 Settimane"
+        unique_id: vmc_master_hum_interna_media_12w
+        unit_of_measurement: "%"
+        device_class: humidity
+        state: >
+          {%- set righe = (stat.statistics.get('sensor.vmc_master_hum_interna_numeric', []) if stat is defined and stat is mapping and stat.statistics is defined else []) -%}
+          {%- set inizio = (utcnow() - timedelta(days=84)).replace(microsecond=0).isoformat() -%}
+          {%- set valori = righe | selectattr('start', 'ge', inizio) | selectattr('mean', 'defined') | map(attribute='mean') | list -%}
+          {{ ((valori | sum) / (valori | length)) | round(2) if valori | length > 0 else none }}
+        icon: mdi:chart-bell-curve-cumulative
+      - default_entity_id: sensor.vmc_master_rischio_muffa_giorni_dati      # [CONFIGURAZIONE, 2 RICHIAMI] [INTERFACCIA, 3 RICHIAMI] [AUTOMAZIONE, 0 RICHIAMI] GIORNI DI DATI DISPONIBILI PER LE MEDIE DEL RISCHIO MUFFA (0-84): SOTTO 28, 56 E 84 LE MEDIE SONO PARZIALI
+        name: "Rischio Muffa Giorni di Dati"
+        unique_id: vmc_master_rischio_muffa_giorni_dati
+        unit_of_measurement: "d"
+        state: >
+          {%- set righe = (stat.statistics.get('sensor.vmc_master_hum_interna_numeric', []) if stat is defined and stat is mapping and stat.statistics is defined else []) -%}
+          {%- if righe | length > 0 -%}
+            {{ ([((utcnow() - as_datetime(righe[0].start)).total_seconds() / 86400) | round(1), 84] | min) }}
+          {%- else -%}
+            0
+          {%- endif -%}
+        icon: mdi:calendar-clock
 
       # Rischio Muffa 4 Settimane
   - sensor:
@@ -2160,8 +2227,8 @@ template:
           {%- if states('sensor.vmc_master_sensori') in stati -%}
             Non disponibile
           {%- else -%}
-            {% set temp = states('sensor.vmc_master_temp_interna_4w') | float(none) %}
-            {% set hum  = states('sensor.vmc_master_hum_interna_4w')  | float(none) %}
+            {% set temp = states('sensor.vmc_master_temp_interna_media_4w') | float(none) %}
+            {% set hum  = states('sensor.vmc_master_hum_interna_media_4w')  | float(none) %}
             {% if temp is none or hum is none %}
               [Non Calcolabile]
             {% else %}
@@ -2194,8 +2261,8 @@ template:
           {%- if states('sensor.vmc_master_sensori') in stati -%}
             Non disponibile
           {%- else -%}
-            {% set temp = states('sensor.vmc_master_temp_interna_8w') | float(none) %}
-            {% set hum  = states('sensor.vmc_master_hum_interna_8w')  | float(none) %}
+            {% set temp = states('sensor.vmc_master_temp_interna_media_8w') | float(none) %}
+            {% set hum  = states('sensor.vmc_master_hum_interna_media_8w')  | float(none) %}
             {% if temp is none or hum is none %}
               [Non Calcolabile]
             {% else %}
@@ -2228,8 +2295,8 @@ template:
           {%- if states('sensor.vmc_master_sensori') in stati -%}
             Non disponibile
           {%- else -%}
-            {% set temp = states('sensor.vmc_master_temp_interna_12w') | float(none) %}
-            {% set hum  = states('sensor.vmc_master_hum_interna_12w')  | float(none) %}
+            {% set temp = states('sensor.vmc_master_temp_interna_media_12w') | float(none) %}
+            {% set hum  = states('sensor.vmc_master_hum_interna_media_12w')  | float(none) %}
             {% if temp is none or hum is none %}
               [Non Calcolabile]
             {% else %}
@@ -3902,17 +3969,18 @@ recorder:
 #      - sensor.vmc_master_status_calcolo_aria_scambiata_totale
 #      - sensor.vmc_master_cicli_ricambio_aria
       - sensor.vmc_master_tempo_mancante_ricambio
-      - sensor.vmc_master_temp_interna_numeric
-      - sensor.vmc_master_hum_interna_numeric
+#      - sensor.vmc_master_temp_interna_numeric
+#      - sensor.vmc_master_hum_interna_numeric
       - sensor.vmc_master_calcolo_rischio_muffa_4w
       - sensor.vmc_master_calcolo_rischio_muffa_8w
       - sensor.vmc_master_calcolo_rischio_muffa_12w
-      - sensor.vmc_master_temp_interna_4w
-      - sensor.vmc_master_temp_interna_8w
-      - sensor.vmc_master_temp_interna_12w
-      - sensor.vmc_master_hum_interna_4w
-      - sensor.vmc_master_hum_interna_8w
-      - sensor.vmc_master_hum_interna_12w
+      - sensor.vmc_master_temp_interna_media_4w
+      - sensor.vmc_master_temp_interna_media_8w
+      - sensor.vmc_master_temp_interna_media_12w
+      - sensor.vmc_master_hum_interna_media_4w
+      - sensor.vmc_master_hum_interna_media_8w
+      - sensor.vmc_master_hum_interna_media_12w
+      - sensor.vmc_master_rischio_muffa_giorni_dati
       - sensor.vmc_master_stato_led_interfaccia
       - sensor.vmc_master_alert_avvio_interfaccia
 #      - sensor.vmc_master_trend_muffa
@@ -6280,6 +6348,8 @@ script:
   
                     Impiegato per il rilevamento: {{ (state_attr('sensor.vmc_master_temp_esterna_status', 'friendly_name') or (((device_name('sensor.vmc_master_temp_esterna_status') or '') ~ ' ' ~ ((entity_name('sensor.vmc_master_temp_esterna_status') or '') if entity_name is defined else '')) | trim)) }}
   
+                    In sostituzione si usa la sonda della VMC, senza Offset: {{ states('sensor.vmc_master_temp_esterna_status') }} °C
+  
                     Data: {{ now().strftime('%d-%m-%Y') }}
                     Ora: {{ now().strftime('%H:%M:%S') }}
     icon: mdi:fingerprint-off
@@ -6305,6 +6375,8 @@ script:
                     Non Disponibile: {{ states('input_text.vmc_master_last_temp_internal_entity') }}
   
                     Impiegato per il rilevamento: {{ (state_attr('sensor.vmc_master_temp_interna_status', 'friendly_name') or (((device_name('sensor.vmc_master_temp_interna_status') or '') ~ ' ' ~ ((entity_name('sensor.vmc_master_temp_interna_status') or '') if entity_name is defined else '')) | trim)) }}
+  
+                    In sostituzione si usa la sonda della VMC, senza Offset: {{ states('sensor.vmc_master_temp_interna_status') }} °C
   
                     Data: {{ now().strftime('%d-%m-%Y') }}
                     Ora: {{ now().strftime('%H:%M:%S') }}
@@ -6358,6 +6430,8 @@ script:
   
                     Impiegato per il rilevamento: {{ (state_attr('sensor.vmc_master_umidita_interna_status', 'friendly_name') or (((device_name('sensor.vmc_master_umidita_interna_status') or '') ~ ' ' ~ ((entity_name('sensor.vmc_master_umidita_interna_status') or '') if entity_name is defined else '')) | trim)) }}
   
+                    In sostituzione si usa la sonda della VMC, senza Offset: {{ states('sensor.vmc_master_umidita_interna_status') }} %
+  
                     Data: {{ now().strftime('%d-%m-%Y') }}
                     Ora: {{ now().strftime('%H:%M:%S') }}
     icon: mdi:fingerprint-off
@@ -6383,6 +6457,8 @@ script:
                     Non Disponibile: {{ states('input_text.vmc_master_last_co2_internal_entity') }}
   
                     Impiegato per il rilevamento: {{ (state_attr('sensor.vmc_master_co2_status', 'friendly_name') or (((device_name('sensor.vmc_master_co2_status') or '') ~ ' ' ~ ((entity_name('sensor.vmc_master_co2_status') or '') if entity_name is defined else '')) | trim)) }}
+  
+                    In sostituzione si usa la sonda della VMC, senza Offset: {{ states('sensor.vmc_master_co2_status') }} ppm
   
                     Data: {{ now().strftime('%d-%m-%Y') }}
                     Ora: {{ now().strftime('%H:%M:%S') }}
@@ -6774,12 +6850,13 @@ script:
             - sensor.vmc_master_calcolo_rischio_muffa_4w
             - sensor.vmc_master_calcolo_rischio_muffa_8w
             - sensor.vmc_master_calcolo_rischio_muffa_12w
-            - sensor.vmc_master_temp_interna_4w
-            - sensor.vmc_master_temp_interna_8w
-            - sensor.vmc_master_temp_interna_12w
-            - sensor.vmc_master_hum_interna_4w
-            - sensor.vmc_master_hum_interna_8w
-            - sensor.vmc_master_hum_interna_12w
+            - sensor.vmc_master_temp_interna_media_4w
+            - sensor.vmc_master_temp_interna_media_8w
+            - sensor.vmc_master_temp_interna_media_12w
+            - sensor.vmc_master_hum_interna_media_4w
+            - sensor.vmc_master_hum_interna_media_8w
+            - sensor.vmc_master_hum_interna_media_12w
+            - sensor.vmc_master_rischio_muffa_giorni_dati
             - sensor.vmc_master_stato_led_interfaccia
             - sensor.vmc_master_alert_avvio_interfaccia
             - sensor.vmc_master_trend_muffa

@@ -67,6 +67,12 @@ description: >-
   fonti Meteo, per ottenere una maggiore precisione e affidabilità rispetto ai
   sensori di Temperatura e Umidità integrati nella VMC;
 
+  - Se un'entità scelta (Temperatura Esterna, Temperatura Interna, Umidità
+  Interna o CO₂ Interna) non è disponibile, usa al suo posto la sonda della
+  VMC senza Offset, lo notifica e lo segnala nella scheda «Sensori -
+  Selezionati»; l'Umidità Esterna non ha una sonda nella VMC e resta «Non
+  disponibile»;
+
   - Permette lo spegnimento Automatico, in funzione della Temperatura Esterna se
   ≤ -18 [°C], e la successiva ripresa;
 
@@ -28656,6 +28662,8 @@ actions:
 
                 Impiegato per il rilevamento: {{ (state_attr('sensor.vmc_master_temp_esterna_status', 'friendly_name') or (((device_name('sensor.vmc_master_temp_esterna_status') or '') ~ ' ' ~ ((entity_name('sensor.vmc_master_temp_esterna_status') or '') if entity_name is defined else '')) | trim)) }}
 
+                In sostituzione si usa la sonda della VMC, senza Offset: {{ states('sensor.vmc_master_temp_esterna_status') }} °C
+
                 Data {{ now().strftime('%d-%m-%Y') }} Ora
                 {{now().strftime('%H:%M:%S') }}
             enabled: true
@@ -28676,6 +28684,8 @@ actions:
                 states('input_text.vmc_master_last_temp_internal_entity') }}
 
                 Impiegato per il rilevamento: {{ (state_attr('sensor.vmc_master_temp_interna_status', 'friendly_name') or (((device_name('sensor.vmc_master_temp_interna_status') or '') ~ ' ' ~ ((entity_name('sensor.vmc_master_temp_interna_status') or '') if entity_name is defined else '')) | trim)) }}
+
+                In sostituzione si usa la sonda della VMC, senza Offset: {{ states('sensor.vmc_master_temp_interna_status') }} °C
 
                 Data {{ now().strftime('%d-%m-%Y') }} Ora
                 {{now().strftime('%H:%M:%S') }}
@@ -28719,6 +28729,8 @@ actions:
 
                 Impiegato per il rilevamento: {{ (state_attr('sensor.vmc_master_umidita_interna_status', 'friendly_name') or (((device_name('sensor.vmc_master_umidita_interna_status') or '') ~ ' ' ~ ((entity_name('sensor.vmc_master_umidita_interna_status') or '') if entity_name is defined else '')) | trim)) }}
 
+                In sostituzione si usa la sonda della VMC, senza Offset: {{ states('sensor.vmc_master_umidita_interna_status') }} %
+
                 Data {{ now().strftime('%d-%m-%Y') }} Ora
                 {{now().strftime('%H:%M:%S') }}
             enabled: true
@@ -28739,6 +28751,8 @@ actions:
                 states('input_text.vmc_master_last_co2_internal_entity') }}
 
                 Impiegato per il rilevamento: {{ (state_attr('sensor.vmc_master_co2_status', 'friendly_name') or (((device_name('sensor.vmc_master_co2_status') or '') ~ ' ' ~ ((entity_name('sensor.vmc_master_co2_status') or '') if entity_name is defined else '')) | trim)) }}
+
+                In sostituzione si usa la sonda della VMC, senza Offset: {{ states('sensor.vmc_master_co2_status') }} ppm
 
                 Data {{ now().strftime('%d-%m-%Y') }} Ora
                 {{now().strftime('%H:%M:%S') }}

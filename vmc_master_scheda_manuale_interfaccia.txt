@@ -9504,6 +9504,74 @@ cards:
                 state_color: true
               - type: conditional
                 conditions:
+                  - condition: or
+                    conditions:
+                    - condition: and
+                      conditions:
+                        - condition: state
+                          entity: sensor.vmc_master_temperatura_esterna_selezionata
+                          state: '-100'
+                        - condition: state
+                          entity: sensor.vmc_master_temp_esterna_status
+                          state_not:
+                            - Non disponibile
+                            - '-'
+                            - unknown
+                            - unavailable
+                    - condition: and
+                      conditions:
+                        - condition: state
+                          entity: sensor.vmc_master_temperatura_interna_selezionata
+                          state: '-100'
+                        - condition: state
+                          entity: sensor.vmc_master_temp_interna_status
+                          state_not:
+                            - Non disponibile
+                            - '-'
+                            - unknown
+                            - unavailable
+                    - condition: and
+                      conditions:
+                        - condition: state
+                          entity: sensor.vmc_master_umidita_interna_selezionata
+                          state: '-100'
+                        - condition: state
+                          entity: sensor.vmc_master_umidita_interna_status
+                          state_not:
+                            - Non disponibile
+                            - '-'
+                            - unknown
+                            - unavailable
+                    - condition: and
+                      conditions:
+                        - condition: state
+                          entity: sensor.vmc_master_co2_interna_selezionata
+                          state: '-100'
+                        - condition: state
+                          entity: sensor.vmc_master_co2_status
+                          state_not:
+                            - Non disponibile
+                            - '-'
+                            - unknown
+                            - unavailable
+                card:
+                  type: markdown
+                  content: |-
+                    {%- set righe = [
+                      ['Temperatura Ext.', 'sensor.vmc_master_temperatura_esterna_selezionata', 'sensor.vmc_master_temp_esterna_status', '°C'],
+                      ['Temperatura Int.', 'sensor.vmc_master_temperatura_interna_selezionata', 'sensor.vmc_master_temp_interna_status', '°C'],
+                      ['Umidità Int.', 'sensor.vmc_master_umidita_interna_selezionata', 'sensor.vmc_master_umidita_interna_status', '%'],
+                      ['CO₂ Int.', 'sensor.vmc_master_co2_interna_selezionata', 'sensor.vmc_master_co2_status', 'ppm']
+                    ] -%}
+                    <font color="rgb(255, 140, 0)"><ha-icon icon="mdi:swap-horizontal"></ha-icon><span style="padding-right: 10px;"></span><strong>ENTITÀ SCELTA NON DISPONIBILE: IN USO LA SONDA DELLA VMC (SENZA OFFSET)</strong></font>
+                    {% for r in righe if states(r[1]) == '-100' and states(r[2]) not in ['Non disponibile', '-', 'unknown', 'unavailable'] %}
+
+                    - {{ r[0] }}: {{ states(r[2]) }} {{ r[3] }}
+                    {%- endfor %}
+
+                    Al ripristino dell'entità scelta si torna automaticamente al suo valore (con Offset). Vedere Pannello Informazioni, Nota Entità Scelte non Disponibili.
+              - type: conditional
+                conditions:
                   - entity: >-
                       input_boolean.vmc_master_opzioni_interruttore_monitoraggio_sensori_extra
                     state: 'on'
@@ -9543,6 +9611,22 @@ cards:
                           secondary_info: last-changed
                       title: Sensori - Extra
                       state_color: true
+                    - type: conditional
+                      conditions:
+                        - condition: numeric_state
+                          entity: sensor.vmc_master_rischio_muffa_giorni_dati
+                          below: 84
+                      card:
+                        type: markdown
+                        content: |-
+                          {%- set g = states('sensor.vmc_master_rischio_muffa_giorni_dati') | float(0) -%}
+                          <ha-icon icon="mdi:calendar-clock"></ha-icon><span style="padding-right: 10px;"></span><strong>RISCHIO MUFFA: MEDIE IN AVVIO (DATI PARZIALI)</strong>
+
+                          - Media 4 Settimane: {{ [g, 28] | min | round(0) | int }} / 28 giorni{% if g >= 28 %} (completa){% endif %}
+                          - Media 8 Settimane: {{ [g, 56] | min | round(0) | int }} / 56 giorni{% if g >= 56 %} (completa){% endif %}
+                          - Media 12 Settimane: {{ [g, 84] | min | round(0) | int }} / 84 giorni
+
+                          Finché una media non è completa è calcolata sui soli giorni disponibili. Vedere Pannello Informazioni, punto 19.
                     - type: vertical-stack
                       cards:
                         - type: entities
@@ -9964,12 +10048,13 @@ cards:
                           'sensor.vmc_master_calcolo_rischio_muffa_4w',
                           'sensor.vmc_master_calcolo_rischio_muffa_8w',
                           'sensor.vmc_master_calcolo_rischio_muffa_12w',
-                          'sensor.vmc_master_temp_interna_4w',
-                          'sensor.vmc_master_temp_interna_8w',
-                          'sensor.vmc_master_temp_interna_12w',
-                          'sensor.vmc_master_hum_interna_4w',
-                          'sensor.vmc_master_hum_interna_8w',
-                          'sensor.vmc_master_hum_interna_12w',
+                          'sensor.vmc_master_temp_interna_media_4w',
+                          'sensor.vmc_master_temp_interna_media_8w',
+                          'sensor.vmc_master_temp_interna_media_12w',
+                          'sensor.vmc_master_hum_interna_media_4w',
+                          'sensor.vmc_master_hum_interna_media_8w',
+                          'sensor.vmc_master_hum_interna_media_12w',
+                          'sensor.vmc_master_rischio_muffa_giorni_dati',
                           'sensor.vmc_master_stato_led_interfaccia',
                           'sensor.vmc_master_alert_avvio_interfaccia',
                           'sensor.vmc_master_trend_muffa',
@@ -11877,6 +11962,26 @@ cards:
 
                   <br>
 
+                  <strong>Nota Entità Scelte non Disponibili</strong>
+
+                  Se un'entità scelta in Opzioni non è disponibile, al suo
+                  posto si usa la sonda della VMC, senza Offset (l'Offset è
+                  tarato sull'entità scelta): Temperatura Ext., Temperatura
+                  Int., Umidità Int. e CO₂ Int. (la CO₂ solo sui modelli con la
+                  sonda; senza sonda il valore resta «-»). L'Umidità Ext. non ha
+                  una sonda nella VMC e resta «Non disponibile», come i calcoli
+                  che la usano (punto di rugiada e umidità assoluta esterni).
+                  Tutte le logiche (allerte, Free, Punto di Rugiada, Rischio
+                  Muffa, grafici) continuano così a funzionare. Il cambio è
+                  segnalato da un riquadro arancione sotto la scheda «Sensori -
+                  Selezionati» e dalla notifica «Non Disponibile» (con il valore
+                  della VMC in uso); al ripristino dell'entità scelta si torna
+                  automaticamente al suo valore con l'Offset. Congelamento e
+                  Δ Temp. leggono sempre entrambe le fonti e, se ne manca una,
+                  usano quella disponibile.
+
+                  <br>
+
                   <strong>Nota VMC Master - Agg. Sensori</strong>
 
                   Rilegge subito tutti i dati della VMC (stato, sensori, nome
@@ -12833,6 +12938,21 @@ cards:
                   <br><br>
                   <b>Fonte.</b> Modello di Hukka e Viitanen (1999): limiti critici di temperatura e umidità
                   per il rischio di crescita della muffa.
+                  <br><br>
+                  <b>Come si calcolano le medie.</b> La temperatura e l'umidità interne (quelle delle schede
+                  «Sensori - Selezionati», con i loro Offset, o la sonda della VMC se l'entità scelta non è
+                  disponibile) sono registrate nel database: Home Assistant ne conserva le statistiche orarie a
+                  lungo termine, che non vengono cancellate dalla pulizia periodica del database (10 giorni) né
+                  dai riavvii. Ogni ora (al minuto 5) e a ogni avvio le medie si ricalcolano come media delle
+                  medie orarie degli ultimi 28, 56 e 84 giorni (4, 8 e 12 Settimane): ogni ora pesa allo stesso
+                  modo, qualunque sia la frequenza di aggiornamento del sensore.
+                  <br><br>
+                  <b>Periodo di avvio.</b> Le statistiche esistono solo da quando i sensori sono registrati
+                  (dalla release 8.5.1): finché non sono trascorsi 28, 56 e 84 giorni, le medie di 4, 8 e 12
+                  Settimane sono calcolate sui soli giorni disponibili (nei primi giorni le tre medie coincidono
+                  e l'Andamento risulta Stabile). Sotto la scheda «Sensori - Extra» un riquadro mostra i giorni di
+                  dati disponibili per ciascuna media (es. 12 / 28 giorni) e scompare quando anche la media di 12
+                  Settimane è completa.
                   </td></tr></table>
 
 
