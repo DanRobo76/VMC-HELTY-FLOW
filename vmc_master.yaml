@@ -4798,7 +4798,7 @@ input_boolean:
     initial: false
     icon: mdi:remote-tv
 
-  vmc_master_opzioni_offset_sensori:                                            # [CONFIGURAZIONE, 4 RICHIAMI] [INTERFACCIA, 29 RICHIAMI] [AUTOMAZIONE, 9 RICHIAMI]
+  vmc_master_opzioni_offset_sensori:                                            # [CONFIGURAZIONE, 6 RICHIAMI] [INTERFACCIA, 29 RICHIAMI] [AUTOMAZIONE, 9 RICHIAMI]
     name: "Opzioni"
     initial: false
     icon: mdi:format-list-checkbox
@@ -7801,13 +7801,17 @@ script:
       Sensori, dopo altri 5 s attiva lo Status Pannello Led, attiva gli Avvisi, la Notifica Status VMC e
       tutti gli interruttori VMC ON/OFF (PdR, Umidità, Calendario, Free Heating, Free Cooling, CO₂ e VOC)
       e infine riavvia Home Assistant. Attendere il termine del processo: la scheda mostra il countdown
-      di 10 s sotto il pulsante prima del riavvio.
+      di 10 s sotto il pulsante prima del riavvio (la finestra Opzioni, chiusa dall'azzeramento delle
+      variabili booleane, viene riaperta per mostrarlo e richiusa prima del riavvio).
     sequence:
       - action: timer.start                                                 # COUNTDOWN IN SCHEDA SOTTO IL PULSANTE
         target:
           entity_id: timer.vmc_master_countdown_script_inizializzazione
       - action: script.vmc_master_azzera_booleans
         data: {}
+      - action: input_boolean.turn_on                                       # RIAPRE LA FINESTRA OPZIONI, CHIUSA DA AZZERA BOOLEANS, PER MOSTRARE IL COUNTDOWN SOTTO IL PULSANTE
+        target:
+          entity_id: input_boolean.vmc_master_opzioni_offset_sensori
       - action: script.vmc_master_azzera_offset_sensors
         data: {}
       - action: script.vmc_master_profilo_calendario
@@ -7850,6 +7854,9 @@ script:
       - action: timer.cancel                                                # FINE DEL COUNTDOWN IN SCHEDA
         target:
           entity_id: timer.vmc_master_countdown_script_inizializzazione
+      - action: input_boolean.turn_off                                      # RICHIUDE LA FINESTRA OPZIONI PRIMA DEL RIAVVIO
+        target:
+          entity_id: input_boolean.vmc_master_opzioni_offset_sensori
       - action: homeassistant.restart
         data: {}
     mode: restart
