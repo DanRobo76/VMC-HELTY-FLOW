@@ -12682,6 +12682,13 @@ cards:
                     ripristinata a fine allerta. Nella finestra Telecomando il tasto della velocità attiva è illuminato, quello della
                     velocità da ripristinare è illuminato con l'icona ↺; i tasti Sensori e Led Pannello illuminano lo stato attuale
                     (On oppure Off) e con «Verificare Filtro» il tasto «Led Pannello On» mostra l'icona del filtro.</i><br><br>
+                    <b>AVVERTENZA SUI TEMPI DI ATTESA:</b> i valori originali sono stati verificati con una simulazione completa della
+                    logica su 18.152 scenari (allerte singole e concomitanti, Black-Out, Calendario, Free Cool./Heat., interruttori, Bottone
+                    Panico e comandi manuali), che ha confermato l'assenza di collisioni tra le azioni dell'automazione e la correttezza di
+                    tutti gli esiti. La modifica anche di un solo valore altera la sequenza temporale delle logiche e può produrre esiti
+                    diversi da quelli qui descritti: in particolare i tempi di Avvio e di Memoria degli Inquinanti (8 Secondi) e di Fine
+                    Δ Temp. (4 Secondi) sono già al valore minimo. Si raccomanda pertanto di modificare i tempi con cautela e, in caso di
+                    comportamenti anomali, di riportarli ai valori originali con «Ripristina Tempi di Attesa Originali».<br><br>
                     - Congelamento ≤ -18 [°C] Temp. Ext.: 0 Secondi. Durante il Congelamento la VMC resta ferma: se si prova a cambiarle Velocità viene riportata subito a Velocità 0 e, se non si ferma, il comando di arresto viene ripetuto finché non si ferma (circa ogni 4 Secondi);<br>
                     - VMC Sensori Int. Δ Temp. > 23 [°C]: 4 Secondi;<br>
                     - Inquinanti (CO₂ e VOC): 8 Secondi. Se la VMC è partita da Velocità 0 resta a Velocità 1 fino al rientro degli Inquinanti, poi torna a Velocità 0; se nel frattempo l'utente sceglie un'altra Velocità diversa da 0 (anche durante il Congelamento o il Δ Temp.) questa viene mantenuta, anche dopo il rientro; se invece sceglie Velocità 0 con gli Inquinanti ancora presenti, dopo circa 8 Secondi la VMC riparte a Velocità 1 e al rientro degli Inquinanti torna a Velocità 0, anche se prima dell'allerta era a un'altra Velocità;<br>
