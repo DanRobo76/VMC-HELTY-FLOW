@@ -9952,6 +9952,9 @@ cards:
                           'sensor.vmc_master_sensori',
                           'sensor.vmc_master_nome',
                           'sensor.vmc_master_lan',
+                          'sensor.vmc_master_status_ventola_memorizzata',
+                          'sensor.vmc_master_sensori_memorizzata',
+                          'sensor.vmc_master_nome_memorizzata',
                           'sensor.vmc_master_versione_repository',
                           'sensor.vmc_master_versione_corrente',
                           'sensor.vmc_master_verifica_ip_inserito',
@@ -11065,7 +11068,7 @@ cards:
                       detail: 2
                       entity: sensor.vmc_master_voc_status
                       name: VOC
-                      unit: '[ppm]'
+                      unit: '[ppb]'
                     - graph: line
                       type: sensor
                       detail: 2
@@ -11212,9 +11215,16 @@ cards:
                   <b>Che cos'è.</b> Accende o spegne le routine dei sensori interni della VMC, come l'opzione
                   SENSORI dell'App Air Guard (comandi VMWH0300000 e VMWH0300002).
                   <br><br>
-                  <b>Se è disabilitata</b> i valori rilevati dai sensori nella schermata INFO dell'App Mobile
-                  non sono più disponibili e le funzioni e gli allarmi impostati nel Firmware della VMC
-                  vengono disattivati.
+                  <b>Impostazione consigliata: Off.</b> Con le routine accese il Firmware della VMC gestisce in
+                  autonomia le proprie funzioni e i propri allarmi e può intervenire sulla ventilazione senza
+                  passare da Home Assistant. Questi interventi si sovrappongono ai comandi dell'automazione VMC
+                  Master: la VMC riceve ordini da due sistemi diversi, che possono entrare in collisione (cambi di
+                  velocità non richiesti, oppure un cambio fatto dal Firmware scambiato per una scelta
+                  dell'utente). Con le routine spente le decisioni restano solo all'automazione,
+                  che segue le logiche descritte in questo Pannello.
+                  <br><br>
+                  <b>Con le routine spente</b> i valori dei sensori non compaiono più nella schermata INFO
+                  dell'App Mobile e le funzioni e gli allarmi del Firmware della VMC restano disattivati.
                   <br><br>
                   <b>Telecomando.</b> Si illumina il tasto «Sensori On» se le routine sono accese, il tasto
                   «Sensori Off» se sono spente; se lo stato non è disponibile restano spenti entrambi.
@@ -13337,7 +13347,7 @@ cards:
                   cancella da sola i vecchi file vmc_clona.yaml e vmc_clona_scheda_manuale_interfaccia.txt e lo segnala con una
                   notifica: a quel punto riavviare Home Assistant e cancellare dall'interfaccia la vecchia scheda «Clona VMC»,
                   ora sostituita dalla Finestra Clona. La vecchia scheda non può essere cancellata in automatico.
-                  Il nuovo vmc_master.yaml contiene l'IP predefinito 192.168.1.160: se la VMC ha un IP diverso, scriverlo di nuovo
+                  Il nuovo vmc_master.yaml contiene l'IP predefinito 999.999.999.999 (volutamente non valido): scrivere l'IP della VMC
                   nel campo «Cambia IP VMC (Riavvio di H.A.)». Le vecchie entità «vmc_master_slave_…» della scheda «Clona VMC»
                   restano come «non più fornite» e si possono eliminare da Impostazioni → Dispositivi e servizi → Entità.
                   <br><br>
