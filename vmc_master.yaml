@@ -4803,22 +4803,22 @@ input_boolean:
     initial: false
     icon: mdi:format-list-checkbox
 
-  vmc_master_opzioni_interruttore_offset_sensori:                               # [CONFIGURAZIONE, 3 RICHIAMI] [INTERFACCIA, 5 RICHIAMI] [AUTOMAZIONE, 13 RICHIAMI]
+  vmc_master_opzioni_interruttore_offset_sensori:                               # [CONFIGURAZIONE, 5 RICHIAMI] [INTERFACCIA, 5 RICHIAMI] [AUTOMAZIONE, 13 RICHIAMI]
     name: "Sensori Selezionati - Offset"
     initial: false
     icon: mdi:format-list-checkbox
 
-  vmc_master_opzioni_monitoraggio_sensori:                                      # [CONFIGURAZIONE, 3 RICHIAMI] [INTERFACCIA, 28 RICHIAMI] [AUTOMAZIONE, 9 RICHIAMI]
+  vmc_master_opzioni_monitoraggio_sensori:                                      # [CONFIGURAZIONE, 4 RICHIAMI] [INTERFACCIA, 28 RICHIAMI] [AUTOMAZIONE, 9 RICHIAMI]
     name: "Sensori"
     initial: false
     icon: mdi:memory
 
-  vmc_master_opzioni_interruttore_monitoraggio_sensori_extra:                   # [CONFIGURAZIONE, 3 RICHIAMI] [INTERFACCIA, 5 RICHIAMI] [AUTOMAZIONE, 13 RICHIAMI]
+  vmc_master_opzioni_interruttore_monitoraggio_sensori_extra:                   # [CONFIGURAZIONE, 5 RICHIAMI] [INTERFACCIA, 5 RICHIAMI] [AUTOMAZIONE, 13 RICHIAMI]
     name: "Sensori - Extra"
     initial: false
     icon: mdi:memory
 
-  vmc_master_opzioni_interruttore_sensori_vmc_interni:                          # [CONFIGURAZIONE, 3 RICHIAMI] [INTERFACCIA, 5 RICHIAMI] [AUTOMAZIONE, 13 RICHIAMI]
+  vmc_master_opzioni_interruttore_sensori_vmc_interni:                          # [CONFIGURAZIONE, 5 RICHIAMI] [INTERFACCIA, 5 RICHIAMI] [AUTOMAZIONE, 13 RICHIAMI]
     name: "Sensori - VMC Interni"
     initial: false
     icon: mdi:memory
@@ -5267,7 +5267,7 @@ input_boolean:
 ################### Fine Creazione Switch Booleano impiegato nell'Automazione, per l'Audio all'Avvio di Home Assistant ############################
 
 ################### Inizio Creazione Switch Booleani per i Tempi di Attesa dei Trigger dell'Automazione ###################
-  vmc_master_opzione_finestra_tempi_attesa:                                     # [CONFIGURAZIONE, 5 RICHIAMI] [INTERFACCIA, 3 RICHIAMI] [AUTOMAZIONE, 0 RICHIAMI] FINESTRA TEMPI DI ATTESA, NON PIU' PRESENTE NEL PANNELLO OPZIONI (I TEMPI NON VANNO MODIFICATI)
+  vmc_master_opzione_finestra_tempi_attesa:                                     # [CONFIGURAZIONE, 4 RICHIAMI] [INTERFACCIA, 3 RICHIAMI] [AUTOMAZIONE, 0 RICHIAMI] FINESTRA TEMPI DI ATTESA, NON PIU' PRESENTE NEL PANNELLO OPZIONI (I TEMPI NON VANNO MODIFICATI)
     name: "Finestra Tempi di Attesa"
     icon: mdi:timer-cog-outline
 
@@ -5275,8 +5275,8 @@ input_boolean:
     name: "Tempi di Attesa Inizializzati"
     icon: mdi:timer-check-outline
 
-  vmc_master_opzione_finestra_prossime_letture:                                 # [CONFIGURAZIONE, 5 RICHIAMI] [INTERFACCIA, 5 RICHIAMI] [AUTOMAZIONE, 0 RICHIAMI] FINESTRA «PROSSIME LETTURE DALLA VMC» NEL PANNELLO OPZIONI
-    name: "Prossime Letture dalla VMC"
+  vmc_master_opzione_finestra_prossime_letture:                                 # [CONFIGURAZIONE, 5 RICHIAMI] [INTERFACCIA, 5 RICHIAMI] [AUTOMAZIONE, 0 RICHIAMI] FINESTRA «TIMER LETTURA DATI VMC» NELLA SCHEDA SENSORI - SELEZIONATI
+    name: "Timer Lettura Dati VMC"
     icon: mdi:timer-outline
 ################### Fine Creazione Switch Booleani per i Tempi di Attesa dei Trigger dell'Automazione ###################
 
@@ -5538,11 +5538,11 @@ timer:
   vmc_master_lettura_ambientali:                                 # [CONFIGURAZIONE, 2 RICHIAMI] [INTERFACCIA, 2 RICHIAMI] [AUTOMAZIONE, 0 RICHIAMI] COUNTDOWN ALLA PROSSIMA LETTURA «SENSORI AMBIENTALI» DI HOME ASSISTANT (OGNI 1227 s, scan_interval DI sensor.vmc_master_sensori)
     name: "Prossima Lettura Sensori Ambientali"
     icon: mdi:timer-sync-outline
-  vmc_master_lettura_lan:                                        # [CONFIGURAZIONE, 2 RICHIAMI] [INTERFACCIA, 2 RICHIAMI] [AUTOMAZIONE, 0 RICHIAMI] COUNTDOWN ALLA PROSSIMA LETTURA «LAN» DI HOME ASSISTANT (OGNI 57641 s, scan_interval DI sensor.vmc_master_lan)
-    name: "Prossima Lettura Lan"
+  vmc_master_lettura_lan:                                        # [CONFIGURAZIONE, 2 RICHIAMI] [INTERFACCIA, 2 RICHIAMI] [AUTOMAZIONE, 0 RICHIAMI] COUNTDOWN ALLA PROSSIMA LETTURA «SENSORI LAN» DI HOME ASSISTANT (OGNI 57641 s, scan_interval DI sensor.vmc_master_lan)
+    name: "Prossima Lettura Sensori Lan"
     icon: mdi:timer-sync-outline
-  vmc_master_lettura_nome:                                       # [CONFIGURAZIONE, 2 RICHIAMI] [INTERFACCIA, 2 RICHIAMI] [AUTOMAZIONE, 0 RICHIAMI] COUNTDOWN ALLA PROSSIMA LETTURA «NOME» DI HOME ASSISTANT (OGNI 43227 s, scan_interval DI sensor.vmc_master_nome)
-    name: "Prossima Lettura Nome"
+  vmc_master_lettura_nome:                                       # [CONFIGURAZIONE, 2 RICHIAMI] [INTERFACCIA, 2 RICHIAMI] [AUTOMAZIONE, 0 RICHIAMI] COUNTDOWN ALLA PROSSIMA LETTURA «SENSORE NOME» DI HOME ASSISTANT (OGNI 43227 s, scan_interval DI sensor.vmc_master_nome)
+    name: "Prossima Lettura Sensore Nome"
     icon: mdi:timer-sync-outline
   vmc_master_countdown_script_agg_sensori:                       # [CONFIGURAZIONE, 4 RICHIAMI] [INTERFACCIA, 7 RICHIAMI] [AUTOMAZIONE, 0 RICHIAMI] COUNTDOWN IN SCHEDA, SOTTO IL PULSANTE, DELLO SCRIPT AGG. SENSORI (79 s: 22 PAUSE DA 2 s + 7 SCRIPT ELENCHI DA 5 s)
     name: "Agg. Sensori in corso"
@@ -7269,6 +7269,7 @@ script:
             - input_boolean.vmc_master_opzioni_monitoraggio_sensori
             - input_boolean.vmc_master_opzioni_interruttore_monitoraggio_sensori_extra
             - input_boolean.vmc_master_opzioni_interruttore_sensori_vmc_interni
+            - input_boolean.vmc_master_opzione_finestra_prossime_letture
             - input_boolean.vmc_master_opzioni_calendario_main
             - input_boolean.vmc_master_opzioni_calendario
             - input_boolean.vmc_master_opzioni_punto_di_rugiada
@@ -25831,7 +25832,7 @@ automation:
     alias: "VMC Master - Countdown Letture VMC"
     description: >
       Mostra in scheda quanto manca alla prossima lettura che Home Assistant fa da solo (Ping, Sensori Ventilazione,
-      Sensori Ambientali, Lan, Nome). Non legge la VMC e non cambia gli scan_interval: ricava il momento della
+      Sensori Ambientali, Sensori Lan, Sensore Nome). Non legge la VMC e non cambia gli scan_interval: ricava il momento della
       prossima lettura dall'ultima lettura registrata (last_reported) piu' lo scan_interval del sensore. Allo scadere
       fa ripartire subito il timer e ogni minuto ricontrolla l'allineamento. Gli intervalli qui sotto devono essere
       identici agli scan_interval dei sensori.
@@ -25877,22 +25878,36 @@ automation:
                     duration: "{{ '%02d:%02d:%02d' % (secondi // 3600, (secondi % 3600) // 60, secondi % 60) }}"
 ################### Fine Creazione Automazione Countdown delle Letture della VMC ###################
 
-################### Inizio Creazione Automazione Esclusivita' delle Finestre Opzioni Prossime Letture e Tempi di Attesa ###################
+################### Inizio Creazione Automazione Esclusivita' delle Finestre Timer Lettura Dati VMC e Tempi di Attesa ###################
   - id: "vmc_master_esclusivita_finestre_opzioni"                               # [CONFIGURAZIONE, 3 RICHIAMI] [INTERFACCIA, 1 RICHIAMO] [AUTOMAZIONE, 0 RICHIAMI]
     alias: "VMC Master - Esclusività Finestre Opzioni"
     description: >
-      Le finestre «Prossime Letture dalla VMC» e «Tempi di Attesa» (quest'ultima non piu' presente nella scheda) del
-      pannello Opzioni si comportano come le altre (Audio, Clona, Calendario, ...): aprendone una si chiudono tutte le
-      altre, aprendo un'altra finestra di Opzioni si chiudono loro, e si chiudono anche quando si chiude o si riapre il
-      pannello Opzioni. E' separata
-      dall'Automazione VMC Master per non accodarle un evento (mode: queued) a ogni apertura di finestra.
+      La finestra «Timer Lettura Dati VMC» della scheda Sensori - Selezionati si comporta come le finestre Extra,
+      VMC Interni e Offset della stessa scheda: aprendola si chiudono loro, aprendo una di loro si chiude lei, e si
+      chiude anche quando si apre o si chiude la scheda Sensori - Selezionati. La finestra «Tempi di Attesa» (non
+      piu' presente nella scheda) si comporta come le altre del pannello Opzioni (Audio, Clona, Calendario, ...):
+      aprendola si chiudono le altre, aprendo un'altra finestra di Opzioni si chiude lei, e si chiude anche quando si
+      chiude o si riapre il pannello Opzioni. E' separata dall'Automazione VMC Master per non accodarle un evento
+      (mode: queued) a ogni apertura di finestra.
     mode: queued
     max: 10
     triggers:
       - trigger: state
+        entity_id: input_boolean.vmc_master_opzione_finestra_prossime_letture
+        to: 'on'
+        id: nuova_timer
+      - trigger: state
         entity_id:
-          - input_boolean.vmc_master_opzione_finestra_prossime_letture
-          - input_boolean.vmc_master_opzione_finestra_tempi_attesa
+          - input_boolean.vmc_master_opzioni_interruttore_monitoraggio_sensori_extra
+          - input_boolean.vmc_master_opzioni_interruttore_sensori_vmc_interni
+          - input_boolean.vmc_master_opzioni_interruttore_offset_sensori
+        to: 'on'
+        id: esistente_sensori
+      - trigger: state
+        entity_id: input_boolean.vmc_master_opzioni_monitoraggio_sensori
+        id: pannello_sensori
+      - trigger: state
+        entity_id: input_boolean.vmc_master_opzione_finestra_tempi_attesa
         to: 'on'
         id: nuova
       - trigger: state
@@ -25915,11 +25930,39 @@ automation:
       - choose:
           - conditions:
               - condition: trigger
+                id: nuova_timer
+            sequence:
+              - action: input_boolean.turn_off
+                target:
+                  entity_id:
+                    - input_boolean.vmc_master_opzioni_interruttore_monitoraggio_sensori_extra
+                    - input_boolean.vmc_master_opzioni_interruttore_sensori_vmc_interni
+                    - input_boolean.vmc_master_opzioni_interruttore_offset_sensori
+          - conditions:
+              - condition: trigger
+                id:
+                  - esistente_sensori
+                  - pannello_sensori
+            sequence:
+              - action: input_boolean.turn_off
+                target:
+                  entity_id: input_boolean.vmc_master_opzione_finestra_prossime_letture
+          - conditions:
+              - condition: trigger
                 id: nuova
             sequence:
               - action: input_boolean.turn_off
                 target:
-                  entity_id: "{{ ['input_boolean.vmc_master_opzioni_calendario_main', 'input_boolean.vmc_master_opzioni_free_heating_o_free_cooling', 'input_boolean.vmc_master_opzioni_calendario', 'input_boolean.vmc_master_opzioni_punto_di_rugiada', 'input_boolean.vmc_master_opzioni_scelta_sensori', 'input_boolean.vmc_master_opzioni_elementi_chimici', 'input_boolean.vmc_master_opzione_finestra_audio', 'input_boolean.vmc_master_opzione_finestra_clona', 'input_boolean.vmc_master_conferma_pulizia_cronologia', 'input_boolean.vmc_master_opzione_finestra_prossime_letture', 'input_boolean.vmc_master_opzione_finestra_tempi_attesa'] | reject('eq', trigger.entity_id) | list }}"
+                  entity_id:
+                    - input_boolean.vmc_master_opzioni_calendario_main
+                    - input_boolean.vmc_master_opzioni_free_heating_o_free_cooling
+                    - input_boolean.vmc_master_opzioni_calendario
+                    - input_boolean.vmc_master_opzioni_punto_di_rugiada
+                    - input_boolean.vmc_master_opzioni_scelta_sensori
+                    - input_boolean.vmc_master_opzioni_elementi_chimici
+                    - input_boolean.vmc_master_opzione_finestra_audio
+                    - input_boolean.vmc_master_opzione_finestra_clona
+                    - input_boolean.vmc_master_conferma_pulizia_cronologia
           - conditions:
               - condition: trigger
                 id:
@@ -25928,10 +25971,8 @@ automation:
             sequence:
               - action: input_boolean.turn_off
                 target:
-                  entity_id:
-                    - input_boolean.vmc_master_opzione_finestra_prossime_letture
-                    - input_boolean.vmc_master_opzione_finestra_tempi_attesa
-################### Fine Creazione Automazione Esclusivita' delle Finestre Opzioni Prossime Letture e Tempi di Attesa ###################
+                  entity_id: input_boolean.vmc_master_opzione_finestra_tempi_attesa
+################### Fine Creazione Automazione Esclusivita' delle Finestre Timer Lettura Dati VMC e Tempi di Attesa ###################
 
 ################### Inizio Creazione Automazione Inizializzazione dei Tempi di Attesa ###################
   - id: "vmc_master_inizializza_tempi_attesa"                                    # [CONFIGURAZIONE, 3 RICHIAMI] [INTERFACCIA, 1 RICHIAMO] [AUTOMAZIONE, 0 RICHIAMI]

@@ -9561,6 +9561,7 @@ cards:
                         input_boolean.vmc_master_opzioni_interruttore_sensori_vmc_interni
                     - entity: >-
                         input_boolean.vmc_master_opzioni_interruttore_offset_sensori
+                    - entity: input_boolean.vmc_master_opzione_finestra_prossime_letture
                 state_color: true
               - type: conditional
                 conditions:
@@ -9761,6 +9762,37 @@ cards:
                               text: "Vuoi Procedere?"
                       title: Sensori Selezionati - Offset
                       state_color: true
+              - type: conditional
+                conditions:
+                  - condition: state
+                    entity: input_boolean.vmc_master_opzione_finestra_prossime_letture
+                    state: 'on'
+                card:
+                  type: entities
+                  title: "Timer Lettura Dati VMC"
+                  show_header_toggle: false
+                  state_color: false
+                  entities:
+                    - entity: timer.vmc_master_lettura_ping
+                      name: "Verifica On-Line (Ping)"
+                      icon: mdi:timer-sync-outline
+                      secondary_info: last-updated
+                    - entity: timer.vmc_master_lettura_ventilazione
+                      name: "Sensori Ventilazione"
+                      icon: mdi:timer-sync-outline
+                      secondary_info: last-updated
+                    - entity: timer.vmc_master_lettura_ambientali
+                      name: "Sensori Ambientali"
+                      icon: mdi:timer-sync-outline
+                      secondary_info: last-updated
+                    - entity: timer.vmc_master_lettura_lan
+                      name: "Sensori Lan"
+                      icon: mdi:timer-sync-outline
+                      secondary_info: last-updated
+                    - entity: timer.vmc_master_lettura_nome
+                      name: "Sensore Nome"
+                      icon: mdi:timer-sync-outline
+                      secondary_info: last-updated
         - type: conditional
           conditions:
             - condition: and
@@ -9900,34 +9932,7 @@ cards:
                         input_boolean.vmc_master_opzioni_free_heating_o_free_cooling
                     - entity: input_boolean.vmc_master_opzione_finestra_audio
                     - entity: input_boolean.vmc_master_opzione_finestra_clona
-                    - entity: input_boolean.vmc_master_opzione_finestra_prossime_letture
                 show_header_toggle: false
-              - type: conditional
-                conditions:
-                  - condition: state
-                    entity: input_boolean.vmc_master_opzione_finestra_prossime_letture
-                    state: 'on'
-                card:
-                  type: entities
-                  title: "Prossime Letture dalla VMC"
-                  show_header_toggle: false
-                  state_color: false
-                  entities:
-                    - entity: timer.vmc_master_lettura_ping
-                      name: "Verifica On-Line (Ping)"
-                      icon: mdi:timer-sync-outline
-                    - entity: timer.vmc_master_lettura_ventilazione
-                      name: "Sensori Ventilazione"
-                      icon: mdi:timer-sync-outline
-                    - entity: timer.vmc_master_lettura_ambientali
-                      name: "Sensori Ambientali"
-                      icon: mdi:timer-sync-outline
-                    - entity: timer.vmc_master_lettura_lan
-                      name: "Lan"
-                      icon: mdi:timer-sync-outline
-                    - entity: timer.vmc_master_lettura_nome
-                      name: "Nome"
-                      icon: mdi:timer-sync-outline
               - type: conditional
                 conditions:
                   - condition: state
@@ -11183,11 +11188,13 @@ cards:
                   <b>Verifica On-Line (Ping).</b> Il riquadro «Verifica On-Line (Ping)» mostra se la VMC risponde in rete (ON-Line /
                   OFF-Line); Home Assistant la controlla ogni 10 secondi.
                   <br><br>
-                  <b>Prossime Letture.</b> Nel pannello Opzioni il pulsantino ⏱ accanto a quello di Clona apre la finestra
-                  «Prossime Letture dalla VMC»: per Ping (ogni 10 s), Sensori Ventilazione (ogni 5 s), Sensori Ambientali (ogni
-                  1227 s), Lan (ogni 57641 s) e Nome (ogni 43227 s) mostra il tempo che manca alla prossima lettura che Home
-                  Assistant fa da solo, calcolato dall'ultima lettura registrata. Gli intervalli sono gli scan_interval del file
-                  vmc_master.yaml e non si modificano dalla scheda.
+                  <b>Timer Lettura Dati VMC.</b> Nella scheda «Sensori - Selezionati» il pulsantino ⏱ dopo quello degli Offset apre la
+                  finestra «Timer Lettura Dati VMC»: per Ping (ogni 10 s), Sensori Ventilazione (ogni 5 s), Sensori Ambientali (ogni
+                  1227 s), Sensori Lan (ogni 57641 s) e Sensore Nome (ogni 43227 s) mostra il tempo che manca alla prossima lettura
+                  che Home Assistant fa da solo, calcolato dall'ultima lettura registrata, e sotto ogni voce da quanto tempo è
+                  avvenuta l'ultima lettura. Come le finestre Extra, VMC Interni e Offset, aprendola si chiudono le altre e si
+                  chiude con la scheda «Sensori - Selezionati» e alla fine di ogni Fascia del Calendario. Gli intervalli sono gli
+                  scan_interval del file vmc_master.yaml e non si modificano dalla scheda.
                   </td></tr></table>
 
                   <strong>- Verifica On-Line (Ping)</strong> <pre style="font-size:6px; background-color: #d9ffcc;">{{ states('sensor.vmc_master_status_ip') }}</pre>
