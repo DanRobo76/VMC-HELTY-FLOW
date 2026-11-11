@@ -4804,7 +4804,7 @@ input_boolean:
     icon: mdi:format-list-checkbox
 
   vmc_master_opzioni_interruttore_offset_sensori:                               # [CONFIGURAZIONE, 3 RICHIAMI] [INTERFACCIA, 5 RICHIAMI] [AUTOMAZIONE, 13 RICHIAMI]
-    name: "Sensori - Offset"
+    name: "Sensori Selezionati - Offset"
     initial: false
     icon: mdi:format-list-checkbox
 

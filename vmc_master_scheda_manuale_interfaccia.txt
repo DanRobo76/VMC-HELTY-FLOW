@@ -9759,7 +9759,7 @@ cards:
                               entity_id: script.vmc_master_azzera_offset_sensors
                             confirmation:
                               text: "Vuoi Procedere?"
-                      title: Sensori - Offset
+                      title: Sensori Selezionati - Offset
                       state_color: true
         - type: conditional
           conditions:
