@@ -770,7 +770,46 @@ template:
                states('input_boolean.vmc_master_spia_calendario_domenica_1')=='off' and
                states('input_boolean.vmc_master_spia_calendario_domenica_2')=='off')
           ) -%}
-          {{ t1 or t2 or t3 or t4 or t5 or t6 or t7 or t8 or t9 or t10 }}
+          {#- Trigger «Black-Out a Velocità 1 caso [SPIE INQUINANTI OFF] e [SPIE FREECOOLING ON o FREEHEATING ON o MEMORIE INQUINANTI ON]» -#}
+          {%- set t11 = (
+            (
+              states('sensor.vmc_master_status_ip_interfaccia') == "OFF-Line"
+              and states('sensor.vmc_master_status_ventola_lettura_codice_interpretato') == "Velocità 1"
+
+              and states('input_boolean.vmc_master_spia_velocita_0') == 'off'
+              and states('input_boolean.vmc_master_spia_velocita_2') == 'off'
+              and states('input_boolean.vmc_master_spia_velocita_3') == 'off'
+              and states('input_boolean.vmc_master_spia_velocita_4') == 'off'
+              and states('input_boolean.vmc_master_spia_velocita_notturna') == 'off'
+              and states('input_boolean.vmc_master_spia_velocita_freecooling') == 'off'
+              and states('input_boolean.vmc_master_spia_velocita_iperventilazione') == 'off'
+
+              and states('input_boolean.vmc_master_spia_calendario_lunedi_1') == 'off'
+              and states('input_boolean.vmc_master_spia_calendario_lunedi_2') == 'off'
+              and states('input_boolean.vmc_master_spia_calendario_martedi_1') == 'off'
+              and states('input_boolean.vmc_master_spia_calendario_martedi_2') == 'off'
+              and states('input_boolean.vmc_master_spia_calendario_mercoledi_1') == 'off'
+              and states('input_boolean.vmc_master_spia_calendario_mercoledi_2') == 'off'
+              and states('input_boolean.vmc_master_spia_calendario_giovedi_1') == 'off'
+              and states('input_boolean.vmc_master_spia_calendario_giovedi_2') == 'off'
+              and states('input_boolean.vmc_master_spia_calendario_venerdi_1') == 'off'
+              and states('input_boolean.vmc_master_spia_calendario_venerdi_2') == 'off'
+              and states('input_boolean.vmc_master_spia_calendario_sabato_1') == 'off'
+              and states('input_boolean.vmc_master_spia_calendario_sabato_2') == 'off'
+              and states('input_boolean.vmc_master_spia_calendario_domenica_1') == 'off'
+              and states('input_boolean.vmc_master_spia_calendario_domenica_2') == 'off'
+
+              and states('input_boolean.vmc_master_spia_co2_o_voc') == 'off'
+              and (
+                states('input_boolean.vmc_master_spia_velocita_freecooling_un_solo_avvio_per_programmazione_freecooling') == 'on'
+                or states('input_boolean.vmc_master_spia_velocita_freecooling_un_solo_avvio_per_programmazione_freeheating') == 'on'
+                or states('input_boolean.vmc_master_spia_co2_o_voc_partenza_ritorno_velocita_0') == 'on'
+                or states('input_boolean.vmc_master_spia_velocita_1_co2_o_voc_pdr') == 'on'
+                or states('input_boolean.vmc_master_spia_velocita_1_co2_o_voc') == 'on'
+              )
+            )
+          ) -%}
+          {{ t1 or t2 or t3 or t4 or t5 or t6 or t7 or t8 or t9 or t10 or t11 }}
         delay_on: "{{ states('input_number.vmc_master_attesa_blackout_rilevazione') | int(32) }}"   # SECONDI (UN TEMPLATE PER IL DELAY_ON DEVE ESSERE UNICO, NON UN DIZIONARIO)
         icon: >
           {{ 'mdi:power-plug-off' if is_state('binary_sensor.vmc_master_black_out_rilevato', 'on') else 'mdi:power-plug' }}
@@ -20441,6 +20480,92 @@ automation:
               states('input_boolean.vmc_master_spia_velocita_freecooling_un_solo_avvio_per_programmazione_freecooling') == 'on'
               or states('input_boolean.vmc_master_spia_velocita_freecooling_un_solo_avvio_per_programmazione_freeheating') == 'on'
             )
+          }}
+          {%- endset -%}
+          {%- set vmc_master_esito = vmc_master_esito | trim | lower -%}
+          {{ not (vmc_master_esito in ['true', 'yes', 'on', 'enable'] or (vmc_master_esito | is_number and vmc_master_esito | float(0) != 0)) }}
+      - trigger: template                                                  # Black-Out a Velocità 1 caso [SPIE INQUINANTI OFF] e [SPIE FREECOOLING ON o FREEHEATING ON o MEMORIE INQUINANTI ON] (ATTESA: input_number.vmc_master_attesa_blackout_rilevazione)
+        id: "ON|blackout_rilevazione|blackout_rilevazione|Black-Out Velocità 1 rilevato"
+        value_template: |-
+          {{
+          (
+            states('sensor.vmc_master_status_ip_interfaccia') == "OFF-Line"
+            and states('sensor.vmc_master_status_ventola_lettura_codice_interpretato') == "Velocità 1"
+
+            and states('input_boolean.vmc_master_spia_velocita_0') == 'off'
+            and states('input_boolean.vmc_master_spia_velocita_2') == 'off'
+            and states('input_boolean.vmc_master_spia_velocita_3') == 'off'
+            and states('input_boolean.vmc_master_spia_velocita_4') == 'off'
+            and states('input_boolean.vmc_master_spia_velocita_notturna') == 'off'
+            and states('input_boolean.vmc_master_spia_velocita_freecooling') == 'off'
+            and states('input_boolean.vmc_master_spia_velocita_iperventilazione') == 'off'
+
+            and states('input_boolean.vmc_master_spia_calendario_lunedi_1') == 'off'
+            and states('input_boolean.vmc_master_spia_calendario_lunedi_2') == 'off'
+            and states('input_boolean.vmc_master_spia_calendario_martedi_1') == 'off'
+            and states('input_boolean.vmc_master_spia_calendario_martedi_2') == 'off'
+            and states('input_boolean.vmc_master_spia_calendario_mercoledi_1') == 'off'
+            and states('input_boolean.vmc_master_spia_calendario_mercoledi_2') == 'off'
+            and states('input_boolean.vmc_master_spia_calendario_giovedi_1') == 'off'
+            and states('input_boolean.vmc_master_spia_calendario_giovedi_2') == 'off'
+            and states('input_boolean.vmc_master_spia_calendario_venerdi_1') == 'off'
+            and states('input_boolean.vmc_master_spia_calendario_venerdi_2') == 'off'
+            and states('input_boolean.vmc_master_spia_calendario_sabato_1') == 'off'
+            and states('input_boolean.vmc_master_spia_calendario_sabato_2') == 'off'
+            and states('input_boolean.vmc_master_spia_calendario_domenica_1') == 'off'
+            and states('input_boolean.vmc_master_spia_calendario_domenica_2') == 'off'
+
+            and states('input_boolean.vmc_master_spia_co2_o_voc') == 'off'
+            and (
+              states('input_boolean.vmc_master_spia_velocita_freecooling_un_solo_avvio_per_programmazione_freecooling') == 'on'
+              or states('input_boolean.vmc_master_spia_velocita_freecooling_un_solo_avvio_per_programmazione_freeheating') == 'on'
+              or states('input_boolean.vmc_master_spia_co2_o_voc_partenza_ritorno_velocita_0') == 'on'
+              or states('input_boolean.vmc_master_spia_velocita_1_co2_o_voc_pdr') == 'on'
+              or states('input_boolean.vmc_master_spia_velocita_1_co2_o_voc') == 'on'
+            )
+          )
+          }}
+      - trigger: template
+        id: "OFF|blackout_rilevazione|blackout_rilevazione|Black-Out Velocità 1 rilevato"
+        value_template: |-
+          {%- set vmc_master_esito -%}
+          {{
+          (
+            states('sensor.vmc_master_status_ip_interfaccia') == "OFF-Line"
+            and states('sensor.vmc_master_status_ventola_lettura_codice_interpretato') == "Velocità 1"
+
+            and states('input_boolean.vmc_master_spia_velocita_0') == 'off'
+            and states('input_boolean.vmc_master_spia_velocita_2') == 'off'
+            and states('input_boolean.vmc_master_spia_velocita_3') == 'off'
+            and states('input_boolean.vmc_master_spia_velocita_4') == 'off'
+            and states('input_boolean.vmc_master_spia_velocita_notturna') == 'off'
+            and states('input_boolean.vmc_master_spia_velocita_freecooling') == 'off'
+            and states('input_boolean.vmc_master_spia_velocita_iperventilazione') == 'off'
+
+            and states('input_boolean.vmc_master_spia_calendario_lunedi_1') == 'off'
+            and states('input_boolean.vmc_master_spia_calendario_lunedi_2') == 'off'
+            and states('input_boolean.vmc_master_spia_calendario_martedi_1') == 'off'
+            and states('input_boolean.vmc_master_spia_calendario_martedi_2') == 'off'
+            and states('input_boolean.vmc_master_spia_calendario_mercoledi_1') == 'off'
+            and states('input_boolean.vmc_master_spia_calendario_mercoledi_2') == 'off'
+            and states('input_boolean.vmc_master_spia_calendario_giovedi_1') == 'off'
+            and states('input_boolean.vmc_master_spia_calendario_giovedi_2') == 'off'
+            and states('input_boolean.vmc_master_spia_calendario_venerdi_1') == 'off'
+            and states('input_boolean.vmc_master_spia_calendario_venerdi_2') == 'off'
+            and states('input_boolean.vmc_master_spia_calendario_sabato_1') == 'off'
+            and states('input_boolean.vmc_master_spia_calendario_sabato_2') == 'off'
+            and states('input_boolean.vmc_master_spia_calendario_domenica_1') == 'off'
+            and states('input_boolean.vmc_master_spia_calendario_domenica_2') == 'off'
+
+            and states('input_boolean.vmc_master_spia_co2_o_voc') == 'off'
+            and (
+              states('input_boolean.vmc_master_spia_velocita_freecooling_un_solo_avvio_per_programmazione_freecooling') == 'on'
+              or states('input_boolean.vmc_master_spia_velocita_freecooling_un_solo_avvio_per_programmazione_freeheating') == 'on'
+              or states('input_boolean.vmc_master_spia_co2_o_voc_partenza_ritorno_velocita_0') == 'on'
+              or states('input_boolean.vmc_master_spia_velocita_1_co2_o_voc_pdr') == 'on'
+              or states('input_boolean.vmc_master_spia_velocita_1_co2_o_voc') == 'on'
+            )
+          )
           }}
           {%- endset -%}
           {%- set vmc_master_esito = vmc_master_esito | trim | lower -%}
