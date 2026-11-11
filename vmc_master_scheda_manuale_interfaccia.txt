@@ -9901,7 +9901,6 @@ cards:
                     - entity: input_boolean.vmc_master_opzione_finestra_audio
                     - entity: input_boolean.vmc_master_opzione_finestra_clona
                     - entity: input_boolean.vmc_master_opzione_finestra_prossime_letture
-                    - entity: input_boolean.vmc_master_opzione_finestra_tempi_attesa
                 show_header_toggle: false
               - type: conditional
                 conditions:
@@ -9929,93 +9928,6 @@ cards:
                     - entity: timer.vmc_master_lettura_nome
                       name: "Nome"
                       icon: mdi:timer-sync-outline
-              - type: conditional
-                conditions:
-                  - condition: state
-                    entity: input_boolean.vmc_master_opzione_finestra_tempi_attesa
-                    state: 'on'
-                card:
-                  type: entities
-                  title: "Tempi di Attesa dell'Automazione"
-                  show_header_toggle: false
-                  state_color: false
-                  entities:
-                    - type: section
-                      label: "Lim. Δ Punto di Rugiada"
-                    - entity: input_number.vmc_master_attesa_pdr_cambio
-                      name: "Cambio Velocità per Lim. Δ PdR"
-                    - entity: input_number.vmc_master_attesa_pdr_cambio_inquinanti
-                      name: "Cambio Velocità per Lim. Δ PdR (con Inquinanti)"
-                    - entity: input_number.vmc_master_attesa_pdr_ripristino
-                      name: "Ripristino dopo Lim. Δ PdR"
-                    - entity: input_number.vmc_master_attesa_pdr_ripristino_inquinanti
-                      name: "Ripristino dopo Lim. Δ PdR (con Inquinanti)"
-                    - type: section
-                      label: "Free Heating / Free Cooling"
-                    - entity: input_number.vmc_master_attesa_free_sospensione
-                      name: "Sospensione Free Heating/Cooling"
-                    - entity: input_number.vmc_master_attesa_free_sospensione_inquinanti
-                      name: "Sospensione Free Heating/Cooling (con Inquinanti)"
-                    - entity: input_number.vmc_master_attesa_free_ripristino
-                      name: "Ripristino Free Heating/Cooling"
-                    - entity: input_number.vmc_master_attesa_free_ripristino_inquinanti
-                      name: "Ripristino Free Heating/Cooling (con Inquinanti)"
-                    - entity: input_number.vmc_master_attesa_free_annullamento
-                      name: "Annullamento Memoria Free Heating/Cooling"
-                    - type: section
-                      label: "Inquinanti CO₂/VOC"
-                    - entity: input_number.vmc_master_attesa_inquinanti_avvio
-                      name: "Avvio Allerta Inquinanti"
-                    - entity: input_number.vmc_master_attesa_inquinanti_avvio_spia_pdr
-                      name: "Avvio Allerta Inquinanti (con Spia PdR)"
-                    - entity: input_number.vmc_master_attesa_inquinanti_fine
-                      name: "Fine Allerta Inquinanti"
-                    - entity: input_number.vmc_master_attesa_inquinanti_memoria
-                      name: "Memorizzazione Velocità (Inquinanti)"
-                    - type: section
-                      label: "Umidità"
-                    - entity: input_number.vmc_master_attesa_umidita_avvio
-                      name: "Avvio Allerta Umidità"
-                    - entity: input_number.vmc_master_attesa_umidita_fine
-                      name: "Fine Allerta Umidità"
-                    - entity: input_number.vmc_master_attesa_umidita_memoria
-                      name: "Memorizzazione Velocità (Umidità)"
-                    - type: section
-                      label: "Δ Temp."
-                    - entity: input_number.vmc_master_attesa_delta_avvio
-                      name: "Avvio Allerta Δ Temp."
-                    - entity: input_number.vmc_master_attesa_delta_fine
-                      name: "Fine Allerta Δ Temp."
-                    - entity: input_number.vmc_master_attesa_delta_memoria
-                      name: "Memorizzazione Velocità (Δ Temp.)"
-                    - type: section
-                      label: "Black-Out"
-                    - entity: input_number.vmc_master_attesa_blackout_rilevazione
-                      name: "Rilevazione Black-Out"
-                    - entity: input_number.vmc_master_attesa_blackout_ripristino
-                      name: "Ripristino dopo Black-Out"
-                    - type: section
-                      label: "Programmazione Giornaliera"
-                    - entity: input_number.vmc_master_attesa_calendario_inizio
-                      name: "Inizio Fascia"
-                    - entity: input_number.vmc_master_attesa_calendario_fine
-                      name: "Fine Fascia"
-                    - type: section
-                      label: "Avvisi"
-                    - entity: input_number.vmc_master_attesa_avvisi
-                      name: "Aggiornamento Avvisi"
-                    - type: section
-                    - type: button
-                      entity: script.vmc_master_ripristina_tempi_attesa
-                      name: "Ripristina Tempi di Attesa Originali"
-                      action_name: Esegui
-                      tap_action:
-                        action: perform-action
-                        perform_action: script.turn_on
-                        target:
-                          entity_id: script.vmc_master_ripristina_tempi_attesa
-                        confirmation:
-                          text: "Vuoi riportare tutti i tempi di attesa ai valori originali?"
               - type: conditional
                 conditions:
                   - condition: state
@@ -12175,10 +12087,10 @@ cards:
 
                   <strong>VMC Master - Ripristina Tempi di Attesa Originali</strong>
 
-                  Pulsante nel pannello Opzioni (pulsantino «Tempi di Attesa»).
+                  Non ha un pulsante nella scheda: i Tempi di Attesa sono fissi e non vanno modificati.
 
                   Riporta i 24 Tempi di Attesa dell'Automazione ai Valori
-                  Originali, dopo la conferma. E' compreso nel Profilo
+                  Originali. E' compreso nel Profilo
                   Inizializzazione.
 
                   <br>
@@ -12922,8 +12834,8 @@ cards:
                     <summary><b>17 Logiche di Funzionamento</b></summary> 
                     <table><tr><td align="justify">
                     <b>PRIORITA' DI ATTIVAZIONE DEGLI ALLARMI (Secondi per l'Attivazione e per la Ripresa):</b><br>
-                    <i>I Secondi indicati sono i valori originali: ogni tempo di attesa si può modificare nel pannello Opzioni (pulsantino
-                    «Tempi di Attesa») e si riporta ai valori originali con «Ripristina Tempi di Attesa Originali». Mentre l'automazione
+                    <i>I Secondi indicati sono fissi e non vanno modificati: il Profilo Inizializzazione li riporta comunque ai valori
+                    originali. Mentre l'automazione
                     aspetta, sotto il pannello VMC compare il riquadro con il «Tempo Mancante» dell'azione in attesa (es. «Annullamento
                     Memoria Free Heating», «Cambio Velocità per Lim. Δ PdR») e la «Velocità Registrata», cioè la velocità che verrà
                     ripristinata a fine allerta. Nella finestra Telecomando il tasto della velocità attiva è illuminato, quello della
