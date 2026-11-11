@@ -2101,8 +2101,7 @@ template:
       - default_entity_id: sensor.vmc_master_temp_interna_numeric               # [CONFIGURAZIONE, 6 RICHIAMI] [INTERFACCIA, 1 RICHIAMO] [AUTOMAZIONE, 0 RICHIAMI]
         name: "Temp Interna Numerica"
         unit_of_measurement: "°C"
-        device_class: temperature
-        state_class: measurement                                                # REGISTRATO NEL DATABASE: HOME ASSISTANT NE CONSERVA LE STATISTICHE ORARIE A LUNGO TERMINE (USATE PER LE MEDIE DEL RISCHIO MUFFA)
+        state_class: measurement                                                # REGISTRATO NEL DATABASE: HOME ASSISTANT NE CONSERVA LE STATISTICHE ORARIE A LUNGO TERMINE (USATE PER LE MEDIE DEL RISCHIO MUFFA); SENZA device_class PER NON COMPARIRE NEGLI ELENCHI DELLE ENTITA' SELEZIONABILI
         unique_id: vmc_master_temp_interna_numeric
         state: >
           {% set v = states('sensor.vmc_master_temp_interna_status') | float(none) %}
@@ -2112,8 +2111,7 @@ template:
       - default_entity_id: sensor.vmc_master_hum_interna_numeric                # [CONFIGURAZIONE, 7 RICHIAMI] [INTERFACCIA, 1 RICHIAMO] [AUTOMAZIONE, 0 RICHIAMI]
         name: "Umidità Interna Numerica"
         unit_of_measurement: "%"
-        device_class: humidity
-        state_class: measurement                                                # REGISTRATO NEL DATABASE: HOME ASSISTANT NE CONSERVA LE STATISTICHE ORARIE A LUNGO TERMINE (USATE PER LE MEDIE DEL RISCHIO MUFFA)
+        state_class: measurement                                                # REGISTRATO NEL DATABASE: HOME ASSISTANT NE CONSERVA LE STATISTICHE ORARIE A LUNGO TERMINE (USATE PER LE MEDIE DEL RISCHIO MUFFA); SENZA device_class PER NON COMPARIRE NEGLI ELENCHI DELLE ENTITA' SELEZIONABILI
         unique_id: vmc_master_hum_interna_numeric
         state: >
           {% set v = states('sensor.vmc_master_umidita_interna_status') | float(none) %}
@@ -2141,7 +2139,6 @@ template:
         name: "Temp. Interna Media 4 Settimane"
         unique_id: vmc_master_temp_interna_media_4w
         unit_of_measurement: "°C"
-        device_class: temperature
         state: >
           {%- set righe = (stat.statistics.get('sensor.vmc_master_temp_interna_numeric', []) if stat is defined and stat is mapping and stat.statistics is defined else []) -%}
           {%- set inizio = (utcnow() - timedelta(days=28)).replace(microsecond=0).isoformat() -%}
@@ -2152,7 +2149,6 @@ template:
         name: "Umidità Interna Media 4 Settimane"
         unique_id: vmc_master_hum_interna_media_4w
         unit_of_measurement: "%"
-        device_class: humidity
         state: >
           {%- set righe = (stat.statistics.get('sensor.vmc_master_hum_interna_numeric', []) if stat is defined and stat is mapping and stat.statistics is defined else []) -%}
           {%- set inizio = (utcnow() - timedelta(days=28)).replace(microsecond=0).isoformat() -%}
@@ -2163,7 +2159,6 @@ template:
         name: "Temp. Interna Media 8 Settimane"
         unique_id: vmc_master_temp_interna_media_8w
         unit_of_measurement: "°C"
-        device_class: temperature
         state: >
           {%- set righe = (stat.statistics.get('sensor.vmc_master_temp_interna_numeric', []) if stat is defined and stat is mapping and stat.statistics is defined else []) -%}
           {%- set inizio = (utcnow() - timedelta(days=56)).replace(microsecond=0).isoformat() -%}
@@ -2174,7 +2169,6 @@ template:
         name: "Umidità Interna Media 8 Settimane"
         unique_id: vmc_master_hum_interna_media_8w
         unit_of_measurement: "%"
-        device_class: humidity
         state: >
           {%- set righe = (stat.statistics.get('sensor.vmc_master_hum_interna_numeric', []) if stat is defined and stat is mapping and stat.statistics is defined else []) -%}
           {%- set inizio = (utcnow() - timedelta(days=56)).replace(microsecond=0).isoformat() -%}
@@ -2185,7 +2179,6 @@ template:
         name: "Temp. Interna Media 12 Settimane"
         unique_id: vmc_master_temp_interna_media_12w
         unit_of_measurement: "°C"
-        device_class: temperature
         state: >
           {%- set righe = (stat.statistics.get('sensor.vmc_master_temp_interna_numeric', []) if stat is defined and stat is mapping and stat.statistics is defined else []) -%}
           {%- set inizio = (utcnow() - timedelta(days=84)).replace(microsecond=0).isoformat() -%}
@@ -2196,7 +2189,6 @@ template:
         name: "Umidità Interna Media 12 Settimane"
         unique_id: vmc_master_hum_interna_media_12w
         unit_of_measurement: "%"
-        device_class: humidity
         state: >
           {%- set righe = (stat.statistics.get('sensor.vmc_master_hum_interna_numeric', []) if stat is defined and stat is mapping and stat.statistics is defined else []) -%}
           {%- set inizio = (utcnow() - timedelta(days=84)).replace(microsecond=0).isoformat() -%}
