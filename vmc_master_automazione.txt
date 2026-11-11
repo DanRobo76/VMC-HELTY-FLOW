@@ -27,7 +27,7 @@
 #                                                                                                                                                                                                                         #
 # PER LICENZE COMMERCIALI O USI PARTICOLARI CONTATTARE L'AUTORE: danilo.robotti@gmail.com                                                                                                                                 #
 #                                                                                                                                                                                                                         #
-# DATA: 9 NOVEMBRE 2026                                                                                                                                                                                                   #
+# DATA: 11 NOVEMBRE 2026                                                                                                                                                                                                  #
 #                                                                                                                                                                                                                         #
 # Impiego dell'Intelligenza Artificiale                                                                                                                                                                                   #
 # Nello sviluppo del presente software l'autore si è avvalso anche di strumenti di intelligenza artificiale.                                                                                                              #
@@ -66,6 +66,12 @@ description: >-
   sistema di Home Assistant (H.A.), includendo anche le entità provenienti da
   fonti Meteo, per ottenere una maggiore precisione e affidabilità rispetto ai
   sensori di Temperatura e Umidità integrati nella VMC;
+
+  - Se un'entità scelta (Temperatura Esterna, Temperatura Interna, Umidità
+  Interna o CO₂ Interna) non è disponibile, usa al suo posto la sonda della
+  VMC senza Offset, lo notifica e lo segnala nella scheda «Sensori -
+  Selezionati»; l'Umidità Esterna non ha una sonda nella VMC e resta «Non
+  disponibile»;
 
   - Permette lo spegnimento Automatico, in funzione della Temperatura Esterna se
   ≤ -18 [°C], e la successiva ripresa;
@@ -272,6 +278,7 @@ triggers:
     trigger: state
   - entity_id:
       - input_boolean.vmc_master_opzioni_monitoraggio_sensori
+    from: 'off'
     to: 'on'
     id: Opzioni Monitoraggio On
     alias: Trigger Attivazione Finestra Monitoraggio
@@ -2282,6 +2289,53 @@ triggers:
     id: >-
       Black-Out a Velocità 1 caso [SPIE INQUINANTI ON] e [SPIE FREECOOLING ON o
       FREEHEAING ON]
+    trigger: template
+    for:
+      seconds: "{{ states('input_number.vmc_master_attesa_blackout_rilevazione') | int(32) }}"
+  - alias: >-
+      Black-Out Velocità 1 [ON] - [RILEVAZIONE DISATTIVATA SE SPIA GIORNO
+      CALENDARIO E' ON] e [SPIE INQUINANTI OFF] e [SPIE FREECOOLING ON o
+      FREEHEATING ON o MEMORIE INQUINANTI ON]
+    value_template: |
+      {{
+      (
+        states('sensor.vmc_master_status_ip_interfaccia') == "OFF-Line"
+        and states('sensor.vmc_master_status_ventola_lettura_codice_interpretato') == "Velocità 1"
+
+        and states('input_boolean.vmc_master_spia_velocita_0') == 'off'
+        and states('input_boolean.vmc_master_spia_velocita_2') == 'off'
+        and states('input_boolean.vmc_master_spia_velocita_3') == 'off'
+        and states('input_boolean.vmc_master_spia_velocita_4') == 'off'
+        and states('input_boolean.vmc_master_spia_velocita_notturna') == 'off'
+        and states('input_boolean.vmc_master_spia_velocita_freecooling') == 'off'
+        and states('input_boolean.vmc_master_spia_velocita_iperventilazione') == 'off'
+
+        and states('input_boolean.vmc_master_spia_calendario_lunedi_1') == 'off'
+        and states('input_boolean.vmc_master_spia_calendario_lunedi_2') == 'off'
+        and states('input_boolean.vmc_master_spia_calendario_martedi_1') == 'off'
+        and states('input_boolean.vmc_master_spia_calendario_martedi_2') == 'off'
+        and states('input_boolean.vmc_master_spia_calendario_mercoledi_1') == 'off'
+        and states('input_boolean.vmc_master_spia_calendario_mercoledi_2') == 'off'
+        and states('input_boolean.vmc_master_spia_calendario_giovedi_1') == 'off'
+        and states('input_boolean.vmc_master_spia_calendario_giovedi_2') == 'off'
+        and states('input_boolean.vmc_master_spia_calendario_venerdi_1') == 'off'
+        and states('input_boolean.vmc_master_spia_calendario_venerdi_2') == 'off'
+        and states('input_boolean.vmc_master_spia_calendario_sabato_1') == 'off'
+        and states('input_boolean.vmc_master_spia_calendario_sabato_2') == 'off'
+        and states('input_boolean.vmc_master_spia_calendario_domenica_1') == 'off'
+        and states('input_boolean.vmc_master_spia_calendario_domenica_2') == 'off'
+
+        and states('input_boolean.vmc_master_spia_co2_o_voc') == 'off'
+        and (
+          states('input_boolean.vmc_master_spia_velocita_freecooling_un_solo_avvio_per_programmazione_freecooling') == 'on'
+          or states('input_boolean.vmc_master_spia_velocita_freecooling_un_solo_avvio_per_programmazione_freeheating') == 'on'
+          or states('input_boolean.vmc_master_spia_co2_o_voc_partenza_ritorno_velocita_0') == 'on'
+          or states('input_boolean.vmc_master_spia_velocita_1_co2_o_voc_pdr') == 'on'
+          or states('input_boolean.vmc_master_spia_velocita_1_co2_o_voc') == 'on'
+        )
+      )
+      }}
+    id: "Black-Out a Velocità 1 caso [SPIE INQUINANTI OFF] e [SPIE FREECOOLING ON o FREEHEATING ON o MEMORIE INQUINANTI ON]"
     trigger: template
     for:
       seconds: "{{ states('input_number.vmc_master_attesa_blackout_rilevazione') | int(32) }}"
@@ -7955,6 +8009,45 @@ actions:
           or states('input_boolean.vmc_master_spia_velocita_freecooling_un_solo_avvio_per_programmazione_freeheating') == 'on'
         )
       }}
+      {%- elif trigger.id == 'Black-Out a Velocità 1 caso [SPIE INQUINANTI OFF] e [SPIE FREECOOLING ON o FREEHEATING ON o MEMORIE INQUINANTI ON]' -%}
+      {{
+      (
+        states('sensor.vmc_master_status_ip_interfaccia') == "OFF-Line"
+        and states('sensor.vmc_master_status_ventola_lettura_codice_interpretato') == "Velocità 1"
+
+        and states('input_boolean.vmc_master_spia_velocita_0') == 'off'
+        and states('input_boolean.vmc_master_spia_velocita_2') == 'off'
+        and states('input_boolean.vmc_master_spia_velocita_3') == 'off'
+        and states('input_boolean.vmc_master_spia_velocita_4') == 'off'
+        and states('input_boolean.vmc_master_spia_velocita_notturna') == 'off'
+        and states('input_boolean.vmc_master_spia_velocita_freecooling') == 'off'
+        and states('input_boolean.vmc_master_spia_velocita_iperventilazione') == 'off'
+
+        and states('input_boolean.vmc_master_spia_calendario_lunedi_1') == 'off'
+        and states('input_boolean.vmc_master_spia_calendario_lunedi_2') == 'off'
+        and states('input_boolean.vmc_master_spia_calendario_martedi_1') == 'off'
+        and states('input_boolean.vmc_master_spia_calendario_martedi_2') == 'off'
+        and states('input_boolean.vmc_master_spia_calendario_mercoledi_1') == 'off'
+        and states('input_boolean.vmc_master_spia_calendario_mercoledi_2') == 'off'
+        and states('input_boolean.vmc_master_spia_calendario_giovedi_1') == 'off'
+        and states('input_boolean.vmc_master_spia_calendario_giovedi_2') == 'off'
+        and states('input_boolean.vmc_master_spia_calendario_venerdi_1') == 'off'
+        and states('input_boolean.vmc_master_spia_calendario_venerdi_2') == 'off'
+        and states('input_boolean.vmc_master_spia_calendario_sabato_1') == 'off'
+        and states('input_boolean.vmc_master_spia_calendario_sabato_2') == 'off'
+        and states('input_boolean.vmc_master_spia_calendario_domenica_1') == 'off'
+        and states('input_boolean.vmc_master_spia_calendario_domenica_2') == 'off'
+
+        and states('input_boolean.vmc_master_spia_co2_o_voc') == 'off'
+        and (
+          states('input_boolean.vmc_master_spia_velocita_freecooling_un_solo_avvio_per_programmazione_freecooling') == 'on'
+          or states('input_boolean.vmc_master_spia_velocita_freecooling_un_solo_avvio_per_programmazione_freeheating') == 'on'
+          or states('input_boolean.vmc_master_spia_co2_o_voc_partenza_ritorno_velocita_0') == 'on'
+          or states('input_boolean.vmc_master_spia_velocita_1_co2_o_voc_pdr') == 'on'
+          or states('input_boolean.vmc_master_spia_velocita_1_co2_o_voc') == 'on'
+        )
+      )
+      }}
       {%- elif trigger.id == 'Black-Out a Velocità 2' -%}
       {{
         states('sensor.vmc_master_status_ip_interfaccia') == "OFF-Line"
@@ -10702,6 +10795,19 @@ actions:
                 - input_boolean.vmc_master_opzione_finestra_clona
             enabled: true
             action: input_boolean.turn_off
+          - alias: >-
+              Aggiorna gli elenchi delle Entità selezionabili (Temperatura,
+              Umidità, Anidride Carbonica, Dispositivo Mobile, Media Player)
+            action: script.turn_on
+            target:
+              entity_id:
+                - script.vmc_master_aggiorna_elenco_entita_temperatura_esterna
+                - script.vmc_master_aggiorna_elenco_entita_temperatura_interna
+                - script.vmc_master_aggiorna_elenco_entita_umidita_esterna
+                - script.vmc_master_aggiorna_elenco_entita_umidita_interna
+                - script.vmc_master_aggiorna_elenco_entita_co2_interna
+                - script.vmc_master_aggiorna_elenco_entita_notifica_dispositivo
+                - script.vmc_master_aggiorna_elenco_entita_media_player
         alias: Trigger Attivazione Finestra Opzioni
       - conditions:
           - condition: trigger
@@ -16909,7 +17015,9 @@ actions:
             action: input_boolean.turn_off
       - conditions:
           - condition: trigger
-            id: Black-Out a Velocità 1
+            id:
+              - Black-Out a Velocità 1
+              - "Black-Out a Velocità 1 caso [SPIE INQUINANTI OFF] e [SPIE FREECOOLING ON o FREEHEATING ON o MEMORIE INQUINANTI ON]"
         sequence:
           - data: {}
             target:
@@ -28293,7 +28401,6 @@ actions:
       - conditions:
           - condition: trigger
             id:
-              - ' Opzioni On'
               - VMC Master Save Selected Temperatura Esterna Entity
         sequence:
           - action: script.turn_on
@@ -28308,7 +28415,6 @@ actions:
           - condition: trigger
             id:
               - VMC Master Save Selected Temperatura Interna Entity
-              - ' Opzioni On'
         sequence:
           - action: script.turn_on
             metadata: {}
@@ -28321,7 +28427,6 @@ actions:
       - conditions:
           - condition: trigger
             id:
-              - ' Opzioni On'
               - VMC Master Save Selected Umidità Esterna Entity
         sequence:
           - action: script.turn_on
@@ -28335,7 +28440,6 @@ actions:
       - conditions:
           - condition: trigger
             id:
-              - ' Opzioni On'
               - VMC Master Save Selected Umidità Interna Entity
         sequence:
           - action: script.turn_on
@@ -28349,7 +28453,6 @@ actions:
       - conditions:
           - condition: trigger
             id:
-              - ' Opzioni On'
               - VMC Master Save Selected CO2 Interna Entity
         sequence:
           - action: script.turn_on
@@ -28363,7 +28466,6 @@ actions:
       - conditions:
           - condition: trigger
             id:
-              - ' Opzioni On'
               - VMC Master Save Selected Dispositivo Interna Entity
         sequence:
           - action: script.turn_on
@@ -28377,7 +28479,6 @@ actions:
       - conditions:
           - condition: trigger
             id:
-              - ' Opzioni On'
               - VMC Master Save Selected Media Player Interna Entity
         sequence:
           - action: script.turn_on
@@ -28561,6 +28662,8 @@ actions:
 
                 Impiegato per il rilevamento: {{ (state_attr('sensor.vmc_master_temp_esterna_status', 'friendly_name') or (((device_name('sensor.vmc_master_temp_esterna_status') or '') ~ ' ' ~ ((entity_name('sensor.vmc_master_temp_esterna_status') or '') if entity_name is defined else '')) | trim)) }}
 
+                In sostituzione si usa la sonda della VMC, senza Offset: {{ states('sensor.vmc_master_temp_esterna_status') }} °C
+
                 Data {{ now().strftime('%d-%m-%Y') }} Ora
                 {{now().strftime('%H:%M:%S') }}
             enabled: true
@@ -28581,6 +28684,8 @@ actions:
                 states('input_text.vmc_master_last_temp_internal_entity') }}
 
                 Impiegato per il rilevamento: {{ (state_attr('sensor.vmc_master_temp_interna_status', 'friendly_name') or (((device_name('sensor.vmc_master_temp_interna_status') or '') ~ ' ' ~ ((entity_name('sensor.vmc_master_temp_interna_status') or '') if entity_name is defined else '')) | trim)) }}
+
+                In sostituzione si usa la sonda della VMC, senza Offset: {{ states('sensor.vmc_master_temp_interna_status') }} °C
 
                 Data {{ now().strftime('%d-%m-%Y') }} Ora
                 {{now().strftime('%H:%M:%S') }}
@@ -28624,6 +28729,8 @@ actions:
 
                 Impiegato per il rilevamento: {{ (state_attr('sensor.vmc_master_umidita_interna_status', 'friendly_name') or (((device_name('sensor.vmc_master_umidita_interna_status') or '') ~ ' ' ~ ((entity_name('sensor.vmc_master_umidita_interna_status') or '') if entity_name is defined else '')) | trim)) }}
 
+                In sostituzione si usa la sonda della VMC, senza Offset: {{ states('sensor.vmc_master_umidita_interna_status') }} %
+
                 Data {{ now().strftime('%d-%m-%Y') }} Ora
                 {{now().strftime('%H:%M:%S') }}
             enabled: true
@@ -28644,6 +28751,8 @@ actions:
                 states('input_text.vmc_master_last_co2_internal_entity') }}
 
                 Impiegato per il rilevamento: {{ (state_attr('sensor.vmc_master_co2_status', 'friendly_name') or (((device_name('sensor.vmc_master_co2_status') or '') ~ ' ' ~ ((entity_name('sensor.vmc_master_co2_status') or '') if entity_name is defined else '')) | trim)) }}
+
+                In sostituzione si usa la sonda della VMC, senza Offset: {{ states('sensor.vmc_master_co2_status') }} ppm
 
                 Data {{ now().strftime('%d-%m-%Y') }} Ora
                 {{now().strftime('%H:%M:%S') }}

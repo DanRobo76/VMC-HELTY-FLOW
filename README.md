@@ -152,6 +152,7 @@
 - <sub>**[Home Assistant](https://www.home-assistant.io/installation/)**</sub>
 - <sub>VMC **Helty Flow Plus** oppure **Flow Elite** visibile nell'app **[Air Guard](https://play.google.com/store/apps/details?id=com.helty.heltyair&hl=it&gl=US&pli=1)**; diversamente, inserirla nella rete di casa con la stessa app prima di procedere</sub>
 - <sub>Indirizzo IP della VMC statico (impostato nel router); la VMC risponde sulla porta 5001</sub>
+- <sub>Solo per gli Avvisi audio: Google Translate Text-to-speech configurato nel file `configuration.yaml` (`tts:` → `- platform: google_translate`), che fornisce l'azione `tts.google_translate_say` usata dagli script audio; aggiunto dall'interfaccia (Dispositivi e servizi) l'azione non esiste e gli avvisi audio non partono</sub>
 <br>
 
 <sub>**App consigliata:** `File editor` [Impostazioni → Applicazioni → Installa app → File editor → Installa]</sub>
@@ -165,12 +166,21 @@
 <br>
 
 ### Se è già installata una versione precedente
+<sub><strong>Dalla release 8.5.0:</strong></sub><br>
+<sub><strong>a)</strong> nella cartella `\\192.168.1.xxx\config\packages\vmc_helty_flow\master\` sostituire i file con quelli nuovi del punto <strong>4</strong> (`vmc_master.yaml` e i tre script `.sh`);</sub><br>
+<sub><strong>b)</strong> sostituire l'automazione (punto <strong>5</strong>) e la scheda (punto <strong>6</strong>) con le nuove;</sub><br>
+<sub><strong>c)</strong> riavviare Home Assistant;</sub><br>
+<sub><strong>d)</strong> il nuovo `vmc_master.yaml` contiene l'IP predefinito 192.168.1.160: se la VMC ha un IP diverso, scriverlo di nuovo nel campo <strong>«Cambia IP VMC (Riavvio di H.A.)»</strong> (punto <strong>8</strong>).</sub><br>
+<sub>Le VMC clonate si aggiornano come indicato sotto, alla fine della procedura dalla release 8.4.0 o precedenti.</sub><br>
+<sub>Le 6 vecchie entità delle medie del Rischio Muffa («vmc_master_temp_interna_4w/8w/12w» e «vmc_master_hum_interna_4w/8w/12w») restano come «non più fornite»: si possono eliminare da <strong>Impostazioni → Dispositivi e servizi → Entità</strong>; le nuove medie si completano in 4, 8 e 12 settimane (Pannello Informazioni, punto 19).</sub><br>
+
 <sub><strong>Dalla release 8.4.0 o precedenti:</strong></sub><br>
 <sub><strong>a)</strong> nella cartella `\\192.168.1.xxx\config\packages\vmc_helty_flow\master\` sostituire i file con quelli nuovi del punto <strong>4</strong>; i file `vmc_clona.yaml` e `vmc_clona_scheda_manuale_interfaccia.txt` non servono più: al primo avvio l'automazione «VMC Master - Clona Rimuovi File Obsoleti» li cancella da sola e chiede, con una notifica, di riavviare Home Assistant;</sub><br>
 <sub><strong>b)</strong> sostituire l'automazione (punto <strong>5</strong>) e la scheda (punto <strong>6</strong>) con le nuove; cancellare dall'interfaccia la vecchia scheda «Clona VMC», ora sostituita dalla Finestra Clona del pannello Impostazioni;</sub><br>
 <sub><strong>c)</strong> riavviare Home Assistant;</sub><br>
 <sub><strong>d)</strong> il nuovo `vmc_master.yaml` contiene l'IP predefinito 192.168.1.160: se la VMC ha un IP diverso, scriverlo di nuovo nel campo <strong>«Cambia IP VMC (Riavvio di H.A.)»</strong> (punto <strong>8</strong>); l'IP viene aggiornato anche nello script del cambio nome e Home Assistant si riavvia da solo.</sub><br>
 <sub>Le vecchie entità «vmc_master_slave_…» della scheda «Clona VMC» restano come «non più fornite»: si possono eliminare da <strong>Impostazioni → Dispositivi e servizi → Entità</strong>.</sub><br>
+<sub>Le 6 vecchie entità delle medie del Rischio Muffa («vmc_master_temp_interna_4w/8w/12w» e «vmc_master_hum_interna_4w/8w/12w») restano come «non più fornite»: si possono eliminare da <strong>Impostazioni → Dispositivi e servizi → Entità</strong>; le nuove medie si completano in 4, 8 e 12 settimane (Pannello Informazioni, punto 19).</sub><br>
 <sub>Le VMC clonate restano alla release con cui sono state create: per aggiornarle, cancellarle dalla Finestra Clona, riavviare, clonarle di nuovo con lo stesso nome e IP, riavviare e incollare di nuovo automazione e scheda (punto <strong>11</strong>).</sub>
 
 ---
@@ -514,6 +524,7 @@
 - <sub>**[Home Assistant](https://www.home-assistant.io/installation/)**</sub>
 - <sub>**Helty Flow Plus** or **Flow Elite** unit visible in the **[Air Guard](https://play.google.com/store/apps/details?id=com.helty.heltyair&hl=it&gl=US&pli=1)** app; otherwise add it to the home network with the same app before proceeding</sub>
 - <sub>Static IP address for the unit (set in the router); the unit answers on port 5001</sub>
+- <sub>Only for audio alerts: Google Translate Text-to-speech configured in `configuration.yaml` (`tts:` → `- platform: google_translate`), which provides the `tts.google_translate_say` action used by the audio scripts; when added from the interface (Devices & services) that action does not exist and audio alerts do not play</sub>
 <br>
 
 <sub>**Recommended app:** `File editor` [Settings → Apps → Install app → File editor → Install]</sub>
@@ -527,12 +538,21 @@
 <br>
 
 ### If a previous version is already installed
+<sub><strong>From release 8.5.0:</strong></sub><br>
+<sub><strong>a)</strong> in the folder `\\192.168.1.xxx\config\packages\vmc_helty_flow\master\` replace the files with the new ones of step <strong>4</strong> (`vmc_master.yaml` and the three `.sh` scripts);</sub><br>
+<sub><strong>b)</strong> replace the automation (step <strong>5</strong>) and the card (step <strong>6</strong>) with the new ones;</sub><br>
+<sub><strong>c)</strong> restart Home Assistant;</sub><br>
+<sub><strong>d)</strong> the new `vmc_master.yaml` contains the default IP 192.168.1.160: if the unit has a different IP, type it again in the <strong>«Cambia IP VMC (Riavvio di H.A.)»</strong> field (step <strong>8</strong>).</sub><br>
+<sub>Cloned units are updated as described below, at the end of the procedure from release 8.4.0 or earlier.</sub><br>
+<sub>The 6 old Mould Risk average entities («vmc_master_temp_interna_4w/8w/12w» and «vmc_master_hum_interna_4w/8w/12w») remain as «no longer provided»: they can be deleted from <strong>Settings → Devices & services → Entities</strong>; the new averages fill up in 4, 8 and 12 weeks (Information Panel, item 19).</sub><br>
+
 <sub><strong>From release 8.4.0 or earlier:</strong></sub><br>
 <sub><strong>a)</strong> in the folder `\\192.168.1.xxx\config\packages\vmc_helty_flow\master\` replace the files with the new ones of step <strong>4</strong>; the files `vmc_clona.yaml` and `vmc_clona_scheda_manuale_interfaccia.txt` are no longer needed: at the first start the automation «VMC Master - Clona Rimuovi File Obsoleti» deletes them by itself and asks, with a notification, to restart Home Assistant;</sub><br>
 <sub><strong>b)</strong> replace the automation (step <strong>5</strong>) and the card (step <strong>6</strong>) with the new ones; delete the old «Clona VMC» card from the interface, now replaced by the Clone window of the Settings panel;</sub><br>
 <sub><strong>c)</strong> restart Home Assistant;</sub><br>
 <sub><strong>d)</strong> the new `vmc_master.yaml` contains the default IP 192.168.1.160: if the unit has a different IP, type it again in the <strong>«Cambia IP VMC (Riavvio di H.A.)»</strong> field (step <strong>8</strong>); the IP is also updated in the name-change script and Home Assistant restarts by itself.</sub><br>
 <sub>The old «vmc_master_slave_…» entities of the «Clona VMC» card remain as «no longer provided»: they can be deleted from <strong>Settings → Devices & services → Entities</strong>.</sub><br>
+<sub>The 6 old Mould Risk average entities («vmc_master_temp_interna_4w/8w/12w» and «vmc_master_hum_interna_4w/8w/12w») remain as «no longer provided»: they can be deleted from <strong>Settings → Devices & services → Entities</strong>; the new averages fill up in 4, 8 and 12 weeks (Information Panel, item 19).</sub><br>
 <sub>Cloned units stay at the release they were created with: to update them, delete them from the Clone window, restart, clone them again with the same name and IP, restart and paste automation and card again (step <strong>11</strong>).</sub>
 
 ---

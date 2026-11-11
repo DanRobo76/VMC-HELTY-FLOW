@@ -27,7 +27,7 @@
 #                                                                                                                                                                                                                         #
 # PER LICENZE COMMERCIALI O USI PARTICOLARI CONTATTARE L'AUTORE: danilo.robotti@gmail.com                                                                                                                                 #
 #                                                                                                                                                                                                                         #
-# DATA: 1 NOVEMBRE 2026                                                                                                                                                                                                   #
+# DATA: 11 NOVEMBRE 2026                                                                                                                                                                                                  #
 #                                                                                                                                                                                                                         #
 # Impiego dell'Intelligenza Artificiale                                                                                                                                                                                   #
 # Nello sviluppo del presente software l'autore si è avvalso anche di strumenti di intelligenza artificiale.                                                                                                              #
@@ -38,4 +38,5 @@
 #                                                                                                                                                                                                                         #
 ###########################################################################################################################################################################################################################
 #!/bin/bash
-echo "VMNM $1" | nc 192.168.1.160 5001
+# "$*" UNISCE TUTTE LE PAROLE DEL NOME (UN NOME CON SPAZI ARRIVA INTERO); timeout EVITA CHE IL COMANDO RESTI APPESO SE LA VMC NON RISPONDE
+echo "VMNM $*" | timeout 5 nc 192.168.1.160 5001

@@ -27,7 +27,7 @@
 #                                                                                                                                                                                                                         #
 # PER LICENZE COMMERCIALI O USI PARTICOLARI CONTATTARE L'AUTORE: danilo.robotti@gmail.com                                                                                                                                 #
 #                                                                                                                                                                                                                         #
-# DATA: 8 NOVEMBRE 2026                                                                                                                                                                                                   #
+# DATA: 11 NOVEMBRE 2026                                                                                                                                                                                                  #
 #                                                                                                                                                                                                                         #
 # Impiego dell'Intelligenza Artificiale                                                                                                                                                                                   #
 # Nello sviluppo del presente software l'autore si è avvalso anche di strumenti di intelligenza artificiale.                                                                                                              #
@@ -170,25 +170,25 @@ cards:
 
         Valore Offset Min settato per la Temperatura Esterna: {{
         state_attr('input_number.vmc_master_offset_temp_esterna', 'min') |
-        float  }}
+        float(-50)  }}
 
         Valore Offset Min settato per la Temperatura Interna: {{
         state_attr('input_number.vmc_master_offset_temp_interna', 'min') |
-        float  }}
+        float(-50)  }}
 
         Valore Offset Min settato per l'Umidità Esterna: {{
         state_attr('input_number.vmc_master_offset_umidita_esterna', 'min') |
-        float  }}
+        float(-50)  }}
 
         Valore Offset Min settato per l'Umidità Interna: {{
         state_attr('input_number.vmc_master_offset_umidita_interna', 'min') |
-        float  }}
+        float(-50)  }}
 
         Valore Offset Min settato per l'Anidride Carbonica, CO₂: {{
-        state_attr('input_number.vmc_master_offset_co2', 'min') | float  }}
+        state_attr('input_number.vmc_master_offset_co2', 'min') | float(-50)  }}
 
         Valore Offset Min settato per i Composti Organici Volatili, VOC: {{
-        state_attr('input_number.vmc_master_offset_voc', 'min') | float  }}
+        state_attr('input_number.vmc_master_offset_voc', 'min') | float(-50)  }}
 
 
         {% elif
@@ -197,22 +197,22 @@ cards:
          <font color="rgb(128, 0, 128)"><font size="+1"><strong><ha-icon icon="mdi:alarm-light-off-outline"></ha-icon></strong></font><span style="padding-right: 10px;"></span><font size="+1"><strong> NESSUNA ALLERTA OFFSET</strong></font>
                  
         Valore Offset settato per la Temperatura Esterna: {{
-        states('input_number.vmc_master_offset_temp_esterna') | float  }}
+        states('input_number.vmc_master_offset_temp_esterna') | float(0)  }}
 
         Valore Offset settato per la Temperatura Interna: {{
-        states('input_number.vmc_master_offset_temp_interna') | float  }}
+        states('input_number.vmc_master_offset_temp_interna') | float(0)  }}
 
         Valore Offset settato per l'Umidità Esterna: {{
-        states('input_number.vmc_master_offset_umidita_esterna') | float  }}
+        states('input_number.vmc_master_offset_umidita_esterna') | float(0)  }}
 
         Valore Offset settato per l'Umidità Interna: {{
-        states('input_number.vmc_master_offset_umidita_interna') | float  }}
+        states('input_number.vmc_master_offset_umidita_interna') | float(0)  }}
 
         Valore Offset settato per l'Anidride Carbonica, CO₂: {{
-        states('input_number.vmc_master_offset_co2') | float  }}
+        states('input_number.vmc_master_offset_co2') | float(0)  }}
 
         Valore Offset settato per i Composti Organici Volatili, VOC: {{
-        states('input_number.vmc_master_offset_voc') | float  }}
+        states('input_number.vmc_master_offset_voc') | float(0)  }}
 
 
         Msg. 1
@@ -466,6 +466,11 @@ cards:
         {% set congelamento_vmc =
         states('sensor.vmc_master_temp_esterna_status_senza_offset') |
         float(default=none) %}
+
+        {#- Se un sensore non e' disponibile si confronta solo l'altro: il valore mancante vale 99 (nessun congelamento) e non viene mai mostrato -#}
+        {% set congelamento = congelamento if congelamento is not none else 99 %}
+
+        {% set congelamento_vmc = congelamento_vmc if congelamento_vmc is not none else 99 %}
 
 
         {% set spia_velocita_0 =
@@ -6695,9 +6700,9 @@ cards:
 
           - L'OPZIONE [VMC ON/OFF, in Funzione dell'Umidità Interna] RIMARRÀ IMPOSTATA SU ACCESO, <strong>DIVERSAMENTE LA VMC VERRA' ARRESTATA</strong>
               {% if states('input_boolean.vmc_master_spia_umidita_velocita_0')=='on'%}
-          - L'UMIDITA' INTERNA AVRA' UN VALORE ≥ DI {{ states('input_number.vmc_master_umidita_avvio') | float }}%, <strong>DIVERSAMENTE LA VMC VERRA' ARRESTATA</strong>
+          - L'UMIDITA' INTERNA AVRA' UN VALORE {% if states('sensor.vmc_master_umidita_interna_status_verifica_soglia') == 'Possibile Secchezza, Disidratazione' %}≤ DI 35%{% else %}≥ DI {{ states('input_number.vmc_master_umidita_avvio') | float(65) }}%{% endif %}, <strong>DIVERSAMENTE LA VMC VERRA' ARRESTATA</strong>
               {% else %}
-          - L'UMIDITA' INTERNA AVRA' UN VALORE ≥ DI {{ states('input_number.vmc_master_umidita_avvio') | float }}%, <strong>DIVERSAMENTE LA VMC MANTERRA' LA VELOCITA' IMPOSTATA: {{ states('sensor.vmc_master_status_ventola_lettura_codice_interpretato_interfaccia') }}</strong>
+          - L'UMIDITA' INTERNA AVRA' UN VALORE {% if states('sensor.vmc_master_umidita_interna_status_verifica_soglia') == 'Possibile Secchezza, Disidratazione' %}≤ DI 35%{% else %}≥ DI {{ states('input_number.vmc_master_umidita_avvio') | float(65) }}%{% endif %}, <strong>DIVERSAMENTE LA VMC MANTERRA' LA VELOCITA' IMPOSTATA: {{ states('sensor.vmc_master_status_ventola_lettura_codice_interpretato_interfaccia') }}</strong>
               {% endif %}
           - NON SONO PRESENTI ALTRE ALLERTE CHE POTREBBERO ARRESTARE LA VMC
 
@@ -9159,6 +9164,7 @@ cards:
                     entity: sensor.vmc_master_alert_avvio_interfaccia
                     state_not:
                     - Alert
+                    - Alert Δ Temp.
                 - show_name: true
                   show_icon: true
                   type: button
@@ -9177,6 +9183,7 @@ cards:
                     entity: sensor.vmc_master_alert_avvio_interfaccia
                     state:
                     - Alert
+                    - Alert Δ Temp.
                 - show_name: true
                   entity: binary_sensor.vmc_master_tasto_iperventilazione
                   state_color: true
@@ -9497,6 +9504,74 @@ cards:
                 state_color: true
               - type: conditional
                 conditions:
+                  - condition: or
+                    conditions:
+                    - condition: and
+                      conditions:
+                        - condition: state
+                          entity: sensor.vmc_master_temperatura_esterna_selezionata
+                          state: '-100'
+                        - condition: state
+                          entity: sensor.vmc_master_temp_esterna_status
+                          state_not:
+                            - Non disponibile
+                            - '-'
+                            - unknown
+                            - unavailable
+                    - condition: and
+                      conditions:
+                        - condition: state
+                          entity: sensor.vmc_master_temperatura_interna_selezionata
+                          state: '-100'
+                        - condition: state
+                          entity: sensor.vmc_master_temp_interna_status
+                          state_not:
+                            - Non disponibile
+                            - '-'
+                            - unknown
+                            - unavailable
+                    - condition: and
+                      conditions:
+                        - condition: state
+                          entity: sensor.vmc_master_umidita_interna_selezionata
+                          state: '-100'
+                        - condition: state
+                          entity: sensor.vmc_master_umidita_interna_status
+                          state_not:
+                            - Non disponibile
+                            - '-'
+                            - unknown
+                            - unavailable
+                    - condition: and
+                      conditions:
+                        - condition: state
+                          entity: sensor.vmc_master_co2_interna_selezionata
+                          state: '-100'
+                        - condition: state
+                          entity: sensor.vmc_master_co2_status
+                          state_not:
+                            - Non disponibile
+                            - '-'
+                            - unknown
+                            - unavailable
+                card:
+                  type: markdown
+                  content: |-
+                    {%- set righe = [
+                      ['Temperatura Ext.', 'sensor.vmc_master_temperatura_esterna_selezionata', 'sensor.vmc_master_temp_esterna_status', '°C'],
+                      ['Temperatura Int.', 'sensor.vmc_master_temperatura_interna_selezionata', 'sensor.vmc_master_temp_interna_status', '°C'],
+                      ['Umidità Int.', 'sensor.vmc_master_umidita_interna_selezionata', 'sensor.vmc_master_umidita_interna_status', '%'],
+                      ['CO₂ Int.', 'sensor.vmc_master_co2_interna_selezionata', 'sensor.vmc_master_co2_status', 'ppm']
+                    ] -%}
+                    <font color="rgb(255, 140, 0)"><ha-icon icon="mdi:swap-horizontal"></ha-icon><span style="padding-right: 10px;"></span><strong>ENTITÀ SCELTA NON DISPONIBILE: IN USO LA SONDA DELLA VMC (SENZA OFFSET)</strong></font>
+                    {% for r in righe if states(r[1]) == '-100' and states(r[2]) not in ['Non disponibile', '-', 'unknown', 'unavailable'] %}
+
+                    - {{ r[0] }}: {{ states(r[2]) }} {{ r[3] }}
+                    {%- endfor %}
+
+                    Al ripristino dell'entità scelta si torna automaticamente al suo valore (con Offset). Vedere Pannello Informazioni, Nota Entità Scelte non Disponibili.
+              - type: conditional
+                conditions:
                   - entity: >-
                       input_boolean.vmc_master_opzioni_interruttore_monitoraggio_sensori_extra
                     state: 'on'
@@ -9536,6 +9611,22 @@ cards:
                           secondary_info: last-changed
                       title: Sensori - Extra
                       state_color: true
+                    - type: conditional
+                      conditions:
+                        - condition: numeric_state
+                          entity: sensor.vmc_master_rischio_muffa_giorni_dati
+                          below: 84
+                      card:
+                        type: markdown
+                        content: |-
+                          {%- set g = states('sensor.vmc_master_rischio_muffa_giorni_dati') | float(0) -%}
+                          <ha-icon icon="mdi:calendar-clock"></ha-icon><span style="padding-right: 10px;"></span><strong>RISCHIO MUFFA: MEDIE IN AVVIO (DATI PARZIALI)</strong>
+
+                          - Media 4 Settimane: {{ [g, 28] | min | round(0) | int }} / 28 giorni{% if g >= 28 %} (completa){% endif %}
+                          - Media 8 Settimane: {{ [g, 56] | min | round(0) | int }} / 56 giorni{% if g >= 56 %} (completa){% endif %}
+                          - Media 12 Settimane: {{ [g, 84] | min | round(0) | int }} / 84 giorni
+
+                          Finché una media non è completa è calcolata sui soli giorni disponibili. Vedere Pannello Informazioni, punto 19.
                     - type: vertical-stack
                       cards:
                         - type: entities
@@ -9957,12 +10048,13 @@ cards:
                           'sensor.vmc_master_calcolo_rischio_muffa_4w',
                           'sensor.vmc_master_calcolo_rischio_muffa_8w',
                           'sensor.vmc_master_calcolo_rischio_muffa_12w',
-                          'sensor.vmc_master_temp_interna_4w',
-                          'sensor.vmc_master_temp_interna_8w',
-                          'sensor.vmc_master_temp_interna_12w',
-                          'sensor.vmc_master_hum_interna_4w',
-                          'sensor.vmc_master_hum_interna_8w',
-                          'sensor.vmc_master_hum_interna_12w',
+                          'sensor.vmc_master_temp_interna_media_4w',
+                          'sensor.vmc_master_temp_interna_media_8w',
+                          'sensor.vmc_master_temp_interna_media_12w',
+                          'sensor.vmc_master_hum_interna_media_4w',
+                          'sensor.vmc_master_hum_interna_media_8w',
+                          'sensor.vmc_master_hum_interna_media_12w',
+                          'sensor.vmc_master_rischio_muffa_giorni_dati',
                           'sensor.vmc_master_stato_led_interfaccia',
                           'sensor.vmc_master_alert_avvio_interfaccia',
                           'sensor.vmc_master_trend_muffa',
@@ -11585,7 +11677,7 @@ cards:
 
                   <table><tr><td align="justify">
                   <b>Che cos'è.</b> La programmazione settimanale: per ogni giorno si impostano
-                  l'orario di Accensione e di Spegnimento su due Fasce, anche contigue. La velocità di
+                  l'orario di Accensione e di Spegnimento su due Fasce, anche contigue (con almeno 1 minuto tra il 1° Spegnimento e la 2° Accensione). La velocità di
                   ogni Fascia si sceglie dal menù "Opzioni -> Opzioni - Calendario".
                   <br><br>
                   <b>Come interviene.</b> L'ingresso e l'uscita dalla Fascia avvengono dopo 3 secondi;
@@ -11711,6 +11803,9 @@ cards:
 
                   - i mesi di ogni fascia (Set Inizio Mese - Set Fine Mese) non
                   devono essere ripetuti
+
+                  - ogni fascia comprende almeno due mesi: Set Inizio Mese e
+                  Set Fine Mese devono essere diversi
 
                   </pre>
 
@@ -11864,6 +11959,26 @@ cards:
                   registrare o escludere si scelgono nell'unico elenco della
                   sezione «recorder» del file vmc_master.yaml (riga commentata
                   con # = registrata); dopo la modifica riavviare Home Assistant.
+
+                  <br>
+
+                  <strong>Nota Entità Scelte non Disponibili</strong>
+
+                  Se un'entità scelta in Opzioni non è disponibile, al suo
+                  posto si usa la sonda della VMC, senza Offset (l'Offset è
+                  tarato sull'entità scelta): Temperatura Ext., Temperatura
+                  Int., Umidità Int. e CO₂ Int. (la CO₂ solo sui modelli con la
+                  sonda; senza sonda il valore resta «-»). L'Umidità Ext. non ha
+                  una sonda nella VMC e resta «Non disponibile», come i calcoli
+                  che la usano (punto di rugiada e umidità assoluta esterni).
+                  Tutte le logiche (allerte, Free, Punto di Rugiada, Rischio
+                  Muffa, grafici) continuano così a funzionare. Il cambio è
+                  segnalato da un riquadro arancione sotto la scheda «Sensori -
+                  Selezionati» e dalla notifica «Non Disponibile» (con il valore
+                  della VMC in uso); al ripristino dell'entità scelta si torna
+                  automaticamente al suo valore con l'Offset. Congelamento e
+                  Δ Temp. leggono sempre entrambe le fonti e, se ne manca una,
+                  usano quella disponibile.
 
                   <br>
 
@@ -12021,7 +12136,12 @@ cards:
                   'on') or is_state('input_boolean.vmc_master_opzione_finestra_audio',
                   'on')
                   or is_state('input_boolean.vmc_master_opzione_finestra_clona', 'on')
+                  or is_state('input_boolean.vmc_master_clona_eseguita', 'on')
+                  or is_state('input_boolean.vmc_master_clona_conferma_cancellazione', 'on')
                   or is_state('input_boolean.vmc_master_conferma_pulizia_cronologia', 'on')
+                  or is_state('input_boolean.vmc_master_opzione_finestra_prossime_letture', 'on')
+                  or is_state('input_boolean.vmc_master_opzione_finestra_tempi_attesa', 'on')
+                  or is_state('input_boolean.vmc_master_attese_inizializzate', 'on')
                   %}
 
 
@@ -12074,6 +12194,8 @@ cards:
                   %}{% if is_state('input_boolean.vmc_master_opzione_finestra_audio',
                   'on') %}vmc_master_opzione_finestra_audio: On <br>{% endif %}
                   {% if is_state('input_boolean.vmc_master_opzione_finestra_clona', 'on') %}vmc_master_opzione_finestra_clona: On <br>{% endif %}
+                  {% if is_state('input_boolean.vmc_master_clona_eseguita', 'on') %}vmc_master_clona_eseguita: On <br>{% endif %}
+                  {% if is_state('input_boolean.vmc_master_clona_conferma_cancellazione', 'on') %}vmc_master_clona_conferma_cancellazione: On <br>{% endif %}
                   {% if is_state('input_boolean.vmc_master_conferma_pulizia_cronologia', 'on') %}vmc_master_conferma_pulizia_cronologia: On <br>{% endif %}
                   {% if is_state('input_boolean.vmc_master_opzione_finestra_prossime_letture', 'on') %}vmc_master_opzione_finestra_prossime_letture: On <br>{% endif %}
                   {% if is_state('input_boolean.vmc_master_opzione_finestra_tempi_attesa', 'on') %}vmc_master_opzione_finestra_tempi_attesa: On <br>{% endif %}
@@ -12816,6 +12938,21 @@ cards:
                   <br><br>
                   <b>Fonte.</b> Modello di Hukka e Viitanen (1999): limiti critici di temperatura e umidità
                   per il rischio di crescita della muffa.
+                  <br><br>
+                  <b>Come si calcolano le medie.</b> La temperatura e l'umidità interne (quelle delle schede
+                  «Sensori - Selezionati», con i loro Offset, o la sonda della VMC se l'entità scelta non è
+                  disponibile) sono registrate nel database: Home Assistant ne conserva le statistiche orarie a
+                  lungo termine, che non vengono cancellate dalla pulizia periodica del database (10 giorni) né
+                  dai riavvii. Ogni ora (al minuto 5) e a ogni avvio le medie si ricalcolano come media delle
+                  medie orarie degli ultimi 28, 56 e 84 giorni (4, 8 e 12 Settimane): ogni ora pesa allo stesso
+                  modo, qualunque sia la frequenza di aggiornamento del sensore.
+                  <br><br>
+                  <b>Periodo di avvio.</b> Le statistiche esistono solo da quando i sensori sono registrati
+                  (dalla release 8.5.1): finché non sono trascorsi 28, 56 e 84 giorni, le medie di 4, 8 e 12
+                  Settimane sono calcolate sui soli giorni disponibili (nei primi giorni le tre medie coincidono
+                  e l'Andamento risulta Stabile). Sotto la scheda «Sensori - Extra» un riquadro mostra i giorni di
+                  dati disponibili per ciascuna media (es. 12 / 28 giorni) e scompare quando anche la media di 12
+                  Settimane è completa.
                   </td></tr></table>
 
 
@@ -13110,7 +13247,7 @@ cards:
                   <table>
                   <tr><th style="padding: 4px 8px; border: 1px solid #c3c2b7;">Scritta</th><th style="padding: 4px 8px; border: 1px solid #c3c2b7;">Tasti</th><th style="padding: 4px 8px; border: 1px solid #c3c2b7;">Allerta</th><th style="padding: 4px 8px; border: 1px solid #c3c2b7;">Premendo il tasto</th></tr>
                   <tr><td style="padding: 4px 8px; border: 1px solid #c3c2b7;">Alert</td><td style="padding: 4px 8px; border: 1px solid #c3c2b7;">Velocità 1, 2, 3, 4, Notturna, Iperventilazione, Free</td><td style="padding: 4px 8px; border: 1px solid #c3c2b7;">Punto di Rugiada sfavorevole (interruttore PdR su ON) o Congelamento</td><td style="padding: 4px 8px; border: 1px solid #c3c2b7;">La VMC viene arrestata (Velocità 0). Con Punto di Rugiada sfavorevole e Inquinanti presenti la VMC mantiene la velocità scelta</td></tr>
-                  <tr><td style="padding: 4px 8px; border: 1px solid #c3c2b7;">Alert Δ Temp.</td><td style="padding: 4px 8px; border: 1px solid #c3c2b7;">Velocità 2, 3, 4, Iperventilazione, Free</td><td style="padding: 4px 8px; border: 1px solid #c3c2b7;">Diff. Temp. > 23 °C</td><td style="padding: 4px 8px; border: 1px solid #c3c2b7;">La VMC viene portata a Velocità 1</td></tr>
+                  <tr><td style="padding: 4px 8px; border: 1px solid #c3c2b7;">Alert Δ Temp.</td><td style="padding: 4px 8px; border: 1px solid #c3c2b7;">Velocità 2, 3, 4, Notturna, Iperventilazione, Free</td><td style="padding: 4px 8px; border: 1px solid #c3c2b7;">Diff. Temp. > 23 °C</td><td style="padding: 4px 8px; border: 1px solid #c3c2b7;">La VMC viene portata a Velocità 1</td></tr>
                   <tr><td style="padding: 4px 8px; border: 1px solid #c3c2b7;">Alert Free</td><td style="padding: 4px 8px; border: 1px solid #c3c2b7;">Free</td><td style="padding: 4px 8px; border: 1px solid #c3c2b7;">Mese programmato Free Heating / Free Cooling in condizioni sfavorevoli (voce 14)</td><td style="padding: 4px 8px; border: 1px solid #c3c2b7;">La VMC viene arrestata (Velocità 0); con Inquinanti presenti o allarme Umidità in corso viene portata a Velocità 1</td></tr>
                   </table>
                   <table><tr><td align="justify">
