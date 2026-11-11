@@ -73,13 +73,47 @@ cards:
                     state: 'on'
               - condition: state
                 entity: sensor.vmc_master_status_ip_interfaccia
-                state: OFF-Line
+                state: ON-Line
           - condition: state
             entity: sensor.vmc_master_status_ip_interfaccia
             state: OFF-Line
     card:
       type: entities
       entities:
+        - type: conditional
+          conditions:
+            - condition: state
+              entity: sensor.vmc_master_status_ip_interfaccia
+              state: ON-Line
+            - condition: or
+              conditions:
+                - condition: state
+                  entity: input_boolean.vmc_master_spia_velocita_0
+                  state: 'on'
+                - condition: state
+                  entity: input_boolean.vmc_master_spia_velocita_1
+                  state: 'on'
+                - condition: state
+                  entity: input_boolean.vmc_master_spia_velocita_2
+                  state: 'on'
+                - condition: state
+                  entity: input_boolean.vmc_master_spia_velocita_3
+                  state: 'on'
+                - condition: state
+                  entity: input_boolean.vmc_master_spia_velocita_4
+                  state: 'on'
+                - condition: state
+                  entity: input_boolean.vmc_master_spia_velocita_notturna
+                  state: 'on'
+                - condition: state
+                  entity: input_boolean.vmc_master_spia_velocita_freecooling
+                  state: 'on'
+                - condition: state
+                  entity: input_boolean.vmc_master_spia_velocita_iperventilazione
+                  state: 'on'
+          row:
+            type: section
+            label: VMC di nuovo ON-Line, ripristino della velocità in uso prima del Black-Out in corso...
         - type: button
           entity: script.vmc_master_upgrade_sensors
           action_name: Esegui
@@ -10062,6 +10096,7 @@ cards:
                           'sensor.vmc_master_alert_avvio_interfaccia',
                           'sensor.vmc_master_trend_muffa',
                           'sensor.vmc_master_trend_muffa_level',
+                          'sensor.vmc_master_trend_muffa_level_numeric',
                           'input_text.vmc_master_nome_da_inserire',
                           'input_text.vmc_master_ip_insert',
                           'input_text.vmc_master_last_temp_external_entity',
@@ -10920,13 +10955,14 @@ cards:
                             content: >-
                               {%- set ultima = (states('input_text.vmc_master_clona_vmc_clonate').split(',') | last).split(':') | first -%}
                               <ha-icon icon="mdi:check-circle-outline"></ha-icon> La VMC <b>{{ ultima }}</b> è stata clonata
-                              nella cartella <a href="/config/packages/vmc_helty_flow/{{ ultima }}"><b>/config/packages/vmc_helty_flow/{{ ultima }}</b></a>.
+                              nella cartella <b>packages/vmc_helty_flow/{{ ultima }}</b> della cartella condivisa <b>config</b> di Home Assistant
+                              (la stessa usata per l'installazione).
                               <br><br>
                               Copia il contenuto dei file:
                               <ul>
-                              <li><a href="/config/packages/vmc_helty_flow/{{ ultima }}/vmc_{{ ultima }}_automazione.txt"><b>vmc_{{ ultima }}_automazione.txt</b></a>
+                              <li><b>vmc_{{ ultima }}_automazione.txt</b>
                               e incollalo in una nuova automazione;</li>
-                              <li><a href="/config/packages/vmc_helty_flow/{{ ultima }}/vmc_{{ ultima }}_scheda_manuale_interfaccia.txt"><b>vmc_{{ ultima }}_scheda_manuale_interfaccia.txt</b></a>
+                              <li><b>vmc_{{ ultima }}_scheda_manuale_interfaccia.txt</b>
                               e incollalo in una nuova scheda «Manuale» dell'interfaccia.</li>
                               </ul>
                           - show_name: true
@@ -11093,15 +11129,13 @@ cards:
                       entity: sensor.vmc_master_umidita_assoluta_esterna
                       name: Umidità Assoluta Esterna
                       unit: ' [g/m³]'
-                    - graph: line
-                      type: sensor
-                      detail: 2
-                      entity: sensor.vmc_master_trend_muffa_level
-                      limits:
-                        min: 0
-                        max: 3
-                      name: Risk Muffa su 12 Sett.
+                    - type: history-graph
+                      title: Risk Muffa su 12 Sett.
                       hours_to_show: 2016
+                      min_y_axis: 0
+                      max_y_axis: 3
+                      entities:
+                        - entity: sensor.vmc_master_trend_muffa_level_numeric
                   columns: 2
         - type: conditional
           conditions:
@@ -13293,7 +13327,7 @@ cards:
                   • vmc_&lt;nome&gt;_script_cambio_ip.sh<br>• vmc_&lt;nome&gt;_script_cambio_nome.sh
                   </td></tr></table>
                   <table><tr><td align="justify">
-                  4. Compare il riquadro «VMC Clonata» con i link ai due file .txt: copiare il contenuto del file
+                  4. Compare il riquadro «VMC Clonata» con la cartella e i nomi dei due file .txt: copiare il contenuto del file
                   dell'automazione in una nuova automazione (Impostazioni → Automazioni → Crea automazione → Modifica in YAML)
                   e il contenuto del file della scheda in una nuova scheda «Manuale» dell'interfaccia.
                   <br>5. Per aggiungere un'altra VMC premere «Ripeti Clona/Elimina VMC» e ripetere dal punto 2: si possono clonare
