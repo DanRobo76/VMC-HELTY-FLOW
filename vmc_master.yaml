@@ -1320,7 +1320,7 @@ template:
         icon: mdi:cloud-percent
 
   - sensor:
-      - default_entity_id: sensor.vmc_master_co2_status                         # [CONFIGURAZIONE, 12 RICHIAMI] [INTERFACCIA, 17 RICHIAMI] [AUTOMAZIONE, 4 RICHIAMI] SENSORE DI LETTURA ANIDIRDE CARBONICA INTERNA MEMORIZZATA NEL SENSORE vmc_master_co2_interna_selezionata + OFFSET MANUALE, PREVIA VERIFICA DI AVVENUTA LETTURA DEI DATI "SENSORI" MEMORIZZATI NELLA VMC; SE L'ENTITA' SCELTA NON E' DISPONIBILE SI USA LA SONDA DELLA VMC SENZA OFFSET
+      - default_entity_id: sensor.vmc_master_co2_status                         # [CONFIGURAZIONE, 11 RICHIAMI] [INTERFACCIA, 17 RICHIAMI] [AUTOMAZIONE, 4 RICHIAMI] SENSORE DI LETTURA ANIDIRDE CARBONICA INTERNA MEMORIZZATA NEL SENSORE vmc_master_co2_interna_selezionata + OFFSET MANUALE, PREVIA VERIFICA DI AVVENUTA LETTURA DEI DATI "SENSORI" MEMORIZZATI NELLA VMC; SE L'ENTITA' SCELTA NON E' DISPONIBILE SI USA LA SONDA DELLA VMC SENZA OFFSET
         name: "CO₂ Int. [ppm]"
         unique_id: vmc_master_co2_status
         state: >
@@ -1376,7 +1376,7 @@ template:
         icon: mdi:molecule-co2
 
   - sensor:
-      - default_entity_id: sensor.vmc_master_voc_status                         # [CONFIGURAZIONE, 6 RICHIAMI] [INTERFACCIA, 15 RICHIAMI] [AUTOMAZIONE, 0 RICHIAMI] SENSORE DI LETTURA COMPOSTI ORGANICI VOLATICI INTERNI MEMORIZZATI NELLA VMC + OFFSET MANUALE ESPRESSI IN PPB [DEFAULT VMC], PREVIA VERIFICA DI AVVENUTA LETTURA DEI DATI "SENSORI" MEMORIZZATI NELLA VMC
+      - default_entity_id: sensor.vmc_master_voc_status                         # [CONFIGURAZIONE, 7 RICHIAMI] [INTERFACCIA, 15 RICHIAMI] [AUTOMAZIONE, 0 RICHIAMI] SENSORE DI LETTURA COMPOSTI ORGANICI VOLATICI INTERNI MEMORIZZATI NELLA VMC + OFFSET MANUALE ESPRESSI IN PPB [DEFAULT VMC], PREVIA VERIFICA DI AVVENUTA LETTURA DEI DATI "SENSORI" MEMORIZZATI NELLA VMC
         name: "VOC Int. [ppb]"
         unique_id: vmc_master_voc_status
         state: >
@@ -17191,7 +17191,7 @@ script:
                 data:
                   message: >
                     Sulla VMC {{ states('sensor.vmc_master_nome_status') }} 
-                    Allerta Composti Organici Volatili,  {{states('sensor.vmc_master_voc_status_verifica_soglia')}}, {{states('sensor.vmc_master_co2_status')}} ppb
+                    Allerta Composti Organici Volatili,  {{states('sensor.vmc_master_voc_status_verifica_soglia')}}, {{states('sensor.vmc_master_voc_status')}} ppb
                   language: "it"
               - delay: "00:00:10"
     mode: queued
