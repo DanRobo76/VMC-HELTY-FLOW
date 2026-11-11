@@ -22217,9 +22217,10 @@ actions:
                   - data: {}
                     target:
                       entity_id: >-
-                        input_boolean.vmc_master_spia_velocita_freecooling_co2_o_voc
+                        input_boolean.vmc_master_spia_velocita_1_co2_o_voc
                     enabled: true
                     action: input_boolean.turn_on
+                    alias: Velocità 1 scelta dall'utente con PdR e VMC in Free Cool./Heat. -> resta la Velocità 1 (prima la VMC tornava in Free Cool./Heat.)
                   - repeat:
                       sequence:
                         - data: {}
@@ -22228,7 +22229,7 @@ actions:
                               - >-
                                 input_boolean.vmc_master_spia_velocita_0_co2_o_voc
                               - >-
-                                input_boolean.vmc_master_spia_velocita_1_co2_o_voc
+                                input_boolean.vmc_master_spia_velocita_freecooling_co2_o_voc
                               - >-
                                 input_boolean.vmc_master_spia_velocita_2_co2_o_voc
                               - >-
@@ -22246,7 +22247,7 @@ actions:
                           value_template: >-
                             {{states('input_boolean.vmc_master_spia_velocita_0_co2_o_voc')=='off'
                             and
-                            states('input_boolean.vmc_master_spia_velocita_1_co2_o_voc')=='off'
+                            states('input_boolean.vmc_master_spia_velocita_freecooling_co2_o_voc')=='off'
                             and
                             states('input_boolean.vmc_master_spia_velocita_2_co2_o_voc')=='off'
                             and
@@ -22259,7 +22260,7 @@ actions:
                             states('input_boolean.vmc_master_spia_velocita_iperventilazione_co2_o_voc')=='off'}}
                   - metadata: {}
                     data: {}
-                    action: shell_command.vmc_master_freecooling
+                    action: shell_command.vmc_master_velocita_1
                 alias: >-
                   Se la Spia 1° Avvio Free Heating è OFF e la Spia1° Avvio Free
                   Cooling/Heating è OFF e Spia FreeCooling PdR ON
@@ -22976,6 +22977,25 @@ actions:
                 id:
                   - spia_velocita_Free Cooling_congelamento
         sequence:
+          - alias: Velocità scelta dall'utente durante l'allerta Congelamento con Inquinanti in corso -> azzera la memoria Inquinanti (a fine allerta Congelamento la logica Inquinanti riparte dalla velocità scelta)
+            if:
+              - condition: template
+                value_template: "{{ trigger.id not in ['Congelamento ON', 'spia_velocita_0_congelamento'] and is_state('input_boolean.vmc_master_congelamento_verifica_soglia_valore_spia', 'on') and is_state('input_boolean.vmc_master_spia_co2_o_voc', 'on') }}"
+            then:
+              - action: input_boolean.turn_off
+                target:
+                  entity_id:
+                    - input_boolean.vmc_master_spia_co2_o_voc
+                    - input_boolean.vmc_master_spia_co2_o_voc_partenza_ritorno_velocita_0
+                    - input_boolean.vmc_master_spia_velocita_0_co2_o_voc
+                    - input_boolean.vmc_master_spia_velocita_1_co2_o_voc
+                    - input_boolean.vmc_master_spia_velocita_2_co2_o_voc
+                    - input_boolean.vmc_master_spia_velocita_3_co2_o_voc
+                    - input_boolean.vmc_master_spia_velocita_4_co2_o_voc
+                    - input_boolean.vmc_master_spia_velocita_notturna_co2_o_voc
+                    - input_boolean.vmc_master_spia_velocita_iperventilazione_co2_o_voc
+                    - input_boolean.vmc_master_spia_velocita_freecooling_co2_o_voc
+                    - input_boolean.vmc_master_spia_velocita_1_co2_o_voc_pdr
           - metadata: {}
             data: {}
             target:
@@ -31700,6 +31720,25 @@ actions:
                 id:
                   - spia_velocita_Free Cooling_delta_temp
         sequence:
+          - alias: Velocità scelta dall'utente durante l'allerta Δ Temp. con Inquinanti in corso -> azzera la memoria Inquinanti (a fine allerta Δ Temp. la logica Inquinanti riparte dalla velocità scelta)
+            if:
+              - condition: template
+                value_template: "{{ trigger.id not in ['delta_temp_ON', 'spia_velocita_1_delta_temp'] and is_state('input_boolean.vmc_master_delta_temp_verifica_soglia_valore_spia', 'on') and is_state('input_boolean.vmc_master_spia_co2_o_voc', 'on') }}"
+            then:
+              - action: input_boolean.turn_off
+                target:
+                  entity_id:
+                    - input_boolean.vmc_master_spia_co2_o_voc
+                    - input_boolean.vmc_master_spia_co2_o_voc_partenza_ritorno_velocita_0
+                    - input_boolean.vmc_master_spia_velocita_0_co2_o_voc
+                    - input_boolean.vmc_master_spia_velocita_1_co2_o_voc
+                    - input_boolean.vmc_master_spia_velocita_2_co2_o_voc
+                    - input_boolean.vmc_master_spia_velocita_3_co2_o_voc
+                    - input_boolean.vmc_master_spia_velocita_4_co2_o_voc
+                    - input_boolean.vmc_master_spia_velocita_notturna_co2_o_voc
+                    - input_boolean.vmc_master_spia_velocita_iperventilazione_co2_o_voc
+                    - input_boolean.vmc_master_spia_velocita_freecooling_co2_o_voc
+                    - input_boolean.vmc_master_spia_velocita_1_co2_o_voc_pdr
           - metadata: {}
             data: {}
             target:
