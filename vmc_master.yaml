@@ -158,7 +158,7 @@ command_line:
 ################### Inizio Creazione Sensori Principali della VMC  ########################################################################################################################################################
 sensor:
   - platform: tcp
-    name: vmc_master_status_ventola                                             # [CONFIGURAZIONE, 7 RICHIAMI] [INTERFACCIA, 2 RICHIAMI] [AUTOMAZIONE, 163 RICHIAMI] CREAZIONE DEL SENSORE LETTURA STATI DI VENTILAZIONE; N.b non tutti i valori sono identificabili
+    name: vmc_master_status_ventola                                             # [CONFIGURAZIONE, 7 RICHIAMI] [INTERFACCIA, 2 RICHIAMI] [AUTOMAZIONE, 170 RICHIAMI] CREAZIONE DEL SENSORE LETTURA STATI DI VENTILAZIONE; N.b non tutti i valori sono identificabili
     host: 999.999.999.999                        # INDIRIZZO IP DELLA VMC MASTER
     port: 5001                                 # PORTA 5001 DELLA VMC IMPOSTAZIONE DI DEFAULT
     timeout: 3
@@ -473,7 +473,7 @@ template:
           {% endif %}
 
   - binary_sensor:
-      - default_entity_id: binary_sensor.vmc_master_black_out_rilevato          # [CONFIGURAZIONE, 2 RICHIAMI] [INTERFACCIA, 0 RICHIAMI] [AUTOMAZIONE, 229 RICHIAMI] BLACK-OUT RILEVATO: ON QUANDO UNA DELLE CONDIZIONI DEI TRIGGER «BLACK-OUT» DELL'AUTOMAZIONE (STESSO TESTO, 1:1) E' VERA DA ALMENO «ATTESA BLACK-OUT RILEVAZIONE» SECONDI; CON L'AUTOMAZIONE IN MODALITA' QUEUED FA USCIRE I CICLI DI CONFERMA DELLA VELOCITA', COME FACEVA IL RIAVVIO DELLA MODALITA' RESTART
+      - default_entity_id: binary_sensor.vmc_master_black_out_rilevato          # [CONFIGURAZIONE, 2 RICHIAMI] [INTERFACCIA, 0 RICHIAMI] [AUTOMAZIONE, 238 RICHIAMI] BLACK-OUT RILEVATO: ON QUANDO UNA DELLE CONDIZIONI DEI TRIGGER «BLACK-OUT» DELL'AUTOMAZIONE (STESSO TESTO, 1:1) E' VERA DA ALMENO «ATTESA BLACK-OUT RILEVAZIONE» SECONDI; CON L'AUTOMAZIONE IN MODALITA' QUEUED FA USCIRE I CICLI DI CONFERMA DELLA VELOCITA', COME FACEVA IL RIAVVIO DELLA MODALITA' RESTART
         name: "Black-Out Rilevato"
         unique_id: vmc_master_black_out_rilevato
         state: >
@@ -862,7 +862,7 @@ template:
         icon: mdi:code-array
 
   - sensor:
-      - default_entity_id: sensor.vmc_master_status_ventola_lettura_codice_interpretato # [CONFIGURAZIONE, 126 RICHIAMI] [INTERFACCIA, 53 RICHIAMI] [AUTOMAZIONE, 760 RICHIAMI] SENSORE DI INTERPRETAZIONE DELLA LETTURA DEI DATI "VELOCITA'" MEMORIZZATI NELLA VMC CONVERITA IN "STRINGA", PREVIA VERIFICA DI AVVENUTA LETTURA DEI DATI "VELOCITA'"" MEMORIZZATI NELLA VMC
+      - default_entity_id: sensor.vmc_master_status_ventola_lettura_codice_interpretato # [CONFIGURAZIONE, 128 RICHIAMI] [INTERFACCIA, 53 RICHIAMI] [AUTOMAZIONE, 786 RICHIAMI] SENSORE DI INTERPRETAZIONE DELLA LETTURA DEI DATI "VELOCITA'" MEMORIZZATI NELLA VMC CONVERITA IN "STRINGA", PREVIA VERIFICA DI AVVENUTA LETTURA DEI DATI "VELOCITA'"" MEMORIZZATI NELLA VMC
         name: "Status Ventilazione"
         unique_id: vmc_master_status_ventola_lettura_codice_interpretato
         state: >
@@ -2576,7 +2576,7 @@ template:
         icon: mdi:alarm-light-outline
 
   - sensor:
-      - default_entity_id: sensor.vmc_master_alert_monitoraggio_co2             # [CONFIGURAZIONE, 385 RICHIAMI] [INTERFACCIA, 42 RICHIAMI] [AUTOMAZIONE, 14 RICHIAMI] SENSORE POP-UP MONITORAGGIO SUPERAMENTO DEL Livello di Concentrazione CO₂ [ppm]
+      - default_entity_id: sensor.vmc_master_alert_monitoraggio_co2             # [CONFIGURAZIONE, 385 RICHIAMI] [INTERFACCIA, 42 RICHIAMI] [AUTOMAZIONE, 28 RICHIAMI] SENSORE POP-UP MONITORAGGIO SUPERAMENTO DEL Livello di Concentrazione CO₂ [ppm]
         name: "Monitoraggio CO₂"
         unique_id: vmc_master_alert_monitoraggio_co2
         state: >
@@ -2594,7 +2594,7 @@ template:
         icon: mdi:alarm-light-outline
 
   - sensor:
-      - default_entity_id: sensor.vmc_master_alert_monitoraggio_voc             # [CONFIGURAZIONE, 385 RICHIAMI] [INTERFACCIA, 43 RICHIAMI] [AUTOMAZIONE, 14 RICHIAMI] SENSORE POP-UP MONITORAGGIO SUPERAMENTO DEL Livello di Concentrazione VOC [ppb]
+      - default_entity_id: sensor.vmc_master_alert_monitoraggio_voc             # [CONFIGURAZIONE, 385 RICHIAMI] [INTERFACCIA, 43 RICHIAMI] [AUTOMAZIONE, 28 RICHIAMI] SENSORE POP-UP MONITORAGGIO SUPERAMENTO DEL Livello di Concentrazione VOC [ppb]
         name: "Monitoraggio VOC"
         unique_id: vmc_master_alert_monitoraggio_voc
         state: >
@@ -3213,7 +3213,7 @@ template:
         icon: mdi:timer-play-outline
 
   - sensor:
-      - default_entity_id: sensor.vmc_master_status_accensione_vmc_tramite_calendario_2 # [CONFIGURAZIONE, 30 RICHIAMI] [INTERFACCIA, 3 RICHIAMI] [AUTOMAZIONE, 30 RICHIAMI] SENSORE DI VERIFICA 2° FASCIA ACCENSIONE SE GLI ORARI SONO STATI INSERITI CORRETTAMENTE, DIVERSAMENTE MOSTRERA' "DISABILITATA"
+      - default_entity_id: sensor.vmc_master_status_accensione_vmc_tramite_calendario_2 # [CONFIGURAZIONE, 30 RICHIAMI] [INTERFACCIA, 3 RICHIAMI] [AUTOMAZIONE, 37 RICHIAMI] SENSORE DI VERIFICA 2° FASCIA ACCENSIONE SE GLI ORARI SONO STATI INSERITI CORRETTAMENTE, DIVERSAMENTE MOSTRERA' "DISABILITATA"
         name: "2° Accensione programmata"
         unique_id: vmc_master_status_accensione_vmc_tramite_calendario_2
         state: >
@@ -3273,7 +3273,7 @@ template:
         icon: mdi:timer-stop-outline
 
   - sensor:
-      - default_entity_id: sensor.vmc_master_status_spegnimento_vmc_tramite_calendario_2 # [CONFIGURAZIONE, 30 RICHIAMI] [INTERFACCIA, 1 RICHIAMO] [AUTOMAZIONE, 28 RICHIAMI] SENSORE DI VERIFICA 2° FASCIA SPEGNIMENTO SE GLI ORARI SONO STATI INSERITI CORRETTAMENTE, DIVERSAMENTE MOSTRERA' "DISABILITATO"
+      - default_entity_id: sensor.vmc_master_status_spegnimento_vmc_tramite_calendario_2 # [CONFIGURAZIONE, 30 RICHIAMI] [INTERFACCIA, 1 RICHIAMO] [AUTOMAZIONE, 35 RICHIAMI] SENSORE DI VERIFICA 2° FASCIA SPEGNIMENTO SE GLI ORARI SONO STATI INSERITI CORRETTAMENTE, DIVERSAMENTE MOSTRERA' "DISABILITATO"
         name: "2° Spegnimento programmato"
         unique_id: vmc_master_status_spegnimento_vmc_tramite_calendario_2
         state: >
@@ -4877,7 +4877,7 @@ input_boolean:
     name: "Mostra o Nascondi gli Avvisi"
     icon: mdi:light-switch-off
 
-  vmc_master_opzioni_accendi_spegni_vmc_vs_co2_e_voc:                           # [CONFIGURAZIONE, 115 RICHIAMI] [INTERFACCIA, 42 RICHIAMI] [AUTOMAZIONE, 17 RICHIAMI] VERIFICA IL VALORE DI PERICOLOSITA' DEI SENZORE CO2 E VOC; SOLAMENTE; LA VMC VERRA' SI AVVIERA' IN AUTOMATICO SE VIENE ACCESO (ON), QUALORA I VALORI RISULTINO PERICOLOSI
+  vmc_master_opzioni_accendi_spegni_vmc_vs_co2_e_voc:                           # [CONFIGURAZIONE, 115 RICHIAMI] [INTERFACCIA, 42 RICHIAMI] [AUTOMAZIONE, 31 RICHIAMI] VERIFICA IL VALORE DI PERICOLOSITA' DEI SENZORE CO2 E VOC; SOLAMENTE; LA VMC VERRA' SI AVVIERA' IN AUTOMATICO SE VIENE ACCESO (ON), QUALORA I VALORI RISULTINO PERICOLOSI
     name: "VMC ON/OFF, in Funzione del Lim. CO₂ e/o VOC"
     icon: mdi:light-switch-off
 
@@ -4894,7 +4894,7 @@ input_boolean:
     initial: false
     icon: mdi:human-handsup
 ################### Inizio Creazione Switch Booleani impiegati nell'Automazione, per valutare la Velocità in caso di Black-Out e/o SUPERAMENTO DEL Set Lim. Δ Punto di Rugiada ##############################################################
-  vmc_master_spia_velocita_0:                                                   # [CONFIGURAZIONE, 214 RICHIAMI] [INTERFACCIA, 22 RICHIAMI] [AUTOMAZIONE, 349 RICHIAMI] SENSORE TRACCIAMENTO VELOCITA' 0, IN CASO DI BLACK-OUT
+  vmc_master_spia_velocita_0:                                                   # [CONFIGURAZIONE, 215 RICHIAMI] [INTERFACCIA, 22 RICHIAMI] [AUTOMAZIONE, 349 RICHIAMI] SENSORE TRACCIAMENTO VELOCITA' 0, IN CASO DI BLACK-OUT
     name: "Spia Velocità 0"
     icon: mdi:memory
 
@@ -5056,7 +5056,7 @@ input_boolean:
 ################### Fine Creazione Switch Booleani impiegati nell'Automazione, per valutare la Velocità in caso di Black-Out e/o SUPERAMENTO DEL Set Lim. Δ Punto di Rugiada ##############################################
 ################### Inizio Creazione Switch Booleani impiegati nell'Automazione, per valutare gli inquinanti CO2 e VOC ##############################################
 
-  vmc_master_spia_co2_o_voc:                                                    # [CONFIGURAZIONE, 142 RICHIAMI] [INTERFACCIA, 15 RICHIAMI] [AUTOMAZIONE, 261 RICHIAMI] SENSORE DI SUPPORTO NELL'AUTOMAZIONE PER LA VERIFICA DI INQUINANTI CO2 E VOC
+  vmc_master_spia_co2_o_voc:                                                    # [CONFIGURAZIONE, 142 RICHIAMI] [INTERFACCIA, 15 RICHIAMI] [AUTOMAZIONE, 275 RICHIAMI] SENSORE DI SUPPORTO NELL'AUTOMAZIONE PER LA VERIFICA DI INQUINANTI CO2 E VOC
     name: "Spia Inquinanti CO₂ e/o VOC"
     icon: mdi:memory
 
@@ -5288,13 +5288,13 @@ input_datetime:
     has_time: true
     icon: mdi:timer-stop-outline
 
-  vmc_master_accensione_lunedi_2:                                               # [CONFIGURAZIONE, 56 RICHIAMI] [INTERFACCIA, 2 RICHIAMI] [AUTOMAZIONE, 4 RICHIAMI]
+  vmc_master_accensione_lunedi_2:                                               # [CONFIGURAZIONE, 56 RICHIAMI] [INTERFACCIA, 2 RICHIAMI] [AUTOMAZIONE, 5 RICHIAMI]
     name: "Lun. 2°"
     has_date: false
     has_time: true
     icon: mdi:timer-play-outline
     
-  vmc_master_spegnimento_lunedi_2:                                              # [CONFIGURAZIONE, 40 RICHIAMI] [INTERFACCIA, 2 RICHIAMI] [AUTOMAZIONE, 4 RICHIAMI]
+  vmc_master_spegnimento_lunedi_2:                                              # [CONFIGURAZIONE, 40 RICHIAMI] [INTERFACCIA, 2 RICHIAMI] [AUTOMAZIONE, 5 RICHIAMI]
     name: "Lun. 2°"
     has_date: false
     has_time: true
@@ -5312,13 +5312,13 @@ input_datetime:
     has_time: true
     icon: mdi:timer-stop-outline
     
-  vmc_master_accensione_martedi_2:                                              # [CONFIGURAZIONE, 56 RICHIAMI] [INTERFACCIA, 2 RICHIAMI] [AUTOMAZIONE, 4 RICHIAMI]
+  vmc_master_accensione_martedi_2:                                              # [CONFIGURAZIONE, 56 RICHIAMI] [INTERFACCIA, 2 RICHIAMI] [AUTOMAZIONE, 5 RICHIAMI]
     name: "Mar. 2°"
     has_date: false
     has_time: true
     icon: mdi:timer-play-outline
     
-  vmc_master_spegnimento_martedi_2:                                             # [CONFIGURAZIONE, 40 RICHIAMI] [INTERFACCIA, 2 RICHIAMI] [AUTOMAZIONE, 4 RICHIAMI]
+  vmc_master_spegnimento_martedi_2:                                             # [CONFIGURAZIONE, 40 RICHIAMI] [INTERFACCIA, 2 RICHIAMI] [AUTOMAZIONE, 5 RICHIAMI]
     name: "Mar. 2°"
     has_date: false
     has_time: true
@@ -5336,13 +5336,13 @@ input_datetime:
     has_time: true
     icon: mdi:timer-stop-outline
 
-  vmc_master_accensione_mercoledi_2:                                            # [CONFIGURAZIONE, 56 RICHIAMI] [INTERFACCIA, 2 RICHIAMI] [AUTOMAZIONE, 4 RICHIAMI]
+  vmc_master_accensione_mercoledi_2:                                            # [CONFIGURAZIONE, 56 RICHIAMI] [INTERFACCIA, 2 RICHIAMI] [AUTOMAZIONE, 5 RICHIAMI]
     name: "Mer. 2°"
     has_date: false
     has_time: true
     icon: mdi:timer-play-outline
     
-  vmc_master_spegnimento_mercoledi_2:                                           # [CONFIGURAZIONE, 40 RICHIAMI] [INTERFACCIA, 2 RICHIAMI] [AUTOMAZIONE, 4 RICHIAMI]
+  vmc_master_spegnimento_mercoledi_2:                                           # [CONFIGURAZIONE, 40 RICHIAMI] [INTERFACCIA, 2 RICHIAMI] [AUTOMAZIONE, 5 RICHIAMI]
     name: "Mer. 2°"
     has_date: false
     has_time: true
@@ -5360,13 +5360,13 @@ input_datetime:
     has_time: true
     icon: mdi:timer-stop-outline
 
-  vmc_master_accensione_giovedi_2:                                              # [CONFIGURAZIONE, 56 RICHIAMI] [INTERFACCIA, 2 RICHIAMI] [AUTOMAZIONE, 4 RICHIAMI]
+  vmc_master_accensione_giovedi_2:                                              # [CONFIGURAZIONE, 56 RICHIAMI] [INTERFACCIA, 2 RICHIAMI] [AUTOMAZIONE, 5 RICHIAMI]
     name: "Gio. 2°"
     has_date: false
     has_time: true
     icon: mdi:timer-play-outline
 
-  vmc_master_spegnimento_giovedi_2:                                             # [CONFIGURAZIONE, 40 RICHIAMI] [INTERFACCIA, 2 RICHIAMI] [AUTOMAZIONE, 4 RICHIAMI]
+  vmc_master_spegnimento_giovedi_2:                                             # [CONFIGURAZIONE, 40 RICHIAMI] [INTERFACCIA, 2 RICHIAMI] [AUTOMAZIONE, 5 RICHIAMI]
     name: "Gio. 2°"
     has_date: false
     has_time: true
@@ -5384,13 +5384,13 @@ input_datetime:
     has_time: true
     icon: mdi:timer-stop-outline
 
-  vmc_master_accensione_venerdi_2:                                              # [CONFIGURAZIONE, 56 RICHIAMI] [INTERFACCIA, 2 RICHIAMI] [AUTOMAZIONE, 4 RICHIAMI]
+  vmc_master_accensione_venerdi_2:                                              # [CONFIGURAZIONE, 56 RICHIAMI] [INTERFACCIA, 2 RICHIAMI] [AUTOMAZIONE, 5 RICHIAMI]
     name: "Ven. 2°"
     has_date: false
     has_time: true
     icon: mdi:timer-play-outline
 
-  vmc_master_spegnimento_venerdi_2:                                             # [CONFIGURAZIONE, 40 RICHIAMI] [INTERFACCIA, 2 RICHIAMI] [AUTOMAZIONE, 4 RICHIAMI]
+  vmc_master_spegnimento_venerdi_2:                                             # [CONFIGURAZIONE, 40 RICHIAMI] [INTERFACCIA, 2 RICHIAMI] [AUTOMAZIONE, 5 RICHIAMI]
     name: "Ven. 2°"
     has_date: false
     has_time: true
@@ -5408,13 +5408,13 @@ input_datetime:
     has_time: true
     icon: mdi:timer-stop-outline
 
-  vmc_master_accensione_sabato_2:                                               # [CONFIGURAZIONE, 56 RICHIAMI] [INTERFACCIA, 2 RICHIAMI] [AUTOMAZIONE, 4 RICHIAMI]
+  vmc_master_accensione_sabato_2:                                               # [CONFIGURAZIONE, 56 RICHIAMI] [INTERFACCIA, 2 RICHIAMI] [AUTOMAZIONE, 5 RICHIAMI]
     name: "Sab. 2°"
     has_date: false
     has_time: true
     icon: mdi:timer-play-outline
     
-  vmc_master_spegnimento_sabato_2:                                              # [CONFIGURAZIONE, 40 RICHIAMI] [INTERFACCIA, 2 RICHIAMI] [AUTOMAZIONE, 4 RICHIAMI]
+  vmc_master_spegnimento_sabato_2:                                              # [CONFIGURAZIONE, 40 RICHIAMI] [INTERFACCIA, 2 RICHIAMI] [AUTOMAZIONE, 5 RICHIAMI]
     name: "Sab. 2°"
     has_date: false
     has_time: true
@@ -5432,13 +5432,13 @@ input_datetime:
     has_time: true
     icon: mdi:timer-stop-outline
 
-  vmc_master_accensione_domenica_2:                                             # [CONFIGURAZIONE, 56 RICHIAMI] [INTERFACCIA, 2 RICHIAMI] [AUTOMAZIONE, 4 RICHIAMI]
+  vmc_master_accensione_domenica_2:                                             # [CONFIGURAZIONE, 56 RICHIAMI] [INTERFACCIA, 2 RICHIAMI] [AUTOMAZIONE, 5 RICHIAMI]
     name: "Dom. 2°"
     has_date: false
     has_time: true
     icon: mdi:timer-play-outline
     
-  vmc_master_spegnimento_domenica_2:                                            # [CONFIGURAZIONE, 40 RICHIAMI] [INTERFACCIA, 2 RICHIAMI] [AUTOMAZIONE, 4 RICHIAMI]
+  vmc_master_spegnimento_domenica_2:                                            # [CONFIGURAZIONE, 40 RICHIAMI] [INTERFACCIA, 2 RICHIAMI] [AUTOMAZIONE, 5 RICHIAMI]
     name: "Dom. 2°"
     has_date: false
     has_time: true
@@ -7857,6 +7857,8 @@ script:
       coda (al massimo 1 minuto), ripete l'arresto con la rilettura dello stato della ventola e porta tutte
       le variabili booleane su OFF. Se è in corso un'allerta Δ Temp. o Congelamento (allerte del firmware
       della VMC), ne ripristina le spie con la memoria Velocità 0: a fine allerta la VMC resta a Velocità 0.
+      Se la VMC non conferma la Velocità 0 entro 10 s (per esempio Black-Out in corso), accende la memoria
+      Black-Out Velocità 0: al ritorno della corrente la VMC viene fermata e non riparte alla velocità di prima.
       Durante l'esecuzione la scheda mostra sotto il pulsante il countdown di 61 s al massimo, che si
       chiude prima se l'automazione finisce prima gli eventi in coda.
     sequence:
@@ -7910,6 +7912,16 @@ script:
               entity_id:
                 - input_boolean.vmc_master_congelamento_verifica_soglia_valore_spia
                 - input_boolean.vmc_master_spia_velocita_0_congelamento
+      - wait_template: "{{ states('sensor.vmc_master_status_ventola_lettura_codice_interpretato') == 'Velocità 0' }}"   # ATTENDE LA CONFERMA DELLA VELOCITA' 0 (AL MASSIMO 10 S)
+        timeout: "00:00:10"
+        continue_on_timeout: true
+      - if:                                                                   # VMC NON FERMA (BLACK-OUT IN CORSO O VMC CHE NON RISPONDE): MEMORIA BLACK-OUT VELOCITA' 0, COSI' AL RITORNO DELLA CORRENTE LA VMC VIENE FERMATA E NON RIPARTE ALLA VELOCITA' DI PRIMA
+          - condition: template
+            value_template: "{{ not delta_in_corso and not congelamento_in_corso and states('sensor.vmc_master_status_ventola_lettura_codice_interpretato') != 'Velocità 0' }}"
+        then:
+          - action: input_boolean.turn_on
+            target:
+              entity_id: input_boolean.vmc_master_spia_velocita_0
       - action: timer.cancel                                                # FINE DEL COUNTDOWN IN SCHEDA
         target:
           entity_id: timer.vmc_master_countdown_script_panic_button
@@ -25947,7 +25959,7 @@ shell_command:
   vmc_master_velocita_3:                   printf 'VMWH0000003\n' | timeout 5 nc -w 3 999.999.999.999 5001 # [CONFIGURAZIONE, 27 RICHIAMI] [INTERFACCIA, 2 RICHIAMI] [AUTOMAZIONE, 14 RICHIAMI] INVIO COMANDO VELOCITA' 3 ALLA VMC
   vmc_master_velocita_2:                   printf 'VMWH0000002\n' | timeout 5 nc -w 3 999.999.999.999 5001 # [CONFIGURAZIONE, 27 RICHIAMI] [INTERFACCIA, 2 RICHIAMI] [AUTOMAZIONE, 14 RICHIAMI] INVIO COMANDO VELOCITA' 2 ALLA VMC
   vmc_master_velocita_1:                   printf 'VMWH0000001\n' | timeout 5 nc -w 3 999.999.999.999 5001 # [CONFIGURAZIONE, 47 RICHIAMI] [INTERFACCIA, 2 RICHIAMI] [AUTOMAZIONE, 64 RICHIAMI] INVIO COMANDO VELOCITA' 1 ALLA VMC
-  vmc_master_velocita_0:                   printf 'VMWH0000000\n' | timeout 5 nc -w 3 999.999.999.999 5001 # [CONFIGURAZIONE, 110 RICHIAMI] [INTERFACCIA, 1 RICHIAMO] [AUTOMAZIONE, 52 RICHIAMI] INVIO COMANDO VELOCITA' 0 ALLA VMC
+  vmc_master_velocita_0:                   printf 'VMWH0000000\n' | timeout 5 nc -w 3 999.999.999.999 5001 # [CONFIGURAZIONE, 110 RICHIAMI] [INTERFACCIA, 1 RICHIAMO] [AUTOMAZIONE, 53 RICHIAMI] INVIO COMANDO VELOCITA' 0 ALLA VMC
   vmc_master_sensori_on:                   printf 'VMWH0300000\n' | timeout 5 nc -w 3 999.999.999.999 5001 # [CONFIGURAZIONE, 1 RICHIAMO] [INTERFACCIA, 1 RICHIAMO] [AUTOMAZIONE, 0 RICHIAMI] INVIO COMANDO SENSORI ON ALLA VMC PER ACCENDERE I SENSORI DELLA VMC; I valori rilevati dai sensori nella schermata INFO dell'App Mobile saranno disponibili e i relativi allarmi verrano segnalati
   vmc_master_sensori_off:                  printf 'VMWH0300002\n' | timeout 5 nc -w 3 999.999.999.999 5001 # [CONFIGURAZIONE, 2 RICHIAMI] [INTERFACCIA, 1 RICHIAMO] [AUTOMAZIONE, 0 RICHIAMI] INVIO COMANDO SENSORI OFF ALLA VMC PER DISATTIVARE I SENSORI DELLA VMC; I valori rilevati dai sensori nella schermata INFO dell'App Mobile NON saranno disponibili e i relativi allarmi NON verrano segnalati
   vmc_master_pannello_led_on:              printf 'VMWH0100010\n' | timeout 5 nc -w 3 999.999.999.999 5001 # [CONFIGURAZIONE, 2 RICHIAMI] [INTERFACCIA, 1 RICHIAMO] [AUTOMAZIONE, 0 RICHIAMI] INVIO COMANDO PANNELLO LED ON ALLA VMC PER ATTIVARE IL LED PANNELLO DEI COMANDI

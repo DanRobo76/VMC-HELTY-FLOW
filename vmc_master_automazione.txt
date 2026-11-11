@@ -16945,6 +16945,9 @@ actions:
           - condition: trigger
             id: Black-Out Off Vel. 0
         sequence:
+          - variables:
+              vel_prima_del_comando: "{{ states('sensor.vmc_master_status_ventola_lettura_codice_interpretato') }}"
+            alias: Memorizza la velocità letta alla riaccensione della VMC
           - choose:
               - conditions:
                   - condition: template
@@ -17045,6 +17048,48 @@ actions:
                       entity_id:
                         - input_boolean.vmc_master_spia_velocita_0
                 alias: Inquinanti ON, Partenza Vel.0 -> Vel. 1
+            default:
+              - alias: >-
+                  Nessuna memoria PdR o Inquinanti: se alla riaccensione la VMC non è ferma (era in moto quando è mancata la
+                  corrente e la velocità di ritorno è Velocità 0, per esempio un'allerta finita durante il Black-Out) la si riporta a Velocità 0;
+                  se è già ferma non si invia alcun comando
+                if:
+                  - condition: template
+                    value_template: "{{ states('sensor.vmc_master_status_ventola_lettura_codice_interpretato') not in ['Velocità 0', 'Non disponibile', 'unknown', 'unavailable', ''] }}"
+                then:
+                  - variables:
+                      vel_prima_del_comando: "{{ states('sensor.vmc_master_status_ventola_lettura_codice_interpretato') }}"
+                    alias: Memorizza la velocità prima del comando (un cambio fatto dall'utente ferma il ciclo di conferma)
+                  - alias: >-
+                      Ripristino dopo il Black-Out: ripete il comando finché la VMC non lo esegue e solo dopo spegne le spie,
+                      così le allerte in attesa della fine del Black-Out memorizzano la velocità ripristinata e non quella letta alla riaccensione
+                    repeat:
+                      sequence:
+                        - data: {}
+                          action: shell_command.vmc_master_velocita_0
+                        - delay:
+                            hours: 0
+                            minutes: 0
+                            seconds: 1
+                            milliseconds: 0
+                        - action: homeassistant.update_entity
+                          target:
+                            entity_id: sensor.vmc_master_status_ventola
+                          alias: Rilettura immediata della velocità (la velocità non ancora aggiornata non va presa per una scelta dell'utente)
+                        - delay:
+                            hours: 0
+                            minutes: 0
+                            seconds: 3
+                            milliseconds: 0
+                      until:
+                        - condition: template
+                          value_template: "{{ states('sensor.vmc_master_status_ventola_lettura_codice_interpretato') == 'Velocità 0' or (vel_prima_del_comando not in ['Non disponibile', 'unknown', 'unavailable', ''] and states('sensor.vmc_master_status_ventola_lettura_codice_interpretato') not in [vel_prima_del_comando, 'Non disponibile', 'unknown', 'unavailable', '']) or is_state('binary_sensor.vmc_master_black_out_rilevato', 'on') }}"
+          - alias: >-
+              Ripristino dopo il Black-Out: attende che la VMC esegua il comando (al massimo 12 s) prima di spegnere le spie,
+              così le allerte in attesa della fine del Black-Out memorizzano la velocità ripristinata
+            wait_template: "{{ states('sensor.vmc_master_status_ventola_lettura_codice_interpretato') != vel_prima_del_comando or is_state('binary_sensor.vmc_master_black_out_rilevato', 'on') }}"
+            timeout: "00:00:12"
+            continue_on_timeout: true
           - data: {}
             target:
               entity_id:
@@ -17200,8 +17245,33 @@ actions:
           - condition: trigger
             id: Black-Out Off Vel. 1
         sequence:
-          - data: {}
-            action: shell_command.vmc_master_velocita_1
+          - variables:
+              vel_prima_del_comando: "{{ states('sensor.vmc_master_status_ventola_lettura_codice_interpretato') }}"
+            alias: Memorizza la velocità prima del comando (un cambio fatto dall'utente ferma il ciclo di conferma)
+          - alias: >-
+              Ripristino dopo il Black-Out: ripete il comando finché la VMC non lo esegue e solo dopo spegne le spie,
+              così le allerte in attesa della fine del Black-Out memorizzano la velocità ripristinata e non quella letta alla riaccensione
+            repeat:
+              sequence:
+                - data: {}
+                  action: shell_command.vmc_master_velocita_1
+                - delay:
+                    hours: 0
+                    minutes: 0
+                    seconds: 1
+                    milliseconds: 0
+                - action: homeassistant.update_entity
+                  target:
+                    entity_id: sensor.vmc_master_status_ventola
+                  alias: Rilettura immediata della velocità (la velocità non ancora aggiornata non va presa per una scelta dell'utente)
+                - delay:
+                    hours: 0
+                    minutes: 0
+                    seconds: 3
+                    milliseconds: 0
+              until:
+                - condition: template
+                  value_template: "{{ states('sensor.vmc_master_status_ventola_lettura_codice_interpretato') == 'Velocità 1' or (vel_prima_del_comando not in ['Non disponibile', 'unknown', 'unavailable', ''] and states('sensor.vmc_master_status_ventola_lettura_codice_interpretato') not in [vel_prima_del_comando, 'Non disponibile', 'unknown', 'unavailable', '']) or is_state('binary_sensor.vmc_master_black_out_rilevato', 'on') }}"
           - data: {}
             target:
               entity_id:
@@ -17239,8 +17309,33 @@ actions:
           - condition: trigger
             id: Black-Out Off Vel. 2
         sequence:
-          - data: {}
-            action: shell_command.vmc_master_velocita_2
+          - variables:
+              vel_prima_del_comando: "{{ states('sensor.vmc_master_status_ventola_lettura_codice_interpretato') }}"
+            alias: Memorizza la velocità prima del comando (un cambio fatto dall'utente ferma il ciclo di conferma)
+          - alias: >-
+              Ripristino dopo il Black-Out: ripete il comando finché la VMC non lo esegue e solo dopo spegne le spie,
+              così le allerte in attesa della fine del Black-Out memorizzano la velocità ripristinata e non quella letta alla riaccensione
+            repeat:
+              sequence:
+                - data: {}
+                  action: shell_command.vmc_master_velocita_2
+                - delay:
+                    hours: 0
+                    minutes: 0
+                    seconds: 1
+                    milliseconds: 0
+                - action: homeassistant.update_entity
+                  target:
+                    entity_id: sensor.vmc_master_status_ventola
+                  alias: Rilettura immediata della velocità (la velocità non ancora aggiornata non va presa per una scelta dell'utente)
+                - delay:
+                    hours: 0
+                    minutes: 0
+                    seconds: 3
+                    milliseconds: 0
+              until:
+                - condition: template
+                  value_template: "{{ states('sensor.vmc_master_status_ventola_lettura_codice_interpretato') == 'Velocità 2' or (vel_prima_del_comando not in ['Non disponibile', 'unknown', 'unavailable', ''] and states('sensor.vmc_master_status_ventola_lettura_codice_interpretato') not in [vel_prima_del_comando, 'Non disponibile', 'unknown', 'unavailable', '']) or is_state('binary_sensor.vmc_master_black_out_rilevato', 'on') }}"
           - data: {}
             target:
               entity_id:
@@ -17278,8 +17373,33 @@ actions:
           - condition: trigger
             id: Black-Out Off Vel. 3
         sequence:
-          - data: {}
-            action: shell_command.vmc_master_velocita_3
+          - variables:
+              vel_prima_del_comando: "{{ states('sensor.vmc_master_status_ventola_lettura_codice_interpretato') }}"
+            alias: Memorizza la velocità prima del comando (un cambio fatto dall'utente ferma il ciclo di conferma)
+          - alias: >-
+              Ripristino dopo il Black-Out: ripete il comando finché la VMC non lo esegue e solo dopo spegne le spie,
+              così le allerte in attesa della fine del Black-Out memorizzano la velocità ripristinata e non quella letta alla riaccensione
+            repeat:
+              sequence:
+                - data: {}
+                  action: shell_command.vmc_master_velocita_3
+                - delay:
+                    hours: 0
+                    minutes: 0
+                    seconds: 1
+                    milliseconds: 0
+                - action: homeassistant.update_entity
+                  target:
+                    entity_id: sensor.vmc_master_status_ventola
+                  alias: Rilettura immediata della velocità (la velocità non ancora aggiornata non va presa per una scelta dell'utente)
+                - delay:
+                    hours: 0
+                    minutes: 0
+                    seconds: 3
+                    milliseconds: 0
+              until:
+                - condition: template
+                  value_template: "{{ states('sensor.vmc_master_status_ventola_lettura_codice_interpretato') == 'Velocità 3' or (vel_prima_del_comando not in ['Non disponibile', 'unknown', 'unavailable', ''] and states('sensor.vmc_master_status_ventola_lettura_codice_interpretato') not in [vel_prima_del_comando, 'Non disponibile', 'unknown', 'unavailable', '']) or is_state('binary_sensor.vmc_master_black_out_rilevato', 'on') }}"
           - data: {}
             target:
               entity_id:
@@ -17317,8 +17437,33 @@ actions:
           - condition: trigger
             id: Black-Out Off Vel. 4
         sequence:
-          - data: {}
-            action: shell_command.vmc_master_velocita_4
+          - variables:
+              vel_prima_del_comando: "{{ states('sensor.vmc_master_status_ventola_lettura_codice_interpretato') }}"
+            alias: Memorizza la velocità prima del comando (un cambio fatto dall'utente ferma il ciclo di conferma)
+          - alias: >-
+              Ripristino dopo il Black-Out: ripete il comando finché la VMC non lo esegue e solo dopo spegne le spie,
+              così le allerte in attesa della fine del Black-Out memorizzano la velocità ripristinata e non quella letta alla riaccensione
+            repeat:
+              sequence:
+                - data: {}
+                  action: shell_command.vmc_master_velocita_4
+                - delay:
+                    hours: 0
+                    minutes: 0
+                    seconds: 1
+                    milliseconds: 0
+                - action: homeassistant.update_entity
+                  target:
+                    entity_id: sensor.vmc_master_status_ventola
+                  alias: Rilettura immediata della velocità (la velocità non ancora aggiornata non va presa per una scelta dell'utente)
+                - delay:
+                    hours: 0
+                    minutes: 0
+                    seconds: 3
+                    milliseconds: 0
+              until:
+                - condition: template
+                  value_template: "{{ states('sensor.vmc_master_status_ventola_lettura_codice_interpretato') == 'Velocità 4' or (vel_prima_del_comando not in ['Non disponibile', 'unknown', 'unavailable', ''] and states('sensor.vmc_master_status_ventola_lettura_codice_interpretato') not in [vel_prima_del_comando, 'Non disponibile', 'unknown', 'unavailable', '']) or is_state('binary_sensor.vmc_master_black_out_rilevato', 'on') }}"
           - data: {}
             target:
               entity_id:
@@ -17356,8 +17501,33 @@ actions:
           - condition: trigger
             id: Black-Out Off Notturna
         sequence:
-          - data: {}
-            action: shell_command.vmc_master_notturna
+          - variables:
+              vel_prima_del_comando: "{{ states('sensor.vmc_master_status_ventola_lettura_codice_interpretato') }}"
+            alias: Memorizza la velocità prima del comando (un cambio fatto dall'utente ferma il ciclo di conferma)
+          - alias: >-
+              Ripristino dopo il Black-Out: ripete il comando finché la VMC non lo esegue e solo dopo spegne le spie,
+              così le allerte in attesa della fine del Black-Out memorizzano la velocità ripristinata e non quella letta alla riaccensione
+            repeat:
+              sequence:
+                - data: {}
+                  action: shell_command.vmc_master_notturna
+                - delay:
+                    hours: 0
+                    minutes: 0
+                    seconds: 1
+                    milliseconds: 0
+                - action: homeassistant.update_entity
+                  target:
+                    entity_id: sensor.vmc_master_status_ventola
+                  alias: Rilettura immediata della velocità (la velocità non ancora aggiornata non va presa per una scelta dell'utente)
+                - delay:
+                    hours: 0
+                    minutes: 0
+                    seconds: 3
+                    milliseconds: 0
+              until:
+                - condition: template
+                  value_template: "{{ states('sensor.vmc_master_status_ventola_lettura_codice_interpretato') == 'Notturna' or (vel_prima_del_comando not in ['Non disponibile', 'unknown', 'unavailable', ''] and states('sensor.vmc_master_status_ventola_lettura_codice_interpretato') not in [vel_prima_del_comando, 'Non disponibile', 'unknown', 'unavailable', '']) or is_state('binary_sensor.vmc_master_black_out_rilevato', 'on') }}"
           - data: {}
             target:
               entity_id:
@@ -17395,8 +17565,33 @@ actions:
           - condition: trigger
             id: Black-Out Off Iperventilazione
         sequence:
-          - data: {}
-            action: shell_command.vmc_master_iperventilazione
+          - variables:
+              vel_prima_del_comando: "{{ states('sensor.vmc_master_status_ventola_lettura_codice_interpretato') }}"
+            alias: Memorizza la velocità prima del comando (un cambio fatto dall'utente ferma il ciclo di conferma)
+          - alias: >-
+              Ripristino dopo il Black-Out: ripete il comando finché la VMC non lo esegue e solo dopo spegne le spie,
+              così le allerte in attesa della fine del Black-Out memorizzano la velocità ripristinata e non quella letta alla riaccensione
+            repeat:
+              sequence:
+                - data: {}
+                  action: shell_command.vmc_master_iperventilazione
+                - delay:
+                    hours: 0
+                    minutes: 0
+                    seconds: 1
+                    milliseconds: 0
+                - action: homeassistant.update_entity
+                  target:
+                    entity_id: sensor.vmc_master_status_ventola
+                  alias: Rilettura immediata della velocità (la velocità non ancora aggiornata non va presa per una scelta dell'utente)
+                - delay:
+                    hours: 0
+                    minutes: 0
+                    seconds: 3
+                    milliseconds: 0
+              until:
+                - condition: template
+                  value_template: "{{ states('sensor.vmc_master_status_ventola_lettura_codice_interpretato') == 'Iperventilazione' or (vel_prima_del_comando not in ['Non disponibile', 'unknown', 'unavailable', ''] and states('sensor.vmc_master_status_ventola_lettura_codice_interpretato') not in [vel_prima_del_comando, 'Non disponibile', 'unknown', 'unavailable', '']) or is_state('binary_sensor.vmc_master_black_out_rilevato', 'on') }}"
           - data: {}
             target:
               entity_id:
@@ -17433,6 +17628,9 @@ actions:
           - condition: trigger
             id: Black-Out Off Free Cool./Heat.
         sequence:
+          - variables:
+              vel_prima_del_comando: "{{ states('sensor.vmc_master_status_ventola_lettura_codice_interpretato') }}"
+            alias: Memorizza la velocità letta alla riaccensione della VMC
           - choose:
               - conditions:
                   - condition: template
@@ -17506,6 +17704,12 @@ actions:
                   - action: shell_command.vmc_master_velocita_1
                     metadata: {}
                     data: {}
+          - alias: >-
+              Ripristino dopo il Black-Out: attende che la VMC esegua il comando (al massimo 12 s) prima di spegnere le spie,
+              così le allerte in attesa della fine del Black-Out memorizzano la velocità ripristinata
+            wait_template: "{{ states('sensor.vmc_master_status_ventola_lettura_codice_interpretato') != vel_prima_del_comando or is_state('binary_sensor.vmc_master_black_out_rilevato', 'on') }}"
+            timeout: "00:00:12"
+            continue_on_timeout: true
           - data: {}
             target:
               entity_id:
@@ -17543,11 +17747,34 @@ actions:
             target:
               entity_id: input_boolean.vmc_master_spia_calendario_lunedi_1
             action: input_boolean.turn_off
+          - alias: >-
+              Allerta a cavallo delle due fasce: se la 2° Fascia di Lunedì è già in corso non si ferma la VMC
+              (la comanda la 2° Fascia) e non si azzerano le spie: si evita il comando Velocità 0 subito seguito
+              dalla velocità della 2° Fascia
+            condition: template
+            value_template: >-
+              {{ not ( states('sensor.vmc_master_status_accensione_vmc_tramite_calendario_2') == "Lunedi"
+              and states('sensor.vmc_master_status_spegnimento_vmc_tramite_calendario_2') == "Lunedi"
+              and now().strftime('%H:%M') >= strptime(states('input_datetime.vmc_master_accensione_lunedi_2'), '%H:%M:%S').strftime('%H:%M')
+              and now().strftime('%H:%M') < strptime(states('input_datetime.vmc_master_spegnimento_lunedi_2'), '%H:%M:%S').strftime('%H:%M') ) }}
           - action: shell_command.vmc_master_velocita_0
             metadata: {}
             data: {}
           - data: {}
             action: script.vmc_master_calendario_fascia_1_o_2_off
+          - alias: >-
+              Fuori dal Calendario hanno effetto tutte le verifiche: se gli Inquinanti sono presenti la logica Inquinanti riparte
+              dalla VMC ferma (Velocità 1 fino al rientro, poi Velocità 0)
+            if:
+              - condition: template
+                value_template: >-
+                  {{ (states('sensor.vmc_master_alert_monitoraggio_co2') == 'Allerta' or states('sensor.vmc_master_alert_monitoraggio_voc') == 'Allerta')
+                  and states('input_boolean.vmc_master_opzioni_accendi_spegni_vmc_vs_co2_e_voc') == 'on' }}
+            then:
+              - data: {}
+                target:
+                  entity_id: input_boolean.vmc_master_spia_co2_o_voc
+                action: input_boolean.turn_on
       - conditions:
           - condition: trigger
             id: 2° Lunedì On
@@ -17577,6 +17804,19 @@ actions:
             data: {}
           - data: {}
             action: script.vmc_master_calendario_fascia_1_o_2_off
+          - alias: >-
+              Fuori dal Calendario hanno effetto tutte le verifiche: se gli Inquinanti sono presenti la logica Inquinanti riparte
+              dalla VMC ferma (Velocità 1 fino al rientro, poi Velocità 0)
+            if:
+              - condition: template
+                value_template: >-
+                  {{ (states('sensor.vmc_master_alert_monitoraggio_co2') == 'Allerta' or states('sensor.vmc_master_alert_monitoraggio_voc') == 'Allerta')
+                  and states('input_boolean.vmc_master_opzioni_accendi_spegni_vmc_vs_co2_e_voc') == 'on' }}
+            then:
+              - data: {}
+                target:
+                  entity_id: input_boolean.vmc_master_spia_co2_o_voc
+                action: input_boolean.turn_on
       - conditions:
           - condition: trigger
             id: 1° Martedì On
@@ -17602,11 +17842,34 @@ actions:
             target:
               entity_id: input_boolean.vmc_master_spia_calendario_martedi_1
             action: input_boolean.turn_off
+          - alias: >-
+              Allerta a cavallo delle due fasce: se la 2° Fascia di Martedì è già in corso non si ferma la VMC
+              (la comanda la 2° Fascia) e non si azzerano le spie: si evita il comando Velocità 0 subito seguito
+              dalla velocità della 2° Fascia
+            condition: template
+            value_template: >-
+              {{ not ( states('sensor.vmc_master_status_accensione_vmc_tramite_calendario_2') == "Martedi"
+              and states('sensor.vmc_master_status_spegnimento_vmc_tramite_calendario_2') == "Martedi"
+              and now().strftime('%H:%M') >= strptime(states('input_datetime.vmc_master_accensione_martedi_2'), '%H:%M:%S').strftime('%H:%M')
+              and now().strftime('%H:%M') < strptime(states('input_datetime.vmc_master_spegnimento_martedi_2'), '%H:%M:%S').strftime('%H:%M') ) }}
           - action: shell_command.vmc_master_velocita_0
             metadata: {}
             data: {}
           - data: {}
             action: script.vmc_master_calendario_fascia_1_o_2_off
+          - alias: >-
+              Fuori dal Calendario hanno effetto tutte le verifiche: se gli Inquinanti sono presenti la logica Inquinanti riparte
+              dalla VMC ferma (Velocità 1 fino al rientro, poi Velocità 0)
+            if:
+              - condition: template
+                value_template: >-
+                  {{ (states('sensor.vmc_master_alert_monitoraggio_co2') == 'Allerta' or states('sensor.vmc_master_alert_monitoraggio_voc') == 'Allerta')
+                  and states('input_boolean.vmc_master_opzioni_accendi_spegni_vmc_vs_co2_e_voc') == 'on' }}
+            then:
+              - data: {}
+                target:
+                  entity_id: input_boolean.vmc_master_spia_co2_o_voc
+                action: input_boolean.turn_on
       - conditions:
           - condition: trigger
             id: 2° Martedì On
@@ -17636,6 +17899,19 @@ actions:
             data: {}
           - data: {}
             action: script.vmc_master_calendario_fascia_1_o_2_off
+          - alias: >-
+              Fuori dal Calendario hanno effetto tutte le verifiche: se gli Inquinanti sono presenti la logica Inquinanti riparte
+              dalla VMC ferma (Velocità 1 fino al rientro, poi Velocità 0)
+            if:
+              - condition: template
+                value_template: >-
+                  {{ (states('sensor.vmc_master_alert_monitoraggio_co2') == 'Allerta' or states('sensor.vmc_master_alert_monitoraggio_voc') == 'Allerta')
+                  and states('input_boolean.vmc_master_opzioni_accendi_spegni_vmc_vs_co2_e_voc') == 'on' }}
+            then:
+              - data: {}
+                target:
+                  entity_id: input_boolean.vmc_master_spia_co2_o_voc
+                action: input_boolean.turn_on
       - conditions:
           - condition: trigger
             id: 1° Mercoledì On
@@ -17660,11 +17936,34 @@ actions:
             target:
               entity_id: input_boolean.vmc_master_spia_calendario_mercoledi_1
             action: input_boolean.turn_off
+          - alias: >-
+              Allerta a cavallo delle due fasce: se la 2° Fascia di Mercoledì è già in corso non si ferma la VMC
+              (la comanda la 2° Fascia) e non si azzerano le spie: si evita il comando Velocità 0 subito seguito
+              dalla velocità della 2° Fascia
+            condition: template
+            value_template: >-
+              {{ not ( states('sensor.vmc_master_status_accensione_vmc_tramite_calendario_2') == "Mercoledi"
+              and states('sensor.vmc_master_status_spegnimento_vmc_tramite_calendario_2') == "Mercoledi"
+              and now().strftime('%H:%M') >= strptime(states('input_datetime.vmc_master_accensione_mercoledi_2'), '%H:%M:%S').strftime('%H:%M')
+              and now().strftime('%H:%M') < strptime(states('input_datetime.vmc_master_spegnimento_mercoledi_2'), '%H:%M:%S').strftime('%H:%M') ) }}
           - action: shell_command.vmc_master_velocita_0
             metadata: {}
             data: {}
           - data: {}
             action: script.vmc_master_calendario_fascia_1_o_2_off
+          - alias: >-
+              Fuori dal Calendario hanno effetto tutte le verifiche: se gli Inquinanti sono presenti la logica Inquinanti riparte
+              dalla VMC ferma (Velocità 1 fino al rientro, poi Velocità 0)
+            if:
+              - condition: template
+                value_template: >-
+                  {{ (states('sensor.vmc_master_alert_monitoraggio_co2') == 'Allerta' or states('sensor.vmc_master_alert_monitoraggio_voc') == 'Allerta')
+                  and states('input_boolean.vmc_master_opzioni_accendi_spegni_vmc_vs_co2_e_voc') == 'on' }}
+            then:
+              - data: {}
+                target:
+                  entity_id: input_boolean.vmc_master_spia_co2_o_voc
+                action: input_boolean.turn_on
       - conditions:
           - condition: trigger
             id: 2° Mercoledì On
@@ -17694,6 +17993,19 @@ actions:
             data: {}
           - data: {}
             action: script.vmc_master_calendario_fascia_1_o_2_off
+          - alias: >-
+              Fuori dal Calendario hanno effetto tutte le verifiche: se gli Inquinanti sono presenti la logica Inquinanti riparte
+              dalla VMC ferma (Velocità 1 fino al rientro, poi Velocità 0)
+            if:
+              - condition: template
+                value_template: >-
+                  {{ (states('sensor.vmc_master_alert_monitoraggio_co2') == 'Allerta' or states('sensor.vmc_master_alert_monitoraggio_voc') == 'Allerta')
+                  and states('input_boolean.vmc_master_opzioni_accendi_spegni_vmc_vs_co2_e_voc') == 'on' }}
+            then:
+              - data: {}
+                target:
+                  entity_id: input_boolean.vmc_master_spia_co2_o_voc
+                action: input_boolean.turn_on
       - conditions:
           - condition: trigger
             id: 1° Giovedì On
@@ -17719,12 +18031,35 @@ actions:
             target:
               entity_id: input_boolean.vmc_master_spia_calendario_giovedi_1
             action: input_boolean.turn_off
+          - alias: >-
+              Allerta a cavallo delle due fasce: se la 2° Fascia di Giovedì è già in corso non si ferma la VMC
+              (la comanda la 2° Fascia) e non si azzerano le spie: si evita il comando Velocità 0 subito seguito
+              dalla velocità della 2° Fascia
+            condition: template
+            value_template: >-
+              {{ not ( states('sensor.vmc_master_status_accensione_vmc_tramite_calendario_2') == "Giovedi"
+              and states('sensor.vmc_master_status_spegnimento_vmc_tramite_calendario_2') == "Giovedi"
+              and now().strftime('%H:%M') >= strptime(states('input_datetime.vmc_master_accensione_giovedi_2'), '%H:%M:%S').strftime('%H:%M')
+              and now().strftime('%H:%M') < strptime(states('input_datetime.vmc_master_spegnimento_giovedi_2'), '%H:%M:%S').strftime('%H:%M') ) }}
           - action: shell_command.vmc_master_velocita_0
             metadata: {}
             data: {}
           - data: {}
             action: script.vmc_master_calendario_fascia_1_o_2_off
             enabled: true
+          - alias: >-
+              Fuori dal Calendario hanno effetto tutte le verifiche: se gli Inquinanti sono presenti la logica Inquinanti riparte
+              dalla VMC ferma (Velocità 1 fino al rientro, poi Velocità 0)
+            if:
+              - condition: template
+                value_template: >-
+                  {{ (states('sensor.vmc_master_alert_monitoraggio_co2') == 'Allerta' or states('sensor.vmc_master_alert_monitoraggio_voc') == 'Allerta')
+                  and states('input_boolean.vmc_master_opzioni_accendi_spegni_vmc_vs_co2_e_voc') == 'on' }}
+            then:
+              - data: {}
+                target:
+                  entity_id: input_boolean.vmc_master_spia_co2_o_voc
+                action: input_boolean.turn_on
       - conditions:
           - condition: trigger
             id: 2° Giovedì On
@@ -17754,6 +18089,19 @@ actions:
             data: {}
           - data: {}
             action: script.vmc_master_calendario_fascia_1_o_2_off
+          - alias: >-
+              Fuori dal Calendario hanno effetto tutte le verifiche: se gli Inquinanti sono presenti la logica Inquinanti riparte
+              dalla VMC ferma (Velocità 1 fino al rientro, poi Velocità 0)
+            if:
+              - condition: template
+                value_template: >-
+                  {{ (states('sensor.vmc_master_alert_monitoraggio_co2') == 'Allerta' or states('sensor.vmc_master_alert_monitoraggio_voc') == 'Allerta')
+                  and states('input_boolean.vmc_master_opzioni_accendi_spegni_vmc_vs_co2_e_voc') == 'on' }}
+            then:
+              - data: {}
+                target:
+                  entity_id: input_boolean.vmc_master_spia_co2_o_voc
+                action: input_boolean.turn_on
       - conditions:
           - condition: trigger
             id: 1° Venerdì On
@@ -17778,11 +18126,34 @@ actions:
             target:
               entity_id: input_boolean.vmc_master_spia_calendario_venerdi_1
             action: input_boolean.turn_off
+          - alias: >-
+              Allerta a cavallo delle due fasce: se la 2° Fascia di Venerdì è già in corso non si ferma la VMC
+              (la comanda la 2° Fascia) e non si azzerano le spie: si evita il comando Velocità 0 subito seguito
+              dalla velocità della 2° Fascia
+            condition: template
+            value_template: >-
+              {{ not ( states('sensor.vmc_master_status_accensione_vmc_tramite_calendario_2') == "Venerdi"
+              and states('sensor.vmc_master_status_spegnimento_vmc_tramite_calendario_2') == "Venerdi"
+              and now().strftime('%H:%M') >= strptime(states('input_datetime.vmc_master_accensione_venerdi_2'), '%H:%M:%S').strftime('%H:%M')
+              and now().strftime('%H:%M') < strptime(states('input_datetime.vmc_master_spegnimento_venerdi_2'), '%H:%M:%S').strftime('%H:%M') ) }}
           - action: shell_command.vmc_master_velocita_0
             metadata: {}
             data: {}
           - data: {}
             action: script.vmc_master_calendario_fascia_1_o_2_off
+          - alias: >-
+              Fuori dal Calendario hanno effetto tutte le verifiche: se gli Inquinanti sono presenti la logica Inquinanti riparte
+              dalla VMC ferma (Velocità 1 fino al rientro, poi Velocità 0)
+            if:
+              - condition: template
+                value_template: >-
+                  {{ (states('sensor.vmc_master_alert_monitoraggio_co2') == 'Allerta' or states('sensor.vmc_master_alert_monitoraggio_voc') == 'Allerta')
+                  and states('input_boolean.vmc_master_opzioni_accendi_spegni_vmc_vs_co2_e_voc') == 'on' }}
+            then:
+              - data: {}
+                target:
+                  entity_id: input_boolean.vmc_master_spia_co2_o_voc
+                action: input_boolean.turn_on
       - conditions:
           - condition: trigger
             id: 2° Venerdì On
@@ -17812,6 +18183,19 @@ actions:
             data: {}
           - data: {}
             action: script.vmc_master_calendario_fascia_1_o_2_off
+          - alias: >-
+              Fuori dal Calendario hanno effetto tutte le verifiche: se gli Inquinanti sono presenti la logica Inquinanti riparte
+              dalla VMC ferma (Velocità 1 fino al rientro, poi Velocità 0)
+            if:
+              - condition: template
+                value_template: >-
+                  {{ (states('sensor.vmc_master_alert_monitoraggio_co2') == 'Allerta' or states('sensor.vmc_master_alert_monitoraggio_voc') == 'Allerta')
+                  and states('input_boolean.vmc_master_opzioni_accendi_spegni_vmc_vs_co2_e_voc') == 'on' }}
+            then:
+              - data: {}
+                target:
+                  entity_id: input_boolean.vmc_master_spia_co2_o_voc
+                action: input_boolean.turn_on
       - conditions:
           - condition: trigger
             id: 1° Sabato On
@@ -17836,11 +18220,34 @@ actions:
             target:
               entity_id: input_boolean.vmc_master_spia_calendario_sabato_1
             action: input_boolean.turn_off
+          - alias: >-
+              Allerta a cavallo delle due fasce: se la 2° Fascia di Sabato è già in corso non si ferma la VMC
+              (la comanda la 2° Fascia) e non si azzerano le spie: si evita il comando Velocità 0 subito seguito
+              dalla velocità della 2° Fascia
+            condition: template
+            value_template: >-
+              {{ not ( states('sensor.vmc_master_status_accensione_vmc_tramite_calendario_2') == "Sabato"
+              and states('sensor.vmc_master_status_spegnimento_vmc_tramite_calendario_2') == "Sabato"
+              and now().strftime('%H:%M') >= strptime(states('input_datetime.vmc_master_accensione_sabato_2'), '%H:%M:%S').strftime('%H:%M')
+              and now().strftime('%H:%M') < strptime(states('input_datetime.vmc_master_spegnimento_sabato_2'), '%H:%M:%S').strftime('%H:%M') ) }}
           - action: shell_command.vmc_master_velocita_0
             metadata: {}
             data: {}
           - data: {}
             action: script.vmc_master_calendario_fascia_1_o_2_off
+          - alias: >-
+              Fuori dal Calendario hanno effetto tutte le verifiche: se gli Inquinanti sono presenti la logica Inquinanti riparte
+              dalla VMC ferma (Velocità 1 fino al rientro, poi Velocità 0)
+            if:
+              - condition: template
+                value_template: >-
+                  {{ (states('sensor.vmc_master_alert_monitoraggio_co2') == 'Allerta' or states('sensor.vmc_master_alert_monitoraggio_voc') == 'Allerta')
+                  and states('input_boolean.vmc_master_opzioni_accendi_spegni_vmc_vs_co2_e_voc') == 'on' }}
+            then:
+              - data: {}
+                target:
+                  entity_id: input_boolean.vmc_master_spia_co2_o_voc
+                action: input_boolean.turn_on
       - conditions:
           - condition: trigger
             id: 2° Sabato On
@@ -17870,6 +18277,19 @@ actions:
             data: {}
           - data: {}
             action: script.vmc_master_calendario_fascia_1_o_2_off
+          - alias: >-
+              Fuori dal Calendario hanno effetto tutte le verifiche: se gli Inquinanti sono presenti la logica Inquinanti riparte
+              dalla VMC ferma (Velocità 1 fino al rientro, poi Velocità 0)
+            if:
+              - condition: template
+                value_template: >-
+                  {{ (states('sensor.vmc_master_alert_monitoraggio_co2') == 'Allerta' or states('sensor.vmc_master_alert_monitoraggio_voc') == 'Allerta')
+                  and states('input_boolean.vmc_master_opzioni_accendi_spegni_vmc_vs_co2_e_voc') == 'on' }}
+            then:
+              - data: {}
+                target:
+                  entity_id: input_boolean.vmc_master_spia_co2_o_voc
+                action: input_boolean.turn_on
       - conditions:
           - condition: trigger
             id: 1° Domenica On
@@ -17894,12 +18314,35 @@ actions:
             target:
               entity_id: input_boolean.vmc_master_spia_calendario_domenica_1
             action: input_boolean.turn_off
+          - alias: >-
+              Allerta a cavallo delle due fasce: se la 2° Fascia di Domenica è già in corso non si ferma la VMC
+              (la comanda la 2° Fascia) e non si azzerano le spie: si evita il comando Velocità 0 subito seguito
+              dalla velocità della 2° Fascia
+            condition: template
+            value_template: >-
+              {{ not ( states('sensor.vmc_master_status_accensione_vmc_tramite_calendario_2') == "Domenica"
+              and states('sensor.vmc_master_status_spegnimento_vmc_tramite_calendario_2') == "Domenica"
+              and now().strftime('%H:%M') >= strptime(states('input_datetime.vmc_master_accensione_domenica_2'), '%H:%M:%S').strftime('%H:%M')
+              and now().strftime('%H:%M') < strptime(states('input_datetime.vmc_master_spegnimento_domenica_2'), '%H:%M:%S').strftime('%H:%M') ) }}
           - action: shell_command.vmc_master_velocita_0
             metadata: {}
             data: {}
           - metadata: {}
             data: {}
             action: script.vmc_master_calendario_fascia_1_o_2_off
+          - alias: >-
+              Fuori dal Calendario hanno effetto tutte le verifiche: se gli Inquinanti sono presenti la logica Inquinanti riparte
+              dalla VMC ferma (Velocità 1 fino al rientro, poi Velocità 0)
+            if:
+              - condition: template
+                value_template: >-
+                  {{ (states('sensor.vmc_master_alert_monitoraggio_co2') == 'Allerta' or states('sensor.vmc_master_alert_monitoraggio_voc') == 'Allerta')
+                  and states('input_boolean.vmc_master_opzioni_accendi_spegni_vmc_vs_co2_e_voc') == 'on' }}
+            then:
+              - data: {}
+                target:
+                  entity_id: input_boolean.vmc_master_spia_co2_o_voc
+                action: input_boolean.turn_on
       - conditions:
           - condition: trigger
             id: 2° Domenica On
@@ -17929,6 +18372,19 @@ actions:
             data: {}
           - data: {}
             action: script.vmc_master_calendario_fascia_1_o_2_off
+          - alias: >-
+              Fuori dal Calendario hanno effetto tutte le verifiche: se gli Inquinanti sono presenti la logica Inquinanti riparte
+              dalla VMC ferma (Velocità 1 fino al rientro, poi Velocità 0)
+            if:
+              - condition: template
+                value_template: >-
+                  {{ (states('sensor.vmc_master_alert_monitoraggio_co2') == 'Allerta' or states('sensor.vmc_master_alert_monitoraggio_voc') == 'Allerta')
+                  and states('input_boolean.vmc_master_opzioni_accendi_spegni_vmc_vs_co2_e_voc') == 'on' }}
+            then:
+              - data: {}
+                target:
+                  entity_id: input_boolean.vmc_master_spia_co2_o_voc
+                action: input_boolean.turn_on
       - conditions:
           - condition: trigger
             id:
