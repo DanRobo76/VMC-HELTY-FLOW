@@ -9558,6 +9558,8 @@ cards:
                     - entity: >-
                         input_boolean.vmc_master_opzioni_interruttore_monitoraggio_sensori_extra
                     - entity: >-
+                        input_boolean.vmc_master_opzioni_interruttore_sensori_vmc_interni
+                    - entity: >-
                         input_boolean.vmc_master_opzioni_interruttore_offset_sensori
                 state_color: true
               - type: conditional
@@ -9621,7 +9623,7 @@ cards:
                       ['Umidità Int.', 'sensor.vmc_master_umidita_interna_selezionata', 'sensor.vmc_master_umidita_interna_status', '%'],
                       ['CO₂ Int.', 'sensor.vmc_master_co2_interna_selezionata', 'sensor.vmc_master_co2_status', 'ppm']
                     ] -%}
-                    <font color="rgb(255, 140, 0)"><ha-icon icon="mdi:swap-horizontal"></ha-icon><span style="padding-right: 10px;"></span><strong>ENTITÀ SCELTA NON DISPONIBILE: IN USO LA SONDA DELLA VMC (SENZA OFFSET)</strong></font>
+                    <font color="rgb(255, 140, 0)"><ha-icon icon="mdi:swap-horizontal"></ha-icon><span style="padding-right: 10px;"></span> <strong>ENTITÀ SCELTA NON DISPONIBILE: IN USO LA SONDA DELLA VMC (SENZA OFFSET)</strong></font>
                     {% for r in righe if states(r[1]) == '-100' and states(r[2]) not in ['Non disponibile', '-', 'unknown', 'unavailable'] %}
 
                     - {{ r[0] }}: {{ states(r[2]) }} {{ r[3] }}
@@ -9678,47 +9680,53 @@ cards:
                         type: markdown
                         content: |-
                           {%- set g = states('sensor.vmc_master_rischio_muffa_giorni_dati') | float(0) -%}
-                          <ha-icon icon="mdi:calendar-clock"></ha-icon><span style="padding-right: 10px;"></span><strong>RISCHIO MUFFA: MEDIE IN AVVIO (DATI PARZIALI)</strong>
+                          <ha-icon icon="mdi:calendar-clock"></ha-icon><span style="padding-right: 10px;"></span> <strong>RISCHIO MUFFA: MEDIE IN AVVIO (DATI PARZIALI)</strong>
 
                           - Media 4 Settimane: {{ [g, 28] | min | round(0) | int }} / 28 giorni{% if g >= 28 %} (completa){% endif %}
                           - Media 8 Settimane: {{ [g, 56] | min | round(0) | int }} / 56 giorni{% if g >= 56 %} (completa){% endif %}
                           - Media 12 Settimane: {{ [g, 84] | min | round(0) | int }} / 84 giorni
 
                           Finché una media non è completa è calcolata sui soli giorni disponibili. Vedere Pannello Informazioni, punto 19.
-                    - type: vertical-stack
-                      cards:
-                        - type: entities
-                          entities:
-                            - entity: >-
-                                sensor.vmc_master_temp_esterna_status_senza_offset
-                              secondary_info: last-changed
-                              tap_action:
-                                action: more-info
-                                entity: sensor.vmc_master_temp_esterna_status_senza_offset_grafico
-                            - entity: >-
-                                sensor.vmc_master_temp_interna_status_senza_offset
-                              secondary_info: last-updated
-                              tap_action:
-                                action: more-info
-                                entity: sensor.vmc_master_temp_interna_status_senza_offset_grafico
-                            - entity: >-
-                                sensor.vmc_master_umidita_interna_status_senza_offset
-                              secondary_info: last-updated
-                              tap_action:
-                                action: more-info
-                                entity: sensor.vmc_master_umidita_interna_status_senza_offset_grafico
-                            - entity: sensor.vmc_master_co2_status_senza_offset
-                              secondary_info: last-updated
-                              tap_action:
-                                action: more-info
-                                entity: sensor.vmc_master_co2_status_senza_offset_grafico
-                            - entity: sensor.vmc_master_voc_status_senza_offset
-                              secondary_info: last-updated
-                              tap_action:
-                                action: more-info
-                                entity: sensor.vmc_master_voc_status_senza_offset_grafico
-                          title: Sensori VMC Interni
-                          state_color: true
+              - type: conditional
+                conditions:
+                  - entity: >-
+                      input_boolean.vmc_master_opzioni_interruttore_sensori_vmc_interni
+                    state: 'on'
+                card:
+                  type: vertical-stack
+                  cards:
+                    - type: entities
+                      entities:
+                        - entity: >-
+                            sensor.vmc_master_temp_esterna_status_senza_offset
+                          secondary_info: last-changed
+                          tap_action:
+                            action: more-info
+                            entity: sensor.vmc_master_temp_esterna_status_senza_offset_grafico
+                        - entity: >-
+                            sensor.vmc_master_temp_interna_status_senza_offset
+                          secondary_info: last-updated
+                          tap_action:
+                            action: more-info
+                            entity: sensor.vmc_master_temp_interna_status_senza_offset_grafico
+                        - entity: >-
+                            sensor.vmc_master_umidita_interna_status_senza_offset
+                          secondary_info: last-updated
+                          tap_action:
+                            action: more-info
+                            entity: sensor.vmc_master_umidita_interna_status_senza_offset_grafico
+                        - entity: sensor.vmc_master_co2_status_senza_offset
+                          secondary_info: last-updated
+                          tap_action:
+                            action: more-info
+                            entity: sensor.vmc_master_co2_status_senza_offset_grafico
+                        - entity: sensor.vmc_master_voc_status_senza_offset
+                          secondary_info: last-updated
+                          tap_action:
+                            action: more-info
+                            entity: sensor.vmc_master_voc_status_senza_offset_grafico
+                      title: Sensori VMC Interni
+                      state_color: true
               - type: conditional
                 conditions:
                   - entity: >-
@@ -10226,6 +10234,7 @@ cards:
                           'input_boolean.vmc_master_opzioni_interruttore_offset_sensori',
                           'input_boolean.vmc_master_opzioni_monitoraggio_sensori',
                           'input_boolean.vmc_master_opzioni_interruttore_monitoraggio_sensori_extra',
+                          'input_boolean.vmc_master_opzioni_interruttore_sensori_vmc_interni',
                           'input_boolean.vmc_master_opzioni_calendario_main',
                           'input_boolean.vmc_master_opzioni_calendario',
                           'input_boolean.vmc_master_opzioni_punto_di_rugiada',
@@ -12223,6 +12232,8 @@ cards:
                   'on') or
                   is_state('input_boolean.vmc_master_opzioni_interruttore_monitoraggio_sensori_extra',
                   'on') or
+                  is_state('input_boolean.vmc_master_opzioni_interruttore_sensori_vmc_interni',
+                  'on') or
                   is_state('input_boolean.vmc_master_opzioni_interruttore_calendario',
                   'on') or
                   is_state('input_boolean.vmc_master_opzioni_offset_sensori',
@@ -12270,6 +12281,10 @@ cards:
                   is_state('input_boolean.vmc_master_opzioni_interruttore_monitoraggio_sensori_extra',
                   'on')
                   %}vmc_master_opzioni_interruttore_monitoraggio_sensori_extra:
+                  On <br>{% endif %}{% if
+                  is_state('input_boolean.vmc_master_opzioni_interruttore_sensori_vmc_interni',
+                  'on')
+                  %}vmc_master_opzioni_interruttore_sensori_vmc_interni:
                   On <br>{% endif %}{% if
                   is_state('input_boolean.vmc_master_opzioni_interruttore_calendario',
                   'on') %}vmc_master_opzioni_interruttore_calendario: On <br>{%
