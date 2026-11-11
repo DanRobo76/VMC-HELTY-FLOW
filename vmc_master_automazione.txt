@@ -321,6 +321,22 @@ triggers:
       Monitoraggio
     trigger: state
   - entity_id:
+      - input_boolean.vmc_master_opzioni_interruttore_sensori_vmc_interni
+    from: 'off'
+    to: 'on'
+    id: Opzioni Sub VMC Interni On
+    alias: Trigger Attivazione Sotto Finestra Sensori VMC Interni - Finestra Monitoraggio
+    trigger: state
+  - entity_id:
+      - input_boolean.vmc_master_opzioni_interruttore_sensori_vmc_interni
+    from: 'on'
+    to: 'off'
+    id: Opzioni Sub VMC Interni Off
+    alias: >-
+      Trigger Disattivazione Sotto Finestra Sensori VMC Interni - Finestra
+      Monitoraggio
+    trigger: state
+  - entity_id:
       - input_boolean.vmc_master_opzioni_interruttore_calendario
     from: 'off'
     to: 'on'
@@ -10603,6 +10619,7 @@ actions:
                 - input_boolean.vmc_master_opzioni_punto_di_rugiada
                 - >-
                   input_boolean.vmc_master_opzioni_interruttore_monitoraggio_sensori_extra
+                - input_boolean.vmc_master_opzioni_interruttore_sensori_vmc_interni
                 - input_boolean.vmc_master_opzioni_interruttore_offset_sensori
                 - input_boolean.vmc_master_opzioni_scelta_sensori
                 - input_boolean.vmc_master_opzioni_elementi_chimici
@@ -10643,6 +10660,7 @@ actions:
                 - input_boolean.vmc_master_opzioni_punto_di_rugiada
                 - >-
                   input_boolean.vmc_master_opzioni_interruttore_monitoraggio_sensori_extra
+                - input_boolean.vmc_master_opzioni_interruttore_sensori_vmc_interni
                 - input_boolean.vmc_master_opzioni_interruttore_offset_sensori
                 - input_boolean.vmc_master_opzioni_scelta_sensori
                 - input_boolean.vmc_master_opzioni_elementi_chimici
@@ -10662,6 +10680,7 @@ actions:
                 - input_boolean.vmc_master_opzioni_monitoraggio_sensori
                 - >-
                   input_boolean.vmc_master_opzioni_interruttore_monitoraggio_sensori_extra
+                - input_boolean.vmc_master_opzioni_interruttore_sensori_vmc_interni
                 - input_boolean.vmc_master_opzioni_interruttore_offset_sensori
             enabled: true
             action: input_boolean.turn_off
@@ -10679,6 +10698,7 @@ actions:
               entity_id:
                 - >-
                   input_boolean.vmc_master_opzioni_interruttore_monitoraggio_sensori_extra
+                - input_boolean.vmc_master_opzioni_interruttore_sensori_vmc_interni
             action: input_boolean.turn_off
         alias: Trigger Attivazione Sotto Finestra Offset - Finestra Monitoraggio
       - conditions:
@@ -10703,6 +10723,7 @@ actions:
             target:
               entity_id:
                 - input_boolean.vmc_master_opzioni_interruttore_offset_sensori
+                - input_boolean.vmc_master_opzioni_interruttore_sensori_vmc_interni
             action: input_boolean.turn_off
         alias: >-
           Trigger Attivazione Sotto Finestra Sensori Extra - Finestra
@@ -10718,6 +10739,35 @@ actions:
             action: input_boolean.turn_off
         alias: >-
           Trigger Attivazione Sotto Finestra Sensori Extra - Finestra
+          Monitoraggio
+      - conditions:
+          - condition: trigger
+            id: Opzioni Sub VMC Interni On
+        sequence:
+          - data: {}
+            target:
+              entity_id: input_boolean.vmc_master_opzioni_interruttore_sensori_vmc_interni
+            action: input_boolean.turn_on
+          - data: {}
+            target:
+              entity_id:
+                - >-
+                  input_boolean.vmc_master_opzioni_interruttore_monitoraggio_sensori_extra
+                - input_boolean.vmc_master_opzioni_interruttore_offset_sensori
+            action: input_boolean.turn_off
+        alias: >-
+          Trigger Attivazione Sotto Finestra Sensori VMC Interni - Finestra
+          Monitoraggio
+      - conditions:
+          - condition: trigger
+            id: Opzioni Sub VMC Interni Off
+        sequence:
+          - data: {}
+            target:
+              entity_id: input_boolean.vmc_master_opzioni_interruttore_sensori_vmc_interni
+            action: input_boolean.turn_off
+        alias: >-
+          Trigger Disattivazione Sotto Finestra Sensori VMC Interni - Finestra
           Monitoraggio
       - conditions:
           - condition: trigger
@@ -10742,6 +10792,7 @@ actions:
                 - input_boolean.vmc_master_opzioni_punto_di_rugiada
                 - >-
                   input_boolean.vmc_master_opzioni_interruttore_monitoraggio_sensori_extra
+                - input_boolean.vmc_master_opzioni_interruttore_sensori_vmc_interni
                 - input_boolean.vmc_master_opzioni_interruttore_offset_sensori
                 - input_boolean.vmc_master_opzioni_scelta_sensori
                 - input_boolean.vmc_master_opzioni_elementi_chimici
@@ -10781,6 +10832,7 @@ actions:
                 - input_boolean.vmc_master_opzioni_interruttore_offset_sensori
                 - >-
                   input_boolean.vmc_master_opzioni_interruttore_monitoraggio_sensori_extra
+                - input_boolean.vmc_master_opzioni_interruttore_sensori_vmc_interni
                 - input_boolean.vmc_master_opzioni_calendario
                 - input_boolean.vmc_master_opzioni_calendario_main
                 - input_boolean.vmc_master_opzioni_scelta_sensori
@@ -10976,6 +11028,7 @@ actions:
                 - input_boolean.vmc_master_opzioni_interruttore_offset_sensori
                 - >-
                   input_boolean.vmc_master_opzioni_interruttore_monitoraggio_sensori_extra
+                - input_boolean.vmc_master_opzioni_interruttore_sensori_vmc_interni
                 - input_boolean.vmc_master_opzioni_calendario
                 - input_boolean.vmc_master_opzioni_calendario_main
                 - input_boolean.vmc_master_opzioni_offset_sensori
@@ -11019,6 +11072,7 @@ actions:
                 - input_boolean.vmc_master_opzioni_punto_di_rugiada
                 - >-
                   input_boolean.vmc_master_opzioni_interruttore_monitoraggio_sensori_extra
+                - input_boolean.vmc_master_opzioni_interruttore_sensori_vmc_interni
                 - input_boolean.vmc_master_opzioni_interruttore_offset_sensori
                 - input_boolean.vmc_master_opzioni_scelta_sensori
                 - input_boolean.vmc_master_opzioni_elementi_chimici

@@ -4097,6 +4097,7 @@ recorder:
       - input_boolean.vmc_master_opzioni_interruttore_offset_sensori
       - input_boolean.vmc_master_opzioni_monitoraggio_sensori
       - input_boolean.vmc_master_opzioni_interruttore_monitoraggio_sensori_extra
+      - input_boolean.vmc_master_opzioni_interruttore_sensori_vmc_interni
       - input_boolean.vmc_master_opzioni_calendario_main
       - input_boolean.vmc_master_opzioni_calendario
       - input_boolean.vmc_master_opzioni_punto_di_rugiada
@@ -4802,7 +4803,7 @@ input_boolean:
     initial: false
     icon: mdi:format-list-checkbox
 
-  vmc_master_opzioni_interruttore_offset_sensori:                               # [CONFIGURAZIONE, 3 RICHIAMI] [INTERFACCIA, 5 RICHIAMI] [AUTOMAZIONE, 12 RICHIAMI]
+  vmc_master_opzioni_interruttore_offset_sensori:                               # [CONFIGURAZIONE, 3 RICHIAMI] [INTERFACCIA, 5 RICHIAMI] [AUTOMAZIONE, 13 RICHIAMI]
     name: "Sensori - Offset"
     initial: false
     icon: mdi:format-list-checkbox
@@ -4812,8 +4813,13 @@ input_boolean:
     initial: false
     icon: mdi:memory
 
-  vmc_master_opzioni_interruttore_monitoraggio_sensori_extra:                   # [CONFIGURAZIONE, 3 RICHIAMI] [INTERFACCIA, 5 RICHIAMI] [AUTOMAZIONE, 12 RICHIAMI]
+  vmc_master_opzioni_interruttore_monitoraggio_sensori_extra:                   # [CONFIGURAZIONE, 3 RICHIAMI] [INTERFACCIA, 5 RICHIAMI] [AUTOMAZIONE, 13 RICHIAMI]
     name: "Sensori - Extra"
+    initial: false
+    icon: mdi:memory
+
+  vmc_master_opzioni_interruttore_sensori_vmc_interni:                          # [CONFIGURAZIONE, 3 RICHIAMI] [INTERFACCIA, 5 RICHIAMI] [AUTOMAZIONE, 13 RICHIAMI]
+    name: "Sensori - VMC Interni"
     initial: false
     icon: mdi:memory
 
@@ -7076,6 +7082,7 @@ script:
             - input_boolean.vmc_master_opzioni_interruttore_offset_sensori
             - input_boolean.vmc_master_opzioni_monitoraggio_sensori
             - input_boolean.vmc_master_opzioni_interruttore_monitoraggio_sensori_extra
+            - input_boolean.vmc_master_opzioni_interruttore_sensori_vmc_interni
             - input_boolean.vmc_master_opzioni_calendario_main
             - input_boolean.vmc_master_opzioni_calendario
             - input_boolean.vmc_master_opzioni_punto_di_rugiada
@@ -7261,6 +7268,7 @@ script:
             - input_boolean.vmc_master_opzioni_interruttore_offset_sensori
             - input_boolean.vmc_master_opzioni_monitoraggio_sensori
             - input_boolean.vmc_master_opzioni_interruttore_monitoraggio_sensori_extra
+            - input_boolean.vmc_master_opzioni_interruttore_sensori_vmc_interni
             - input_boolean.vmc_master_opzioni_calendario_main
             - input_boolean.vmc_master_opzioni_calendario
             - input_boolean.vmc_master_opzioni_punto_di_rugiada
