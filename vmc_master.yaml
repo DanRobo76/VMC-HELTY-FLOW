@@ -3805,6 +3805,10 @@ recorder:
       - timer.vmc_master_lettura_ambientali
       - timer.vmc_master_lettura_lan
       - timer.vmc_master_lettura_nome
+      - timer.vmc_master_countdown_script_agg_sensori
+      - timer.vmc_master_countdown_script_panic_button
+      - timer.vmc_master_countdown_script_inizializzazione
+      - timer.vmc_master_countdown_script_reset_filtro
       - script.vmc_master_ripristina_tempi_attesa
       - sensor.vmc_master_velocita_registrata
       - binary_sensor.vmc_master_tasto_velocita_0
@@ -5534,6 +5538,22 @@ timer:
   vmc_master_lettura_nome:                                       # [CONFIGURAZIONE, 2 RICHIAMI] [INTERFACCIA, 2 RICHIAMI] [AUTOMAZIONE, 0 RICHIAMI] COUNTDOWN ALLA PROSSIMA LETTURA «NOME» DI HOME ASSISTANT (OGNI 43227 s, scan_interval DI sensor.vmc_master_nome)
     name: "Prossima Lettura Nome"
     icon: mdi:timer-sync-outline
+  vmc_master_countdown_script_agg_sensori:                       # [CONFIGURAZIONE, 4 RICHIAMI] [INTERFACCIA, 7 RICHIAMI] [AUTOMAZIONE, 0 RICHIAMI] COUNTDOWN IN SCHEDA, SOTTO IL PULSANTE, DELLO SCRIPT AGG. SENSORI (79 s: 22 PAUSE DA 2 s + 7 SCRIPT ELENCHI DA 5 s)
+    name: "Agg. Sensori in corso"
+    duration: "00:01:19"
+    icon: mdi:timer-sand
+  vmc_master_countdown_script_panic_button:                      # [CONFIGURAZIONE, 4 RICHIAMI] [INTERFACCIA, 5 RICHIAMI] [AUTOMAZIONE, 0 RICHIAMI] COUNTDOWN IN SCHEDA, SOTTO IL PULSANTE, DELLO SCRIPT PANIC BUTTON (MAX 61 s: ATTESA AUTOMAZIONE MAX 60 s + 1 s; SI FERMA PRIMA SE LO SCRIPT FINISCE PRIMA)
+    name: "Panic Button in corso"
+    duration: "00:01:01"
+    icon: mdi:timer-sand
+  vmc_master_countdown_script_inizializzazione:                  # [CONFIGURAZIONE, 4 RICHIAMI] [INTERFACCIA, 3 RICHIAMI] [AUTOMAZIONE, 0 RICHIAMI] COUNTDOWN IN SCHEDA, SOTTO IL PULSANTE, DELLO SCRIPT PROFILO INIZIALIZZAZIONE (10 s: 2 PAUSE DA 5 s, POI RIAVVIO DI HOME ASSISTANT)
+    name: "Profilo Inizializzazione in corso"
+    duration: "00:00:10"
+    icon: mdi:timer-sand
+  vmc_master_countdown_script_reset_filtro:                      # [CONFIGURAZIONE, 4 RICHIAMI] [INTERFACCIA, 3 RICHIAMI] [AUTOMAZIONE, 0 RICHIAMI] COUNTDOWN IN SCHEDA, SOTTO IL PULSANTE, DELLO SCRIPT RESET FILTRO (5 s DI ATTESA DOPO IL COMANDO ALLA VMC)
+    name: "Reset Filtro in corso"
+    duration: "00:00:05"
+    icon: mdi:timer-sand
 ################### Fine Creazione Timer per il Countdown in Scheda delle Attese dell'Automazione ###################
 
 ################### Inizio Creazione Scripts ############################################################################################################################################################################
@@ -6715,13 +6735,19 @@ script:
     icon: mdi:cursor-pointer
     mode: restart
     sequence:
+      - action: timer.start                                                 # COUNTDOWN IN SCHEDA SOTTO IL PULSANTE
+        target:
+          entity_id: timer.vmc_master_countdown_script_reset_filtro
       - action: shell_command.vmc_master_reset_filtro
       - delay:
           hours: 0
           minutes: 0
           seconds: 5
           milliseconds: 0
-    description: Resetta il Filtro all'interno della VMC una volta sostituito lo stesso
+      - action: timer.cancel                                                # FINE DEL COUNTDOWN IN SCHEDA
+        target:
+          entity_id: timer.vmc_master_countdown_script_reset_filtro
+    description: Resetta il Filtro all'interno della VMC una volta sostituito lo stesso (5 s). Durante l'esecuzione la scheda mostra il countdown sotto il pulsante.
 
   vmc_master_pulisci_cronologia_audio:                                          # [CONFIGURAZIONE, 2 RICHIAMI] [INTERFACCIA, 3 RICHIAMI] [AUTOMAZIONE, 0 RICHIAMI]
     alias: "VMC Master - Pulisci cronologia Audio"
@@ -6758,6 +6784,10 @@ script:
             - timer.vmc_master_lettura_ambientali
             - timer.vmc_master_lettura_lan
             - timer.vmc_master_lettura_nome
+            - timer.vmc_master_countdown_script_agg_sensori
+            - timer.vmc_master_countdown_script_panic_button
+            - timer.vmc_master_countdown_script_inizializzazione
+            - timer.vmc_master_countdown_script_reset_filtro
             - script.vmc_master_ripristina_tempi_attesa
             - sensor.vmc_master_velocita_registrata
             - binary_sensor.vmc_master_tasto_velocita_0
@@ -7442,6 +7472,9 @@ script:
   vmc_master_upgrade_sensors:                                                   # [CONFIGURAZIONE, 2 RICHIAMI] [INTERFACCIA, 7 RICHIAMI] [AUTOMAZIONE, 1 RICHIAMO]
     alias: VMC Master - Agg. Sensori
     sequence:
+      - action: timer.start                                                 # COUNTDOWN IN SCHEDA SOTTO IL PULSANTE
+        target:
+          entity_id: timer.vmc_master_countdown_script_agg_sensori
       - action: homeassistant.update_entity
         target:
           entity_id:
@@ -7582,9 +7615,12 @@ script:
             - input_text.vmc_master_last_co2_internal_entity
             - input_text.vmc_master_last_notification_device
             - input_text.vmc_master_last_media_player_entity
+      - action: timer.cancel                                                # FINE DEL COUNTDOWN IN SCHEDA
+        target:
+          entity_id: timer.vmc_master_countdown_script_agg_sensori
     mode: restart
     icon: mdi:cursor-pointer
-    description: Aggiorna in sequenza tutte le entità e i sensori della VMC.
+    description: Aggiorna in sequenza tutte le entità e i sensori della VMC (circa 79 s). Durante l'esecuzione la scheda mostra il countdown sotto il pulsante.
 
   vmc_master_profilo_calendario:                                                # [CONFIGURAZIONE, 3 RICHIAMI] [INTERFACCIA, 3 RICHIAMI] [AUTOMAZIONE, 0 RICHIAMI]
     alias: VMC Master - Profilo Calendario
@@ -7756,8 +7792,12 @@ script:
       Attesa ai valori originali, arresta la VMC (Velocità 0), dopo 5 s disattiva lo Status Routine
       Sensori, dopo altri 5 s attiva lo Status Pannello Led, attiva gli Avvisi, la Notifica Status VMC e
       tutti gli interruttori VMC ON/OFF (PdR, Umidità, Calendario, Free Heating, Free Cooling, CO₂ e VOC)
-      e infine riavvia Home Assistant. Attendere il termine del processo.
+      e infine riavvia Home Assistant. Attendere il termine del processo: la scheda mostra il countdown
+      di 10 s sotto il pulsante prima del riavvio.
     sequence:
+      - action: timer.start                                                 # COUNTDOWN IN SCHEDA SOTTO IL PULSANTE
+        target:
+          entity_id: timer.vmc_master_countdown_script_inizializzazione
       - action: script.vmc_master_azzera_booleans
         data: {}
       - action: script.vmc_master_azzera_offset_sensors
@@ -7799,6 +7839,9 @@ script:
             - input_boolean.vmc_master_opzioni_accendi_spegni_vmc_vs_freeheating
             - input_boolean.vmc_master_opzioni_accendi_spegni_vmc_vs_freecooling
             - input_boolean.vmc_master_opzioni_accendi_spegni_vmc_vs_co2_e_voc
+      - action: timer.cancel                                                # FINE DEL COUNTDOWN IN SCHEDA
+        target:
+          entity_id: timer.vmc_master_countdown_script_inizializzazione
       - action: homeassistant.restart
         data: {}
     mode: restart
@@ -7814,8 +7857,13 @@ script:
       coda (al massimo 1 minuto), ripete l'arresto con la rilettura dello stato della ventola e porta tutte
       le variabili booleane su OFF. Se è in corso un'allerta Δ Temp. o Congelamento (allerte del firmware
       della VMC), ne ripristina le spie con la memoria Velocità 0: a fine allerta la VMC resta a Velocità 0.
+      Durante l'esecuzione la scheda mostra sotto il pulsante il countdown di 61 s al massimo, che si
+      chiude prima se l'automazione finisce prima gli eventi in coda.
     sequence:
       - action: shell_command.vmc_master_velocita_0                          # SUBITO VELOCITA' 0 E INTERRUTTORI SPENTI
+      - action: timer.start                                                 # COUNTDOWN IN SCHEDA SOTTO IL PULSANTE
+        target:
+          entity_id: timer.vmc_master_countdown_script_panic_button
       - action: input_boolean.turn_off
         data: {}
         target:
@@ -7862,6 +7910,9 @@ script:
               entity_id:
                 - input_boolean.vmc_master_congelamento_verifica_soglia_valore_spia
                 - input_boolean.vmc_master_spia_velocita_0_congelamento
+      - action: timer.cancel                                                # FINE DEL COUNTDOWN IN SCHEDA
+        target:
+          entity_id: timer.vmc_master_countdown_script_panic_button
     mode: restart
     icon: mdi:cursor-pointer
 #-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
