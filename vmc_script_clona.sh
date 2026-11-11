@@ -46,6 +46,10 @@ input_dir="/config/packages/vmc_helty_flow/master/"
 slave_nome=$(echo "$1" | tr -d '\r')
 slave_ip=$(echo "$2" | tr -d '\r')
 
+# Interrompe senza creare nulla se il nome o l'indirizzo IP non sono validi
+echo "$slave_nome" | grep -Eq '^[a-z]{1,10}$' && [ "$slave_nome" != "master" ] || { echo "Nome non valido: '$slave_nome'"; exit 1; }
+echo "$slave_ip" | grep -Eq '^[0-9]{1,3}(\.[0-9]{1,3}){3}$' || { echo "Indirizzo IP non valido: '$slave_ip'"; exit 1; }
+
 # Crea la sottocartella se non esiste
 subfolder="/config/packages/vmc_helty_flow/${slave_nome}/"
 mkdir -p "$subfolder"

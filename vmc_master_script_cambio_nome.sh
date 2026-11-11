@@ -39,4 +39,4 @@
 ###########################################################################################################################################################################################################################
 #!/bin/bash
 # "$*" UNISCE TUTTE LE PAROLE DEL NOME (UN NOME CON SPAZI ARRIVA INTERO); timeout EVITA CHE IL COMANDO RESTI APPESO SE LA VMC NON RISPONDE
-echo "VMNM $*" | timeout 5 nc 192.168.1.160 5001
+echo "VMNM $*" | timeout 5 nc 999.999.999.999 5001

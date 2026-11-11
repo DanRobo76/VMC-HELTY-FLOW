@@ -41,6 +41,9 @@
 
 IP="$1"  # Imposta l'indirizzo IP specificato come argomento
 
+# Interrompe senza modificare nulla se l'argomento non è un indirizzo IP valido (altrimenti gli indirizzi nei file verrebbero cancellati)
+echo "$IP" | grep -Eq '^[0-9]{1,3}(\.[0-9]{1,3}){3}$' || { echo "Indirizzo IP non valido: '$IP'"; exit 1; }
+
 # Esegui la sostituzione dell'indirizzo IP nel file YAML
 sed -i "s/[0-9]\+\.[0-9]\+\.[0-9]\+\.[0-9]\+/$IP/g" "/config/packages/vmc_helty_flow/master/vmc_master.yaml"
 sed -i 's/nc [0-9]\+\.[0-9]\+\.[0-9]\+\.[0-9]\+ 5001/nc '"$IP"' 5001/' "/config/packages/vmc_helty_flow/master/vmc_master_script_cambio_nome.sh"
