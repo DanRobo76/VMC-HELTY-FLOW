@@ -104,8 +104,9 @@ description: >-
   Cooling;
 
   - Ripristina la Velocità precedente in caso di Black-Out, se la VMC ha una
-  linea dedicata e/o se installato un relè domotico [ad Esclusione nel Range del
-  Calendario];
+  linea dedicata e/o se installato un relè domotico; durante una Fascia del
+  Calendario, al ritorno della corrente, la VMC riparte con la Velocità della
+  Fascia in corso;
 
   - Avvisa in caso di Aggiornamento del Package;
 
@@ -156,9 +157,15 @@ description: >-
   dopo 4 Secondi e mantenuta a fine Umidità; se però l'Umidità ha avviato la VMC
   da Velocità 0 e la VMC risulta ancora, o di nuovo, a Velocità 0, dopo 4 Secondi
   viene riportata alla [Set Velocità Umidità di Avvio] e a fine Umidità torna a
-  Velocità 0 (per fermarla si spegne l'interruttore dell'Umidità);
+  Velocità 0 (per fermarla si spegne l'interruttore dell'Umidità); se l'Umidità
+  ha avviato la VMC da Velocità 0 e a fine Umidità sono ancora presenti gli
+  Inquinanti, la VMC scende a Velocità 1 e torna a Velocità 0 al rientro degli
+  Inquinanti;
 
-  - Black-Out: 32 Secondi per il Rilevamento e per il Ripristino.
+  - Black-Out: 32 Secondi per il Rilevamento e per il Ripristino; durante una
+  Fascia del Calendario la rilevazione del Black-Out non è attiva: al ritorno
+  della corrente (VMC OFF-Line almeno 32 Secondi) la VMC riparte con la Velocità
+  della Fascia in corso dopo 32 Secondi (+5 Secondi dello script della Fascia).
 
 
   CAMBIO MANUALE DELLA VELOCITÀ: ogni comando dell'automazione viene ripetuto ogni
@@ -213,13 +220,19 @@ description: >-
   Velocità 0: dopo 4 Secondi la VMC torna in Notturna e, quando l'umidità rientra,
   torna a Velocità 0.
 
+  Esempio: la VMC è a Velocità 0, l'Umidità la avvia a Velocità 2 e poi sale la
+  CO₂; quando l'umidità rientra la VMC scende a Velocità 1 e, quando rientra
+  anche la CO₂, torna a Velocità 0.
+
 
   CALENDARIO: 3 Secondi per l'Ingresso e per l'Uscita dalla Fascia oraria;
   all'Ingresso il comando alla VMC parte dopo ulteriori 5 Secondi (attesa dello
   script della Fascia). All'interno della Fascia, a VMC avviata, hanno effetto
   Congelamento, Δ Temp., Inquinanti, Lim. Δ Punto di Rugiada e Free Cooling /
-  Free Heating; Umidità e Black-Out non hanno effetto. All'uscita dalla Fascia la
-  VMC si arresta.
+  Free Heating; l'Umidità non ha effetto e la rilevazione del Black-Out non è
+  attiva: al ritorno della corrente (VMC OFF-Line almeno 32 Secondi) la VMC
+  riparte con la Velocità della Fascia in corso dopo 32 Secondi (+5 Secondi dello
+  script della Fascia). All'uscita dalla Fascia la VMC si arresta.
 
 
   COSA SUCCEDE SE SI SPEGNE UN INTERRUTTORE (CO₂/VOC, Punto di Rugiada, Free

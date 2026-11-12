@@ -12376,7 +12376,8 @@ script:
     mode: restart
     icon: mdi:fingerprint-off
     description: >
-      Richiamato dall'Automazione VMC Master all'inizio della 1° Fascia del Calendario. Dopo 5 s, solo
+      Richiamato dall'Automazione VMC Master all'inizio della 1° Fascia del Calendario e, durante la
+      Fascia, al ritorno della corrente dopo un Black-Out (VMC OFF-Line almeno 32 s). Dopo 5 s, solo
       in assenza di allerta Congelamento e Δ Temp. (altrimenti non fa nulla), spegne le memorie di
       Inquinanti e Punto di Rugiada e comanda la velocità scelta per la Fascia (Velocità 0-4, Notturna,
       Iperventilazione o Free Cool./Heat.) secondo gli interruttori PdR e Inquinanti (CO₂/VOC):
@@ -16808,7 +16809,8 @@ script:
     mode: restart
     icon: mdi:fingerprint-off
     description: >
-      Richiamato dall'Automazione VMC Master all'inizio della 2° Fascia del Calendario. Dopo 5 s, solo
+      Richiamato dall'Automazione VMC Master all'inizio della 2° Fascia del Calendario e, durante la
+      Fascia, al ritorno della corrente dopo un Black-Out (VMC OFF-Line almeno 32 s). Dopo 5 s, solo
       in assenza di allerta Congelamento e Δ Temp. (altrimenti non fa nulla), spegne le memorie di
       Inquinanti e Punto di Rugiada e comanda la velocità scelta per la Fascia (Velocità 0-4, Notturna,
       Iperventilazione o Free Cool./Heat.) secondo gli interruttori PdR e Inquinanti (CO₂/VOC):

@@ -66,7 +66,7 @@
 - <sub>Configurazione dall'interfaccia, senza modificare lo YAML</sub>
 - <sub>Controllo locale e remoto della VMC</sub>
 - <sub>Ripresa automatica della velocità al termine di ogni allerta</sub>
-- <sub>Ripristino della velocità dopo un black-out (VMC con linea dedicata nel quadro elettrico e/o relè domotico)</sub>
+- <sub>Ripristino della velocità dopo un black-out (VMC con linea dedicata nel quadro elettrico e/o relè domotico); durante una fascia del Calendario la VMC riparte con la velocità della fascia in corso</sub>
 - <sub>Calcolo di ricambi d'aria, portata, umidità assoluta e comfort igrometrico</sub>
 - <sub>Cambio dell'indirizzo IP e del nome della VMC dall'interfaccia</sub>
 - <sub>Conferma prima di ogni script («Vuoi Procedere?»); conferma «Sì / No» per la pulizia della cronologia e per la cancellazione di una VMC</sub>
@@ -106,7 +106,7 @@
 - <sub>Permette l'accensione e lo spegnimento in funzione di 2 fasce orarie programmabili per ogni giorno della settimana.</sub>
 - <sub>Permette l'accensione e lo spegnimento in funzione di 2 fasce mensili programmabili (Free Heating / Free Cooling), evitando raffrescamento o riscaldamento indesiderato.</sub>
 - <sub>Permette l'accensione e lo spegnimento in funzione dei parametri ambientali.</sub>
-- <sub>Ripristina la velocità in caso di Black-Out (se la VMC ha linea dedicata al quadro elettrico e/o è installato un relè domotico).</sub>
+- <sub>Ripristina la velocità in caso di Black-Out (se la VMC ha linea dedicata al quadro elettrico e/o è installato un relè domotico); durante una fascia del Calendario, al ritorno della corrente, la VMC riparte con la velocità della fascia in corso.</sub>
 - <sub>Calcola il tempo di ricambio d'aria in funzione della velocità.</sub>
 - <sub>Calcola la portata d'aria (m³/h) in funzione della velocità.</sub>
 - <sub>Calcola l'umidità assoluta esterna e interna (g/m³).</sub>
@@ -439,7 +439,7 @@
 - <sub>Configuration from the interface, without editing YAML</sub>
 - <sub>Local and remote control of the unit</sub>
 - <sub>Automatic return to the set speed at the end of every alert</sub>
-- <sub>Speed recovery after a power failure (unit on a dedicated circuit and/or smart relay)</sub>
+- <sub>Speed recovery after a power failure (unit on a dedicated circuit and/or smart relay); during a Calendar time slot the VMC restarts at the speed of the current slot</sub>
 - <sub>Calculation of air changes, airflow, absolute humidity and hygrometric comfort</sub>
 - <sub>Change of the unit's IP address and name from the interface</sub>
 - <sub>Confirmation before every script («Vuoi Procedere?» – Do you want to proceed?); «Yes / No» confirmation for history purge and unit deletion</sub>
@@ -478,7 +478,7 @@
 - <sub>Start and stop according to 2 programmable time slots for each day of the week.</sub>
 - <sub>Start and stop according to 2 programmable monthly periods (Free Heating / Free Cooling), avoiding unwanted cooling or heating.</sub>
 - <sub>Start and stop according to environmental parameters.</sub>
-- <sub>Restores the speed after a power failure (if the unit has a dedicated circuit and/or a smart relay is installed).</sub>
+- <sub>Restores the speed after a power failure (if the unit has a dedicated circuit and/or a smart relay is installed); during a Calendar time slot, when power returns, the VMC restarts at the speed of the current slot.</sub>
 - <sub>Calculates the air change time according to the speed.</sub>
 - <sub>Calculates the airflow (m³/h) according to the speed.</sub>
 - <sub>Calculates outdoor and indoor absolute humidity (g/m³).</sub>
