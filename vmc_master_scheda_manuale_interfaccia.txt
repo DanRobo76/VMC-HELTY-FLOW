@@ -9672,22 +9672,16 @@ cards:
                           secondary_info: last-changed
                       title: Sensori - Extra
                       state_color: true
-                    - type: conditional
-                      conditions:
-                        - condition: numeric_state
-                          entity: sensor.vmc_master_rischio_muffa_giorni_dati
-                          below: 84
-                      card:
-                        type: markdown
-                        content: |-
-                          {%- set g = states('sensor.vmc_master_rischio_muffa_giorni_dati') | float(0) -%}
-                          <ha-icon icon="mdi:calendar-clock"></ha-icon><span style="padding-right: 10px;"></span> <strong>RISCHIO MUFFA: STATUS MEDIE</strong>
+                    - type: markdown
+                      content: |-
+                        {%- set g = states('sensor.vmc_master_rischio_muffa_giorni_dati') | float(0) -%}
+                        <ha-icon icon="mdi:calendar-clock"></ha-icon><span style="padding-right: 10px;"></span> <strong>RISCHIO MUFFA: STATUS MEDIE</strong>
 
-                          - Media 4 Settimane: {{ [g, 28] | min | round(0) | int }} / 28 giorni{% if g >= 28 %} (completa){% endif %}
-                          - Media 8 Settimane: {{ [g, 56] | min | round(0) | int }} / 56 giorni{% if g >= 56 %} (completa){% endif %}
-                          - Media 12 Settimane: {{ [g, 84] | min | round(0) | int }} / 84 giorni
+                        - Media 4 Settimane: {{ [g, 28] | min | round(0) | int }} / 28 giorni{% if g >= 28 %} (completa){% endif %}
+                        - Media 8 Settimane: {{ [g, 56] | min | round(0) | int }} / 56 giorni{% if g >= 56 %} (completa){% endif %}
+                        - Media 12 Settimane: {{ [g, 84] | min | round(0) | int }} / 84 giorni{% if g >= 84 %} (completa){% endif %}
 
-                          Finché una media non è completa è calcolata sui soli giorni disponibili. Vedere Pannello Informazioni, punto 19.
+                        Finché una media non è completa è calcolata sui soli giorni disponibili. Vedere Pannello Informazioni, punto 19.
               - type: conditional
                 conditions:
                   - entity: >-
@@ -12994,9 +12988,9 @@ cards:
                   <b>Periodo di avvio.</b> Le statistiche esistono solo da quando i sensori sono registrati
                   (dalla release 8.5.1): finché non sono trascorsi 28, 56 e 84 giorni, le medie di 4, 8 e 12
                   Settimane sono calcolate sui soli giorni disponibili (nei primi giorni le tre medie coincidono
-                  e l'Andamento risulta Stabile). Sotto la scheda «Sensori - Extra» un riquadro mostra i giorni di
-                  dati disponibili per ciascuna media (es. 12 / 28 giorni) e scompare quando anche la media di 12
-                  Settimane è completa.
+                  e l'Andamento risulta Stabile). Sotto la scheda «Sensori - Extra» il riquadro «Rischio Muffa: Status
+                  Medie» mostra i giorni di dati disponibili per ciascuna media (es. 12 / 28 giorni) e resta sempre
+                  visibile: quando una media raggiunge i suoi giorni accanto compare «(completa)».
                   </td></tr></table>
 
 

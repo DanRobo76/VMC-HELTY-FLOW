@@ -2239,7 +2239,7 @@ template:
           {%- set valori = righe | selectattr('start', 'ge', inizio) | selectattr('mean', 'defined') | map(attribute='mean') | list -%}
           {{ ((valori | sum) / (valori | length)) | round(2) if valori | length > 0 else none }}
         icon: mdi:chart-bell-curve-cumulative
-      - default_entity_id: sensor.vmc_master_rischio_muffa_giorni_dati      # [CONFIGURAZIONE, 2 RICHIAMI] [INTERFACCIA, 3 RICHIAMI] [AUTOMAZIONE, 0 RICHIAMI] GIORNI DI DATI DISPONIBILI PER LE MEDIE DEL RISCHIO MUFFA (0-84): SOTTO 28, 56 E 84 LE MEDIE SONO PARZIALI
+      - default_entity_id: sensor.vmc_master_rischio_muffa_giorni_dati      # [CONFIGURAZIONE, 2 RICHIAMI] [INTERFACCIA, 2 RICHIAMI] [AUTOMAZIONE, 0 RICHIAMI] GIORNI DI DATI DISPONIBILI PER LE MEDIE DEL RISCHIO MUFFA (0-84): SOTTO 28, 56 E 84 LE MEDIE SONO PARZIALI
         name: "Rischio Muffa Giorni di Dati"
         unique_id: vmc_master_rischio_muffa_giorni_dati
         unit_of_measurement: "d"
