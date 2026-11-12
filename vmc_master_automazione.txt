@@ -158,9 +158,9 @@ description: >-
   da Velocità 0 e la VMC risulta ancora, o di nuovo, a Velocità 0, dopo 4 Secondi
   viene riportata alla [Set Velocità Umidità di Avvio] e a fine Umidità torna a
   Velocità 0 (per fermarla si spegne l'interruttore dell'Umidità); se l'Umidità
-  ha avviato la VMC da Velocità 0 e a fine Umidità sono ancora presenti gli
-  Inquinanti, la VMC scende a Velocità 1 e torna a Velocità 0 al rientro degli
-  Inquinanti;
+  ha avviato la VMC da Velocità 0, la VMC è ancora alla [Set Velocità Umidità di
+  Avvio] e a fine Umidità sono ancora presenti gli Inquinanti, la VMC scende a
+  Velocità 1 e torna a Velocità 0 al rientro degli Inquinanti;
 
   - Black-Out: 32 Secondi per il Rilevamento e per il Ripristino; durante una
   Fascia del Calendario la rilevazione del Black-Out non è attiva: al ritorno
@@ -5470,7 +5470,9 @@ triggers:
       seconds: "{{ states('input_number.vmc_master_attesa_umidita_fine') | int(28) }}"
   - alias: >-
       Umidità finita con Inquinanti in corso e Umidità partita da Velocità 0
-      [Foglio Logiche: Velocità 1 degli Inquinanti, a fine Inquinanti Velocità 0]
+      [Foglio Logiche: Velocità 1 degli Inquinanti, a fine Inquinanti Velocità 0;
+      solo se la VMC è ancora alla Velocità dell'Umidità, una Velocità scelta
+      dall'utente resta]
     trigger: template
     value_template: |-
       {{ (
@@ -5478,6 +5480,7 @@ triggers:
         states('sensor.vmc_master_alert_monitoraggio_umidita') != 'Allerta' and
         states('input_boolean.vmc_master_umidita_verifica_soglia_valore_spia') == 'on' and
         states('input_boolean.vmc_master_spia_umidita_velocita_0') == 'on' and
+        states('sensor.vmc_master_status_ventola_lettura_codice_interpretato') == states('input_select.vmc_master_speed_umidita') and
         states('input_boolean.vmc_master_spia_co2_o_voc') == 'on' and
         (states('sensor.vmc_master_alert_monitoraggio_co2') == 'Allerta' or states('sensor.vmc_master_alert_monitoraggio_voc') == 'Allerta') and
         states('input_boolean.vmc_master_opzioni_accendi_spegni_vmc_vs_co2_e_voc') == 'on' and
@@ -9726,6 +9729,7 @@ actions:
         states('sensor.vmc_master_alert_monitoraggio_umidita') != 'Allerta' and
         states('input_boolean.vmc_master_umidita_verifica_soglia_valore_spia') == 'on' and
         states('input_boolean.vmc_master_spia_umidita_velocita_0') == 'on' and
+        states('sensor.vmc_master_status_ventola_lettura_codice_interpretato') == states('input_select.vmc_master_speed_umidita') and
         states('input_boolean.vmc_master_spia_co2_o_voc') == 'on' and
         (states('sensor.vmc_master_alert_monitoraggio_co2') == 'Allerta' or states('sensor.vmc_master_alert_monitoraggio_voc') == 'Allerta') and
         states('input_boolean.vmc_master_opzioni_accendi_spegni_vmc_vs_co2_e_voc') == 'on' and

@@ -862,7 +862,7 @@ template:
         icon: mdi:code-array
 
   - sensor:
-      - default_entity_id: sensor.vmc_master_status_ventola_lettura_codice_interpretato # [CONFIGURAZIONE, 128 RICHIAMI] [INTERFACCIA, 53 RICHIAMI] [AUTOMAZIONE, 790 RICHIAMI] SENSORE DI INTERPRETAZIONE DELLA LETTURA DEI DATI "VELOCITA'" MEMORIZZATI NELLA VMC CONVERITA IN "STRINGA", PREVIA VERIFICA DI AVVENUTA LETTURA DEI DATI "VELOCITA'"" MEMORIZZATI NELLA VMC
+      - default_entity_id: sensor.vmc_master_status_ventola_lettura_codice_interpretato # [CONFIGURAZIONE, 128 RICHIAMI] [INTERFACCIA, 53 RICHIAMI] [AUTOMAZIONE, 792 RICHIAMI] SENSORE DI INTERPRETAZIONE DELLA LETTURA DEI DATI "VELOCITA'" MEMORIZZATI NELLA VMC CONVERITA IN "STRINGA", PREVIA VERIFICA DI AVVENUTA LETTURA DEI DATI "VELOCITA'"" MEMORIZZATI NELLA VMC
         name: "Status Ventilazione"
         unique_id: vmc_master_status_ventola_lettura_codice_interpretato
         state: >
@@ -4365,7 +4365,7 @@ input_select:
       - Dicembre
     icon: mdi:calendar-month-outline  
 
-  vmc_master_speed_umidita:                                                     # [CONFIGURAZIONE, 3 RICHIAMI] [INTERFACCIA, 18 RICHIAMI] [AUTOMAZIONE, 22 RICHIAMI] SENSORE DI MEMORIZZAZIONE DELLA VELOCITA' CHE SI DESIDERA IMPOSTARE NELLA VMC
+  vmc_master_speed_umidita:                                                     # [CONFIGURAZIONE, 3 RICHIAMI] [INTERFACCIA, 18 RICHIAMI] [AUTOMAZIONE, 24 RICHIAMI] SENSORE DI MEMORIZZAZIONE DELLA VELOCITA' CHE SI DESIDERA IMPOSTARE NELLA VMC
     name: "Set Velocità Umidità di Avvio"
     options:
       - Velocità 0
