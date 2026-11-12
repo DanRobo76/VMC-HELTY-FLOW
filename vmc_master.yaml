@@ -7373,7 +7373,6 @@ script:
             - input_boolean.vmc_master_avvio_home_assistant_in_corso_per_audio
     mode: restart
     icon: mdi:fingerprint-off
-    description: Imposta tutte le variabili Booleane su OFF
     #TRANNE: input_boolean.vmc_master_notifica_audio, input_boolean.vmc_master_notifica_status_vmc, input_boolean.vmc_master_opzioni_accendi_spegni_vmc_vs_umidita, input_boolean.vmc_master_opzioni_accendi_spegni_avvisi,input_boolean.vmc_master_opzioni_accendi_spegni_vmc_vs_pdr, input_boolean.vmc_master_opzioni_accendi_spegni_vmc_vs_calendario,input_boolean.vmc_master_opzioni_accendi_spegni_vmc_vs_freeheating, input_boolean.vmc_master_opzioni_accendi_spegni_vmc_vs_freecooling, input_boolean.vmc_master_opzioni_accendi_spegni_vmc_vs_co2_e_voc, input_boolean.vmc_master_notifica_allerta_congelamento, input_boolean.vmc_master_notifica_allerta_differenza_temp_int_est, input_boolean.vmc_master_notifica_allerta_inquinanti, input_boolean.vmc_master_notifica_allerta_pdr, input_boolean.vmc_master_notifica_allerta_freecooling_heating, input_boolean.vmc_master_notifica_allerta_umidita, input_boolean.vmc_master_notifica_allerta_black_out, input_boolean.vmc_master_notifica_allerta_status_velocita, input_boolean.vmc_master_notifica_allerta_riepilogo
 
   vmc_master_azzera_offset_sensors:                                             # [CONFIGURAZIONE, 3 RICHIAMI] [INTERFACCIA, 3 RICHIAMI] [AUTOMAZIONE, 0 RICHIAMI]
