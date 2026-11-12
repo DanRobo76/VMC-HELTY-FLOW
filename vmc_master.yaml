@@ -2239,7 +2239,7 @@ template:
           {%- set valori = righe | selectattr('start', 'ge', inizio) | selectattr('mean', 'defined') | map(attribute='mean') | list -%}
           {{ ((valori | sum) / (valori | length)) | round(2) if valori | length > 0 else none }}
         icon: mdi:chart-bell-curve-cumulative
-      - default_entity_id: sensor.vmc_master_rischio_muffa_giorni_dati      # [CONFIGURAZIONE, 2 RICHIAMI] [INTERFACCIA, 3 RICHIAMI] [AUTOMAZIONE, 0 RICHIAMI] GIORNI DI DATI DISPONIBILI PER LE MEDIE DEL RISCHIO MUFFA (0-84): SOTTO 28, 56 E 84 LE MEDIE SONO PARZIALI
+      - default_entity_id: sensor.vmc_master_rischio_muffa_giorni_dati      # [CONFIGURAZIONE, 2 RICHIAMI] [INTERFACCIA, 2 RICHIAMI] [AUTOMAZIONE, 0 RICHIAMI] GIORNI DI DATI DISPONIBILI PER LE MEDIE DEL RISCHIO MUFFA (0-84): SOTTO 28, 56 E 84 LE MEDIE SONO PARZIALI
         name: "Rischio Muffa Giorni di Dati"
         unique_id: vmc_master_rischio_muffa_giorni_dati
         unit_of_measurement: "d"
@@ -7256,26 +7256,49 @@ script:
 
   vmc_master_azzera_booleans:                                                   # [CONFIGURAZIONE, 5 RICHIAMI] [INTERFACCIA, 1 RICHIAMO] [AUTOMAZIONE, 0 RICHIAMI]
     alias: VMC Master - Booleans Off
+    description: >
+      Porta su OFF spie e memorie. Gli interruttori dei Pannelli (Telecomando, Monitoraggio, Calendario, Offset, Avvisi,
+      Informazioni e relative finestre) vengono chiusi solo se non viene richiesto mantieni_pannelli: true (fine Fascia
+      del Calendario): un Pannello aperto si chiude solo quando lo decide l'utente.
+    fields:
+      mantieni_pannelli:
+        name: Mantieni Pannelli
+        description: "true: i Pannelli aperti restano aperti (si azzerano solo spie e memorie)"
+        default: false
+        selector:
+          boolean:
     sequence:
-      - action: input_boolean.turn_off
+      - if:                                                                     # PANNELLI: CHIUSI SOLO SE NON SI CHIEDE DI MANTENERLI (LA FINE FASCIA DEL CALENDARIO LI MANTIENE APERTI)
+          - condition: template
+            value_template: "{{ not (mantieni_pannelli | default(false) | bool) }}"
+        then:
+          - action: input_boolean.turn_off
+            data: {}
+            target:
+              entity_id:
+                - input_boolean.vmc_master_opzioni_avvisi
+                - input_boolean.vmc_master_opzioni_avvisi_grafici
+                - input_boolean.vmc_master_opzioni_vmc
+                - input_boolean.vmc_master_opzioni_offset_sensori
+                - input_boolean.vmc_master_opzioni_interruttore_offset_sensori
+                - input_boolean.vmc_master_opzioni_monitoraggio_sensori
+                - input_boolean.vmc_master_opzioni_interruttore_monitoraggio_sensori_extra
+                - input_boolean.vmc_master_opzioni_interruttore_sensori_vmc_interni
+                - input_boolean.vmc_master_opzione_finestra_prossime_letture
+                - input_boolean.vmc_master_opzioni_calendario_main
+                - input_boolean.vmc_master_opzioni_calendario
+                - input_boolean.vmc_master_opzioni_punto_di_rugiada
+                - input_boolean.vmc_master_opzioni_free_heating_o_free_cooling
+                - input_boolean.vmc_master_opzioni_interruttore_calendario
+                - input_boolean.vmc_master_opzioni_lettura_sensori
+                - input_boolean.vmc_master_opzioni_scelta_sensori
+                - input_boolean.vmc_master_opzioni_elementi_chimici
+                - input_boolean.vmc_master_opzione_finestra_audio
+                - input_boolean.vmc_master_opzione_finestra_clona
+      - action: input_boolean.turn_off                                          # SPIE E MEMORIE: SEMPRE
         data: {}
         target:
           entity_id:
-            - input_boolean.vmc_master_opzioni_avvisi
-            - input_boolean.vmc_master_opzioni_avvisi_grafici
-            - input_boolean.vmc_master_opzioni_vmc
-            - input_boolean.vmc_master_opzioni_offset_sensori
-            - input_boolean.vmc_master_opzioni_interruttore_offset_sensori
-            - input_boolean.vmc_master_opzioni_monitoraggio_sensori
-            - input_boolean.vmc_master_opzioni_interruttore_monitoraggio_sensori_extra
-            - input_boolean.vmc_master_opzioni_interruttore_sensori_vmc_interni
-            - input_boolean.vmc_master_opzione_finestra_prossime_letture
-            - input_boolean.vmc_master_opzioni_calendario_main
-            - input_boolean.vmc_master_opzioni_calendario
-            - input_boolean.vmc_master_opzioni_punto_di_rugiada
-            - input_boolean.vmc_master_opzioni_free_heating_o_free_cooling
-            - input_boolean.vmc_master_opzioni_interruttore_calendario
-            - input_boolean.vmc_master_opzioni_lettura_sensori
             - input_boolean.vmc_master_opzioni_accendi_spegni_avvisi_spia
             - input_boolean.vmc_master_spia_velocita_0
             - input_boolean.vmc_master_spia_velocita_1
@@ -7339,10 +7362,6 @@ script:
             - input_boolean.vmc_master_spia_velocita_notturna_delta_temp_verifica_soglia_valore
             - input_boolean.vmc_master_spia_velocita_freecooling_delta_temp_verifica_soglia_valore
             - input_boolean.vmc_master_umidita_verifica_soglia_valore_spia
-            - input_boolean.vmc_master_opzioni_scelta_sensori
-            - input_boolean.vmc_master_opzioni_elementi_chimici
-            - input_boolean.vmc_master_opzione_finestra_audio
-            - input_boolean.vmc_master_opzione_finestra_clona
             - input_boolean.vmc_master_spia_umidita_velocita_0
             - input_boolean.vmc_master_spia_umidita_velocita_1
             - input_boolean.vmc_master_spia_umidita_velocita_2
@@ -7949,11 +7968,12 @@ script:
     alias: VMC Master - Calendario Fascia 1 o 2 Off
     description: >
       Richiamato dall'Automazione VMC Master alla fine della 1° o della 2° Fascia del Calendario di
-      ogni giorno: porta tutte le variabili booleane (spie e memorie) su OFF; gli interruttori VMC ON/OFF e
-      le impostazioni Audio restano invariati.
+      ogni giorno: porta tutte le variabili booleane (spie e memorie) su OFF; gli interruttori VMC ON/OFF,
+      le impostazioni Audio e i Pannelli aperti restano invariati (un Pannello si chiude solo quando lo decide l'utente).
     sequence:
       - action: script.vmc_master_azzera_booleans
-        data: {}
+        data:
+          mantieni_pannelli: true
     mode: restart
     icon: mdi:fingerprint-off
 #------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
