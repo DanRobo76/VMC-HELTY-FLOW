@@ -9681,7 +9681,7 @@ cards:
                         type: markdown
                         content: |-
                           {%- set g = states('sensor.vmc_master_rischio_muffa_giorni_dati') | float(0) -%}
-                          <ha-icon icon="mdi:calendar-clock"></ha-icon><span style="padding-right: 10px;"></span> <strong>RISCHIO MUFFA: MEDIE IN AVVIO (DATI PARZIALI)</strong>
+                          <ha-icon icon="mdi:calendar-clock"></ha-icon><span style="padding-right: 10px;"></span> <strong>RISCHIO MUFFA: STATUS MEDIE</strong>
 
                           - Media 4 Settimane: {{ [g, 28] | min | round(0) | int }} / 28 giorni{% if g >= 28 %} (completa){% endif %}
                           - Media 8 Settimane: {{ [g, 56] | min | round(0) | int }} / 56 giorni{% if g >= 56 %} (completa){% endif %}
