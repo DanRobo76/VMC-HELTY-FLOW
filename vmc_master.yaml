@@ -5062,47 +5062,47 @@ input_boolean:
 ################### Fine Creazione Switch Booleani impiegati nell'Automazione, per valutare la Velocità in caso di Black-Out e/o SUPERAMENTO DEL Set Lim. Δ Punto di Rugiada ##############################################
 ################### Inizio Creazione Switch Booleani impiegati nell'Automazione, per valutare gli inquinanti CO2 e VOC ##############################################
 
-  vmc_master_spia_co2_o_voc:                                                    # [CONFIGURAZIONE, 142 RICHIAMI] [INTERFACCIA, 15 RICHIAMI] [AUTOMAZIONE, 275 RICHIAMI] SENSORE DI SUPPORTO NELL'AUTOMAZIONE PER LA VERIFICA DI INQUINANTI CO2 E VOC
+  vmc_master_spia_co2_o_voc:                                                    # [CONFIGURAZIONE, 142 RICHIAMI] [INTERFACCIA, 15 RICHIAMI] [AUTOMAZIONE, 279 RICHIAMI] SENSORE DI SUPPORTO NELL'AUTOMAZIONE PER LA VERIFICA DI INQUINANTI CO2 E VOC
     name: "Spia Inquinanti CO₂ e/o VOC"
     icon: mdi:memory
 
-  vmc_master_spia_co2_o_voc_partenza_ritorno_velocita_0:                        # [CONFIGURAZIONE, 60 RICHIAMI] [INTERFACCIA, 12 RICHIAMI] [AUTOMAZIONE, 207 RICHIAMI] SENSORE DI SUPPORTO NELL'AUTOMAZIONE PER LA VERIFICA DI INQUINANTI CO2 E VOC PARTENZA DA VELOCITA' 0 E RITORNO A VELOCITA' 0
+  vmc_master_spia_co2_o_voc_partenza_ritorno_velocita_0:                        # [CONFIGURAZIONE, 60 RICHIAMI] [INTERFACCIA, 12 RICHIAMI] [AUTOMAZIONE, 209 RICHIAMI] SENSORE DI SUPPORTO NELL'AUTOMAZIONE PER LA VERIFICA DI INQUINANTI CO2 E VOC PARTENZA DA VELOCITA' 0 E RITORNO A VELOCITA' 0
     name: "Spia di Richiamo Vel. 0 CO₂ e/o VOC "
     icon: mdi:memory
 
-  vmc_master_spia_velocita_0_co2_o_voc:                                         # [CONFIGURAZIONE, 41 RICHIAMI] [INTERFACCIA, 12 RICHIAMI] [AUTOMAZIONE, 188 RICHIAMI] SENSORE TRACCIAMENTO VELOCITA' 0, IN CASO DI INQUINANTI CO2 E VOC
+  vmc_master_spia_velocita_0_co2_o_voc:                                         # [CONFIGURAZIONE, 41 RICHIAMI] [INTERFACCIA, 12 RICHIAMI] [AUTOMAZIONE, 190 RICHIAMI] SENSORE TRACCIAMENTO VELOCITA' 0, IN CASO DI INQUINANTI CO2 E VOC
     name: "Spia Velocità 0 CO₂ e/o VOC"
     icon: mdi:memory
 
-  vmc_master_spia_velocita_1_co2_o_voc:                                         # [CONFIGURAZIONE, 83 RICHIAMI] [INTERFACCIA, 12 RICHIAMI] [AUTOMAZIONE, 228 RICHIAMI] SENSORE TRACCIAMENTO VELOCITA' 1, IN CASO DI INQUINANTI CO2 E VOCT
+  vmc_master_spia_velocita_1_co2_o_voc:                                         # [CONFIGURAZIONE, 83 RICHIAMI] [INTERFACCIA, 12 RICHIAMI] [AUTOMAZIONE, 229 RICHIAMI] SENSORE TRACCIAMENTO VELOCITA' 1, IN CASO DI INQUINANTI CO2 E VOCT
     name: "Spia Velocità 1 CO₂ e/o VOC"
     icon: mdi:memory
 
-  vmc_master_spia_velocita_2_co2_o_voc:                                         # [CONFIGURAZIONE, 49 RICHIAMI] [INTERFACCIA, 12 RICHIAMI] [AUTOMAZIONE, 203 RICHIAMI] SENSORE TRACCIAMENTO VELOCITA' 2, IN CASO DI INQUINANTI CO2 E VOC
+  vmc_master_spia_velocita_2_co2_o_voc:                                         # [CONFIGURAZIONE, 49 RICHIAMI] [INTERFACCIA, 12 RICHIAMI] [AUTOMAZIONE, 205 RICHIAMI] SENSORE TRACCIAMENTO VELOCITA' 2, IN CASO DI INQUINANTI CO2 E VOC
     name: "Spia Velocità 2 CO₂ e/o VOC"
     icon: mdi:memory
 
-  vmc_master_spia_velocita_3_co2_o_voc:                                         # [CONFIGURAZIONE, 49 RICHIAMI] [INTERFACCIA, 12 RICHIAMI] [AUTOMAZIONE, 203 RICHIAMI] SENSORE TRACCIAMENTO VELOCITA' 3, IN CASO DI INQUINANTI CO2 E VOC
+  vmc_master_spia_velocita_3_co2_o_voc:                                         # [CONFIGURAZIONE, 49 RICHIAMI] [INTERFACCIA, 12 RICHIAMI] [AUTOMAZIONE, 205 RICHIAMI] SENSORE TRACCIAMENTO VELOCITA' 3, IN CASO DI INQUINANTI CO2 E VOC
     name: "Spia Velocità 3 CO₂ e/o VOC"
     icon: mdi:memory
     
-  vmc_master_spia_velocita_4_co2_o_voc:                                         # [CONFIGURAZIONE, 49 RICHIAMI] [INTERFACCIA, 12 RICHIAMI] [AUTOMAZIONE, 203 RICHIAMI] SENSORE TRACCIAMENTO VELOCITA' 4, IN CASO DI INQUINANTI CO2 E VOC
+  vmc_master_spia_velocita_4_co2_o_voc:                                         # [CONFIGURAZIONE, 49 RICHIAMI] [INTERFACCIA, 12 RICHIAMI] [AUTOMAZIONE, 205 RICHIAMI] SENSORE TRACCIAMENTO VELOCITA' 4, IN CASO DI INQUINANTI CO2 E VOC
     name: "Spia Velocità 4 CO₂ e/o VOC"
     icon: mdi:memory
 
-  vmc_master_spia_velocita_iperventilazione_co2_o_voc:                          # [CONFIGURAZIONE, 49 RICHIAMI] [INTERFACCIA, 12 RICHIAMI] [AUTOMAZIONE, 203 RICHIAMI] SENSORE TRACCIAMENTO VELOCITA' IPERVENTILAZIONE, IN CASO DI INQUINANTI CO2 E VOC
+  vmc_master_spia_velocita_iperventilazione_co2_o_voc:                          # [CONFIGURAZIONE, 49 RICHIAMI] [INTERFACCIA, 12 RICHIAMI] [AUTOMAZIONE, 205 RICHIAMI] SENSORE TRACCIAMENTO VELOCITA' IPERVENTILAZIONE, IN CASO DI INQUINANTI CO2 E VOC
     name: "Spia Velocità Iperventilazione CO₂ e/o VOC"
     icon: mdi:memory
 
-  vmc_master_spia_velocita_notturna_co2_o_voc:                                  # [CONFIGURAZIONE, 49 RICHIAMI] [INTERFACCIA, 12 RICHIAMI] [AUTOMAZIONE, 203 RICHIAMI] SENSORE TRACCIAMENTO VELOCITA' NOTTURNA, IN CASO DI INQUINANTI CO2 E VOC
+  vmc_master_spia_velocita_notturna_co2_o_voc:                                  # [CONFIGURAZIONE, 49 RICHIAMI] [INTERFACCIA, 12 RICHIAMI] [AUTOMAZIONE, 205 RICHIAMI] SENSORE TRACCIAMENTO VELOCITA' NOTTURNA, IN CASO DI INQUINANTI CO2 E VOC
     name: "Spia Velocità Notturna CO₂ e/o VOC"
     icon: mdi:memory
 
-  vmc_master_spia_velocita_freecooling_co2_o_voc:                               # [CONFIGURAZIONE, 65 RICHIAMI] [INTERFACCIA, 12 RICHIAMI] [AUTOMAZIONE, 209 RICHIAMI] SENSORE TRACCIAMENTO VELOCITA' FREE-COOLING, IN CASO DI INQUINANTI CO2 E VOC
+  vmc_master_spia_velocita_freecooling_co2_o_voc:                               # [CONFIGURAZIONE, 65 RICHIAMI] [INTERFACCIA, 12 RICHIAMI] [AUTOMAZIONE, 212 RICHIAMI] SENSORE TRACCIAMENTO VELOCITA' FREE-COOLING, IN CASO DI INQUINANTI CO2 E VOC
     name: "Spia Velocità Free Cool./Heat. CO₂ e/o VOC"
     icon: mdi:memory        
 
-  vmc_master_spia_velocita_1_co2_o_voc_pdr:                                     # [CONFIGURAZIONE, 92 RICHIAMI] [INTERFACCIA, 11 RICHIAMI] [AUTOMAZIONE, 248 RICHIAMI] SENSORE TRACCIAMENTO VELOCITA' 1, IN CASO DI AVVIO PUNTO DI RUGIADA A VELOCITA 1 E INQUINANTI CO2 E VOC ASSENTI MA PRECEDENTEMENTE PRESENTI A VELOCITA 0
+  vmc_master_spia_velocita_1_co2_o_voc_pdr:                                     # [CONFIGURAZIONE, 92 RICHIAMI] [INTERFACCIA, 11 RICHIAMI] [AUTOMAZIONE, 250 RICHIAMI] SENSORE TRACCIAMENTO VELOCITA' 1, IN CASO DI AVVIO PUNTO DI RUGIADA A VELOCITA 1 E INQUINANTI CO2 E VOC ASSENTI MA PRECEDENTEMENTE PRESENTI A VELOCITA 0
     name: "Spia Velocità 1 CO₂ e/o VOC Vs PdR"
     icon: mdi:memory
 
@@ -5111,7 +5111,7 @@ input_boolean:
 
 ################### Inizio Creazione Switch Booleani impiegati nell'Automazione, per valutare CONGELAMENTO ############################
 
-  vmc_master_congelamento_verifica_soglia_valore_spia:                          # [CONFIGURAZIONE, 195 RICHIAMI] [INTERFACCIA, 13 RICHIAMI] [AUTOMAZIONE, 226 RICHIAMI] SENSORE TRACCIAMENTO CONGELAMENTO
+  vmc_master_congelamento_verifica_soglia_valore_spia:                          # [CONFIGURAZIONE, 195 RICHIAMI] [INTERFACCIA, 13 RICHIAMI] [AUTOMAZIONE, 227 RICHIAMI] SENSORE TRACCIAMENTO CONGELAMENTO
     name: "Spia VMC Congelamento ≤ -18 [°C] Temp. Esterna ?"
     icon: mdi:memory
 
@@ -5159,7 +5159,7 @@ input_boolean:
 
 ################### Inizio Creazione Switch Booleani impiegati nell'Automazione, per valutare DIFFERENZA DI TEMPERATURA ############################
 
-  vmc_master_delta_temp_verifica_soglia_valore_spia:                            # [CONFIGURAZIONE, 213 RICHIAMI] [INTERFACCIA, 12 RICHIAMI] [AUTOMAZIONE, 234 RICHIAMI] SENSORE TRACCIAMENTO DIFFERENZA DI TEMPERATURA > 23 °C
+  vmc_master_delta_temp_verifica_soglia_valore_spia:                            # [CONFIGURAZIONE, 213 RICHIAMI] [INTERFACCIA, 12 RICHIAMI] [AUTOMAZIONE, 235 RICHIAMI] SENSORE TRACCIAMENTO DIFFERENZA DI TEMPERATURA > 23 °C
     name: "Spia VMC Sensori Int. Δ Temp. > 23 [°C] ?"
     icon: mdi:memory
 
@@ -26009,13 +26009,13 @@ shell_command:
   vmc_master_rimuovi_caratteri_di_ritorno: find /config/packages/vmc_helty_flow/master -type f -name "*.sh" -exec sed -i 's/\r$//' {} \; # [CONFIGURAZIONE, 1 RICHIAMO] [INTERFACCIA, 0 RICHIAMI] [AUTOMAZIONE, 2 RICHIAMI] TROVA E RIMUOVE CARATTERI DI RITORNO IN TUTTI I FILES *.sh CONTENUTI NELLA CARTELLA
   vmc_master_aggiorna_indirizzo_ip:        bash /config/packages/vmc_helty_flow/master/vmc_master_script_cambio_ip.sh   {{ states('input_text.vmc_master_ip_insert') }} # [CONFIGURAZIONE, 1 RICHIAMO] [INTERFACCIA, 0 RICHIAMI] [AUTOMAZIONE, 1 RICHIAMO] TROVA E SOSTITUISCE NEL FILE CORRENTE L'INDIRIZZO IP INSERITO NELL'INTERFACCIA, VIENE LANCIATO SOLO SE IL SENSORE VERIFICA IP INSERITO CONFERMA UN INDIRIZZO VALIDO (LO SCRIPT NON HA UN INDIRIZZO DI DEFAULT)
   vmc_master_cambia_nome:                  bash /config/packages/vmc_helty_flow/master/vmc_master_script_cambio_nome.sh "{{ states('input_text.vmc_master_nome_da_inserire') | replace('"', '') }}" # [CONFIGURAZIONE, 1 RICHIAMO] [INTERFACCIA, 0 RICHIAMI] [AUTOMAZIONE, 1 RICHIAMO] INVIO COMANDO PER CAMBIARE NOME ALLA VMC
-  vmc_master_freecooling:                  printf 'VMWH0000007\n' | timeout 5 nc -w 3 999.999.999.999 5001 # [CONFIGURAZIONE, 79 RICHIAMI] [INTERFACCIA, 6 RICHIAMI] [AUTOMAZIONE, 26 RICHIAMI] INVIO COMANDO Free Cool./Heat. ALLA VMC
+  vmc_master_freecooling:                  printf 'VMWH0000007\n' | timeout 5 nc -w 3 999.999.999.999 5001 # [CONFIGURAZIONE, 79 RICHIAMI] [INTERFACCIA, 6 RICHIAMI] [AUTOMAZIONE, 25 RICHIAMI] INVIO COMANDO Free Cool./Heat. ALLA VMC
   vmc_master_notturna:                     printf 'VMWH0000006\n' | timeout 5 nc -w 3 999.999.999.999 5001 # [CONFIGURAZIONE, 27 RICHIAMI] [INTERFACCIA, 2 RICHIAMI] [AUTOMAZIONE, 14 RICHIAMI] INVIO COMANDO NOTTURNA ALLA VMC
   vmc_master_iperventilazione:             printf 'VMWH0000005\n' | timeout 5 nc -w 3 999.999.999.999 5001 # [CONFIGURAZIONE, 27 RICHIAMI] [INTERFACCIA, 2 RICHIAMI] [AUTOMAZIONE, 14 RICHIAMI] INVIO COMANDO IPERVENTILAZIONE ALLA VMC
   vmc_master_velocita_4:                   printf 'VMWH0000004\n' | timeout 5 nc -w 3 999.999.999.999 5001 # [CONFIGURAZIONE, 27 RICHIAMI] [INTERFACCIA, 2 RICHIAMI] [AUTOMAZIONE, 14 RICHIAMI] INVIO COMANDO VELOCITA' 4 ALLA VMC
   vmc_master_velocita_3:                   printf 'VMWH0000003\n' | timeout 5 nc -w 3 999.999.999.999 5001 # [CONFIGURAZIONE, 27 RICHIAMI] [INTERFACCIA, 2 RICHIAMI] [AUTOMAZIONE, 14 RICHIAMI] INVIO COMANDO VELOCITA' 3 ALLA VMC
   vmc_master_velocita_2:                   printf 'VMWH0000002\n' | timeout 5 nc -w 3 999.999.999.999 5001 # [CONFIGURAZIONE, 27 RICHIAMI] [INTERFACCIA, 2 RICHIAMI] [AUTOMAZIONE, 14 RICHIAMI] INVIO COMANDO VELOCITA' 2 ALLA VMC
-  vmc_master_velocita_1:                   printf 'VMWH0000001\n' | timeout 5 nc -w 3 999.999.999.999 5001 # [CONFIGURAZIONE, 47 RICHIAMI] [INTERFACCIA, 2 RICHIAMI] [AUTOMAZIONE, 64 RICHIAMI] INVIO COMANDO VELOCITA' 1 ALLA VMC
+  vmc_master_velocita_1:                   printf 'VMWH0000001\n' | timeout 5 nc -w 3 999.999.999.999 5001 # [CONFIGURAZIONE, 47 RICHIAMI] [INTERFACCIA, 2 RICHIAMI] [AUTOMAZIONE, 65 RICHIAMI] INVIO COMANDO VELOCITA' 1 ALLA VMC
   vmc_master_velocita_0:                   printf 'VMWH0000000\n' | timeout 5 nc -w 3 999.999.999.999 5001 # [CONFIGURAZIONE, 110 RICHIAMI] [INTERFACCIA, 1 RICHIAMO] [AUTOMAZIONE, 53 RICHIAMI] INVIO COMANDO VELOCITA' 0 ALLA VMC
   vmc_master_sensori_on:                   printf 'VMWH0300000\n' | timeout 5 nc -w 3 999.999.999.999 5001 # [CONFIGURAZIONE, 1 RICHIAMO] [INTERFACCIA, 1 RICHIAMO] [AUTOMAZIONE, 0 RICHIAMI] INVIO COMANDO SENSORI ON ALLA VMC PER ACCENDERE I SENSORI DELLA VMC; I valori rilevati dai sensori nella schermata INFO dell'App Mobile saranno disponibili e i relativi allarmi verrano segnalati
   vmc_master_sensori_off:                  printf 'VMWH0300002\n' | timeout 5 nc -w 3 999.999.999.999 5001 # [CONFIGURAZIONE, 2 RICHIAMI] [INTERFACCIA, 1 RICHIAMO] [AUTOMAZIONE, 0 RICHIAMI] INVIO COMANDO SENSORI OFF ALLA VMC PER DISATTIVARE I SENSORI DELLA VMC; I valori rilevati dai sensori nella schermata INFO dell'App Mobile NON saranno disponibili e i relativi allarmi NON verrano segnalati
