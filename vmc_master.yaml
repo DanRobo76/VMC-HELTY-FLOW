@@ -158,7 +158,7 @@ command_line:
 ################### Inizio Creazione Sensori Principali della VMC  ########################################################################################################################################################
 sensor:
   - platform: tcp
-    name: vmc_master_status_ventola                                             # [CONFIGURAZIONE, 7 RICHIAMI] [INTERFACCIA, 2 RICHIAMI] [AUTOMAZIONE, 170 RICHIAMI] CREAZIONE DEL SENSORE LETTURA STATI DI VENTILAZIONE; N.b non tutti i valori sono identificabili
+    name: vmc_master_status_ventola                                             # [CONFIGURAZIONE, 7 RICHIAMI] [INTERFACCIA, 2 RICHIAMI] [AUTOMAZIONE, 171 RICHIAMI] CREAZIONE DEL SENSORE LETTURA STATI DI VENTILAZIONE; N.b non tutti i valori sono identificabili
     host: 999.999.999.999                        # INDIRIZZO IP DELLA VMC MASTER
     port: 5001                                 # PORTA 5001 DELLA VMC IMPOSTAZIONE DI DEFAULT
     timeout: 3
@@ -459,7 +459,7 @@ template:
         icon: mdi:ip
 
   - sensor:
-      - default_entity_id: sensor.vmc_master_status_ip_interfaccia              # [CONFIGURAZIONE, 319 RICHIAMI] [INTERFACCIA, 112 RICHIAMI] [AUTOMAZIONE, 312 RICHIAMI] SENSORE IMPIEGATO PER LA VISUALIZZAZIONE NELL'INTERFACCIA SE LA VMC E' IN RETE O MENO
+      - default_entity_id: sensor.vmc_master_status_ip_interfaccia              # [CONFIGURAZIONE, 319 RICHIAMI] [INTERFACCIA, 112 RICHIAMI] [AUTOMAZIONE, 316 RICHIAMI] SENSORE IMPIEGATO PER LA VISUALIZZAZIONE NELL'INTERFACCIA SE LA VMC E' IN RETE O MENO
         name: "Status VMC"
         unique_id: vmc_master_status_ip_interfaccia
         state: >
@@ -473,7 +473,7 @@ template:
           {% endif %}
 
   - binary_sensor:
-      - default_entity_id: binary_sensor.vmc_master_black_out_rilevato          # [CONFIGURAZIONE, 2 RICHIAMI] [INTERFACCIA, 0 RICHIAMI] [AUTOMAZIONE, 238 RICHIAMI] BLACK-OUT RILEVATO: ON QUANDO UNA DELLE CONDIZIONI DEI TRIGGER «BLACK-OUT» DELL'AUTOMAZIONE (STESSO TESTO, 1:1) E' VERA DA ALMENO «ATTESA BLACK-OUT RILEVAZIONE» SECONDI; CON L'AUTOMAZIONE IN MODALITA' QUEUED FA USCIRE I CICLI DI CONFERMA DELLA VELOCITA', COME FACEVA IL RIAVVIO DELLA MODALITA' RESTART
+      - default_entity_id: binary_sensor.vmc_master_black_out_rilevato          # [CONFIGURAZIONE, 2 RICHIAMI] [INTERFACCIA, 0 RICHIAMI] [AUTOMAZIONE, 240 RICHIAMI] BLACK-OUT RILEVATO: ON QUANDO UNA DELLE CONDIZIONI DEI TRIGGER «BLACK-OUT» DELL'AUTOMAZIONE (STESSO TESTO, 1:1) E' VERA DA ALMENO «ATTESA BLACK-OUT RILEVAZIONE» SECONDI; CON L'AUTOMAZIONE IN MODALITA' QUEUED FA USCIRE I CICLI DI CONFERMA DELLA VELOCITA', COME FACEVA IL RIAVVIO DELLA MODALITA' RESTART
         name: "Black-Out Rilevato"
         unique_id: vmc_master_black_out_rilevato
         state: >
@@ -862,7 +862,7 @@ template:
         icon: mdi:code-array
 
   - sensor:
-      - default_entity_id: sensor.vmc_master_status_ventola_lettura_codice_interpretato # [CONFIGURAZIONE, 128 RICHIAMI] [INTERFACCIA, 53 RICHIAMI] [AUTOMAZIONE, 786 RICHIAMI] SENSORE DI INTERPRETAZIONE DELLA LETTURA DEI DATI "VELOCITA'" MEMORIZZATI NELLA VMC CONVERITA IN "STRINGA", PREVIA VERIFICA DI AVVENUTA LETTURA DEI DATI "VELOCITA'"" MEMORIZZATI NELLA VMC
+      - default_entity_id: sensor.vmc_master_status_ventola_lettura_codice_interpretato # [CONFIGURAZIONE, 128 RICHIAMI] [INTERFACCIA, 53 RICHIAMI] [AUTOMAZIONE, 790 RICHIAMI] SENSORE DI INTERPRETAZIONE DELLA LETTURA DEI DATI "VELOCITA'" MEMORIZZATI NELLA VMC CONVERITA IN "STRINGA", PREVIA VERIFICA DI AVVENUTA LETTURA DEI DATI "VELOCITA'"" MEMORIZZATI NELLA VMC
         name: "Status Ventilazione"
         unique_id: vmc_master_status_ventola_lettura_codice_interpretato
         state: >
@@ -1012,7 +1012,7 @@ template:
           {{ (ns.righe | join(' · '))[:255] if ns.righe | count > 0 and att != 'Non disponibile' else 'Nessuna' }}
 
   - sensor:
-      - default_entity_id: sensor.vmc_master_status_ventola_lettura_codice_interpretato_interfaccia # [CONFIGURAZIONE, 252 RICHIAMI] [INTERFACCIA, 99 RICHIAMI] [AUTOMAZIONE, 265 RICHIAMI] SENSORE DI INTERPRETAZIONE DELLA LETTURA DEI DATI "VELOCITA'" MEMORIZZATI NELLA VMC CONVERITA IN "STRINGA" CON LA POSSIBILITA' DI VISUALIZZARE FREE COOLING O FREE HEATING O FREE C./H. (IN FUNZIONE DEL VALORE LETTO DEL SENSORE vmc_master_status_mese_corrente_freeheating_o_freecooling), PREVIA VERIFICA DI AVVENUTA LETTURA DEI DATI "VELOCITA'"" MEMORIZZATI NELLA VMC
+      - default_entity_id: sensor.vmc_master_status_ventola_lettura_codice_interpretato_interfaccia # [CONFIGURAZIONE, 252 RICHIAMI] [INTERFACCIA, 99 RICHIAMI] [AUTOMAZIONE, 268 RICHIAMI] SENSORE DI INTERPRETAZIONE DELLA LETTURA DEI DATI "VELOCITA'" MEMORIZZATI NELLA VMC CONVERITA IN "STRINGA" CON LA POSSIBILITA' DI VISUALIZZARE FREE COOLING O FREE HEATING O FREE C./H. (IN FUNZIONE DEL VALORE LETTO DEL SENSORE vmc_master_status_mese_corrente_freeheating_o_freecooling), PREVIA VERIFICA DI AVVENUTA LETTURA DEI DATI "VELOCITA'"" MEMORIZZATI NELLA VMC
         name: "Status Ventilazione"
         unique_id: vmc_master_status_ventola_lettura_codice_interpretato_interfaccia
         state: >
@@ -2558,7 +2558,7 @@ template:
 
 ########################################################################################### INIZIO SENSORI PER POP-UP MONITORAGGIO ##################################################################
   - sensor:
-      - default_entity_id: sensor.vmc_master_alert_monitoraggio_umidita         # [CONFIGURAZIONE, 13 RICHIAMI] [INTERFACCIA, 15 RICHIAMI] [AUTOMAZIONE, 4 RICHIAMI] SENSORE POP-UP MONITORAGGIO UMIDITA'; SENSORE MONITORAGGIO SCHEDA AVVISI
+      - default_entity_id: sensor.vmc_master_alert_monitoraggio_umidita         # [CONFIGURAZIONE, 13 RICHIAMI] [INTERFACCIA, 15 RICHIAMI] [AUTOMAZIONE, 6 RICHIAMI] SENSORE POP-UP MONITORAGGIO UMIDITA'; SENSORE MONITORAGGIO SCHEDA AVVISI
         name: "Monitoraggio Umidità"
         unique_id: vmc_master_alert_monitoraggio_umidita
         state: >
@@ -2576,7 +2576,7 @@ template:
         icon: mdi:alarm-light-outline
 
   - sensor:
-      - default_entity_id: sensor.vmc_master_alert_monitoraggio_co2             # [CONFIGURAZIONE, 385 RICHIAMI] [INTERFACCIA, 42 RICHIAMI] [AUTOMAZIONE, 28 RICHIAMI] SENSORE POP-UP MONITORAGGIO SUPERAMENTO DEL Livello di Concentrazione CO₂ [ppm]
+      - default_entity_id: sensor.vmc_master_alert_monitoraggio_co2             # [CONFIGURAZIONE, 385 RICHIAMI] [INTERFACCIA, 42 RICHIAMI] [AUTOMAZIONE, 30 RICHIAMI] SENSORE POP-UP MONITORAGGIO SUPERAMENTO DEL Livello di Concentrazione CO₂ [ppm]
         name: "Monitoraggio CO₂"
         unique_id: vmc_master_alert_monitoraggio_co2
         state: >
@@ -2594,7 +2594,7 @@ template:
         icon: mdi:alarm-light-outline
 
   - sensor:
-      - default_entity_id: sensor.vmc_master_alert_monitoraggio_voc             # [CONFIGURAZIONE, 385 RICHIAMI] [INTERFACCIA, 43 RICHIAMI] [AUTOMAZIONE, 28 RICHIAMI] SENSORE POP-UP MONITORAGGIO SUPERAMENTO DEL Livello di Concentrazione VOC [ppb]
+      - default_entity_id: sensor.vmc_master_alert_monitoraggio_voc             # [CONFIGURAZIONE, 385 RICHIAMI] [INTERFACCIA, 43 RICHIAMI] [AUTOMAZIONE, 30 RICHIAMI] SENSORE POP-UP MONITORAGGIO SUPERAMENTO DEL Livello di Concentrazione VOC [ppb]
         name: "Monitoraggio VOC"
         unique_id: vmc_master_alert_monitoraggio_voc
         state: >
@@ -4559,7 +4559,7 @@ input_number:
     icon: mdi:knob
 
 ################### Inizio Creazione Fase di Riallineamento delle Allerte al Riavvio di Home Assistant ###################
-  vmc_master_fase_riallineamento_al_riavvio:                                    # [CONFIGURAZIONE, 187 RICHIAMI] [INTERFACCIA, 1 RICHIAMO] [AUTOMAZIONE, 192 RICHIAMI] FASE DEL RIALLINEAMENTO DELLE ALLERTE FINITE A HOME ASSISTANT SPENTO (0 = FUNZIONAMENTO NORMALE)
+  vmc_master_fase_riallineamento_al_riavvio:                                    # [CONFIGURAZIONE, 187 RICHIAMI] [INTERFACCIA, 1 RICHIAMO] [AUTOMAZIONE, 196 RICHIAMI] FASE DEL RIALLINEAMENTO DELLE ALLERTE FINITE A HOME ASSISTANT SPENTO (0 = FUNZIONAMENTO NORMALE)
     name: "Fase Riallineamento Allerte al Riavvio"
     min: 0
     max: 4
@@ -4633,7 +4633,7 @@ input_number:
     mode: box
     unit_of_measurement: s
     icon: mdi:timer-cog-outline
-  vmc_master_attesa_blackout_rilevazione:                                      # [CONFIGURAZIONE, 4 RICHIAMI] [INTERFACCIA, 1 RICHIAMO] [AUTOMAZIONE, 11 RICHIAMI] TEMPO DI ATTESA [s] DI 11 TRIGGER DELL'AUTOMAZIONE VMC MASTER (VALORE ORIGINALE 32 s), LETTO ANCHE DAL COUNTDOWN
+  vmc_master_attesa_blackout_rilevazione:                                      # [CONFIGURAZIONE, 4 RICHIAMI] [INTERFACCIA, 1 RICHIAMO] [AUTOMAZIONE, 12 RICHIAMI] TEMPO DI ATTESA [s] DI 11 TRIGGER DELL'AUTOMAZIONE VMC MASTER (VALORE ORIGINALE 32 s), LETTO ANCHE DAL COUNTDOWN
     name: "Attesa Rilevazione Black-Out"
     min: 1
     max: 300
@@ -4641,7 +4641,7 @@ input_number:
     mode: box
     unit_of_measurement: s
     icon: mdi:timer-cog-outline
-  vmc_master_attesa_blackout_ripristino:                                       # [CONFIGURAZIONE, 3 RICHIAMI] [INTERFACCIA, 1 RICHIAMO] [AUTOMAZIONE, 8 RICHIAMI] TEMPO DI ATTESA [s] DI 8 TRIGGER DELL'AUTOMAZIONE VMC MASTER (VALORE ORIGINALE 32 s), LETTO ANCHE DAL COUNTDOWN
+  vmc_master_attesa_blackout_ripristino:                                       # [CONFIGURAZIONE, 3 RICHIAMI] [INTERFACCIA, 1 RICHIAMO] [AUTOMAZIONE, 9 RICHIAMI] TEMPO DI ATTESA [s] DI 8 TRIGGER DELL'AUTOMAZIONE VMC MASTER (VALORE ORIGINALE 32 s), LETTO ANCHE DAL COUNTDOWN
     name: "Attesa Ripristino dopo Black-Out"
     min: 1
     max: 300
@@ -4721,7 +4721,7 @@ input_number:
     mode: box
     unit_of_measurement: s
     icon: mdi:timer-cog-outline
-  vmc_master_attesa_umidita_fine:                                              # [CONFIGURAZIONE, 3 RICHIAMI] [INTERFACCIA, 1 RICHIAMO] [AUTOMAZIONE, 1 RICHIAMO] TEMPO DI ATTESA [s] DI 1 TRIGGER DELL'AUTOMAZIONE VMC MASTER (VALORE ORIGINALE 28 s), LETTO ANCHE DAL COUNTDOWN
+  vmc_master_attesa_umidita_fine:                                              # [CONFIGURAZIONE, 3 RICHIAMI] [INTERFACCIA, 1 RICHIAMO] [AUTOMAZIONE, 2 RICHIAMI] TEMPO DI ATTESA [s] DI 1 TRIGGER DELL'AUTOMAZIONE VMC MASTER (VALORE ORIGINALE 28 s), LETTO ANCHE DAL COUNTDOWN
     name: "Attesa Fine Allerta Umidità"
     min: 1
     max: 300
@@ -4867,7 +4867,7 @@ input_boolean:
     name: "VMC ON/OFF, in Funzione del Lim. Δ P. di Rugiada"
     icon: mdi:light-switch-off
 
-  vmc_master_opzioni_accendi_spegni_vmc_vs_calendario:                          # [CONFIGURAZIONE, 61 RICHIAMI] [INTERFACCIA, 6 RICHIAMI] [AUTOMAZIONE, 36 RICHIAMI] VERIFICA SE RENDERE AUTONOMA LA VMC, SE "ON" VERRA' IMPIEGATO IL CALENDARIO AVVIANDO IN AUTONOMIA L'ACCENSIONE E LO SPEGNIMENTO; SE "OFF" NON VERRA' IMPIEGATO IL CALENDARIO PERTENDO L'AUTONOMIA DI ACCENSIONE E SPEGNIMENTO AUTOMATICO
+  vmc_master_opzioni_accendi_spegni_vmc_vs_calendario:                          # [CONFIGURAZIONE, 61 RICHIAMI] [INTERFACCIA, 6 RICHIAMI] [AUTOMAZIONE, 37 RICHIAMI] VERIFICA SE RENDERE AUTONOMA LA VMC, SE "ON" VERRA' IMPIEGATO IL CALENDARIO AVVIANDO IN AUTONOMIA L'ACCENSIONE E LO SPEGNIMENTO; SE "OFF" NON VERRA' IMPIEGATO IL CALENDARIO PERTENDO L'AUTONOMIA DI ACCENSIONE E SPEGNIMENTO AUTOMATICO
     name: "VMC ON/OFF, in Funzione del Calendario"
     icon: mdi:light-switch-off
 
@@ -4883,7 +4883,7 @@ input_boolean:
     name: "Mostra o Nascondi gli Avvisi"
     icon: mdi:light-switch-off
 
-  vmc_master_opzioni_accendi_spegni_vmc_vs_co2_e_voc:                           # [CONFIGURAZIONE, 115 RICHIAMI] [INTERFACCIA, 42 RICHIAMI] [AUTOMAZIONE, 31 RICHIAMI] VERIFICA IL VALORE DI PERICOLOSITA' DEI SENZORE CO2 E VOC; SOLAMENTE; LA VMC VERRA' SI AVVIERA' IN AUTOMATICO SE VIENE ACCESO (ON), QUALORA I VALORI RISULTINO PERICOLOSI
+  vmc_master_opzioni_accendi_spegni_vmc_vs_co2_e_voc:                           # [CONFIGURAZIONE, 115 RICHIAMI] [INTERFACCIA, 42 RICHIAMI] [AUTOMAZIONE, 33 RICHIAMI] VERIFICA IL VALORE DI PERICOLOSITA' DEI SENZORE CO2 E VOC; SOLAMENTE; LA VMC VERRA' SI AVVIERA' IN AUTOMATICO SE VIENE ACCESO (ON), QUALORA I VALORI RISULTINO PERICOLOSI
     name: "VMC ON/OFF, in Funzione del Lim. CO₂ e/o VOC"
     icon: mdi:light-switch-off
 
@@ -4891,7 +4891,7 @@ input_boolean:
     name: "Spia Avvisi"
     icon: mdi:alert-rhombus-outline
 
-  vmc_master_opzioni_accendi_spegni_vmc_vs_umidita:                             # [CONFIGURAZIONE, 25 RICHIAMI] [INTERFACCIA, 16 RICHIAMI] [AUTOMAZIONE, 22 RICHIAMI] VERIFICA IL VALORE DI PERICOLOSITA' DELL'UMIDITA' SETTATA; LA VMC VERRA' SI AVVIERA' IN AUTOMATICO SE VIENE ACCESO (ON), QUALORA IL VALORE RISULTI PERICOLOSO
+  vmc_master_opzioni_accendi_spegni_vmc_vs_umidita:                             # [CONFIGURAZIONE, 25 RICHIAMI] [INTERFACCIA, 16 RICHIAMI] [AUTOMAZIONE, 24 RICHIAMI] VERIFICA IL VALORE DI PERICOLOSITA' DELL'UMIDITA' SETTATA; LA VMC VERRA' SI AVVIERA' IN AUTOMATICO SE VIENE ACCESO (ON), QUALORA IL VALORE RISULTI PERICOLOSO
     name: "VMC ON/OFF, in Funzione dell'Umidità Interna"
     icon: mdi:light-switch-off
 ################### Fine Creazione Switch Booleani impiegati nell'Interfaccia Lovelace per mostrare o meno le Opzioni ####################################################################################
@@ -4900,209 +4900,209 @@ input_boolean:
     initial: false
     icon: mdi:human-handsup
 ################### Inizio Creazione Switch Booleani impiegati nell'Automazione, per valutare la Velocità in caso di Black-Out e/o SUPERAMENTO DEL Set Lim. Δ Punto di Rugiada ##############################################################
-  vmc_master_spia_velocita_0:                                                   # [CONFIGURAZIONE, 215 RICHIAMI] [INTERFACCIA, 22 RICHIAMI] [AUTOMAZIONE, 349 RICHIAMI] SENSORE TRACCIAMENTO VELOCITA' 0, IN CASO DI BLACK-OUT
+  vmc_master_spia_velocita_0:                                                   # [CONFIGURAZIONE, 215 RICHIAMI] [INTERFACCIA, 22 RICHIAMI] [AUTOMAZIONE, 352 RICHIAMI] SENSORE TRACCIAMENTO VELOCITA' 0, IN CASO DI BLACK-OUT
     name: "Spia Velocità 0"
     icon: mdi:memory
 
-  vmc_master_spia_velocita_1:                                                   # [CONFIGURAZIONE, 205 RICHIAMI] [INTERFACCIA, 22 RICHIAMI] [AUTOMAZIONE, 343 RICHIAMI] SENSORE TRACCIAMENTO VELOCITA' 1, IN CASO DI BLACK-OUT
+  vmc_master_spia_velocita_1:                                                   # [CONFIGURAZIONE, 205 RICHIAMI] [INTERFACCIA, 22 RICHIAMI] [AUTOMAZIONE, 346 RICHIAMI] SENSORE TRACCIAMENTO VELOCITA' 1, IN CASO DI BLACK-OUT
     name: "Spia Velocità 1"
     icon: mdi:memory
 
-  vmc_master_spia_velocita_2:                                                   # [CONFIGURAZIONE, 214 RICHIAMI] [INTERFACCIA, 22 RICHIAMI] [AUTOMAZIONE, 349 RICHIAMI] SENSORE TRACCIAMENTO VELOCITA' 2, IN CASO DI BLACK-OUT
+  vmc_master_spia_velocita_2:                                                   # [CONFIGURAZIONE, 214 RICHIAMI] [INTERFACCIA, 22 RICHIAMI] [AUTOMAZIONE, 352 RICHIAMI] SENSORE TRACCIAMENTO VELOCITA' 2, IN CASO DI BLACK-OUT
     name: "Spia Velocità 2"
     icon: mdi:memory
 
-  vmc_master_spia_velocita_3:                                                   # [CONFIGURAZIONE, 214 RICHIAMI] [INTERFACCIA, 22 RICHIAMI] [AUTOMAZIONE, 349 RICHIAMI] SENSORE TRACCIAMENTO VELOCITA' 3, IN CASO DI BLACK-OUT
+  vmc_master_spia_velocita_3:                                                   # [CONFIGURAZIONE, 214 RICHIAMI] [INTERFACCIA, 22 RICHIAMI] [AUTOMAZIONE, 352 RICHIAMI] SENSORE TRACCIAMENTO VELOCITA' 3, IN CASO DI BLACK-OUT
     name: "Spia Velocità 3"
     icon: mdi:memory
     
-  vmc_master_spia_velocita_4:                                                   # [CONFIGURAZIONE, 214 RICHIAMI] [INTERFACCIA, 22 RICHIAMI] [AUTOMAZIONE, 349 RICHIAMI] SENSORE TRACCIAMENTO VELOCITA' 4, IN CASO DI BLACK-OUT
+  vmc_master_spia_velocita_4:                                                   # [CONFIGURAZIONE, 214 RICHIAMI] [INTERFACCIA, 22 RICHIAMI] [AUTOMAZIONE, 352 RICHIAMI] SENSORE TRACCIAMENTO VELOCITA' 4, IN CASO DI BLACK-OUT
     name: "Spia Velocità 4"
     icon: mdi:memory
 
-  vmc_master_spia_velocita_iperventilazione:                                    # [CONFIGURAZIONE, 214 RICHIAMI] [INTERFACCIA, 22 RICHIAMI] [AUTOMAZIONE, 349 RICHIAMI] SENSORE TRACCIAMENTO VELOCITA' IPERVENTILAZIONE, IN CASO DI BLACK-OUT
+  vmc_master_spia_velocita_iperventilazione:                                    # [CONFIGURAZIONE, 214 RICHIAMI] [INTERFACCIA, 22 RICHIAMI] [AUTOMAZIONE, 352 RICHIAMI] SENSORE TRACCIAMENTO VELOCITA' IPERVENTILAZIONE, IN CASO DI BLACK-OUT
     name: "Spia Velocità Iperventilazione"
     icon: mdi:memory
 
-  vmc_master_spia_velocita_notturna:                                            # [CONFIGURAZIONE, 214 RICHIAMI] [INTERFACCIA, 22 RICHIAMI] [AUTOMAZIONE, 349 RICHIAMI] SENSORE TRACCIAMENTO VELOCITA' NOTTURNA, IN CASO DI BLACK-OUT
+  vmc_master_spia_velocita_notturna:                                            # [CONFIGURAZIONE, 214 RICHIAMI] [INTERFACCIA, 22 RICHIAMI] [AUTOMAZIONE, 352 RICHIAMI] SENSORE TRACCIAMENTO VELOCITA' NOTTURNA, IN CASO DI BLACK-OUT
     name: "Spia Velocità Notturna"
     icon: mdi:memory
 
-  vmc_master_spia_velocita_freecooling:                                         # [CONFIGURAZIONE, 214 RICHIAMI] [INTERFACCIA, 22 RICHIAMI] [AUTOMAZIONE, 349 RICHIAMI] SENSORE TRACCIAMENTO VELOCITA' FREE-COOLING, IN CASO DI BLACK-OUT
+  vmc_master_spia_velocita_freecooling:                                         # [CONFIGURAZIONE, 214 RICHIAMI] [INTERFACCIA, 22 RICHIAMI] [AUTOMAZIONE, 352 RICHIAMI] SENSORE TRACCIAMENTO VELOCITA' FREE-COOLING, IN CASO DI BLACK-OUT
     name: "Spia Velocità Free Cool./Heat."
     icon: mdi:memory    
 
-  vmc_master_spia_calendario_lunedi_1:                                          # [CONFIGURAZIONE, 76 RICHIAMI] [INTERFACCIA, 12 RICHIAMI] [AUTOMAZIONE, 71 RICHIAMI] SENSORE TRACCIAMENTO, QUANDO SI E' ALL'INTERNO DEL LUNEDì 1° FASCIA DEL CALENDARIO
+  vmc_master_spia_calendario_lunedi_1:                                          # [CONFIGURAZIONE, 76 RICHIAMI] [INTERFACCIA, 12 RICHIAMI] [AUTOMAZIONE, 74 RICHIAMI] SENSORE TRACCIAMENTO, QUANDO SI E' ALL'INTERNO DEL LUNEDì 1° FASCIA DEL CALENDARIO
     name: "Spia all'interno del Calendario Lunedì 1°"
     icon: mdi:memory
 
-  vmc_master_spia_calendario_lunedi_2:                                          # [CONFIGURAZIONE, 76 RICHIAMI] [INTERFACCIA, 12 RICHIAMI] [AUTOMAZIONE, 71 RICHIAMI] SENSORE TRACCIAMENTO, QUANDO SI E' ALL'INTERNO DEL LUNEDì 2° FASCIA DEL CALENDARIO
+  vmc_master_spia_calendario_lunedi_2:                                          # [CONFIGURAZIONE, 76 RICHIAMI] [INTERFACCIA, 12 RICHIAMI] [AUTOMAZIONE, 74 RICHIAMI] SENSORE TRACCIAMENTO, QUANDO SI E' ALL'INTERNO DEL LUNEDì 2° FASCIA DEL CALENDARIO
     name: "Spia all'interno del Calendario Lunedì 2°"
     icon: mdi:memory
 
-  vmc_master_spia_calendario_martedi_1:                                         # [CONFIGURAZIONE, 76 RICHIAMI] [INTERFACCIA, 12 RICHIAMI] [AUTOMAZIONE, 71 RICHIAMI] SENSORE TRACCIAMENTO, QUANDO SI E' ALL'INTERNO DEL MARTEDì 1° FASCIA DEL CALENDARIO
+  vmc_master_spia_calendario_martedi_1:                                         # [CONFIGURAZIONE, 76 RICHIAMI] [INTERFACCIA, 12 RICHIAMI] [AUTOMAZIONE, 74 RICHIAMI] SENSORE TRACCIAMENTO, QUANDO SI E' ALL'INTERNO DEL MARTEDì 1° FASCIA DEL CALENDARIO
     name: "Spia all'interno del Calendario Martedì 1°"
     icon: mdi:memory
 
-  vmc_master_spia_calendario_martedi_2:                                         # [CONFIGURAZIONE, 76 RICHIAMI] [INTERFACCIA, 12 RICHIAMI] [AUTOMAZIONE, 71 RICHIAMI] SENSORE TRACCIAMENTO, QUANDO SI E' ALL'INTERNO DEL MARTEDì 2° FASCIA DEL CALENDARIO
+  vmc_master_spia_calendario_martedi_2:                                         # [CONFIGURAZIONE, 76 RICHIAMI] [INTERFACCIA, 12 RICHIAMI] [AUTOMAZIONE, 74 RICHIAMI] SENSORE TRACCIAMENTO, QUANDO SI E' ALL'INTERNO DEL MARTEDì 2° FASCIA DEL CALENDARIO
     name: "Spia all'interno del Calendario Martedì 2°"
     icon: mdi:memory
 
-  vmc_master_spia_calendario_mercoledi_1:                                       # [CONFIGURAZIONE, 76 RICHIAMI] [INTERFACCIA, 12 RICHIAMI] [AUTOMAZIONE, 71 RICHIAMI] SENSORE TRACCIAMENTO, QUANDO SI E' ALL'INTERNO DEL MERCOLEDì 1° FASCIA DEL CALENDARIO
+  vmc_master_spia_calendario_mercoledi_1:                                       # [CONFIGURAZIONE, 76 RICHIAMI] [INTERFACCIA, 12 RICHIAMI] [AUTOMAZIONE, 74 RICHIAMI] SENSORE TRACCIAMENTO, QUANDO SI E' ALL'INTERNO DEL MERCOLEDì 1° FASCIA DEL CALENDARIO
     name: "Spia all'interno del Calendario Mercoledì 1°"
     icon: mdi:memory
 
-  vmc_master_spia_calendario_mercoledi_2:                                       # [CONFIGURAZIONE, 76 RICHIAMI] [INTERFACCIA, 12 RICHIAMI] [AUTOMAZIONE, 71 RICHIAMI] SENSORE TRACCIAMENTO, QUANDO SI E' ALL'INTERNO DEL MERCOLEDì 2° FASCIA DEL CALENDARIO
+  vmc_master_spia_calendario_mercoledi_2:                                       # [CONFIGURAZIONE, 76 RICHIAMI] [INTERFACCIA, 12 RICHIAMI] [AUTOMAZIONE, 74 RICHIAMI] SENSORE TRACCIAMENTO, QUANDO SI E' ALL'INTERNO DEL MERCOLEDì 2° FASCIA DEL CALENDARIO
     name: "Spia all'interno del Calendario Mercoledì 2°"
     icon: mdi:memory
 
-  vmc_master_spia_calendario_giovedi_1:                                         # [CONFIGURAZIONE, 76 RICHIAMI] [INTERFACCIA, 12 RICHIAMI] [AUTOMAZIONE, 71 RICHIAMI] SENSORE TRACCIAMENTO, QUANDO SI E' ALL'INTERNO DEL GIOVEDì 1° FASCIA DEL CALENDARIO
+  vmc_master_spia_calendario_giovedi_1:                                         # [CONFIGURAZIONE, 76 RICHIAMI] [INTERFACCIA, 12 RICHIAMI] [AUTOMAZIONE, 74 RICHIAMI] SENSORE TRACCIAMENTO, QUANDO SI E' ALL'INTERNO DEL GIOVEDì 1° FASCIA DEL CALENDARIO
     name: "Spia all'interno del Calendario Giovedì 1°"
     icon: mdi:memory
 
-  vmc_master_spia_calendario_giovedi_2:                                         # [CONFIGURAZIONE, 76 RICHIAMI] [INTERFACCIA, 12 RICHIAMI] [AUTOMAZIONE, 71 RICHIAMI] SENSORE TRACCIAMENTO, QUANDO SI E' ALL'INTERNO DEL GIOVEDì 2° FASCIA DEL CALENDARIO
+  vmc_master_spia_calendario_giovedi_2:                                         # [CONFIGURAZIONE, 76 RICHIAMI] [INTERFACCIA, 12 RICHIAMI] [AUTOMAZIONE, 74 RICHIAMI] SENSORE TRACCIAMENTO, QUANDO SI E' ALL'INTERNO DEL GIOVEDì 2° FASCIA DEL CALENDARIO
     name: "Spia all'interno del Calendario Giovedì 2°"
     icon: mdi:memory
 
-  vmc_master_spia_calendario_venerdi_1:                                         # [CONFIGURAZIONE, 76 RICHIAMI] [INTERFACCIA, 12 RICHIAMI] [AUTOMAZIONE, 71 RICHIAMI] SENSORE TRACCIAMENTO, QUANDO SI E' ALL'INTERNO DEL VENERDì 1° FASCIA DEL CALENDARIO
+  vmc_master_spia_calendario_venerdi_1:                                         # [CONFIGURAZIONE, 76 RICHIAMI] [INTERFACCIA, 12 RICHIAMI] [AUTOMAZIONE, 74 RICHIAMI] SENSORE TRACCIAMENTO, QUANDO SI E' ALL'INTERNO DEL VENERDì 1° FASCIA DEL CALENDARIO
     name: "Spia all'interno del Calendario Venerdì 1°"
     icon: mdi:memory
 
-  vmc_master_spia_calendario_venerdi_2:                                         # [CONFIGURAZIONE, 76 RICHIAMI] [INTERFACCIA, 12 RICHIAMI] [AUTOMAZIONE, 71 RICHIAMI] SENSORE TRACCIAMENTO, QUANDO SI E' ALL'INTERNO DEL VENERDì 2° FASCIA DEL CALENDARIO
+  vmc_master_spia_calendario_venerdi_2:                                         # [CONFIGURAZIONE, 76 RICHIAMI] [INTERFACCIA, 12 RICHIAMI] [AUTOMAZIONE, 74 RICHIAMI] SENSORE TRACCIAMENTO, QUANDO SI E' ALL'INTERNO DEL VENERDì 2° FASCIA DEL CALENDARIO
     name: "Spia all'interno del Calendario Venerdì 2°"
     icon: mdi:memory
 
-  vmc_master_spia_calendario_sabato_1:                                          # [CONFIGURAZIONE, 76 RICHIAMI] [INTERFACCIA, 12 RICHIAMI] [AUTOMAZIONE, 71 RICHIAMI] SENSORE TRACCIAMENTO, QUANDO SI E' ALL'INTERNO DEL SABATO 1° FASCIA DEL CALENDARIO
+  vmc_master_spia_calendario_sabato_1:                                          # [CONFIGURAZIONE, 76 RICHIAMI] [INTERFACCIA, 12 RICHIAMI] [AUTOMAZIONE, 74 RICHIAMI] SENSORE TRACCIAMENTO, QUANDO SI E' ALL'INTERNO DEL SABATO 1° FASCIA DEL CALENDARIO
     name: "Spia all'interno del Calendario Sabato 1°"
     icon: mdi:memory
 
-  vmc_master_spia_calendario_sabato_2:                                          # [CONFIGURAZIONE, 76 RICHIAMI] [INTERFACCIA, 12 RICHIAMI] [AUTOMAZIONE, 71 RICHIAMI] SENSORE TRACCIAMENTO, QUANDO SI E' ALL'INTERNO DEL SABATO 2° FASCIA DEL CALENDARIO
+  vmc_master_spia_calendario_sabato_2:                                          # [CONFIGURAZIONE, 76 RICHIAMI] [INTERFACCIA, 12 RICHIAMI] [AUTOMAZIONE, 74 RICHIAMI] SENSORE TRACCIAMENTO, QUANDO SI E' ALL'INTERNO DEL SABATO 2° FASCIA DEL CALENDARIO
     name: "Spia all'interno del Calendario Sabato 2°"
     icon: mdi:memory
 
-  vmc_master_spia_calendario_domenica_1:                                        # [CONFIGURAZIONE, 76 RICHIAMI] [INTERFACCIA, 12 RICHIAMI] [AUTOMAZIONE, 71 RICHIAMI] SENSORE TRACCIAMENTO, QUANDO SI E' ALL'INTERNO DEL DOMENICA 1° FASCIA DEL CALENDARIO
+  vmc_master_spia_calendario_domenica_1:                                        # [CONFIGURAZIONE, 76 RICHIAMI] [INTERFACCIA, 12 RICHIAMI] [AUTOMAZIONE, 74 RICHIAMI] SENSORE TRACCIAMENTO, QUANDO SI E' ALL'INTERNO DEL DOMENICA 1° FASCIA DEL CALENDARIO
     name: "Spia all'interno del Calendario Domenica 1°"
     icon: mdi:memory
 
-  vmc_master_spia_calendario_domenica_2:                                        # [CONFIGURAZIONE, 76 RICHIAMI] [INTERFACCIA, 12 RICHIAMI] [AUTOMAZIONE, 71 RICHIAMI] SENSORE TRACCIAMENTO, QUANDO SI E' ALL'INTERNO DEL DOMENICA 2° FASCIA DEL CALENDARIO
+  vmc_master_spia_calendario_domenica_2:                                        # [CONFIGURAZIONE, 76 RICHIAMI] [INTERFACCIA, 12 RICHIAMI] [AUTOMAZIONE, 74 RICHIAMI] SENSORE TRACCIAMENTO, QUANDO SI E' ALL'INTERNO DEL DOMENICA 2° FASCIA DEL CALENDARIO
     name: "Spia all'interno del Calendario Domenica 2°"
     icon: mdi:memory
 
-  vmc_master_spia_velocita_0_un_solo_avvio:                                     # [CONFIGURAZIONE, 45 RICHIAMI] [INTERFACCIA, 12 RICHIAMI] [AUTOMAZIONE, 219 RICHIAMI] SENSORE DI SUPPORTO NELL'AUTOMAZIONE PER IL RIPRISTINO DELLA VELOCITA' 0, IN CASO SUPERAMENTO del Lim. Δ P. di Rugiada
+  vmc_master_spia_velocita_0_un_solo_avvio:                                     # [CONFIGURAZIONE, 45 RICHIAMI] [INTERFACCIA, 12 RICHIAMI] [AUTOMAZIONE, 221 RICHIAMI] SENSORE DI SUPPORTO NELL'AUTOMAZIONE PER IL RIPRISTINO DELLA VELOCITA' 0, IN CASO SUPERAMENTO del Lim. Δ P. di Rugiada
     name: "Spia Velocità 0 1° Avvio"
     icon: mdi:memory
 
-  vmc_master_spia_velocita_1_un_solo_avvio:                                     # [CONFIGURAZIONE, 53 RICHIAMI] [INTERFACCIA, 28 RICHIAMI] [AUTOMAZIONE, 226 RICHIAMI] SENSORE DI SUPPORTO NELL'AUTOMAZIONE PER IL RIPRISTINO DELLA VELOCITA' 1, IN CASO SUPERAMENTO del Lim. Δ P. di Rugiada
+  vmc_master_spia_velocita_1_un_solo_avvio:                                     # [CONFIGURAZIONE, 53 RICHIAMI] [INTERFACCIA, 28 RICHIAMI] [AUTOMAZIONE, 227 RICHIAMI] SENSORE DI SUPPORTO NELL'AUTOMAZIONE PER IL RIPRISTINO DELLA VELOCITA' 1, IN CASO SUPERAMENTO del Lim. Δ P. di Rugiada
     name: "Spia Velocità 1 1° Avvio"
     icon: mdi:memory
 
-  vmc_master_spia_velocita_2_un_solo_avvio:                                     # [CONFIGURAZIONE, 53 RICHIAMI] [INTERFACCIA, 28 RICHIAMI] [AUTOMAZIONE, 222 RICHIAMI] SENSORE DI SUPPORTO NELL'AUTOMAZIONE PER IL RIPRISTINO DELLA VELOCITA' 2, IN CASO SUPERAMENTO del Lim. Δ P. di Rugiada
+  vmc_master_spia_velocita_2_un_solo_avvio:                                     # [CONFIGURAZIONE, 53 RICHIAMI] [INTERFACCIA, 28 RICHIAMI] [AUTOMAZIONE, 223 RICHIAMI] SENSORE DI SUPPORTO NELL'AUTOMAZIONE PER IL RIPRISTINO DELLA VELOCITA' 2, IN CASO SUPERAMENTO del Lim. Δ P. di Rugiada
     name: "Spia Velocità 2 1° Avvio"
     icon: mdi:memory
 
-  vmc_master_spia_velocita_3_un_solo_avvio:                                     # [CONFIGURAZIONE, 53 RICHIAMI] [INTERFACCIA, 28 RICHIAMI] [AUTOMAZIONE, 222 RICHIAMI] SENSORE DI SUPPORTO NELL'AUTOMAZIONE PER IL RIPRISTINO DELLA VELOCITA' 3, IN CASO SUPERAMENTO del Lim. Δ P. di Rugiada
+  vmc_master_spia_velocita_3_un_solo_avvio:                                     # [CONFIGURAZIONE, 53 RICHIAMI] [INTERFACCIA, 28 RICHIAMI] [AUTOMAZIONE, 223 RICHIAMI] SENSORE DI SUPPORTO NELL'AUTOMAZIONE PER IL RIPRISTINO DELLA VELOCITA' 3, IN CASO SUPERAMENTO del Lim. Δ P. di Rugiada
     name: "Spia Velocità 3 1° Avvio"
     icon: mdi:memory
 
-  vmc_master_spia_velocita_4_un_solo_avvio:                                     # [CONFIGURAZIONE, 53 RICHIAMI] [INTERFACCIA, 28 RICHIAMI] [AUTOMAZIONE, 222 RICHIAMI] SENSORE DI SUPPORTO NELL'AUTOMAZIONE PER IL RIPRISTINO DELLA VELOCITA' 4, IN CASO SUPERAMENTO del Lim. Δ P. di Rugiada
+  vmc_master_spia_velocita_4_un_solo_avvio:                                     # [CONFIGURAZIONE, 53 RICHIAMI] [INTERFACCIA, 28 RICHIAMI] [AUTOMAZIONE, 223 RICHIAMI] SENSORE DI SUPPORTO NELL'AUTOMAZIONE PER IL RIPRISTINO DELLA VELOCITA' 4, IN CASO SUPERAMENTO del Lim. Δ P. di Rugiada
     name: "Spia Velocità 4 1° Avvio"
     icon: mdi:memory
 
-  vmc_master_spia_velocita_iperventilazione_un_solo_avvio:                      # [CONFIGURAZIONE, 53 RICHIAMI] [INTERFACCIA, 28 RICHIAMI] [AUTOMAZIONE, 222 RICHIAMI] SENSORE DI SUPPORTO NELL'AUTOMAZIONE PER IL RIPRISTINO DELLA VELOCITA' IPERVENTILAZIONE, IN CASO SUPERAMENTO del Lim. Δ P. di Rugiada
+  vmc_master_spia_velocita_iperventilazione_un_solo_avvio:                      # [CONFIGURAZIONE, 53 RICHIAMI] [INTERFACCIA, 28 RICHIAMI] [AUTOMAZIONE, 223 RICHIAMI] SENSORE DI SUPPORTO NELL'AUTOMAZIONE PER IL RIPRISTINO DELLA VELOCITA' IPERVENTILAZIONE, IN CASO SUPERAMENTO del Lim. Δ P. di Rugiada
     name: "Spia Velocità Iperventilazione 1° Avvio"
     icon: mdi:memory
 
-  vmc_master_spia_velocita_notturna_un_solo_avvio:                              # [CONFIGURAZIONE, 53 RICHIAMI] [INTERFACCIA, 28 RICHIAMI] [AUTOMAZIONE, 222 RICHIAMI] SENSORE DI SUPPORTO NELL'AUTOMAZIONE PER IL RIPRISTINO DELLA VELOCITA' NOTTURNA, IN CASO SUPERAMENTO del Lim. Δ P. di Rugiada
+  vmc_master_spia_velocita_notturna_un_solo_avvio:                              # [CONFIGURAZIONE, 53 RICHIAMI] [INTERFACCIA, 28 RICHIAMI] [AUTOMAZIONE, 223 RICHIAMI] SENSORE DI SUPPORTO NELL'AUTOMAZIONE PER IL RIPRISTINO DELLA VELOCITA' NOTTURNA, IN CASO SUPERAMENTO del Lim. Δ P. di Rugiada
     name: "Spia Velocità notturna 1° Avvio"
     icon: mdi:memory
 
-  vmc_master_spia_velocita_freecooling_un_solo_avvio:                           # [CONFIGURAZIONE, 91 RICHIAMI] [INTERFACCIA, 28 RICHIAMI] [AUTOMAZIONE, 233 RICHIAMI] SENSORE DI SUPPORTO NELL'AUTOMAZIONE PER IL RIPRISTINO DELLA VELOCITA' FREE-COOLING, IN CASO SUPERAMENTO del Lim. Δ P. di Rugiada
+  vmc_master_spia_velocita_freecooling_un_solo_avvio:                           # [CONFIGURAZIONE, 91 RICHIAMI] [INTERFACCIA, 28 RICHIAMI] [AUTOMAZIONE, 234 RICHIAMI] SENSORE DI SUPPORTO NELL'AUTOMAZIONE PER IL RIPRISTINO DELLA VELOCITA' FREE-COOLING, IN CASO SUPERAMENTO del Lim. Δ P. di Rugiada
     name: "Spia Velocità freecooling 1° Avvio"
     icon: mdi:memory
 
-  vmc_master_spia_velocita_freecooling_un_solo_avvio_per_programmazione_freecooling: # [CONFIGURAZIONE, 70 RICHIAMI] [INTERFACCIA, 17 RICHIAMI] [AUTOMAZIONE, 194 RICHIAMI] SENSORE DI SUPPORTO NELL'AUTOMAZIONE PER IL RIPRISTINO DELLA VELOCITA' FREE-COOLING, IN CASO DI ALLERTA PROGRAMMATA DEL FREE COOLING
+  vmc_master_spia_velocita_freecooling_un_solo_avvio_per_programmazione_freecooling: # [CONFIGURAZIONE, 70 RICHIAMI] [INTERFACCIA, 17 RICHIAMI] [AUTOMAZIONE, 196 RICHIAMI] SENSORE DI SUPPORTO NELL'AUTOMAZIONE PER IL RIPRISTINO DELLA VELOCITA' FREE-COOLING, IN CASO DI ALLERTA PROGRAMMATA DEL FREE COOLING
     name: "Spia su Programmazione Velocità Free Cooling 1° Avvio"
     icon: mdi:memory
 
-  vmc_master_spia_velocita_freecooling_un_solo_avvio_per_programmazione_freeheating: # [CONFIGURAZIONE, 94 RICHIAMI] [INTERFACCIA, 17 RICHIAMI] [AUTOMAZIONE, 193 RICHIAMI] SENSORE DI SUPPORTO NELL'AUTOMAZIONE PER IL RIPRISTINO DELLA VELOCITA' FREE-COOLING, IN CASO DI ALLERTA PROGRAMMATA DEL FREE HEATING
+  vmc_master_spia_velocita_freecooling_un_solo_avvio_per_programmazione_freeheating: # [CONFIGURAZIONE, 94 RICHIAMI] [INTERFACCIA, 17 RICHIAMI] [AUTOMAZIONE, 195 RICHIAMI] SENSORE DI SUPPORTO NELL'AUTOMAZIONE PER IL RIPRISTINO DELLA VELOCITA' FREE-COOLING, IN CASO DI ALLERTA PROGRAMMATA DEL FREE HEATING
     name: "Spia su Programmazione Velocità Free Heating 1° Avvio"
     icon: mdi:memory
 
-  vmc_master_spia_umidita_velocita_0:                                           # [CONFIGURAZIONE, 5 RICHIAMI] [INTERFACCIA, 13 RICHIAMI] [AUTOMAZIONE, 54 RICHIAMI] SENSORE DI SUPPORTO NELL'AUTOMAZIONE PER IL RIPRISTINO DELLA VELOCITA' 0, IN CASO DI ALLERTA UMIDITA'
+  vmc_master_spia_umidita_velocita_0:                                           # [CONFIGURAZIONE, 5 RICHIAMI] [INTERFACCIA, 13 RICHIAMI] [AUTOMAZIONE, 57 RICHIAMI] SENSORE DI SUPPORTO NELL'AUTOMAZIONE PER IL RIPRISTINO DELLA VELOCITA' 0, IN CASO DI ALLERTA UMIDITA'
     name: "Spia Umidità Velocità 0"
     icon: mdi:memory
 
-  vmc_master_spia_umidita_velocita_1:                                           # [CONFIGURAZIONE, 5 RICHIAMI] [INTERFACCIA, 9 RICHIAMI] [AUTOMAZIONE, 45 RICHIAMI] SENSORE DI SUPPORTO NELL'AUTOMAZIONE PER IL RIPRISTINO DELLA VELOCITA' 1, IN CASO DI ALLERTA UMIDITA'
+  vmc_master_spia_umidita_velocita_1:                                           # [CONFIGURAZIONE, 5 RICHIAMI] [INTERFACCIA, 9 RICHIAMI] [AUTOMAZIONE, 46 RICHIAMI] SENSORE DI SUPPORTO NELL'AUTOMAZIONE PER IL RIPRISTINO DELLA VELOCITA' 1, IN CASO DI ALLERTA UMIDITA'
     name: "Spia Umidità Velocità 1"
     icon: mdi:memory
 
-  vmc_master_spia_umidita_velocita_2:                                           # [CONFIGURAZIONE, 5 RICHIAMI] [INTERFACCIA, 9 RICHIAMI] [AUTOMAZIONE, 45 RICHIAMI] SENSORE DI SUPPORTO NELL'AUTOMAZIONE PER IL RIPRISTINO DELLA VELOCITA' 2, IN CASO DI ALLERTA UMIDITA'
+  vmc_master_spia_umidita_velocita_2:                                           # [CONFIGURAZIONE, 5 RICHIAMI] [INTERFACCIA, 9 RICHIAMI] [AUTOMAZIONE, 46 RICHIAMI] SENSORE DI SUPPORTO NELL'AUTOMAZIONE PER IL RIPRISTINO DELLA VELOCITA' 2, IN CASO DI ALLERTA UMIDITA'
     name: "Spia Umidità Velocità 2"
     icon: mdi:memory
 
-  vmc_master_spia_umidita_velocita_3:                                           # [CONFIGURAZIONE, 5 RICHIAMI] [INTERFACCIA, 9 RICHIAMI] [AUTOMAZIONE, 45 RICHIAMI] SENSORE DI SUPPORTO NELL'AUTOMAZIONE PER IL RIPRISTINO DELLA VELOCITA' 3, IN CASO DI ALLERTA UMIDITA'
+  vmc_master_spia_umidita_velocita_3:                                           # [CONFIGURAZIONE, 5 RICHIAMI] [INTERFACCIA, 9 RICHIAMI] [AUTOMAZIONE, 46 RICHIAMI] SENSORE DI SUPPORTO NELL'AUTOMAZIONE PER IL RIPRISTINO DELLA VELOCITA' 3, IN CASO DI ALLERTA UMIDITA'
     name: "Spia Umidità Velocità 3"
     icon: mdi:memory
 
-  vmc_master_spia_umidita_velocita_4:                                           # [CONFIGURAZIONE, 5 RICHIAMI] [INTERFACCIA, 9 RICHIAMI] [AUTOMAZIONE, 45 RICHIAMI] SENSORE DI SUPPORTO NELL'AUTOMAZIONE PER IL RIPRISTINO DELLA VELOCITA' 4, IN CASO DI ALLERTA UMIDITA'
+  vmc_master_spia_umidita_velocita_4:                                           # [CONFIGURAZIONE, 5 RICHIAMI] [INTERFACCIA, 9 RICHIAMI] [AUTOMAZIONE, 46 RICHIAMI] SENSORE DI SUPPORTO NELL'AUTOMAZIONE PER IL RIPRISTINO DELLA VELOCITA' 4, IN CASO DI ALLERTA UMIDITA'
     name: "Spia Umidità Velocità 4"
     icon: mdi:memory
 
-  vmc_master_spia_umidita_velocita_iperventilazione:                            # [CONFIGURAZIONE, 5 RICHIAMI] [INTERFACCIA, 9 RICHIAMI] [AUTOMAZIONE, 45 RICHIAMI] SENSORE DI SUPPORTO NELL'AUTOMAZIONE PER IL RIPRISTINO DELLA VELOCITA' IPERVENTILAZIONE, IN CASO DI ALLERTA UMIDITA'
+  vmc_master_spia_umidita_velocita_iperventilazione:                            # [CONFIGURAZIONE, 5 RICHIAMI] [INTERFACCIA, 9 RICHIAMI] [AUTOMAZIONE, 46 RICHIAMI] SENSORE DI SUPPORTO NELL'AUTOMAZIONE PER IL RIPRISTINO DELLA VELOCITA' IPERVENTILAZIONE, IN CASO DI ALLERTA UMIDITA'
     name: "Spia Umidità Velocità Iperventilazione"
     icon: mdi:memory
 
-  vmc_master_spia_umidita_velocita_notturna:                                    # [CONFIGURAZIONE, 5 RICHIAMI] [INTERFACCIA, 9 RICHIAMI] [AUTOMAZIONE, 45 RICHIAMI] SENSORE DI SUPPORTO NELL'AUTOMAZIONE PER IL RIPRISTINO DELLA VELOCITA' NOTTURNA, IN CASO DI ALLERTA UMIDITA'
+  vmc_master_spia_umidita_velocita_notturna:                                    # [CONFIGURAZIONE, 5 RICHIAMI] [INTERFACCIA, 9 RICHIAMI] [AUTOMAZIONE, 46 RICHIAMI] SENSORE DI SUPPORTO NELL'AUTOMAZIONE PER IL RIPRISTINO DELLA VELOCITA' NOTTURNA, IN CASO DI ALLERTA UMIDITA'
     name: "Spia Umidità Velocità Notturna"
     icon: mdi:memory
 
-  vmc_master_spia_umidita_velocita_freecooling:                                 # [CONFIGURAZIONE, 5 RICHIAMI] [INTERFACCIA, 9 RICHIAMI] [AUTOMAZIONE, 45 RICHIAMI] SENSORE DI SUPPORTO NELL'AUTOMAZIONE PER IL RIPRISTINO DELLA VELOCITA' FREE COOL./HEAT, IN CASO DI ALLERTA UMIDITA'
+  vmc_master_spia_umidita_velocita_freecooling:                                 # [CONFIGURAZIONE, 5 RICHIAMI] [INTERFACCIA, 9 RICHIAMI] [AUTOMAZIONE, 46 RICHIAMI] SENSORE DI SUPPORTO NELL'AUTOMAZIONE PER IL RIPRISTINO DELLA VELOCITA' FREE COOL./HEAT, IN CASO DI ALLERTA UMIDITA'
     name: "Spia Umidità Velocità Free Cool./Heat."
     icon: mdi:memory
 ################### Fine Creazione Switch Booleani impiegati nell'Automazione, per valutare la Velocità in caso di Black-Out e/o SUPERAMENTO DEL Set Lim. Δ Punto di Rugiada ##############################################
 ################### Inizio Creazione Switch Booleani impiegati nell'Automazione, per valutare gli inquinanti CO2 e VOC ##############################################
 
-  vmc_master_spia_co2_o_voc:                                                    # [CONFIGURAZIONE, 142 RICHIAMI] [INTERFACCIA, 15 RICHIAMI] [AUTOMAZIONE, 279 RICHIAMI] SENSORE DI SUPPORTO NELL'AUTOMAZIONE PER LA VERIFICA DI INQUINANTI CO2 E VOC
+  vmc_master_spia_co2_o_voc:                                                    # [CONFIGURAZIONE, 142 RICHIAMI] [INTERFACCIA, 15 RICHIAMI] [AUTOMAZIONE, 281 RICHIAMI] SENSORE DI SUPPORTO NELL'AUTOMAZIONE PER LA VERIFICA DI INQUINANTI CO2 E VOC
     name: "Spia Inquinanti CO₂ e/o VOC"
     icon: mdi:memory
 
-  vmc_master_spia_co2_o_voc_partenza_ritorno_velocita_0:                        # [CONFIGURAZIONE, 60 RICHIAMI] [INTERFACCIA, 12 RICHIAMI] [AUTOMAZIONE, 209 RICHIAMI] SENSORE DI SUPPORTO NELL'AUTOMAZIONE PER LA VERIFICA DI INQUINANTI CO2 E VOC PARTENZA DA VELOCITA' 0 E RITORNO A VELOCITA' 0
+  vmc_master_spia_co2_o_voc_partenza_ritorno_velocita_0:                        # [CONFIGURAZIONE, 60 RICHIAMI] [INTERFACCIA, 12 RICHIAMI] [AUTOMAZIONE, 210 RICHIAMI] SENSORE DI SUPPORTO NELL'AUTOMAZIONE PER LA VERIFICA DI INQUINANTI CO2 E VOC PARTENZA DA VELOCITA' 0 E RITORNO A VELOCITA' 0
     name: "Spia di Richiamo Vel. 0 CO₂ e/o VOC "
     icon: mdi:memory
 
-  vmc_master_spia_velocita_0_co2_o_voc:                                         # [CONFIGURAZIONE, 41 RICHIAMI] [INTERFACCIA, 12 RICHIAMI] [AUTOMAZIONE, 190 RICHIAMI] SENSORE TRACCIAMENTO VELOCITA' 0, IN CASO DI INQUINANTI CO2 E VOC
+  vmc_master_spia_velocita_0_co2_o_voc:                                         # [CONFIGURAZIONE, 41 RICHIAMI] [INTERFACCIA, 12 RICHIAMI] [AUTOMAZIONE, 191 RICHIAMI] SENSORE TRACCIAMENTO VELOCITA' 0, IN CASO DI INQUINANTI CO2 E VOC
     name: "Spia Velocità 0 CO₂ e/o VOC"
     icon: mdi:memory
 
-  vmc_master_spia_velocita_1_co2_o_voc:                                         # [CONFIGURAZIONE, 83 RICHIAMI] [INTERFACCIA, 12 RICHIAMI] [AUTOMAZIONE, 229 RICHIAMI] SENSORE TRACCIAMENTO VELOCITA' 1, IN CASO DI INQUINANTI CO2 E VOCT
+  vmc_master_spia_velocita_1_co2_o_voc:                                         # [CONFIGURAZIONE, 83 RICHIAMI] [INTERFACCIA, 12 RICHIAMI] [AUTOMAZIONE, 230 RICHIAMI] SENSORE TRACCIAMENTO VELOCITA' 1, IN CASO DI INQUINANTI CO2 E VOCT
     name: "Spia Velocità 1 CO₂ e/o VOC"
     icon: mdi:memory
 
-  vmc_master_spia_velocita_2_co2_o_voc:                                         # [CONFIGURAZIONE, 49 RICHIAMI] [INTERFACCIA, 12 RICHIAMI] [AUTOMAZIONE, 205 RICHIAMI] SENSORE TRACCIAMENTO VELOCITA' 2, IN CASO DI INQUINANTI CO2 E VOC
+  vmc_master_spia_velocita_2_co2_o_voc:                                         # [CONFIGURAZIONE, 49 RICHIAMI] [INTERFACCIA, 12 RICHIAMI] [AUTOMAZIONE, 206 RICHIAMI] SENSORE TRACCIAMENTO VELOCITA' 2, IN CASO DI INQUINANTI CO2 E VOC
     name: "Spia Velocità 2 CO₂ e/o VOC"
     icon: mdi:memory
 
-  vmc_master_spia_velocita_3_co2_o_voc:                                         # [CONFIGURAZIONE, 49 RICHIAMI] [INTERFACCIA, 12 RICHIAMI] [AUTOMAZIONE, 205 RICHIAMI] SENSORE TRACCIAMENTO VELOCITA' 3, IN CASO DI INQUINANTI CO2 E VOC
+  vmc_master_spia_velocita_3_co2_o_voc:                                         # [CONFIGURAZIONE, 49 RICHIAMI] [INTERFACCIA, 12 RICHIAMI] [AUTOMAZIONE, 206 RICHIAMI] SENSORE TRACCIAMENTO VELOCITA' 3, IN CASO DI INQUINANTI CO2 E VOC
     name: "Spia Velocità 3 CO₂ e/o VOC"
     icon: mdi:memory
     
-  vmc_master_spia_velocita_4_co2_o_voc:                                         # [CONFIGURAZIONE, 49 RICHIAMI] [INTERFACCIA, 12 RICHIAMI] [AUTOMAZIONE, 205 RICHIAMI] SENSORE TRACCIAMENTO VELOCITA' 4, IN CASO DI INQUINANTI CO2 E VOC
+  vmc_master_spia_velocita_4_co2_o_voc:                                         # [CONFIGURAZIONE, 49 RICHIAMI] [INTERFACCIA, 12 RICHIAMI] [AUTOMAZIONE, 206 RICHIAMI] SENSORE TRACCIAMENTO VELOCITA' 4, IN CASO DI INQUINANTI CO2 E VOC
     name: "Spia Velocità 4 CO₂ e/o VOC"
     icon: mdi:memory
 
-  vmc_master_spia_velocita_iperventilazione_co2_o_voc:                          # [CONFIGURAZIONE, 49 RICHIAMI] [INTERFACCIA, 12 RICHIAMI] [AUTOMAZIONE, 205 RICHIAMI] SENSORE TRACCIAMENTO VELOCITA' IPERVENTILAZIONE, IN CASO DI INQUINANTI CO2 E VOC
+  vmc_master_spia_velocita_iperventilazione_co2_o_voc:                          # [CONFIGURAZIONE, 49 RICHIAMI] [INTERFACCIA, 12 RICHIAMI] [AUTOMAZIONE, 206 RICHIAMI] SENSORE TRACCIAMENTO VELOCITA' IPERVENTILAZIONE, IN CASO DI INQUINANTI CO2 E VOC
     name: "Spia Velocità Iperventilazione CO₂ e/o VOC"
     icon: mdi:memory
 
-  vmc_master_spia_velocita_notturna_co2_o_voc:                                  # [CONFIGURAZIONE, 49 RICHIAMI] [INTERFACCIA, 12 RICHIAMI] [AUTOMAZIONE, 205 RICHIAMI] SENSORE TRACCIAMENTO VELOCITA' NOTTURNA, IN CASO DI INQUINANTI CO2 E VOC
+  vmc_master_spia_velocita_notturna_co2_o_voc:                                  # [CONFIGURAZIONE, 49 RICHIAMI] [INTERFACCIA, 12 RICHIAMI] [AUTOMAZIONE, 206 RICHIAMI] SENSORE TRACCIAMENTO VELOCITA' NOTTURNA, IN CASO DI INQUINANTI CO2 E VOC
     name: "Spia Velocità Notturna CO₂ e/o VOC"
     icon: mdi:memory
 
-  vmc_master_spia_velocita_freecooling_co2_o_voc:                               # [CONFIGURAZIONE, 65 RICHIAMI] [INTERFACCIA, 12 RICHIAMI] [AUTOMAZIONE, 212 RICHIAMI] SENSORE TRACCIAMENTO VELOCITA' FREE-COOLING, IN CASO DI INQUINANTI CO2 E VOC
+  vmc_master_spia_velocita_freecooling_co2_o_voc:                               # [CONFIGURAZIONE, 65 RICHIAMI] [INTERFACCIA, 12 RICHIAMI] [AUTOMAZIONE, 213 RICHIAMI] SENSORE TRACCIAMENTO VELOCITA' FREE-COOLING, IN CASO DI INQUINANTI CO2 E VOC
     name: "Spia Velocità Free Cool./Heat. CO₂ e/o VOC"
     icon: mdi:memory        
 
-  vmc_master_spia_velocita_1_co2_o_voc_pdr:                                     # [CONFIGURAZIONE, 92 RICHIAMI] [INTERFACCIA, 11 RICHIAMI] [AUTOMAZIONE, 250 RICHIAMI] SENSORE TRACCIAMENTO VELOCITA' 1, IN CASO DI AVVIO PUNTO DI RUGIADA A VELOCITA 1 E INQUINANTI CO2 E VOC ASSENTI MA PRECEDENTEMENTE PRESENTI A VELOCITA 0
+  vmc_master_spia_velocita_1_co2_o_voc_pdr:                                     # [CONFIGURAZIONE, 92 RICHIAMI] [INTERFACCIA, 11 RICHIAMI] [AUTOMAZIONE, 251 RICHIAMI] SENSORE TRACCIAMENTO VELOCITA' 1, IN CASO DI AVVIO PUNTO DI RUGIADA A VELOCITA 1 E INQUINANTI CO2 E VOC ASSENTI MA PRECEDENTEMENTE PRESENTI A VELOCITA 0
     name: "Spia Velocità 1 CO₂ e/o VOC Vs PdR"
     icon: mdi:memory
 
@@ -5111,7 +5111,7 @@ input_boolean:
 
 ################### Inizio Creazione Switch Booleani impiegati nell'Automazione, per valutare CONGELAMENTO ############################
 
-  vmc_master_congelamento_verifica_soglia_valore_spia:                          # [CONFIGURAZIONE, 195 RICHIAMI] [INTERFACCIA, 13 RICHIAMI] [AUTOMAZIONE, 227 RICHIAMI] SENSORE TRACCIAMENTO CONGELAMENTO
+  vmc_master_congelamento_verifica_soglia_valore_spia:                          # [CONFIGURAZIONE, 195 RICHIAMI] [INTERFACCIA, 13 RICHIAMI] [AUTOMAZIONE, 229 RICHIAMI] SENSORE TRACCIAMENTO CONGELAMENTO
     name: "Spia VMC Congelamento ≤ -18 [°C] Temp. Esterna ?"
     icon: mdi:memory
 
@@ -5151,7 +5151,7 @@ input_boolean:
 
 ################### Inizio Creazione Switch Booleani impiegati nell'Automazione, per valutare UMIDITA' ############################
 
-  vmc_master_umidita_verifica_soglia_valore_spia:                               # [CONFIGURAZIONE, 24 RICHIAMI] [INTERFACCIA, 14 RICHIAMI] [AUTOMAZIONE, 31 RICHIAMI] SENSORE TRACCIAMENTO umidità
+  vmc_master_umidita_verifica_soglia_valore_spia:                               # [CONFIGURAZIONE, 24 RICHIAMI] [INTERFACCIA, 14 RICHIAMI] [AUTOMAZIONE, 34 RICHIAMI] SENSORE TRACCIAMENTO umidità
     name: "Spia VMC Umidità"
     icon: mdi:memory
 
@@ -5159,7 +5159,7 @@ input_boolean:
 
 ################### Inizio Creazione Switch Booleani impiegati nell'Automazione, per valutare DIFFERENZA DI TEMPERATURA ############################
 
-  vmc_master_delta_temp_verifica_soglia_valore_spia:                            # [CONFIGURAZIONE, 213 RICHIAMI] [INTERFACCIA, 12 RICHIAMI] [AUTOMAZIONE, 235 RICHIAMI] SENSORE TRACCIAMENTO DIFFERENZA DI TEMPERATURA > 23 °C
+  vmc_master_delta_temp_verifica_soglia_valore_spia:                            # [CONFIGURAZIONE, 213 RICHIAMI] [INTERFACCIA, 12 RICHIAMI] [AUTOMAZIONE, 237 RICHIAMI] SENSORE TRACCIAMENTO DIFFERENZA DI TEMPERATURA > 23 °C
     name: "Spia VMC Sensori Int. Δ Temp. > 23 [°C] ?"
     icon: mdi:memory
 
@@ -7958,7 +7958,7 @@ script:
     icon: mdi:fingerprint-off
 #------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 #------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-  vmc_master_calendario_fascia_1_on:                                            # [CONFIGURAZIONE, 2 RICHIAMI] [INTERFACCIA, 1 RICHIAMO] [AUTOMAZIONE, 7 RICHIAMI]
+  vmc_master_calendario_fascia_1_on:                                            # [CONFIGURAZIONE, 2 RICHIAMI] [INTERFACCIA, 1 RICHIAMO] [AUTOMAZIONE, 8 RICHIAMI]
     alias: VMC Master - Calendario Fascia 1 On
     sequence:
       - delay:
@@ -12390,7 +12390,7 @@ script:
       senza allerta va in Free Cooling; nei mesi non programmati va in Free Cooling.
 #------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 #------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-  vmc_master_calendario_fascia_2_on:                                            # [CONFIGURAZIONE, 2 RICHIAMI] [INTERFACCIA, 1 RICHIAMO] [AUTOMAZIONE, 7 RICHIAMI]
+  vmc_master_calendario_fascia_2_on:                                            # [CONFIGURAZIONE, 2 RICHIAMI] [INTERFACCIA, 1 RICHIAMO] [AUTOMAZIONE, 8 RICHIAMI]
     alias: VMC Master - Calendario Fascia 2 On
     sequence:
       - delay:
@@ -26015,7 +26015,7 @@ shell_command:
   vmc_master_velocita_4:                   printf 'VMWH0000004\n' | timeout 5 nc -w 3 999.999.999.999 5001 # [CONFIGURAZIONE, 27 RICHIAMI] [INTERFACCIA, 2 RICHIAMI] [AUTOMAZIONE, 14 RICHIAMI] INVIO COMANDO VELOCITA' 4 ALLA VMC
   vmc_master_velocita_3:                   printf 'VMWH0000003\n' | timeout 5 nc -w 3 999.999.999.999 5001 # [CONFIGURAZIONE, 27 RICHIAMI] [INTERFACCIA, 2 RICHIAMI] [AUTOMAZIONE, 14 RICHIAMI] INVIO COMANDO VELOCITA' 3 ALLA VMC
   vmc_master_velocita_2:                   printf 'VMWH0000002\n' | timeout 5 nc -w 3 999.999.999.999 5001 # [CONFIGURAZIONE, 27 RICHIAMI] [INTERFACCIA, 2 RICHIAMI] [AUTOMAZIONE, 14 RICHIAMI] INVIO COMANDO VELOCITA' 2 ALLA VMC
-  vmc_master_velocita_1:                   printf 'VMWH0000001\n' | timeout 5 nc -w 3 999.999.999.999 5001 # [CONFIGURAZIONE, 47 RICHIAMI] [INTERFACCIA, 2 RICHIAMI] [AUTOMAZIONE, 65 RICHIAMI] INVIO COMANDO VELOCITA' 1 ALLA VMC
+  vmc_master_velocita_1:                   printf 'VMWH0000001\n' | timeout 5 nc -w 3 999.999.999.999 5001 # [CONFIGURAZIONE, 47 RICHIAMI] [INTERFACCIA, 2 RICHIAMI] [AUTOMAZIONE, 66 RICHIAMI] INVIO COMANDO VELOCITA' 1 ALLA VMC
   vmc_master_velocita_0:                   printf 'VMWH0000000\n' | timeout 5 nc -w 3 999.999.999.999 5001 # [CONFIGURAZIONE, 110 RICHIAMI] [INTERFACCIA, 1 RICHIAMO] [AUTOMAZIONE, 53 RICHIAMI] INVIO COMANDO VELOCITA' 0 ALLA VMC
   vmc_master_sensori_on:                   printf 'VMWH0300000\n' | timeout 5 nc -w 3 999.999.999.999 5001 # [CONFIGURAZIONE, 1 RICHIAMO] [INTERFACCIA, 1 RICHIAMO] [AUTOMAZIONE, 0 RICHIAMI] INVIO COMANDO SENSORI ON ALLA VMC PER ACCENDERE I SENSORI DELLA VMC; I valori rilevati dai sensori nella schermata INFO dell'App Mobile saranno disponibili e i relativi allarmi verrano segnalati
   vmc_master_sensori_off:                  printf 'VMWH0300002\n' | timeout 5 nc -w 3 999.999.999.999 5001 # [CONFIGURAZIONE, 2 RICHIAMI] [INTERFACCIA, 1 RICHIAMO] [AUTOMAZIONE, 0 RICHIAMI] INVIO COMANDO SENSORI OFF ALLA VMC PER DISATTIVARE I SENSORI DELLA VMC; I valori rilevati dai sensori nella schermata INFO dell'App Mobile NON saranno disponibili e i relativi allarmi NON verrano segnalati
