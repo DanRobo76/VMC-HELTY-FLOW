@@ -207,6 +207,7 @@ command_line:
 # >>> FINE SEZIONE INSTALLA VMC (SOLO MASTER, RIMOSSA DA VMC_SCRIPT_CLONA.SH) <<<
   - sensor:
       name: vmc_master_status_ip                                                # [CONFIGURAZIONE, 6 RICHIAMI] [INTERFACCIA, 2 RICHIAMI] [AUTOMAZIONE, 0 RICHIAMI] SENSORE DI RAGGIUNGIBILITA' DELLA VMC: UN SOLO PING OGNI 10 S (3 TENTATIVI A 1 S, DURATA MASSIMA 4 S); USA IL PROTOCOLLO ICMP E NON LA PORTA 5001, QUINDI NON ENTRA IN CONFLITTO CON LE LETTURE TCP DEI SENSORI
+      unique_id: vmc_master_status_ip
       # Un solo ping: 3 tentativi a 1 s di distanza, durata massima 4 s (prima: lock + 3 tentativi fino a 12 s, causa dei timeout)
       command: >-
         ping -c 3 -W 1 -w 4 999.999.999.999 2>/dev/null | grep -q 'bytes from'
@@ -257,6 +258,7 @@ sensor:
 
   - platform: rest
     name: vmc_master_versione_repository                                        # [CONFIGURAZIONE, 7 RICHIAMI] [INTERFACCIA, 3 RICHIAMI] [AUTOMAZIONE, 8 RICHIAMI] SENSORE PER VISUALIZZARE LA VERSIONE CORRENTE NEL REPOSITORY DI GITHUB: https://github.com/DanRobo76/VMC-HELTY-FLOW DA CONFRONTARE CON LA VERSIONE CORRENTE INSTALLATA IN HOME ASSISTANT TRAMITE AUTOMAZIONE
+    unique_id: vmc_master_versione_repository
     resource: https://api.github.com/repos/DanRobo76/VMC-HELTY-FLOW/releases/latest
     value_template: >-
       {% if value_json is mapping and value_json.get('tag_name') %}
