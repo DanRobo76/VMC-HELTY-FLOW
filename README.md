@@ -58,6 +58,7 @@
 | <sub>**Intestazione animata**</sub> | <sub>Il flusso d'aria scorre in funzione della portata e il colore del LED indica lo stato: bianco normale, giallo allerta (che respira a VMC ferma con Avvisi presenti), blu umidità, rosso inquinanti, grigio OFF-Line; la scritta «Alert» sotto i tasti avvisa prima di avviare la VMC</sub> |
 | <sub>**Avvisi e notifiche**</sub> | <sub>Su dispositivo mobile e tramite Media Player</sub> |
 | <sub>**Più VMC**</sub> | <sub>Clonazione e cancellazione dalla Finestra Clona del pannello Impostazioni, senza riavvii intermedi</sub> |
+| <sub>**Prima installazione**</sub> | <sub>Collegamento della VMC nuova al Wi-Fi di casa da Home Assistant, senza l'App Air Guard</sub> |
 </details>
 
 <details>
@@ -96,6 +97,7 @@
 - <sub>Permette l'accensione e lo spegnimento automatico in funzione dell'Umidità Interna Settata (sopra il valore impostato, oppure con aria secca ≤ 35% per far entrare aria dall'esterno).</sub>
 - <sub>Se si dispone di più VMC, permette di clonarle e cancellarle dalla Finestra Clona del pannello Impostazioni, presente solo nella VMC Master: controllo del nome e dell'IP, più clonazioni senza riavvio, cancellazione con conferma «Sì / No» (vedi Installazione, punto 11).</sub>
 - <sub>Al primo avvio dopo l'aggiornamento dalla release 8.4.0 o precedenti cancella da solo i file della vecchia Clona VMC (vmc_clona.yaml e vmc_clona_scheda_manuale_interfaccia.txt).</sub>
+- <sub>Collega una VMC appena installata al Wi-Fi di casa senza l'App Air Guard, con gli stessi passaggi del manuale Helty (Rete, Password VMC, Access Point, Errori LED), dalla Finestra Prima Installazione VMC: sotto il Panic Button della scheda OFF-Line e nel pannello Impostazioni accanto alla Finestra Clona, solo nella VMC Master. Richiede Home Assistant OS con una scheda Wi-Fi riconosciuta [Pannello Informazioni → punto 24].</sub>
 - <sub>Permette lo spegnimento automatico in funzione della Temperatura Esterna ≤ -18 °C e successiva ripresa in funzione degli offset impostati.</sub>
   > <sub>**Nota:** per impostazione firmware, la priorità è assegnata al sensore interno della VMC rispetto al valore rilevato dal sensore esterno dell'entità selezionata.</sub>
 - <sub>Permette l'avvio automatico a Velocità 1 in funzione della Differenza Temperatura Interna - Temperatura Esterna se > 23 °C e successiva ripresa.</sub>
@@ -186,7 +188,8 @@
 ---
 
 ### 1. Rendere statico l'indirizzo IP della VMC
-<sub>Impostare nel router un indirizzo IP statico per la VMC; la VMC risponde sulla porta <strong>5001</strong>.</sub>
+<sub>Impostare nel router un indirizzo IP statico per la VMC; la VMC risponde sulla porta <strong>5001</strong>.</sub><br>
+<sub>Se la VMC non è ancora collegata al Wi-Fi di casa, si può collegare senza l'App Air Guard dopo i punti 2-7, con la Finestra Prima Installazione VMC (icona sotto il Panic Button della scheda OFF-Line): al termine il pulsante «Usa IP per Cambia IP VMC» esegue anche il punto 8 [Pannello Informazioni → punto 24].</sub>
 
 ---
 
@@ -431,6 +434,7 @@
 | <sub>**Animated header**</sub> | <sub>The airflow moves according to the flow rate and the LED colour shows the state: white normal, yellow alert (breathing when the unit is stopped with warnings present), blue humidity, red pollutants, grey off-line; the «Alert» label under the buttons warns before starting the unit</sub> |
 | <sub>**Alerts and notifications**</sub> | <sub>On mobile devices and through Media Players</sub> |
 | <sub>**Multiple units**</sub> | <sub>Cloning and deletion from the Clone window of the Settings panel, with no restarts in between</sub> |
+| <sub>**First installation**</sub> | <sub>Connect a new unit to the home Wi-Fi from Home Assistant, without the Air Guard app</sub> |
 </details>
 
 <details>
@@ -468,6 +472,7 @@
 - <sub>Automatic start and stop based on the set Indoor Humidity (above the set value, or with dry air ≤ 35% to bring in outdoor air).</sub>
 - <sub>With more than one unit, clone and delete units from the Clone window of the Settings panel, available only on the Master unit: name and IP checks, several clones without restarting, deletion with «Yes / No» confirmation (see Installation, step 11).</sub>
 - <sub>At the first start after updating from release 8.4.0 or earlier, it deletes by itself the files of the old Clone VMC (vmc_clona.yaml and vmc_clona_scheda_manuale_interfaccia.txt).</sub>
+- <sub>Connects a newly installed unit to the home Wi-Fi without the Air Guard app, with the same steps as the Helty manual (Network, VMC Password, Access Point, LED Errors), from the First Installation window: under the Panic Button of the OFF-Line card and in the Settings panel next to the Clone window, only on the Master unit. Requires Home Assistant OS with a recognised Wi-Fi adapter [Information Panel → item 24].</sub>
 - <sub>Automatic stop when the Outdoor Temperature is ≤ -18 °C and restart according to the set offsets.</sub>
   > <sub>**Note:** by firmware design, the unit's internal sensor takes priority over the value of the selected outdoor sensor entity.</sub>
 - <sub>Automatic start at Speed 1 when the Indoor - Outdoor Temperature Difference is > 23 °C, and restart afterwards.</sub>
@@ -558,7 +563,8 @@
 ---
 
 ### 1. Make the unit's IP address static
-<sub>Set a static IP address for the unit in the router; the unit answers on port <strong>5001</strong>.</sub>
+<sub>Set a static IP address for the unit in the router; the unit answers on port <strong>5001</strong>.</sub><br>
+<sub>If the unit is not yet connected to the home Wi-Fi, it can be connected without the Air Guard app after steps 2-7, with the First Installation window (icon under the Panic Button of the OFF-Line card): at the end the «Usa IP per Cambia IP VMC» button also performs step 8 [Information Panel → item 24].</sub>
 
 ---
 
