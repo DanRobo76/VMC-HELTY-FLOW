@@ -13589,6 +13589,23 @@ cards:
                   e l'Andamento risulta Stabile). Sotto la scheda «Sensori - Extra» il riquadro «Rischio Muffa: Status
                   Medie» mostra i giorni di dati disponibili per ciascuna media (es. 12 / 28 giorni) e resta sempre
                   visibile: quando una media raggiunge i suoi giorni accanto compare «(completa)».
+                  <br><br>
+                  <b>Entità da cancellare dopo l'aggiornamento.</b> Chi aggiorna da una release 8.5.0 o precedente trova
+                  ancora le 6 vecchie entità delle medie, sostituite dalla release 8.5.1 con le nuove medie dalle statistiche:
+                  restano come «non più fornite» e vanno eliminate a mano. Per ciascuna: Impostazioni → Dispositivi e servizi
+                  → Entità → cerca il nome → apri l'entità → Elimina. Non cancellare le nuove medie, che hanno «media» nel nome.
+                  </td></tr></table>
+                  <table style="width:100%; border-collapse: collapse;">
+                  <tr><th style="padding: 4px 8px; border: 1px solid #c3c2b7;">N°</th><th style="padding: 4px 8px; border: 1px solid #c3c2b7;">Da cancellare</th></tr>
+                  <tr><td style="padding: 4px 8px; border: 1px solid #c3c2b7;">1</td><td style="padding: 4px 8px; border: 1px solid #c3c2b7;">sensor.vmc_master_temp_interna_4w</td></tr>
+                  <tr><td style="padding: 4px 8px; border: 1px solid #c3c2b7;">2</td><td style="padding: 4px 8px; border: 1px solid #c3c2b7;">sensor.vmc_master_temp_interna_8w</td></tr>
+                  <tr><td style="padding: 4px 8px; border: 1px solid #c3c2b7;">3</td><td style="padding: 4px 8px; border: 1px solid #c3c2b7;">sensor.vmc_master_temp_interna_12w</td></tr>
+                  <tr><td style="padding: 4px 8px; border: 1px solid #c3c2b7;">4</td><td style="padding: 4px 8px; border: 1px solid #c3c2b7;">sensor.vmc_master_hum_interna_4w</td></tr>
+                  <tr><td style="padding: 4px 8px; border: 1px solid #c3c2b7;">5</td><td style="padding: 4px 8px; border: 1px solid #c3c2b7;">sensor.vmc_master_hum_interna_8w</td></tr>
+                  <tr><td style="padding: 4px 8px; border: 1px solid #c3c2b7;">6</td><td style="padding: 4px 8px; border: 1px solid #c3c2b7;">sensor.vmc_master_hum_interna_12w</td></tr>
+                  </table>
+                  <table><tr><td align="justify">
+                  Con una prima installazione dalla release 8.5.1 in poi queste entità non sono mai esistite e non c'è nulla da cancellare.
                   </td></tr></table>
 
 
