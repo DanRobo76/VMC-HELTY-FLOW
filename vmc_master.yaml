@@ -180,7 +180,8 @@ command_line:
       value_template: "{{ value_json.stage | default('Errore') }}"
       # Letto a richiesta dall'automazione Installa VMC Lettura Stato (ogni 5 s solo con la finestra aperta o una procedura in corso)
       scan_interval: 86400
-      command_timeout: 10
+      # 30 s: all'avvio di Home Assistant i sensori command_line partono tutti insieme e il sistema e' carico (di norma risponde in meno di 1 s)
+      command_timeout: 30
       json_attributes:
         - version
         - progress
