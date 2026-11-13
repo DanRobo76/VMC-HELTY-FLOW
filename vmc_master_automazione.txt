@@ -128,7 +128,9 @@ description: >-
   0 e, se non si ferma, il comando di arresto viene ripetuto finché non si ferma
   (circa ogni 4 Secondi);
 
-  - VMC Sensori Int. Δ Temp. > 23 [°C]: 4 Secondi;
+  - VMC Sensori Int. Δ Temp. > 23 [°C]: 4 Secondi; se durante l'allerta si cambia
+  Velocità, la VMC viene riportata a Velocità 1 e la Velocità scelta viene
+  memorizzata dopo 4 Secondi e impostata a fine allerta;
 
   - Inquinanti (CO₂ e VOC): 8 Secondi. Se la VMC è partita da Velocità 0 resta a
   Velocità 1 fino al rientro degli Inquinanti, poi torna a Velocità 0; se nel
@@ -136,7 +138,10 @@ description: >-
   Congelamento o il Δ Temp.) questa viene mantenuta, anche dopo il rientro; se
   invece sceglie Velocità 0 con gli Inquinanti ancora presenti, dopo circa 8
   Secondi la VMC riparte a Velocità 1 e al rientro degli Inquinanti torna a
-  Velocità 0, anche se prima dell'allerta era a un'altra Velocità;
+  Velocità 0, anche se prima dell'allerta era a un'altra Velocità; se un'allerta
+  Lim. Δ PdR è iniziata con la VMC a Velocità 0, all'arrivo degli Inquinanti la
+  sua memoria di Velocità 0 si azzera dopo 4 Secondi e la VMC parte a Velocità 1
+  dopo 8 Secondi;
 
   - Sup. Lim. Δ PdR con Inquinanti: 12 Secondi;
 
@@ -148,9 +153,9 @@ description: >-
 
   - Free Cool./Heat. con Inquinanti: 20 Secondi;
 
-  - Free Cool./Heat.: 24 Secondi. Se durante l'avviso si sceglie un'altra
-  Velocità, la ripresa automatica in Free Cool./Heat. viene annullata e la VMC
-  resta sulla Velocità scelta;
+  - Free Cool./Heat.: 24 Secondi. Se durante l'avviso si sceglie un'altra Velocità
+  e la si mantiene per 20 Secondi, la ripresa automatica in Free Cool./Heat. viene
+  annullata e la VMC resta sulla Velocità scelta;
 
   - Umidità: 28 Secondi (la logica Umidità memorizza subito la Velocità in uso);
   se durante l'allerta si cambia Velocità, la nuova Velocità viene memorizzata
@@ -165,7 +170,10 @@ description: >-
   - Black-Out: 32 Secondi per il Rilevamento e per il Ripristino; durante una
   Fascia del Calendario la rilevazione del Black-Out non è attiva: al ritorno
   della corrente (VMC OFF-Line almeno 32 Secondi) la VMC riparte con la Velocità
-  della Fascia in corso dopo 32 Secondi (+5 Secondi dello script della Fascia).
+  della Fascia in corso dopo 32 Secondi (+5 Secondi dello script della Fascia);
+
+  - Avvisi (riquadro degli Avvisi e avviso di aggiornamento del Package):
+  5 Secondi.
 
 
   CAMBIO MANUALE DELLA VELOCITÀ: ogni comando dell'automazione viene ripetuto ogni
@@ -185,8 +193,9 @@ description: >-
   ferma: nessun effetto; a fine allerta torna alla Velocità di prima;
 
   - Δ Temp. > 23 °C: si sceglie un'altra Velocità → viene riportata a Velocità 1;
-  a fine allerta va alla Velocità scelta; si sceglie Velocità 0 → viene riportata
-  a Velocità 1; a fine allerta resta a Velocità 0;
+  la Velocità scelta viene memorizzata dopo 4 Secondi e impostata a fine allerta;
+  si sceglie Velocità 0 → viene riportata a Velocità 1; a fine allerta resta a
+  Velocità 0;
 
   - Inquinanti (CO₂ e VOC): si sceglie un'altra Velocità → viene mantenuta, anche
   dopo il rientro degli Inquinanti; si sceglie Velocità 0 → dopo circa 8 Secondi
@@ -199,8 +208,9 @@ description: >-
 
   - Free Cool./Heat. sfavorevole (VMC ferma in attesa): si sceglie un'altra
   Velocità → la VMC va alla Velocità scelta e la ripresa automatica in Free
-  Cool./Heat. viene annullata; si sceglie Velocità 0 → la VMC è già ferma: nessun
-  effetto; quando le condizioni tornano favorevoli riprende in Free Cool./Heat.;
+  Cool./Heat. viene annullata dopo 20 Secondi; si sceglie Velocità 0 → la VMC è
+  già ferma: nessun effetto; quando le condizioni tornano favorevoli riprende in
+  Free Cool./Heat.;
 
   - Umidità, con la VMC già in moto all'inizio: si sceglie un'altra Velocità →
   memorizzata dopo 4 Secondi e mantenuta a fine Umidità; si sceglie Velocità 0 →
