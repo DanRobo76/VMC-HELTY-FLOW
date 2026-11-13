@@ -17210,6 +17210,11 @@ actions:
                       'on' and
                       states('input_boolean.vmc_master_spia_velocita_1_co2_o_voc_pdr')==
                       'on' ) ) }} 
+                  - alias: >-
+                      Allerta Congelamento non in corso (con il Congelamento in corso la VMC resta a Velocità 0 e la memoria
+                      degli Inquinanti non va toccata: la Velocità 1 degli Inquinanti riparte a fine Congelamento)
+                    condition: template
+                    value_template: "{{ is_state('input_boolean.vmc_master_congelamento_verifica_soglia_valore_spia', 'off') }}"
                 sequence:
                   - data: {}
                     action: shell_command.vmc_master_velocita_1
