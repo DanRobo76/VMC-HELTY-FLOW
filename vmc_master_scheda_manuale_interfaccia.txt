@@ -194,26 +194,23 @@ cards:
           show_header_toggle: false
           state_color: true
           entities:
-            - type: buttons
-              entities:
-                - entity: input_boolean.vmc_master_installa_vmc_scheda_rete
-                  name: Rete
-                - entity: input_boolean.vmc_master_installa_vmc_scheda_password
-                  name: Password VMC
-                - entity: input_boolean.vmc_master_installa_vmc_scheda_access_point
-                  name: Access Point
-                - entity: input_boolean.vmc_master_installa_vmc_scheda_errori
-                  name: Errori LED
             - type: conditional
               conditions:
-                - entity: input_boolean.vmc_master_installa_vmc_scheda_rete
-                  state: 'on'
+                - entity: binary_sensor.vmc_master_installa_vmc_configurata
+                  state_not: 'on'
+              row:
+                type: section
+                label: "1 · Trova la VMC"
+            - type: conditional
+              conditions:
+                - entity: binary_sensor.vmc_master_installa_vmc_configurata
+                  state_not: 'on'
               row:
                 entity: input_text.vmc_master_installa_vmc_rete_vmc
             - type: conditional
               conditions:
-                - entity: input_boolean.vmc_master_installa_vmc_scheda_rete
-                  state: 'on'
+                - entity: binary_sensor.vmc_master_installa_vmc_configurata
+                  state_not: 'on'
                 - entity: binary_sensor.vmc_master_installa_vmc_in_corso
                   state_not: 'on'
               row:
@@ -228,26 +225,27 @@ cards:
                     entity_id: script.vmc_master_installa_vmc_cerca_reti
             - type: conditional
               conditions:
-                - entity: input_boolean.vmc_master_installa_vmc_scheda_rete
-                  state: 'on'
+                - entity: binary_sensor.vmc_master_installa_vmc_configurata
+                  state_not: 'on'
               row:
-                entity: input_text.vmc_master_installa_vmc_password_vmc
+                type: section
+                label: "2 · Collega al Wi-Fi di casa"
             - type: conditional
               conditions:
-                - entity: input_boolean.vmc_master_installa_vmc_scheda_rete
-                  state: 'on'
+                - entity: binary_sensor.vmc_master_installa_vmc_configurata
+                  state_not: 'on'
               row:
                 entity: input_text.vmc_master_installa_vmc_rete_casa
             - type: conditional
               conditions:
-                - entity: input_boolean.vmc_master_installa_vmc_scheda_rete
-                  state: 'on'
+                - entity: binary_sensor.vmc_master_installa_vmc_configurata
+                  state_not: 'on'
               row:
                 entity: input_text.vmc_master_installa_vmc_password_casa
             - type: conditional
               conditions:
-                - entity: input_boolean.vmc_master_installa_vmc_scheda_rete
-                  state: 'on'
+                - entity: binary_sensor.vmc_master_installa_vmc_configurata
+                  state_not: 'on'
                 - entity: binary_sensor.vmc_master_installa_vmc_in_corso
                   state_not: 'on'
               row:
@@ -264,16 +262,19 @@ cards:
                     text: "Vuoi Procedere? Il server si collega per pochi secondi alla rete della VMC e poi torna com'era."
             - type: conditional
               conditions:
-                - entity: input_boolean.vmc_master_installa_vmc_scheda_rete
+                - entity: binary_sensor.vmc_master_installa_vmc_configurata
                   state: 'on'
+              row:
+                type: section
+                label: "3 · IP fisso e IP nel Package"
+            - type: conditional
+              conditions:
                 - entity: binary_sensor.vmc_master_installa_vmc_configurata
                   state: 'on'
               row:
                 entity: input_text.vmc_master_installa_vmc_ip_vmc
             - type: conditional
               conditions:
-                - entity: input_boolean.vmc_master_installa_vmc_scheda_rete
-                  state: 'on'
                 - entity: binary_sensor.vmc_master_installa_vmc_configurata
                   state: 'on'
                 - entity: binary_sensor.vmc_master_installa_vmc_in_corso
@@ -292,56 +293,57 @@ cards:
                     text: "Vuoi Procedere? L'IP verificato viene scritto in Cambia IP VMC e Home Assistant verrà riavviato."
             - type: conditional
               conditions:
-                - entity: input_boolean.vmc_master_installa_vmc_scheda_password
-                  state: 'on'
-              row:
-                entity: input_text.vmc_master_installa_vmc_rete_vmc
-            - type: conditional
-              conditions:
-                - entity: input_boolean.vmc_master_installa_vmc_scheda_password
-                  state: 'on'
-              row:
-                entity: input_text.vmc_master_installa_vmc_password_vmc
-                name: "Password Attuale Rete VMC"
-            - type: conditional
-              conditions:
-                - entity: input_boolean.vmc_master_installa_vmc_scheda_password
-                  state: 'on'
-              row:
-                entity: input_text.vmc_master_installa_vmc_nuova_password
-            - type: conditional
-              conditions:
-                - entity: input_boolean.vmc_master_installa_vmc_scheda_password
-                  state: 'on'
-              row:
-                entity: input_text.vmc_master_installa_vmc_ripeti_password
-            - type: conditional
-              conditions:
-                - entity: input_boolean.vmc_master_installa_vmc_scheda_password
-                  state: 'on'
-              row:
-                type: section
-                label: Rete del server (solo se il suo Wi-Fi è collegato)
-            - type: conditional
-              conditions:
-                - entity: input_boolean.vmc_master_installa_vmc_scheda_password
-                  state: 'on'
-              row:
-                entity: input_text.vmc_master_installa_vmc_rete_casa
-            - type: conditional
-              conditions:
-                - entity: input_boolean.vmc_master_installa_vmc_scheda_password
-                  state: 'on'
-              row:
-                entity: input_text.vmc_master_installa_vmc_password_casa
-            - type: conditional
-              conditions:
-                - entity: input_boolean.vmc_master_installa_vmc_scheda_password
+                - entity: binary_sensor.vmc_master_installa_vmc_configurata
                   state: 'on'
                 - entity: binary_sensor.vmc_master_installa_vmc_in_corso
                   state_not: 'on'
               row:
                 type: button
+                entity: script.vmc_master_installa_vmc_nuova_vmc
+                name: "Collega un'Altra VMC"
+                action_name: Esegui
+                tap_action:
+                  action: perform-action
+                  perform_action: script.turn_on
+                  target:
+                    entity_id: script.vmc_master_installa_vmc_nuova_vmc
+                  confirmation:
+                    text: "Vuoi Procedere? La finestra torna ai passi 1 e 2; la VMC già collegata non cambia."
+          footer:
+            type: buttons
+            entities:
+              - entity: input_boolean.vmc_master_installa_vmc_scheda_password
+                name: Cambia Password VMC
+              - entity: input_boolean.vmc_master_installa_vmc_scheda_access_point
+                name: Access Point
+              - entity: input_boolean.vmc_master_installa_vmc_scheda_errori
+                name: Errori LED
+        - type: conditional
+          conditions:
+          - condition: state
+            entity: input_boolean.vmc_master_installa_vmc_scheda_password
+            state: 'on'
+          card:
+            type: markdown
+            content: |-
+              Cambia la password della rete **{{ states('input_text.vmc_master_installa_vmc_rete_vmc') or 'VMC_xxxxxxxx' }}**, solo con la VMC in **Access Point** (prima di collegarla alla rete di casa). Nuova password: da 8 a 32 caratteri tra lettere senza accenti, numeri e `$ @ ! % ? &`. Se il server usa solo il Wi-Fi serve anche la password di casa.
+        - type: conditional
+          conditions:
+          - condition: state
+            entity: input_boolean.vmc_master_installa_vmc_scheda_password
+            state: 'on'
+          card:
+            type: entities
+            show_header_toggle: false
+            state_color: true
+            entities:
+              - entity: input_text.vmc_master_installa_vmc_password_vmc
+                name: "Password Attuale Rete VMC"
+              - entity: input_text.vmc_master_installa_vmc_nuova_password
+              - entity: input_text.vmc_master_installa_vmc_ripeti_password
+              - entity: input_text.vmc_master_installa_vmc_password_casa
+                name: "Password Rete Casa (solo se il server usa il Wi-Fi)"
+              - type: button
                 entity: script.vmc_master_installa_vmc_cambia_password
                 name: "Salva Nuova Password"
                 action_name: Esegui
@@ -352,16 +354,35 @@ cards:
                     entity_id: script.vmc_master_installa_vmc_cambia_password
                   confirmation:
                     text: "Vuoi Procedere? Annota la nuova password: servirà per ogni nuovo collegamento alla rete della VMC."
-            - type: conditional
-              conditions:
-                - entity: input_boolean.vmc_master_installa_vmc_scheda_access_point
-                  state: 'on'
-                - entity: binary_sensor.vmc_master_installa_vmc_configurata
-                  state: 'on'
-                - entity: binary_sensor.vmc_master_installa_vmc_in_corso
-                  state_not: 'on'
-              row:
-                type: button
+        - type: conditional
+          conditions:
+          - condition: state
+            entity: input_boolean.vmc_master_installa_vmc_scheda_access_point
+            state: 'on'
+          card:
+            type: markdown
+            content: |-
+              La VMC lascia la rete di casa e torna alla sua rete **VMC_xxxxxxxx**, come appena installata: serve per cambiarne la password o collegarla a un'altra rete. Finché non la ricolleghi Home Assistant non la raggiunge.
+              {% if is_state('binary_sensor.vmc_master_installa_vmc_configurata', 'off') %}
+              _Disponibile per la VMC collegata con i passi 1 e 2. Se la VMC non è più raggiungibile usa il Ripristino Wi-Fi di **Errori LED**._
+              {% endif %}
+        - type: conditional
+          conditions:
+          - condition: state
+            entity: input_boolean.vmc_master_installa_vmc_scheda_access_point
+            state: 'on'
+          - condition: state
+            entity: binary_sensor.vmc_master_installa_vmc_configurata
+            state: 'on'
+          - condition: state
+            entity: binary_sensor.vmc_master_installa_vmc_in_corso
+            state_not: 'on'
+          card:
+            type: entities
+            show_header_toggle: false
+            state_color: true
+            entities:
+              - type: button
                 entity: script.vmc_master_installa_vmc_access_point
                 name: "Riporta la VMC in Access Point"
                 action_name: Esegui
@@ -372,85 +393,6 @@ cards:
                     entity_id: script.vmc_master_installa_vmc_access_point
                   confirmation:
                     text: "Vuoi Procedere? La VMC lascia la rete di casa e torna alla rete VMC_xxxxxxxx: non sarà raggiungibile finché non la ricolleghi."
-        - type: conditional
-          conditions:
-          - condition: state
-            entity: input_boolean.vmc_master_installa_vmc_scheda_rete
-            state: 'on'
-          card:
-            type: markdown
-            content: |-
-              {%- set vmc = state_attr('sensor.vmc_master_installa_vmc_stato', 'vmc_networks') or [] -%}
-              {%- set altre = state_attr('sensor.vmc_master_installa_vmc_stato', 'wifi_networks') or [] -%}
-              {% if vmc %}**Reti VMC trovate:** {% for n in vmc %}`{{ n.ssid }}` {{ n.signal }}%{{ ' · ' if not loop.last }}{% endfor %}
-              {% endif %}{% if altre %}**Altre reti:** {% for n in altre %}{{ n.ssid }} {{ n.signal }}%{{ ' · ' if not loop.last }}{% endfor %}
-              {% endif %}Password iniziale della rete VMC: **12345678**. Con il LED Allarme filtri acceso esegui prima il reset filtri. Serve Home Assistant OS con una scheda Wi-Fi riconosciuta. Vedere Pannello Informazioni, punto 24.
-        - type: conditional
-          conditions:
-          - condition: state
-            entity: binary_sensor.vmc_master_installa_vmc_in_corso
-            state: 'on'
-          card:
-            type: markdown
-            content: |-
-              {%- set p = (state_attr('sensor.vmc_master_installa_vmc_stato', 'progress') or 0) | int(0) -%}
-              {%- set pieni = (p / 10) | round(0, 'floor') | int -%}
-              ⏳ **{{ states('sensor.vmc_master_installa_vmc_stato') }}** · {{ p }} %
-              {{ '▰' * pieni }}{{ '▱' * (10 - pieni) }}
-              {{ state_attr('sensor.vmc_master_installa_vmc_stato', 'message') or 'Attendi il completamento della procedura.' }}
-        - type: conditional
-          conditions:
-          - condition: state
-            entity: binary_sensor.vmc_master_installa_vmc_in_corso
-            state_not: 'on'
-          - condition: state
-            entity: sensor.vmc_master_installa_vmc_stato
-            state_not: In attesa
-          card:
-            type: markdown
-            content: |-
-              {%- set a = states.sensor.vmc_master_installa_vmc_stato.attributes -%}
-              {%- set titoli = {
-                'configure': ['VMC collegata', 'Errore collegamento VMC'],
-                'verify': ['Indirizzo VMC verificato', 'Errore indirizzo VMC'],
-                'rename': ['VMC rinominata', 'Errore rinomina VMC'],
-                'ap_password': ['Password VMC cambiata', 'Errore cambio password VMC'],
-                'ap_mode': ['VMC in Access Point', 'Errore ritorno Access Point'],
-                'scan': ['Ricerca reti completata', 'Errore ricerca reti'],
-                'recover': ['Rete server ripristinata', 'Errore ripristino rete server']} -%}
-              {%- set t = titoli.get(a.get('action', ''), [states('sensor.vmc_master_installa_vmc_stato'), states('sensor.vmc_master_installa_vmc_stato')]) -%}
-              {{ '✅' if a.get('success') else '❌' }} **{{ t[0] if a.get('success') else t[1] }}**
-              {{ a.get('message') or '' }}
-              {% if a.get('success') and a.get('vmc_ip') %}
-              IP: **{{ a.get('vmc_ip') }}** · Nome: {{ a.get('vmc_name') }}{% if a.get('vmc_mac') %} · MAC: `{{ a.get('vmc_mac') }}`{% endif %}
-              {% endif %}{% if is_state('binary_sensor.vmc_master_installa_vmc_configurata', 'on') %}
-              Prenota sul router un IP fisso per il MAC della VMC e scrivilo in «IP Fisso VMC (Router)»: la verifica parte da sola. Poi premi «Usa IP per Cambia IP VMC».
-              {% endif %}{% if not a.get('success') and a.get('action') == 'configure' and a.get('network_sent') %}
-              Apri la voce **Errori LED** per leggere i lampeggi del LED Allarme filtri.
-              {% endif %}
-        - type: conditional
-          conditions:
-          - condition: state
-            entity: input_boolean.vmc_master_installa_vmc_scheda_access_point
-            state: 'on'
-          card:
-            type: markdown
-            content: |-
-              La VMC lascia la rete di casa e torna alla sua rete **VMC_xxxxxxxx**, come appena installata: serve per cambiarne la password o collegarla a un'altra rete. Finché non la ricolleghi Home Assistant non la raggiunge.
-              {% if is_state('binary_sensor.vmc_master_installa_vmc_configurata', 'on') %}
-              VMC: **{{ state_attr('sensor.vmc_master_installa_vmc_stato', 'configured_name') }}** · IP: {{ state_attr('sensor.vmc_master_installa_vmc_stato', 'configured_ip') }} · Rete VMC: {{ state_attr('sensor.vmc_master_installa_vmc_stato', 'configured_ap_ssid') }}
-              {% else %}
-              _Disponibile per la VMC collegata con la voce **Rete**. Se la VMC non è più raggiungibile usa il Ripristino Wi-Fi della voce **Errori LED**._
-              {% endif %}
-        - type: conditional
-          conditions:
-          - condition: state
-            entity: input_boolean.vmc_master_installa_vmc_scheda_password
-            state: 'on'
-          card:
-            type: markdown
-            content: |-
-              Si può cambiare **solo con la VMC in Access Point** (prima di collegarla alla rete di casa). Nuova password: da 8 a 32 caratteri tra lettere senza accenti, numeri e `$ @ ! % ? &`.
         - type: conditional
           conditions:
           - condition: state
@@ -472,7 +414,49 @@ cards:
 
               Con gli errori 1 e 2 per 3 volte di seguito la VMC torna da sola in Access Point. Le segnalazioni compaiono solo se l'allarme filtri non è già attivo.
 
-              **Ripristino Wi-Fi:** spegni la VMC, togli corrente a monte, ridai corrente **tenendo premuto il tasto Notturna** fino alla fine dei 7 lampeggi di tutti i LED, poi ripeti la voce **Rete** (password 12345678).
+              **Ripristino Wi-Fi:** spegni la VMC, togli corrente a monte, ridai corrente **tenendo premuto il tasto Notturna** fino alla fine dei 7 lampeggi di tutti i LED, poi ripeti i passi 1 e 2 (password 12345678).
+        - type: markdown
+          content: |-
+            {%- set st = 'sensor.vmc_master_installa_vmc_stato' -%}
+            {%- set a = states[st].attributes if states[st] is not none else {} -%}
+            {%- set titoli = {
+              'configure': ['VMC collegata', 'Errore collegamento VMC'],
+              'verify': ['Indirizzo VMC verificato', 'Errore indirizzo VMC'],
+              'rename': ['VMC rinominata', 'Errore rinomina VMC'],
+              'ap_password': ['Password VMC cambiata', 'Errore cambio password VMC'],
+              'ap_mode': ['VMC in Access Point', 'Errore ritorno Access Point'],
+              'scan': ['Ricerca reti completata', 'Errore ricerca reti'],
+              'recover': ['Rete server ripristinata', 'Errore ripristino rete server']} -%}
+            {%- if is_state('binary_sensor.vmc_master_installa_vmc_configurata', 'on') %}
+            <font color="#43a047"><ha-icon icon="mdi:check-circle"></ha-icon></font> **VMC trovata:** {{ a.get('configured_ap_ssid') }}
+            <font color="#43a047"><ha-icon icon="mdi:check-circle"></ha-icon></font> **Collegata alla rete di casa:** IP {{ a.get('configured_ip') }} · Nome {{ a.get('configured_name') }}{% if a.get('configured_mac') %} · MAC `{{ a.get('configured_mac') }}`{% endif %}
+
+            Prenota sul router un IP fisso per il MAC della VMC e scrivilo in «IP Fisso VMC (Router)»: la verifica parte da sola. Poi premi «Usa IP per Cambia IP VMC».
+            {%- endif %}
+            {%- if is_state('binary_sensor.vmc_master_installa_vmc_in_corso', 'on') %}
+            {%- set p = (a.get('progress') or 0) | int(0) %}
+            {%- set pieni = (p / 10) | round(0, 'floor') | int %}
+
+            ⏳ **{{ states(st) }}** · {{ p }} %
+            {{ '▰' * pieni }}{{ '▱' * (10 - pieni) }}
+            {{ a.get('message') or 'Attendi il completamento della procedura.' }}
+            {%- elif states(st) not in ['In attesa', 'unknown', 'unavailable'] and a.get('action') %}
+            {%- set t = titoli.get(a.get('action', ''), [states(st), states(st)]) %}
+
+            {{ '✅' if a.get('success') else '❌' }} **{{ t[0] if a.get('success') else t[1] }}**
+            {{ a.get('message') or '' }}
+            {%- if not a.get('success') and a.get('action') == 'configure' and a.get('network_sent') %}
+            Apri **Errori LED** per leggere i lampeggi del LED Allarme filtri.
+            {%- endif %}
+            {%- elif is_state('binary_sensor.vmc_master_installa_vmc_configurata', 'off') %}
+
+            ℹ️ Premi «Cerca» o scrivi il nome VMC_xxxxxxxx letto sullo smartphone. Password della rete VMC: **{{ '12345678' if states('input_text.vmc_master_installa_vmc_password_vmc') in ['12345678', ''] else 'quella di «Cambia Password VMC»' }}**. Con il LED Allarme filtri acceso esegui prima il reset filtri. Serve Home Assistant OS con una scheda Wi-Fi riconosciuta.
+            {%- endif %}
+            {%- set vmc = a.get('vmc_networks') or [] %}
+            {%- if vmc and is_state('binary_sensor.vmc_master_installa_vmc_configurata', 'off') %}
+
+            **Reti VMC trovate:** {% for n in vmc %}`{{ n.ssid }}` {{ n.signal }}%{{ ' · ' if not loop.last }}{% endfor %}
+            {%- endif %}
 # >>> FINE SEZIONE INSTALLA VMC (SOLO MASTER, RIMOSSA DA VMC_SCRIPT_CLONA.SH) <<<
   - type: conditional
     conditions:
@@ -10481,7 +10465,6 @@ cards:
                           'input_text.vmc_master_installa_vmc_nuova_password',
                           'input_text.vmc_master_installa_vmc_ripeti_password',
                           'input_boolean.vmc_master_installa_vmc_finestra',
-                          'input_boolean.vmc_master_installa_vmc_scheda_rete',
                           'input_boolean.vmc_master_installa_vmc_scheda_password',
                           'input_boolean.vmc_master_installa_vmc_scheda_access_point',
                           'input_boolean.vmc_master_installa_vmc_scheda_errori',
@@ -10494,6 +10477,7 @@ cards:
                           'script.vmc_master_installa_vmc_cambia_password',
                           'script.vmc_master_installa_vmc_access_point',
                           'script.vmc_master_installa_vmc_usa_ip',
+                          'script.vmc_master_installa_vmc_nuova_vmc',
                           'automation.vmc_master_installa_vmc_avvio',
                           'automation.vmc_master_installa_vmc_notifica_esito',
                           'automation.vmc_master_installa_vmc_verifica_ip',
@@ -11337,26 +11321,23 @@ cards:
                       show_header_toggle: false
                       state_color: true
                       entities:
-                        - type: buttons
-                          entities:
-                            - entity: input_boolean.vmc_master_installa_vmc_scheda_rete
-                              name: Rete
-                            - entity: input_boolean.vmc_master_installa_vmc_scheda_password
-                              name: Password VMC
-                            - entity: input_boolean.vmc_master_installa_vmc_scheda_access_point
-                              name: Access Point
-                            - entity: input_boolean.vmc_master_installa_vmc_scheda_errori
-                              name: Errori LED
                         - type: conditional
                           conditions:
-                            - entity: input_boolean.vmc_master_installa_vmc_scheda_rete
-                              state: 'on'
+                            - entity: binary_sensor.vmc_master_installa_vmc_configurata
+                              state_not: 'on'
+                          row:
+                            type: section
+                            label: "1 · Trova la VMC"
+                        - type: conditional
+                          conditions:
+                            - entity: binary_sensor.vmc_master_installa_vmc_configurata
+                              state_not: 'on'
                           row:
                             entity: input_text.vmc_master_installa_vmc_rete_vmc
                         - type: conditional
                           conditions:
-                            - entity: input_boolean.vmc_master_installa_vmc_scheda_rete
-                              state: 'on'
+                            - entity: binary_sensor.vmc_master_installa_vmc_configurata
+                              state_not: 'on'
                             - entity: binary_sensor.vmc_master_installa_vmc_in_corso
                               state_not: 'on'
                           row:
@@ -11371,26 +11352,27 @@ cards:
                                 entity_id: script.vmc_master_installa_vmc_cerca_reti
                         - type: conditional
                           conditions:
-                            - entity: input_boolean.vmc_master_installa_vmc_scheda_rete
-                              state: 'on'
+                            - entity: binary_sensor.vmc_master_installa_vmc_configurata
+                              state_not: 'on'
                           row:
-                            entity: input_text.vmc_master_installa_vmc_password_vmc
+                            type: section
+                            label: "2 · Collega al Wi-Fi di casa"
                         - type: conditional
                           conditions:
-                            - entity: input_boolean.vmc_master_installa_vmc_scheda_rete
-                              state: 'on'
+                            - entity: binary_sensor.vmc_master_installa_vmc_configurata
+                              state_not: 'on'
                           row:
                             entity: input_text.vmc_master_installa_vmc_rete_casa
                         - type: conditional
                           conditions:
-                            - entity: input_boolean.vmc_master_installa_vmc_scheda_rete
-                              state: 'on'
+                            - entity: binary_sensor.vmc_master_installa_vmc_configurata
+                              state_not: 'on'
                           row:
                             entity: input_text.vmc_master_installa_vmc_password_casa
                         - type: conditional
                           conditions:
-                            - entity: input_boolean.vmc_master_installa_vmc_scheda_rete
-                              state: 'on'
+                            - entity: binary_sensor.vmc_master_installa_vmc_configurata
+                              state_not: 'on'
                             - entity: binary_sensor.vmc_master_installa_vmc_in_corso
                               state_not: 'on'
                           row:
@@ -11407,16 +11389,19 @@ cards:
                                 text: "Vuoi Procedere? Il server si collega per pochi secondi alla rete della VMC e poi torna com'era."
                         - type: conditional
                           conditions:
-                            - entity: input_boolean.vmc_master_installa_vmc_scheda_rete
+                            - entity: binary_sensor.vmc_master_installa_vmc_configurata
                               state: 'on'
+                          row:
+                            type: section
+                            label: "3 · IP fisso e IP nel Package"
+                        - type: conditional
+                          conditions:
                             - entity: binary_sensor.vmc_master_installa_vmc_configurata
                               state: 'on'
                           row:
                             entity: input_text.vmc_master_installa_vmc_ip_vmc
                         - type: conditional
                           conditions:
-                            - entity: input_boolean.vmc_master_installa_vmc_scheda_rete
-                              state: 'on'
                             - entity: binary_sensor.vmc_master_installa_vmc_configurata
                               state: 'on'
                             - entity: binary_sensor.vmc_master_installa_vmc_in_corso
@@ -11435,56 +11420,57 @@ cards:
                                 text: "Vuoi Procedere? L'IP verificato viene scritto in Cambia IP VMC e Home Assistant verrà riavviato."
                         - type: conditional
                           conditions:
-                            - entity: input_boolean.vmc_master_installa_vmc_scheda_password
-                              state: 'on'
-                          row:
-                            entity: input_text.vmc_master_installa_vmc_rete_vmc
-                        - type: conditional
-                          conditions:
-                            - entity: input_boolean.vmc_master_installa_vmc_scheda_password
-                              state: 'on'
-                          row:
-                            entity: input_text.vmc_master_installa_vmc_password_vmc
-                            name: "Password Attuale Rete VMC"
-                        - type: conditional
-                          conditions:
-                            - entity: input_boolean.vmc_master_installa_vmc_scheda_password
-                              state: 'on'
-                          row:
-                            entity: input_text.vmc_master_installa_vmc_nuova_password
-                        - type: conditional
-                          conditions:
-                            - entity: input_boolean.vmc_master_installa_vmc_scheda_password
-                              state: 'on'
-                          row:
-                            entity: input_text.vmc_master_installa_vmc_ripeti_password
-                        - type: conditional
-                          conditions:
-                            - entity: input_boolean.vmc_master_installa_vmc_scheda_password
-                              state: 'on'
-                          row:
-                            type: section
-                            label: Rete del server (solo se il suo Wi-Fi è collegato)
-                        - type: conditional
-                          conditions:
-                            - entity: input_boolean.vmc_master_installa_vmc_scheda_password
-                              state: 'on'
-                          row:
-                            entity: input_text.vmc_master_installa_vmc_rete_casa
-                        - type: conditional
-                          conditions:
-                            - entity: input_boolean.vmc_master_installa_vmc_scheda_password
-                              state: 'on'
-                          row:
-                            entity: input_text.vmc_master_installa_vmc_password_casa
-                        - type: conditional
-                          conditions:
-                            - entity: input_boolean.vmc_master_installa_vmc_scheda_password
+                            - entity: binary_sensor.vmc_master_installa_vmc_configurata
                               state: 'on'
                             - entity: binary_sensor.vmc_master_installa_vmc_in_corso
                               state_not: 'on'
                           row:
                             type: button
+                            entity: script.vmc_master_installa_vmc_nuova_vmc
+                            name: "Collega un'Altra VMC"
+                            action_name: Esegui
+                            tap_action:
+                              action: perform-action
+                              perform_action: script.turn_on
+                              target:
+                                entity_id: script.vmc_master_installa_vmc_nuova_vmc
+                              confirmation:
+                                text: "Vuoi Procedere? La finestra torna ai passi 1 e 2; la VMC già collegata non cambia."
+                      footer:
+                        type: buttons
+                        entities:
+                          - entity: input_boolean.vmc_master_installa_vmc_scheda_password
+                            name: Cambia Password VMC
+                          - entity: input_boolean.vmc_master_installa_vmc_scheda_access_point
+                            name: Access Point
+                          - entity: input_boolean.vmc_master_installa_vmc_scheda_errori
+                            name: Errori LED
+                    - type: conditional
+                      conditions:
+                      - condition: state
+                        entity: input_boolean.vmc_master_installa_vmc_scheda_password
+                        state: 'on'
+                      card:
+                        type: markdown
+                        content: |-
+                          Cambia la password della rete **{{ states('input_text.vmc_master_installa_vmc_rete_vmc') or 'VMC_xxxxxxxx' }}**, solo con la VMC in **Access Point** (prima di collegarla alla rete di casa). Nuova password: da 8 a 32 caratteri tra lettere senza accenti, numeri e `$ @ ! % ? &`. Se il server usa solo il Wi-Fi serve anche la password di casa.
+                    - type: conditional
+                      conditions:
+                      - condition: state
+                        entity: input_boolean.vmc_master_installa_vmc_scheda_password
+                        state: 'on'
+                      card:
+                        type: entities
+                        show_header_toggle: false
+                        state_color: true
+                        entities:
+                          - entity: input_text.vmc_master_installa_vmc_password_vmc
+                            name: "Password Attuale Rete VMC"
+                          - entity: input_text.vmc_master_installa_vmc_nuova_password
+                          - entity: input_text.vmc_master_installa_vmc_ripeti_password
+                          - entity: input_text.vmc_master_installa_vmc_password_casa
+                            name: "Password Rete Casa (solo se il server usa il Wi-Fi)"
+                          - type: button
                             entity: script.vmc_master_installa_vmc_cambia_password
                             name: "Salva Nuova Password"
                             action_name: Esegui
@@ -11495,16 +11481,35 @@ cards:
                                 entity_id: script.vmc_master_installa_vmc_cambia_password
                               confirmation:
                                 text: "Vuoi Procedere? Annota la nuova password: servirà per ogni nuovo collegamento alla rete della VMC."
-                        - type: conditional
-                          conditions:
-                            - entity: input_boolean.vmc_master_installa_vmc_scheda_access_point
-                              state: 'on'
-                            - entity: binary_sensor.vmc_master_installa_vmc_configurata
-                              state: 'on'
-                            - entity: binary_sensor.vmc_master_installa_vmc_in_corso
-                              state_not: 'on'
-                          row:
-                            type: button
+                    - type: conditional
+                      conditions:
+                      - condition: state
+                        entity: input_boolean.vmc_master_installa_vmc_scheda_access_point
+                        state: 'on'
+                      card:
+                        type: markdown
+                        content: |-
+                          La VMC lascia la rete di casa e torna alla sua rete **VMC_xxxxxxxx**, come appena installata: serve per cambiarne la password o collegarla a un'altra rete. Finché non la ricolleghi Home Assistant non la raggiunge.
+                          {% if is_state('binary_sensor.vmc_master_installa_vmc_configurata', 'off') %}
+                          _Disponibile per la VMC collegata con i passi 1 e 2. Se la VMC non è più raggiungibile usa il Ripristino Wi-Fi di **Errori LED**._
+                          {% endif %}
+                    - type: conditional
+                      conditions:
+                      - condition: state
+                        entity: input_boolean.vmc_master_installa_vmc_scheda_access_point
+                        state: 'on'
+                      - condition: state
+                        entity: binary_sensor.vmc_master_installa_vmc_configurata
+                        state: 'on'
+                      - condition: state
+                        entity: binary_sensor.vmc_master_installa_vmc_in_corso
+                        state_not: 'on'
+                      card:
+                        type: entities
+                        show_header_toggle: false
+                        state_color: true
+                        entities:
+                          - type: button
                             entity: script.vmc_master_installa_vmc_access_point
                             name: "Riporta la VMC in Access Point"
                             action_name: Esegui
@@ -11515,85 +11520,6 @@ cards:
                                 entity_id: script.vmc_master_installa_vmc_access_point
                               confirmation:
                                 text: "Vuoi Procedere? La VMC lascia la rete di casa e torna alla rete VMC_xxxxxxxx: non sarà raggiungibile finché non la ricolleghi."
-                    - type: conditional
-                      conditions:
-                      - condition: state
-                        entity: input_boolean.vmc_master_installa_vmc_scheda_rete
-                        state: 'on'
-                      card:
-                        type: markdown
-                        content: |-
-                          {%- set vmc = state_attr('sensor.vmc_master_installa_vmc_stato', 'vmc_networks') or [] -%}
-                          {%- set altre = state_attr('sensor.vmc_master_installa_vmc_stato', 'wifi_networks') or [] -%}
-                          {% if vmc %}**Reti VMC trovate:** {% for n in vmc %}`{{ n.ssid }}` {{ n.signal }}%{{ ' · ' if not loop.last }}{% endfor %}
-                          {% endif %}{% if altre %}**Altre reti:** {% for n in altre %}{{ n.ssid }} {{ n.signal }}%{{ ' · ' if not loop.last }}{% endfor %}
-                          {% endif %}Password iniziale della rete VMC: **12345678**. Con il LED Allarme filtri acceso esegui prima il reset filtri. Serve Home Assistant OS con una scheda Wi-Fi riconosciuta. Vedere Pannello Informazioni, punto 24.
-                    - type: conditional
-                      conditions:
-                      - condition: state
-                        entity: binary_sensor.vmc_master_installa_vmc_in_corso
-                        state: 'on'
-                      card:
-                        type: markdown
-                        content: |-
-                          {%- set p = (state_attr('sensor.vmc_master_installa_vmc_stato', 'progress') or 0) | int(0) -%}
-                          {%- set pieni = (p / 10) | round(0, 'floor') | int -%}
-                          ⏳ **{{ states('sensor.vmc_master_installa_vmc_stato') }}** · {{ p }} %
-                          {{ '▰' * pieni }}{{ '▱' * (10 - pieni) }}
-                          {{ state_attr('sensor.vmc_master_installa_vmc_stato', 'message') or 'Attendi il completamento della procedura.' }}
-                    - type: conditional
-                      conditions:
-                      - condition: state
-                        entity: binary_sensor.vmc_master_installa_vmc_in_corso
-                        state_not: 'on'
-                      - condition: state
-                        entity: sensor.vmc_master_installa_vmc_stato
-                        state_not: In attesa
-                      card:
-                        type: markdown
-                        content: |-
-                          {%- set a = states.sensor.vmc_master_installa_vmc_stato.attributes -%}
-                          {%- set titoli = {
-                            'configure': ['VMC collegata', 'Errore collegamento VMC'],
-                            'verify': ['Indirizzo VMC verificato', 'Errore indirizzo VMC'],
-                            'rename': ['VMC rinominata', 'Errore rinomina VMC'],
-                            'ap_password': ['Password VMC cambiata', 'Errore cambio password VMC'],
-                            'ap_mode': ['VMC in Access Point', 'Errore ritorno Access Point'],
-                            'scan': ['Ricerca reti completata', 'Errore ricerca reti'],
-                            'recover': ['Rete server ripristinata', 'Errore ripristino rete server']} -%}
-                          {%- set t = titoli.get(a.get('action', ''), [states('sensor.vmc_master_installa_vmc_stato'), states('sensor.vmc_master_installa_vmc_stato')]) -%}
-                          {{ '✅' if a.get('success') else '❌' }} **{{ t[0] if a.get('success') else t[1] }}**
-                          {{ a.get('message') or '' }}
-                          {% if a.get('success') and a.get('vmc_ip') %}
-                          IP: **{{ a.get('vmc_ip') }}** · Nome: {{ a.get('vmc_name') }}{% if a.get('vmc_mac') %} · MAC: `{{ a.get('vmc_mac') }}`{% endif %}
-                          {% endif %}{% if is_state('binary_sensor.vmc_master_installa_vmc_configurata', 'on') %}
-                          Prenota sul router un IP fisso per il MAC della VMC e scrivilo in «IP Fisso VMC (Router)»: la verifica parte da sola. Poi premi «Usa IP per Cambia IP VMC».
-                          {% endif %}{% if not a.get('success') and a.get('action') == 'configure' and a.get('network_sent') %}
-                          Apri la voce **Errori LED** per leggere i lampeggi del LED Allarme filtri.
-                          {% endif %}
-                    - type: conditional
-                      conditions:
-                      - condition: state
-                        entity: input_boolean.vmc_master_installa_vmc_scheda_access_point
-                        state: 'on'
-                      card:
-                        type: markdown
-                        content: |-
-                          La VMC lascia la rete di casa e torna alla sua rete **VMC_xxxxxxxx**, come appena installata: serve per cambiarne la password o collegarla a un'altra rete. Finché non la ricolleghi Home Assistant non la raggiunge.
-                          {% if is_state('binary_sensor.vmc_master_installa_vmc_configurata', 'on') %}
-                          VMC: **{{ state_attr('sensor.vmc_master_installa_vmc_stato', 'configured_name') }}** · IP: {{ state_attr('sensor.vmc_master_installa_vmc_stato', 'configured_ip') }} · Rete VMC: {{ state_attr('sensor.vmc_master_installa_vmc_stato', 'configured_ap_ssid') }}
-                          {% else %}
-                          _Disponibile per la VMC collegata con la voce **Rete**. Se la VMC non è più raggiungibile usa il Ripristino Wi-Fi della voce **Errori LED**._
-                          {% endif %}
-                    - type: conditional
-                      conditions:
-                      - condition: state
-                        entity: input_boolean.vmc_master_installa_vmc_scheda_password
-                        state: 'on'
-                      card:
-                        type: markdown
-                        content: |-
-                          Si può cambiare **solo con la VMC in Access Point** (prima di collegarla alla rete di casa). Nuova password: da 8 a 32 caratteri tra lettere senza accenti, numeri e `$ @ ! % ? &`.
                     - type: conditional
                       conditions:
                       - condition: state
@@ -11615,7 +11541,49 @@ cards:
 
                           Con gli errori 1 e 2 per 3 volte di seguito la VMC torna da sola in Access Point. Le segnalazioni compaiono solo se l'allarme filtri non è già attivo.
 
-                          **Ripristino Wi-Fi:** spegni la VMC, togli corrente a monte, ridai corrente **tenendo premuto il tasto Notturna** fino alla fine dei 7 lampeggi di tutti i LED, poi ripeti la voce **Rete** (password 12345678).
+                          **Ripristino Wi-Fi:** spegni la VMC, togli corrente a monte, ridai corrente **tenendo premuto il tasto Notturna** fino alla fine dei 7 lampeggi di tutti i LED, poi ripeti i passi 1 e 2 (password 12345678).
+                    - type: markdown
+                      content: |-
+                        {%- set st = 'sensor.vmc_master_installa_vmc_stato' -%}
+                        {%- set a = states[st].attributes if states[st] is not none else {} -%}
+                        {%- set titoli = {
+                          'configure': ['VMC collegata', 'Errore collegamento VMC'],
+                          'verify': ['Indirizzo VMC verificato', 'Errore indirizzo VMC'],
+                          'rename': ['VMC rinominata', 'Errore rinomina VMC'],
+                          'ap_password': ['Password VMC cambiata', 'Errore cambio password VMC'],
+                          'ap_mode': ['VMC in Access Point', 'Errore ritorno Access Point'],
+                          'scan': ['Ricerca reti completata', 'Errore ricerca reti'],
+                          'recover': ['Rete server ripristinata', 'Errore ripristino rete server']} -%}
+                        {%- if is_state('binary_sensor.vmc_master_installa_vmc_configurata', 'on') %}
+                        <font color="#43a047"><ha-icon icon="mdi:check-circle"></ha-icon></font> **VMC trovata:** {{ a.get('configured_ap_ssid') }}
+                        <font color="#43a047"><ha-icon icon="mdi:check-circle"></ha-icon></font> **Collegata alla rete di casa:** IP {{ a.get('configured_ip') }} · Nome {{ a.get('configured_name') }}{% if a.get('configured_mac') %} · MAC `{{ a.get('configured_mac') }}`{% endif %}
+
+                        Prenota sul router un IP fisso per il MAC della VMC e scrivilo in «IP Fisso VMC (Router)»: la verifica parte da sola. Poi premi «Usa IP per Cambia IP VMC».
+                        {%- endif %}
+                        {%- if is_state('binary_sensor.vmc_master_installa_vmc_in_corso', 'on') %}
+                        {%- set p = (a.get('progress') or 0) | int(0) %}
+                        {%- set pieni = (p / 10) | round(0, 'floor') | int %}
+
+                        ⏳ **{{ states(st) }}** · {{ p }} %
+                        {{ '▰' * pieni }}{{ '▱' * (10 - pieni) }}
+                        {{ a.get('message') or 'Attendi il completamento della procedura.' }}
+                        {%- elif states(st) not in ['In attesa', 'unknown', 'unavailable'] and a.get('action') %}
+                        {%- set t = titoli.get(a.get('action', ''), [states(st), states(st)]) %}
+
+                        {{ '✅' if a.get('success') else '❌' }} **{{ t[0] if a.get('success') else t[1] }}**
+                        {{ a.get('message') or '' }}
+                        {%- if not a.get('success') and a.get('action') == 'configure' and a.get('network_sent') %}
+                        Apri **Errori LED** per leggere i lampeggi del LED Allarme filtri.
+                        {%- endif %}
+                        {%- elif is_state('binary_sensor.vmc_master_installa_vmc_configurata', 'off') %}
+
+                        ℹ️ Premi «Cerca» o scrivi il nome VMC_xxxxxxxx letto sullo smartphone. Password della rete VMC: **{{ '12345678' if states('input_text.vmc_master_installa_vmc_password_vmc') in ['12345678', ''] else 'quella di «Cambia Password VMC»' }}**. Con il LED Allarme filtri acceso esegui prima il reset filtri. Serve Home Assistant OS con una scheda Wi-Fi riconosciuta.
+                        {%- endif %}
+                        {%- set vmc = a.get('vmc_networks') or [] %}
+                        {%- if vmc and is_state('binary_sensor.vmc_master_installa_vmc_configurata', 'off') %}
+
+                        **Reti VMC trovate:** {% for n in vmc %}`{{ n.ssid }}` {{ n.signal }}%{{ ' · ' if not loop.last }}{% endfor %}
+                        {%- endif %}
 # >>> FINE SEZIONE INSTALLA VMC (SOLO MASTER, RIMOSSA DA VMC_SCRIPT_CLONA.SH) <<<
         - type: conditional
           conditions:
@@ -14030,18 +13998,23 @@ cards:
                   interrompe per qualche secondo. Il motore è in Python (solo libreria standard) ed è incluso nel Package: non
                   servono HACS, add-on o file separati. Viene preparato da solo nella cartella /config/.vmc_master_installa_vmc.
                   <br><br>
-                  <b>Le quattro voci.</b> In alto nella finestra quattro icone scelgono la voce; ne resta aperta una sola.
-                  <br>• <b>Rete</b>: «Cerca» trova le reti VMC_xxxxxxxx (con una sola rete il nome si compila da solo); password
-                  iniziale della rete VMC 12345678; scrivere nome e password del Wi-Fi di casa e premere «Collega VMC alla Rete».
-                  Al termine compaiono IP, nome e MAC della VMC: prenotare sul router un IP fisso per quel MAC e scriverlo in
-                  «IP Fisso VMC (Router)» (la verifica della stessa VMC parte da sola), poi premere «Usa IP per Cambia IP VMC»:
-                  l'IP viene scritto in «Cambia IP VMC (Riavvio di H.A.)» e Home Assistant si riavvia.
-                  <br>• <b>Password VMC</b>: cambia la password della rete VMC_xxxxxxxx, solo con la VMC in Access Point.
+                  <b>I tre passi.</b> All'apertura la finestra mostra solo i passi del collegamento.
+                  <br>1. <b>Trova la VMC</b>: «Cerca» trova le reti VMC_xxxxxxxx (con una sola rete il nome si compila da solo),
+                  oppure scrivere il nome letto sullo smartphone; password della rete VMC di fabbrica 12345678.
+                  <br>2. <b>Collega al Wi-Fi di casa</b>: scrivere nome e password del Wi-Fi di casa e premere «Collega VMC alla
+                  Rete». Al termine i passi 1 e 2 diventano righe verdi con IP, nome e MAC della VMC.
+                  <br>3. <b>IP fisso e IP nel Package</b>: prenotare sul router un IP fisso per quel MAC e scriverlo in «IP Fisso VMC
+                  (Router)» (la verifica della stessa VMC parte da sola), poi premere «Usa IP per Cambia IP VMC»: l'IP viene scritto
+                  in «Cambia IP VMC (Riavvio di H.A.)» e Home Assistant si riavvia. «Collega un'Altra VMC» riporta la finestra ai
+                  passi 1 e 2 (per esempio per una VMC da clonare).
+                  <br><br>
+                  <b>Gli strumenti.</b> Tre icone in fondo alla finestra aprono un riquadro sotto; ne resta aperto uno solo.
+                  <br>• <b>Cambia Password VMC</b>: cambia la password della rete VMC_xxxxxxxx, solo con la VMC in Access Point.
                   <br>• <b>Access Point</b>: riporta la VMC alla sua rete VMC_xxxxxxxx; finché non viene ricollegata Home Assistant
                   non la raggiunge.
                   <br>• <b>Errori LED</b>: tabella dei lampeggi del LED Allarme filtri e Ripristino Wi-Fi dal pannello comandi.
                   <br><br>
-                  <b>Avanzamento ed esito.</b> Sotto la finestra compaiono l'avanzamento della procedura e poi l'esito, che arriva
+                  <b>Avanzamento ed esito.</b> Nel riquadro in fondo compaiono l'avanzamento della procedura e poi l'esito, che arriva
                   anche come notifica. Lo stato viene letto ogni 5 secondi solo con la finestra aperta o con una procedura in corso.
                   <br><br>
                   <b>N.b.</b> Il nome della VMC si cambia con «Cambia Nome VMC» del pannello Impostazioni (VMC ON-Line). Le
