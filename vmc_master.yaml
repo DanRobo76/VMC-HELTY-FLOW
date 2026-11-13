@@ -157,7 +157,7 @@ homeassistant:
 command_line:
 # >>> INIZIO SEZIONE INSTALLA VMC (SOLO MASTER, RIMOSSA DA VMC_SCRIPT_CLONA.SH) <<<
   - sensor:
-      name: vmc_master_installa_vmc_stato                                       # [CONFIGURAZIONE, 15 RICHIAMI] [INTERFACCIA, 25 RICHIAMI] [AUTOMAZIONE, 0 RICHIAMI] PRIMA INSTALLAZIONE VMC: STATO DELLA PROCEDURA (LETTO OGNI 5 S SOLO CON LA FINESTRA APERTA O UNA PROCEDURA IN CORSO)
+      name: vmc_master_installa_vmc_stato                                       # [CONFIGURAZIONE, 15 RICHIAMI] [INTERFACCIA, 3 RICHIAMI] [AUTOMAZIONE, 0 RICHIAMI] PRIMA INSTALLAZIONE VMC: STATO DELLA PROCEDURA (LETTO OGNI 5 S SOLO CON LA FINESTRA APERTA O UNA PROCEDURA IN CORSO)
       unique_id: vmc_master_installa_vmc_stato
       command: |-
         python3 -c '
@@ -279,14 +279,14 @@ sensor:
 template:
 # >>> INIZIO SEZIONE INSTALLA VMC (SOLO MASTER, RIMOSSA DA VMC_SCRIPT_CLONA.SH) <<<
   - binary_sensor:
-      - default_entity_id: binary_sensor.vmc_master_installa_vmc_in_corso       # [CONFIGURAZIONE, 3 RICHIAMI] [INTERFACCIA, 15 RICHIAMI] [AUTOMAZIONE, 0 RICHIAMI] PRIMA INSTALLAZIONE VMC: PROCEDURA IN CORSO
+      - default_entity_id: binary_sensor.vmc_master_installa_vmc_in_corso       # [CONFIGURAZIONE, 3 RICHIAMI] [INTERFACCIA, 13 RICHIAMI] [AUTOMAZIONE, 0 RICHIAMI] PRIMA INSTALLAZIONE VMC: PROCEDURA IN CORSO
         name: "Installa VMC In Corso"
         unique_id: vmc_master_installa_vmc_in_corso
         icon: mdi:progress-clock
         state: >-
           {{ (state_attr('sensor.vmc_master_installa_vmc_stato', 'job_id') or '') != ''
              and state_attr('sensor.vmc_master_installa_vmc_stato', 'finished') == false }}
-      - default_entity_id: binary_sensor.vmc_master_installa_vmc_configurata    # [CONFIGURAZIONE, 2 RICHIAMI] [INTERFACCIA, 11 RICHIAMI] [AUTOMAZIONE, 0 RICHIAMI] PRIMA INSTALLAZIONE VMC: VMC COLLEGATA ALLA RETE DI CASA E RITROVATA
+      - default_entity_id: binary_sensor.vmc_master_installa_vmc_configurata    # [CONFIGURAZIONE, 2 RICHIAMI] [INTERFACCIA, 33 RICHIAMI] [AUTOMAZIONE, 0 RICHIAMI] PRIMA INSTALLAZIONE VMC: VMC COLLEGATA ALLA RETE DI CASA E RITROVATA
         name: "Installa VMC Configurata"
         unique_id: vmc_master_installa_vmc_configurata
         icon: mdi:wifi-check
@@ -3683,7 +3683,7 @@ template:
 ################### Inizio Creazione Etichette Interfaccia Lovelace #######################################################################################################################################################
 input_text:
 # >>> INIZIO SEZIONE INSTALLA VMC (SOLO MASTER, RIMOSSA DA VMC_SCRIPT_CLONA.SH) <<<
-  vmc_master_installa_vmc_rete_vmc:                                             # [CONFIGURAZIONE, 11 RICHIAMI] [INTERFACCIA, 5 RICHIAMI] [AUTOMAZIONE, 0 RICHIAMI] PRIMA INSTALLAZIONE VMC: NOME DELLA RETE WI-FI DELLA VMC (VMC_xxxxxxxx), CONSERVATO AL RIAVVIO
+  vmc_master_installa_vmc_rete_vmc:                                             # [CONFIGURAZIONE, 12 RICHIAMI] [INTERFACCIA, 5 RICHIAMI] [AUTOMAZIONE, 0 RICHIAMI] PRIMA INSTALLAZIONE VMC: NOME DELLA RETE WI-FI DELLA VMC (VMC_xxxxxxxx), CONSERVATO AL RIAVVIO
     name: "Rete Wi-Fi VMC"
     max: 32
     icon: mdi:access-point
@@ -3693,7 +3693,7 @@ input_text:
     mode: password
     max: 63
     icon: mdi:lock
-  vmc_master_installa_vmc_rete_casa:                                            # [CONFIGURAZIONE, 4 RICHIAMI] [INTERFACCIA, 5 RICHIAMI] [AUTOMAZIONE, 0 RICHIAMI] PRIMA INSTALLAZIONE VMC: NOME DELLA RETE WI-FI DI CASA, CONSERVATO AL RIAVVIO
+  vmc_master_installa_vmc_rete_casa:                                            # [CONFIGURAZIONE, 4 RICHIAMI] [INTERFACCIA, 3 RICHIAMI] [AUTOMAZIONE, 0 RICHIAMI] PRIMA INSTALLAZIONE VMC: NOME DELLA RETE WI-FI DI CASA, CONSERVATO AL RIAVVIO
     name: "Rete Wi-Fi Casa"
     max: 32
     icon: mdi:wifi
@@ -3703,7 +3703,7 @@ input_text:
     mode: password
     max: 32
     icon: mdi:lock
-  vmc_master_installa_vmc_ip_vmc:                                               # [CONFIGURAZIONE, 7 RICHIAMI] [INTERFACCIA, 3 RICHIAMI] [AUTOMAZIONE, 0 RICHIAMI] PRIMA INSTALLAZIONE VMC: IP DELLA VMC RILEVATO O PRENOTATO SUL ROUTER (SCRIVENDOLO PARTE LA VERIFICA)
+  vmc_master_installa_vmc_ip_vmc:                                               # [CONFIGURAZIONE, 8 RICHIAMI] [INTERFACCIA, 3 RICHIAMI] [AUTOMAZIONE, 0 RICHIAMI] PRIMA INSTALLAZIONE VMC: IP DELLA VMC RILEVATO O PRENOTATO SUL ROUTER (SCRIVENDOLO PARTE LA VERIFICA)
     name: "IP Fisso VMC (Router)"
     max: 15
     icon: mdi:ip-network
@@ -4249,7 +4249,6 @@ recorder:
       - input_text.vmc_master_installa_vmc_nuova_password
       - input_text.vmc_master_installa_vmc_ripeti_password
       - input_boolean.vmc_master_installa_vmc_finestra
-      - input_boolean.vmc_master_installa_vmc_scheda_rete
       - input_boolean.vmc_master_installa_vmc_scheda_password
       - input_boolean.vmc_master_installa_vmc_scheda_access_point
       - input_boolean.vmc_master_installa_vmc_scheda_errori
@@ -4262,6 +4261,7 @@ recorder:
       - script.vmc_master_installa_vmc_cambia_password
       - script.vmc_master_installa_vmc_access_point
       - script.vmc_master_installa_vmc_usa_ip
+      - script.vmc_master_installa_vmc_nuova_vmc
       - automation.vmc_master_installa_vmc_avvio
       - automation.vmc_master_installa_vmc_notifica_esito
       - automation.vmc_master_installa_vmc_verifica_ip
@@ -4918,19 +4918,15 @@ input_boolean:
     name: "Prima Installazione"
     initial: false
     icon: mdi:wifi-cog
-  vmc_master_installa_vmc_scheda_rete:                                          # [CONFIGURAZIONE, 3 RICHIAMI] [INTERFACCIA, 21 RICHIAMI] [AUTOMAZIONE, 0 RICHIAMI] PRIMA INSTALLAZIONE VMC: VOCE RETE (COLLEGAMENTO DELLA VMC AL WI-FI DI CASA)
-    name: "Rete"
-    initial: true
-    icon: mdi:wifi-arrow-up-down
-  vmc_master_installa_vmc_scheda_password:                                      # [CONFIGURAZIONE, 3 RICHIAMI] [INTERFACCIA, 21 RICHIAMI] [AUTOMAZIONE, 0 RICHIAMI] PRIMA INSTALLAZIONE VMC: VOCE CAMBIA PASSWORD DELLA RETE DELLA VMC
-    name: "Password VMC"
+  vmc_master_installa_vmc_scheda_password:                                      # [CONFIGURAZIONE, 3 RICHIAMI] [INTERFACCIA, 7 RICHIAMI] [AUTOMAZIONE, 0 RICHIAMI] PRIMA INSTALLAZIONE VMC: STRUMENTO CAMBIA PASSWORD DELLA RETE DELLA VMC
+    name: "Cambia Password VMC"
     initial: false
     icon: mdi:lock-reset
-  vmc_master_installa_vmc_scheda_access_point:                                  # [CONFIGURAZIONE, 3 RICHIAMI] [INTERFACCIA, 7 RICHIAMI] [AUTOMAZIONE, 0 RICHIAMI] PRIMA INSTALLAZIONE VMC: VOCE RITORNO DELLA VMC IN ACCESS POINT
+  vmc_master_installa_vmc_scheda_access_point:                                  # [CONFIGURAZIONE, 3 RICHIAMI] [INTERFACCIA, 7 RICHIAMI] [AUTOMAZIONE, 0 RICHIAMI] PRIMA INSTALLAZIONE VMC: STRUMENTO RITORNO DELLA VMC IN ACCESS POINT
     name: "Access Point"
     initial: false
     icon: mdi:access-point-network
-  vmc_master_installa_vmc_scheda_errori:                                        # [CONFIGURAZIONE, 3 RICHIAMI] [INTERFACCIA, 5 RICHIAMI] [AUTOMAZIONE, 0 RICHIAMI] PRIMA INSTALLAZIONE VMC: VOCE ERRORI DEL LED E RIPRISTINO WI-FI
+  vmc_master_installa_vmc_scheda_errori:                                        # [CONFIGURAZIONE, 3 RICHIAMI] [INTERFACCIA, 5 RICHIAMI] [AUTOMAZIONE, 0 RICHIAMI] PRIMA INSTALLAZIONE VMC: STRUMENTO ERRORI DEL LED E RIPRISTINO WI-FI
     name: "Errori LED"
     initial: false
     icon: mdi:alert-circle-outline
@@ -5777,9 +5773,9 @@ script:
   vmc_master_installa_vmc_cerca_reti:                                           # [CONFIGURAZIONE, 1 RICHIAMO] [INTERFACCIA, 5 RICHIAMI] [AUTOMAZIONE, 0 RICHIAMI] PRIMA INSTALLAZIONE VMC: CERCA LE RETI WI-FI VMC_xxxxxxxx (COME LA SCANSIONE DELL'APP)
     alias: VMC Master - Installa VMC Cerca Reti VMC
     description: >
-      Pulsante «Cerca» della voce Rete nella Finestra Prima Installazione VMC: il Wi-Fi del server cerca le reti
+      Pulsante «Cerca» del passo 1 nella Finestra Prima Installazione VMC: il Wi-Fi del server cerca le reti
       visibili, come la scansione dello smartphone nell'App Air Guard. Se trova una sola rete VMC_xxxxxxxx ne
-      scrive il nome nel campo «Rete Wi-Fi VMC». Le reti trovate compaiono sotto la finestra.
+      scrive il nome nel campo «Rete Wi-Fi VMC». Le reti trovate compaiono nel riquadro di stato.
     icon: mdi:wifi-refresh
     mode: single
     max_exceeded: silent
@@ -5794,7 +5790,7 @@ script:
   vmc_master_installa_vmc_configura:                                            # [CONFIGURAZIONE, 1 RICHIAMO] [INTERFACCIA, 5 RICHIAMI] [AUTOMAZIONE, 0 RICHIAMI] PRIMA INSTALLAZIONE VMC: COLLEGA LA VMC ALLA RETE DI CASA (CONFIGURAZIONE RETE, INFRASTRUTTURA)
     alias: VMC Master - Installa VMC Collega VMC alla Rete
     description: >
-      Pulsante «Collega VMC alla Rete» della voce Rete nella Finestra Prima Installazione VMC, come «Salva» in
+      Pulsante «Collega VMC alla Rete» del passo 2 nella Finestra Prima Installazione VMC, come «Salva» in
       Configurazione rete › Infrastruttura dell'App Air Guard: il server si collega per pochi secondi alla rete
       della VMC, ne legge il nome, le invia nome e password del Wi-Fi di casa, ripristina il proprio Wi-Fi e
       ritrova la VMC sulla rete di casa (IP e MAC). Avviata la procedura cancella la password di casa dal campo.
@@ -5829,7 +5825,7 @@ script:
   vmc_master_installa_vmc_cambia_password:                                      # [CONFIGURAZIONE, 1 RICHIAMO] [INTERFACCIA, 5 RICHIAMI] [AUTOMAZIONE, 0 RICHIAMI] PRIMA INSTALLAZIONE VMC: CAMBIA LA PASSWORD DELLA RETE DELLA VMC (SOLO IN ACCESS POINT)
     alias: VMC Master - Installa VMC Cambia Password VMC
     description: >
-      Pulsante della voce Password VMC nella Finestra Prima Installazione VMC: cambia la password della rete
+      Pulsante dello strumento Cambia Password VMC nella Finestra Prima Installazione VMC: cambia la password della rete
       VMC_xxxxxxxx, solo con la VMC in modalità Access Point come indica il manuale Helty. Se la nuova password e
       la ripetizione non coincidono si ferma con una notifica. Avviata la procedura svuota i campi delle password.
     icon: mdi:lock-reset
@@ -5874,7 +5870,7 @@ script:
   vmc_master_installa_vmc_access_point:                                         # [CONFIGURAZIONE, 1 RICHIAMO] [INTERFACCIA, 5 RICHIAMI] [AUTOMAZIONE, 0 RICHIAMI] PRIMA INSTALLAZIONE VMC: RIPORTA LA VMC ALLA SUA RETE VMC_xxxxxxxx (ACCESS POINT)
     alias: VMC Master - Installa VMC Riporta la VMC in Access Point
     description: >
-      Pulsante della voce Access Point nella Finestra Prima Installazione VMC, come Configurazione rete › Access
+      Pulsante dello strumento Access Point nella Finestra Prima Installazione VMC, come Configurazione rete › Access
       Point dell'App Air Guard: la VMC lascia la rete di casa e torna alla sua rete VMC_xxxxxxxx. Finché non viene
       ricollegata Home Assistant non la raggiunge.
     icon: mdi:access-point-network
@@ -5893,7 +5889,7 @@ script:
   vmc_master_installa_vmc_usa_ip:                                               # [CONFIGURAZIONE, 1 RICHIAMO] [INTERFACCIA, 5 RICHIAMI] [AUTOMAZIONE, 0 RICHIAMI] PRIMA INSTALLAZIONE VMC: COPIA L'IP VERIFICATO DELLA VMC IN CAMBIA IP VMC (RIAVVIO DI H.A.)
     alias: VMC Master - Installa VMC Usa IP per Cambia IP
     description: >
-      Pulsante «Usa IP per Cambia IP VMC» della voce Rete nella Finestra Prima Installazione VMC: scrive l'ultimo
+      Pulsante «Usa IP per Cambia IP VMC» del passo 3 nella Finestra Prima Installazione VMC: scrive l'ultimo
       IP verificato della VMC appena collegata nel campo «Cambia IP VMC (Riavvio di H.A.)», che aggiorna l'IP in
       tutti i file del Package e riavvia Home Assistant. Non fa nulla se l'IP verificato manca o non è valido.
     icon: mdi:ip-network
@@ -5909,6 +5905,24 @@ script:
           entity_id: input_text.vmc_master_ip_insert
         data:
           value: "{{ ip_verificato }}"
+
+  vmc_master_installa_vmc_nuova_vmc:                                            # [CONFIGURAZIONE, 1 RICHIAMO] [INTERFACCIA, 5 RICHIAMI] [AUTOMAZIONE, 0 RICHIAMI] PRIMA INSTALLAZIONE VMC: RIPARTE DAL PASSO 1 PER COLLEGARE UN'ALTRA VMC
+    alias: VMC Master - Installa VMC Collega un'Altra VMC
+    description: >
+      Pulsante «Collega un'Altra VMC» del passo 3 nella Finestra Prima Installazione VMC: svuota i campi Rete
+      Wi-Fi VMC e IP Fisso VMC, così la finestra torna ai passi 1 e 2 per collegare un'altra VMC (per esempio
+      una da clonare). Non modifica la VMC già collegata.
+    icon: mdi:plus-network
+    mode: single
+    max_exceeded: silent
+    sequence:
+      - action: input_text.set_value
+        target:
+          entity_id:
+            - input_text.vmc_master_installa_vmc_rete_vmc
+            - input_text.vmc_master_installa_vmc_ip_vmc
+        data:
+          value: ""
 # >>> FINE SEZIONE INSTALLA VMC (SOLO MASTER, RIMOSSA DA VMC_SCRIPT_CLONA.SH) <<<
 # >>> INIZIO SEZIONE CLONA VMC (SOLO MASTER, RIMOSSA DA VMC_SCRIPT_CLONA.SH) <<<
   vmc_master_clona_vmc:                                                         # [CONFIGURAZIONE, 2 RICHIAMI] [INTERFACCIA, 0 RICHIAMI] [AUTOMAZIONE, 0 RICHIAMI] CLONA VMC: CREA LA CARTELLA DELLA NUOVA VMC
@@ -18331,13 +18345,13 @@ automation:
         target:
           entity_id: sensor.vmc_master_installa_vmc_stato
 
-  - id: "vmc_master_installa_vmc_finestre"                                      # [CONFIGURAZIONE, 2 RICHIAMI] [INTERFACCIA, 1 RICHIAMO] [AUTOMAZIONE, 0 RICHIAMI] PRIMA INSTALLAZIONE VMC: ESCLUSIVITA' DELLA FINESTRA E DELLE SUE VOCI
+  - id: "vmc_master_installa_vmc_finestre"                                      # [CONFIGURAZIONE, 2 RICHIAMI] [INTERFACCIA, 1 RICHIAMO] [AUTOMAZIONE, 0 RICHIAMI] PRIMA INSTALLAZIONE VMC: ESCLUSIVITA' DELLA FINESTRA E DEI SUOI STRUMENTI
     alias: "VMC Master - Installa VMC Finestre"
     description: >
       La Finestra Prima Installazione VMC si comporta come le altre finestre del pannello Impostazioni (Audio,
       Clona, Calendario, ...): aprendola si chiudono le altre, aprendo un'altra si chiude lei, e si chiude anche
-      quando si apre o si chiude il pannello. Delle sue quattro voci (Rete, Password VMC, Access Point, Errori LED)
-      ne resta aperta una sola: aprendone una si chiudono le altre.
+      quando si apre o si chiude il pannello. Dei suoi tre strumenti in fondo alla finestra (Cambia Password VMC,
+      Access Point, Errori LED) ne resta aperto uno solo: aprendone uno si chiudono gli altri.
     mode: queued
     max: 10
     trace:
@@ -18365,7 +18379,6 @@ automation:
         id: pannello
       - trigger: state
         entity_id:
-          - input_boolean.vmc_master_installa_vmc_scheda_rete
           - input_boolean.vmc_master_installa_vmc_scheda_password
           - input_boolean.vmc_master_installa_vmc_scheda_access_point
           - input_boolean.vmc_master_installa_vmc_scheda_errori
@@ -18405,8 +18418,7 @@ automation:
               - action: input_boolean.turn_off
                 target:
                   entity_id: >-
-                    {{ ['input_boolean.vmc_master_installa_vmc_scheda_rete',
-                        'input_boolean.vmc_master_installa_vmc_scheda_password',
+                    {{ ['input_boolean.vmc_master_installa_vmc_scheda_password',
                         'input_boolean.vmc_master_installa_vmc_scheda_access_point',
                         'input_boolean.vmc_master_installa_vmc_scheda_errori']
                        | reject('eq', trigger.entity_id) | list }}
