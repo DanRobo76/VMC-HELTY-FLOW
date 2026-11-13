@@ -519,7 +519,7 @@ template:
       - default_entity_id: sensor.vmc_master_versione_corrente                  # [CONFIGURAZIONE, 4 RICHIAMI] [INTERFACCIA, 3 RICHIAMI] [AUTOMAZIONE, 4 RICHIAMI] SENSORE PER VISUALIZZARE LA VERSIONE CORRENTE INSTALLATA IN HOME ASSISTANT DA CONFRONTARE NEL REPOSITORY DI GITHUB: https://github.com/DanRobo76/VMC-HELTY-FLOW IN Releases TRAMITE AUTOMAZIONE
         name: "Package Ver."
         unique_id: vmc_master_versione_corrente
-        state: "v.8.5.1"
+        state: "v.8.6.0"
         icon: mdi:check-decagram-outline
 
   - sensor:
