@@ -63,9 +63,11 @@ cp "${input_dir}vmc_master.yaml" "${subfolder}vmc_${slave_nome}.yaml"
 
 # Rimuove la sezione Clona VMC, presente solo nella Master: i blocchi fra i segnaposto "SEZIONE CLONA VMC"
 # e le singole righe della Finestra Clona e delle entità di clonazione (vmc_master_clona_...);
-# dove la Finestra Clona è una voce di un elenco scritto su una sola riga, toglie solo la voce e non la riga
+# dove la Finestra Clona è una voce di un elenco scritto su una sola riga, toglie solo la voce e non la riga.
+# Rimuove anche la Finestra Prima Installazione VMC, presente solo nella Master: i blocchi fra i segnaposto
+# "SEZIONE INSTALLA VMC" e le singole righe delle sue entità (vmc_master_installa_vmc_...)
 for file_clone in "${subfolder}vmc_${slave_nome}_automazione.txt" "${subfolder}vmc_${slave_nome}_scheda_manuale_interfaccia.txt" "${subfolder}vmc_${slave_nome}.yaml"; do
-  sed -i '/>>> INIZIO SEZIONE CLONA VMC/,/>>> FINE SEZIONE CLONA VMC/d; s/'"'"'input_boolean\.vmc_master_opzione_finestra_clona'"'"', //g; /vmc_master_opzione_finestra_clona/d; /vmc_master_clona_/d' "$file_clone"
+  sed -i '/>>> INIZIO SEZIONE CLONA VMC/,/>>> FINE SEZIONE CLONA VMC/d; s/'"'"'input_boolean\.vmc_master_opzione_finestra_clona'"'"', //g; /vmc_master_opzione_finestra_clona/d; /vmc_master_clona_/d; />>> INIZIO SEZIONE INSTALLA VMC/,/>>> FINE SEZIONE INSTALLA VMC/d; /vmc_master_installa_vmc_/d' "$file_clone"
 done
 
 # Sostituisci "master" (case-sensitive)
