@@ -25881,16 +25881,16 @@ automation:
           for_each: "{{ chiavi }}"
           sequence:
             - variables:
-                intervallo: "{{ letture[repeat.item][1] }}"
+                intervallo: "{{ letture[repeat.item][1] | int(1) }}"
                 timer_lettura: "timer.vmc_master_lettura_{{ repeat.item }}"
                 ultima: "{{ as_timestamp(states[letture[repeat.item][0]].last_reported, as_timestamp(now())) if states[letture[repeat.item][0]] is not none else as_timestamp(now()) }}"
-                trascorsi: "{{ (as_timestamp(now()) - ultima) % intervallo }}"
-                mancano: "{{ (intervallo - trascorsi) | round(0, 'ceil') | int if (intervallo - trascorsi) >= 1 else intervallo }}"
-                scarto: "{{ (as_timestamp(state_attr(timer_lettura, 'finishes_at'), 0) - (as_timestamp(now()) + mancano)) | abs if is_state(timer_lettura, 'active') else 9999 }}"
+                trascorsi: "{{ ((as_timestamp(now()) - (ultima | float(0))) % intervallo) | round(3) }}"
+                mancano: "{{ (intervallo - (trascorsi | float(0))) | round(0, 'ceil') | int if (intervallo - (trascorsi | float(0))) >= 1 else intervallo }}"
+                scarto: "{{ ((as_timestamp(state_attr(timer_lettura, 'finishes_at'), 0) - (as_timestamp(now()) + (mancano | int(0)))) | abs | round(3)) if is_state(timer_lettura, 'active') else 9999 }}"
                 secondi: "{{ intervallo if trigger.id == 'scaduto' else mancano }}"
             - if:
                 - condition: template
-                  value_template: "{{ trigger.id == 'scaduto' or scarto > 2 }}"
+                  value_template: "{{ trigger.id == 'scaduto' or (scarto | float(9999)) > 2 }}"
               then:
                 - action: timer.start
                   target:
