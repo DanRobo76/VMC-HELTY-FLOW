@@ -1,5 +1,9 @@
 <p align="center">
-  <img src="immagini/Collage%20VMC%20Master.webp" alt="VMC MASTER" width="100%">
+  <a href="https://github.com/DanRobo76/VMC-HELTY-FLOW/raw/main/Video/VMC_MASTER_promo_IT.mp4">
+    <img src="Video/anteprima_scene_IT.webp" alt="Video di presentazione di VMC MASTER (50 secondi)" width="100%">
+  </a>
+  <br>
+  <sub>Video di presentazione · 50 secondi · clicca per scaricarlo</sub>
 </p>
 
 ---
@@ -24,14 +28,6 @@
 <p align="center">
   <strong>La tua ventilazione meccanica controllata in Home Assistant.</strong><br>
   Package avanzato per VMC Helty Flow Plus / Elite: logiche con priorità, controllo locale e remoto, avvisi affidabili.
-</p>
-
-<p align="center">
-  <a href="https://github.com/DanRobo76/VMC-HELTY-FLOW/raw/main/Video/VMC_MASTER_promo_IT.mp4">
-    <img src="Video/anteprima_scene_IT.webp" alt="Video di presentazione di VMC MASTER (50 secondi)" width="720">
-  </a>
-  <br>
-  <sub>Video di presentazione · 50 secondi · clicca per scaricarlo</sub>
 </p>
 
 <p align="center">
