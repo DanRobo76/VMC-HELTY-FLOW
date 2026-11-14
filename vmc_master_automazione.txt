@@ -112,7 +112,8 @@ description: >-
 
   - Permette di Rinominare la VMC;
 
-  - Permette di Cambiare l'IP.
+  - Il Cambio dell'IP non è in questa automazione: lo esegue subito l'automazione
+  «VMC Master - Cambio IP VMC (Riavvio di H.A.)» del Package.
 
 
   PRIORITA' DI ATTIVAZIONE DEGLI ALLARMI (Secondi per l'Attivazione e per la
