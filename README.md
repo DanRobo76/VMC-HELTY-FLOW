@@ -27,6 +27,14 @@
 </p>
 
 <p align="center">
+  <a href="Video/VMC_MASTER_promo_IT.mp4">
+    <img src="Video/anteprima_video_IT.webp" alt="▶ Guarda il video di VMC MASTER (50 secondi)" width="720">
+  </a>
+  <br>
+  <strong>🎬 <a href="Video/VMC_MASTER_promo_IT.mp4">Guarda il video: VMC MASTER in 50 secondi</a></strong>
+</p>
+
+<p align="center">
   <a href="mailto:danilo.robotti@gmail.com">danilo.robotti@gmail.com</a>
 </p>
 
@@ -403,6 +411,14 @@
 <p align="center">
   <strong>Your mechanical ventilation, controlled in Home Assistant.</strong><br>
   Advanced package for Helty Flow Plus / Elite MVHR units: prioritized logic, local and remote control, reliable alerts.
+</p>
+
+<p align="center">
+  <a href="Video/VMC_MASTER_promo_EN.mp4">
+    <img src="Video/anteprima_video_EN.webp" alt="▶ Watch the VMC MASTER video (50 seconds)" width="720">
+  </a>
+  <br>
+  <strong>🎬 <a href="Video/VMC_MASTER_promo_EN.mp4">Watch the video: VMC MASTER in 50 seconds</a></strong>
 </p>
 
 <p align="center">
