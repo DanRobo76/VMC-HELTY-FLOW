@@ -159,7 +159,7 @@ homeassistant:
 command_line:
 # >>> INIZIO SEZIONE INSTALLA VMC (SOLO MASTER, RIMOSSA DA VMC_SCRIPT_CLONA.SH) <<<
   - sensor:
-      name: vmc_master_installa_vmc_stato                                       # [CONFIGURAZIONE, 15 RICHIAMI] [INTERFACCIA, 3 RICHIAMI] [AUTOMAZIONE, 0 RICHIAMI] PRIMA INSTALLAZIONE VMC: STATO DELLA PROCEDURA (LETTO OGNI 5 S SOLO CON LA FINESTRA APERTA O UNA PROCEDURA IN CORSO)
+      name: vmc_master_installa_vmc_stato                                       # [CONFIGURAZIONE, 17 RICHIAMI] [INTERFACCIA, 3 RICHIAMI] [AUTOMAZIONE, 0 RICHIAMI] PRIMA INSTALLAZIONE VMC: STATO DELLA PROCEDURA (LETTO OGNI 5 S SOLO CON LA FINESTRA APERTA O UNA PROCEDURA IN CORSO)
       unique_id: vmc_master_installa_vmc_stato
       command: |-
         python3 -c '
@@ -300,6 +300,42 @@ template:
           {{ rete not in ['', 'unknown', 'unavailable']
              and rete == state_attr('sensor.vmc_master_installa_vmc_stato', 'configured_ap_ssid')
              and (state_attr('sensor.vmc_master_installa_vmc_stato', 'configured_ip') or '') != '' }}
+  - sensor:
+      - default_entity_id: sensor.vmc_master_installa_vmc_verifica_ip           # [CONFIGURAZIONE, 2 RICHIAMI] [INTERFACCIA, 6 RICHIAMI] [AUTOMAZIONE, 0 RICHIAMI] PRIMA INSTALLAZIONE VMC: CONTROLLO DELL'IP VERIFICATO PRIMA DI IMPOSTARLO NELLA VMC MASTER (ok / non valido / già impostato / in uso, CON IL NOME DELLA VMC CHE LO USA)
+        name: "Installa VMC Verifica IP"
+        unique_id: vmc_master_installa_vmc_verifica_ip
+        icon: mdi:ip-network
+        state: >-
+          {%- set ip = (state_attr('sensor.vmc_master_installa_vmc_stato', 'configured_ip') or '') | trim -%}
+          {%- set ns = namespace(vmc='') -%}
+          {%- for s in states.sensor | rejectattr('attributes.restored', 'eq', true) | selectattr('entity_id', 'search', '^sensor\.vmc_[a-z]+_ip$') | rejectattr('entity_id', 'eq', 'sensor.vmc_master_ip') -%}
+            {%- if ns.vmc == '' and s.state | trim == ip -%}{%- set ns.vmc = s.entity_id | regex_replace('^sensor\.vmc_([a-z]+)_ip$', '\\1') | capitalize -%}{%- endif -%}
+          {%- endfor -%}
+          {%- set lista = states('input_text.vmc_master_clona_vmc_clonate') -%}
+          {%- for c in (lista.split(',') if lista not in ['', 'unknown', 'unavailable'] else []) -%}
+            {%- if ns.vmc == '' and c.split(':') | last | trim == ip -%}{%- set ns.vmc = c.split(':') | first | trim | capitalize -%}{%- endif -%}
+          {%- endfor -%}
+          {%- if not (ip is match('^(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$')) -%}
+            non valido
+          {%- elif ip == states('sensor.vmc_master_ip') | trim -%}
+            già impostato
+          {%- elif ns.vmc != '' -%}
+            in uso
+          {%- else -%}
+            ok
+          {%- endif -%}
+        attributes:
+          vmc: >-
+            {%- set ip = (state_attr('sensor.vmc_master_installa_vmc_stato', 'configured_ip') or '') | trim -%}
+            {%- set ns = namespace(vmc='') -%}
+            {%- for s in states.sensor | rejectattr('attributes.restored', 'eq', true) | selectattr('entity_id', 'search', '^sensor\.vmc_[a-z]+_ip$') | rejectattr('entity_id', 'eq', 'sensor.vmc_master_ip') -%}
+              {%- if ns.vmc == '' and s.state | trim == ip -%}{%- set ns.vmc = s.entity_id | regex_replace('^sensor\.vmc_([a-z]+)_ip$', '\\1') | capitalize -%}{%- endif -%}
+            {%- endfor -%}
+            {%- set lista = states('input_text.vmc_master_clona_vmc_clonate') -%}
+            {%- for c in (lista.split(',') if lista not in ['', 'unknown', 'unavailable'] else []) -%}
+              {%- if ns.vmc == '' and c.split(':') | last | trim == ip -%}{%- set ns.vmc = c.split(':') | first | trim | capitalize -%}{%- endif -%}
+            {%- endfor -%}
+            {{ ns.vmc }}
 # >>> FINE SEZIONE INSTALLA VMC (SOLO MASTER, RIMOSSA DA VMC_SCRIPT_CLONA.SH) <<<
   - triggers:                                                                  # ULTIMA LETTURA VALIDA DI sensor.vmc_master_status_ventola: DA HOME ASSISTANT 2026.x IL SENSORE TCP DIVENTA unavailable A OGNI LETTURA FALLITA (VMC SPENTA, BLACK-OUT, DISTURBO WI-FI); QUESTO SENSORE CONSERVA L'ULTIMO VALORE LETTO COME FACEVANO LE RELEASE PRECEDENTI DI HOME ASSISTANT
       - trigger: state
@@ -525,19 +561,29 @@ template:
         icon: mdi:check-decagram-outline
 
   - sensor:
-      - default_entity_id: sensor.vmc_master_verifica_ip_inserito               # [CONFIGURAZIONE, 4 RICHIAMI] [INTERFACCIA, 4 RICHIAMI] [AUTOMAZIONE, 0 RICHIAMI] VERIFICA DEL VALORE INSERIO NEL SENSORE "vmc_master_ip_insert" E' UN INDIRIZZO IP
+      - default_entity_id: sensor.vmc_master_verifica_ip_inserito               # [CONFIGURAZIONE, 2 RICHIAMI] [INTERFACCIA, 10 RICHIAMI] [AUTOMAZIONE, 0 RICHIAMI] VERIFICA DEL VALORE INSERIO NEL SENSORE "vmc_master_ip_insert": IP / IP non Valido / IP già impostato (E' GIA' L'IP DI QUESTA VMC) / IP già in uso (E' L'IP DI UN'ALTRA VMC DEL PACKAGE)
         name: "IP"
         unique_id: vmc_master_verifica_ip_inserito
         state: >
-          {% if states.input_text.vmc_master_ip_insert.state is match("^(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$") %}
-            {{ states.input_text.vmc_master_ip_insert.state }}
-          {% else %}
-            IP non Valido    
-          {% endif %}
+          {%- set ip = states('input_text.vmc_master_ip_insert') | trim -%}
+          {%- set ns = namespace(uso=false) -%}
+          {%- for s in states.sensor | rejectattr('attributes.restored', 'eq', true) | selectattr('entity_id', 'search', '^sensor\.vmc_[a-z]+_ip$') | rejectattr('entity_id', 'eq', 'sensor.vmc_master_ip') -%}
+            {%- if s.state | trim == ip -%}{%- set ns.uso = true -%}{%- endif -%}
+          {%- endfor -%}
+          {%- set ns.uso = ns.uso or ip in (states('input_text.vmc_master_clona_vmc_clonate').split(',') | map('regex_replace', '^[^:]*:', '') | list) -%}  {#- VMC CLONATE IN ATTESA DI RIAVVIO (RIGA SOLO MASTER, RIMOSSA DA VMC_SCRIPT_CLONA.SH) -#}
+          {%- if not (ip is match('^(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$')) -%}
+            IP non Valido
+          {%- elif ip == states('sensor.vmc_master_ip') | trim -%}
+            IP già impostato
+          {%- elif ns.uso -%}
+            IP già in uso
+          {%- else -%}
+            {{ ip }}
+          {%- endif -%}
         icon: mdi:ip    
 
   - sensor:
-      - default_entity_id: sensor.vmc_master_ip                                 # [CONFIGURAZIONE, 2 RICHIAMI] [INTERFACCIA, 4 RICHIAMI] [AUTOMAZIONE, 0 RICHIAMI] SENSORE PER VISUALIZZARE L'IP NELL'INTERFACCIA
+      - default_entity_id: sensor.vmc_master_ip                                 # [CONFIGURAZIONE, 9 RICHIAMI] [INTERFACCIA, 4 RICHIAMI] [AUTOMAZIONE, 0 RICHIAMI] SENSORE PER VISUALIZZARE L'IP NELL'INTERFACCIA
         name: "IP configurato su Porta 5001"
         unique_id: vmc_master_ip
         state: "999.999.999.999"
@@ -3709,7 +3755,7 @@ input_text:
     max: 32
     icon: mdi:lock
   vmc_master_installa_vmc_ip_vmc:                                               # [CONFIGURAZIONE, 8 RICHIAMI] [INTERFACCIA, 3 RICHIAMI] [AUTOMAZIONE, 0 RICHIAMI] PRIMA INSTALLAZIONE VMC: IP DELLA VMC RILEVATO O PRENOTATO SUL ROUTER (SCRIVENDOLO PARTE LA VERIFICA)
-    name: "IP Fisso VMC (Router)"
+    name: "IP Fisso della VMC (prenotato sul router)"
     max: 15
     icon: mdi:ip-network
   vmc_master_installa_vmc_nuova_password:                                       # [CONFIGURAZIONE, 4 RICHIAMI] [INTERFACCIA, 3 RICHIAMI] [AUTOMAZIONE, 0 RICHIAMI] PRIMA INSTALLAZIONE VMC: NUOVA PASSWORD DELLA RETE DELLA VMC
@@ -3742,7 +3788,7 @@ input_text:
     min: 0
     max: 255
 
-  vmc_master_clona_vmc_clonate:                                                 # [CONFIGURAZIONE, 9 RICHIAMI] [INTERFACCIA, 6 RICHIAMI] [AUTOMAZIONE, 0 RICHIAMI] CLONA VMC: VMC CLONATE IN ATTESA DI RIAVVIO (nome:ip,nome:ip), SI SVUOTA AL RIAVVIO
+  vmc_master_clona_vmc_clonate:                                                 # [CONFIGURAZIONE, 13 RICHIAMI] [INTERFACCIA, 6 RICHIAMI] [AUTOMAZIONE, 0 RICHIAMI] CLONA VMC: VMC CLONATE IN ATTESA DI RIAVVIO (nome:ip,nome:ip), SI SVUOTA AL RIAVVIO
     name: VMC Clonate in attesa di Riavvio
     initial: ""
     min: 0
@@ -4262,6 +4308,7 @@ recorder:
       - sensor.vmc_master_installa_vmc_stato
       - binary_sensor.vmc_master_installa_vmc_in_corso
       - binary_sensor.vmc_master_installa_vmc_configurata
+      - sensor.vmc_master_installa_vmc_verifica_ip
       - script.vmc_master_installa_vmc_avvia
       - script.vmc_master_installa_vmc_cerca_reti
       - script.vmc_master_installa_vmc_configura
@@ -5898,11 +5945,14 @@ script:
                  'ap_ssid': states('input_text.vmc_master_installa_vmc_rete_vmc')}} }}
 
   vmc_master_installa_vmc_usa_ip:                                               # [CONFIGURAZIONE, 1 RICHIAMO] [INTERFACCIA, 5 RICHIAMI] [AUTOMAZIONE, 0 RICHIAMI] PRIMA INSTALLAZIONE VMC: COPIA L'IP VERIFICATO DELLA VMC IN CAMBIA IP VMC (RIAVVIO DI H.A.)
-    alias: VMC Master - Installa VMC Usa IP per Cambia IP
+    alias: VMC Master - Installa VMC Imposta IP nella VMC Master
     description: >
-      Pulsante «Usa IP per Cambia IP VMC» del passo 3 nella Finestra Prima Installazione VMC: scrive l'ultimo
-      IP verificato della VMC appena collegata nel campo «Cambia IP VMC (Riavvio di H.A.)», che aggiorna l'IP in
-      tutti i file del Package e riavvia Home Assistant. Non fa nulla se l'IP verificato manca o non è valido.
+      Pulsante «Imposta questo IP nella VMC Master» del passo 3 nella Finestra Prima Installazione VMC: scrive
+      l'ultimo IP verificato della VMC appena collegata nel campo «Cambia IP VMC (Riavvio di H.A.)» della VMC
+      Master, che aggiorna l'IP in tutti i file del Package e riavvia Home Assistant; da quel momento la scheda
+      Master comanda questa VMC. Non fa nulla se l'IP manca o non è valido, se è già quello della VMC Master o se
+      è già usato da una VMC clonata (anche in attesa di riavvio): in quel caso il pulsante non compare e la
+      finestra indica quale VMC lo usa.
     icon: mdi:ip-network
     mode: single
     max_exceeded: silent
@@ -5910,7 +5960,7 @@ script:
       - variables:
           ip_verificato: "{{ (state_attr('sensor.vmc_master_installa_vmc_stato', 'configured_ip') or '') | trim }}"
       - condition: template
-        value_template: "{{ ip_verificato is match('^([0-9]{1,3}[.]){3}[0-9]{1,3}$') }}"
+        value_template: "{{ is_state('sensor.vmc_master_installa_vmc_verifica_ip', 'ok') }}"
       - action: input_text.set_value
         target:
           entity_id: input_text.vmc_master_ip_insert
@@ -5921,8 +5971,8 @@ script:
     alias: VMC Master - Installa VMC Collega un'Altra VMC
     description: >
       Pulsante «Collega un'Altra VMC» del passo 3 nella Finestra Prima Installazione VMC: svuota i campi Rete
-      Wi-Fi VMC e IP Fisso VMC, così la finestra torna ai passi 1 e 2 per collegare un'altra VMC (per esempio
-      una da clonare). Non modifica la VMC già collegata.
+      Wi-Fi VMC e IP Fisso della VMC, così la finestra torna ai passi 1 e 2 per collegare al Wi-Fi un'altra VMC
+      (per esempio una da clonare). La VMC appena collegata resta in rete e non cambia.
     icon: mdi:plus-network
     mode: single
     max_exceeded: silent
@@ -18189,7 +18239,7 @@ automation:
     alias: "VMC Master - Installa VMC Avvio"
     description: >
       All'avvio di Home Assistant prepara la Finestra Prima Installazione VMC: i campi Rete Wi-Fi VMC, Rete Wi-Fi
-      Casa e IP Fisso VMC partono da testo vuoto la prima volta, il motore Python viene preparato e, se una
+      Casa e IP Fisso della VMC partono da testo vuoto la prima volta, il motore Python viene preparato e, se una
       procedura era stata interrotta, il Wi-Fi del server torna com'era. Infine legge lo stato della procedura.
     mode: single
     trace:
@@ -18224,7 +18274,7 @@ automation:
     alias: "VMC Master - Installa VMC Notifica Esito"
     description: >
       Al termine di ogni nuova procedura della Finestra Prima Installazione VMC crea una notifica con l'esito
-      (non ripete il vecchio esito al riavvio). Dopo il collegamento scrive nel campo IP Fisso VMC l'indirizzo
+      (non ripete il vecchio esito al riavvio). Dopo il collegamento scrive nel campo IP Fisso della VMC l'indirizzo
       rilevato; dopo la ricerca reti, se la rete VMC_xxxxxxxx trovata è una sola, ne scrive il nome nel campo Rete
       Wi-Fi VMC.
     mode: queued
@@ -18295,7 +18345,7 @@ automation:
   - id: "vmc_master_installa_vmc_verifica_ip"                                   # [CONFIGURAZIONE, 2 RICHIAMI] [INTERFACCIA, 1 RICHIAMO] [AUTOMAZIONE, 0 RICHIAMI] PRIMA INSTALLAZIONE VMC: VERIFICA L'IP SCRITTO NEL CAMPO IP FISSO VMC
     alias: "VMC Master - Installa VMC Verifica IP"
     description: >
-      Scrivendo un nuovo indirizzo nel campo IP Fisso VMC della Finestra Prima Installazione VMC, attende la fine
+      Scrivendo un nuovo indirizzo nel campo IP Fisso della VMC della Finestra Prima Installazione VMC, attende la fine
       di un'eventuale procedura in corso (al massimo 8 minuti) e controlla che a quell'indirizzo risponda la
       stessa VMC appena collegata (stessi MAC e nome). Il campo non modifica il router.
     mode: restart
@@ -18982,22 +19032,36 @@ automation:
   - id: "vmc_master_cambio_ip_vmc"                                              # [CONFIGURAZIONE, 3 RICHIAMI] [INTERFACCIA, 1 RICHIAMO] [AUTOMAZIONE, 0 RICHIAMI]
     alias: "VMC Master - Cambio IP VMC (Riavvio di H.A.)"
     description: >
-      Quando si scrive un IP nel campo «Cambia IP VMC (Riavvio di H.A.)» (anche con il pulsante «Usa IP per Cambia IP
-      VMC» della Prima Installazione): se l'IP è valido toglie i caratteri di ritorno dagli script .sh, aggiorna l'IP in
-      tutti i file del Package, attende 2 s e riavvia Home Assistant; se non è valido svuota il campo. È separata
-      dall'Automazione VMC Master, che esegue gli eventi in coda: così il riavvio parte subito anche se la VMC non
-      risponde e l'Automazione VMC Master sta ancora ripetendo un comando.
+      Quando si scrive un IP nel campo «Cambia IP VMC (Riavvio di H.A.)» (anche dal passo 3 della Finestra Prima
+      Installazione VMC): se l'IP è valido toglie i caratteri di ritorno dagli script .sh,
+      aggiorna l'IP in tutti i file del Package, attende 2 s e riavvia Home Assistant; se non è valido svuota il
+      campo. Se l'IP è già quello di questa VMC, o è già usato da un'altra VMC del Package, non cambia nulla e non
+      riavvia: sotto il campo compare l'avviso. Il controllo è fatto qui e non solo nel sensore di verifica, che si
+      aggiorna al massimo una volta al secondo. È separata dall'Automazione VMC Master, che esegue gli eventi in
+      coda: così il riavvio parte subito anche se la VMC non risponde e l'Automazione VMC Master sta ancora
+      ripetendo un comando.
     mode: single
     max_exceeded: silent
     triggers:
       - trigger: state
         entity_id: input_text.vmc_master_ip_insert
     actions:
+      - variables:
+          ip: "{{ states('input_text.vmc_master_ip_insert') | trim }}"
+          ip_valido: >-
+            {{ ip is match('^(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$') }}
+          ip_libero: >-
+            {%- set ns = namespace(uso=false) -%}
+            {%- for s in states.sensor | rejectattr('attributes.restored', 'eq', true) | selectattr('entity_id', 'search', '^sensor\.vmc_[a-z]+_ip$') | rejectattr('entity_id', 'eq', 'sensor.vmc_master_ip') -%}
+              {%- if s.state | trim == ip -%}{%- set ns.uso = true -%}{%- endif -%}
+            {%- endfor -%}
+            {%- set ns.uso = ns.uso or ip in (states('input_text.vmc_master_clona_vmc_clonate').split(',') | map('regex_replace', '^[^:]*:', '') | list) -%}  {#- VMC CLONATE IN ATTESA DI RIAVVIO (RIGA SOLO MASTER, RIMOSSA DA VMC_SCRIPT_CLONA.SH) -#}
+            {{ not ns.uso and ip != states('sensor.vmc_master_ip') | trim }}
       - choose:
           - alias: IP Inserito Valido
             conditions:
               - condition: template
-                value_template: "{{ states('sensor.vmc_master_verifica_ip_inserito') != 'IP non Valido' }}"
+                value_template: "{{ ip_valido and ip_libero }}"
             sequence:
               - action: shell_command.vmc_master_rimuovi_caratteri_di_ritorno
               - action: shell_command.vmc_master_aggiorna_indirizzo_ip
@@ -19007,7 +19071,7 @@ automation:
           - alias: IP Inserito NON Valido
             conditions:
               - condition: template
-                value_template: "{{ states('sensor.vmc_master_verifica_ip_inserito') == 'IP non Valido' }}"
+                value_template: "{{ not ip_valido }}"
             sequence:
               - action: input_text.set_value
                 target:
