@@ -39,7 +39,7 @@
 ###########################################################################################################################################################################################################################
 alias: Automazione VMC Master
 description: >-
-  Automazione VMC Master Release v.8.5.1:
+  Automazione VMC Master Release v.8.6.0:
 
   - Invia Comandi alla VMC leggendone i valori Contenuti;
 
@@ -111,6 +111,12 @@ description: >-
   - Avvisa in caso di Aggiornamento del Package;
 
   - Permette di Rinominare la VMC;
+
+  - La Prima Installazione della VMC (collegamento al Wi-Fi di casa anche senza
+  l'App Air Guard, con gli stessi passaggi del manuale Helty) non è in questa
+  automazione: la esegue la Finestra Prima Installazione VMC del Package
+  principale; a installazione conclusa la VMC resta visibile e utilizzabile
+  anche dall'App Air Guard;
 
   - Il Cambio dell'IP non è in questa automazione: lo esegue subito l'automazione
   «VMC Master - Cambio IP VMC (Riavvio di H.A.)» del Package.
