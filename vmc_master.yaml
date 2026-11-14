@@ -27298,7 +27298,7 @@ shell_command:
             if requested:
                 eligible = [i for i in eligible if i.get("interface") == requested]
             if not eligible:
-                raise Failure("no_wifi", "Il Supervisor non rileva una scheda Wi-Fi disponibile. Collega al computer di Home Assistant una chiavetta USB Wi-Fi compatibile oppure configura la VMC con l'app Air Guard.")
+                raise Failure("no_wifi", "Il Supervisor non rileva una scheda Wi-Fi disponibile. Serve un computer di Home Assistant con scheda Wi-Fi integrata oppure con una chiavetta USB Wi-Fi compatibile collegata; in alternativa configura la VMC con l'app Air Guard.")
             eligible.sort(key=lambda i: (bool(i.get("connected")), bool(i.get("enabled") and (i.get("wifi") or {}).get("ssid"))))
             return eligible[0]
 
