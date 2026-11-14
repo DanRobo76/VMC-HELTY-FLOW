@@ -11832,11 +11832,11 @@ cards:
             cards:
               - type: markdown
                 content: >-
-                  <table align="center"><tr><td width="160"><a href="https://github.com/DanRobo76/VMC-HELTY-FLOW#readme" target="_blank"><img src="https://raw.githubusercontent.com/DanRobo76/VMC-HELTY-FLOW/main/Video/anteprima_video_IT.webp?v=20261114" width="160" alt="Guarda il video"></a></td><td>
+                  <table align="center"><tr><td width="160"><a href="https://github.com/DanRobo76/VMC-HELTY-FLOW/raw/main/Video/VMC_MASTER_promo_IT.mp4" target="_blank"><img src="https://raw.githubusercontent.com/DanRobo76/VMC-HELTY-FLOW/main/Video/anteprima_video_IT.webp?v=20261114b" width="160" alt="Guarda il video"></a></td><td>
                   <b>VMC HELTY FLOW Plus/Elite</b><br>
                   Release installata: <b>{{ states('sensor.vmc_master_versione_corrente') }}</b><br>
                   {% set _i = states('sensor.vmc_master_versione_corrente') | trim | regex_replace('^[^0-9]*', '') %}{% set _r = states('sensor.vmc_master_versione_repository') | trim | regex_replace('^[^0-9]*', '') %}{% if _i is match('^[0-9]+([.][0-9]+)*$') and _r is match('^[0-9]+([.][0-9]+)*$') and (_r.split('.') | map('int') | list) > (_i.split('.') | map('int') | list) %}<ha-icon icon="mdi:arrow-up-bold-circle-outline"></ha-icon> <b>Aggiornamento disponibile: {{ states('sensor.vmc_master_versione_repository') }}</b>{% else %}<ha-icon icon="mdi:check-circle-outline"></ha-icon> Nessun aggiornamento{% endif %}<br>
-                  <ha-icon icon="mdi:email-fast"></ha-icon> <a href="mailto:danilo.robotti@gmail.com">Mail</a> &nbsp; <ha-icon icon="mdi:github"></ha-icon> <a href="https://github.com/DanRobo76/VMC-HELTY-FLOW">GitHub</a> &nbsp; <ha-icon icon="mdi:play-circle"></ha-icon> <a href="https://github.com/DanRobo76/VMC-HELTY-FLOW#readme" target="_blank">Video</a>
+                  <ha-icon icon="mdi:email-fast"></ha-icon> <a href="mailto:danilo.robotti@gmail.com">Mail</a> &nbsp; <ha-icon icon="mdi:github"></ha-icon> <a href="https://github.com/DanRobo76/VMC-HELTY-FLOW">GitHub</a> &nbsp; <ha-icon icon="mdi:play-circle"></ha-icon> <a href="https://github.com/DanRobo76/VMC-HELTY-FLOW/raw/main/Video/VMC_MASTER_promo_IT.mp4" target="_blank">Video</a>
                   </td></tr></table>
                   <br>
                   <details><summary><b>Informazioni</b></summary>
