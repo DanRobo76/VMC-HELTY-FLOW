@@ -142,7 +142,7 @@ homeassistant:
       icon: mdi:hvac
     automation.vmc_master_riallineamento_allerte_al_riavvio:
       icon: mdi:hvac
-    automation.vmc_master_cambio_ip_vmc:
+    automation.vmc_master_cambio_ip_vmc_riavvio_di_h_a:
       icon: mdi:hvac
     automation.vmc_master_countdown_attese_automazione:
       icon: mdi:hvac
@@ -3918,7 +3918,7 @@ recorder:
       - automation.vmc_master_riepilogo_audio_avvio
       - automation.vmc_master_audio_allerte_e_stato
       - automation.vmc_master_riallineamento_allerte_al_riavvio
-      - automation.vmc_master_cambio_ip_vmc
+      - automation.vmc_master_cambio_ip_vmc_riavvio_di_h_a
       - automation.vmc_master_countdown_attese_automazione
       - automation.vmc_master_inizializza_tempi_di_attesa
       - automation.vmc_master_countdown_letture_vmc
@@ -7151,7 +7151,7 @@ script:
             - automation.vmc_master_riepilogo_audio_avvio
             - automation.vmc_master_audio_allerte_e_stato
             - automation.vmc_master_riallineamento_allerte_al_riavvio
-            - automation.vmc_master_cambio_ip_vmc
+            - automation.vmc_master_cambio_ip_vmc_riavvio_di_h_a
             - automation.vmc_master_countdown_attese_automazione
             - automation.vmc_master_inizializza_tempi_di_attesa
             - automation.vmc_master_countdown_letture_vmc
