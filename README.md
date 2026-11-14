@@ -192,7 +192,7 @@
 
 ### 1. Rendere statico l'indirizzo IP della VMC
 <sub>Impostare nel router un indirizzo IP statico per la VMC; la VMC risponde sulla porta <strong>5001</strong>.</sub><br>
-<sub>Se la VMC non è ancora collegata al Wi-Fi di casa, si può collegare senza l'App Air Guard dopo i punti 2-7, con la Finestra Prima Installazione VMC (icona sotto il Panic Button della scheda OFF-Line): al termine il pulsante «Usa IP per Cambia IP VMC» esegue anche il punto 8 [Pannello Informazioni → punto 24].</sub>
+<sub>Se la VMC non è ancora collegata al Wi-Fi di casa, si può collegare senza l'App Air Guard dopo i punti 2-7, con la Finestra Prima Installazione VMC (icona sotto il Panic Button della scheda OFF-Line): al termine il pulsante «Imposta questo IP nella VMC Master» (passo 3) esegue anche il punto 8 [Pannello Informazioni → punto 24].</sub>
 
 ---
 
@@ -574,7 +574,7 @@
 
 ### 1. Make the unit's IP address static
 <sub>Set a static IP address for the unit in the router; the unit answers on port <strong>5001</strong>.</sub><br>
-<sub>If the unit is not yet connected to the home Wi-Fi, it can be connected without the Air Guard app after steps 2-7, with the First Installation window (icon under the Panic Button of the OFF-Line card): at the end the «Usa IP per Cambia IP VMC» button also performs step 8 [Information Panel → item 24].</sub>
+<sub>If the unit is not yet connected to the home Wi-Fi, it can be connected without the Air Guard app after steps 2-7, with the First Installation window (icon under the Panic Button of the OFF-Line card): at the end the «Imposta questo IP nella VMC Master» button (step 3) also performs step 8 [Information Panel → item 24].</sub>
 
 ---
 

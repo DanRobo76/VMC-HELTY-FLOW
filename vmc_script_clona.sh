@@ -1,6 +1,6 @@
 ###########################################################################################################################################################################################################################
 #                                                                                                                                                                                                                         #
-#                                                          SCRIPT CLONA VMC HELTY FLOW PLUS RELEASE [VER. 1.1]                                                                                                            #
+#                                                          SCRIPT CLONA VMC HELTY FLOW PLUS RELEASE [VER. 1.2]                                                                                                            #
 #                                                                                                                                                                                                                         #
 # SVILUPPATO DA ING. DANILO ROBOTTI, ALLE PRIME ARMI CON HOME ASSISTANT :)                                                                                                                                                #
 #                                                                                                                                                                                                                         #
