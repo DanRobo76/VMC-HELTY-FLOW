@@ -14069,8 +14069,9 @@ cards:
                   sotto il Panic Button della scheda OFF-Line (VMC non raggiungibile) oppure nel pannello Impostazioni, accanto alla
                   Finestra Clona. È presente solo nella VMC Master: con essa si collegano anche le VMC da clonare.
                   <br><br>
-                  <b>Occorrente.</b> Home Assistant OS con il Supervisor e una scheda Wi-Fi riconosciuta: il Wi-Fi del server fa la
-                  parte dello smartphone, si collega per pochi secondi alla rete VMC_xxxxxxxx della VMC e poi torna com'era. È
+                  <b>Occorrente.</b> Home Assistant OS con il Supervisor, installato su un computer con scheda Wi-Fi integrata
+                  oppure con una chiavetta USB Wi-Fi compatibile collegata; la scheda deve comparire tra le interfacce di rete di
+                  Home Assistant (Impostazioni › Sistema › Rete). Il Wi-Fi del server fa la parte dello smartphone, si collega per pochi secondi alla rete VMC_xxxxxxxx della VMC e poi torna com'era. È
                   consigliabile che il server sia collegato anche via cavo; con il solo Wi-Fi l'accesso a Home Assistant si
                   interrompe per qualche secondo. Il motore è in Python (solo libreria standard) ed è incluso nel Package: non
                   servono HACS, add-on o file separati. Viene preparato da solo nella cartella /config/.vmc_master_installa_vmc.
