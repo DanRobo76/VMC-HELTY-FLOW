@@ -3930,6 +3930,7 @@ recorder:
       - timer.vmc_master_countdown_script_panic_button
       - timer.vmc_master_countdown_script_inizializzazione
       - timer.vmc_master_countdown_script_reset_filtro
+      - timer.vmc_master_countdown_avvio_home_assistant
       - script.vmc_master_ripristina_tempi_attesa
       - sensor.vmc_master_velocita_registrata
       - binary_sensor.vmc_master_tasto_velocita_0
@@ -5684,7 +5685,7 @@ timer:
   vmc_master_countdown_blackout_rilevazione:                     # [CONFIGURAZIONE, 2 RICHIAMI] [INTERFACCIA, 4 RICHIAMI] [AUTOMAZIONE, 0 RICHIAMI] COUNTDOWN DELL'ATTESA IN CORSO DI UNO DEGLI 11 TRIGGER «RILEVAZIONE BLACK-OUT» DELL'AUTOMAZIONE (AVVIATO DA vmc_master_countdown_attese_automazione)
     name: "Rilevazione Black-Out"
     icon: mdi:timer-sand
-  vmc_master_countdown_blackout_ripristino:                      # [CONFIGURAZIONE, 2 RICHIAMI] [INTERFACCIA, 4 RICHIAMI] [AUTOMAZIONE, 0 RICHIAMI] COUNTDOWN DELL'ATTESA IN CORSO DI UNO DEI 9 TRIGGER «RIPRISTINO DOPO BLACK-OUT» DELL'AUTOMAZIONE (AVVIATO DA vmc_master_countdown_attese_automazione)
+  vmc_master_countdown_blackout_ripristino:                      # [CONFIGURAZIONE, 2 RICHIAMI] [INTERFACCIA, 6 RICHIAMI] [AUTOMAZIONE, 0 RICHIAMI] COUNTDOWN DELL'ATTESA IN CORSO DI UNO DEI 9 TRIGGER «RIPRISTINO DOPO BLACK-OUT» DELL'AUTOMAZIONE (AVVIATO DA vmc_master_countdown_attese_automazione)
     name: "Ripristino dopo Black-Out"
     icon: mdi:timer-sand
   vmc_master_countdown_calendario_inizio:                        # [CONFIGURAZIONE, 2 RICHIAMI] [INTERFACCIA, 4 RICHIAMI] [AUTOMAZIONE, 0 RICHIAMI] COUNTDOWN DELL'ATTESA IN CORSO DI UNO DEI 14 TRIGGER «INIZIO FASCIA» DELL'AUTOMAZIONE (AVVIATO DA vmc_master_countdown_attese_automazione)
@@ -5726,6 +5727,10 @@ timer:
   vmc_master_countdown_script_reset_filtro:                      # [CONFIGURAZIONE, 4 RICHIAMI] [INTERFACCIA, 3 RICHIAMI] [AUTOMAZIONE, 0 RICHIAMI] COUNTDOWN IN SCHEDA, SOTTO IL PULSANTE, DELLO SCRIPT RESET FILTRO (5 s DI ATTESA DOPO IL COMANDO ALLA VMC)
     name: "Reset Filtro in corso"
     duration: "00:00:05"
+    icon: mdi:timer-sand
+  vmc_master_countdown_avvio_home_assistant:                     # [CONFIGURAZIONE, 3 RICHIAMI] [INTERFACCIA, 3 RICHIAMI] [AUTOMAZIONE, 0 RICHIAMI] COUNTDOWN IN SCHEDA DEI 60 s DOPO L'AVVIO DI HOME ASSISTANT IN CUI LE FINI ALLERTA SONO SOSPESE (AVVIATO DA vmc_master_riallineamento_allerte_al_riavvio), POI PARTE IL RIPRISTINO DOPO BLACK-OUT
+    name: "Avvio di Home Assistant"
+    duration: "00:01:00"
     icon: mdi:timer-sand
 ################### Fine Creazione Timer per il Countdown in Scheda delle Attese dell'Automazione ###################
 
@@ -7157,6 +7162,7 @@ script:
             - timer.vmc_master_countdown_script_panic_button
             - timer.vmc_master_countdown_script_inizializzazione
             - timer.vmc_master_countdown_script_reset_filtro
+            - timer.vmc_master_countdown_avvio_home_assistant
             - script.vmc_master_ripristina_tempi_attesa
             - sensor.vmc_master_velocita_registrata
             - binary_sensor.vmc_master_tasto_velocita_0
@@ -18924,7 +18930,7 @@ automation:
       automazione sospende le fini allerta per 60 s (sensori e VMC letti) e poi le riattiva per gradi: Black-Out, Congelamento
       e Diff. Temp.; dopo 40 s Inquinanti; dopo altri 40 s Punto di Rugiada, Free Heating/Cooling, Calendario e Umidità.
       Ogni allerta finita a HA spento si chiude così come una fine allerta normale; dopo altri 60 s la fase torna a 0
-      (nessun effetto): in tutto 200 s dall'avvio.
+      (nessun effetto): in tutto 200 s dall'avvio. I primi 60 s sono mostrati in scheda con il countdown «Avvio di Home Assistant».
     mode: restart
     triggers:
       - trigger: homeassistant
@@ -18935,6 +18941,9 @@ automation:
           entity_id: input_number.vmc_master_fase_riallineamento_al_riavvio
         data:
           value: 1
+      - action: timer.start                                                   # SOLO VISUALIZZAZIONE IN SCHEDA: COUNTDOWN DEI 60 s DELLA FASE 1
+        target:
+          entity_id: timer.vmc_master_countdown_avvio_home_assistant
       - delay:
           seconds: 60
       - action: input_number.set_value
