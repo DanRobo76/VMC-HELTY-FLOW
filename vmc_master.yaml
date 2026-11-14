@@ -27268,7 +27268,7 @@ shell_command:
             info = self.supervisor.info()
             wifi = [{"interface": i["interface"], "enabled": i.get("enabled", False), "connected": i.get("connected", False), "ssid": (i.get("wifi") or {}).get("ssid", "")} for i in interfaces(info) if i.get("type") == "wireless"]
             ethernet = [i["interface"] for i in interfaces(info) if i.get("type") == "ethernet" and i.get("connected")]
-            self.status.emit("Server verificato" if wifi else "Wi-Fi non disponibile", 100, "Scheda Wi-Fi disponibile per il primo collegamento." if wifi else "Il Supervisor non rileva una scheda Wi-Fi. Per la prima configurazione serve una scheda Wi-Fi riconosciuta da Home Assistant OS.", wifi_interfaces=wifi, ethernet_interfaces=ethernet, wifi_available=bool(wifi), success=bool(wifi))
+            self.status.emit("Server verificato" if wifi else "Wi-Fi non disponibile", 100, "Scheda Wi-Fi disponibile per il primo collegamento." if wifi else "Il Supervisor non rileva una scheda Wi-Fi. Per la prima configurazione serve una scheda Wi-Fi integrata nel computer di Home Assistant oppure una chiavetta USB Wi-Fi collegata e riconosciuta da Home Assistant OS.", wifi_interfaces=wifi, ethernet_interfaces=ethernet, wifi_available=bool(wifi), success=bool(wifi))
             return info
 
         def restore(self):
@@ -27298,7 +27298,7 @@ shell_command:
             if requested:
                 eligible = [i for i in eligible if i.get("interface") == requested]
             if not eligible:
-                raise Failure("no_wifi", "Il Supervisor non rileva una scheda Wi-Fi disponibile. Collega un adattatore compatibile oppure configura la VMC con l'app Air Guard.")
+                raise Failure("no_wifi", "Il Supervisor non rileva una scheda Wi-Fi disponibile. Collega al computer di Home Assistant una chiavetta USB Wi-Fi compatibile oppure configura la VMC con l'app Air Guard.")
             eligible.sort(key=lambda i: (bool(i.get("connected")), bool(i.get("enabled") and (i.get("wifi") or {}).get("ssid"))))
             return eligible[0]
 

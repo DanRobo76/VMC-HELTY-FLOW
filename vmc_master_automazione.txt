@@ -39,7 +39,7 @@
 ###########################################################################################################################################################################################################################
 alias: Automazione VMC Master
 description: >-
-  Automazione VMC Master Release v.8.5.1:
+  Automazione VMC Master Release v.8.6.0:
 
   - Invia Comandi alla VMC leggendone i valori Contenuti;
 
@@ -56,7 +56,9 @@ description: >-
   Errori o cambio filtro della VMC;
 
   - Permette di selezionare le entità Media Player disponibili nel sistema di
-  Home Assistant (H.A.) per ascoltare gli Avvisi;
+  Home Assistant (H.A.) per ascoltare gli Avvisi; gli Avvisi audio richiedono
+  Google Translate Text-to-Speech configurato in YAML nel file
+  configuration.yaml (tts: - platform: google_translate);
 
   - Permette di selezionare le entità di Lettura dell'Anidride Carbonica
   disponibili nel sistema di Home Assistant (H.A.), oltre a quella integrata
@@ -111,6 +113,13 @@ description: >-
   - Avvisa in caso di Aggiornamento del Package;
 
   - Permette di Rinominare la VMC;
+
+  - La Prima Installazione della VMC (collegamento al Wi-Fi di casa anche senza
+  l'App Air Guard, con gli stessi passaggi del manuale Helty) non è in questa
+  automazione: la esegue la Finestra Prima Installazione VMC del Package
+  principale e richiede Home Assistant OS su un computer con scheda Wi-Fi
+  integrata oppure con una chiavetta USB Wi-Fi collegata; a installazione
+  conclusa la VMC resta visibile e utilizzabile anche dall'App Air Guard;
 
   - Il Cambio dell'IP non è in questa automazione: lo esegue subito l'automazione
   «VMC Master - Cambio IP VMC (Riavvio di H.A.)» del Package.

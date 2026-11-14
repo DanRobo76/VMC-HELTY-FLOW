@@ -97,7 +97,7 @@
 - <sub>Permette l'accensione e lo spegnimento automatico in funzione dell'Umidità Interna Settata (sopra il valore impostato, oppure con aria secca ≤ 35% per far entrare aria dall'esterno).</sub>
 - <sub>Se si dispone di più VMC, permette di clonarle e cancellarle dalla Finestra Clona del pannello Impostazioni, presente solo nella VMC Master: controllo del nome e dell'IP, più clonazioni senza riavvio, cancellazione con conferma «Sì / No» (vedi Installazione, punto 11).</sub>
 - <sub>Al primo avvio dopo l'aggiornamento dalla release 8.4.0 o precedenti cancella da solo i file della vecchia Clona VMC (vmc_clona.yaml e vmc_clona_scheda_manuale_interfaccia.txt).</sub>
-- <sub>Collega una VMC appena installata al Wi-Fi di casa senza l'App Air Guard, con gli stessi passaggi del manuale Helty (collegamento in 3 passi e gli strumenti Cambia Password VMC, Access Point, Errori LED), dalla Finestra Prima Installazione VMC: sotto il Panic Button della scheda OFF-Line e nel pannello Impostazioni accanto alla Finestra Clona, solo nella VMC Master. Richiede Home Assistant OS con una scheda Wi-Fi riconosciuta. A installazione conclusa la VMC resta visibile e utilizzabile anche dall'App Air Guard, senza ripetere la procedura [Pannello Informazioni → punto 24].</sub>
+- <sub>Collega una VMC appena installata al Wi-Fi di casa senza l'App Air Guard, con gli stessi passaggi del manuale Helty (collegamento in 3 passi e gli strumenti Cambia Password VMC, Access Point, Errori LED), dalla Finestra Prima Installazione VMC: sotto il Panic Button della scheda OFF-Line e nel pannello Impostazioni accanto alla Finestra Clona, solo nella VMC Master. Richiede Home Assistant OS su un computer con scheda Wi-Fi integrata oppure con una chiavetta USB Wi-Fi collegata (vedere Requisiti). A installazione conclusa la VMC resta visibile e utilizzabile anche dall'App Air Guard, senza ripetere la procedura [Pannello Informazioni → punto 24].</sub>
 - <sub>Permette lo spegnimento automatico in funzione della Temperatura Esterna ≤ -18 °C e successiva ripresa in funzione degli offset impostati.</sub>
   > <sub>**Nota:** per impostazione firmware, la priorità è assegnata al sensore interno della VMC rispetto al valore rilevato dal sensore esterno dell'entità selezionata.</sub>
 - <sub>Permette l'avvio automatico a Velocità 1 in funzione della Differenza Temperatura Interna - Temperatura Esterna se > 23 °C e successiva ripresa.</sub>
@@ -154,10 +154,13 @@
 - <sub>**[Home Assistant](https://www.home-assistant.io/installation/)**</sub>
 - <sub>VMC **Helty Flow Plus** oppure **Flow Elite** visibile nell'app **[Air Guard](https://play.google.com/store/apps/details?id=com.helty.heltyair&hl=it&gl=US&pli=1)**; diversamente, inserirla nella rete di casa con la stessa app prima di procedere, oppure collegarla senza l'app con la Finestra Prima Installazione VMC (vedere il punto 1)</sub>
 - <sub>Indirizzo IP della VMC statico (impostato nel router); la VMC risponde sulla porta 5001</sub>
-- <sub>Solo per gli Avvisi audio: Google Translate Text-to-speech configurato nel file `configuration.yaml` (`tts:` → `- platform: google_translate`), che fornisce l'azione `tts.google_translate_say` usata dagli script audio; aggiunto dall'interfaccia (Dispositivi e servizi) l'azione non esiste e gli avvisi audio non partono</sub>
-<br>
+- <sub>**Solo per gli Avvisi audio:** l'integrazione **Google Translate Text-to-Speech** configurata in YAML nel file <strong>configuration.yaml</strong> della cartella <strong>config</strong>, con la sintassi riportata nell'immagine. Questa configurazione crea l'azione `tts.google_translate_say` usata dagli script audio del Package; se l'integrazione viene aggiunta soltanto dall'interfaccia (Impostazioni → Dispositivi e servizi) l'azione non viene creata e gli avvisi audio non vengono riprodotti. Dopo la modifica salvare il file e riavviare Home Assistant.</sub>
 
-<sub>**App consigliata:** `File editor` [Impostazioni → Applicazioni → Installa app → File editor → Installa]</sub>
+  <img src="immagini/README/configurazione_tts.png" alt="configuration.yaml: tts / google_translate" width="60%">
+
+- <sub>**Solo per la Prima Installazione VMC** (collegamento della VMC al Wi-Fi di casa senza l'App Air Guard): Home Assistant OS con il Supervisor, installato su un computer dotato di scheda Wi-Fi integrata oppure con una chiavetta USB Wi-Fi compatibile collegata; la scheda deve risultare tra le interfacce di rete di Home Assistant (Impostazioni → Sistema → Rete).</sub>
+- <sub>**Facoltativa, ma consigliata:** l'app **File editor** di Home Assistant, il gestore dei file con cui si modifica <strong>configuration.yaml</strong>, si creano le cartelle del Package e si copiano i file [Impostazioni → Applicazioni → Installa app → File editor → Installa]</sub>
+<br>
 
 > <sub>⚠️ **ATTENZIONE!** Se la VMC utilizza un'app diversa da **Air Guard**, il codice molto probabilmente non sarà compatibile 🧰.</sub>
 </details>
@@ -472,7 +475,7 @@
 - <sub>Automatic start and stop based on the set Indoor Humidity (above the set value, or with dry air ≤ 35% to bring in outdoor air).</sub>
 - <sub>With more than one unit, clone and delete units from the Clone window of the Settings panel, available only on the Master unit: name and IP checks, several clones without restarting, deletion with «Yes / No» confirmation (see Installation, step 11).</sub>
 - <sub>At the first start after updating from release 8.4.0 or earlier, it deletes by itself the files of the old Clone VMC (vmc_clona.yaml and vmc_clona_scheda_manuale_interfaccia.txt).</sub>
-- <sub>Connects a newly installed unit to the home Wi-Fi without the Air Guard app, with the same steps as the Helty manual (3-step connection plus the Change VMC Password, Access Point and LED Errors tools), from the First Installation window: under the Panic Button of the OFF-Line card and in the Settings panel next to the Clone window, only on the Master unit. Requires Home Assistant OS with a recognised Wi-Fi adapter. Once installed, the unit remains visible and usable in the Air Guard app as well, without repeating the procedure [Information Panel → item 24].</sub>
+- <sub>Connects a newly installed unit to the home Wi-Fi without the Air Guard app, with the same steps as the Helty manual (3-step connection plus the Change VMC Password, Access Point and LED Errors tools), from the First Installation window: under the Panic Button of the OFF-Line card and in the Settings panel next to the Clone window, only on the Master unit. Requires Home Assistant OS on a computer with a built-in Wi-Fi card or a USB Wi-Fi dongle plugged in (see Requirements). Once installed, the unit remains visible and usable in the Air Guard app as well, without repeating the procedure [Information Panel → item 24].</sub>
 - <sub>Automatic stop when the Outdoor Temperature is ≤ -18 °C and restart according to the set offsets.</sub>
   > <sub>**Note:** by firmware design, the unit's internal sensor takes priority over the value of the selected outdoor sensor entity.</sub>
 - <sub>Automatic start at Speed 1 when the Indoor - Outdoor Temperature Difference is > 23 °C, and restart afterwards.</sub>
@@ -529,10 +532,13 @@
 - <sub>**[Home Assistant](https://www.home-assistant.io/installation/)**</sub>
 - <sub>**Helty Flow Plus** or **Flow Elite** unit visible in the **[Air Guard](https://play.google.com/store/apps/details?id=com.helty.heltyair&hl=it&gl=US&pli=1)** app; otherwise add it to the home network with the same app before proceeding, or connect it without the app using the First Installation window (see step 1)</sub>
 - <sub>Static IP address for the unit (set in the router); the unit answers on port 5001</sub>
-- <sub>Only for audio alerts: Google Translate Text-to-speech configured in `configuration.yaml` (`tts:` → `- platform: google_translate`), which provides the `tts.google_translate_say` action used by the audio scripts; when added from the interface (Devices & services) that action does not exist and audio alerts do not play</sub>
-<br>
+- <sub>**Only for audio alerts:** the **Google Translate Text-to-Speech** integration configured in YAML in the <strong>configuration.yaml</strong> file of the <strong>config</strong> folder, with the syntax shown in the image. This configuration creates the `tts.google_translate_say` action used by the package audio scripts; if the integration is added only from the interface (Settings → Devices & services) the action is not created and audio alerts are not played. After the change, save the file and restart Home Assistant.</sub>
 
-<sub>**Recommended app:** `File editor` [Settings → Apps → Install app → File editor → Install]</sub>
+  <img src="immagini/README/configurazione_tts.png" alt="configuration.yaml: tts / google_translate" width="60%">
+
+- <sub>**Only for the First Installation** (connecting the unit to the home Wi-Fi without the Air Guard app): Home Assistant OS with the Supervisor, installed on a computer with a built-in Wi-Fi card or with a compatible USB Wi-Fi dongle plugged in; the adapter must be listed among the Home Assistant network interfaces (Settings → System → Network).</sub>
+- <sub>**Optional, but recommended:** the Home Assistant **File editor** app, the file manager used to edit <strong>configuration.yaml</strong>, create the package folders and copy the files [Settings → Apps → Install app → File editor → Install]</sub>
+<br>
 
 > <sub>⚠️ **WARNING!** If the unit uses an app other than **Air Guard**, the code will most likely not be compatible 🧰.</sub>
 </details>
