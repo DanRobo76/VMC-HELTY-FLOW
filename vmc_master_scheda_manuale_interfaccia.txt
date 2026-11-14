@@ -118,6 +118,8 @@ cards:
           conditions:
             - entity: timer.vmc_master_countdown_avvio_home_assistant
               state: active
+            - entity: sensor.vmc_master_status_ip_interfaccia
+              state: ON-Line
           row:
             entity: timer.vmc_master_countdown_avvio_home_assistant
             name: "Avvio di Home Assistant"
@@ -158,6 +160,16 @@ cards:
           secondary_info: last-changed
         - entity: input_text.vmc_master_ip_insert
           secondary_info: last-changed
+        - type: conditional
+          conditions:
+            - entity: sensor.vmc_master_verifica_ip_inserito
+              state_not:
+                - IP non Valido
+                - unknown
+                - unavailable
+          row:
+            type: section
+            label: IP salvato. Home Assistant si sta riavviando, la pagina tornerà da sola tra 1-3 minuti.
         - type: button
           entity: script.vmc_master_bottone_panico
           action_name: Esegui
@@ -10146,6 +10158,16 @@ cards:
                   - entity: sensor.vmc_master_ip
                   - entity: input_text.vmc_master_ip_insert
                     secondary_info: last-changed
+                  - type: conditional
+                    conditions:
+                      - entity: sensor.vmc_master_verifica_ip_inserito
+                        state_not:
+                          - IP non Valido
+                          - unknown
+                          - unavailable
+                    row:
+                      type: section
+                      label: IP salvato. Home Assistant si sta riavviando, la pagina tornerà da sola tra 1-3 minuti.
                   - entity: input_text.vmc_master_nome_da_inserire
                     secondary_info: last-updated
                   - entity: input_number.vmc_master_volume_da_inserire
@@ -14105,6 +14127,16 @@ cards:
                   - entity: sensor.vmc_master_ip
                   - entity: input_text.vmc_master_ip_insert
                     secondary_info: last-changed
+                  - type: conditional
+                    conditions:
+                      - entity: sensor.vmc_master_verifica_ip_inserito
+                        state_not:
+                          - IP non Valido
+                          - unknown
+                          - unavailable
+                    row:
+                      type: section
+                      label: IP salvato. Home Assistant si sta riavviando, la pagina tornerà da sola tra 1-3 minuti.
                   - type: button
                     entity: script.vmc_master_upgrade_sensors
                     action_name: Esegui
