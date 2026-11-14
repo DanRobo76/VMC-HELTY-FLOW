@@ -113,7 +113,23 @@ cards:
                   state: 'on'
           row:
             type: section
-            label: VMC di nuovo ON-Line, ripristino della velocità in uso prima del Black-Out in corso...
+            label: VMC di nuovo ON-Line, ripristino della velocità in uso prima del Black-Out in corso... Non serve fare nulla, attendi la fine del countdown.
+        - type: conditional
+          conditions:
+            - entity: timer.vmc_master_countdown_avvio_home_assistant
+              state: active
+          row:
+            entity: timer.vmc_master_countdown_avvio_home_assistant
+            name: "Avvio di Home Assistant"
+            icon: mdi:timer-sand
+        - type: conditional
+          conditions:
+            - entity: timer.vmc_master_countdown_blackout_ripristino
+              state: active
+          row:
+            entity: timer.vmc_master_countdown_blackout_ripristino
+            name: "Ripristino Velocità tra"
+            icon: mdi:timer-sand
         - type: button
           entity: script.vmc_master_upgrade_sensors
           action_name: Esegui
@@ -10723,6 +10739,7 @@ cards:
                           'timer.vmc_master_countdown_script_panic_button',
                           'timer.vmc_master_countdown_script_inizializzazione',
                           'timer.vmc_master_countdown_script_reset_filtro',
+                          'timer.vmc_master_countdown_avvio_home_assistant',
                           'input_boolean.vmc_master_conferma_pulizia_cronologia'
                         ] -%}
                         {%- set tipi = {'automation': 'Automazioni', 'binary_sensor': 'Sensori binari', 'button': 'Pulsanti', 'input_boolean': 'Interruttori (input_boolean)', 'input_datetime': 'Orari (input_datetime)', 'input_number': 'Valori numerici (input_number)', 'input_select': 'Selettori (input_select)', 'input_text': 'Testi (input_text)', 'script': 'Script', 'sensor': 'Sensori', 'timer': 'Timer'} -%}
@@ -12635,6 +12652,21 @@ cards:
                   scompare. Gli altri script durano al massimo pochi secondi
                   (Pulisci Cronologia Audio 2 s, Aggiorna Elenco 5 s) e non
                   hanno countdown.
+
+                  <br>
+
+                  <strong>Nota VMC di nuovo ON-Line</strong>
+
+                  Quando la VMC torna ON-Line dopo un Black-Out, o dopo
+                  l'inserimento di una nuova VMC, la scheda mostra «VMC di
+                  nuovo ON-Line, ripristino della velocità in uso prima del
+                  Black-Out in corso...» con il countdown «Ripristino Velocità
+                  tra» (32 secondi): non serve fare nulla. Se Home Assistant
+                  si è appena avviato (per esempio dopo Cambia IP VMC), prima
+                  compare il countdown «Avvio di Home Assistant» (60 secondi)
+                  e poi quello del ripristino. Allo zero la VMC riceve la
+                  velocità e, dopo pochi secondi di conferma, compare la
+                  scheda completa.
 
                   <br>
 
