@@ -14066,6 +14066,19 @@ cards:
                   <b>Avanzamento ed esito.</b> Nel riquadro in fondo compaiono l'avanzamento della procedura e poi l'esito, che arriva
                   anche come notifica. Lo stato viene letto ogni 5 secondi solo con la finestra aperta o con una procedura in corso.
                   <br><br>
+                  <b>Dopo il collegamento.</b> Al riavvio di Home Assistant la scheda mostra «VMC di nuovo ON-Line...» con i countdown
+                  «Avvio di Home Assistant» (60 secondi) e «Ripristino Velocità tra» (32 secondi): non serve fare nulla, al termine
+                  compare la scheda completa. Mentre la VMC passa dalla sua rete VMC_xxxxxxxx al Wi-Fi di casa e si riavvia, il
+                  registro di Home Assistant può riportare per qualche minuto errori dell'integrazione TCP sulla porta 5001 («timed out»,
+                  «Host is unreachable», «Connection refused»): è normale, la VMC non è ancora raggiungibile, e gli errori cessano da
+                  soli appena risponde. Vanno verificati solo se continuano con la VMC ON-Line.
+                  <br><br>
+                  <b>App Air Guard.</b> Il collegamento eseguito da Home Assistant equivale a quello dell'App ufficiale Air Guard: la
+                  VMC entra nella rete di casa con gli stessi passaggi del manuale Helty. Per questo, a installazione conclusa, la VMC è
+                  visibile e utilizzabile anche dall'App Air Guard, da uno smartphone collegato allo stesso Wi-Fi di casa, senza
+                  ripetere la procedura. Home Assistant e l'App possono convivere: una velocità scelta dall'App viene letta da Home
+                  Assistant alla lettura successiva della VMC.
+                  <br><br>
                   <b>N.b.</b> Il nome della VMC si cambia con «Cambia Nome VMC» del pannello Impostazioni (VMC ON-Line). Le
                   password non entrano nello storico; la password di casa e le nuove password vengono cancellate dai campi dopo
                   l'avvio della procedura. Se la VMC non viene ritrovata si controlla se la rete VMC_xxxxxxxx è ricomparsa: secondo
