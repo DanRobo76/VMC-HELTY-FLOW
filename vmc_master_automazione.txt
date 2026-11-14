@@ -1,6 +1,6 @@
 ###########################################################################################################################################################################################################################
 #                                                                                                                                                                                                                         #
-#                                                          AUTOMAZIONE VMC HELTY FLOW PLUS RELEASE [VER. 8.5.1]                                                                                                           #
+#                                                          AUTOMAZIONE VMC HELTY FLOW PLUS RELEASE [VER. 8.6.0]                                                                                                           #
 #                                                                                                                                                                                                                         #
 # SVILUPPATO DA ING. DANILO ROBOTTI, ALLE PRIME ARMI CON HOME ASSISTANT :)                                                                                                                                                #
 #                                                                                                                                                                                                                         #
@@ -3590,11 +3590,6 @@ triggers:
       }}
     id: Cambio Nome VMC
     trigger: template
-  - entity_id:
-      - input_text.vmc_master_ip_insert
-    id: Riscrivi IP
-    alias: Cambio Indirizzo IP della VMC (Riavvio di H.A.)
-    trigger: state
   - alias: Spia Avvisi On
     value_template: |
       {{
@@ -18651,44 +18646,6 @@ actions:
               entity_id: input_text.vmc_master_nome_da_inserire
             action: input_text.set_value
         alias: Rinomina VMC
-      - conditions:
-          - condition: trigger
-            id:
-              - Riscrivi IP
-        sequence:
-          - alias: Verifica se l'IP è Valido o Meno
-            choose:
-              - conditions:
-                  - condition: template
-                    value_template: >-
-                      {{ (states('sensor.vmc_master_verifica_ip_inserito') !=
-                      "IP non Valido") }}
-                sequence:
-                  - data: {}
-                    action: shell_command.vmc_master_rimuovi_caratteri_di_ritorno
-                  - data: {}
-                    action: shell_command.vmc_master_aggiorna_indirizzo_ip
-                  - delay:
-                      hours: 0
-                      minutes: 0
-                      seconds: 2
-                      milliseconds: 0
-                  - data: {}
-                    action: homeassistant.restart
-                alias: IP Inserito Valido
-              - conditions:
-                  - condition: template
-                    value_template: >-
-                      {{ (states('sensor.vmc_master_verifica_ip_inserito') ==
-                      "IP non Valido") }}
-                sequence:
-                  - data:
-                      value: ''
-                    target:
-                      entity_id: input_text.vmc_master_ip_insert
-                    action: input_text.set_value
-                alias: IP Inserito NON Valido
-        alias: Cambio Indirizzo IP della VMC (Riavvio di H.A.)
       - conditions:
           - condition: trigger
             id: Spia Avvisi On
