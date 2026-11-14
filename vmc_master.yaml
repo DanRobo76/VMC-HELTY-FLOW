@@ -142,6 +142,8 @@ homeassistant:
       icon: mdi:hvac
     automation.vmc_master_riallineamento_allerte_al_riavvio:
       icon: mdi:hvac
+    automation.vmc_master_cambio_ip_vmc:
+      icon: mdi:hvac
     automation.vmc_master_countdown_attese_automazione:
       icon: mdi:hvac
     automation.vmc_master_inizializza_tempi_di_attesa:
@@ -523,7 +525,7 @@ template:
         icon: mdi:check-decagram-outline
 
   - sensor:
-      - default_entity_id: sensor.vmc_master_verifica_ip_inserito               # [CONFIGURAZIONE, 2 RICHIAMI] [INTERFACCIA, 4 RICHIAMI] [AUTOMAZIONE, 2 RICHIAMI] VERIFICA DEL VALORE INSERIO NEL SENSORE "vmc_master_ip_insert" E' UN INDIRIZZO IP
+      - default_entity_id: sensor.vmc_master_verifica_ip_inserito               # [CONFIGURAZIONE, 4 RICHIAMI] [INTERFACCIA, 4 RICHIAMI] [AUTOMAZIONE, 0 RICHIAMI] VERIFICA DEL VALORE INSERIO NEL SENSORE "vmc_master_ip_insert" E' UN INDIRIZZO IP
         name: "IP"
         unique_id: vmc_master_verifica_ip_inserito
         state: >
@@ -3754,7 +3756,7 @@ input_text:
     max: 10
     icon: mdi:form-textbox
         
-  vmc_master_ip_insert:                                                         # [CONFIGURAZIONE, 6 RICHIAMI] [INTERFACCIA, 4 RICHIAMI] [AUTOMAZIONE, 2 RICHIAMI]
+  vmc_master_ip_insert:                                                         # [CONFIGURAZIONE, 8 RICHIAMI] [INTERFACCIA, 4 RICHIAMI] [AUTOMAZIONE, 0 RICHIAMI]
     name: "Cambia IP VMC (Riavvio di H.A.)"
     initial: ""
     icon: mdi:form-textbox
@@ -3916,6 +3918,7 @@ recorder:
       - automation.vmc_master_riepilogo_audio_avvio
       - automation.vmc_master_audio_allerte_e_stato
       - automation.vmc_master_riallineamento_allerte_al_riavvio
+      - automation.vmc_master_cambio_ip_vmc
       - automation.vmc_master_countdown_attese_automazione
       - automation.vmc_master_inizializza_tempi_di_attesa
       - automation.vmc_master_countdown_letture_vmc
@@ -7148,6 +7151,7 @@ script:
             - automation.vmc_master_riepilogo_audio_avvio
             - automation.vmc_master_audio_allerte_e_stato
             - automation.vmc_master_riallineamento_allerte_al_riavvio
+            - automation.vmc_master_cambio_ip_vmc
             - automation.vmc_master_countdown_attese_automazione
             - automation.vmc_master_inizializza_tempi_di_attesa
             - automation.vmc_master_countdown_letture_vmc
@@ -18974,6 +18978,44 @@ automation:
           value: 0
 ################### Fine Creazione Automazione di Riallineamento delle Allerte al Riavvio di Home Assistant ###################
 
+################### Inizio Creazione Automazione Cambio IP della VMC (Riavvio di H.A.) ###################
+  - id: "vmc_master_cambio_ip_vmc"                                              # [CONFIGURAZIONE, 3 RICHIAMI] [INTERFACCIA, 1 RICHIAMO] [AUTOMAZIONE, 0 RICHIAMI]
+    alias: "VMC Master - Cambio IP VMC (Riavvio di H.A.)"
+    description: >
+      Quando si scrive un IP nel campo «Cambia IP VMC (Riavvio di H.A.)» (anche con il pulsante «Usa IP per Cambia IP
+      VMC» della Prima Installazione): se l'IP è valido toglie i caratteri di ritorno dagli script .sh, aggiorna l'IP in
+      tutti i file del Package, attende 2 s e riavvia Home Assistant; se non è valido svuota il campo. È separata
+      dall'Automazione VMC Master, che esegue gli eventi in coda: così il riavvio parte subito anche se la VMC non
+      risponde e l'Automazione VMC Master sta ancora ripetendo un comando.
+    mode: single
+    max_exceeded: silent
+    triggers:
+      - trigger: state
+        entity_id: input_text.vmc_master_ip_insert
+    actions:
+      - choose:
+          - alias: IP Inserito Valido
+            conditions:
+              - condition: template
+                value_template: "{{ states('sensor.vmc_master_verifica_ip_inserito') != 'IP non Valido' }}"
+            sequence:
+              - action: shell_command.vmc_master_rimuovi_caratteri_di_ritorno
+              - action: shell_command.vmc_master_aggiorna_indirizzo_ip
+              - delay:
+                  seconds: 2
+              - action: homeassistant.restart
+          - alias: IP Inserito NON Valido
+            conditions:
+              - condition: template
+                value_template: "{{ states('sensor.vmc_master_verifica_ip_inserito') == 'IP non Valido' }}"
+            sequence:
+              - action: input_text.set_value
+                target:
+                  entity_id: input_text.vmc_master_ip_insert
+                data:
+                  value: ''
+################### Fine Creazione Automazione Cambio IP della VMC (Riavvio di H.A.) ###################
+
 ################### Inizio Creazione Automazione Countdown delle Attese dell'Automazione VMC Master (solo visualizzazione in scheda) ###################
 # SEZIONE GENERATA AUTOMATICAMENTE DAI TRIGGER CON ATTESA ("for") DELL'AUTOMAZIONE VMC MASTER: OGNI TRIGGER E' COPIATO 1:1 (id "ON") E NEGATO (id "OFF").
 # SE SI MODIFICA UN TRIGGER CON ATTESA NELL'AUTOMAZIONE VMC MASTER, VA RIGENERATA ANCHE QUESTA SEZIONE.
@@ -27758,8 +27800,8 @@ shell_command:
   vmc_master_clona_rimuovi_file_obsoleti: find /config/packages -type f \( -name vmc_clona.yaml -o -name vmc_clona_scheda_manuale_interfaccia.txt \) -print -delete 2>/dev/null; true # [CONFIGURAZIONE, 2 RICHIAMI] [INTERFACCIA, 0 RICHIAMI] [AUTOMAZIONE, 0 RICHIAMI] CANCELLA I FILE DELLA VECCHIA CLONA VMC (RELEASE 8.4.0 O PRECEDENTI) E NE STAMPA IL PERCORSO
 # >>> FINE SEZIONE CLONA VMC (SOLO MASTER, RIMOSSA DA VMC_SCRIPT_CLONA.SH) <<<
 
-  vmc_master_rimuovi_caratteri_di_ritorno: find /config/packages/vmc_helty_flow/master -type f -name "*.sh" -exec sed -i 's/\r$//' {} \; # [CONFIGURAZIONE, 1 RICHIAMO] [INTERFACCIA, 0 RICHIAMI] [AUTOMAZIONE, 2 RICHIAMI] TROVA E RIMUOVE CARATTERI DI RITORNO IN TUTTI I FILES *.sh CONTENUTI NELLA CARTELLA
-  vmc_master_aggiorna_indirizzo_ip:        bash /config/packages/vmc_helty_flow/master/vmc_master_script_cambio_ip.sh   {{ states('input_text.vmc_master_ip_insert') }} # [CONFIGURAZIONE, 1 RICHIAMO] [INTERFACCIA, 0 RICHIAMI] [AUTOMAZIONE, 1 RICHIAMO] TROVA E SOSTITUISCE NEL FILE CORRENTE L'INDIRIZZO IP INSERITO NELL'INTERFACCIA, VIENE LANCIATO SOLO SE IL SENSORE VERIFICA IP INSERITO CONFERMA UN INDIRIZZO VALIDO (LO SCRIPT NON HA UN INDIRIZZO DI DEFAULT)
+  vmc_master_rimuovi_caratteri_di_ritorno: find /config/packages/vmc_helty_flow/master -type f -name "*.sh" -exec sed -i 's/\r$//' {} \; # [CONFIGURAZIONE, 2 RICHIAMI] [INTERFACCIA, 0 RICHIAMI] [AUTOMAZIONE, 1 RICHIAMO] TROVA E RIMUOVE CARATTERI DI RITORNO IN TUTTI I FILES *.sh CONTENUTI NELLA CARTELLA
+  vmc_master_aggiorna_indirizzo_ip:        bash /config/packages/vmc_helty_flow/master/vmc_master_script_cambio_ip.sh   {{ states('input_text.vmc_master_ip_insert') }} # [CONFIGURAZIONE, 2 RICHIAMI] [INTERFACCIA, 0 RICHIAMI] [AUTOMAZIONE, 0 RICHIAMI] TROVA E SOSTITUISCE NEL FILE CORRENTE L'INDIRIZZO IP INSERITO NELL'INTERFACCIA, VIENE LANCIATO SOLO SE IL SENSORE VERIFICA IP INSERITO CONFERMA UN INDIRIZZO VALIDO (LO SCRIPT NON HA UN INDIRIZZO DI DEFAULT)
   vmc_master_cambia_nome:                  bash /config/packages/vmc_helty_flow/master/vmc_master_script_cambio_nome.sh "{{ states('input_text.vmc_master_nome_da_inserire') | replace('"', '') }}" # [CONFIGURAZIONE, 1 RICHIAMO] [INTERFACCIA, 0 RICHIAMI] [AUTOMAZIONE, 1 RICHIAMO] INVIO COMANDO PER CAMBIARE NOME ALLA VMC
   vmc_master_freecooling:                  printf 'VMWH0000007\n' | timeout 5 nc -w 3 999.999.999.999 5001 # [CONFIGURAZIONE, 79 RICHIAMI] [INTERFACCIA, 6 RICHIAMI] [AUTOMAZIONE, 25 RICHIAMI] INVIO COMANDO Free Cool./Heat. ALLA VMC
   vmc_master_notturna:                     printf 'VMWH0000006\n' | timeout 5 nc -w 3 999.999.999.999 5001 # [CONFIGURAZIONE, 27 RICHIAMI] [INTERFACCIA, 2 RICHIAMI] [AUTOMAZIONE, 14 RICHIAMI] INVIO COMANDO NOTTURNA ALLA VMC
