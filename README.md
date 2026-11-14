@@ -159,9 +159,8 @@
   <img src="immagini/README/configurazione_tts.png" alt="configuration.yaml: tts / google_translate" width="60%">
 
 - <sub>**Solo per la Prima Installazione VMC** (collegamento della VMC al Wi-Fi di casa senza l'App Air Guard): Home Assistant OS con il Supervisor, installato su un computer dotato di scheda Wi-Fi integrata oppure con una chiavetta USB Wi-Fi compatibile collegata; la scheda deve risultare tra le interfacce di rete di Home Assistant (Impostazioni → Sistema → Rete).</sub>
+- <sub>**Facoltativa, ma consigliata:** l'app **File editor** di Home Assistant, il gestore dei file con cui si modifica <strong>configuration.yaml</strong>, si creano le cartelle del Package e si copiano i file [Impostazioni → Applicazioni → Installa app → File editor → Installa]</sub>
 <br>
-
-<sub>**App consigliata:** `File editor` [Impostazioni → Applicazioni → Installa app → File editor → Installa]</sub>
 
 > <sub>⚠️ **ATTENZIONE!** Se la VMC utilizza un'app diversa da **Air Guard**, il codice molto probabilmente non sarà compatibile 🧰.</sub>
 </details>
@@ -538,9 +537,8 @@
   <img src="immagini/README/configurazione_tts.png" alt="configuration.yaml: tts / google_translate" width="60%">
 
 - <sub>**Only for the First Installation** (connecting the unit to the home Wi-Fi without the Air Guard app): Home Assistant OS with the Supervisor, installed on a computer with a built-in Wi-Fi card or with a compatible USB Wi-Fi dongle plugged in; the adapter must be listed among the Home Assistant network interfaces (Settings → System → Network).</sub>
+- <sub>**Optional, but recommended:** the Home Assistant **File editor** app, the file manager used to edit <strong>configuration.yaml</strong>, create the package folders and copy the files [Settings → Apps → Install app → File editor → Install]</sub>
 <br>
-
-<sub>**Recommended app:** `File editor` [Settings → Apps → Install app → File editor → Install]</sub>
 
 > <sub>⚠️ **WARNING!** If the unit uses an app other than **Air Guard**, the code will most likely not be compatible 🧰.</sub>
 </details>
