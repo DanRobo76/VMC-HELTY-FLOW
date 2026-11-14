@@ -165,11 +165,27 @@ cards:
             - entity: sensor.vmc_master_verifica_ip_inserito
               state_not:
                 - IP non Valido
+                - IP già in uso
+                - IP già impostato
                 - unknown
                 - unavailable
           row:
             type: section
             label: IP salvato. Home Assistant si sta riavviando, la pagina tornerà da sola tra 1-3 minuti.
+        - type: conditional
+          conditions:
+            - entity: sensor.vmc_master_verifica_ip_inserito
+              state: IP già in uso
+          row:
+            type: section
+            label: "IP già usato da un'altra VMC del Package: non è stato cambiato nulla, scrivi l'IP di questa VMC."
+        - type: conditional
+          conditions:
+            - entity: sensor.vmc_master_verifica_ip_inserito
+              state: IP già impostato
+          row:
+            type: section
+            label: "Questo è già l'IP della VMC: non serve cambiarlo, Home Assistant non viene riavviato."
         - type: button
           entity: script.vmc_master_bottone_panico
           action_name: Esegui
@@ -294,7 +310,7 @@ cards:
                   state: 'on'
               row:
                 type: section
-                label: "3 · IP fisso e IP nel Package"
+                label: "3 · IP fisso e IP della VMC Master"
             - type: conditional
               conditions:
                 - entity: binary_sensor.vmc_master_installa_vmc_configurata
@@ -307,10 +323,12 @@ cards:
                   state: 'on'
                 - entity: binary_sensor.vmc_master_installa_vmc_in_corso
                   state_not: 'on'
+                - entity: sensor.vmc_master_installa_vmc_verifica_ip
+                  state: 'ok'
               row:
                 type: button
                 entity: script.vmc_master_installa_vmc_usa_ip
-                name: "Usa IP per Cambia IP VMC"
+                name: "Imposta questo IP nella VMC Master"
                 action_name: Esegui
                 tap_action:
                   action: perform-action
@@ -318,7 +336,7 @@ cards:
                   target:
                     entity_id: script.vmc_master_installa_vmc_usa_ip
                   confirmation:
-                    text: "Vuoi Procedere? L'IP verificato viene scritto in Cambia IP VMC e Home Assistant verrà riavviato."
+                    text: "L'IP verificato viene scritto in Cambia IP VMC: la scheda Master comanderà questa VMC. Home Assistant si riavvia (1-3 minuti). Non usarlo per una VMC da clonare: il suo IP va nella Finestra Clona. Vuoi procedere?"
             - type: conditional
               conditions:
                 - entity: binary_sensor.vmc_master_installa_vmc_configurata
@@ -336,7 +354,7 @@ cards:
                   target:
                     entity_id: script.vmc_master_installa_vmc_nuova_vmc
                   confirmation:
-                    text: "Vuoi Procedere? La finestra torna ai passi 1 e 2; la VMC già collegata non cambia."
+                    text: "La finestra torna ai passi 1 e 2 per collegare al Wi-Fi un'altra VMC (per esempio una da clonare). La VMC appena collegata resta in rete e non cambia. Vuoi procedere?"
           footer:
             type: buttons
             entities:
@@ -458,8 +476,24 @@ cards:
             {%- if is_state('binary_sensor.vmc_master_installa_vmc_configurata', 'on') %}
             <font color="#43a047"><ha-icon icon="mdi:check-circle"></ha-icon></font> **VMC trovata:** {{ a.get('configured_ap_ssid') }}
             <font color="#43a047"><ha-icon icon="mdi:check-circle"></ha-icon></font> **Collegata alla rete di casa:** IP {{ a.get('configured_ip') }} · Nome {{ a.get('configured_name') }}{% if a.get('configured_mac') %} · MAC `{{ a.get('configured_mac') }}`{% endif %}
+            {%- set v = states('sensor.vmc_master_installa_vmc_verifica_ip') %}
 
-            Prenota sul router un IP fisso per il MAC della VMC e scrivilo in «IP Fisso VMC (Router)»: la verifica parte da sola. Poi premi «Usa IP per Cambia IP VMC».
+            **Cosa fare ora**
+
+            1. Nel router prenota un IP fisso per il MAC della VMC.
+            2. Se l'IP prenotato è diverso, scrivilo in «IP Fisso della VMC (prenotato sul router)»: la verifica parte da sola.
+            3. Se è la VMC della scheda Master, premi «Imposta questo IP nella VMC Master»: Home Assistant si riavvia (1-3 minuti).
+            4. Se è una VMC da clonare, annota l'IP per la Finestra Clona e premi «Collega un'Altra VMC» per la prossima.
+            {%- if v == 'in uso' %}
+
+            <font color="#e53935"><ha-icon icon="mdi:alert-circle"></ha-icon></font> **IP già usato dalla VMC {{ state_attr('sensor.vmc_master_installa_vmc_verifica_ip', 'vmc') }}:** non può diventare l'IP della VMC Master, per questo il pulsante non compare. Se l'IP è giusto, la VMC appena collegata è quella: non serve fare altro.
+            {%- elif v == 'già impostato' %}
+
+            <font color="#43a047"><ha-icon icon="mdi:check-circle"></ha-icon></font> **IP già impostato nella VMC Master:** non serve fare altro.
+            {%- elif v == 'non valido' %}
+
+            <font color="#e53935"><ha-icon icon="mdi:alert-circle"></ha-icon></font> **IP non valido:** controlla l'IP della VMC.
+            {%- endif %}
             {%- endif %}
             {%- if is_state('binary_sensor.vmc_master_installa_vmc_in_corso', 'on') %}
             {%- set p = (a.get('progress') or 0) | int(0) %}
@@ -485,6 +519,8 @@ cards:
 
             **Reti VMC trovate:** {% for n in vmc %}`{{ n.ssid }}` {{ n.signal }}%{{ ' · ' if not loop.last }}{% endfor %}
             {%- endif %}
+
+            <small><b>Strumenti:</b> «Cambia Password VMC» cambia la password della rete VMC_xxxxxxxx (solo con la VMC in Access Point) · «Access Point» riporta la VMC alla sua rete · «Errori LED» spiega i lampeggi del LED e il ripristino del Wi-Fi.</small>
 # >>> FINE SEZIONE INSTALLA VMC (SOLO MASTER, RIMOSSA DA VMC_SCRIPT_CLONA.SH) <<<
   - type: conditional
     conditions:
@@ -10163,11 +10199,27 @@ cards:
                       - entity: sensor.vmc_master_verifica_ip_inserito
                         state_not:
                           - IP non Valido
+                          - IP già in uso
+                          - IP già impostato
                           - unknown
                           - unavailable
                     row:
                       type: section
                       label: IP salvato. Home Assistant si sta riavviando, la pagina tornerà da sola tra 1-3 minuti.
+                  - type: conditional
+                    conditions:
+                      - entity: sensor.vmc_master_verifica_ip_inserito
+                        state: IP già in uso
+                    row:
+                      type: section
+                      label: "IP già usato da un'altra VMC del Package: non è stato cambiato nulla, scrivi l'IP di questa VMC."
+                  - type: conditional
+                    conditions:
+                      - entity: sensor.vmc_master_verifica_ip_inserito
+                        state: IP già impostato
+                    row:
+                      type: section
+                      label: "Questo è già l'IP della VMC: non serve cambiarlo, Home Assistant non viene riavviato."
                   - entity: input_text.vmc_master_nome_da_inserire
                     secondary_info: last-updated
                   - entity: input_number.vmc_master_volume_da_inserire
@@ -11433,7 +11485,7 @@ cards:
                               state: 'on'
                           row:
                             type: section
-                            label: "3 · IP fisso e IP nel Package"
+                            label: "3 · IP fisso e IP della VMC Master"
                         - type: conditional
                           conditions:
                             - entity: binary_sensor.vmc_master_installa_vmc_configurata
@@ -11446,10 +11498,12 @@ cards:
                               state: 'on'
                             - entity: binary_sensor.vmc_master_installa_vmc_in_corso
                               state_not: 'on'
+                            - entity: sensor.vmc_master_installa_vmc_verifica_ip
+                              state: 'ok'
                           row:
                             type: button
                             entity: script.vmc_master_installa_vmc_usa_ip
-                            name: "Usa IP per Cambia IP VMC"
+                            name: "Imposta questo IP nella VMC Master"
                             action_name: Esegui
                             tap_action:
                               action: perform-action
@@ -11457,7 +11511,7 @@ cards:
                               target:
                                 entity_id: script.vmc_master_installa_vmc_usa_ip
                               confirmation:
-                                text: "Vuoi Procedere? L'IP verificato viene scritto in Cambia IP VMC e Home Assistant verrà riavviato."
+                                text: "L'IP verificato viene scritto in Cambia IP VMC: la scheda Master comanderà questa VMC. Home Assistant si riavvia (1-3 minuti). Non usarlo per una VMC da clonare: il suo IP va nella Finestra Clona. Vuoi procedere?"
                         - type: conditional
                           conditions:
                             - entity: binary_sensor.vmc_master_installa_vmc_configurata
@@ -11475,7 +11529,7 @@ cards:
                               target:
                                 entity_id: script.vmc_master_installa_vmc_nuova_vmc
                               confirmation:
-                                text: "Vuoi Procedere? La finestra torna ai passi 1 e 2; la VMC già collegata non cambia."
+                                text: "La finestra torna ai passi 1 e 2 per collegare al Wi-Fi un'altra VMC (per esempio una da clonare). La VMC appena collegata resta in rete e non cambia. Vuoi procedere?"
                       footer:
                         type: buttons
                         entities:
@@ -11597,8 +11651,24 @@ cards:
                         {%- if is_state('binary_sensor.vmc_master_installa_vmc_configurata', 'on') %}
                         <font color="#43a047"><ha-icon icon="mdi:check-circle"></ha-icon></font> **VMC trovata:** {{ a.get('configured_ap_ssid') }}
                         <font color="#43a047"><ha-icon icon="mdi:check-circle"></ha-icon></font> **Collegata alla rete di casa:** IP {{ a.get('configured_ip') }} · Nome {{ a.get('configured_name') }}{% if a.get('configured_mac') %} · MAC `{{ a.get('configured_mac') }}`{% endif %}
+                        {%- set v = states('sensor.vmc_master_installa_vmc_verifica_ip') %}
 
-                        Prenota sul router un IP fisso per il MAC della VMC e scrivilo in «IP Fisso VMC (Router)»: la verifica parte da sola. Poi premi «Usa IP per Cambia IP VMC».
+                        **Cosa fare ora**
+
+                        1. Nel router prenota un IP fisso per il MAC della VMC.
+                        2. Se l'IP prenotato è diverso, scrivilo in «IP Fisso della VMC (prenotato sul router)»: la verifica parte da sola.
+                        3. Se è la VMC della scheda Master, premi «Imposta questo IP nella VMC Master»: Home Assistant si riavvia (1-3 minuti).
+                        4. Se è una VMC da clonare, annota l'IP per la Finestra Clona e premi «Collega un'Altra VMC» per la prossima.
+                        {%- if v == 'in uso' %}
+
+                        <font color="#e53935"><ha-icon icon="mdi:alert-circle"></ha-icon></font> **IP già usato dalla VMC {{ state_attr('sensor.vmc_master_installa_vmc_verifica_ip', 'vmc') }}:** non può diventare l'IP della VMC Master, per questo il pulsante non compare. Se l'IP è giusto, la VMC appena collegata è quella: non serve fare altro.
+                        {%- elif v == 'già impostato' %}
+
+                        <font color="#43a047"><ha-icon icon="mdi:check-circle"></ha-icon></font> **IP già impostato nella VMC Master:** non serve fare altro.
+                        {%- elif v == 'non valido' %}
+
+                        <font color="#e53935"><ha-icon icon="mdi:alert-circle"></ha-icon></font> **IP non valido:** controlla l'IP della VMC.
+                        {%- endif %}
                         {%- endif %}
                         {%- if is_state('binary_sensor.vmc_master_installa_vmc_in_corso', 'on') %}
                         {%- set p = (a.get('progress') or 0) | int(0) %}
@@ -11624,6 +11694,8 @@ cards:
 
                         **Reti VMC trovate:** {% for n in vmc %}`{{ n.ssid }}` {{ n.signal }}%{{ ' · ' if not loop.last }}{% endfor %}
                         {%- endif %}
+
+                        <small><b>Strumenti:</b> «Cambia Password VMC» cambia la password della rete VMC_xxxxxxxx (solo con la VMC in Access Point) · «Access Point» riporta la VMC alla sua rete · «Errori LED» spiega i lampeggi del LED e il ripristino del Wi-Fi.</small>
 # >>> FINE SEZIONE INSTALLA VMC (SOLO MASTER, RIMOSSA DA VMC_SCRIPT_CLONA.SH) <<<
         - type: conditional
           conditions:
@@ -11760,11 +11832,11 @@ cards:
             cards:
               - type: markdown
                 content: >-
-                  <table align="center"><tr><td width="96"><img src="https://raw.githubusercontent.com/DanRobo76/VMC-HELTY-FLOW/main/immagini/Intestazione/icona_vmc.webp?v=20261107" width="96" alt="VMC"></td><td>
+                  <table align="center"><tr><td width="160"><a href="https://github.com/DanRobo76/VMC-HELTY-FLOW#readme" target="_blank"><img src="https://raw.githubusercontent.com/DanRobo76/VMC-HELTY-FLOW/main/Video/anteprima_video_IT.webp?v=20261114" width="160" alt="Guarda il video"></a></td><td>
                   <b>VMC HELTY FLOW Plus/Elite</b><br>
                   Release installata: <b>{{ states('sensor.vmc_master_versione_corrente') }}</b><br>
                   {% set _i = states('sensor.vmc_master_versione_corrente') | trim | regex_replace('^[^0-9]*', '') %}{% set _r = states('sensor.vmc_master_versione_repository') | trim | regex_replace('^[^0-9]*', '') %}{% if _i is match('^[0-9]+([.][0-9]+)*$') and _r is match('^[0-9]+([.][0-9]+)*$') and (_r.split('.') | map('int') | list) > (_i.split('.') | map('int') | list) %}<ha-icon icon="mdi:arrow-up-bold-circle-outline"></ha-icon> <b>Aggiornamento disponibile: {{ states('sensor.vmc_master_versione_repository') }}</b>{% else %}<ha-icon icon="mdi:check-circle-outline"></ha-icon> Nessun aggiornamento{% endif %}<br>
-                  <ha-icon icon="mdi:email-fast"></ha-icon> <a href="mailto:danilo.robotti@gmail.com">Mail</a> &nbsp; <ha-icon icon="mdi:github"></ha-icon> <a href="https://github.com/DanRobo76/VMC-HELTY-FLOW">GitHub</a>
+                  <ha-icon icon="mdi:email-fast"></ha-icon> <a href="mailto:danilo.robotti@gmail.com">Mail</a> &nbsp; <ha-icon icon="mdi:github"></ha-icon> <a href="https://github.com/DanRobo76/VMC-HELTY-FLOW">GitHub</a> &nbsp; <ha-icon icon="mdi:play-circle"></ha-icon> <a href="https://github.com/DanRobo76/VMC-HELTY-FLOW#readme" target="_blank">Video</a>
                   </td></tr></table>
                   <br>
                   <details><summary><b>Informazioni</b></summary>
@@ -12704,7 +12776,10 @@ cards:
                   tornerà da sola tra 1-3 minuti.» e il riavvio parte dopo 2
                   secondi, anche se l'Automazione VMC Master sta eseguendo
                   altri eventi: il Cambio IP è un'automazione a parte del
-                  Package.
+                  Package. Se l'IP è già quello della VMC, o è già usato da
+                  un'altra VMC del Package (principale o clonata), non viene
+                  cambiato nulla, Home Assistant non si riavvia e sotto il
+                  campo compare l'avviso.
 
                   <br>
 
@@ -14081,10 +14156,18 @@ cards:
                   oppure scrivere il nome letto sullo smartphone; password della rete VMC di fabbrica 12345678.
                   <br>2. <b>Collega al Wi-Fi di casa</b>: scrivere nome e password del Wi-Fi di casa e premere «Collega VMC alla
                   Rete». Al termine i passi 1 e 2 diventano righe verdi con IP, nome e MAC della VMC.
-                  <br>3. <b>IP fisso e IP nel Package</b>: prenotare sul router un IP fisso per quel MAC e scriverlo in «IP Fisso VMC
-                  (Router)» (la verifica della stessa VMC parte da sola), poi premere «Usa IP per Cambia IP VMC»: l'IP viene scritto
-                  in «Cambia IP VMC (Riavvio di H.A.)» e Home Assistant si riavvia. «Collega un'Altra VMC» riporta la finestra ai
-                  passi 1 e 2 (per esempio per una VMC da clonare).
+                  <br>3. <b>IP fisso e IP della VMC Master</b>: compare quando la VMC è sul Wi-Fi di casa. Prenotare sul router un IP
+                  fisso per quel MAC; se è diverso da quello rilevato, scriverlo in «IP Fisso della VMC (prenotato sul router)»: la
+                  verifica che a quell'IP risponda la stessa VMC parte da sola.
+                  <br>• Se è la VMC della scheda Master: «Imposta questo IP nella VMC Master» scrive l'IP verificato in «Cambia IP VMC
+                  (Riavvio di H.A.)», l'IP viene aggiornato in tutti i file del Package e Home Assistant si riavvia (1-3 minuti); da quel
+                  momento la scheda Master comanda questa VMC.
+                  <br>• Se è una VMC da clonare: non premere «Imposta questo IP nella VMC Master», altrimenti la scheda Master passa a
+                  comandare lei. Annotare l'IP per la Finestra Clona e premere «Collega un'Altra VMC», che riporta la finestra ai passi 1
+                  e 2 per la VMC successiva; la VMC appena collegata resta in rete e non cambia.
+                  <br>• <b>Controllo dell'IP</b>: se l'IP è già usato da una VMC clonata (anche in attesa di riavvio) il pulsante non
+                  compare e la finestra indica quale VMC lo usa; se è già l'IP della VMC Master la finestra lo segnala e non serve fare
+                  altro. Lo stesso controllo vale per «Cambia IP VMC» (vedere la Nota Cambia IP VMC) e per l'IP della Finestra Clona.
                   <br><br>
                   <b>Gli strumenti.</b> Tre icone in fondo alla finestra aprono un riquadro sotto; ne resta aperto uno solo.
                   <br>• <b>Cambia Password VMC</b>: cambia la password della rete VMC_xxxxxxxx, solo con la VMC in Access Point.
@@ -14139,11 +14222,27 @@ cards:
                       - entity: sensor.vmc_master_verifica_ip_inserito
                         state_not:
                           - IP non Valido
+                          - IP già in uso
+                          - IP già impostato
                           - unknown
                           - unavailable
                     row:
                       type: section
                       label: IP salvato. Home Assistant si sta riavviando, la pagina tornerà da sola tra 1-3 minuti.
+                  - type: conditional
+                    conditions:
+                      - entity: sensor.vmc_master_verifica_ip_inserito
+                        state: IP già in uso
+                    row:
+                      type: section
+                      label: "IP già usato da un'altra VMC del Package: non è stato cambiato nulla, scrivi l'IP di questa VMC."
+                  - type: conditional
+                    conditions:
+                      - entity: sensor.vmc_master_verifica_ip_inserito
+                        state: IP già impostato
+                    row:
+                      type: section
+                      label: "Questo è già l'IP della VMC: non serve cambiarlo, Home Assistant non viene riavviato."
                   - type: button
                     entity: script.vmc_master_upgrade_sensors
                     action_name: Esegui
