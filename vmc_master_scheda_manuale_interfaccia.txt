@@ -118,6 +118,8 @@ cards:
           conditions:
             - entity: timer.vmc_master_countdown_avvio_home_assistant
               state: active
+            - entity: sensor.vmc_master_status_ip_interfaccia
+              state: ON-Line
           row:
             entity: timer.vmc_master_countdown_avvio_home_assistant
             name: "Avvio di Home Assistant"

@@ -542,7 +542,7 @@ template:
         icon: mdi:ip
 
   - sensor:
-      - default_entity_id: sensor.vmc_master_status_ip_interfaccia              # [CONFIGURAZIONE, 323 RICHIAMI] [INTERFACCIA, 114 RICHIAMI] [AUTOMAZIONE, 316 RICHIAMI] SENSORE IMPIEGATO PER LA VISUALIZZAZIONE NELL'INTERFACCIA SE LA VMC E' IN RETE O MENO
+      - default_entity_id: sensor.vmc_master_status_ip_interfaccia              # [CONFIGURAZIONE, 323 RICHIAMI] [INTERFACCIA, 115 RICHIAMI] [AUTOMAZIONE, 316 RICHIAMI] SENSORE IMPIEGATO PER LA VISUALIZZAZIONE NELL'INTERFACCIA SE LA VMC E' IN RETE O MENO
         name: "Status VMC"
         unique_id: vmc_master_status_ip_interfaccia
         state: >
