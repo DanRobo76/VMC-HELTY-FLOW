@@ -22,7 +22,7 @@ Le versioni pubblicate sono elencate nella pagina [Releases](https://github.com/
 
 | VMC-HELTY-FLOW Release | Supportata da Home Assistant (Core) |
 | :--------------------: | :---------------------------------: |
-| :white_check_mark: v.8.5.1 | :white_check_mark: Ver. 2026.11.1 |
+| :white_check_mark: v.8.6.0 | :white_check_mark: Ver. 2026.11.1 |
 
 Sono supportate solo l'ultima release pubblicata e la versione di Home Assistant indicata. Prima di segnalare un problema aggiornare il Package all'ultima release.
 
