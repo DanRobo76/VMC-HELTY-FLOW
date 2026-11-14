@@ -10269,7 +10269,7 @@ cards:
                           'automation.vmc_master_riepilogo_audio_avvio',
                           'automation.vmc_master_audio_allerte_e_stato',
                           'automation.vmc_master_riallineamento_allerte_al_riavvio',
-                          'automation.vmc_master_cambio_ip_vmc',
+                          'automation.vmc_master_cambio_ip_vmc_riavvio_di_h_a',
                           'sensor.vmc_master_temperatura_esterna_selezionata',
                           'sensor.vmc_master_temperatura_interna_selezionata',
                           'sensor.vmc_master_umidita_esterna_selezionata',
