@@ -4,29 +4,6 @@
   </a>
 </p>
 
-<table align="center">
-<tr>
-<td>
-
-**🚀 VMC MASTER ora è anche un'integrazione per il Marketplace di Home Assistant**
-
-- 📦 **Niente file da copiare**: si installa da Home Assistant e si chiedono solo nome e IP della VMC.
-- 🔔 **Aggiornamenti con un clic**: le nuove versioni compaiono da sole nel Marketplace.
-- 🧠 **Stesse logiche e stessa scheda** della versione 8.6.0.
-- 🔁 **Hai già il package manuale?** L'integrazione lo riconosce e lo migra mantenendo entità, cronologia e impostazioni (prima fai un backup di Home Assistant).
-
-**Come si aggiunge** (Home Assistant 2026.11 o successivo): *Impostazioni → Marketplace → ⋮ → Repository personalizzate*, indirizzo `https://github.com/DanRobo76/VMC-HELTY-FLOW-MARKETPLACE`, tipo **Integrazione**, poi *VMC Master → Installa*.
-
-<p align="center">
-  <a href="https://my.home-assistant.io/redirect/marketplace_repository/?owner=DanRobo76&repository=VMC-HELTY-FLOW-MARKETPLACE&category=integration"><strong>▶ Apri nel Marketplace di Home Assistant</strong></a>
-  &nbsp;·&nbsp;
-  <a href="https://github.com/DanRobo76/VMC-HELTY-FLOW-MARKETPLACE"><strong>📖 Guida all'installazione e alla migrazione</strong></a>
-</p>
-
-</td>
-</tr>
-</table>
-
 <p align="center">
   <a href="https://github.com/DanRobo76/VMC-HELTY-FLOW/raw/main/Video/VMC_MASTER_promo_IT.mp4">
     <img src="Video/anteprima_scene_IT.webp" alt="Video di presentazione di VMC MASTER (50 secondi)" width="100%">
@@ -439,29 +416,6 @@
     <img src="immagini/README/passa_al_marketplace_en.webp" alt="Switch to the Marketplace! Install and update VMC MASTER with one click, right from Home Assistant" width="100%">
   </a>
 </p>
-
-<table align="center">
-<tr>
-<td>
-
-**🚀 VMC MASTER is now also an integration for the Home Assistant Marketplace**
-
-- 📦 **No files to copy**: install it from Home Assistant; it only asks for the unit's name and IP.
-- 🔔 **One-click updates**: new versions show up in the Marketplace by themselves.
-- 🧠 **Same logic and same card** as version 8.6.0.
-- 🔁 **Already using the manual package?** The integration detects it and migrates it, keeping entities, history and settings (make a Home Assistant backup first).
-
-**How to add it** (Home Assistant 2026.11 or later): *Settings → Marketplace → ⋮ → Custom repositories*, URL `https://github.com/DanRobo76/VMC-HELTY-FLOW-MARKETPLACE`, type **Integration**, then *VMC Master → Install*.
-
-<p align="center">
-  <a href="https://my.home-assistant.io/redirect/marketplace_repository/?owner=DanRobo76&repository=VMC-HELTY-FLOW-MARKETPLACE&category=integration"><strong>▶ Open in the Home Assistant Marketplace</strong></a>
-  &nbsp;·&nbsp;
-  <a href="https://github.com/DanRobo76/VMC-HELTY-FLOW-MARKETPLACE"><strong>📖 Installation and migration guide</strong></a>
-</p>
-
-</td>
-</tr>
-</table>
 
 <p align="center">
   <a href="https://github.com/DanRobo76/VMC-HELTY-FLOW/raw/main/Video/VMC_MASTER_promo_EN.mp4">
