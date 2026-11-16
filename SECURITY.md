@@ -1,6 +1,6 @@
 # Security Policy
 
-Questa pagina riassume le versioni supportate, i limiti di funzionamento del Package **VMC-HELTY-FLOW** (tempi di lettura, priorità degli allarmi, gestione del database) e il modo corretto di segnalare un problema.
+Questa pagina riassume le versioni supportate, i limiti di funzionamento del Package **VMC-HELTY-FLOW** e dell'integrazione **VMC Master** per il Marketplace (tempi di lettura, prove di collisione, priorità degli allarmi, gestione del database) e il modo corretto di segnalare un problema.
 
 **Indice**
 
@@ -18,13 +18,15 @@ Questa pagina riassume le versioni supportate, i limiti di funzionamento del Pac
 
 ## 1. Versioni supportate
 
-Le versioni pubblicate sono elencate nella pagina [Releases](https://github.com/DanRobo76/VMC-HELTY-FLOW/releases).
+| Prodotto | Versione | Home Assistant (Core) | Stato |
+| --- | :---: | :---: | --- |
+| Integrazione **VMC Master** per il Marketplace ([VMC-HELTY-FLOW-MARKETPLACE](https://github.com/DanRobo76/VMC-HELTY-FLOW-MARKETPLACE)) | ultima release ([Releases](https://github.com/DanRobo76/VMC-HELTY-FLOW-MARKETPLACE/releases)) | 2026.11.0 o successiva | :white_check_mark: Supportata: riceve correzioni e nuove funzioni |
+| Package manuale **VMC-HELTY-FLOW** | v.8.6.0 ([Releases](https://github.com/DanRobo76/VMC-HELTY-FLOW/releases)) | 2026.11.1 | :warning: Ultima release del Package: funziona, ma non riceve più aggiornamenti |
+| Package manuale **VMC-HELTY-FLOW** | v.8.5.1 e precedenti | – | :x: Non supportate |
 
-| VMC-HELTY-FLOW Release | Supportata da Home Assistant (Core) |
-| :--------------------: | :---------------------------------: |
-| :white_check_mark: v.8.6.0 | :white_check_mark: Ver. 2026.11.1 |
+La v.8.6.0 è l'ultima release del Package manuale: lo sviluppo prosegue solo nell'integrazione VMC Master, che installa lo stesso Package 8.6.0 per ogni VMC e si aggiorna dal Marketplace di Home Assistant. Chi usa il Package manuale può passare all'integrazione seguendo la guida di migrazione nel [README dell'integrazione](https://github.com/DanRobo76/VMC-HELTY-FLOW-MARKETPLACE#readme).
 
-Sono supportate solo l'ultima release pubblicata e la versione di Home Assistant indicata. Prima di segnalare un problema aggiornare il Package all'ultima release.
+I limiti descritti in questa pagina (tempi di lettura, priorità degli allarmi, entità escluse dal database) valgono sia per il Package 8.6.0 sia per l'integrazione, che usa lo stesso Package.
 
 ---
 
@@ -68,16 +70,28 @@ Lo script dura **79 secondi**: sotto il pulsante compare la riga **Agg. Sensori 
 > [!WARNING]
 > **Si sconsiglia di modificare qualsiasi tempistica del Package**: gli intervalli di lettura della sezione 2, i secondi di attesa degli allarmi della sezione 5 e le pause degli script.
 >
-> Le tempistiche attuali sono state scelte per evitare **collisioni**, cioè comandi che Home Assistant invia alla VMC prima di aver riletto l'esito del comando precedente, e sono state verificate con simulazioni su Home Assistant reale e una VMC simulata (lenta e veloce):
->
-> | Prova | Scenari | Collisioni |
-> | --- | ---: | ---: |
-> | Allerte singole e coppie di allerte | 17.264 | **0** |
-> | 3 allerte | 44.640 | **0** |
-> | 4 allerte contemporanee | 23.040 | **0** |
-> | 5 allerte contemporanee *(in corso)* | 44.951 su 144.000 | **0** |
+> Le tempistiche attuali sono state scelte per evitare **collisioni**, cioè comandi di velocità che Home Assistant invia alla VMC prima di aver riletto l'esito del comando precedente. Le prove di collisione descritte sotto non ne hanno trovata nessuna.
 >
 > Con valori diversi questa verifica non è più valida e possono comparire collisioni, comandi ripetuti o velocità errate.
+
+### Prove di collisione
+
+Le prove sono state eseguite su **Home Assistant 2026.11.1 reale**, con tempo virtuale e una **VMC simulata** sia veloce (risposta in 0,5 s) sia lenta (risposta in 6 s); non sostituiscono una prova con una VMC vera. Per ogni scenario sono stati controllati sia le collisioni sia la velocità finale attesa secondo il foglio Logiche di Funzionamento.
+
+| Prova | Scenari | Collisioni | Esiti errati | Versione provata |
+| --- | ---: | ---: | ---: | --- |
+| Allerte singole, coppie di allerte, Free Cooling/Heating, Calendario, interruttori e Panic Button, ripresa dopo Black-Out | 17.264 | **0** | **0** | 8.5.1 in sviluppo |
+| 3 allerte insieme (31 terzetti × 90 ordini × 8 velocità di partenza × 2 VMC) | 44.640 | **0** | 12, corretti con la PR #97 | 8.5.1 in sviluppo |
+| Riprova dopo la correzione della PR #97 | 7.072 | **0** | **0** | 8.5.1 in sviluppo |
+| 4 allerte contemporanee | 23.040 | **0** | **0** | 8.5.1 |
+| 5 allerte contemporanee | 144.000 | **0** | **0** | 8.5.1 |
+| **Totale** | **236.016** | **0** | 0 dopo la correzione | |
+
+Dettagli:
+
+- la prima prova copre tutte le allerte singole e 92 dei 138 ordini possibili con 2 allerte, con comandi manuali, 8 velocità di partenza e 2 VMC (3.840 scenari di allerte singole, 9.664 di coppie, 1.600 di Free Cooling/Heating, 768 di Calendario, 736 di interruttori e Panic Button, 656 di ripresa dopo Black-Out);
+- le prove con 4 e 5 allerte (25 gruppi possibili) partono con la VMC ferma (Velocità 0) e usano gli ordini in cui tutte le allerte del gruppo sono in corso insieme;
+- sulla **v.8.6.0** è in corso un campione di controllo di 5.760 scenari (2.880 con 4 allerte e 2.880 con 5 allerte, da tutti i 25 gruppi): l'esito sarà riportato qui al termine.
 
 Ulteriori motivi:
 
@@ -206,11 +220,11 @@ Se la VMC rileva una temperatura interna o esterna negativa, si chiede di inviar
 
 Per segnalare un errore scrivere a <a href="mailto:danilo.robotti@gmail.com">danilo.robotti@gmail.com</a> indicando:
 
-- la release installata (riquadro della versione nella scheda) e la versione di Home Assistant;
+- se si usa il Package manuale v.8.6.0 o l'integrazione VMC Master, con la release installata (riquadro della versione nella scheda) e la versione di Home Assistant;
 - una descrizione del problema e, se possibile, i passi per riprodurlo;
 - le stringhe della voce **1 Info Lettura Dati nella VMC** e gli eventuali messaggi di errore dei log.
 
-Le correzioni sono pubblicate nella pagina [Releases](https://github.com/DanRobo76/VMC-HELTY-FLOW/releases).
+Le correzioni sono pubblicate solo per l'integrazione VMC Master, nella pagina [Releases](https://github.com/DanRobo76/VMC-HELTY-FLOW-MARKETPLACE/releases) del suo repository: per un problema del Package 8.6.0 la soluzione è passare all'integrazione.
 
 ---
 
