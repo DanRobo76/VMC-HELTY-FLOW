@@ -86,13 +86,13 @@ Le prove sono state eseguite su **Home Assistant 2026.11.1 reale**, con tempo vi
 | 4 allerte contemporanee | 23.040 | **0** | **0** | 8.5.1 |
 | 5 allerte contemporanee | 144.000 | **0** | **0** | 8.5.1 |
 | **Totale** | **236.016** | **0** | 0 dopo la correzione | |
-| Campione di controllo: 4 e 5 allerte contemporanee *(in corso)* | 5.760 | *in corso* | *in corso* | **8.6.0** |
+| Campione di controllo: 4 e 5 allerte contemporanee | 5.760 | **0** | **0** | **8.6.0** |
 
 Dettagli:
 
 - la prima prova copre tutte le allerte singole e 92 dei 138 ordini possibili con 2 allerte, con comandi manuali, 8 velocità di partenza e 2 VMC (3.840 scenari di allerte singole, 9.664 di coppie, 1.600 di Free Cooling/Heating, 768 di Calendario, 736 di interruttori e Panic Button, 656 di ripresa dopo Black-Out);
 - le prove con 4 e 5 allerte (25 gruppi possibili) partono con la VMC ferma (Velocità 0) e usano gli ordini in cui tutte le allerte del gruppo sono in corso insieme;
-- il campione di controllo sulla **v.8.6.0** comprende 5.760 scenari (2.880 con 4 allerte e 2.880 con 5 allerte, da tutti i 25 gruppi, VMC veloce e lenta, partenza da Velocità 0): l'esito sarà riportato nella tabella al termine.
+- il campione di controllo sulla **v.8.6.0** (stessi file `vmc_master.yaml` e `vmc_master_automazione.txt` della release pubblicata) comprende 5.760 scenari estratti dalla prova completa con 4 e 5 allerte (1 ogni 29): 2.880 con 4 allerte e 2.880 con 5 allerte, da tutti i 25 gruppi, VMC veloce e lenta, partenza da Velocità 0. Esito: 0 collisioni, 0 esiti errati, 0 errori di esecuzione; è contato a parte rispetto al totale.
 
 Ulteriori motivi:
 
