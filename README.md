@@ -5,6 +5,35 @@
 </p>
 
 <p align="center">
+  <strong>⚠️ La release 8.6.0 di questo repository è obsoleta e non viene più aggiornata.</strong><br>
+  La versione supportata è l'integrazione <strong>VMC MASTER</strong> del Marketplace di Home Assistant: <a href="https://github.com/DanRobo76/VMC-HELTY-FLOW-MARKETPLACE">github.com/DanRobo76/VMC-HELTY-FLOW-MARKETPLACE</a>.
+</p>
+
+<details>
+  <summary><strong>Passare al Marketplace: prima eliminare tutto</strong></summary>
+
+<br>
+
+<sub>Prima di installare l'integrazione va eliminato completamente il package manuale (VMC Master e ogni VMC clonata). Lo storico dei dati delle VMC viene perso.</sub>
+
+1. <sub>(Facoltativo) Fare un backup completo: <strong>Impostazioni → Sistema → Backup</strong>.</sub>
+2. <sub>Aprire <strong>Impostazioni → Automazioni e scenari</strong>.</sub>
+3. <sub>Sull'automazione <strong>«Automazione VMC Master»</strong> premere i <strong>tre puntini</strong> → <strong>Elimina</strong>.</sub>
+4. <sub>Ripetere per ogni VMC clonata: <strong>«Automazione VMC ‹nome›»</strong> (‹nome› in minuscolo, come scritto nella Finestra Clona).</sub>
+5. <sub>Aprire la plancia con le schede delle VMC e premere l'<strong>icona matita (Modifica la plancia)</strong>.</sub>
+6. <sub>Su ogni scheda delle VMC premere i <strong>tre puntini</strong> → <strong>Elimina</strong>.</sub>
+7. <sub>Eliminare allo stesso modo la vecchia scheda <strong>«Clona VMC»</strong>, se presente, e salvare la plancia.</sub>
+8. <sub>Con l'app <strong>File editor</strong> (oppure Samba) eliminare la cartella `config/packages/vmc_helty_flow` con tutto il contenuto (cartella `master` e cartelle di ogni VMC clonata).</sub>
+9. <sub>Eliminare anche la cartella nascosta `config/.vmc_master_installa_vmc`, se presente.</sub>
+10. <sub><strong>Non</strong> togliere da <strong>configuration.yaml</strong> la riga `packages: !include_dir_named packages/`: serve all'integrazione.</sub>
+11. <sub>Riavviare Home Assistant: <strong>Impostazioni → Strumenti → YAML → Riavvia → Riavvia Home Assistant</strong>.</sub>
+12. <sub>Dopo il riavvio aprire <strong>Impostazioni → Dispositivi e servizi → Entità</strong> e cercare `vmc_`.</sub>
+13. <sub>Selezionare tutte le entità rimaste come «non più fornite» e rimuoverle.</sub>
+14. <sub>Installare l'integrazione seguendo il README del <a href="https://github.com/DanRobo76/VMC-HELTY-FLOW-MARKETPLACE">repository del Marketplace</a>.</sub>
+
+</details>
+
+<p align="center">
   <a href="https://github.com/DanRobo76/VMC-HELTY-FLOW/raw/main/Video/VMC_MASTER_promo_IT.mp4">
     <img src="Video/anteprima_scene_IT.webp" alt="Video di presentazione di VMC MASTER (1 minuto e 17 secondi)" width="100%">
   </a>
@@ -416,6 +445,35 @@
     <img src="immagini/README/passa_al_marketplace_en.webp" alt="Switch to the Marketplace! Install and update VMC MASTER with one click, right from Home Assistant" width="100%">
   </a>
 </p>
+
+<p align="center">
+  <strong>⚠️ Release 8.6.0 of this repository is obsolete and no longer updated.</strong><br>
+  The supported version is the <strong>VMC MASTER</strong> integration from the Home Assistant Marketplace: <a href="https://github.com/DanRobo76/VMC-HELTY-FLOW-MARKETPLACE">github.com/DanRobo76/VMC-HELTY-FLOW-MARKETPLACE</a>.
+</p>
+
+<details>
+  <summary><strong>Moving to the Marketplace: remove everything first</strong></summary>
+
+<br>
+
+<sub>Before installing the integration, remove the manual package completely (VMC Master and every cloned unit). The units' data history is lost.</sub>
+
+1. <sub>(Optional) Make a full backup: <strong>Settings → System → Backups</strong>.</sub>
+2. <sub>Open <strong>Settings → Automations & scenes</strong>.</sub>
+3. <sub>On the automation <strong>«Automazione VMC Master»</strong> press the <strong>three dots</strong> → <strong>Delete</strong>.</sub>
+4. <sub>Repeat for each cloned unit: <strong>«Automazione VMC ‹name›»</strong> (‹name› in lowercase, as typed in the Clone window).</sub>
+5. <sub>Open the dashboard with the unit cards and press the <strong>pencil icon (Edit dashboard)</strong>.</sub>
+6. <sub>On each unit card press the <strong>three dots</strong> → <strong>Delete</strong>.</sub>
+7. <sub>Delete the old <strong>«Clona VMC»</strong> card the same way, if present, and save the dashboard.</sub>
+8. <sub>With the <strong>File editor</strong> app (or Samba) delete the folder `config/packages/vmc_helty_flow` with everything inside (the `master` folder and the folders of every cloned unit).</sub>
+9. <sub>Also delete the hidden folder `config/.vmc_master_installa_vmc`, if present.</sub>
+10. <sub>Do <strong>not</strong> remove the line `packages: !include_dir_named packages/` from <strong>configuration.yaml</strong>: the integration needs it.</sub>
+11. <sub>Restart Home Assistant: <strong>Settings → Developer tools → YAML → Restart → Restart Home Assistant</strong>.</sub>
+12. <sub>After the restart open <strong>Settings → Devices & services → Entities</strong> and search for `vmc_`.</sub>
+13. <sub>Select all entities left as «no longer provided» and remove them.</sub>
+14. <sub>Install the integration following the README of the <a href="https://github.com/DanRobo76/VMC-HELTY-FLOW-MARKETPLACE">Marketplace repository</a>.</sub>
+
+</details>
 
 <p align="center">
   <a href="https://github.com/DanRobo76/VMC-HELTY-FLOW/raw/main/Video/VMC_MASTER_promo_EN.mp4">
